@@ -23,6 +23,7 @@ export function TrustBar() {
                 width={280}
                 height={112}
                 className="trust-bar__logo"
+                unoptimized
               />
             </div>
           ))}

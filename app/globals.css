@@ -878,7 +878,6 @@ img {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  filter: url(#liquid-glass-filter);
 }
 
 .services__blob {

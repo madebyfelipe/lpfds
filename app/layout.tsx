@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   title: "Made by Felipe | Branding + Social Media Estratégico",
   description:
     "Landing page da Made by Felipe para profissionais e escritórios que querem posicionamento, marca e conteúdo estratégico para lotar agenda.",
+  icons: {
+    icon: "/logo-no-text-white.png",
+    shortcut: "/logo-no-text-white.png",
+    apple: "/logo-no-text-white.png"
+  },
   openGraph: {
     title: "Made by Felipe | Branding + Social Media Estratégico",
     description:
