@@ -1,0 +1,115 @@
+import { pricingTiers } from "@/lib/data";
+
+function IncludedFeatures({ items, dark = false }: { items: { label: string; included: boolean }[]; dark?: boolean }) {
+  const visibleItems = items.filter((item) => item.included);
+
+  return (
+    <ul className={`pricing-features__list ${dark ? "pricing-features__list--dark" : ""}`}>
+      {visibleItems.map((item) => (
+        <li key={item.label} className="pricing-features__item">
+          <span className="pricing-features__mark">{dark ? "✳" : "✶"}</span>
+          <span>{item.label}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function CardTier({
+  name,
+  price,
+  cta,
+  highlighted,
+  features
+}: {
+  name: string;
+  price: string;
+  cta: string;
+  highlighted?: boolean;
+  features: { label: string; included: boolean }[];
+}) {
+  return (
+    <article className="pricing-card sr">
+      <div className="pricing-card__top">
+        <div className="pricing-card__frame">
+          <div className="pricing-card__headerRow">
+            <p className="pricing-card__label">{name}</p>
+            {highlighted ? <span className="pricing-card__badge">Popular</span> : null}
+          </div>
+
+          <div className="pricing-card__priceRow">
+            <span className="pricing-card__currency">{price.split("/")[0]}</span>
+            <span className="pricing-card__period">/{price.split("/")[1]}</span>
+          </div>
+
+          <a href="#agendar" className="pricing-card__button button button--primary">
+            {cta}
+            <span className="hero__buttonIcon">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div className="pricing-features">
+        <p className="pricing-features__title">Features included:</p>
+        <IncludedFeatures items={features} />
+      </div>
+    </article>
+  );
+}
+
+export function Pricing() {
+  const [essential, strategic, premium] = pricingTiers;
+  const premiumFeatures = [...premium.branding, ...premium.social];
+
+  return (
+    <section id="planos" className="section">
+      <div className="site-shell">
+        <div className="section-header">
+          <span className="section-kicker sr">Planos</span>
+          <h2 className="section-title sr">
+            Planos que <em>escalam</em> com você
+          </h2>
+        </div>
+
+        <div className="pricing-showcase">
+          <div className="pricing-showcase__top">
+            <CardTier
+              name={essential.name}
+              price={essential.price}
+              cta={essential.cta}
+              features={[...essential.branding, ...essential.social]}
+            />
+            <CardTier
+              name={strategic.name}
+              price={strategic.price}
+              cta={strategic.cta}
+              highlighted
+              features={[...strategic.branding, ...strategic.social]}
+            />
+          </div>
+
+          <article className="pricing-premium sr">
+            <div className="pricing-premium__offer">
+              <p className="pricing-premium__label">{premium.name}</p>
+              <div className="pricing-card__priceRow pricing-card__priceRow--dark">
+                <span className="pricing-card__currency">{premium.price.split("/")[0]}</span>
+                <span className="pricing-card__period pricing-card__period--dark">
+                  /{premium.price.split("/")[1]}
+                </span>
+              </div>
+              <a href="#agendar" className="pricing-premium__button button button--primary">
+                {premium.cta}
+                <span className="pricing-premium__buttonIcon">→</span>
+              </a>
+            </div>
+
+            <div className="pricing-premium__details">
+              <p className="pricing-features__title pricing-features__title--dark">Features included:</p>
+              <IncludedFeatures items={premiumFeatures} dark />
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
+}
