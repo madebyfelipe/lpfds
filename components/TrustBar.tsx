@@ -1,18 +1,31 @@
-import { trustedMarks } from "@/lib/data";
+import Image from "next/image";
+
+const logos = [
+  { src: "/logo-client-1.png", alt: "Cliente 1" },
+  { src: "/logo-client-2.png", alt: "Cliente 2" },
+  { src: "/logo-client-3.png", alt: "Cliente 3" },
+  { src: "/logo-client-4.png", alt: "Cliente 4" },
+  { src: "/logo-client-5.png", alt: "Cliente 5" },
+];
 
 export function TrustBar() {
+  const track = [...logos, ...logos, ...logos, ...logos];
+
   return (
     <div className="trust-bar">
-      <div className="site-shell">
-        <div className="trust-bar__inner">
-          <span className="trust-bar__label">Atendemos profissionais de</span>
-          <div className="trust-bar__marks">
-            {trustedMarks.map((mark) => (
-              <span key={mark} className="trust-bar__mark">
-                {mark}
-              </span>
-            ))}
-          </div>
+      <div className="trust-bar__carousel">
+        <div className="trust-bar__track">
+          {track.map((logo, i) => (
+            <div key={i} className="trust-bar__logo-wrap">
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={280}
+                height={112}
+                className="trust-bar__logo"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

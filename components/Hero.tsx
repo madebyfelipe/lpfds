@@ -28,7 +28,7 @@ export function Hero() {
             </p>
 
             <div className="hero__actions sr">
-              <MotionLink href="#agendar" className="button button--primary hero__buttonPrimary">
+              <MotionLink href="https://cal.com/madebyfelipe/15min" target="_blank" rel="noopener noreferrer" className="button button--primary hero__buttonPrimary">
                 Agendar conversa gratuita
                 <span className="hero__buttonIcon">→</span>
               </MotionLink>

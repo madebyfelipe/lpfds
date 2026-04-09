@@ -26,7 +26,7 @@ export function Nav() {
             ))}
           </div>
 
-          <MotionLink href="#agendar" className="button topbar__cta">
+          <MotionLink href="https://cal.com/madebyfelipe/15min" target="_blank" rel="noopener noreferrer" className="button topbar__cta">
             Agendar conversa
           </MotionLink>
         </nav>

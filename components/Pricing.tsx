@@ -22,12 +22,14 @@ function CardTier({
   price,
   cta,
   highlighted,
+  paymentUrl,
   features
 }: {
   name: string;
   price: string;
   cta: string;
   highlighted?: boolean;
+  paymentUrl: string;
   features: { label: string; included: boolean }[];
 }) {
   return (
@@ -45,7 +47,9 @@ function CardTier({
           </div>
 
           <MotionLink
-            href="#agendar"
+            href={paymentUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`pricing-card__button button ${highlighted ? "button--primary" : "button--ghost"}`}
           >
             {cta}
@@ -82,12 +86,14 @@ export function Pricing() {
               name={essential.name}
               price={essential.price}
               cta={essential.cta}
+              paymentUrl={essential.paymentUrl}
               features={[...essential.branding, ...essential.social]}
             />
             <CardTier
               name={strategic.name}
               price={strategic.price}
               cta={strategic.cta}
+              paymentUrl={strategic.paymentUrl}
               highlighted
               features={[...strategic.branding, ...strategic.social]}
             />
@@ -102,7 +108,7 @@ export function Pricing() {
                   /{premium.price.split("/")[1]}
                 </span>
               </div>
-              <MotionLink href="#agendar" className="pricing-premium__button button button--primary">
+              <MotionLink href={premium.paymentUrl} target="_blank" rel="noopener noreferrer" className="pricing-premium__button button button--ghost">
                 {premium.cta}
                 <span className="pricing-premium__buttonIcon">→</span>
               </MotionLink>

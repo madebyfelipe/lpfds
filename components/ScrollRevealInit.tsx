@@ -48,9 +48,9 @@ export function ScrollRevealInit() {
         // ── Service cards: slide-in from left with stagger ──
         gsap.fromTo(
           ".service-card",
-          { opacity: 0, x: -40 },
+          { opacity: 0, y: 25 },
           {
-            opacity: 1, x: 0, duration: 0.65, stagger: 0.1, ease: "power2.out",
+            opacity: 1, y: 0, duration: 0.65, stagger: 0.1, ease: "power2.out",
             scrollTrigger: { trigger: ".services__grid", start: "top 82%" }
           }
         );

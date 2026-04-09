@@ -19,9 +19,14 @@ export type ProcessStep = {
 
 export type Review = {
   initials: string;
+  name?: string;
   role: string;
   company: string;
   quote: string;
+  metric?: string;
+  metricLabel?: string;
+  avatarSrc?: string;
+  source?: "google";
 };
 
 export type FAQItem = {
@@ -39,6 +44,7 @@ export type PricingTier = {
   price: string;
   highlighted?: boolean;
   cta: string;
+  paymentUrl: string;
   branding: PricingFeature[];
   social: PricingFeature[];
 };
@@ -61,32 +67,26 @@ export const trustedMarks = [
 ];
 
 export const metrics: Metric[] = [
-  { value: 50, suffix: "+", label: "Projetos entregues", description: "Identidades visuais e posicionamentos estratégicos entregues para profissionais e clínicas." },
-  { value: 3, suffix: "x", label: "Mais percepção de valor" },
-  { value: 21, suffix: " dias", label: "Marca pronta", description: "Da conversa inicial à identidade visual em produção." },
-  { value: 100, suffix: "%", label: "Atendimento direto" }
+  { value: 200, suffix: "+", label: "Projetos entregues" },
+  { value: 30, suffix: "+", label: "Marcas atendidas" },
+  { value: 1, suffix: "M+", label: "Impressões geradas" }
 ];
 
 export const services: Service[] = [
   {
-    title: "Identidade Visual Estratégica",
-    description: "Logo, paleta, tipografia e brandbook alinhados ao posicionamento que o seu negócio precisa sustentar.",
-    tags: ["Posicionamento", "Autoridade", "Premium"]
+    title: "Assessoria de Conteúdo",
+    description: "Produção completa para redes sociais, com estratégia, captação, edição e publicação.",
+    tags: ["Conteúdo estratégico", "Consistência visual", "Execução contínua"]
   },
   {
-    title: "Social Media com Direção Criativa",
-    description: "Posts, carrosséis, stories, reels e copy pensados para constância, percepção e conversão.",
-    tags: ["Recorrente", "Estratégico", "Constância"]
+    title: "Posicionamento de Marca",
+    description: "Ajuste fino de como sua marca é percebida — do discurso à estética.",
+    tags: ["Clareza de mensagem", "Materiais institucionais", "Identidade visual"]
   },
   {
-    title: "Direção de Arte Direta",
-    description: "Sem estagiário e sem intermediário: decisões visuais rápidas, alinhadas e conduzidas por quem cria.",
-    tags: ["Direto", "Ágil"]
-  },
-  {
-    title: "Consultoria de Posicionamento",
-    description: "Leitura de mercado, concorrência, tom de voz e diferenciação para parar de comunicar no improviso.",
-    tags: ["Diferenciação", "Nicho"]
+    title: "Design & Identidade",
+    description: "Sua marca vai precisar de materiais para manter-se na frente da concorrência.",
+    tags: ["Materiais institucionais", "Apresentações e propostas", "Papelaria e merchandise"]
   }
 ];
 
@@ -133,7 +133,8 @@ export const pricingTiers: PricingTier[] = [
   {
     name: "Essencial",
     price: "R$ 1.200/mês",
-    cta: "Começar agora",
+    cta: "Quero esse",
+    paymentUrl: "https://www.asaas.com/c/j5h22vewuan1o5lp",
     branding: [
       { label: "Logo + versão reduzida", included: true },
       { label: "Paleta + tipografia", included: true },
@@ -151,6 +152,7 @@ export const pricingTiers: PricingTier[] = [
     name: "Estratégico",
     price: "R$ 1.800/mês",
     cta: "Quero esse",
+    paymentUrl: "https://www.asaas.com/c/ua51ih11im2p38fq",
     highlighted: true,
     branding: [
       { label: "Logo + versões responsivas", included: true },
@@ -168,7 +170,8 @@ export const pricingTiers: PricingTier[] = [
   {
     name: "Premium",
     price: "R$ 2.500/mês",
-    cta: "Falar com Felipe",
+    cta: "Quero esse",
+    paymentUrl: "https://www.asaas.com/c/6pcdiqqaeoybxhmb",
     branding: [
       { label: "Sistema de marca completo", included: true },
       { label: "Paleta + grafismos de apoio", included: true },
@@ -186,29 +189,111 @@ export const pricingTiers: PricingTier[] = [
 
 export const reviews: Review[] = [
   {
-    initials: "AN",
+    initials: "MN",
+    name: "Milton Alves",
     role: "Sócio-fundador",
-    company: "Escritório de Advocacia · SP",
+    company: "Alves & Nabuco · Sorocaba, SP",
     quote:
-      "A identidade visual mudou completamente a percepção dos nossos clientes. Começamos a atrair um perfil que antes nem nos procurava."
+      "Excelente serviço. Desde o início, ficou claro o nível de organização e cuidado em cada etapa do processo. As artes são muito bem feitas, com atenção aos detalhes e alinhadas com o que eu precisava comunicar. Além disso, o prazo foi antecipado. Felipe ajudou até em tarefas fora de seu escopo em situações mais urgentes. É o tipo de trabalho que passa segurança e facilita MUITO o dia a dia.",
+    avatarSrc: "/avatar-milton.png"
   },
   {
-    initials: "NC",
-    role: "Nutricionista clínica",
-    company: "São Paulo · SP",
+    initials: "G",
+    role: "Avaliação do Google",
+    company: "",
     quote:
-      "Em dois meses meu perfil virou referência. Pacientes chegam falando que me escolheram pela presença digital."
+      "Ótimo designer, focado em entregar soluções em perfeito estado e antes do prazo. Além da dedicação e feedbacks para melhor construção dos projetos.",
+    source: "google"
   },
   {
-    initials: "PS",
-    role: "Psicólogo",
-    company: "Consultório particular · SP",
+    initials: "G",
+    role: "Avaliação do Google",
+    company: "",
     quote:
-      "Contratei o combo e em 3 meses já tinha fila de espera. O posicionamento fez toda a diferença no consultório."
+      "Designer incrível, super dedicado, atencioso e talentoso! Cumpre muito bem as solicitações num ótimo prazo, super recomendo!!!",
+    source: "google"
+  },
+  {
+    initials: "G",
+    role: "Avaliação do Google",
+    company: "",
+    quote:
+      "Melhor designer na região.",
+    source: "google"
   }
 ];
 
 export const faqs: FAQItem[] = [
+  {
+    question: "O que exatamente a Made by Felipe faz?",
+    answer:
+      "A Made by Felipe é uma assessoria estratégica de conteúdo. A gente cuida de toda a operação: estratégia, captação, edição, design, redação e distribuição. O objetivo é posicionar sua marca com clareza e gerar demanda qualificada."
+  },
+  {
+    question: "Isso é só gestão de redes sociais?",
+    answer:
+      "Não. Gestão de redes é execução. Aqui, o foco é posicionamento + estratégia + execução integrada. O conteúdo existe para gerar percepção de valor e conversão."
+  },
+  {
+    question: "Pra quem é esse serviço?",
+    answer:
+      "Empresas e profissionais que já têm um bom serviço, mas não conseguem traduzir isso em posicionamento. Principalmente advogados e profissionais da área fitness que precisam de uma operação completa."
+  },
+  {
+    question: "Pra quem não é?",
+    answer:
+      "Quem busca só post bonito, volume de conteúdo ou algo barato. O foco aqui é construção de marca e resultado."
+  },
+  {
+    question: "Vocês garantem resultado?",
+    answer:
+      "Garantimos estratégia, consistência e execução de alto nível. Resultado depende também do seu negócio, oferta e processo comercial."
+  },
+  {
+    question: "Em quanto tempo começo a ver resultado?",
+    answer:
+      "Posicionamento não é imediato. Em geral, os primeiros sinais aparecem entre 30 e 90 dias, com evolução contínua ao longo dos meses."
+  },
+  {
+    question: "Preciso aparecer nos vídeos?",
+    answer:
+      "Na maioria dos casos, sim. A autoridade está diretamente ligada à sua presença. Mas a estratégia pode ser adaptada conforme o perfil."
+  },
+  {
+    question: "Vocês cuidam dos anúncios também?",
+    answer:
+      "Sim. Tráfego pago pode fazer parte da estratégia, principalmente para acelerar distribuição e geração de demanda."
+  },
+  {
+    question: "Como funciona o processo?",
+    answer:
+      "Começa com um diagnóstico de posicionamento. A partir disso, estruturamos a estratégia e executamos toda a operação de conteúdo."
+  },
+  {
+    question: "Preciso já ter uma marca estruturada?",
+    answer:
+      "Não. A gente ajusta ou constrói o posicionamento necessário para sustentar o crescimento."
+  },
+  {
+    question: "Qual é o nível de envolvimento que vou ter?",
+    answer:
+      "Você participa na validação estratégica e na produção (principalmente gravações). O resto da operação fica com a equipe."
+  },
+  {
+    question: "Como funciona o investimento?",
+    answer:
+      "Os projetos são personalizados. O valor varia de acordo com escopo, volume e complexidade. O diagnóstico é o primeiro passo."
+  },
+  {
+    question: "Existe contrato mínimo?",
+    answer:
+      "Sim. O trabalho exige consistência. Projetos muito curtos não geram resultado relevante."
+  },
+  {
+    question: "Por que escolher a Made by Felipe?",
+    answer:
+      "Porque aqui o foco não é conteúdo por conteúdo. É posicionamento, percepção de valor e geração de demanda com estratégia."
+  },
   {
     question: "Por que contrato trimestral?",
     answer:

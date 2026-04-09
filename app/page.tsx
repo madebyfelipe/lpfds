@@ -29,8 +29,8 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <MetricsBar />
         <TrustBar />
+        <MetricsBar />
         <Services />
         <ProblemSolution />
         <Process />
