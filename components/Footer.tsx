@@ -5,7 +5,7 @@ const contacts = [
   { label: "Instagram", href: "https://www.instagram.com/madebyfelipe.com.br" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/madebyfelipe/" },
   { label: "Behance", href: "https://www.behance.net/madebyfelipe" },
-  { label: "WhatsApp", href: "https://wa.me/5515991718747" },
+  { label: "+55 15 99283-5226", href: "https://wa.me/5515992835226" },
   { label: "alo@madebyfelipe.com.br", href: "mailto:alo@madebyfelipe.com.br" }
 ];
 
@@ -57,7 +57,7 @@ export function Footer() {
     </footer>
 
     <a
-      href="https://wa.me/5515991718747"
+      href="https://wa.me/5515992835226"
       className="whatsapp-fab"
       target="_blank"
       rel="noopener noreferrer"
