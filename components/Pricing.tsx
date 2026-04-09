@@ -1,3 +1,5 @@
+import { MotionCard } from "@/components/MotionCard";
+import { MotionLink } from "@/components/MotionLink";
 import { pricingTiers } from "@/lib/data";
 
 function IncludedFeatures({ items, dark = false }: { items: { label: string; included: boolean }[]; dark?: boolean }) {
@@ -29,7 +31,7 @@ function CardTier({
   features: { label: string; included: boolean }[];
 }) {
   return (
-    <article className="pricing-card sr">
+    <MotionCard className={`pricing-card sr${highlighted ? " pricing-card--highlighted" : ""}`}>
       <div className="pricing-card__top">
         <div className="pricing-card__frame">
           <div className="pricing-card__headerRow">
@@ -42,18 +44,21 @@ function CardTier({
             <span className="pricing-card__period">/{price.split("/")[1]}</span>
           </div>
 
-          <a href="#agendar" className="pricing-card__button button button--primary">
+          <MotionLink
+            href="#agendar"
+            className={`pricing-card__button button ${highlighted ? "button--primary" : "button--ghost"}`}
+          >
             {cta}
-            <span className="hero__buttonIcon">→</span>
-          </a>
+            <span className="pricing-card__btn-circle">→</span>
+          </MotionLink>
         </div>
       </div>
 
       <div className="pricing-features">
-        <p className="pricing-features__title">Features included:</p>
+        <p className="pricing-features__title">O que está incluído:</p>
         <IncludedFeatures items={features} />
       </div>
-    </article>
+    </MotionCard>
   );
 }
 
@@ -97,14 +102,14 @@ export function Pricing() {
                   /{premium.price.split("/")[1]}
                 </span>
               </div>
-              <a href="#agendar" className="pricing-premium__button button button--primary">
+              <MotionLink href="#agendar" className="pricing-premium__button button button--primary">
                 {premium.cta}
                 <span className="pricing-premium__buttonIcon">→</span>
-              </a>
+              </MotionLink>
             </div>
 
             <div className="pricing-premium__details">
-              <p className="pricing-features__title pricing-features__title--dark">Features included:</p>
+              <p className="pricing-features__title pricing-features__title--dark">O que está incluído:</p>
               <IncludedFeatures items={premiumFeatures} dark />
             </div>
           </article>

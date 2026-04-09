@@ -10,29 +10,20 @@ function MetricValue({ value, suffix }: { value: number; suffix: string }) {
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) {
-      return;
-    }
+    if (!node) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || animatedRef.current) {
-          return;
-        }
-
+        if (!entry.isIntersecting || animatedRef.current) return;
         animatedRef.current = true;
         const duration = 1200;
         const start = performance.now();
-
         const tick = (now: number) => {
           const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           setDisplayValue(Math.round(value * eased));
-          if (progress < 1) {
-            requestAnimationFrame(tick);
-          }
+          if (progress < 1) requestAnimationFrame(tick);
         };
-
         requestAnimationFrame(tick);
         observer.disconnect();
       },
@@ -40,7 +31,6 @@ function MetricValue({ value, suffix }: { value: number; suffix: string }) {
     );
 
     observer.observe(node);
-
     return () => observer.disconnect();
   }, [value]);
 
@@ -53,16 +43,45 @@ function MetricValue({ value, suffix }: { value: number; suffix: string }) {
 }
 
 export function MetricsBar() {
+  const [m0, m1, m2, m3] = metrics;
+
   return (
     <section className="metrics">
       <div className="site-shell">
-        <div className="metrics__grid">
-          {metrics.map((metric) => (
-            <div key={metric.label} className="metric-card sr">
-              <MetricValue value={metric.value} suffix={metric.suffix} />
-              <p className="metric-card__label">{metric.label}</p>
+        <div className="metrics__bento">
+
+          {/* Featured large card — left, spans all rows */}
+          <div className="metric-card metric-card--featured sr">
+            <p className="metric-card__desc">{m0.description}</p>
+            <div className="metric-card__bottom">
+              <MetricValue value={m0.value} suffix={m0.suffix} />
+              <p className="metric-card__label">{m0.label}</p>
             </div>
-          ))}
+          </div>
+
+          {/* Top right */}
+          <div className="metric-card sr">
+            <MetricValue value={m1.value} suffix={m1.suffix} />
+            <p className="metric-card__label">{m1.label}</p>
+          </div>
+
+          {/* Mid right */}
+          <div className="metric-card metric-card--described sr">
+            <p className="metric-card__desc">{m2.description}</p>
+            <div className="metric-card__bottom">
+              <MetricValue value={m2.value} suffix={m2.suffix} />
+              <p className="metric-card__label">{m2.label}</p>
+            </div>
+          </div>
+
+          {/* Bottom right — status pill */}
+          <div className="metric-card metric-card--status sr">
+            <span className="metric-card__pill">
+              <span className="metric-card__dot" />
+              {m3.value}{m3.suffix} {m3.label}
+            </span>
+          </div>
+
         </div>
       </div>
     </section>

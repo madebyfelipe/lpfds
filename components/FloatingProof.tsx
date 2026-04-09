@@ -12,7 +12,10 @@ export function FloatingProof({ initials, handle, quote, className = "" }: Float
         <div className="proof-card__avatar">{initials}</div>
         <div>
           <p className="proof-card__handle">{handle}</p>
-          <p className="proof-card__label">Cliente Made by Felipe</p>
+          <p className="proof-card__label">
+            <span className="proof-card__statusDot" aria-hidden="true" />
+            Cliente Made by Felipe
+          </p>
         </div>
       </div>
 

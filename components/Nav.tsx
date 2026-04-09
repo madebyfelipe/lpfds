@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MotionLink } from "@/components/MotionLink";
 import { navigationLinks } from "@/lib/data";
 
 export function Nav() {
@@ -25,9 +26,9 @@ export function Nav() {
             ))}
           </div>
 
-          <a href="#agendar" className="button topbar__cta">
+          <MotionLink href="#agendar" className="button topbar__cta">
             Agendar conversa
-          </a>
+          </MotionLink>
         </nav>
       </div>
     </header>

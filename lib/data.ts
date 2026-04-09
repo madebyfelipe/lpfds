@@ -2,6 +2,7 @@ export type Metric = {
   value: number;
   suffix: string;
   label: string;
+  description?: string;
 };
 
 export type Service = {
@@ -60,9 +61,9 @@ export const trustedMarks = [
 ];
 
 export const metrics: Metric[] = [
-  { value: 50, suffix: "+", label: "Projetos entregues" },
+  { value: 50, suffix: "+", label: "Projetos entregues", description: "Identidades visuais e posicionamentos estratégicos entregues para profissionais e clínicas." },
   { value: 3, suffix: "x", label: "Mais percepção de valor" },
-  { value: 21, suffix: " dias", label: "Marca pronta" },
+  { value: 21, suffix: " dias", label: "Marca pronta", description: "Da conversa inicial à identidade visual em produção." },
   { value: 100, suffix: "%", label: "Atendimento direto" }
 ];
 

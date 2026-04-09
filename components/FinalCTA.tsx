@@ -1,3 +1,5 @@
+import { GlobeCanvas } from "@/components/GlobeCanvas";
+import { MotionLink } from "@/components/MotionLink";
 import { ScrollingTags } from "@/components/ScrollingTags";
 
 export function FinalCTA() {
@@ -5,6 +7,8 @@ export function FinalCTA() {
     <section id="agendar" className="cta-band">
       <div className="site-shell">
         <div className="cta-box sr">
+          <GlobeCanvas />
+
           <div className="cta-box__header">
             <h2 className="cta-box__title">
               Pronto pra ser percebido à <em>altura do seu trabalho</em>?
@@ -15,9 +19,9 @@ export function FinalCTA() {
             </p>
 
             <div className="cta-box__actions">
-              <a href="#agendar" className="button button--primary">
+              <MotionLink href="#agendar" className="button button--primary">
                 Agendar minha conversa gratuita →
-              </a>
+              </MotionLink>
             </div>
 
             <div className="cta-box__chips">

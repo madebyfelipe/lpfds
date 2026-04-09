@@ -1,16 +1,20 @@
 import { FloatingProof } from "@/components/FloatingProof";
+import { MotionLink } from "@/components/MotionLink";
+import { SplineBackground } from "@/components/SplineBackground";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { floatingProofs } from "@/lib/data";
 
 export function Hero() {
   return (
     <section className="hero">
-      <div className="site-shell">
+      <SplineBackground />
+
+      <div className="site-shell hero__shell">
         <div className="hero__layout">
           <div className="hero__content">
             <p className="hero__eyebrow sr">Branding + Social Media Estratégico</p>
 
-            <h1 className="hero__title sr">
+            <h1 className="hero__title">
               <span className="hero__titleLine">Posicionamento</span>
               <span className="hero__titleLine hero__titleLine--combo">
                 <span>que</span>
@@ -24,13 +28,13 @@ export function Hero() {
             </p>
 
             <div className="hero__actions sr">
-              <a href="#agendar" className="button button--primary hero__buttonPrimary">
+              <MotionLink href="#agendar" className="button button--primary hero__buttonPrimary">
                 Agendar conversa gratuita
                 <span className="hero__buttonIcon">→</span>
-              </a>
-              <a href="#planos" className="button button--ghost">
+              </MotionLink>
+              <MotionLink href="#planos" className="button button--ghost">
                 Ver planos
-              </a>
+              </MotionLink>
             </div>
 
             <p className="hero__meta sr">
