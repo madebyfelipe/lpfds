@@ -523,8 +523,22 @@ img {
 
 .hero__meta {
   margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
   font-size: 0.9rem;
+  line-height: 1.5;
   color: var(--soft);
+}
+
+.hero__meta span {
+  position: relative;
+}
+
+.hero__meta span:not(:last-child)::after {
+  content: "·";
+  margin-left: 14px;
+  color: rgba(240, 236, 230, 0.24);
 }
 
 .hero__aside {
@@ -2314,6 +2328,7 @@ img {
 
   .hero__title {
     font-size: clamp(3.4rem, 15vw, 4.7rem);
+    line-height: 0.92;
   }
 
   .hero__titleLine--combo {
@@ -2328,11 +2343,19 @@ img {
   }
 
   .hero__meta {
+    gap: 6px 10px;
     line-height: 1.6;
+  }
+
+  .hero__meta span:not(:last-child)::after {
+    margin-left: 10px;
   }
 
   .hero__aside {
     grid-template-columns: 1fr;
+    justify-items: stretch;
+    gap: 14px;
+    padding-top: 6px;
   }
 
   .video-card,
@@ -2395,7 +2418,22 @@ img {
   }
 
   .hero__title {
-    font-size: clamp(2.7rem, 14vw, 3.5rem);
+    font-size: clamp(2.4rem, 12.8vw, 3.15rem);
+    letter-spacing: -0.045em;
+  }
+
+  .hero__text {
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+
+  .hero__actions {
+    margin-top: 26px;
+  }
+
+  .hero__actions .button {
+    min-height: 52px;
+    font-size: 0.92rem;
   }
 
   .hero__buttonPrimary {
@@ -2410,6 +2448,51 @@ img {
   .proof-card {
     padding: 18px;
     border-radius: 22px;
+  }
+
+  .proof-card,
+  .proof-card--top,
+  .proof-card--bottom {
+    width: 100%;
+    margin-right: 0;
+    --float-rotate: 0deg;
+  }
+
+  .proof-card__head {
+    gap: 10px;
+  }
+
+  .proof-card__handle {
+    font-size: 0.9rem;
+  }
+
+  .proof-card__label {
+    font-size: 0.64rem;
+    letter-spacing: 0.11em;
+  }
+
+  .proof-card__quote {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .proof-card__actions {
+    margin-top: 14px;
+    font-size: 0.88rem;
+  }
+
+  .float-card,
+  .float-card-delayed {
+    animation: none;
+  }
+
+  .hero__meta {
+    font-size: 0.84rem;
+    gap: 4px 8px;
+  }
+
+  .hero__meta span:not(:last-child)::after {
+    margin-left: 8px;
   }
 
   .service-card__visual {
