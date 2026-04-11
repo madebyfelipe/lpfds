@@ -3,6 +3,12 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { MotionLink } from "@/components/MotionLink";
+
+function trackSchedule() {
+  if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+    (window as any).fbq("track", "Schedule");
+  }
+}
 import { navigationLinks } from "@/lib/data";
 
 export function Nav() {
@@ -43,6 +49,7 @@ export function Nav() {
               target="_blank"
               rel="noopener noreferrer"
               className="button topbar__cta"
+              onClick={trackSchedule}
             >
               Agendar conversa
             </MotionLink>
@@ -76,6 +83,7 @@ export function Nav() {
             target="_blank"
             rel="noopener noreferrer"
             className="button button--primary topbar__mobileCta"
+            onClick={trackSchedule}
           >
             Agendar conversa gratuita
           </MotionLink>

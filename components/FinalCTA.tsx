@@ -1,5 +1,5 @@
 import { GlobeCanvas } from "@/components/GlobeCanvas";
-import { MotionLink } from "@/components/MotionLink";
+import { ScheduleLink } from "@/components/ScheduleLink";
 import { ScrollingTags } from "@/components/ScrollingTags";
 
 export function FinalCTA() {
@@ -19,9 +19,9 @@ export function FinalCTA() {
             </p>
 
             <div className="cta-box__actions">
-              <MotionLink href="https://cal.com/madebyfelipe/15min" target="_blank" rel="noopener noreferrer" className="button button--primary">
+              <ScheduleLink className="button button--primary">
                 Agendar minha conversa gratuita →
-              </MotionLink>
+              </ScheduleLink>
             </div>
 
             <div className="cta-box__chips">

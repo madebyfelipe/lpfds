@@ -1,5 +1,6 @@
 import { FloatingProof } from "@/components/FloatingProof";
 import { MotionLink } from "@/components/MotionLink";
+import { ScheduleLink } from "@/components/ScheduleLink";
 import { SplineBackground } from "@/components/SplineBackground";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { floatingProofs } from "@/lib/data";
@@ -28,15 +29,10 @@ export function Hero() {
             </p>
 
             <div className="hero__actions sr">
-              <MotionLink
-                href="https://cal.com/madebyfelipe/15min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="button button--primary hero__buttonPrimary"
-              >
+              <ScheduleLink className="button button--primary hero__buttonPrimary">
                 Agendar conversa gratuita
                 <span className="hero__buttonIcon">{"->"}</span>
-              </MotionLink>
+              </ScheduleLink>
               <MotionLink href="#planos" className="button button--ghost">
                 Ver planos
               </MotionLink>
