@@ -2420,15 +2420,16 @@ img {
   }
 
   .hero__aside {
-    grid-template-columns: 1fr;
-    justify-items: stretch;
-    gap: 14px;
-    padding-top: 6px;
+    display: none;
+  }
+
+  .video-block {
+    margin-top: 32px;
   }
 
   .video-card,
   .cta-box {
-    padding: 16px;
+    padding: 10px;
   }
 
   .cta-box {
