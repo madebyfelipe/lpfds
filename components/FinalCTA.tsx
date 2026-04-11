@@ -19,7 +19,7 @@ export function FinalCTA() {
             </p>
 
             <div className="cta-box__actions">
-              <MotionLink href="/agendamento" className="button button--primary">
+              <MotionLink href="https://cal.com/madebyfelipe/15min" target="_blank" rel="noopener noreferrer" className="button button--primary">
                 Agendar minha conversa gratuita →
               </MotionLink>
             </div>

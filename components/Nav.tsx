@@ -39,7 +39,9 @@ export function Nav() {
 
           <div className="topbar__actions">
             <MotionLink
-              href="/agendamento"
+              href="https://cal.com/madebyfelipe/15min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="button topbar__cta"
             >
               Agendar conversa
@@ -70,7 +72,9 @@ export function Nav() {
           </div>
 
           <MotionLink
-            href="/agendamento"
+            href="https://cal.com/madebyfelipe/15min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="button button--primary topbar__mobileCta"
           >
             Agendar conversa gratuita
