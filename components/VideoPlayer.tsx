@@ -10,7 +10,10 @@ export function VideoPlayer() {
       <div className="video-card">
         <div className="video-card__frame">
           <span className="video-card__floating video-card__floating--left">Branding estratégico</span>
-          <span className="video-card__floating video-card__floating--right">Conteúdo com direção</span>
+          <span className="video-card__floating video-card__floating--right video-card__floating--fomo">
+            <span className="video-card__fomo-dot" />
+            4 vagas restantes
+          </span>
 
           {!isPlaying ? (
             <button
