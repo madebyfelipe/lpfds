@@ -28,29 +28,19 @@ export function VideoPlayer() {
                 <div>
                   <p className="video-card__label">VSL exclusiva</p>
                   <p className="video-card__text">
-                    Clique para abrir o espaço do vídeo. O embed definitivo entra aqui na publicação.
+                    Clique para assistir
                   </p>
                 </div>
               </div>
             </button>
           ) : (
-            <div className="video-card__placeholder">
-              {/* SUBSTITUIR: inserir embed do vídeo aqui */}
-              <div className="video-card__stack">
-                <span className="tag">Espaço pronto para a VSL</span>
-                <p className="video-card__text">
-                  A estrutura já está pronta para receber um iframe, player customizado ou vídeo
-                  hospedado.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setIsPlaying(false)}
-                  className="button button--ghost"
-                >
-                  Fechar preview
-                </button>
-              </div>
-            </div>
+            <video
+              className="video-card__video"
+              src="/VSL.mp4"
+              controls
+              autoPlay
+              playsInline
+            />
           )}
         </div>
       </div>
