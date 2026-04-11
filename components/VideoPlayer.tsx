@@ -37,12 +37,11 @@ export function VideoPlayer() {
               </div>
             </button>
           ) : (
-            <video
+            <iframe
               className="video-card__video"
-              src="/VSL.mp4"
-              controls
-              autoPlay
-              playsInline
+              src="https://www.youtube.com/embed/yQ1eYsySZ-E?autoplay=1&rel=0&modestbranding=1"
+              allow="autoplay; fullscreen"
+              allowFullScreen
             />
           )}
         </div>
