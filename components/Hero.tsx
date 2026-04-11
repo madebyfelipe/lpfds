@@ -29,9 +29,7 @@ export function Hero() {
 
             <div className="hero__actions sr">
               <MotionLink
-                href="https://cal.com/madebyfelipe/15min"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/agendamento"
                 className="button button--primary hero__buttonPrimary"
               >
                 Agendar conversa gratuita
