@@ -2606,6 +2606,11 @@ img {
   .footer__bottom {
     line-height: 1.6;
   }
+
+  /* Video */
+  .video-card__frame {
+    aspect-ratio: 4 / 3;
+  }
 }
 
 /* ─── Mobile S (≤ 390px — S23, iPhone 14/15 base) ─────── */
@@ -2696,6 +2701,29 @@ img {
     font-size: 0.7rem;
     min-height: 28px;
     padding: 0 10px;
+  }
+
+  .video-card__play {
+    width: 60px;
+    height: 60px;
+  }
+
+  .video-card__playIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .video-card__stack {
+    gap: 12px;
+  }
+
+  .video-card__label {
+    font-size: 0.72rem;
+  }
+
+  .video-card__text {
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 
   /* Visitor floater */
