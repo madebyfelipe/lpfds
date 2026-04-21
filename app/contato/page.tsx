@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false }
 };
 
-const WHATSAPP_NUMBER = "5515991718747";
+const WHATSAPP_NUMBER = "5515992835226";
 const CALCOM_URL = "https://cal.com/madebyfelipe";
 const EMAIL = "alo@madebyfelipe.com.br";
 const INSTAGRAM_HANDLE = "madebyfelipe.com.br";
@@ -120,7 +120,7 @@ export default function ContatoPage() {
         <span className="contato-footer__copy">
           © {new Date().getFullYear()} Made by Felipe
         </span>
-        <a href="https://new.madebyfelipe.com.br" className="contato-footer__link">
+        <a href="https://madebyfelipe.com.br/cases" target="_blank" rel="noopener noreferrer" className="contato-footer__link">
           Ver portfólio completo →
         </a>
       </footer>
