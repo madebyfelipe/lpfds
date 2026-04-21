@@ -2765,3 +2765,278 @@ img {
     font-size: 0.88rem;
   }
 }
+
+/* ═══════════════════════════════════════════════
+   /contato — Página standalone (QR code)
+═══════════════════════════════════════════════ */
+
+@keyframes contato-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.contato-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ── Nav mínima ── */
+.contato-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.contato-nav__logo {
+  height: 32px;
+  width: auto;
+}
+
+.contato-nav__back {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contato-nav__back:hover {
+  color: var(--text);
+}
+
+/* ── Hero ── */
+.contato-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 52px 24px 40px;
+  animation: contato-fade-up 0.65s ease both;
+}
+
+.contato-hero__photo-wrap {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--line-strong);
+  margin-bottom: 28px;
+  flex-shrink: 0;
+}
+
+.contato-hero__photo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(212, 43, 43, 0.25);
+}
+
+.contato-hero__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contato-hero__eyebrow::before,
+.contato-hero__eyebrow::after {
+  content: "";
+  width: 20px;
+  height: 0;
+  border-top: 1.5px solid currentColor;
+}
+
+.contato-hero__name {
+  margin: 0 0 6px;
+  font-size: clamp(1.7rem, 6vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.contato-hero__tagline {
+  margin: 0;
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+/* ── Ações ── */
+.contato-actions {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  animation: contato-fade-up 0.7s 0.15s ease both;
+}
+
+.contato-cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  transition:
+    transform 0.24s,
+    border-color 0.24s,
+    background 0.24s,
+    box-shadow 0.24s;
+  position: relative;
+  overflow: hidden;
+}
+
+.contato-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0% 50%, rgba(212, 43, 43, 0.06), transparent 60%);
+  pointer-events: none;
+}
+
+.contato-cta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(212, 43, 43, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+}
+
+.contato-cta--primary {
+  background: var(--accent);
+  border-color: transparent;
+  box-shadow: 0 12px 36px var(--accent-glow);
+}
+
+.contato-cta--primary::before {
+  display: none;
+}
+
+.contato-cta--primary:hover {
+  background: var(--accent-dark);
+  border-color: transparent;
+  box-shadow: 0 16px 44px var(--accent-glow);
+}
+
+.contato-cta__icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.contato-cta__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contato-cta__label {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.contato-cta__sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.contato-cta--primary .contato-cta__sub {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.contato-cta__arrow {
+  font-size: 1rem;
+  color: var(--soft);
+  flex-shrink: 0;
+}
+
+.contato-cta--primary .contato-cta__arrow {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Divisor ── */
+.contato-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  color: var(--soft);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contato-divider::before,
+.contato-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ── Footer mínimo ── */
+.contato-footer {
+  padding: 28px 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  animation: contato-fade-up 0.65s 0.3s ease both;
+}
+
+.contato-footer__copy {
+  font-size: 0.78rem;
+  color: var(--soft);
+}
+
+.contato-footer__link {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.contato-footer__link:hover {
+  color: var(--accent);
+}
+
+@media (min-width: 540px) {
+  .contato-hero {
+    padding: 64px 32px 48px;
+  }
+
+  .contato-hero__photo-wrap {
+    width: 128px;
+    height: 128px;
+  }
+
+  .contato-cta {
+    padding: 20px 24px;
+  }
+}

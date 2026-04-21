@@ -2,7 +2,6 @@ import { FloatingProof } from "@/components/FloatingProof";
 import { MotionLink } from "@/components/MotionLink";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { SplineBackground } from "@/components/SplineBackground";
-import { VideoPlayer } from "@/components/VideoPlayer";
 import { floatingProofs } from "@/lib/data";
 
 export function Hero() {
@@ -64,7 +63,6 @@ export function Hero() {
           </aside>
         </div>
 
-        <VideoPlayer />
       </div>
     </section>
   );
