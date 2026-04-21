@@ -54,7 +54,8 @@ export const navigationLinks = [
   { href: "#processo", label: "Processo" },
   { href: "#planos", label: "Planos" },
   { href: "#resultados", label: "Resultados" },
-  { href: "#faq", label: "FAQ" }
+  { href: "#faq", label: "FAQ" },
+  { href: "/contato", label: "Contato" }
 ] as const;
 
 export const trustedMarks = [
