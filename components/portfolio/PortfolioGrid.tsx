@@ -91,7 +91,6 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
         aria-hidden="true"
       >
         <div className="portfolio-floater__inner">
-          <span className="portfolio-floater__dot" />
           <span className="portfolio-floater__label">{label}</span>
         </div>
       </div>

@@ -3270,41 +3270,29 @@ img {
   opacity: 1;
 }
 
-/* Canto superior direito do pill ancorado no canto inferior direito do
+/* Pill abre para baixo/direita a partir do canto inferior direito do
    cursor (a seta tem ~18×26px a partir do hotspot) */
 .portfolio-floater__inner {
   display: flex;
   align-items: center;
-  gap: 12px;
   padding: 14px 22px;
-  transform: translate(calc(-100% + 18px), 32px);
+  transform: translate(18px, 32px);
   border-radius: var(--radius-pill);
-  background: rgba(13, 13, 13, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.44);
+  background: var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.44), 0 12px 30px var(--accent-glow);
   transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .portfolio-floater--visible .portfolio-floater__inner {
-  transform: translate(calc(-100% + 18px), 26px);
-}
-
-.portfolio-floater__dot {
-  flex: none;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 14px var(--accent-glow);
+  transform: translate(18px, 26px);
 }
 
 .portfolio-floater__label {
   font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--text);
+  color: #fff;
   white-space: nowrap;
 }
 
