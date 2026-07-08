@@ -24,7 +24,7 @@ export function Nav() {
     <header className="topbar">
       <div className="site-shell">
         <nav className={`topbar__frame${isOpen ? " topbar__frame--open" : ""}`}>
-          <a href="#" className="topbar__brand" aria-label="Ir para o topo da pagina" onClick={() => setIsOpen(false)}>
+          <a href="/" className="topbar__brand" aria-label="Ir para a pagina inicial" onClick={() => setIsOpen(false)}>
             <Image
               src="/logo-white.png"
               alt="Made by Felipe"

@@ -50,11 +50,12 @@ export type PricingTier = {
 };
 
 export const navigationLinks = [
-  { href: "#servicos", label: "Serviços" },
-  { href: "#processo", label: "Processo" },
-  { href: "#planos", label: "Planos" },
-  { href: "#resultados", label: "Resultados" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#servicos", label: "Serviços" },
+  { href: "/#processo", label: "Processo" },
+  { href: "/#planos", label: "Planos" },
+  { href: "/#resultados", label: "Resultados" },
+  { href: "/portfolio", label: "Portfólio" },
+  { href: "/#faq", label: "FAQ" },
   { href: "/contato", label: "Contato" }
 ] as const;
 
