@@ -3203,18 +3203,8 @@ img {
   border: 1px solid var(--panel-line);
   background: var(--panel);
   box-shadow: var(--shadow-strong);
-  aspect-ratio: 4 / 3;
   transition: transform 0.35s ease, border-color 0.35s ease,
     box-shadow 0.35s ease;
-}
-
-/* Ritmo de alturas que escalona as colunas (estilo masonry) */
-.project-card:nth-child(3n + 2) {
-  aspect-ratio: 3 / 2;
-}
-
-.project-card:nth-child(3n) {
-  aspect-ratio: 1 / 1;
 }
 
 .project-card::before {
@@ -3236,13 +3226,14 @@ img {
 }
 
 .project-card__media {
-  position: absolute;
-  inset: 0;
+  display: block;
 }
 
-/* Card = só a foto (o nome aparece no cursor customizado) */
+/* Card = só a foto, na proporção natural (o nome aparece no cursor customizado) */
 .project-card__image {
-  object-fit: cover;
+  display: block;
+  width: 100%;
+  height: auto;
   filter: brightness(0.92) saturate(0.98);
   transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1),
     filter 0.4s ease;
@@ -3311,10 +3302,7 @@ img {
     column-gap: 0;
   }
 
-  .project-card,
-  .project-card:nth-child(3n + 2),
-  .project-card:nth-child(3n) {
-    aspect-ratio: 4 / 3;
+  .project-card {
     margin-bottom: 12px;
     border-radius: 22px;
   }
@@ -3514,10 +3502,11 @@ img {
   height: 60vh;
   min-height: 360px;
   overflow: hidden;
+  background: var(--panel);
 }
 
 .case-detail__image {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* 5 — Série */
@@ -3537,7 +3526,7 @@ img {
 }
 
 .case-series__image {
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
@@ -3559,10 +3548,79 @@ img {
   overflow: hidden;
   border-radius: var(--radius-md);
   border: 1px solid var(--panel-line);
+  background: var(--panel);
 }
 
 .case-application__image {
-  object-fit: cover;
+  object-fit: contain;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Lightbox — visualizador de imagem em escala
+   ═══════════════════════════════════════════════════════ */
+
+/* Gatilho: botão neutro que herda o layout da classe de mídia junto */
+.lightbox-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 48px);
+  background: rgba(8, 8, 8, 0.94);
+  cursor: zoom-out;
+  animation: lightbox-fade 0.25s ease both;
+}
+
+.lightbox__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.lightbox__close:hover {
+  background: rgba(212, 43, 43, 0.25);
+  border-color: rgba(212, 43, 43, 0.45);
+}
+
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
 }
 
 .case-application__card {

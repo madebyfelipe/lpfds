@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
+import { Lightbox } from "@/components/portfolio/Lightbox";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
 
@@ -110,7 +111,11 @@ export default async function CasePage({
 
         {/* 4 — Detalhe */}
         <section className="case-detail">
-          <div className="case-detail__media sr">
+          <Lightbox
+            src={project.images.detail}
+            alt={`Detalhe do projeto ${project.client}`}
+            className="case-detail__media sr"
+          >
             <Image
               src={project.images.detail}
               alt={`Detalhe do projeto ${project.client}`}
@@ -118,7 +123,7 @@ export default async function CasePage({
               sizes="100vw"
               className="case-detail__image"
             />
-          </div>
+          </Lightbox>
         </section>
 
         {/* 5 — Série */}
@@ -126,7 +131,12 @@ export default async function CasePage({
           <div className="site-shell">
             <div className="case-series__grid">
               {project.images.series.map((src, i) => (
-                <div key={src} className="case-series__item sr">
+                <Lightbox
+                  key={src}
+                  src={src}
+                  alt={`${project.client} — peça ${i + 1}`}
+                  className="case-series__item sr"
+                >
                   <Image
                     src={src}
                     alt={`${project.client} — peça ${i + 1}`}
@@ -134,7 +144,7 @@ export default async function CasePage({
                     sizes="(max-width: 768px) 100vw, 360px"
                     className="case-series__image"
                   />
-                </div>
+                </Lightbox>
               ))}
             </div>
           </div>
@@ -144,7 +154,11 @@ export default async function CasePage({
         <section className="section case-application">
           <div className="site-shell">
             <div className="case-application__grid">
-              <div className="case-application__media sr-left">
+              <Lightbox
+                src={applicationImage}
+                alt={`${project.client} — aplicação`}
+                className="case-application__media sr-left"
+              >
                 <Image
                   src={applicationImage}
                   alt={`${project.client} — aplicação`}
@@ -152,7 +166,7 @@ export default async function CasePage({
                   sizes="(max-width: 768px) 100vw, 560px"
                   className="case-application__image"
                 />
-              </div>
+              </Lightbox>
               <div className="case-application__card sr-right">
                 <span className="case-application__kicker">
                   {project.applicationCaption?.kicker ?? "Aplicação"}
