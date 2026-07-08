@@ -32,9 +32,10 @@ export function Hero() {
                 Agendar conversa gratuita
                 <span className="hero__buttonIcon">{"->"}</span>
               </ScheduleLink>
+              {/* Botão "Ver planos" desativado junto com a seção de preços
               <MotionLink href="#planos" className="button button--ghost">
                 Ver planos
-              </MotionLink>
+              </MotionLink> */}
             </div>
 
             <div

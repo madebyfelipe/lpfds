@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { MetricsBar } from "@/components/MetricsBar";
 import { Nav } from "@/components/Nav";
-import { Pricing } from "@/components/Pricing";
+// import { Pricing } from "@/components/Pricing"; // seção de preços desativada temporariamente
 import { ProblemSolution } from "@/components/ProblemSolution";
 import { Process } from "@/components/Process";
 import { Reviews } from "@/components/Reviews";
@@ -25,7 +25,7 @@ export default function Home() {
         <Services />
         <ProblemSolution />
         <Process />
-        <Pricing />
+        {/* <Pricing /> — seção de preços desativada temporariamente */}
         <Reviews />
         <FAQ />
         <FinalCTA />

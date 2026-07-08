@@ -3042,90 +3042,154 @@ img {
 }
 
 /* ═══════════════════════════════════════════════════════
+   Cursor customizado — pointer estilizado, site inteiro
+   ═══════════════════════════════════════════════════════ */
+
+/* Esconde o cursor nativo só onde há mouse de verdade */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+.site-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: translate;
+}
+
+.site-cursor--visible {
+  opacity: 1;
+}
+
+.site-cursor svg {
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+  transform-origin: 3px 3px; /* escala a partir da ponta da seta */
+  transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.site-cursor--link svg {
+  transform: scale(1.2);
+}
+
+.site-cursor--down svg {
+  transform: scale(0.82);
+}
+
+.site-cursor__arrow {
+  transition: fill 0.18s ease, stroke 0.18s ease;
+}
+
+/* Sobre elementos interativos a seta inverte: branca com contorno vermelho */
+.site-cursor--link .site-cursor__arrow {
+  fill: #fff;
+  stroke: var(--accent);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .site-cursor {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
    Portfólio — índice (/portfolio)
    ═══════════════════════════════════════════════════════ */
 
-.portfolio-hero {
-  padding-top: 168px;
-  padding-bottom: 32px;
+/* Título da página fica só para leitores de tela / SEO */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.portfolio-hero__title {
-  margin: 18px 0 0;
-  font-size: clamp(3rem, 8.5vw, 7rem);
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+/* Board full-bleed — as imagens começam no topo, atrás da navbar de vidro */
+.portfolio-board {
+  padding: 14px 14px 140px;
 }
 
-.portfolio-hero__title em {
-  color: var(--accent);
-  font-style: italic;
-}
-
-.portfolio-grid-section {
-  padding-top: 8px;
-}
-
-/* Filtro (pills inline, logo abaixo do header) */
-.portfolio-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding-bottom: 40px;
-  margin-bottom: 48px;
-  border-bottom: 1px solid var(--line);
-}
-
-.portfolio-filter__pill {
-  min-height: 44px;
-  padding: 0 24px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-pill);
-  transition: color 0.22s ease, background 0.22s ease, border-color 0.22s ease,
-    box-shadow 0.22s ease;
-}
-
-.portfolio-filter__pill:hover {
-  color: var(--text);
-  border-color: rgba(212, 43, 43, 0.32);
-  background: rgba(212, 43, 43, 0.08);
-}
-
-.portfolio-filter__pill--active {
-  color: #fff;
-  background: var(--accent);
-  border-color: var(--accent);
-  box-shadow: 0 12px 30px var(--accent-glow);
-}
-
-.portfolio-filter__pill--active:hover {
-  background: var(--accent-dark);
-  color: #fff;
-}
-
-.portfolio-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-}
-
-.portfolio-grid__rest {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 26px;
+/* Masonry em 2 colunas: aspect-ratios variados criam o escalonamento */
+.portfolio-masonry {
+  columns: 2;
+  column-gap: 14px;
 }
 
 .portfolio-empty {
-  padding: 72px 0;
+  padding: 200px 0 120px;
   text-align: center;
   color: var(--muted);
   font-size: 1.05rem;
+}
+
+/* Dock de filtro flutuante — mesmo shape de vidro do header (.topbar__frame) */
+.portfolio-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  z-index: 55;
+  display: flex;
+  gap: 4px;
+  padding: 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(13, 13, 13, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.44);
+  transform: translateX(-50%);
+  animation: portfolio-dock-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s
+    backwards;
+}
+
+@keyframes portfolio-dock-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 18px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.portfolio-dock__pill {
+  min-height: 48px;
+  padding: 0 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  border-radius: var(--radius-pill);
+  transition: color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+}
+
+.portfolio-dock__pill:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.portfolio-dock__pill--active {
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 0 12px 30px var(--accent-glow);
+}
+
+.portfolio-dock__pill--active:hover {
+  background: var(--accent-dark);
+  color: #fff;
 }
 
 /* Card de projeto — hover 100% em CSS */
@@ -3133,17 +3197,24 @@ img {
   position: relative;
   display: block;
   overflow: hidden;
-  border-radius: 26px;
+  margin-bottom: 14px;
+  break-inside: avoid;
+  border-radius: 28px;
   border: 1px solid var(--panel-line);
   background: var(--panel);
   box-shadow: var(--shadow-strong);
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 4 / 3;
   transition: transform 0.35s ease, border-color 0.35s ease,
     box-shadow 0.35s ease;
 }
 
-.project-card--featured {
-  aspect-ratio: 16 / 8;
+/* Ritmo de alturas que escalona as colunas (estilo masonry) */
+.project-card:nth-child(3n + 2) {
+  aspect-ratio: 3 / 2;
+}
+
+.project-card:nth-child(3n) {
+  aspect-ratio: 1 / 1;
 }
 
 .project-card::before {
@@ -3169,169 +3240,106 @@ img {
   inset: 0;
 }
 
+/* Card = só a foto (o nome aparece no cursor customizado) */
 .project-card__image {
   object-fit: cover;
-  filter: brightness(0.82) saturate(0.96);
+  filter: brightness(0.92) saturate(0.98);
   transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1),
     filter 0.4s ease;
 }
 
 .project-card:hover .project-card__image {
-  transform: scale(1.06);
-  filter: brightness(0.58) saturate(1);
+  transform: scale(1.05);
+  filter: brightness(1) saturate(1.02);
 }
 
-.project-card__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px 32px;
-  background: linear-gradient(
-    to top,
-    rgba(8, 8, 8, 0.86) 0%,
-    rgba(8, 8, 8, 0.12) 55%,
-    transparent 100%
-  );
-}
-
-.project-card__index {
-  align-self: flex-start;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.project-card__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transform: translateY(6px);
-  transition: transform 0.35s ease;
-}
-
-.project-card:hover .project-card__meta {
-  transform: translateY(0);
-}
-
-.project-card__category {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.project-card__client {
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  color: #fff;
-}
-
-.project-card--featured .project-card__client {
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-}
-
-.project-card__arrow {
-  position: absolute;
-  top: 28px;
-  right: 30px;
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  font-size: 1.1rem;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease,
-    border-color 0.3s ease;
-}
-
-.project-card:hover .project-card__arrow {
-  opacity: 1;
-  transform: translateY(0);
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-/* Cursor customizado — segue o mouse mostrando o nome do card */
-.portfolio-cursor {
+/* Floater com o nome do projeto — segue o mouse com a ponta inferior
+   esquerda ancorada no cursor; mesmo shape de vidro do header */
+.portfolio-floater {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: -14px 0 0 20px;
-  padding: 11px 18px;
-  border-radius: var(--radius-pill);
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  box-shadow: 0 16px 40px var(--accent-glow);
+  z-index: 55;
   pointer-events: none;
   opacity: 0;
-  scale: 0.5;
-  transform-origin: left top;
-  transition: opacity 0.25s ease, scale 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: opacity 0.22s ease;
+  will-change: translate;
 }
 
-.portfolio-cursor--active {
+.portfolio-floater--visible {
   opacity: 1;
-  scale: 1;
 }
 
-.portfolio-cursor__arrow {
+/* O deslocamento -100% deixa o canto inferior esquerdo no hotspot do cursor
+   (com 12px de folga para não encostar na seta) */
+.portfolio-floater__inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  transform: translate(2px, calc(-100% - 12px));
+  border-radius: var(--radius-pill);
+  background: rgba(13, 13, 13, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.44);
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.portfolio-floater--visible .portfolio-floater__inner {
+  transform: translate(2px, calc(-100% - 18px));
+}
+
+.portfolio-floater__dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.portfolio-floater__label {
+  font-size: 1.02rem;
   font-weight: 700;
-}
-
-/* Só esconde o cursor nativo em dispositivos com ponteiro fino (desktop) */
-@media (hover: hover) and (pointer: fine) {
-  .project-card {
-    cursor: none;
-  }
-}
-
-/* O cursor customizado depende de hover — some em touch */
-@media (hover: none), (pointer: coarse) {
-  .portfolio-cursor {
-    display: none;
-  }
+  letter-spacing: -0.01em;
+  color: var(--text);
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
-  .portfolio-hero {
-    padding-top: 132px;
+  /* Sem hover em touch — o floater nunca aparece, então some de vez */
+  .portfolio-floater {
+    display: none;
   }
 
-  .portfolio-grid__rest {
-    grid-template-columns: minmax(0, 1fr);
+  .portfolio-board {
+    padding: 12px 12px 120px;
+  }
+
+  .portfolio-masonry {
+    columns: 1;
+    column-gap: 0;
   }
 
   .project-card,
-  .project-card--featured {
+  .project-card:nth-child(3n + 2),
+  .project-card:nth-child(3n) {
     aspect-ratio: 4 / 3;
+    margin-bottom: 12px;
+    border-radius: 22px;
   }
 
-  .portfolio-filter {
-    padding-bottom: 28px;
-    margin-bottom: 32px;
+  .portfolio-dock {
+    bottom: 16px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .portfolio-dock__pill {
+    min-height: 44px;
+    padding: 0 20px;
+    font-size: 0.9rem;
   }
 }
 

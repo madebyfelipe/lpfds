@@ -52,7 +52,7 @@ export type PricingTier = {
 export const navigationLinks = [
   { href: "/#servicos", label: "Serviços" },
   { href: "/#processo", label: "Processo" },
-  { href: "/#planos", label: "Planos" },
+  // { href: "/#planos", label: "Planos" }, // seção de preços desativada temporariamente
   { href: "/#resultados", label: "Resultados" },
   { href: "/portfolio", label: "Portfólio" },
   { href: "/#faq", label: "FAQ" },

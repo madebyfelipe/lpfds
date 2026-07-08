@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Project, ProjectCategory } from "@/lib/portfolio";
 import { ProjectCard } from "./ProjectCard";
 
@@ -10,88 +10,110 @@ const FILTERS: Filter[] = ["Todos", "Marca", "Conteúdo"];
 
 export function PortfolioGrid({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState<Filter>("Todos");
-  const [cursorLabel, setCursorLabel] = useState<string | null>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
+  // label mantém o último nome para o fade-out não esvaziar o pill no meio da animação
+  const [label, setLabel] = useState("");
+  const [labelVisible, setLabelVisible] = useState(false);
+  const floaterRef = useRef<HTMLDivElement>(null);
+  const targetPos = useRef({ x: 0, y: 0 });
+  const currentPos = useRef({ x: 0, y: 0 });
+  const hasPosition = useRef(false);
 
   const filtered =
     active === "Todos"
       ? projects
       : projects.filter((project) => project.category === active);
 
-  const featured = filtered[0];
-  const rest = filtered.slice(1);
-
-  // Move o cursor customizado sem re-render (propriedade `translate` individual).
-  const handleMove = useCallback((event: React.MouseEvent) => {
-    const el = cursorRef.current;
-    if (!el) return;
-    el.style.translate = `${event.clientX}px ${event.clientY}px`;
+  // Perseguição suavizada (lerp por frame): o floater chega com um leve
+  // atraso ao cursor, como se flutuasse sozinho.
+  useEffect(() => {
+    let raf: number;
+    const tick = () => {
+      const el = floaterRef.current;
+      if (el && hasPosition.current) {
+        currentPos.current.x +=
+          (targetPos.current.x - currentPos.current.x) * 0.12;
+        currentPos.current.y +=
+          (targetPos.current.y - currentPos.current.y) * 0.12;
+        el.style.translate = `${currentPos.current.x}px ${currentPos.current.y}px`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, []);
+
+  // Atualiza só o alvo — quem move o floater é o loop acima, sem re-render.
+  const handleMove = useCallback((event: React.MouseEvent) => {
+    targetPos.current = { x: event.clientX, y: event.clientY };
+    if (!hasPosition.current) {
+      // primeira entrada: nasce no cursor em vez de voar desde (0,0)
+      currentPos.current = { x: event.clientX, y: event.clientY };
+      hasPosition.current = true;
+    }
+  }, []);
+
+  const handleHover = (client: string | null) => {
+    if (client) {
+      setLabel(client);
+      setLabelVisible(true);
+    } else {
+      setLabelVisible(false);
+    }
+  };
 
   const changeFilter = (filter: Filter) => {
     setActive(filter);
-    setCursorLabel(null); // evita cursor preso quando um card sai do DOM
+    setLabelVisible(false); // evita floater preso quando um card sai do DOM
   };
 
   return (
-    <section className="section portfolio-grid-section" onMouseMove={handleMove}>
-      <div className="site-shell">
-        <div
-          className="portfolio-filter sr"
-          role="group"
-          aria-label="Filtrar projetos por categoria"
-        >
-          {FILTERS.map((filter) => (
-            <button
-              key={filter}
-              type="button"
-              className={`portfolio-filter__pill${
-                active === filter ? " portfolio-filter__pill--active" : ""
-              }`}
-              aria-pressed={active === filter}
-              onClick={() => changeFilter(filter)}
-            >
-              {filter}
-            </button>
+    <section className="portfolio-board" onMouseMove={handleMove}>
+      {filtered.length > 0 ? (
+        <div className="portfolio-masonry">
+          {filtered.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              onHover={handleHover}
+            />
           ))}
         </div>
+      ) : (
+        <p className="portfolio-empty">Nenhum projeto nesta categoria.</p>
+      )}
 
-        {featured ? (
-          <div className="portfolio-grid">
-            <ProjectCard
-              project={featured}
-              index={0}
-              featured
-              onHover={setCursorLabel}
-            />
-
-            {rest.length > 0 && (
-              <div className="portfolio-grid__rest">
-                {rest.map((project, i) => (
-                  <ProjectCard
-                    key={project.slug}
-                    project={project}
-                    index={i + 1}
-                    onHover={setCursorLabel}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        ) : (
-          <p className="portfolio-empty">Nenhum projeto nesta categoria.</p>
-        )}
-      </div>
-
+      {/* Floater com o nome do projeto — ponta inferior esquerda presa ao cursor */}
       <div
-        ref={cursorRef}
-        className={`portfolio-cursor${
-          cursorLabel ? " portfolio-cursor--active" : ""
+        ref={floaterRef}
+        className={`portfolio-floater${
+          labelVisible ? " portfolio-floater--visible" : ""
         }`}
         aria-hidden="true"
       >
-        <span className="portfolio-cursor__label">{cursorLabel}</span>
-        <span className="portfolio-cursor__arrow">↗</span>
+        <div className="portfolio-floater__inner">
+          <span className="portfolio-floater__dot" />
+          <span className="portfolio-floater__label">{label}</span>
+        </div>
+      </div>
+
+      <div
+        className="portfolio-dock"
+        role="group"
+        aria-label="Filtrar projetos por categoria"
+      >
+        {FILTERS.map((filter) => (
+          <button
+            key={filter}
+            type="button"
+            className={`portfolio-dock__pill${
+              active === filter ? " portfolio-dock__pill--active" : ""
+            }`}
+            aria-pressed={active === filter}
+            onClick={() => changeFilter(filter)}
+          >
+            {filter}
+          </button>
+        ))}
       </div>
     </section>
   );

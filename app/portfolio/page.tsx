@@ -23,21 +23,7 @@ export default function PortfolioPage() {
       <ScrollRevealInit />
       <Nav />
       <main>
-        <section className="section portfolio-hero">
-          <div className="site-shell">
-            <div className="section-header section-header--left">
-              <span className="section-kicker sr">Portfólio</span>
-              <h1 className="portfolio-hero__title sr">
-                Marcas que publicam <em>e crescem</em>
-              </h1>
-              <p className="section-copy sr">
-                Uma seleção de projetos de branding e conteúdo estratégico — do
-                posicionamento à execução que gera alcance, autoridade e demanda.
-              </p>
-            </div>
-          </div>
-        </section>
-
+        <h1 className="visually-hidden">Portfólio — Made by Felipe</h1>
         <PortfolioGrid projects={projects} />
       </main>
       <Footer />
