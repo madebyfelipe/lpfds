@@ -3270,14 +3270,14 @@ img {
   opacity: 1;
 }
 
-/* O deslocamento -100% deixa o canto inferior esquerdo no hotspot do cursor
-   (com 12px de folga para não encostar na seta) */
+/* Canto superior direito do pill ancorado no canto inferior direito do
+   cursor (a seta tem ~18×26px a partir do hotspot) */
 .portfolio-floater__inner {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 14px 22px;
-  transform: translate(2px, calc(-100% - 12px));
+  transform: translate(calc(-100% + 18px), 32px);
   border-radius: var(--radius-pill);
   background: rgba(13, 13, 13, 0.88);
   backdrop-filter: blur(20px);
@@ -3288,7 +3288,7 @@ img {
 }
 
 .portfolio-floater--visible .portfolio-floater__inner {
-  transform: translate(2px, calc(-100% - 18px));
+  transform: translate(calc(-100% + 18px), 26px);
 }
 
 .portfolio-floater__dot {
