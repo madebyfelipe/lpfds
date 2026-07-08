@@ -6,3 +6,6 @@ tsconfig.tsbuildinfo
 *.mp3
 *.mov
 *.avi
+
+# arquivos-fonte dos projetos (originais pesados; versoes otimizadas em public/portfolio)
+projects/

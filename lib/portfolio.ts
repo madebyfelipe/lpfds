@@ -55,6 +55,70 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "doce-afeto",
+    client: "Doce & Afeto",
+    displayName: "DOCE\n& AFETO",
+    category: "Marca",
+    tagline:
+      "Identidade visual completa para uma marca de brownies artesanais — do logo à embalagem.",
+    statement: "Afeto também se embala.",
+    scope: ["Identidade visual", "Ilustração", "Embalagem", "Social media"],
+    execution:
+      "Criação de logotipo, universo ilustrado autoral, padrões gráficos, embalagens e peças de cardápio para redes sociais.",
+    result: { before: "Ideia", after: "Marca", label: "Do zero ao lançamento" },
+    numbers: [
+      { value: "20+", label: "Peças criadas" },
+      { value: "5", label: "Aplicações de embalagem" },
+      { value: "1", label: "Universo ilustrado autoral" },
+    ],
+    images: {
+      cover: "/portfolio/doce-afeto/cover.jpg",
+      detail: "/portfolio/doce-afeto/detail.jpg",
+      series: [
+        "/portfolio/doce-afeto/serie-1.jpg",
+        "/portfolio/doce-afeto/serie-2.jpg",
+        "/portfolio/doce-afeto/serie-3.jpg",
+      ],
+      application: "/portfolio/doce-afeto/aplicacao.jpg",
+    },
+    applicationCaption: {
+      kicker: "Aplicação",
+      text: "Identidade aplicada em sacolas, caixas e embalagens take away.",
+    },
+  },
+  {
+    slug: "liz-helena",
+    client: "Liz Helena",
+    displayName: "LIZ\nHELENA",
+    category: "Conteúdo",
+    tagline:
+      "Identidade e conteúdo editorial para uma neuropsicóloga com voz própria nas redes.",
+    statement: "Saúde mental com estética própria.",
+    scope: ["Identidade visual", "Direção de arte", "Conteúdo editorial"],
+    execution:
+      "Construção de identidade visual, direção de arte e sistema de posts editoriais com linguagem própria para o Instagram.",
+    result: { before: "Genérico", after: "Autoral", label: "Posicionamento" },
+    numbers: [
+      { value: "1", label: "Identidade completa" },
+      { value: "3", label: "Linhas editoriais" },
+      { value: "100%", label: "Sistema replicável" },
+    ],
+    images: {
+      cover: "/portfolio/liz-helena/cover.jpg",
+      detail: "/portfolio/liz-helena/detail.jpg",
+      series: [
+        "/portfolio/liz-helena/serie-1.jpg",
+        "/portfolio/liz-helena/serie-2.jpg",
+        "/portfolio/liz-helena/serie-3.jpg",
+      ],
+      application: "/portfolio/liz-helena/aplicacao.jpg",
+    },
+    applicationCaption: {
+      kicker: "Aplicação",
+      text: "Marca aplicada em brindes, materiais impressos e conteúdo de feed.",
+    },
+  },
+  {
     slug: "know-how-experience",
     client: "Know How Experience",
     displayName: "KNOW HOW\nEXPERIENCE",
