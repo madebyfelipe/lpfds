@@ -199,6 +199,12 @@ export const projects: Project[] = [
       ],
     },
     gallery: posts("fila-zero", 28).map((src) => src.replace(/\.jpg$/, ".png")),
+    presentation: {
+      src: "/portfolio/fila-zero/apresentacao.jpg",
+      width: 1080,
+      height: 37800,
+      text: "Todos os carrosséis na íntegra, slide a slide, na ordem em que foram entregues.",
+    },
   },
 ];
 
