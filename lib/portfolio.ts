@@ -138,8 +138,9 @@ export const projects: Project[] = [
     client: "Know How Experience",
     displayName: "KNOW HOW\nEXPERIENCE",
     category: "Conteúdo",
-    tagline: "Roteiros, copy e spot de TV para um evento de alto impacto.",
-    statement: "Evento memorável começa no roteiro.",
+    tagline:
+      "Direção criativa e produção integral dos materiais de comunicação da 15ª edição.",
+    statement: "Um evento se vende antes de acontecer.",
     scope: ["Roteiros", "Copy", "Spot de TV", "Conteúdo institucional"],
     execution:
       "Desenvolvimento de roteiros, copywriting e produção de spots de TV para a comunicação do evento.",
@@ -152,6 +153,9 @@ export const projects: Project[] = [
         "/portfolio/know-how-experience/serie-3.jpg",
       ],
     },
+    about:
+      "A 15ª edição do Know How Experience reuniu empresários, executivos e investidores em Campo Grande, nos dias 22 e 23 de maio, no Palazzo Murano, sob o tema \"Os 4 Pilares do Networking Lucrativo\". Assumimos a entrega de todos os materiais de comunicação da edição, do anúncio à realização. O escopo incluiu os roteiros de apresentação dos palestrantes, o roteiro do spot de TV, as peças de mídia paga e as copies de virada de lote que sustentaram o ritmo de vendas ao longo de todo o ciclo.\n\nA operação seguiu a lógica de um lançamento. Cada fase da campanha exigiu um pacote próprio de criativos, mensagens e cortes de vídeo, ajustados ao estágio da venda e ao público de cada canal. Conduzimos também o ciclo promocional com parceiros, incluindo a ativação junto ao Café com Negócios, e mantivemos a consistência visual do evento em todos os pontos de contato: redes sociais, mídia paga, materiais de palco e comunicação de bastidores.",
+    aboutImage: "/portfolio/know-how-experience/aplicacao.jpg",
   },
   {
     slug: "turrex-midia-digital",
