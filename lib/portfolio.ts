@@ -84,8 +84,8 @@ export const projects: Project[] = [
     displayName: "DOCE\n& AFETO",
     category: "Marca",
     tagline:
-      "Identidade visual completa para uma marca de brownies artesanais — do logo à embalagem.",
-    statement: "Afeto também se embala.",
+      "Identidade, universo visual e materiais de apoio para uma doceria dark kitchen de Sorocaba.",
+    statement: "Quem não tem vitrine vende pela marca.",
     scope: ["Identidade visual", "Ilustração", "Embalagem", "Social media"],
     execution:
       "Criação de logotipo, universo ilustrado autoral, padrões gráficos, embalagens e peças de cardápio para redes sociais.",
@@ -99,6 +99,9 @@ export const projects: Project[] = [
       ],
     },
     gallery: posts("doce-afeto", 10),
+    about:
+      "Doce & Afeto opera em modelo dark kitchen, sem salão e sem balcão. Toda a decisão de compra acontece na tela, o que transfere para a marca a função que uma loja física cumpriria no ponto de venda. Construímos o sistema de identidade a partir dessa exigência: assinatura visual, paleta, tipografia e um universo gráfico capaz de comunicar sabor, cuidado e padrão de qualidade antes que o cliente veja o produto.\n\nA entrega se estendeu aos materiais que sustentam a operação no dia a dia. Desenvolvemos o cardápio digital, com hierarquia de leitura e apresentação dos produtos pensadas para conversão, embalagens, papel timbrado, e os fixados do Instagram, que organizam o perfil como uma vitrine navegável: linha de produtos, formas de pedido, área de entrega e prova social. O resultado é um repertório visual coerente, aplicável em qualquer canal e replicável pela própria equipe.",
+    aboutImage: "/portfolio/doce-afeto/aplicacao.jpg",
     presentation: {
       src: "/portfolio/doce-afeto/apresentacao.jpg",
       width: 1600,
