@@ -24,6 +24,13 @@ export type Project = {
   presentation?: { src: string; width: number; height: number; text?: string };
 };
 
+// Projeto com as dimensões reais do cover (calculadas em build time pelo
+// servidor via lib/image-size) — o grid usa para reservar a proporção
+// de cada card antes das imagens carregarem, zerando o layout shift.
+export type ProjectWithCoverSize = Project & {
+  coverSize: { width: number; height: number };
+};
+
 // Gera os caminhos /portfolio/<slug>/posts/post-01.jpg … post-NN.jpg
 const posts = (slug: string, count: number): string[] =>
   Array.from(

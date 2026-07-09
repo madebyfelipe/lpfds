@@ -1,14 +1,18 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Project, ProjectCategory } from "@/lib/portfolio";
+import type { ProjectCategory, ProjectWithCoverSize } from "@/lib/portfolio";
 import { ProjectCard } from "./ProjectCard";
 
 type Filter = "Todos" | ProjectCategory;
 
 const FILTERS: Filter[] = ["Todos", "Marca", "Conteúdo"];
 
-export function PortfolioGrid({ projects }: { projects: Project[] }) {
+export function PortfolioGrid({
+  projects
+}: {
+  projects: ProjectWithCoverSize[];
+}) {
   const [active, setActive] = useState<Filter>("Todos");
   // label mantém o último nome para o fade-out não esvaziar o pill no meio da animação
   const [label, setLabel] = useState("");
@@ -70,10 +74,12 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
     <section className="portfolio-board" onMouseMove={handleMove}>
       {filtered.length > 0 ? (
         <div className="portfolio-masonry">
-          {filtered.map((project) => (
+          {filtered.map((project, index) => (
             <ProjectCard
               key={project.slug}
               project={project}
+              // primeiros covers = candidatos a LCP → preload com fetchpriority alto
+              priority={index < 2}
               onHover={handleHover}
             />
           ))}

@@ -7,6 +7,7 @@ import { Nav } from "@/components/Nav";
 import { Lightbox } from "@/components/portfolio/Lightbox";
 import { PresentationBoard } from "@/components/portfolio/PresentationBoard";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
+import { getImageSize } from "@/lib/image-size";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
 
 type Params = { slug: string };
@@ -53,6 +54,13 @@ export default async function CasePage({
 
   const next = getNextProject(slug);
 
+  // Peças da faixa automática da Galeria, com dimensões reais lidas em
+  // build time — o navegador reserva a proporção de cada item antes do
+  // download, sem layout shift na faixa.
+  const gallery = (
+    project.gallery ?? [project.images.detail, ...project.images.series]
+  ).map((src) => ({ src, ...getImageSize(src) }));
+
   return (
     <>
       <ScrollRevealInit />
@@ -90,56 +98,51 @@ export default async function CasePage({
         </section>
 
         {/* 3 — Galeria: faixa automática com todas as peças do projeto */}
-        {(() => {
-          const gallery =
-            project.gallery ?? [project.images.detail, ...project.images.series];
-          return (
-            <section className="section case-gallery">
-              <div className="site-shell">
-                <div className="case-gallery__header sr">
-                  <span className="case-gallery__kicker">Galeria</span>
-                </div>
-              </div>
-              <div className="case-gallery__strip sr">
-                <div
-                  className="case-gallery__track"
-                  style={
-                    {
-                      // velocidade constante: duração proporcional ao nº de peças
-                      "--case-gallery-duration": `${gallery.length * 5}s`,
-                    } as React.CSSProperties
-                  }
-                >
-                  {[0, 1].map((copy) =>
-                    gallery.map((src, i) => (
-                      <Lightbox
-                        key={`${copy}-${src}`}
-                        src={src}
-                        alt={`${project.client} — peça ${i + 1}`}
-                        className="case-gallery__item"
-                      >
-                        {/* width/height 0 + CSS height fixa = proporção natural */}
-                        <Image
-                          src={src}
-                          alt={
-                            copy === 0
-                              ? `${project.client} — peça ${i + 1}`
-                              : ""
-                          }
-                          aria-hidden={copy === 1 || undefined}
-                          width={0}
-                          height={0}
-                          sizes="(max-width: 768px) 90vw, 560px"
-                          className="case-gallery__image"
-                        />
-                      </Lightbox>
-                    ))
-                  )}
-                </div>
-              </div>
-            </section>
-          );
-        })()}
+        <section className="section case-gallery">
+          <div className="site-shell">
+            <div className="case-gallery__header sr">
+              <span className="case-gallery__kicker">Galeria</span>
+            </div>
+          </div>
+          <div className="case-gallery__strip sr">
+            <div
+              className="case-gallery__track"
+              style={
+                {
+                  // velocidade constante: duração proporcional ao nº de peças
+                  "--case-gallery-duration": `${gallery.length * 5}s`,
+                } as React.CSSProperties
+              }
+            >
+              {[0, 1].map((copy) =>
+                gallery.map((item, i) => (
+                  <Lightbox
+                    key={`${copy}-${item.src}`}
+                    src={item.src}
+                    alt={`${project.client} — peça ${i + 1}`}
+                    className="case-gallery__item"
+                  >
+                    {/* dimensões reais + CSS height fixa = proporção natural,
+                        reservada antes do download */}
+                    <Image
+                      src={item.src}
+                      alt={
+                        copy === 0
+                          ? `${project.client} — peça ${i + 1}`
+                          : ""
+                      }
+                      aria-hidden={copy === 1 || undefined}
+                      width={item.width}
+                      height={item.height}
+                      sizes="(max-width: 768px) 90vw, 560px"
+                      className="case-gallery__image"
+                    />
+                  </Lightbox>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
 
         {/* 4 — Statement */}
         <section className="case-statement">

@@ -3244,6 +3244,24 @@ img {
   box-shadow: var(--shadow-strong);
   transition: transform 0.35s ease, border-color 0.35s ease,
     box-shadow 0.35s ease;
+  /* entrada só com transform (sem opacity 0): a imagem pinta imediatamente,
+     então não atrasa o LCP nem depende do JS carregar */
+  animation: project-card-enter 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes project-card-enter {
+  from {
+    transform: translateY(18px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card {
+    animation: none;
+  }
 }
 
 .project-card::before {
