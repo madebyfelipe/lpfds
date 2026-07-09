@@ -3559,7 +3559,9 @@ img {
    -50% em loop — passa sozinha, pausa no hover para permitir o clique */
 .case-gallery__strip {
   overflow: hidden;
-  padding-bottom: 16px;
+  /* respiro para o jump do hover (-8px) e a sombra não serem clipados */
+  padding-top: 12px;
+  padding-bottom: 24px;
 }
 
 .case-gallery__track {
@@ -3590,11 +3592,15 @@ img {
   border-radius: var(--radius-md);
   border: 1px solid var(--panel-line);
   background: var(--panel);
-  transition: border-color 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
+/* Jump leve + destaque no hover (a faixa pausa junto, via :hover do strip) */
 .case-gallery__strip .case-gallery__item:hover {
-  border-color: rgba(212, 43, 43, 0.3);
+  transform: translateY(-8px);
+  border-color: rgba(212, 43, 43, 0.35);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
 /* Sem animação: vira um trilho rolável manualmente */
