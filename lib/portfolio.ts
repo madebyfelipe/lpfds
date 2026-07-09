@@ -109,8 +109,8 @@ export const projects: Project[] = [
     displayName: "LIZ\nHELENA",
     category: "Conteúdo",
     tagline:
-      "Identidade e conteúdo editorial para uma neuropsicóloga com voz própria nas redes.",
-    statement: "Saúde mental com estética própria.",
+      "Identidade visual e posicionamento pessoal para uma estudante em formação.",
+    statement: "Marca própria começa antes do diploma.",
     scope: ["Identidade visual", "Direção de arte", "Conteúdo editorial"],
     execution:
       "Construção de identidade visual, direção de arte e sistema de posts editoriais com linguagem própria para o Instagram.",
@@ -124,6 +124,8 @@ export const projects: Project[] = [
       ],
     },
     gallery: posts("liz-helena", 8),
+    about:
+      "O projeto nasceu da necessidade de dar forma a uma presença profissional ainda em construção. Liz Helena está em formação e precisava de uma marca capaz de acompanhar esse percurso, sustentando a comunicação nos primeiros passos da carreira sem parecer improvisada. Desenvolvemos o sistema de identidade completo: assinatura visual, paleta, tipografia e um conjunto de aplicações pensadas para uso imediato em currículo, portfólio e redes sociais.\n\nA entrega incluiu os templates de apresentação, os modelos de post para LinkedIn e Instagram e as diretrizes de tom de voz que orientam cada publicação. O resultado é um repertório visual coerente, aplicável desde já e preparado para crescer junto com a trajetória profissional dela.",
     presentation: {
       src: "/portfolio/liz-helena/apresentacao.jpg",
       width: 1600,
