@@ -3372,7 +3372,7 @@ img {
   min-height: 88vh;
   display: flex;
   align-items: flex-end;
-  padding-bottom: 72px;
+  padding-bottom: 28px;
   overflow: hidden;
 }
 
@@ -3450,7 +3450,8 @@ img {
 
 /* 2 — Tagline */
 .case-tagline {
-  padding-block: 96px;
+  padding-top: 20px;
+  padding-bottom: 96px;
 }
 
 .case-tagline__text {
@@ -3840,11 +3841,12 @@ img {
 @media (max-width: 768px) {
   .case-hero {
     min-height: 72vh;
-    padding-bottom: 48px;
+    padding-bottom: 20px;
   }
 
   .case-tagline {
-    padding-block: 64px;
+    padding-top: 14px;
+    padding-bottom: 64px;
   }
 
   .case-gallery__strip .case-gallery__item {
