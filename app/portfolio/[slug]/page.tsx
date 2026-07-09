@@ -170,7 +170,11 @@ export default async function CasePage({
             <div className="site-shell">
               <div className="case-about__panel sr">
                 <span className="case-about__kicker">Sobre o projeto</span>
-                <p className="case-about__text">{project.about}</p>
+                {project.about.split("\n\n").map((paragraph, index) => (
+                  <p key={index} className="case-about__text">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
           </section>

@@ -55,6 +55,8 @@ export const projects: Project[] = [
       ],
     },
     gallery: posts("alves-nabuco", 32),
+    about:
+      "O projeto começou pela produção de conteúdo. Estruturamos uma linha editorial para LinkedIn e Instagram, traduzindo temas de direito tributário e trabalhista em publicações claras, com frequência constante e linguagem calibrada para cada canal. A operação cobre pauta, redação, design e distribuição, somada à gestão de campanhas no Google Ads direcionadas à captação de clientes qualificados.\n\nO escopo se expandiu para toda a presença da banca. Desenvolvemos o novo site, as aplicações de marca e os modelos de apresentação usados em reuniões e propostas comerciais. A produção audiovisual passou a alimentar os canais com gravações em vídeo e sessões fotográficas dos sócios e do escritório, garantindo material próprio e consistente em cada ponto de contato.",
     presentation: {
       src: "/portfolio/alves-nabuco/apresentacao.jpg",
       width: 1600,

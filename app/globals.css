@@ -3704,6 +3704,10 @@ img {
   white-space: pre-line;
 }
 
+.case-about__text + .case-about__text {
+  margin-top: 1.2em;
+}
+
 /* 7 — Apresentação (prancha vertical completa) */
 .case-presentation__header {
   display: flex;
