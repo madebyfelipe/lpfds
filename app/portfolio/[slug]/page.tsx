@@ -110,44 +110,37 @@ export default async function CasePage({
           </div>
         </section>
 
-        {/* 4 — Detalhe */}
-        <section className="case-detail">
-          <Lightbox
-            src={project.images.detail}
-            alt={`Detalhe do projeto ${project.client}`}
-            className="case-detail__media sr"
-          >
-            <Image
-              src={project.images.detail}
-              alt={`Detalhe do projeto ${project.client}`}
-              fill
-              sizes="100vw"
-              className="case-detail__image"
-            />
-          </Lightbox>
-        </section>
-
-        {/* 5 — Série */}
-        <section className="section case-series">
+        {/* 4/5 — Galeria: detalhe + série num filmstrip único e coeso */}
+        <section className="section case-gallery">
           <div className="site-shell">
-            <div className="case-series__grid">
-              {project.images.series.map((src, i) => (
+            <div className="case-gallery__header sr">
+              <span className="case-gallery__kicker">Galeria</span>
+              <p className="case-gallery__text">
+                Clique em qualquer peça para ver em escala real.
+              </p>
+            </div>
+          </div>
+          <div className="case-gallery__strip sr">
+            {[project.images.detail, ...project.images.series].map(
+              (src, i) => (
                 <Lightbox
                   key={src}
                   src={src}
                   alt={`${project.client} — peça ${i + 1}`}
-                  className="case-series__item sr"
+                  className="case-gallery__item"
                 >
+                  {/* width/height 0 + CSS height fixa = proporção natural */}
                   <Image
                     src={src}
                     alt={`${project.client} — peça ${i + 1}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 360px"
-                    className="case-series__image"
+                    width={0}
+                    height={0}
+                    sizes="(max-width: 768px) 90vw, 560px"
+                    className="case-gallery__image"
                   />
                 </Lightbox>
-              ))}
-            </div>
+              )
+            )}
           </div>
         </section>
 

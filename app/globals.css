@@ -3491,47 +3491,68 @@ img {
   color: var(--text);
 }
 
-/* 4 — Detalhe */
-.case-detail {
-  padding: 24px 0;
+/* 4/5 — Galeria (filmstrip): cards arredondados de altura uniforme,
+   cada peça na proporção natural — nada é cortado */
+.case-gallery__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
 }
 
-.case-detail__media {
+.case-gallery__kicker {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.case-gallery__text {
+  margin: 0;
+  max-width: 560px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Full-bleed com padding alinhado ao site-shell — o strip escapa da
+   coluna central mas a primeira peça nasce alinhada ao conteúdo */
+.case-gallery__strip {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-inline: max(20px, calc((100vw - 1160px) / 2));
+  padding-bottom: 16px;
+  scroll-snap-type: x proximity;
+  /* o snap alinha ao snapport, não ao padding — sem isto o 1º card cola na borda */
+  scroll-padding-inline: max(20px, calc((100vw - 1160px) / 2));
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.case-gallery__strip .case-gallery__item {
   position: relative;
-  width: 100%;
-  height: 60vh;
-  min-height: 360px;
-  overflow: hidden;
-  background: var(--panel);
-}
-
-.case-detail__image {
-  object-fit: contain;
-}
-
-/* 5 — Série */
-.case-series__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.case-series__item {
-  position: relative;
-  aspect-ratio: 4 / 5;
+  flex: 0 0 auto;
+  width: auto;
+  height: clamp(360px, 56vh, 600px);
   overflow: hidden;
   border-radius: var(--radius-md);
   border: 1px solid var(--panel-line);
   background: var(--panel);
+  scroll-snap-align: start;
+  transition: transform 0.35s ease, border-color 0.35s ease;
 }
 
-.case-series__image {
-  object-fit: contain;
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+.case-gallery__strip .case-gallery__item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 43, 43, 0.3);
 }
 
-.case-series__item:hover .case-series__image {
-  transform: scale(1.05);
+.case-gallery__image {
+  display: block;
+  height: 100%;
+  width: auto;
 }
 
 /* 6 — Aplicação */
@@ -3879,8 +3900,8 @@ img {
     padding-block: 64px;
   }
 
-  .case-series__grid {
-    grid-template-columns: minmax(0, 1fr);
+  .case-gallery__strip .case-gallery__item {
+    height: clamp(300px, 52vh, 440px);
   }
 
   .case-application__grid {
