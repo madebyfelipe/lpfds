@@ -3818,6 +3818,51 @@ img {
   margin-top: 24px;
 }
 
+/* Modo grid: peças individuais lado a lado, sem a moldura da prancha
+   única (cada peça já tem sua própria borda) */
+.presentation-board__frame--grid {
+  border: 0;
+  background: none;
+}
+
+.presentation-board__grid {
+  display: grid;
+  gap: 16px;
+}
+
+.presentation-board__grid--grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.presentation-board__grid--grid-1 {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.presentation-board__grid .presentation-board__grid-item {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.presentation-board__grid .presentation-board__grid-item:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 43, 43, 0.35);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.presentation-board__grid-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* 8 — Próximo projeto */
 .case-next {
   position: relative;
@@ -3896,6 +3941,14 @@ img {
 
   .case-gallery__strip .case-gallery__item {
     height: clamp(300px, 52vh, 440px);
+  }
+
+  .presentation-board__grid--grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .presentation-board__grid--grid-1 {
+    max-width: none;
   }
 
   .case-scope__grid {

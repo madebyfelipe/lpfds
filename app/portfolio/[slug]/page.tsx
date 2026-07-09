@@ -61,6 +61,18 @@ export default async function CasePage({
     project.gallery ?? [project.images.detail, ...project.images.series]
   ).map((src) => ({ src, ...getImageSize(src) }));
 
+  // Seção "Apresentação" em modo grid: usa as peças explícitas ou, na
+  // ausência delas, reaproveita a faixa da Galeria — com dimensões reais
+  // lidas em build time, como no restante da página.
+  const presentation = project.presentation;
+  const presentationGrid =
+    presentation && "layout" in presentation
+      ? (presentation.images ?? project.gallery ?? []).map((src) => ({
+          src,
+          ...getImageSize(src)
+        }))
+      : null;
+
   return (
     <>
       <ScrollRevealInit />
@@ -204,23 +216,33 @@ export default async function CasePage({
           </section>
         )}
 
-        {/* 7 — Apresentação completa (prancha vertical, quando existir) */}
-        {project.presentation && (
+        {/* 7 — Apresentação completa (prancha única ou grid de peças) */}
+        {presentation && (
           <section className="section case-presentation">
             <div className="site-shell">
               <div className="case-presentation__header sr">
                 <span className="case-presentation__kicker">Apresentação</span>
                 <p className="case-presentation__text">
-                  {project.presentation.text ??
+                  {presentation.text ??
                     "O projeto completo, como foi entregue ao cliente."}
                 </p>
               </div>
-              <PresentationBoard
-                src={project.presentation.src}
-                width={project.presentation.width}
-                height={project.presentation.height}
-                client={project.client}
-              />
+              {"layout" in presentation ? (
+                <PresentationBoard
+                  mode="grid"
+                  layout={presentation.layout}
+                  images={presentationGrid ?? []}
+                  client={project.client}
+                />
+              ) : (
+                <PresentationBoard
+                  mode="board"
+                  src={presentation.src}
+                  width={presentation.width}
+                  height={presentation.height}
+                  client={project.client}
+                />
+              )}
             </div>
           </section>
         )}

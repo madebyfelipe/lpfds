@@ -22,9 +22,14 @@ export type Project = {
   // Foto que acompanha o "Sobre o projeto" à esquerda do painel de texto,
   // preenchendo a largura da shell junto com o resto das seções.
   aboutImage?: string;
-  // Prancha vertical completa (estilo Behance) — dimensões reais para o
-  // <Image> renderizar na proporção natural, sem corte.
-  presentation?: { src: string; width: number; height: number; text?: string };
+  // Seção "Apresentação" (perto do fim do case). Dois formatos possíveis:
+  // - prancha única: uma imagem já montada (estilo Behance), dimensões reais
+  //   para o <Image> renderizar na proporção natural, sem corte;
+  // - grid de peças: as peças individuais lado a lado, em grid de 4 colunas
+  //   ou coluna única. Se `images` for omitido, usa `gallery` do projeto.
+  presentation?:
+    | { src: string; width: number; height: number; text?: string }
+    | { layout: "grid-4" | "grid-1"; images?: string[]; text?: string };
 };
 
 // Projeto com as dimensões reais do cover (calculadas em build time pelo
@@ -69,9 +74,7 @@ export const projects: Project[] = [
       "O projeto começou pela produção de conteúdo. Estruturamos uma linha editorial para LinkedIn e Instagram, traduzindo temas de direito tributário e trabalhista em publicações claras, com frequência constante e linguagem calibrada para cada canal. A operação cobre pauta, redação, design e distribuição, somada à gestão de campanhas no Google Ads direcionadas à captação de clientes qualificados.\n\nO escopo se expandiu para toda a presença da banca. Desenvolvemos o novo site, as aplicações de marca e os modelos de apresentação usados em reuniões e propostas comerciais. A produção audiovisual passou a alimentar os canais com gravações em vídeo e sessões fotográficas dos sócios e do escritório, garantindo material próprio e consistente em cada ponto de contato.",
     aboutImage: "/portfolio/alves-nabuco/sobre.jpg",
     presentation: {
-      src: "/portfolio/alves-nabuco/apresentacao.jpg",
-      width: 1600,
-      height: 7203,
+      layout: "grid-4",
       text: "A linha editorial completa — todos os posts produzidos ao longo da parceria, em ordem cronológica.",
     },
   },
@@ -219,9 +222,7 @@ export const projects: Project[] = [
     },
     gallery: posts("fila-zero", 28).map((src) => src.replace(/\.jpg$/, ".png")),
     presentation: {
-      src: "/portfolio/fila-zero/apresentacao.jpg",
-      width: 1080,
-      height: 37800,
+      layout: "grid-4",
       text: "Todos os carrosséis na íntegra, slide a slide, na ordem em que foram entregues.",
     },
   },
