@@ -98,10 +98,6 @@ export default async function CasePage({
               <div className="site-shell">
                 <div className="case-gallery__header sr">
                   <span className="case-gallery__kicker">Galeria</span>
-                  <p className="case-gallery__text">
-                    Passe o mouse para pausar — clique em qualquer peça para
-                    ver em escala real.
-                  </p>
                 </div>
               </div>
               <div className="case-gallery__strip sr">
