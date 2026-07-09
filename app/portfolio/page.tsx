@@ -21,7 +21,7 @@ export default function PortfolioPage() {
   return (
     <>
       <ScrollRevealInit />
-      <Nav />
+      <Nav collapsible />
       <main>
         <h1 className="visually-hidden">Portfólio — Made by Felipe</h1>
         <PortfolioGrid projects={projects} />

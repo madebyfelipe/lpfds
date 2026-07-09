@@ -264,6 +264,45 @@ img {
   top: 18px;
   inset-inline: 0;
   z-index: 50;
+  transition: left 0.35s ease, right 0.35s ease;
+}
+
+.topbar--collapsed {
+  right: auto;
+  left: 20px;
+}
+
+.topbar--collapsed .site-shell {
+  width: auto;
+  margin: 0;
+  transition: width 0.35s ease;
+}
+
+.topbar--collapsed .topbar__frame {
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.topbar__expandButton,
+.topbar__collapseButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.topbar__expandButton:hover,
+.topbar__collapseButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent);
 }
 
 .topbar__frame {
@@ -3516,19 +3555,28 @@ img {
   color: var(--muted);
 }
 
-/* Full-bleed com padding alinhado ao site-shell — o strip escapa da
-   coluna central mas a primeira peça nasce alinhada ao conteúdo */
+/* Faixa automática full-bleed: o track tem 2 cópias da lista e anda
+   -50% em loop — passa sozinha, pausa no hover para permitir o clique */
 .case-gallery__strip {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding-inline: max(20px, calc((100vw - 1160px) / 2));
+  overflow: hidden;
   padding-bottom: 16px;
-  scroll-snap-type: x proximity;
-  /* o snap alinha ao snapport, não ao padding — sem isto o 1º card cola na borda */
-  scroll-padding-inline: max(20px, calc((100vw - 1160px) / 2));
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-strong) transparent;
+}
+
+.case-gallery__track {
+  display: flex;
+  width: max-content;
+  animation: case-gallery-scroll var(--case-gallery-duration, 60s) linear
+    infinite;
+}
+
+.case-gallery__strip:hover .case-gallery__track {
+  animation-play-state: paused;
+}
+
+@keyframes case-gallery-scroll {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .case-gallery__strip .case-gallery__item {
@@ -3536,17 +3584,28 @@ img {
   flex: 0 0 auto;
   width: auto;
   height: clamp(360px, 56vh, 600px);
+  /* margem no item (não gap no track) para o loop de -50% fechar sem salto */
+  margin-right: 20px;
   overflow: hidden;
   border-radius: var(--radius-md);
   border: 1px solid var(--panel-line);
   background: var(--panel);
-  scroll-snap-align: start;
-  transition: transform 0.35s ease, border-color 0.35s ease;
+  transition: border-color 0.35s ease;
 }
 
 .case-gallery__strip .case-gallery__item:hover {
-  transform: translateY(-4px);
   border-color: rgba(212, 43, 43, 0.3);
+}
+
+/* Sem animação: vira um trilho rolável manualmente */
+@media (prefers-reduced-motion: reduce) {
+  .case-gallery__track {
+    animation: none;
+  }
+
+  .case-gallery__strip {
+    overflow-x: auto;
+  }
 }
 
 .case-gallery__image {

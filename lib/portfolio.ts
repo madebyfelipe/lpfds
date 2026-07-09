@@ -18,10 +18,21 @@ export type Project = {
     application?: string; // se ausente, reusa detail
   };
   applicationCaption?: { kicker: string; text: string }; // card da seção Aplicação
+  // Todas as peças da faixa automática da Galeria; se ausente,
+  // a página usa [detail, ...series] como fallback.
+  gallery?: string[];
   // Prancha vertical completa (estilo Behance) — dimensões reais para o
   // <Image> renderizar na proporção natural, sem corte.
   presentation?: { src: string; width: number; height: number; text?: string };
 };
+
+// Gera os caminhos /portfolio/<slug>/posts/post-01.jpg … post-NN.jpg
+const posts = (slug: string, count: number): string[] =>
+  Array.from(
+    { length: count },
+    (_, i) =>
+      `/portfolio/${slug}/posts/post-${String(i + 1).padStart(2, "0")}.jpg`
+  );
 
 // A ordem do array define a ordem do grid (1º = destaque) e o "próximo projeto".
 export const projects: Project[] = [
@@ -56,6 +67,7 @@ export const projects: Project[] = [
       kicker: "Aplicação",
       text: "Peças institucionais e conteúdo jurídico adaptados para feed e campanhas.",
     },
+    gallery: posts("alves-nabuco", 32),
     presentation: {
       src: "/portfolio/alves-nabuco/apresentacao.jpg",
       width: 1600,
@@ -94,6 +106,7 @@ export const projects: Project[] = [
       kicker: "Aplicação",
       text: "Identidade aplicada em sacolas, caixas e embalagens take away.",
     },
+    gallery: posts("doce-afeto", 10),
     presentation: {
       src: "/portfolio/doce-afeto/apresentacao.jpg",
       width: 1600,
@@ -132,6 +145,7 @@ export const projects: Project[] = [
       kicker: "Aplicação",
       text: "Marca aplicada em brindes, materiais impressos e conteúdo de feed.",
     },
+    gallery: posts("liz-helena", 8),
     presentation: {
       src: "/portfolio/liz-helena/apresentacao.jpg",
       width: 1600,
