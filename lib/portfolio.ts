@@ -156,9 +156,20 @@ export const projects: Project[] = [
         "/portfolio/know-how-experience/serie-3.jpg",
       ],
     },
+    gallery: [
+      "/portfolio/know-how-experience/detail.jpg",
+      ...posts("know-how-experience", 3),
+      "/portfolio/know-how-experience/serie-1.jpg",
+      "/portfolio/know-how-experience/serie-2.jpg",
+      "/portfolio/know-how-experience/serie-3.jpg",
+    ],
     about:
       "A 15ª edição do Know How Experience reuniu empresários, executivos e investidores em Campo Grande, nos dias 22 e 23 de maio, no Palazzo Murano, sob o tema \"Os 4 Pilares do Networking Lucrativo\". Assumimos a entrega de todos os materiais de comunicação da edição, do anúncio à realização. O escopo incluiu os roteiros de apresentação dos palestrantes, o roteiro do spot de TV, as peças de mídia paga e as copies de virada de lote que sustentaram o ritmo de vendas ao longo de todo o ciclo.\n\nA operação seguiu a lógica de um lançamento. Cada fase da campanha exigiu um pacote próprio de criativos, mensagens e cortes de vídeo, ajustados ao estágio da venda e ao público de cada canal. Conduzimos também o ciclo promocional com parceiros, incluindo a ativação junto ao Café com Negócios, e mantivemos a consistência visual do evento em todos os pontos de contato: redes sociais, mídia paga, materiais de palco e comunicação de bastidores.",
-    aboutImage: "/portfolio/know-how-experience/aplicacao.jpg",
+    aboutImage: "/portfolio/know-how-experience/sobre.jpg",
+    presentation: {
+      layout: "grid-4",
+      text: "Do credenciamento ao palco — bastidores e criativos da 15ª edição, ponta a ponta.",
+    },
   },
   {
     slug: "turrex-midia-digital",
