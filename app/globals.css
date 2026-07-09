@@ -3690,6 +3690,37 @@ img {
   box-shadow: var(--shadow-strong);
 }
 
+/* Com foto ao lado: duas colunas preenchendo a shell inteira,
+   alinhado à largura das outras seções do case */
+.case-about__grid--with-media {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.case-about__grid--with-media .case-about__panel {
+  max-width: none;
+  margin: 0;
+}
+
+.case-about__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
+  box-shadow: var(--shadow-strong);
+}
+
+/* A foto acompanha a altura do painel de texto, cortando pelo centro */
+.case-about__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .case-about__panel::before {
   content: "";
   position: absolute;
@@ -3874,5 +3905,14 @@ img {
 
   .case-about__panel {
     padding: 32px 24px;
+  }
+
+  .case-about__grid--with-media {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Empilhado: a foto mantém a proporção natural (retrato) */
+  .case-about__media {
+    aspect-ratio: 3 / 4;
   }
 }

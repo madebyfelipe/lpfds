@@ -171,13 +171,34 @@ export default async function CasePage({
         {project.about && (
           <section className="section case-about">
             <div className="site-shell">
-              <div className="case-about__panel sr">
-                <span className="case-about__kicker">Sobre o projeto</span>
-                {project.about.split("\n\n").map((paragraph, index) => (
-                  <p key={index} className="case-about__text">
-                    {paragraph}
-                  </p>
-                ))}
+              <div
+                className={`case-about__grid${
+                  project.aboutImage ? " case-about__grid--with-media" : ""
+                }`}
+              >
+                {project.aboutImage && (
+                  <div className="case-about__media sr-left">
+                    <Image
+                      src={project.aboutImage}
+                      alt={`Bastidores do projeto ${project.client}`}
+                      {...getImageSize(project.aboutImage)}
+                      sizes="(max-width: 900px) 100vw, 45vw"
+                      className="case-about__photo"
+                    />
+                  </div>
+                )}
+                <div
+                  className={`case-about__panel ${
+                    project.aboutImage ? "sr-right" : "sr"
+                  }`}
+                >
+                  <span className="case-about__kicker">Sobre o projeto</span>
+                  {project.about.split("\n\n").map((paragraph, index) => (
+                    <p key={index} className="case-about__text">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
