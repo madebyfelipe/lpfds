@@ -20,7 +20,7 @@ export type Project = {
   applicationCaption?: { kicker: string; text: string }; // card da seção Aplicação
   // Prancha vertical completa (estilo Behance) — dimensões reais para o
   // <Image> renderizar na proporção natural, sem corte.
-  presentation?: { src: string; width: number; height: number };
+  presentation?: { src: string; width: number; height: number; text?: string };
 };
 
 // A ordem do array define a ordem do grid (1º = destaque) e o "próximo projeto".
@@ -56,6 +56,12 @@ export const projects: Project[] = [
       kicker: "Aplicação",
       text: "Peças institucionais e conteúdo jurídico adaptados para feed e campanhas.",
     },
+    presentation: {
+      src: "/portfolio/alves-nabuco/apresentacao.jpg",
+      width: 1600,
+      height: 7203,
+      text: "A linha editorial completa — todos os posts produzidos ao longo da parceria, em ordem cronológica.",
+    },
   },
   {
     slug: "doce-afeto",
@@ -87,6 +93,12 @@ export const projects: Project[] = [
     applicationCaption: {
       kicker: "Aplicação",
       text: "Identidade aplicada em sacolas, caixas e embalagens take away.",
+    },
+    presentation: {
+      src: "/portfolio/doce-afeto/apresentacao.jpg",
+      width: 1600,
+      height: 18500,
+      text: "O universo da marca por inteiro — do pattern ilustrado ao cardápio e ao ponto de venda.",
     },
   },
   {
@@ -124,6 +136,7 @@ export const projects: Project[] = [
       src: "/portfolio/liz-helena/apresentacao.jpg",
       width: 1600,
       height: 10476,
+      text: "A marca completa — do símbolo às aplicações, como foi entregue ao cliente.",
     },
   },
   {

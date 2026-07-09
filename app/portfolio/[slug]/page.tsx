@@ -188,8 +188,8 @@ export default async function CasePage({
               <div className="case-presentation__header sr">
                 <span className="case-presentation__kicker">Apresentação</span>
                 <p className="case-presentation__text">
-                  A marca completa — do símbolo às aplicações, como foi
-                  entregue ao cliente.
+                  {project.presentation.text ??
+                    "O projeto completo, como foi entregue ao cliente."}
                 </p>
               </div>
               <PresentationBoard
