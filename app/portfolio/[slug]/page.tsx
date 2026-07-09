@@ -52,7 +52,6 @@ export default async function CasePage({
   }
 
   const next = getNextProject(slug);
-  const applicationImage = project.images.application ?? project.images.detail;
 
   return (
     <>
@@ -90,27 +89,7 @@ export default async function CasePage({
           </div>
         </section>
 
-        {/* 3 — Resultado */}
-        <section className="section case-result">
-          <div className="site-shell">
-            <div className="case-result__panel sr">
-              <span className="case-result__label">{project.result.label}</span>
-              <div className="case-result__flow">
-                <span className="case-result__before sr-left">
-                  {project.result.before}
-                </span>
-                <span className="case-result__arrow" aria-hidden="true">
-                  →
-                </span>
-                <span className="case-result__after sr-right">
-                  {project.result.after}
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 4/5 — Galeria: faixa automática com todas as peças do projeto */}
+        {/* 3 — Galeria: faixa automática com todas as peças do projeto */}
         {(() => {
           const gallery =
             project.gallery ?? [project.images.detail, ...project.images.series];
@@ -166,35 +145,42 @@ export default async function CasePage({
           );
         })()}
 
-        {/* 6 — Aplicação */}
-        <section className="section case-application">
+        {/* 4 — Statement */}
+        <section className="case-statement">
           <div className="site-shell">
-            <div className="case-application__header sr">
-              <span className="case-application__kicker">
-                {project.applicationCaption?.kicker ?? "Aplicação"}
-              </span>
-              <p className="case-application__text">
-                {project.applicationCaption?.text ??
-                  "Peças aplicadas nos canais do cliente."}
-              </p>
-            </div>
-            <Lightbox
-              src={applicationImage}
-              alt={`${project.client} — aplicação`}
-              className="case-application__media sr"
-            >
-              <Image
-                src={applicationImage}
-                alt={`${project.client} — aplicação`}
-                fill
-                sizes="(max-width: 768px) 100vw, 720px"
-                className="case-application__image"
-              />
-            </Lightbox>
+            <p className="case-statement__text sr">{project.statement}</p>
           </div>
         </section>
 
-        {/* 6.5 — Apresentação completa (prancha vertical, quando existir) */}
+        {/* 5 — Escopo e Execução */}
+        <section className="section case-scope">
+          <div className="site-shell">
+            <div className="case-scope__grid">
+              <div className="case-scope__col sr-left">
+                <span className="case-scope__label">Escopo</span>
+                <p className="case-scope__value">{project.scope.join(" · ")}</p>
+              </div>
+              <div className="case-scope__col sr-right">
+                <span className="case-scope__label">Execução</span>
+                <p className="case-scope__value">{project.execution}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 6 — Sobre o projeto (texto explicativo, aguardando conteúdo) */}
+        {project.about && (
+          <section className="section case-about">
+            <div className="site-shell">
+              <div className="case-about__panel sr">
+                <span className="case-about__kicker">Sobre o projeto</span>
+                <p className="case-about__text">{project.about}</p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 7 — Apresentação completa (prancha vertical, quando existir) */}
         {project.presentation && (
           <section className="section case-presentation">
             <div className="site-shell">
@@ -215,44 +201,7 @@ export default async function CasePage({
           </section>
         )}
 
-        {/* 7 — Statement */}
-        <section className="case-statement">
-          <div className="site-shell">
-            <p className="case-statement__text sr">{project.statement}</p>
-          </div>
-        </section>
-
-        {/* 8 — Escopo */}
-        <section className="section case-scope">
-          <div className="site-shell">
-            <div className="case-scope__grid">
-              <div className="case-scope__col sr-left">
-                <span className="case-scope__label">Escopo</span>
-                <p className="case-scope__value">{project.scope.join(" · ")}</p>
-              </div>
-              <div className="case-scope__col sr-right">
-                <span className="case-scope__label">Execução</span>
-                <p className="case-scope__value">{project.execution}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 9 — Números */}
-        <section className="section case-numbers">
-          <div className="site-shell">
-            <div className="case-numbers__grid sr">
-              {project.numbers.map((item) => (
-                <div key={item.label} className="case-numbers__item">
-                  <span className="case-numbers__value">{item.value}</span>
-                  <span className="case-numbers__label">{item.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 10 — Próximo projeto */}
+        {/* 8 — Próximo projeto */}
         <Link href={`/portfolio/${next.slug}`} className="case-next">
           <div className="case-next__media">
             <Image
