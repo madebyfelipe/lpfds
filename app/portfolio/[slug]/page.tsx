@@ -169,30 +169,28 @@ export default async function CasePage({
         {/* 6 — Aplicação */}
         <section className="section case-application">
           <div className="site-shell">
-            <div className="case-application__grid">
-              <Lightbox
+            <div className="case-application__header sr">
+              <span className="case-application__kicker">
+                {project.applicationCaption?.kicker ?? "Aplicação"}
+              </span>
+              <p className="case-application__text">
+                {project.applicationCaption?.text ??
+                  "Peças aplicadas nos canais do cliente."}
+              </p>
+            </div>
+            <Lightbox
+              src={applicationImage}
+              alt={`${project.client} — aplicação`}
+              className="case-application__media sr"
+            >
+              <Image
                 src={applicationImage}
                 alt={`${project.client} — aplicação`}
-                className="case-application__media sr-left"
-              >
-                <Image
-                  src={applicationImage}
-                  alt={`${project.client} — aplicação`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 560px"
-                  className="case-application__image"
-                />
-              </Lightbox>
-              <div className="case-application__card sr-right">
-                <span className="case-application__kicker">
-                  {project.applicationCaption?.kicker ?? "Aplicação"}
-                </span>
-                <p className="case-application__text">
-                  {project.applicationCaption?.text ??
-                    "Peças aplicadas nos canais do cliente."}
-                </p>
-              </div>
-            </div>
+                fill
+                sizes="(max-width: 768px) 100vw, 720px"
+                className="case-application__image"
+              />
+            </Lightbox>
           </div>
         </section>
 

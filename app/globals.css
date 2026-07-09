@@ -3621,20 +3621,38 @@ img {
 }
 
 /* 6 — Aplicação */
-.case-application__grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 22px;
-  align-items: stretch;
+.case-application__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
 }
 
 .case-application__media {
   position: relative;
-  min-height: 420px;
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 4 / 5;
+  margin: 0 auto;
   overflow: hidden;
   border-radius: var(--radius-md);
   border: 1px solid var(--panel-line);
   background: var(--panel);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.case-application__media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    circle at 0% 0%,
+    rgba(212, 43, 43, 0.08),
+    transparent 55%
+  );
+  pointer-events: none;
 }
 
 .case-application__image {
@@ -3709,33 +3727,7 @@ img {
   }
 }
 
-.case-application__card {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 16px;
-  padding: 44px 40px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--panel-line);
-  background: var(--panel-soft);
-}
-
-.case-application__card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 0% 100%,
-    rgba(212, 43, 43, 0.09),
-    transparent 55%
-  );
-  pointer-events: none;
-}
-
 .case-application__kicker {
-  position: relative;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -3744,11 +3736,11 @@ img {
 }
 
 .case-application__text {
-  position: relative;
   margin: 0;
+  max-width: 560px;
   font-size: 1.15rem;
   line-height: 1.6;
-  color: var(--panel-text);
+  color: var(--muted);
 }
 
 /* 6.5 — Apresentação (prancha vertical completa) */
@@ -3969,12 +3961,8 @@ img {
     height: clamp(300px, 52vh, 440px);
   }
 
-  .case-application__grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .case-application__media {
-    min-height: 320px;
+    max-width: 100%;
   }
 
   .case-scope__grid {
