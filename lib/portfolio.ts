@@ -178,6 +178,28 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
+    slug: "fila-zero",
+    client: "Fila Zero",
+    displayName: "FILA\nZERO",
+    category: "Conteúdo",
+    tagline:
+      "Carrosséis estratégicos para Instagram, unindo educação e conversão em cada peça.",
+    statement: "Fila zero começa com conteúdo certo.",
+    scope: ["Conteúdo para redes sociais", "Direção de arte", "Carrosséis"],
+    execution:
+      "Produção de carrosséis educativos e comerciais para Instagram, com direção de arte consistente peça a peça.",
+    images: {
+      cover: "/portfolio/fila-zero/cover.png",
+      detail: "/portfolio/fila-zero/detail.png",
+      series: [
+        "/portfolio/fila-zero/serie-1.png",
+        "/portfolio/fila-zero/serie-2.png",
+        "/portfolio/fila-zero/serie-3.png",
+      ],
+    },
+    gallery: posts("fila-zero", 28).map((src) => src.replace(/\.jpg$/, ".png")),
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
