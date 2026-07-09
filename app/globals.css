@@ -3665,6 +3665,67 @@ img {
   color: var(--panel-text);
 }
 
+/* 6.5 — Apresentação (prancha vertical completa) */
+.case-presentation__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.case-presentation__kicker {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.case-presentation__text {
+  margin: 0;
+  max-width: 560px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Recolhida mostra só o topo da prancha; expandir revela a altura
+   natural — a imagem nunca é redimensionada nem cortada */
+.presentation-board__frame {
+  position: relative;
+  max-height: 720px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
+}
+
+.presentation-board--open .presentation-board__frame {
+  max-height: none;
+}
+
+.presentation-board__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.presentation-board__fade {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 240px;
+  background: linear-gradient(to bottom, transparent, var(--bg) 92%);
+  pointer-events: none;
+}
+
+.presentation-board__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
 /* 7 — Statement (bloco claro invertido) */
 .case-statement {
   padding: clamp(90px, 14vw, 160px) 0;

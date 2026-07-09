@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Lightbox } from "@/components/portfolio/Lightbox";
+import { PresentationBoard } from "@/components/portfolio/PresentationBoard";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
 
@@ -179,6 +180,27 @@ export default async function CasePage({
             </div>
           </div>
         </section>
+
+        {/* 6.5 — Apresentação completa (prancha vertical, quando existir) */}
+        {project.presentation && (
+          <section className="section case-presentation">
+            <div className="site-shell">
+              <div className="case-presentation__header sr">
+                <span className="case-presentation__kicker">Apresentação</span>
+                <p className="case-presentation__text">
+                  A marca completa — do símbolo às aplicações, como foi
+                  entregue ao cliente.
+                </p>
+              </div>
+              <PresentationBoard
+                src={project.presentation.src}
+                width={project.presentation.width}
+                height={project.presentation.height}
+                client={project.client}
+              />
+            </div>
+          </section>
+        )}
 
         {/* 7 — Statement */}
         <section className="case-statement">

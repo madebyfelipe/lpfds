@@ -18,6 +18,9 @@ export type Project = {
     application?: string; // se ausente, reusa detail
   };
   applicationCaption?: { kicker: string; text: string }; // card da seção Aplicação
+  // Prancha vertical completa (estilo Behance) — dimensões reais para o
+  // <Image> renderizar na proporção natural, sem corte.
+  presentation?: { src: string; width: number; height: number };
 };
 
 // A ordem do array define a ordem do grid (1º = destaque) e o "próximo projeto".
@@ -116,6 +119,11 @@ export const projects: Project[] = [
     applicationCaption: {
       kicker: "Aplicação",
       text: "Marca aplicada em brindes, materiais impressos e conteúdo de feed.",
+    },
+    presentation: {
+      src: "/portfolio/liz-helena/apresentacao.jpg",
+      width: 1600,
+      height: 10476,
     },
   },
   {
