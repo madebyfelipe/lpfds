@@ -13,6 +13,9 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://madebyfelipe.com"),
+  verification: {
+    google: "tN5Kf-NTmvEzkHjSlfQwhrcnv5LpZf4XWn899JNRZkM"
+  },
   title: "Made by Felipe | Branding + Social Media Estratégico",
   description:
     "Landing page da Made by Felipe para profissionais e escritórios que querem posicionamento, marca e conteúdo estratégico para lotar agenda.",
