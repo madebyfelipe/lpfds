@@ -162,7 +162,7 @@ export const projects: Project[] = [
     },
     gallery: [
       "/portfolio/know-how-experience/detail.jpg",
-      ...posts("know-how-experience", 3),
+      ...posts("know-how-experience", 5),
       "/portfolio/know-how-experience/serie-1.jpg",
       "/portfolio/know-how-experience/serie-2.jpg",
       "/portfolio/know-how-experience/serie-3.jpg",
