@@ -10,7 +10,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // Link antigo (bios/links externos) — mantém as URLs /cases funcionando.
-      { source: "/cases", destination: "/portfolio", permanent: true }
+      { source: "/cases", destination: "/portfolio", permanent: true },
+      // O case institucional foi fundido ao case principal da Alves & Nabuco.
+      {
+        source: "/portfolio/alves-nabuco-institucional",
+        destination: "/portfolio/alves-nabuco",
+        permanent: true
+      }
     ];
   }
 };

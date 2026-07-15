@@ -3507,8 +3507,7 @@ img {
 
 @media (prefers-reduced-motion: reduce) {
   .case-hero__image,
-  .case-hero__inner,
-  .webcase-hero__inner {
+  .case-hero__inner {
     animation: none;
   }
 }
@@ -3936,12 +3935,18 @@ img {
   height: auto;
 }
 
-/* ————— Case de site institucional (layout próprio) —————
-   Estrutura independente do case padrão: abertura editorial sem capa,
-   janela de navegador navegável (SiteFrame) e narrativa em capítulos. */
+/* ————— 7 — O site, ao vivo (dobra opcional do case) —————
+   Header no mesmo padrão das outras dobras + janela de navegador
+   navegável (SiteFrame) com as capturas full-page do site entregue. */
 
-.webcase-kicker {
-  display: inline-block;
+.case-site__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.case-site__kicker {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.24em;
@@ -3949,120 +3954,12 @@ img {
   color: var(--accent);
 }
 
-/* 1 — Abertura editorial */
-.webcase-hero {
-  position: relative;
-  padding: 190px 0 76px;
-  overflow: hidden;
-}
-
-.webcase-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      ellipse 55% 60% at 85% -15%,
-      rgba(212, 43, 43, 0.13),
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 45% 45% at 5% 115%,
-      rgba(212, 43, 43, 0.06),
-      transparent 55%
-    );
-  pointer-events: none;
-}
-
-.webcase-hero__inner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  animation: webcase-rise 1s ease 0.1s both;
-}
-
-.webcase-hero__inner .webcase-kicker {
-  margin-bottom: 26px;
-}
-
-.webcase-hero__title {
+.case-site__text {
   margin: 0;
-  max-width: 16ch;
-  font-size: clamp(2.6rem, 6.6vw, 5.6rem);
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.045em;
-  font-family: var(--font-outfit), system-ui, sans-serif;
-  color: #fff;
-}
-
-.webcase-hero__title em {
-  font-style: normal;
-  color: var(--accent);
-}
-
-.webcase-hero__sub {
-  margin: 28px 0 0;
-  max-width: 640px;
-  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  max-width: 560px;
+  font-size: 1.15rem;
   line-height: 1.6;
   color: var(--muted);
-}
-
-.webcase-hero__meta {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin: 64px 0 0;
-  padding-top: 30px;
-  border-top: 1px solid var(--line);
-}
-
-.webcase-hero__meta dt {
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--soft);
-}
-
-.webcase-hero__meta dd {
-  margin: 8px 0 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text);
-  overflow-wrap: anywhere;
-}
-
-@keyframes webcase-rise {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 2 — O site, ao vivo */
-.webcase-live__header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 30px;
-}
-
-.webcase-live__copy {
-  margin: 0;
-  max-width: 460px;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--muted);
-  text-align: right;
 }
 
 /* Janela de navegador */
@@ -4298,100 +4195,7 @@ img {
   color: var(--muted);
 }
 
-/* 3 — Narrativa em capítulos */
-.webcase-story__lede {
-  margin: 0 0 72px;
-  max-width: 880px;
-  font-size: clamp(1.5rem, 3.1vw, 2.3rem);
-  font-weight: 500;
-  line-height: 1.34;
-  letter-spacing: -0.02em;
-  color: var(--text);
-}
-
-.webcase-story__chapters {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 56px 64px;
-}
-
-.webcase-story__chapter {
-  border-top: 1px solid var(--line-strong);
-  padding-top: 28px;
-}
-
-.webcase-story__number {
-  display: block;
-  margin-bottom: 14px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-}
-
-.webcase-story__title {
-  margin: 0 0 14px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  font-family: var(--font-outfit), system-ui, sans-serif;
-  color: #fff;
-}
-
-.webcase-story__text {
-  margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.7;
-  color: var(--muted);
-}
-
-/* 4 — Ficha de entrega */
-.webcase-sheet__panel {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-  padding: 48px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  background: var(--panel);
-}
-
-.webcase-sheet__panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 0% 0%,
-    rgba(212, 43, 43, 0.07),
-    transparent 55%
-  );
-  pointer-events: none;
-}
-
-.webcase-sheet__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.webcase-sheet__list li {
-  padding: 12px 24px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-pill);
-  font-size: clamp(0.95rem, 1.7vw, 1.2rem);
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* 8 — Próximo projeto */
+/* 9 — Próximo projeto */
 .case-next {
   position: relative;
   display: flex;
@@ -4494,27 +4298,7 @@ img {
     aspect-ratio: 3 / 4;
   }
 
-  /* Case de site institucional */
-  .webcase-hero {
-    padding: 140px 0 56px;
-  }
-
-  .webcase-hero__meta {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-    margin-top: 44px;
-  }
-
-  .webcase-live__header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .webcase-live__copy {
-    text-align: left;
-  }
-
+  /* Dobra "O site, ao vivo" */
   .site-frame__chrome {
     gap: 12px;
     padding: 10px 14px;
@@ -4531,18 +4315,5 @@ img {
 
   .site-frame__index-item {
     padding: 16px;
-  }
-
-  .webcase-story__lede {
-    margin-bottom: 52px;
-  }
-
-  .webcase-story__chapters {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
-  }
-
-  .webcase-sheet__panel {
-    padding: 32px 24px;
   }
 }

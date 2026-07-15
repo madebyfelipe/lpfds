@@ -1,6 +1,6 @@
 export type ProjectCategory = "Marca" | "Conteúdo";
 
-// Página do site em um case institucional: vira aba + card-índice na
+// Página do site na dobra "O site" de um case: vira aba + card-índice na
 // janela de navegador (SiteFrame). O screenshot é a captura da página
 // inteira, do topo ao rodapé — é ele que rola dentro do viewport.
 export type WebsitePage = {
@@ -41,16 +41,12 @@ export type Project = {
   presentation?:
     | { src: string; width: number; height: number; text?: string }
     | { layout: "grid-4" | "grid-1"; images?: string[]; text?: string };
-  // Case de site institucional. Quando presente, /portfolio/<slug> abandona
-  // a estrutura padrão (hero de capa, galeria, apresentação) e renderiza o
-  // layout próprio de website: abertura editorial, janela de navegador
-  // navegável e narrativa em capítulos (components/portfolio/WebsiteCase).
+  // Dobra "O site" (entre "Sobre o projeto" e "Apresentação"): janela de
+  // navegador navegável (SiteFrame) com as capturas full-page do site
+  // entregue. Opcional — só aparece quando o projeto incluiu site.
   website?: {
     url: string; // domínio exibido na barra de endereço, sem protocolo
-    sector: string; // "Direito tributário e trabalhista"
-    year: string;
-    intro: string; // parágrafo-lede da narrativa
-    chapters: { title: string; text: string }[]; // capítulos numerados
+    intro: string; // copy da dobra, ao lado do kicker "O site, ao vivo"
     pages: WebsitePage[]; // abas da janela, na ordem de navegação
   };
 };
@@ -78,11 +74,18 @@ export const projects: Project[] = [
     displayName: "ALVES\n& NABUCO",
     category: "Marca",
     tagline:
-      "Conteúdo jurídico e Google Ads para uma banca de direito tributário e trabalhista.",
+      "Estratégia, conteúdo, design e performance para uma banca especializada em direito tributário e trabalhista.",
     statement: "Autoridade se constrói publicando.",
-    scope: ["Produção de conteúdo", "Google Ads", "Posicionamento"],
+    scope: [
+      "Estratégia de conteúdo",
+      "Google Ads",
+      "Site institucional",
+      "Identidade aplicada",
+      "Apresentações comerciais",
+      "Foto e vídeo",
+    ],
     execution:
-      "Estratégia de conteúdo, gestão de tráfego e posicionamento contínuo ao longo de 12 meses de parceria.",
+      "Estratégia de conteúdo, gestão de tráfego, site institucional e produção audiovisual conduzidos de forma integrada ao longo de 12 meses de parceria.",
     images: {
       cover: "/portfolio/alves-nabuco/cover.jpg",
       detail: "/portfolio/alves-nabuco/detail.jpg",
@@ -96,6 +99,41 @@ export const projects: Project[] = [
     about:
       "O projeto começou pela produção de conteúdo. Estruturamos uma linha editorial para LinkedIn e Instagram, traduzindo temas de direito tributário e trabalhista em publicações claras, com frequência constante e linguagem calibrada para cada canal. A operação cobre pauta, redação, design e distribuição, somada à gestão de campanhas no Google Ads direcionadas à captação de clientes qualificados.\n\nO escopo se expandiu para toda a presença da banca. Desenvolvemos o novo site, as aplicações de marca e os modelos de apresentação usados em reuniões e propostas comerciais. A produção audiovisual passou a alimentar os canais com gravações em vídeo e sessões fotográficas dos sócios e do escritório, garantindo material próprio e consistente em cada ponto de contato.",
     aboutImage: "/portfolio/alves-nabuco/sobre.jpg",
+    website: {
+      url: "advocaciaalvesnabuco.com.br",
+      intro:
+        "O novo site da banca, na íntegra: posicionamento preventivo logo na abertura, páginas individuais dos sócios, áreas de atuação e um canal de notícias jurídicas que reforça a autoridade a cada visita. Troque de página nas abas e role dentro da janela para percorrer cada tela.",
+      pages: [
+        {
+          label: "Início",
+          path: "/",
+          description:
+            "Posicionamento preventivo, especialidades e método em três passos — a porta de entrada da banca.",
+          src: "/portfolio/alves-nabuco/pagina-inicio.png",
+        },
+        {
+          label: "Sobre Nós",
+          path: "/sobre-nos",
+          description:
+            "Missão, visão, valores e a apresentação dos sócios-fundadores que conduzem cada caso.",
+          src: "/portfolio/alves-nabuco/pagina-sobre.png",
+        },
+        {
+          label: "Advogados",
+          path: "/advogados",
+          description:
+            "Perfil individual de cada sócio, com frentes de atuação e canais diretos de contato.",
+          src: "/portfolio/alves-nabuco/pagina-advogados.png",
+        },
+        {
+          label: "Blog",
+          path: "/blog",
+          description:
+            "Canal de notícias jurídicas: artigos assinados pelos sócios sustentam a autoridade da marca.",
+          src: "/portfolio/alves-nabuco/pagina-blog.png",
+        },
+      ],
+    },
     presentation: {
       layout: "grid-4",
       text: "A linha editorial completa — todos os posts produzidos ao longo da parceria, em ordem cronológica.",
@@ -220,83 +258,6 @@ export const projects: Project[] = [
   //     ],
   //   },
   // },
-  {
-    slug: "alves-nabuco-institucional",
-    client: "Alves & Nabuco",
-    displayName: "ALVES\n& NABUCO",
-    category: "Marca",
-    tagline:
-      "Estratégia, conteúdo, design e performance para uma banca especializada em direito tributário e trabalhista.",
-    statement: "Autoridade jurídica construída com consistência.",
-    scope: [
-      "Site institucional",
-      "Estratégia de conteúdo",
-      "Google Ads",
-      "Apresentações comerciais",
-      "Identidade aplicada",
-      "Foto e vídeo",
-    ],
-    execution:
-      "Site institucional, estratégia de conteúdo, mídia paga e produção audiovisual conduzidos de forma integrada.",
-    images: {
-      cover: "/portfolio/alves-nabuco-institucional/cover.png",
-    },
-    website: {
-      url: "advocaciaalvesnabuco.com.br",
-      sector: "Direito tributário e trabalhista",
-      year: "2026",
-      intro:
-        "A parceria com a Alves & Nabuco nasceu com um objetivo claro: transformar conhecimento técnico em uma presença digital capaz de gerar autoridade e novos negócios.",
-      chapters: [
-        {
-          title: "Estratégia e conteúdo",
-          text: "Linha editorial contínua para LinkedIn e Instagram, traduzindo temas de direito tributário e trabalhista em materiais acessíveis, relevantes e alinhados ao posicionamento da banca. Da pauta à redação, design e publicação, todo o processo é conduzido de forma integrada.",
-        },
-        {
-          title: "Performance",
-          text: "Gestão de campanhas no Google Ads voltadas à captação de clientes qualificados, conectando o conteúdo publicado à geração de novos negócios e sustentando o ritmo de demanda do escritório.",
-        },
-        {
-          title: "O site institucional",
-          text: "Com a evolução do projeto, passamos a atuar em toda a experiência de marca. Desenvolvemos o novo site da banca: posicionamento preventivo logo na abertura, páginas individuais dos sócios, áreas de atuação e um canal de notícias jurídicas que reforça a autoridade a cada visita.",
-        },
-        {
-          title: "Marca e audiovisual",
-          text: "Apresentações comerciais, materiais de apoio para reuniões e aplicações visuais padronizadas fortalecem a identidade em todos os pontos de contato. Fotografias e vídeos dos sócios e do escritório formam um acervo proprietário que alimenta continuamente os canais de comunicação.",
-        },
-      ],
-      pages: [
-        {
-          label: "Início",
-          path: "/",
-          description:
-            "Posicionamento preventivo, especialidades e método em três passos — a porta de entrada da banca.",
-          src: "/portfolio/alves-nabuco-institucional/pagina-inicio.png",
-        },
-        {
-          label: "Sobre Nós",
-          path: "/sobre-nos",
-          description:
-            "Missão, visão, valores e a apresentação dos sócios-fundadores que conduzem cada caso.",
-          src: "/portfolio/alves-nabuco-institucional/pagina-sobre.png",
-        },
-        {
-          label: "Advogados",
-          path: "/advogados",
-          description:
-            "Perfil individual de cada sócio, com frentes de atuação e canais diretos de contato.",
-          src: "/portfolio/alves-nabuco-institucional/pagina-advogados.png",
-        },
-        {
-          label: "Blog",
-          path: "/blog",
-          description:
-            "Canal de notícias jurídicas: artigos assinados pelos sócios sustentam a autoridade da marca.",
-          src: "/portfolio/alves-nabuco-institucional/pagina-blog.png",
-        },
-      ],
-    },
-  },
   {
     slug: "fila-zero",
     client: "Fila Zero",

@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Lightbox } from "@/components/portfolio/Lightbox";
 import { PresentationBoard } from "@/components/portfolio/PresentationBoard";
-import { WebsiteCase } from "@/components/portfolio/WebsiteCase";
+import { SiteFrame } from "@/components/portfolio/SiteFrame";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { getImageSize } from "@/lib/image-size";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
@@ -55,21 +55,11 @@ export default async function CasePage({
 
   const next = getNextProject(slug);
 
-  // Cases de site institucional têm estrutura própria de apresentação —
-  // nada da sequência padrão abaixo se aplica a eles.
-  if (project.website) {
-    return (
-      <>
-        <ScrollRevealInit />
-        <Nav collapsible />
-        <WebsiteCase
-          project={{ ...project, website: project.website }}
-          next={next}
-        />
-        <Footer />
-      </>
-    );
-  }
+  // Dobra "O site": dimensões reais dos screenshots lidas em build time —
+  // o viewport da janela reserva a proporção de cada página antes do download.
+  const sitePages = project.website
+    ? project.website.pages.map((page) => ({ ...page, ...getImageSize(page.src) }))
+    : null;
 
   // Seção "Apresentação" em modo grid: usa as peças explícitas ou, na
   // ausência delas, reaproveita a faixa da Galeria — com dimensões reais
@@ -244,7 +234,26 @@ export default async function CasePage({
           </section>
         )}
 
-        {/* 7 — Apresentação completa (prancha única ou grid de peças) */}
+        {/* 7 — O site, ao vivo (dobra opcional: projetos que incluíram site) */}
+        {project.website && sitePages && (
+          <section className="section case-site">
+            <div className="site-shell">
+              <div className="case-site__header sr">
+                <span className="case-site__kicker">O site, ao vivo</span>
+                <p className="case-site__text">{project.website.intro}</p>
+              </div>
+              <div className="sr">
+                <SiteFrame
+                  url={project.website.url}
+                  client={project.client}
+                  pages={sitePages}
+                />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 8 — Apresentação completa (prancha única ou grid de peças) */}
         {presentation && (
           <section className="section case-presentation">
             <div className="site-shell">
@@ -275,7 +284,7 @@ export default async function CasePage({
           </section>
         )}
 
-        {/* 8 — Próximo projeto */}
+        {/* 9 — Próximo projeto */}
         <Link href={`/portfolio/${next.slug}`} className="case-next">
           <div className="case-next__media">
             <Image
