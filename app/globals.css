@@ -3917,6 +3917,19 @@ img {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
+/* Grid-1 ocupa a largura inteira da prancha (mesma da Doce & Afeto) —
+   cada peça se comporta como um recorte estático da prancha, sem o
+   hover de destaque do grid-4 */
+.presentation-board__grid--grid-1 .presentation-board__grid-item {
+  transition: none;
+}
+
+.presentation-board__grid--grid-1 .presentation-board__grid-item:hover {
+  transform: none;
+  border-color: var(--panel-line);
+  box-shadow: none;
+}
+
 .presentation-board__grid-image {
   display: block;
   width: 100%;
