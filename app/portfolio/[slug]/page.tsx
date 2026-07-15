@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Lightbox } from "@/components/portfolio/Lightbox";
 import { PresentationBoard } from "@/components/portfolio/PresentationBoard";
+import { WebsiteCase } from "@/components/portfolio/WebsiteCase";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { getImageSize } from "@/lib/image-size";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
@@ -54,11 +55,30 @@ export default async function CasePage({
 
   const next = getNextProject(slug);
 
+  // Cases de site institucional têm estrutura própria de apresentação —
+  // nada da sequência padrão abaixo se aplica a eles.
+  if (project.website) {
+    return (
+      <>
+        <ScrollRevealInit />
+        <Nav />
+        <WebsiteCase
+          project={{ ...project, website: project.website }}
+          next={next}
+        />
+        <Footer />
+      </>
+    );
+  }
+
   // Peças da faixa automática da Galeria, com dimensões reais lidas em
   // build time — o navegador reserva a proporção de cada item antes do
   // download, sem layout shift na faixa.
   const gallery = (
-    project.gallery ?? [project.images.detail, ...project.images.series]
+    project.gallery ??
+    (project.images.detail && project.images.series
+      ? [project.images.detail, ...project.images.series]
+      : [])
   ).map((src) => ({ src, ...getImageSize(src) }));
 
   // Seção "Apresentação" em modo grid: usa as peças explícitas ou, na

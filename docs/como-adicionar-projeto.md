@@ -27,7 +27,7 @@ Notas:
 - Se não houver imagem de aplicação, omita `application` no objeto: o case reusa
   `detail.jpg` automaticamente.
 - As imagens do seed atual (`alves-nabuco`, `know-how-experience`,
-  `turrex-midia-digital`, `apple-sale-br`) são **placeholders gerados** — substitua
+  `turrex-midia-digital`) são **placeholders gerados** — substitua
   pelas peças reais quando o Felipe entregar.
 
 ---
@@ -68,6 +68,52 @@ Copie o template abaixo, cole **no fim do array `projects`** e preencha:
   },
 },
 ```
+
+---
+
+## 2b. Case de **site institucional** (layout próprio)
+
+Para projetos de site, existe um segundo formato de case: em vez da estrutura
+padrão (hero de capa → galeria → apresentação), a página renderiza uma
+**janela de navegador navegável** — as capturas full-page das páginas do site
+rolam dentro do viewport, com abas e cards-índice para trocar de página —
+seguida de narrativa em capítulos e ficha de entrega.
+
+Para usar, basta preencher o campo `website` no objeto do projeto (a presença
+dele troca o layout automaticamente — ver `components/portfolio/WebsiteCase.tsx`
+e `components/portfolio/SiteFrame.tsx`):
+
+```ts
+{
+  slug: "cliente-institucional",
+  // client, displayName, category, tagline, statement e scope como no padrão.
+  // statement vira o título do hero (última palavra ganha o vermelho);
+  // tagline vira o subtítulo; scope vira a ficha "O que entregamos".
+  images: {
+    cover: "/portfolio/cliente-institucional/cover.png", // só o cover: o grid usa
+  },
+  website: {
+    url: "dominio-do-cliente.com.br", // barra de endereço, sem protocolo
+    sector: "Setor do cliente",
+    year: "2026",
+    intro: "Parágrafo-lede da narrativa.",
+    chapters: [{ title: "Capítulo", text: "Texto do capítulo." }], // 4 funciona bem (grid 2×2)
+    pages: [
+      {
+        label: "Início", // nome da aba
+        path: "/", // caminho na barra de endereço
+        description: "Card-índice abaixo da janela.",
+        src: "/portfolio/cliente-institucional/pagina-inicio.png", // captura FULL-PAGE
+      },
+      // …demais páginas
+    ],
+  },
+},
+```
+
+As capturas devem ser da **página inteira** (topo ao rodapé, ex.: 1920 de
+largura) — é a altura delas que cria a rolagem dentro da janela. Exemplo real:
+`alves-nabuco-institucional`.
 
 ---
 

@@ -1,5 +1,15 @@
 export type ProjectCategory = "Marca" | "Conteúdo";
 
+// Página do site em um case institucional: vira aba + card-índice na
+// janela de navegador (SiteFrame). O screenshot é a captura da página
+// inteira, do topo ao rodapé — é ele que rola dentro do viewport.
+export type WebsitePage = {
+  label: string; // nome da aba ("Início", "Sobre Nós"…)
+  path: string; // caminho exibido na barra de endereço ("/", "/sobre-nos"…)
+  description: string; // texto do card-índice abaixo da janela
+  src: string; // /portfolio/<slug>/pagina-*.png (captura full-page)
+};
+
 export type Project = {
   slug: string; // ex.: "alves-nabuco" — vira a URL
   client: string; // "Alves & Nabuco"
@@ -11,8 +21,9 @@ export type Project = {
   execution: string; // texto da coluna "Execução" (seção 5)
   images: {
     cover: string; // /portfolio/<slug>/cover.jpg
-    detail: string;
-    series: [string, string, string];
+    // detail e series são do case padrão — cases de site (website) não usam.
+    detail?: string;
+    series?: [string, string, string];
   };
   // Todas as peças da faixa automática da Galeria; se ausente,
   // a página usa [detail, ...series] como fallback.
@@ -30,6 +41,18 @@ export type Project = {
   presentation?:
     | { src: string; width: number; height: number; text?: string }
     | { layout: "grid-4" | "grid-1"; images?: string[]; text?: string };
+  // Case de site institucional. Quando presente, /portfolio/<slug> abandona
+  // a estrutura padrão (hero de capa, galeria, apresentação) e renderiza o
+  // layout próprio de website: abertura editorial, janela de navegador
+  // navegável e narrativa em capítulos (components/portfolio/WebsiteCase).
+  website?: {
+    url: string; // domínio exibido na barra de endereço, sem protocolo
+    sector: string; // "Direito tributário e trabalhista"
+    year: string;
+    intro: string; // parágrafo-lede da narrativa
+    chapters: { title: string; text: string }[]; // capítulos numerados
+    pages: WebsitePage[]; // abas da janela, na ordem de navegação
+  };
 };
 
 // Projeto com as dimensões reais do cover (calculadas em build time pelo
@@ -196,22 +219,79 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "apple-sale-br",
-    client: "Apple Sale BR",
-    displayName: "APPLE\nSALE BR",
+    slug: "alves-nabuco-institucional",
+    client: "Alves & Nabuco",
+    displayName: "ALVES\n& NABUCO",
     category: "Marca",
-    tagline: "Social e campanha para varejo de eletrônicos.",
-    statement: "Produto premium exige campanha precisa.",
-    scope: ["Social media", "Campanha"],
+    tagline:
+      "Estratégia, conteúdo, design e performance para uma banca especializada em direito tributário e trabalhista.",
+    statement: "Autoridade jurídica construída com consistência.",
+    scope: [
+      "Site institucional",
+      "Estratégia de conteúdo",
+      "Google Ads",
+      "Apresentações comerciais",
+      "Identidade aplicada",
+      "Foto e vídeo",
+    ],
     execution:
-      "Gestão de social media e criação de campanhas de varejo para impulsionar vendas online.",
+      "Site institucional, estratégia de conteúdo, mídia paga e produção audiovisual conduzidos de forma integrada.",
     images: {
-      cover: "/portfolio/apple-sale-br/cover.jpg",
-      detail: "/portfolio/apple-sale-br/detail.jpg",
-      series: [
-        "/portfolio/apple-sale-br/serie-1.jpg",
-        "/portfolio/apple-sale-br/serie-2.jpg",
-        "/portfolio/apple-sale-br/serie-3.jpg",
+      cover: "/portfolio/alves-nabuco-institucional/cover.png",
+    },
+    website: {
+      url: "advocaciaalvesnabuco.com.br",
+      sector: "Direito tributário e trabalhista",
+      year: "2026",
+      intro:
+        "A parceria com a Alves & Nabuco nasceu com um objetivo claro: transformar conhecimento técnico em uma presença digital capaz de gerar autoridade e novos negócios.",
+      chapters: [
+        {
+          title: "Estratégia e conteúdo",
+          text: "Linha editorial contínua para LinkedIn e Instagram, traduzindo temas de direito tributário e trabalhista em materiais acessíveis, relevantes e alinhados ao posicionamento da banca. Da pauta à redação, design e publicação, todo o processo é conduzido de forma integrada.",
+        },
+        {
+          title: "Performance",
+          text: "Gestão de campanhas no Google Ads voltadas à captação de clientes qualificados, conectando o conteúdo publicado à geração de novos negócios e sustentando o ritmo de demanda do escritório.",
+        },
+        {
+          title: "O site institucional",
+          text: "Com a evolução do projeto, passamos a atuar em toda a experiência de marca. Desenvolvemos o novo site da banca: posicionamento preventivo logo na abertura, páginas individuais dos sócios, áreas de atuação e um canal de notícias jurídicas que reforça a autoridade a cada visita.",
+        },
+        {
+          title: "Marca e audiovisual",
+          text: "Apresentações comerciais, materiais de apoio para reuniões e aplicações visuais padronizadas fortalecem a identidade em todos os pontos de contato. Fotografias e vídeos dos sócios e do escritório formam um acervo proprietário que alimenta continuamente os canais de comunicação.",
+        },
+      ],
+      pages: [
+        {
+          label: "Início",
+          path: "/",
+          description:
+            "Posicionamento preventivo, especialidades e método em três passos — a porta de entrada da banca.",
+          src: "/portfolio/alves-nabuco-institucional/pagina-inicio.png",
+        },
+        {
+          label: "Sobre Nós",
+          path: "/sobre-nos",
+          description:
+            "Missão, visão, valores e a apresentação dos sócios-fundadores que conduzem cada caso.",
+          src: "/portfolio/alves-nabuco-institucional/pagina-sobre.png",
+        },
+        {
+          label: "Advogados",
+          path: "/advogados",
+          description:
+            "Perfil individual de cada sócio, com frentes de atuação e canais diretos de contato.",
+          src: "/portfolio/alves-nabuco-institucional/pagina-advogados.png",
+        },
+        {
+          label: "Blog",
+          path: "/blog",
+          description:
+            "Canal de notícias jurídicas: artigos assinados pelos sócios sustentam a autoridade da marca.",
+          src: "/portfolio/alves-nabuco-institucional/pagina-blog.png",
+        },
       ],
     },
   },
