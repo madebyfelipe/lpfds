@@ -321,6 +321,34 @@ export const projects: Project[] = [
       text: "Todos os carrosséis na íntegra, slide a slide, na ordem em que foram entregues.",
     },
   },
+  {
+    slug: "ivoei",
+    client: "iVoei",
+    displayName: "IVOEI",
+    category: "Marca",
+    tagline:
+      "Guia de marca completo para uma agência de passagens aéreas — do símbolo às diretrizes de aplicação.",
+    statement: "Pensou em viajar, pensou iVoei.",
+    scope: [
+      "Identidade visual",
+      "Guia de marca",
+      "Tipografia",
+      "Direção de fotografia",
+    ],
+    execution:
+      "Documentação completa do sistema de marca — logotipo, paleta cromática, tipografia e diretrizes de fotografia — reunida em um guia de aplicação para uso interno da equipe.",
+    images: {
+      cover: "/portfolio/ivoei/cover.jpg",
+    },
+    gallery: posts("ivoei", 17),
+    about:
+      "A iVoei precisava de um repertório visual claro para sustentar sua presença como agência de passagens aéreas. Construímos um guia de marca que parte do símbolo — as asas que remetem à liberdade de viajar — e se desdobra em regras objetivas de uso: como aplicar o logotipo sobre fundos claros e escuros, quais combinações de cor são permitidas e o que nunca deve ser feito com ele.\n\nO guia também define a família tipográfica, a paleta cromática em suas variações monocromáticas e a linha de fotografia que acompanha a marca em qualquer canal. O resultado é um documento de referência único, que qualquer pessoa da equipe pode consultar para manter a marca consistente em todas as aplicações.",
+    aboutImage: "/portfolio/ivoei/posts/post-17.jpg",
+    presentation: {
+      layout: "grid-1",
+      text: "O guia completo, capítulo a capítulo — do símbolo às diretrizes de fotografia.",
+    },
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
