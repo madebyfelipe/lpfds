@@ -340,12 +340,21 @@ export const projects: Project[] = [
     images: {
       cover: "/portfolio/ivoei/cover.jpg",
     },
-    gallery: posts("ivoei", 17),
+    gallery: [
+      "/portfolio/ivoei/gallery/post-01.png",
+      "/portfolio/ivoei/gallery/post-02.png",
+      "/portfolio/ivoei/gallery/post-03.png",
+      "/portfolio/ivoei/gallery/post-04.png",
+      "/portfolio/ivoei/gallery/post-05.png",
+      "/portfolio/ivoei/gallery/post-06.png",
+      "/portfolio/ivoei/gallery/post-07.png",
+    ],
     about:
       "A iVoei precisava de um repertório visual claro para sustentar sua presença como agência de passagens aéreas. Construímos um guia de marca que parte do símbolo — as asas que remetem à liberdade de viajar — e se desdobra em regras objetivas de uso: como aplicar o logotipo sobre fundos claros e escuros, quais combinações de cor são permitidas e o que nunca deve ser feito com ele.\n\nO guia também define a família tipográfica, a paleta cromática em suas variações monocromáticas e a linha de fotografia que acompanha a marca em qualquer canal. O resultado é um documento de referência único, que qualquer pessoa da equipe pode consultar para manter a marca consistente em todas as aplicações.",
     aboutImage: "/portfolio/ivoei/posts/post-17.jpg",
     presentation: {
       layout: "grid-1",
+      images: posts("ivoei", 17),
       text: "O guia completo, capítulo a capítulo — do símbolo às diretrizes de fotografia.",
     },
   },
