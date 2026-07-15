@@ -3350,7 +3350,7 @@ img {
 .portfolio-floater__inner {
   display: flex;
   align-items: center;
-  padding: 24px 37px;
+  padding: 20px 31px;
   transform: translate(18px, 32px);
   border-radius: var(--radius-pill);
   background: var(--accent);
@@ -3364,7 +3364,7 @@ img {
 }
 
 .portfolio-floater__label {
-  font-size: 1.73rem;
+  font-size: 1.43rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   font-family: var(--font-outfit), system-ui, sans-serif;
