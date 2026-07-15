@@ -72,7 +72,7 @@ export function PresentationBoard(props: Props) {
                   sizes={
                     props.layout === "grid-4"
                       ? "(max-width: 768px) 45vw, 270px"
-                      : "(max-width: 600px) 90vw, 420px"
+                      : "(max-width: 1200px) 100vw, 1160px"
                   }
                   className="presentation-board__grid-image"
                 />

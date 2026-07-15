@@ -3898,8 +3898,6 @@ img {
 
 .presentation-board__grid--grid-1 {
   grid-template-columns: minmax(0, 1fr);
-  max-width: 420px;
-  margin: 0 auto;
 }
 
 .presentation-board__grid .presentation-board__grid-item {
@@ -4463,10 +4461,6 @@ img {
 
   .presentation-board__grid--grid-4 {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .presentation-board__grid--grid-1 {
-    max-width: none;
   }
 
   .case-scope__grid {
