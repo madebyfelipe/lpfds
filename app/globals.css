@@ -3157,7 +3157,8 @@ img {
 
 /* Board full-bleed — as imagens começam no topo, atrás da navbar de vidro */
 .portfolio-board {
-  padding: 14px 14px 140px;
+  /* topo desconta o topbar fixo (top 18px + pill) para o 1º card não nascer coberto */
+  padding: 96px 14px 140px;
 }
 
 /* Masonry em 3 colunas: aspect-ratios variados criam o escalonamento */
@@ -3238,7 +3239,7 @@ img {
   overflow: hidden;
   margin-bottom: 14px;
   break-inside: avoid;
-  border-radius: 28px;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--panel-line);
   background: var(--panel);
   box-shadow: var(--shadow-strong);
@@ -3284,6 +3285,32 @@ img {
 
 .project-card__media {
   display: block;
+}
+
+/* Identificação do projeto no touch — no desktop o floater cumpre esse papel */
+.project-card__caption {
+  display: none;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px 16px;
+}
+
+.project-card__client {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  color: var(--text);
+}
+
+.project-card__category {
+  flex: none;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 /* Card = só a foto, na proporção natural (o nome aparece no cursor customizado) */
@@ -3340,6 +3367,7 @@ img {
   font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   color: #fff;
   white-space: nowrap;
 }
@@ -3357,7 +3385,7 @@ img {
   }
 
   .portfolio-board {
-    padding: 12px 12px 120px;
+    padding: 88px 12px 120px;
   }
 
   .portfolio-masonry {
@@ -3367,7 +3395,11 @@ img {
 
   .project-card {
     margin-bottom: 12px;
-    border-radius: 22px;
+    border-radius: var(--radius-md);
+  }
+
+  .project-card__caption {
+    display: flex;
   }
 
   .portfolio-dock {
@@ -3435,7 +3467,7 @@ img {
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 20px;
@@ -3449,6 +3481,7 @@ img {
   font-weight: 800;
   line-height: 0.88;
   letter-spacing: -0.045em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   color: #fff;
 }
 
@@ -3469,6 +3502,14 @@ img {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-hero__image,
+  .case-hero__inner,
+  .webcase-hero__inner {
+    animation: none;
   }
 }
 
@@ -3498,9 +3539,9 @@ img {
 }
 
 .case-gallery__kicker {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -3553,14 +3594,20 @@ img {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
-/* Sem animação: vira um trilho rolável manualmente */
-@media (prefers-reduced-motion: reduce) {
+/* Sem animação (reduced motion) ou sem hover para pausar (touch):
+   vira um trilho rolável manualmente, com alvos parados — e a 2ª cópia
+   do loop some para o usuário não rolar pelas peças em dobro */
+@media (prefers-reduced-motion: reduce), (hover: none) {
   .case-gallery__track {
     animation: none;
   }
 
   .case-gallery__strip {
     overflow-x: auto;
+  }
+
+  .case-gallery__item--dup {
+    display: none;
   }
 }
 
@@ -3652,6 +3699,7 @@ img {
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.04em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   color: var(--bg);
 }
 
@@ -3742,9 +3790,9 @@ img {
 .case-about__kicker {
   position: relative;
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 18px;
@@ -3772,9 +3820,9 @@ img {
 }
 
 .case-presentation__kicker {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -3822,6 +3870,14 @@ img {
   display: flex;
   justify-content: center;
   margin-top: 24px;
+}
+
+/* Expandida, a prancha pode ter dezenas de milhares de px de altura —
+   o botão Recolher acompanha o scroll para fechar de qualquer ponto */
+.presentation-board--open .presentation-board__actions {
+  position: sticky;
+  bottom: 20px;
+  z-index: 5;
 }
 
 /* Modo grid: peças individuais lado a lado, sem a moldura da prancha
@@ -3875,7 +3931,7 @@ img {
 
 .webcase-kicker {
   display: inline-block;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -3926,6 +3982,7 @@ img {
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.045em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   color: #fff;
 }
 
@@ -4269,6 +4326,7 @@ img {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   color: #fff;
 }
 
@@ -4370,6 +4428,7 @@ img {
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   color: #fff;
 }
 

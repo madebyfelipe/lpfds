@@ -61,7 +61,7 @@ export default async function CasePage({
     return (
       <>
         <ScrollRevealInit />
-        <Nav />
+        <Nav collapsible />
         <WebsiteCase
           project={{ ...project, website: project.website }}
           next={next}
@@ -70,16 +70,6 @@ export default async function CasePage({
       </>
     );
   }
-
-  // Peças da faixa automática da Galeria, com dimensões reais lidas em
-  // build time — o navegador reserva a proporção de cada item antes do
-  // download, sem layout shift na faixa.
-  const gallery = (
-    project.gallery ??
-    (project.images.detail && project.images.series
-      ? [project.images.detail, ...project.images.series]
-      : [])
-  ).map((src) => ({ src, ...getImageSize(src) }));
 
   // Seção "Apresentação" em modo grid: usa as peças explícitas ou, na
   // ausência delas, reaproveita a faixa da Galeria — com dimensões reais
@@ -93,10 +83,26 @@ export default async function CasePage({
         }))
       : null;
 
+  // Peças da faixa automática da Galeria, com dimensões reais lidas em
+  // build time — o navegador reserva a proporção de cada item antes do
+  // download, sem layout shift na faixa.
+  const fullGallery =
+    project.gallery ??
+    (project.images.detail && project.images.series
+      ? [project.images.detail, ...project.images.series]
+      : []);
+  // Quando a Apresentação em grid reusa a mesma lista, a faixa vira uma
+  // amostra — sem isso todas as peças apareceriam duas vezes na página.
+  const presentationReusesGallery =
+    !!presentation && "layout" in presentation && !presentation.images;
+  const gallery = (
+    presentationReusesGallery ? fullGallery.slice(0, 10) : fullGallery
+  ).map((src) => ({ src, ...getImageSize(src) }));
+
   return (
     <>
       <ScrollRevealInit />
-      <Nav />
+      <Nav collapsible />
       <main className="case">
         {/* 1 — Hero */}
         <header className="case-hero">
@@ -152,7 +158,9 @@ export default async function CasePage({
                     key={`${copy}-${item.src}`}
                     src={item.src}
                     alt={`${project.client} — peça ${i + 1}`}
-                    className="case-gallery__item"
+                    className={`case-gallery__item${
+                      copy === 1 ? " case-gallery__item--dup" : ""
+                    }`}
                   >
                     {/* dimensões reais + CSS height fixa = proporção natural,
                         reservada antes do download */}

@@ -32,6 +32,11 @@ export function ProjectCard({ project, priority, onHover }: Props) {
           className="project-card__image"
         />
       </div>
+      {/* visível só no touch (≤768px) — no desktop o floater mostra o nome */}
+      <span className="project-card__caption">
+        <span className="project-card__client">{project.client}</span>
+        <span className="project-card__category">{project.category}</span>
+      </span>
     </Link>
   );
 }
