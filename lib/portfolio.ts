@@ -198,26 +198,28 @@ export const projects: Project[] = [
       text: "Do credenciamento ao palco — bastidores e criativos da 15ª edição, ponta a ponta.",
     },
   },
-  {
-    slug: "turrex-midia-digital",
-    client: "Turrex Mídia Digital",
-    displayName: "TURREX\nMÍDIA DIGITAL",
-    category: "Conteúdo",
-    tagline: "Conteúdo DOOH e educacional para LinkedIn.",
-    statement: "Dados falam. Conteúdo convence.",
-    scope: ["Conteúdo DOOH", "LinkedIn", "Educacional"],
-    execution:
-      "Produção de conteúdo para mídia DOOH e trilha educacional no LinkedIn, com foco em engajamento e autoridade.",
-    images: {
-      cover: "/portfolio/turrex-midia-digital/cover.jpg",
-      detail: "/portfolio/turrex-midia-digital/detail.jpg",
-      series: [
-        "/portfolio/turrex-midia-digital/serie-1.jpg",
-        "/portfolio/turrex-midia-digital/serie-2.jpg",
-        "/portfolio/turrex-midia-digital/serie-3.jpg",
-      ],
-    },
-  },
+  // Case Turrex oculto temporariamente — descomente para reativar
+  // (volta ao grid, à rota /portfolio/turrex-midia-digital e ao "próximo projeto").
+  // {
+  //   slug: "turrex-midia-digital",
+  //   client: "Turrex Mídia Digital",
+  //   displayName: "TURREX\nMÍDIA DIGITAL",
+  //   category: "Conteúdo",
+  //   tagline: "Conteúdo DOOH e educacional para LinkedIn.",
+  //   statement: "Dados falam. Conteúdo convence.",
+  //   scope: ["Conteúdo DOOH", "LinkedIn", "Educacional"],
+  //   execution:
+  //     "Produção de conteúdo para mídia DOOH e trilha educacional no LinkedIn, com foco em engajamento e autoridade.",
+  //   images: {
+  //     cover: "/portfolio/turrex-midia-digital/cover.jpg",
+  //     detail: "/portfolio/turrex-midia-digital/detail.jpg",
+  //     series: [
+  //       "/portfolio/turrex-midia-digital/serie-1.jpg",
+  //       "/portfolio/turrex-midia-digital/serie-2.jpg",
+  //       "/portfolio/turrex-midia-digital/serie-3.jpg",
+  //     ],
+  //   },
+  // },
   {
     slug: "alves-nabuco-institucional",
     client: "Alves & Nabuco",
