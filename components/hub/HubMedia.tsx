@@ -7,7 +7,7 @@ export function HubMedia() {
 
   return (
     <section id="newsletter" className="hub-media">
-      <p className="hub-media__kicker">Fique por dentro</p>
+      <span className="hub-media__badge">Fique por dentro</span>
 
       <div className="hub-media__grid">
         <div className="hub-media__newsletter">
