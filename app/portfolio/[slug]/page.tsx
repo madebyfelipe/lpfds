@@ -92,7 +92,7 @@ export default async function CasePage({
   return (
     <>
       <ScrollRevealInit />
-      <Nav collapsible theme="dark" />
+      <Nav collapsible />
       <main className="case">
         {/* 1 — Hero */}
         <header className="case-hero">

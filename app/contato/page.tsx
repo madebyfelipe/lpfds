@@ -60,7 +60,7 @@ export default function ContatoPage() {
             rel="noopener noreferrer"
             className="contato-cta contato-cta--primary"
           >
-            <span className="contato-cta__icon">●</span>
+            <span className="contato-cta__icon">📅</span>
             <span className="contato-cta__body">
               <span className="contato-cta__label">Agendar reunião</span>
               <span className="contato-cta__sub">Escolha um horário no meu calendário</span>
@@ -77,7 +77,7 @@ export default function ContatoPage() {
             rel="noopener noreferrer"
             className="contato-cta"
           >
-            <span className="contato-cta__icon">→</span>
+            <span className="contato-cta__icon">💬</span>
             <span className="contato-cta__body">
               <span className="contato-cta__label">WhatsApp</span>
               <span className="contato-cta__sub">Manda uma mensagem agora</span>
@@ -90,7 +90,7 @@ export default function ContatoPage() {
             href={`mailto:${EMAIL}`}
             className="contato-cta"
           >
-            <span className="contato-cta__icon">→</span>
+            <span className="contato-cta__icon">📧</span>
             <span className="contato-cta__body">
               <span className="contato-cta__label">E-mail</span>
               <span className="contato-cta__sub">{EMAIL}</span>
@@ -105,7 +105,7 @@ export default function ContatoPage() {
             rel="noopener noreferrer"
             className="contato-cta"
           >
-            <span className="contato-cta__icon">→</span>
+            <span className="contato-cta__icon">📸</span>
             <span className="contato-cta__body">
               <span className="contato-cta__label">Instagram</span>
               <span className="contato-cta__sub">@{INSTAGRAM_HANDLE}</span>

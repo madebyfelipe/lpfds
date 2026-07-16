@@ -50,10 +50,12 @@ export type PricingTier = {
 };
 
 export const navigationLinks = [
-  { href: "/#sobre", label: "Sobre" },
   { href: "/#servicos", label: "Serviços" },
   { href: "/#processo", label: "Processo" },
+  // { href: "/#planos", label: "Planos" }, // seção de preços desativada temporariamente
+  { href: "/#resultados", label: "Resultados" },
   { href: "/portfolio", label: "Portfólio" },
+  { href: "/#faq", label: "FAQ" },
   { href: "/contato", label: "Contato" }
 ] as const;
 
@@ -74,29 +76,19 @@ export const metrics: Metric[] = [
 
 export const services: Service[] = [
   {
-    title: "Identidade Visual",
-    description: "Construção de marcas que transmitem valor antes mesmo da primeira conversa.",
-    tags: ["Branding", "Brandbook", "Direção Visual"]
+    title: "Assessoria de Conteúdo",
+    description: "Produção completa para redes sociais, com estratégia, captação, edição e publicação.",
+    tags: ["Conteúdo estratégico", "Consistência visual", "Execução contínua"]
   },
   {
-    title: "Websites",
-    description: "Landing Pages, sites institucionais e interfaces desenvolvidas para transformar visitantes em oportunidades.",
-    tags: ["Performance", "SEO", "Desenvolvimento"]
+    title: "Posicionamento de Marca",
+    description: "Ajuste fino de como sua marca é percebida — do discurso à estética.",
+    tags: ["Clareza de mensagem", "Materiais institucionais", "Identidade visual"]
   },
   {
-    title: "UX/UI Design",
-    description: "Experiências digitais que equilibram estética, usabilidade e objetivos de negócio.",
-    tags: ["Figma", "Usabilidade", "Produtos Digitais"]
-  },
-  {
-    title: "Conteúdo",
-    description: "Planejamento, design e produção de conteúdo para empresas que querem construir autoridade.",
-    tags: ["Planejamento", "Design", "Autoridade"]
-  },
-  {
-    title: "Direção Criativa",
-    description: "Acompanhamento estratégico para campanhas, lançamentos e comunicação de marca.",
-    tags: ["Campanhas", "Lançamentos", "Comunicação"]
+    title: "Design & Identidade",
+    description: "Sua marca vai precisar de materiais para manter-se na frente da concorrência.",
+    tags: ["Materiais institucionais", "Apresentações e propostas", "Papelaria e merchandise"]
   }
 ];
 
@@ -119,23 +111,23 @@ export const solutionItems = [
 export const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Diagnóstico",
-    description: "Entendo seu negócio, mercado, concorrência e objetivo."
+    title: "Conversa de diagnóstico",
+    description: "15 min pra entender seu negócio, público e objetivos reais."
   },
   {
     number: "02",
-    title: "Estratégia",
-    description: "Defino posicionamento, direção visual e prioridades."
+    title: "Criação da marca",
+    description: "Logo, paleta, tipografia e brandbook em até 3 semanas."
   },
   {
     number: "03",
-    title: "Execução",
-    description: "Transformo estratégia em identidade, interfaces, conteúdo e materiais."
+    title: "Conteúdo no ar",
+    description: "Social media rodando com a nova identidade a partir do mês 1."
   },
   {
     number: "04",
-    title: "Evolução",
-    description: "Ajustes, otimizações e acompanhamento para que a marca continue crescendo."
+    title: "Crescimento contínuo",
+    description: "Planejamento, entrega e evolução mensal."
   }
 ];
 

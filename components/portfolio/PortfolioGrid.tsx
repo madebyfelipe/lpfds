@@ -72,19 +72,8 @@ export function PortfolioGrid({
 
   return (
     <section className="portfolio-board" onMouseMove={handleMove}>
-      {/* Intro Header */}
-      <div className="site-shell" style={{ marginBottom: "var(--space-7)", paddingTop: "var(--space-6)" }}>
-        <span className="section-kicker">/PORTFÓLIO</span>
-        <h1 className="section-title" style={{ fontSize: "clamp(2.5rem, 5vw, 4.8rem)", margin: "var(--space-3) 0 var(--space-4)" }}>
-          Projetos <em>selecionados</em>
-        </h1>
-        <p className="section-copy" style={{ margin: 0, maxWidth: "600px" }}>
-          Cases de branding e conteúdo estratégico: marcas que passaram a publicar com consistência e cresceram em alcance, autoridade e demanda.
-        </p>
-      </div>
-
       {filtered.length > 0 ? (
-        <div className="portfolio-structured-grid">
+        <div className="portfolio-masonry">
           {filtered.map((project, index) => (
             <ProjectCard
               key={project.slug}

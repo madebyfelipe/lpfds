@@ -1,33 +1,33 @@
-import { About } from "@/components/About";
-import { AboutMe } from "@/components/AboutMe";
-import { Diferenciais } from "@/components/Diferenciais";
+import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
+import { Hero } from "@/components/Hero";
+import { MetricsBar } from "@/components/MetricsBar";
 import { Nav } from "@/components/Nav";
-import { NewsletterBand } from "@/components/NewsletterBand";
-import { Philosophy } from "@/components/Philosophy";
-import { PortfolioSection } from "@/components/PortfolioSection";
+// import { Pricing } from "@/components/Pricing"; // seção de preços desativada temporariamente
+import { ProblemSolution } from "@/components/ProblemSolution";
 import { Process } from "@/components/Process";
-import { Products } from "@/components/Products";
+import { Reviews } from "@/components/Reviews";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { Services } from "@/components/Services";
+import { TrustBar } from "@/components/TrustBar";
 import { VisitorFloater } from "@/components/VisitorFloater";
 
 export default function Home() {
   return (
     <>
-      <ScrollRevealInit />
+<ScrollRevealInit />
       <Nav />
       <main>
-        <About />
-        <Products />
-        <NewsletterBand />
+        <Hero />
+        <TrustBar />
+        <MetricsBar />
         <Services />
+        <ProblemSolution />
         <Process />
-        <PortfolioSection />
-        <Philosophy />
-        <AboutMe />
-        <Diferenciais />
+        {/* <Pricing /> — seção de preços desativada temporariamente */}
+        <Reviews />
+        <FAQ />
         <FinalCTA />
       </main>
       <Footer />
