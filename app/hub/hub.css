@@ -58,6 +58,22 @@
   font-family: "Neue Haas Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0 20px 72px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Tema escuro do hub (ThemeToggle define data-theme="dark" no .hub).
+   Os painéis Bio/Footer já são escuros por natureza — aqui escurecemos
+   as seções claras do topo (hero, produtos, media). */
+.hub[data-theme="dark"] {
+  --bg: #0d0d0d;
+  --bg-soft: #111111;
+  --text: #f0ece6;
+  --muted: rgba(240, 236, 230, 0.56);
+  --soft: rgba(240, 236, 230, 0.34);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --panel: #181818;
+  --panel-soft: #202020;
 }
 
 /* Base styles inside hub */
@@ -77,6 +93,61 @@
 .hub-header__logo {
   height: 24px;
   width: auto;
+}
+
+/* Logo troca conforme o tema do hub */
+.hub-header__logo--dark {
+  display: none;
+}
+.hub[data-theme="dark"] .hub-header__logo--light {
+  display: none;
+}
+.hub[data-theme="dark"] .hub-header__logo--dark {
+  display: block;
+}
+
+.hub-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Botão de alternância claro/escuro */
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.28s ease, border-color 0.28s ease, color 0.28s ease, transform 0.28s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Mostra sol no tema claro (para ir ao escuro), lua no tema escuro */
+.theme-toggle__icon--moon {
+  display: none;
+}
+.hub[data-theme="dark"] .theme-toggle__icon--sun {
+  display: none;
+}
+.hub[data-theme="dark"] .theme-toggle__icon--moon {
+  display: block;
 }
 
 .hub-header__link {
