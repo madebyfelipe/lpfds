@@ -293,8 +293,8 @@
    ═══════════════════════════════════════════════════════ */
 .hub-products__grid.is-live {
   display: block;
-  /* altura da carta (~80vh) + topo + folga do leque/sombra */
-  height: calc(80vh + 90px);
+  /* altura da carta (~45vh) + topo + folga do leque/sombra */
+  height: calc(45vh + 90px);
   overflow: hidden; /* segura as cartas abertas dentro da seção */
   /* gesto horizontal → JS (baralho); vertical → scroll da página */
   touch-action: pan-y;
@@ -305,15 +305,15 @@
   top: 28px;
   left: 50%; /* centralizado; o GSAP aplica xPercent:-50 + x do leque */
   width: clamp(200px, 72%, 290px);
-  height: 80vh;
+  height: 45vh;
   margin: 0;
-  padding: 32px;
-  gap: 20px;
+  padding: 20px;
+  gap: 12px;
   will-change: transform;
   transition: none; /* o GSAP dirige transform E sombra */
 }
 
-/* Texto proporcional à carta de 80vh (título/desc escalam em vh). */
+/* Texto proporcional à carta de 45vh (título/desc escalam em vh). */
 .hub-products__grid.is-live .hub-card-ref__kicker {
   font-size: 0.85rem;
 }
@@ -653,8 +653,15 @@
     font-size: clamp(3rem, 5vw, 4.8rem);
   }
 
+  .hub-products__grid.is-live {
+    height: calc(60vh + 90px);
+  }
+
   .hub-products__grid.is-live .hub-card-ref {
     width: clamp(240px, 42%, 300px);
+    height: 60vh;
+    padding: 32px;
+    gap: 20px;
     cursor: pointer; /* dá o toque de "escolher a carta" */
   }
 
