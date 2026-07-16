@@ -1,15 +1,15 @@
 export function HubHero() {
   return (
     <section className="hub-hero">
-      <span className="hub-hero__badge">Made by Felipe</span>
+      <p className="hub-hero__kicker">Branding + Social Media Estratégico</p>
       <h1 className="hub-hero__title">
-        Boring is bad
+        Posicionamento que
         <br />
-        for business.
+        <em>lota agenda.</em>
       </h1>
       <p className="hub-hero__subtitle">
-        Design de marca sério, sóbrio e orientado a resultado. Sorocaba e
-        região. Tudo o que o Felipe faz, num só lugar.
+        Identidade visual + conteúdo estratégico pra profissionais e escritórios
+        que querem ser percebidos à altura do que entregam. Tudo num só lugar.
       </p>
     </section>
   );

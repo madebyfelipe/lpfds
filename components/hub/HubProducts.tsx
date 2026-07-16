@@ -1,32 +1,17 @@
 import Link from "next/link";
 
-const Arrow = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    aria-hidden="true"
-  >
-    <line x1="7" y1="17" x2="17" y2="7" />
-    <polyline points="7 7 17 7 17 17" />
-  </svg>
-);
-
 const featured = [
   {
     tone: "accent" as const,
-    eyebrow: "/ESTÚDIO",
-    title: "Identidade de Marca",
+    eyebrow: "IDENTIDADE DE MARCA",
+    title: "Branding Completo",
     body: "Estratégia, naming e sistema visual completo para marcas que querem parecer — e ser — maiores.",
     cta: "Ver serviço",
     href: "/#servicos",
   },
   {
     tone: "dark" as const,
-    eyebrow: "/CONSULTORIA",
+    eyebrow: "CONSULTORIA",
     title: "Diagnóstico de Marca",
     body: "Uma sessão para destravar o posicionamento e o próximo passo visual do seu negócio.",
     cta: "Agendar",
@@ -37,21 +22,21 @@ const featured = [
 
 const secondary = [
   {
-    eyebrow: "/SOCIAL",
-    title: "Social Kit",
-    body: "Templates e arte para redes, no padrão da sua marca.",
+    eyebrow: "SOCIAL MEDIA",
+    title: "Gestão Estratégica",
+    body: "Conteúdo, design e distribuição no padrão da sua marca.",
     cta: "VER",
     href: "/#servicos",
   },
   {
-    eyebrow: "/PORTFÓLIO",
+    eyebrow: "PORTFÓLIO",
     title: "Trabalhos",
     body: "Cases selecionados de branding e design.",
     cta: "VER",
     href: "/portfolio",
   },
   {
-    eyebrow: "/MÉTODO",
+    eyebrow: "MÉTODO",
     title: "Como trabalho",
     body: "Processo claro, do briefing à entrega final.",
     cta: "VER",
@@ -77,12 +62,12 @@ export function HubProducts() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="button button--inverse button--pill"
+                  className="button button--ghost"
                 >
                   {item.cta}
                 </a>
               ) : (
-                <Link href={item.href} className="button button--inverse button--pill">
+                <Link href={item.href} className="button button--ghost">
                   {item.cta}
                 </Link>
               )}
@@ -98,7 +83,7 @@ export function HubProducts() {
             <h3 className="hub-card__title">{item.title}</h3>
             <p className="hub-card__body">{item.body}</p>
             <div className="hub-card__footer">
-              <Link href={item.href} className="button button--secondary">
+              <Link href={item.href} className="button button--ghost">
                 {item.cta}
               </Link>
             </div>

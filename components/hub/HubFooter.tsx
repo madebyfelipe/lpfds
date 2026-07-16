@@ -1,20 +1,5 @@
 import Image from "next/image";
 
-const Arrow = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    aria-hidden="true"
-  >
-    <line x1="7" y1="17" x2="17" y2="7" />
-    <polyline points="7 7 17 7 17 17" />
-  </svg>
-);
-
 const links = [
   { label: "Instagram", href: "https://www.instagram.com/madebyfelipe.com.br" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/madebyfelipe/" },
@@ -48,7 +33,10 @@ export function HubFooter() {
           >
             {link.label}
             <span className="hub-footer__link-arrow">
-              <Arrow />
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
             </span>
           </a>
         ))}

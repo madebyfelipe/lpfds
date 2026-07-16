@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hub | Made by Felipe",
     description:
-      "Design de marca sério, sóbrio e orientado a resultado. Tudo o que o Felipe faz, num só lugar.",
-    images: ["/logo-black.png"],
+      "Posicionamento, branding e social media estratégico. Tudo o que o Felipe faz, num só lugar.",
+    images: ["/logo-white.png"],
     locale: "pt_BR",
     type: "website",
   },

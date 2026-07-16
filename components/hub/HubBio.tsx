@@ -7,8 +7,8 @@ export function HubBio() {
         <Image
           src="/eu.jpg"
           alt="Felipe — Designer de marca"
-          width={280}
-          height={340}
+          width={260}
+          height={320}
           style={{ objectFit: "cover", width: "100%", height: "100%" }}
         />
       </div>
