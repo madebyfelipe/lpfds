@@ -719,24 +719,36 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   Social Kit — stack-pop ("click") shadow
-   O hook useStackPop alterna .is-click durante o estalo.
-   O .hub-card-ref já transiciona box-shadow (0.3s), então a
-   sombra evolui repouso → elevada → repouso sozinha; aqui só
-   damos o pico elevado. Sem tocar na transition/shadow de
-   repouso do card para não alterar o layout/design atual.
+   Social Kit — animação dos cards (hook useStackPop)
+   Desktop: "stack pop" de entrada; .is-click dá o pico da
+   sombra no overshoot. Mobile: seleção por scroll (pin).
    ═══════════════════════════════════════════════════════ */
 .social-card {
   will-change: transform;
 }
 
+/* Enquanto o GSAP dirige o transform (entrada desktop), removemos a
+   transição de transform do card — senão o overshoot fica "borrado".
+   Mantemos a de box-shadow para o pico do "click". Fora disso, o
+   .hub-card-ref volta a transicionar o transform normalmente (hover). */
+.social-card.is-gsap {
+  transition: box-shadow 0.3s ease;
+}
+
+/* Pico da sombra no estalo (desktop). */
 .social-card.is-click {
   box-shadow: var(--shadow-lift, 0 22px 36px rgba(0, 0, 0, 0.34)) !important;
 }
 
+/* Seleção por scroll (mobile): o GSAP dirige transform E sombra a cada
+   frame do scrub, então nenhuma transição CSS deve interferir. */
+.social-card.is-pinned {
+  transition: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  /* cards assentados, sem estalo — o hook também não anima nem
-     alterna .is-click quando reduced-motion está ativo */
+  /* cards assentados, sem estalo nem pin — o hook não roda nenhum
+     branch quando reduced-motion está ativo */
   .social-card {
     will-change: auto;
   }
