@@ -1,33 +1,33 @@
-import { FAQ } from "@/components/FAQ";
+import { About } from "@/components/About";
+import { AboutMe } from "@/components/AboutMe";
+import { Diferenciais } from "@/components/Diferenciais";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
-import { MetricsBar } from "@/components/MetricsBar";
 import { Nav } from "@/components/Nav";
-// import { Pricing } from "@/components/Pricing"; // seção de preços desativada temporariamente
-import { ProblemSolution } from "@/components/ProblemSolution";
+import { NewsletterBand } from "@/components/NewsletterBand";
+import { Philosophy } from "@/components/Philosophy";
+import { PortfolioSection } from "@/components/PortfolioSection";
 import { Process } from "@/components/Process";
-import { Reviews } from "@/components/Reviews";
+import { Products } from "@/components/Products";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { Services } from "@/components/Services";
-import { TrustBar } from "@/components/TrustBar";
 import { VisitorFloater } from "@/components/VisitorFloater";
 
 export default function Home() {
   return (
     <>
-<ScrollRevealInit />
+      <ScrollRevealInit />
       <Nav />
       <main>
-        <Hero />
-        <TrustBar />
-        <MetricsBar />
+        <About />
+        <Products />
+        <NewsletterBand />
         <Services />
-        <ProblemSolution />
         <Process />
-        {/* <Pricing /> — seção de preços desativada temporariamente */}
-        <Reviews />
-        <FAQ />
+        <PortfolioSection />
+        <Philosophy />
+        <AboutMe />
+        <Diferenciais />
         <FinalCTA />
       </main>
       <Footer />

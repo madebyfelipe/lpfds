@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { CustomCursor } from "@/components/CustomCursor";
 import "./globals.css";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  variable: "--font-poppins",
+const neueHaas = localFont({
+  src: [
+    { path: "../public/fonts/NeueHaasDisplay-Light.ttf", weight: "300", style: "normal" },
+    { path: "../public/fonts/NeueHaasDisplay-Roman.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/NeueHaasDisplay-RomanItalic.ttf", weight: "400", style: "italic" },
+    { path: "../public/fonts/NeueHaasDisplay-Medium.ttf", weight: "500", style: "normal" },
+    { path: "../public/fonts/NeueHaasDisplay-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/fonts/NeueHaasDisplay-BoldItalic.ttf", weight: "700", style: "italic" },
+    { path: "../public/fonts/NeueHaasDisplay-Black.ttf", weight: "900", style: "normal" },
+  ],
+  variable: "--font-sans",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"]
 });
 
 export const metadata: Metadata = {
@@ -20,15 +27,15 @@ export const metadata: Metadata = {
   description:
     "Landing page da Made by Felipe para profissionais e escritórios que querem posicionamento, marca e conteúdo estratégico para lotar agenda.",
   icons: {
-    icon: "/logo-no-text-white.png",
-    shortcut: "/logo-no-text-white.png",
-    apple: "/logo-no-text-white.png"
+    icon: "/logo-symbol-red.svg",
+    shortcut: "/logo-symbol-red.svg",
+    apple: "/logo-symbol-red.svg"
   },
   openGraph: {
     title: "Made by Felipe | Branding + Social Media Estratégico",
     description:
       "Posicionamento, branding e social media estratégico para negócios que precisam ser percebidos à altura do que entregam.",
-    images: ["/logo-white.png"],
+    images: ["/logo-black.png"],
     locale: "pt_BR",
     type: "website"
   }
@@ -36,8 +43,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${poppins.variable} site-body`}>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={`${neueHaas.variable} site-body`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark";}catch(e){}`,
+          }}
+        />
         {children}
         <CustomCursor />
         <Script id="meta-pixel" strategy="afterInteractive">

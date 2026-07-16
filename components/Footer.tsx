@@ -30,7 +30,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="footer__heading">Navegação</p>
+            <p className="footer__heading">/Navegação</p>
             <div className="footer__links">
               {navigationLinks.map((link) => (
                 <a key={link.href} href={link.href} className="footer__link">
@@ -41,7 +41,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="footer__heading">Contato</p>
+            <p className="footer__heading">/Contato</p>
             <div className="footer__links">
               {contacts.map((contact) => (
                 <a key={contact.label} href={contact.href} className="footer__link">
@@ -52,7 +52,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="footer__bottom">Made by Felipe © 2026 — São Paulo, SP</div>
+        <div className="footer__bottom">Made by Felipe © 2026 — Sorocaba, SP</div>
       </div>
     </footer>
 

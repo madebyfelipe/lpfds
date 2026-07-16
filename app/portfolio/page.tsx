@@ -29,7 +29,7 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <Nav collapsible />
+      <Nav collapsible theme="dark" />
       <main>
         <h1 className="visually-hidden">Portfólio — Made by Felipe</h1>
         <PortfolioGrid projects={sized} />

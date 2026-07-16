@@ -1,39 +1,31 @@
-import { GlobeCanvas } from "@/components/GlobeCanvas";
 import { ScheduleLink } from "@/components/ScheduleLink";
-import { ScrollingTags } from "@/components/ScrollingTags";
 
 export function FinalCTA() {
   return (
-    <section id="agendar" className="cta-band">
+    <section id="agendar" className="cta-band cta-band--accent">
       <div className="site-shell">
-        <div className="cta-box sr">
-          <GlobeCanvas />
-
-          <div className="cta-box__header">
-            <h2 className="cta-box__title">
-              Pronto pra ser percebido à <em>altura do seu trabalho</em>?
+        <div className="grid-2col grid-2col--align-start sr" style={{ textAlign: "left" }}>
+          {/* Left Column */}
+          <div>
+            <h2 className="cta-box__title" style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)", lineHeight: "1.15", margin: 0 }}>
+              Sua empresa já transmite o <em>valor</em> que ela realmente tem?
             </h2>
-            <p className="cta-box__copy">
-              15 minutos de conversa. Vou entender seu negócio e te mostrar o caminho mais curto
-              pro posicionamento que lota agenda.
-            </p>
-
-            <div className="cta-box__actions">
-              <ScheduleLink className="button button--primary">
-                Agendar minha conversa gratuita →
-              </ScheduleLink>
-            </div>
-
-            <div className="cta-box__chips">
-              {["15 minutos", "Sem compromisso", "Personalizado"].map((item) => (
-                <span key={item} className="chip cta-box__chip">
-                  {item}
-                </span>
-              ))}
-            </div>
           </div>
 
-          <ScrollingTags />
+          {/* Right Column */}
+          <div>
+            <p className="cta-box__copy" style={{ color: "rgba(255, 255, 255, 0.85)", fontSize: "var(--fs-body-lg)", margin: "0 0 var(--space-4)" }}>
+              Se a resposta for não, provavelmente o problema não é o produto. É a forma como ele está sendo percebido.
+            </p>
+            <p className="cta-box__copy" style={{ color: "#fff", fontWeight: 700, margin: "0 0 var(--space-5)" }}>
+              Vamos construir uma marca que comunique isso com clareza.
+            </p>
+            <div className="cta-box__actions" style={{ margin: 0 }}>
+              <ScheduleLink className="button button--inverse">
+                Vamos conversar
+              </ScheduleLink>
+            </div>
+          </div>
         </div>
       </div>
     </section>
