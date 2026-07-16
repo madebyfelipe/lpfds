@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRef } from "react";
-import { useStackPop } from "@/hooks/useStackPop";
+import { useRef, useState } from "react";
+import { useCardDeck } from "@/hooks/useCardDeck";
 
 const products = [
   {
@@ -36,16 +36,72 @@ const products = [
     textColor: "#430806",
     avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
   },
+  {
+    kicker: "/INSTAGRAM",
+    title: "Instagram",
+    desc: "Bastidores, processo e opinião. Quase todo dia no feed.",
+    cta: "Seguir",
+    href: "https://www.instagram.com/madebyfelipe.com.br",
+    bgColor: "#f8b5d0",
+    textColor: "#4a1230",
+    avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
+  },
+  {
+    kicker: "/LINKEDIN",
+    title: "LinkedIn",
+    desc: "Networking e conteúdo pra quem contrata design.",
+    cta: "Conectar",
+    href: "https://www.linkedin.com/in/madebyfelipe/",
+    bgColor: "#a9c9ff",
+    textColor: "#0a2a52",
+    avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
+  },
+  {
+    kicker: "/BEHANCE",
+    title: "Behance",
+    desc: "Projetos completos, do conceito à entrega.",
+    cta: "Ver",
+    href: "https://www.behance.net/madebyfelipe",
+    bgColor: "#8fa0ff",
+    textColor: "#10184a",
+    avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
+  },
+  {
+    kicker: "/WHATSAPP",
+    title: "WhatsApp",
+    desc: "Fala direto comigo. Orçamento sem enrolação.",
+    cta: "Chamar",
+    href: "https://wa.me/5515992835226",
+    bgColor: "#a7e8bd",
+    textColor: "#0c3b22",
+    avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
+  },
+  {
+    kicker: "/E-MAIL",
+    title: "E-mail",
+    desc: "Prefere formal? Me manda um e-mail.",
+    cta: "Escrever",
+    href: "mailto:alo@madebyfelipe.com.br",
+    bgColor: "#ffd9a0",
+    textColor: "#4a2f06",
+    avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
+  },
 ];
 
 export function HubProducts() {
   const gridRef = useRef<HTMLDivElement>(null);
-  useStackPop(gridRef, ".social-card", { stagger: 0.09 });
+  const [spread, setSpread] = useState(false);
+  useCardDeck(gridRef, ".social-card", spread);
 
   return (
     <section className="hub-products">
       <div className="hub-products__grid" ref={gridRef}>
-        {products.map((item) => (
+        {products.map((item) => {
+          const isExternal = item.href.startsWith("http");
+          const externalProps = isExternal
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {};
+          return (
           <article
             key={item.title}
             className="hub-card-ref social-card"
@@ -57,6 +113,7 @@ export function HubProducts() {
                 href={item.href}
                 className="hub-card-ref__action-btn"
                 aria-label={`Acessar ${item.title}`}
+                {...externalProps}
               >
                 <svg
                   width="14"
@@ -94,13 +151,27 @@ export function HubProducts() {
                   </div>
                 ))}
               </div>
-              <Link href={item.href} className="hub-card-ref__pill-btn">
+              <Link
+                href={item.href}
+                className="hub-card-ref__pill-btn"
+                {...externalProps}
+              >
                 {item.cta}
               </Link>
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
+
+      <button
+        type="button"
+        className="hub-products__spread-btn"
+        onClick={() => setSpread((s) => !s)}
+        aria-pressed={spread}
+      >
+        {spread ? "Ver como baralho" : "Ver lado a lado"}
+      </button>
     </section>
   );
 }

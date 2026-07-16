@@ -169,6 +169,15 @@
   padding: 20px 0;
 }
 
+/* Fallback / reduced-motion: cards em fluxo normal (empilhados, legíveis).
+   O JS (useCardDeck) adiciona .is-live e assume o layout de "baralho". */
+.hub-products__grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 /* Reference Card Styling (from attachments) */
 .hub-card-ref {
   border-radius: var(--radius-lg);
@@ -277,43 +286,61 @@
   transform: translateY(-1px);
 }
 
-/* Mobile Overlapping Stack Layout (Screen 2 reference) */
-@media (max-width: 767px) {
-  .hub-products__grid {
-    position: relative;
-    height: 480px; /* Space for stacked elements */
-    margin-bottom: 20px;
-  }
+/* ═══════════════════════════════════════════════════════
+   Social Kit — baralho horizontal (hook useCardDeck)
+   Layout ativo só quando o JS liga .is-live; o GSAP controla
+   x / rotação / escala / sombra de cada carta a cada frame.
+   ═══════════════════════════════════════════════════════ */
+.hub-products__grid.is-live {
+  display: block;
+  /* altura da carta (~60vh) + topo + folga do leque/sombra */
+  height: calc(60vh + 90px);
+  overflow: hidden; /* segura as cartas abertas dentro da seção */
+}
 
-  .hub-card-ref {
-    position: absolute;
-    width: 100%;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.05);
-  }
+.hub-products__grid.is-live .hub-card-ref {
+  position: absolute;
+  top: 28px;
+  left: 50%; /* centralizado; o GSAP aplica xPercent:-50 + x do leque */
+  width: clamp(200px, 72%, 290px);
+  height: 60vh;
+  margin: 0;
+  padding: 32px;
+  gap: 20px;
+  will-change: transform;
+  transition: none; /* o GSAP dirige transform E sombra */
+}
 
-  .hub-card-ref:nth-child(1) {
-    top: 0px;
-    z-index: 3;
-  }
+/* Texto proporcional à carta de 60vh (título/desc escalam em vh). */
+.hub-products__grid.is-live .hub-card-ref__kicker {
+  font-size: 0.85rem;
+}
 
-  .hub-card-ref:nth-child(2) {
-    top: 110px;
-    z-index: 2;
-  }
+.hub-products__grid.is-live .hub-card-ref__title {
+  font-size: clamp(1.9rem, 4.4vh, 2.8rem);
+}
 
-  .hub-card-ref:nth-child(3) {
-    top: 220px;
-    z-index: 1;
-  }
+.hub-products__grid.is-live .hub-card-ref__desc {
+  font-size: clamp(0.98rem, 2.1vh, 1.22rem);
+}
 
-  /* Interaction: hover or touch brings card to front */
-  .hub-card-ref:hover,
-  .hub-card-ref:active,
-  .hub-card-ref:focus-within {
-    z-index: 10;
-    transform: translateY(-20px) scale(1.02);
-    box-shadow: 0 16px 36px rgba(0,0,0,0.1);
-  }
+.hub-products__grid.is-live .hub-card-ref__action-btn {
+  width: 42px;
+  height: 42px;
+}
+
+.hub-products__grid.is-live .hub-card-ref__bottom {
+  padding: 10px 18px;
+}
+
+.hub-products__grid.is-live .hub-card-ref__avatar {
+  width: 34px;
+  height: 34px;
+}
+
+.hub-products__grid.is-live .hub-card-ref__pill-btn {
+  font-size: 0.92rem;
+  padding: 8px 18px;
 }
 
 /* Media Section (Newsletter + Coupon) */
@@ -624,27 +651,9 @@
     font-size: clamp(3rem, 5vw, 4.8rem);
   }
 
-  /* Grid of products: 3 columns (Screen 1 reference layout) */
-  .hub-products__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    position: static;
-    height: auto;
-  }
-
-  .hub-card-ref {
-    position: static;
-    /* sem !important: deixa o GSAP (useStackPop) controlar o transform;
-       o hover abaixo mantém !important e continua vencendo o inline do GSAP */
-    transform: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-    min-height: 240px;
-  }
-
-  .hub-card-ref:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+  .hub-products__grid.is-live .hub-card-ref {
+    width: clamp(240px, 42%, 300px);
+    cursor: pointer; /* dá o toque de "escolher a carta" */
   }
 
   /* Media section: 2 columns (Newsletter and Coupon) */
@@ -719,37 +728,43 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   Social Kit — animação dos cards (hook useStackPop)
-   Desktop: "stack pop" de entrada; .is-click dá o pico da
-   sombra no overshoot. Mobile: seleção por scroll (pin).
+   Social Kit — botão "lado a lado" (só desktop)
+   Alterna o baralho ↔ cartas em linha (toggle, via React).
    ═══════════════════════════════════════════════════════ */
-.social-card {
-  will-change: transform;
+.hub-products__spread-btn {
+  display: none; /* escondido no mobile — lá a seleção é por scroll */
 }
 
-/* Enquanto o GSAP dirige o transform (entrada desktop), removemos a
-   transição de transform do card — senão o overshoot fica "borrado".
-   Mantemos a de box-shadow para o pico do "click". Fora disso, o
-   .hub-card-ref volta a transicionar o transform normalmente (hover). */
-.social-card.is-gsap {
-  transition: box-shadow 0.3s ease;
+@media (min-width: 768px) {
+  .hub-products__spread-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 20px auto 0;
+    padding: 10px 22px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: #151515;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background-color 0.28s ease, transform 0.28s ease;
+  }
+
+  .hub-products__spread-btn:hover {
+    background: var(--accent);
+    transform: translateY(-1px);
+  }
 }
 
-/* Pico da sombra no estalo (desktop). */
-.social-card.is-click {
-  box-shadow: var(--shadow-lift, 0 22px 36px rgba(0, 0, 0, 0.34)) !important;
-}
-
-/* Seleção por scroll (mobile): o GSAP dirige transform E sombra a cada
-   frame do scrub, então nenhuma transição CSS deve interferir. */
-.social-card.is-pinned {
-  transition: none;
-}
-
+/* Reduced motion: sem baralho nem botão — o JS não liga .is-live, então
+   os cards ficam no fluxo normal (empilhados, legíveis, sem movimento). */
 @media (prefers-reduced-motion: reduce) {
-  /* cards assentados, sem estalo nem pin — o hook não roda nenhum
-     branch quando reduced-motion está ativo */
-  .social-card {
-    will-change: auto;
+  .hub-products__spread-btn {
+    display: none;
   }
 }
