@@ -57,7 +57,7 @@
   min-height: 100vh;
   font-family: "Neue Haas Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
-  padding: 0 20px 48px;
+  padding: 0 20px 72px;
 }
 
 /* Base styles inside hub */
@@ -293,9 +293,11 @@
    ═══════════════════════════════════════════════════════ */
 .hub-products__grid.is-live {
   display: block;
-  /* altura da carta (~60vh) + topo + folga do leque/sombra */
-  height: calc(60vh + 90px);
+  /* altura da carta (~80vh) + topo + folga do leque/sombra */
+  height: calc(80vh + 90px);
   overflow: hidden; /* segura as cartas abertas dentro da seção */
+  /* gesto horizontal → JS (baralho); vertical → scroll da página */
+  touch-action: pan-y;
 }
 
 .hub-products__grid.is-live .hub-card-ref {
@@ -303,7 +305,7 @@
   top: 28px;
   left: 50%; /* centralizado; o GSAP aplica xPercent:-50 + x do leque */
   width: clamp(200px, 72%, 290px);
-  height: 60vh;
+  height: 80vh;
   margin: 0;
   padding: 32px;
   gap: 20px;
@@ -311,7 +313,7 @@
   transition: none; /* o GSAP dirige transform E sombra */
 }
 
-/* Texto proporcional à carta de 60vh (título/desc escalam em vh). */
+/* Texto proporcional à carta de 80vh (título/desc escalam em vh). */
 .hub-products__grid.is-live .hub-card-ref__kicker {
   font-size: 0.85rem;
 }
@@ -635,7 +637,7 @@
 @media (min-width: 768px) {
   .hub {
     max-width: 720px;
-    padding: 0 40px 64px;
+    padding: 0 40px 88px;
     margin: 0 auto;
   }
 

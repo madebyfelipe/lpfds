@@ -3,22 +3,16 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import type { RefObject } from "react";
 
-type UseCardDeckOptions = {
-  /** Mobile: onde a pilha "prende" (pin) ao entrar. */
-  mobileStart?: string;
-  /** Mobile: scroll (em % da viewport) consumido para trocar de carta. */
-  perCardScroll?: number;
-};
-
 /**
  * "Baralho" horizontal de cards. Os cards ficam sobrepostos como uma mão de
  * cartas (a ativa à frente e centralizada; as outras abertas para os lados,
  * opacas). Escolher a carta se dá pelo movimento lateral:
  *
- * • Mobile: a seção "prende" (pin) e o scroll desliza a seleção pelo baralho
- *   (para o lado). A página só volta a rolar depois da última carta.
+ * • Mobile: arraste/deslize na HORIZONTAL desliza a seleção pelo baralho.
+ *   O scroll vertical da página continua normal (touch-action: pan-y) —
+ *   a seção não "prende" mais.
  * • Desktop: clique numa carta traz ela para a frente. O parâmetro `spread`
- *   (ligado ao botão "lado a lado") espalha as 3 cartas em linha e volta.
+ *   (ligado ao botão "lado a lado") espalha as cartas em linha e volta.
  *
  * Respeita prefers-reduced-motion: nenhum branch roda → o CSS mostra os cards
  * em fluxo normal (legível, sem movimento).
@@ -26,11 +20,8 @@ type UseCardDeckOptions = {
 export function useCardDeck(
   containerRef: RefObject<HTMLElement | null>,
   cardSelector: string,
-  spread: boolean,
-  options: UseCardDeckOptions = {}
+  spread: boolean
 ) {
-  const { mobileStart = "top 20%", perCardScroll = 90 } = options;
-
   const spreadRef = useRef(spread);
   const firstSpread = useRef(true);
   const apiRef = useRef<{ setMode: (animate: boolean) => void } | null>(null);
@@ -44,8 +35,8 @@ export function useCardDeck(
 
     async function init() {
       const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+      const { Observer } = await import("gsap/dist/Observer");
+      gsap.registerPlugin(Observer);
 
       const root = container!;
 
@@ -109,40 +100,57 @@ export function useCardDeck(
 
         const mm = gsap.matchMedia();
 
-        /* ── MOBILE: seleção por scroll (baralho horizontal, pin) ── */
+        /* ── MOBILE: seleção por ARRASTE HORIZONTAL (sem pin) ── */
         mm.add(
           "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
           () => {
             root.classList.add("is-live");
             gsap.set(cards, { transformOrigin: "50% 120%" });
 
-            const apply = (p: number) =>
-              cards.forEach((card, j) => gsap.set(card, deckAt(j, p)));
+            // "foco" contínuo do baralho (0 … n-1).
+            let p = 0;
+            const apply = (val: number) =>
+              cards.forEach((card, j) => gsap.set(card, deckAt(j, val)));
+            apply(p);
 
-            apply(0);
+            // px de arraste necessários para trocar 1 carta.
+            const dragPerCard = () => Math.max(120, root.offsetWidth * 0.55);
 
-            const st = ScrollTrigger.create({
-              trigger: root,
-              start: mobileStart,
-              end: "+=" + (n - 1) * perCardScroll + "%",
-              pin: true,
-              pinSpacing: true,
-              anticipatePin: 1,
-              snap:
-                n > 1
-                  ? {
-                      snapTo: 1 / (n - 1),
-                      duration: { min: 0.15, max: 0.3 },
-                      ease: "power1.inOut",
-                    }
-                  : undefined,
-              invalidateOnRefresh: true,
-              onUpdate: (self) => apply(self.progress * (n - 1)),
-              onRefresh: (self) => apply(self.progress * (n - 1)),
+            let snapTween: gsap.core.Tween | undefined;
+            const snap = () => {
+              const target = gsap.utils.clamp(0, n - 1, Math.round(p));
+              snapTween?.kill();
+              const proxy = { v: p };
+              snapTween = gsap.to(proxy, {
+                v: target,
+                duration: 0.4,
+                ease: "power2.out",
+                onUpdate() {
+                  p = proxy.v;
+                  apply(p);
+                },
+              });
+            };
+
+            const obs = Observer.create({
+              target: root,
+              type: "touch,pointer",
+              lockAxis: true, // trava no eixo do 1º movimento → vertical rola a página
+              dragMinimum: 4,
+              tolerance: 10,
+              onPress: () => snapTween?.kill(),
+              onChangeX: (self) => {
+                // arrastar para a esquerda (deltaX < 0) avança para a próxima carta.
+                p = gsap.utils.clamp(0, n - 1, p - self.deltaX / dragPerCard());
+                apply(p);
+              },
+              onRelease: snap,
+              onStop: snap,
             });
 
             return () => {
-              st.kill();
+              obs.kill();
+              snapTween?.kill();
               root.classList.remove("is-live");
             };
           }
@@ -202,7 +210,7 @@ export function useCardDeck(
     return () => {
       ctx?.revert();
     };
-  }, [containerRef, cardSelector, mobileStart, perCardScroll]);
+  }, [containerRef, cardSelector]);
 
   // Reage ao botão "lado a lado" (desktop).
   useEffect(() => {
