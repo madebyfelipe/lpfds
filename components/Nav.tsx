@@ -87,7 +87,7 @@ export function Nav({ collapsible = false }: NavProps) {
                   className="button topbar__cta"
                   onClick={trackSchedule}
                 >
-                  Agendar conversa
+                  Começar um projeto
                 </MotionLink>
 
                 <button
@@ -124,7 +124,7 @@ export function Nav({ collapsible = false }: NavProps) {
               className="button button--primary topbar__mobileCta"
               onClick={trackSchedule}
             >
-              Agendar conversa gratuita
+              Começar um projeto
             </MotionLink>
           </div>
         )}

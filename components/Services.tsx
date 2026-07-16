@@ -94,13 +94,14 @@ export function Services() {
       <MotionTrailsBg />
       <div className="site-shell services__content">
         <div className="section-header">
-          <span className="section-kicker sr">O que fazemos melhor</span>
+          <span className="section-kicker sr">/SERVIÇOS</span>
           <h2 className="section-title sr">
-            O que a Made by Felipe <em>resolve</em>
+            Não é sobre o que eu faço.
+            <br />
+            <em>É sobre onde eu entro.</em>
           </h2>
           <p className="section-copy sr">
-            Transformamos suas redes sociais em verdadeiras vitrines para seu negócio.<br />
-            Conteúdo, design e posicionamento alinhados para gerar demanda e autoridade.
+            Onde a minha cabeça faz diferença no seu negócio. Branding, conteúdo e design alinhados para mudar sua percepção no mercado.
           </p>
         </div>
 

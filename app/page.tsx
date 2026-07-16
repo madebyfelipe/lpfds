@@ -11,7 +11,6 @@ import { Reviews } from "@/components/Reviews";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { Services } from "@/components/Services";
 import { TrustBar } from "@/components/TrustBar";
-import { VisitorFloater } from "@/components/VisitorFloater";
 
 export default function Home() {
   return (
@@ -31,7 +30,6 @@ export default function Home() {
         <FinalCTA />
       </main>
       <Footer />
-      <VisitorFloater />
     </>
   );
 }
