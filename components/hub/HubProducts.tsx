@@ -94,23 +94,6 @@ export function HubProducts() {
             <p className="hub-card-ref__desc">{item.desc}</p>
 
             <div className="hub-card-ref__bottom">
-              <div className="hub-card-ref__avatars">
-                {item.avatars.map((av, idx) => (
-                  <div
-                    key={idx}
-                    className="hub-card-ref__avatar"
-                    style={{ zIndex: 5 - idx }}
-                  >
-                    <Image
-                      src={av}
-                      alt="Avatar"
-                      width={28}
-                      height={28}
-                      className="hub-card-ref__avatar-img"
-                    />
-                  </div>
-                ))}
-              </div>
               <Link
                 href={item.href}
                 className="hub-card-ref__pill-btn"
