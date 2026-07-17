@@ -339,8 +339,11 @@
    ═══════════════════════════════════════════════════════ */
 .hub-products__grid.is-live {
   display: block;
-  /* altura da carta (~45vh) + topo + folga do leque/sombra */
-  height: calc(45vh + 90px);
+  /* Ignora o padding lateral do .hub (20px) para o baralho usar a largura
+     total da tela — as "bordas" do .hub não se aplicam às cartas. */
+  margin-inline: -20px;
+  /* altura da carta (~45vh) + topo + folga do leque/sombra (não corta) */
+  height: calc(45vh + 130px);
   overflow: hidden; /* segura as cartas abertas dentro da seção */
   /* gesto horizontal → JS (baralho); vertical → scroll da página */
   touch-action: pan-y;
@@ -695,7 +698,9 @@
   }
 
   .hub-products__grid.is-live {
-    height: calc(60vh + 90px);
+    /* padding lateral do .hub no desktop é 40px */
+    margin-inline: -40px;
+    height: calc(60vh + 130px);
   }
 
   .hub-products__grid.is-live .hub-card-ref {

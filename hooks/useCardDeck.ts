@@ -109,15 +109,8 @@ export function useCardDeck(
 
             // "foco" contínuo do baralho (0 … n-1).
             let p = 0;
-            // Recentra a "mão": sem o ajuste, as cartas abrem todas para a
-            // direita da carta em foco e o baralho fica encostado à direita,
-            // deixando um vão à esquerda. O termo -(mid - val)*fanX cancela o
-            // deslocamento do foco, mantendo o leque centralizado no container.
             const apply = (val: number) =>
-              cards.forEach((card, j) => {
-                const st = deckAt(j, val);
-                gsap.set(card, { ...st, x: st.x - (mid - val) * fanX() });
-              });
+              cards.forEach((card, j) => gsap.set(card, deckAt(j, val)));
             apply(p);
 
             // px de arraste necessários para trocar 1 carta.
