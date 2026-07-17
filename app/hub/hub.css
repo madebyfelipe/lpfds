@@ -514,11 +514,26 @@
   margin: 4px 0 0;
 }
 
-/* Bio Section — primeira dobra do hub: sem painel escuro,
-   herda o tema da página (claro/escuro via ThemeToggle). */
+/* Bio Section - DARK THEME (painel escuro fixo, primeira dobra do hub) */
 .hub-bio {
-  padding: 32px var(--pad-x) 24px;
+  --bg: #0d0d0d;
+  --bg-soft: #111111;
+  --text: #f0ece6;
+  --muted: rgba(240, 236, 230, 0.56);
+  --soft: rgba(240, 236, 230, 0.34);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --panel: #181818;
+  --panel-soft: #202020;
+
+  background: var(--bg);
+  color: var(--text);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  padding: 24px;
+  margin: 24px var(--pad-x) 0;
   position: relative;
+  overflow: hidden;
 }
 
 .hub-bio__container {
@@ -729,7 +744,7 @@
 
   /* Bio section: side-by-side */
   .hub-bio {
-    padding: 48px var(--pad-x) 32px;
+    padding: 32px;
   }
 
   .hub-bio__container {
