@@ -451,6 +451,22 @@
   box-shadow: 0 0 0 3px rgba(212, 43, 43, 0.1);
 }
 
+.hub-media__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hub-media__newsletter-feedback {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
+.hub-media__newsletter-feedback[role="alert"] {
+  color: var(--accent);
+}
+
 .hub-media__submit-btn {
   background: var(--accent);
   color: #fff;
