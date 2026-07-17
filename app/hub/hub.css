@@ -60,7 +60,7 @@
      assim o baralho (.hub-products) ocupa a largura real da tela. */
   --pad-x: 20px;
   margin: 0;
-  padding: 0 0 72px;
+  padding: 0;
   overflow-x: clip; /* segura o full-bleed do baralho (50vw inclui a scrollbar) */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -170,6 +170,7 @@
 /* Hero */
 .hub-hero {
   padding: 32px var(--pad-x) 40px;
+  margin: 0 24px;
   text-align: left;
 }
 
@@ -360,8 +361,8 @@
    ═══════════════════════════════════════════════════════ */
 .hub-products__grid.is-live {
   display: block;
-  /* altura da carta (~45vh) + topo + folga do leque/sombra */
-  height: calc(45vh + 90px);
+  height: 500px;
+  margin-top: 70px;
   overflow: hidden; /* segura as cartas abertas dentro da seção */
   /* gesto horizontal → JS (baralho); vertical → scroll da página */
   touch-action: pan-y;
@@ -372,7 +373,7 @@
   top: 28px;
   left: 50%; /* centralizado; o GSAP aplica xPercent:-50 + x do leque */
   width: clamp(200px, 72%, 290px);
-  height: 45vh;
+  height: min(45vh, 420px); /* cabe no container fixo de 500px */
   margin: 0;
   padding: 20px;
   gap: 12px;
@@ -560,7 +561,7 @@
   color: var(--text);
   border-radius: var(--radius-lg);
   border: 1px solid var(--line);
-  padding: 24px;
+  padding: 24px 24px 50px;
   margin: 24px var(--pad-x) 0;
   position: relative;
   overflow: hidden;
@@ -636,10 +637,13 @@
 
   background: var(--panel-soft);
   color: var(--text);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   border: 1px solid var(--line);
-  padding: 24px;
-  margin: 16px var(--pad-x) 0;
+  padding: 44px;
+  /* full-bleed: escapa do padding lateral e do max-width da .hub */
+  margin: 16px 0 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 .hub-footer__top {
@@ -715,7 +719,7 @@
   .hub {
     --pad-x: 40px;
     max-width: 720px;
-    padding: 0 0 88px;
+    padding: 0;
     margin: 0 auto;
   }
 
@@ -732,12 +736,12 @@
   }
 
   .hub-products__grid.is-live {
-    height: calc(60vh + 90px);
+    height: 500px;
   }
 
   .hub-products__grid.is-live .hub-card-ref {
     width: clamp(240px, 42%, 300px);
-    height: 60vh;
+    height: min(60vh, 420px);
     padding: 32px;
     gap: 20px;
     cursor: pointer; /* dá o toque de "escolher a carta" */
@@ -774,7 +778,7 @@
 
   /* Bio section: side-by-side */
   .hub-bio {
-    padding: 32px;
+    padding: 32px 32px 50px;
   }
 
   .hub-bio__container {
@@ -799,7 +803,7 @@
   }
 
   .hub-footer {
-    padding: 32px;
+    padding: 44px;
   }
 }
 
