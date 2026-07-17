@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { ThemeToggle } from "@/components/hub/ThemeToggle";
+import "../hub/hub.css";
 
 export const metadata: Metadata = {
   title: "Contato | Made by Felipe",
@@ -15,21 +18,38 @@ const INSTAGRAM_HANDLE = "madebyfelipe.com.br";
 
 export default function ContatoPage() {
   return (
-    <div className="contato-page">
-      {/* Nav mínima */}
-      <nav className="contato-nav">
-        <Image
-          src="/logo-white.png"
-          alt="Made by Felipe"
-          width={120}
-          height={32}
-          className="contato-nav__logo"
-          priority
-        />
-        <a href="https://new.madebyfelipe.com.br" className="contato-nav__back">
-          ← Site completo
-        </a>
-      </nav>
+    <div className="hub contato-page">
+      {/* Header — mesmo layout/posicionamento do hub */}
+      <header className="hub-header">
+        <Link href="/" aria-label="Made by Felipe — Home" className="hub-header__logo-link">
+          <Image
+            src="/logo-black.png"
+            alt="Made by Felipe"
+            width={154}
+            height={26}
+            priority
+            className="hub-header__logo hub-header__logo--light"
+          />
+          <Image
+            src="/logo-white.png"
+            alt=""
+            aria-hidden="true"
+            width={154}
+            height={26}
+            priority
+            className="hub-header__logo hub-header__logo--dark"
+          />
+        </Link>
+
+        <div className="hub-header__actions">
+          <nav className="hub-header__nav">
+            <Link href="/hub" className="hub-header__link">
+              Voltar ao hub
+            </Link>
+          </nav>
+          <ThemeToggle />
+        </div>
+      </header>
 
       <main>
         {/* Hero */}
@@ -120,9 +140,9 @@ export default function ContatoPage() {
         <span className="contato-footer__copy">
           © {new Date().getFullYear()} Made by Felipe
         </span>
-        <a href="/portfolio" className="contato-footer__link">
+        <Link href="/portfolio" className="contato-footer__link">
           Ver portfólio completo →
-        </a>
+        </Link>
       </footer>
     </div>
   );

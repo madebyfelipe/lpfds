@@ -339,6 +339,20 @@
   transform: translateY(-1px);
 }
 
+/* Card com fundo forte (ex.: Contato vermelho): botões invertem para branco
+   sobre escuro, já que o hover-para-vermelho sumiria no fundo. */
+.hub-card-ref--invert .hub-card-ref__action-btn,
+.hub-card-ref--invert .hub-card-ref__pill-btn {
+  background: #ffffff;
+  color: #151515;
+}
+
+.hub-card-ref--invert .hub-card-ref__action-btn:hover,
+.hub-card-ref--invert .hub-card-ref__pill-btn:hover {
+  background: #151515;
+  color: #ffffff;
+}
+
 /* ═══════════════════════════════════════════════════════
    Social Kit — baralho horizontal (hook useCardDeck)
    Layout ativo só quando o JS liga .is-live; o GSAP controla

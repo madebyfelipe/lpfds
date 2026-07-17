@@ -14,6 +14,7 @@ const products = [
     href: "/#servicos",
     bgColor: "#d4eb95",
     textColor: "#1b350f",
+    invert: false,
     avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
   },
   {
@@ -24,6 +25,7 @@ const products = [
     href: "/portfolio",
     bgColor: "#fecb4d",
     textColor: "#3b2901",
+    invert: false,
     avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
   },
   {
@@ -34,16 +36,18 @@ const products = [
     href: "/#processo",
     bgColor: "#ff8585",
     textColor: "#430806",
+    invert: false,
     avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
   },
   {
-    kicker: "/INSTAGRAM",
-    title: "Instagram",
-    desc: "Bastidores, processo e opinião. Quase todo dia no feed.",
-    cta: "Seguir",
-    href: "https://www.instagram.com/madebyfelipe.com.br",
-    bgColor: "#f8b5d0",
-    textColor: "#4a1230",
+    kicker: "/CONTATO",
+    title: "Contato",
+    desc: "Agende um horário ou mande uma mensagem — do seu jeito.",
+    cta: "Falar comigo",
+    href: "/contato",
+    bgColor: "#d42b2b",
+    textColor: "#ffffff",
+    invert: true,
     avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
   },
 ];
@@ -64,7 +68,7 @@ export function HubProducts() {
           return (
           <article
             key={item.title}
-            className="hub-card-ref social-card"
+            className={`hub-card-ref social-card${item.invert ? " hub-card-ref--invert" : ""}`}
             style={{ backgroundColor: item.bgColor, color: item.textColor }}
           >
             <div className="hub-card-ref__header">

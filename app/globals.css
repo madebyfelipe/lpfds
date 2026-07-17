@@ -2818,40 +2818,14 @@ img {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.contato-page {
+/* A página vive dentro do escopo `.hub`, herdando tokens (tema claro por
+   padrão, escuro via data-theme), fonte Neue Haas e o container centralizado.
+   Aqui só ajustamos o layout de coluna e neutralizamos o padding do hub. */
+.hub.contato-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* ── Nav mínima ── */
-.contato-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--line);
-}
-
-.contato-nav__logo {
-  height: 32px;
-  width: auto;
-}
-
-.contato-nav__back {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: 0.02em;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.contato-nav__back:hover {
-  color: var(--text);
+  padding: 0;
 }
 
 /* ── Hero ── */
@@ -2963,12 +2937,13 @@ img {
 .contato-cta:hover {
   transform: translateY(-2px);
   border-color: rgba(212, 43, 43, 0.3);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
 }
 
 .contato-cta--primary {
   background: var(--accent);
   border-color: transparent;
+  color: #fff;
   box-shadow: 0 12px 36px var(--accent-glow);
 }
 
