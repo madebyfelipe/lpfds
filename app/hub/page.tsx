@@ -26,10 +26,10 @@ export default function HubPage() {
     <div className="hub">
       <HubHeader />
       <main>
-        <HubHero />
+        <HubBio />
         <HubProducts />
         <HubMedia />
-        <HubBio />
+        <HubHero />
       </main>
       <HubFooter />
     </div>
