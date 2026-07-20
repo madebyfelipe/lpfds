@@ -11,8 +11,8 @@ export function HubHeader() {
         <Image
           src="/logo-black.png"
           alt="Made by Felipe"
-          width={154}
-          height={26}
+          width={158}
+          height={45}
           priority
           className="hub-header__logo hub-header__logo--light"
         />
@@ -20,8 +20,8 @@ export function HubHeader() {
           src="/logo-white.png"
           alt=""
           aria-hidden="true"
-          width={154}
-          height={26}
+          width={158}
+          height={45}
           priority
           className="hub-header__logo hub-header__logo--dark"
         />
