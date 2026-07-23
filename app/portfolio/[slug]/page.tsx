@@ -125,7 +125,10 @@ export default async function CasePage({
           </div>
         </section>
 
-        {/* 3 — Galeria: faixa automática com todas as peças do projeto */}
+        {/* 3 — Galeria: faixa automática com todas as peças do projeto.
+            Só renderiza quando o projeto tem peças — cases sem galeria
+            (ex.: uma landing page única) pulam a dobra por completo. */}
+        {gallery.length > 0 && (
         <section className="section case-gallery">
           <div className="site-shell">
             <div className="case-gallery__header sr">
@@ -173,6 +176,7 @@ export default async function CasePage({
             </div>
           </div>
         </section>
+        )}
 
         {/* 4 — Statement */}
         <section className="case-statement">

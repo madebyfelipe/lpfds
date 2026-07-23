@@ -1,4 +1,4 @@
-export type ProjectCategory = "Marca" | "Conteúdo";
+export type ProjectCategory = "Marca" | "Conteúdo" | "Landing Page";
 
 // Página do site na dobra "O site" de um case: vira aba + card-índice na
 // janela de navegador (SiteFrame). O screenshot é a captura da página
@@ -319,6 +319,35 @@ export const projects: Project[] = [
       layout: "grid-1",
       images: posts("ivoei", 17),
       text: "O guia completo, capítulo a capítulo — do símbolo às diretrizes de fotografia.",
+    },
+  },
+  {
+    slug: "cbricks",
+    client: "Cbricks",
+    displayName: "CBRICKS",
+    category: "Landing Page",
+    tagline:
+      "Pesquisa de mercado, estudo de marca e desenvolvimento de uma landing page para um fabricante de tijolos ecológicos partindo do zero.",
+    statement: "Toda marca começa por uma decisão.",
+    scope: [
+      "Pesquisa de mercado",
+      "Estudo de marca",
+      "Sistema de cores e tipografia",
+      "Landing page",
+    ],
+    execution:
+      "Pesquisa de mercado, definição da base visual e desenvolvimento da landing page conduzidos em parceria terceirizada, com entrega pronta para publicação.",
+    images: {
+      cover: "/portfolio/cbricks/cover.png",
+    },
+    about:
+      "O projeto começou sem ponto de partida. A Cbricks chegou sem marca, sem presença digital e sem material de referência, com o desafio de se posicionar diante de concorrentes já estabelecidos no mercado de construção sustentável. A primeira etapa foi entender o terreno: uma pesquisa de mercado para mapear como os concorrentes se apresentam e onde havia espaço para a Cbricks ocupar.\n\nA partir dessa leitura veio o estudo de marca. Definimos uma estrutura de cores e tipografia coerente com os valores do produto, ecológico, sólido e acessível, para servir de base ao desenvolvimento. Com essa fundação, a landing page foi construída para traduzir o posicionamento em uma primeira experiência clara e consistente, pronta para receber os primeiros visitantes e sustentar a expansão futura da marca.",
+    aboutImage: "/portfolio/cbricks/sobre.png",
+    presentation: {
+      src: "/portfolio/cbricks/apresentacao.png",
+      width: 2160,
+      height: 11892,
+      text: "A landing page por inteiro, da definição visual à tela final.",
     },
   },
 ];

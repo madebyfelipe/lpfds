@@ -6,7 +6,7 @@ import { ProjectCard } from "./ProjectCard";
 
 type Filter = "Todos" | ProjectCategory;
 
-const FILTERS: Filter[] = ["Todos", "Marca", "Conteúdo"];
+const FILTERS: Filter[] = ["Todos", "Marca", "Conteúdo", "Landing Page"];
 
 export function PortfolioGrid({
   projects
