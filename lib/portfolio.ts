@@ -21,10 +21,16 @@ export type Project = {
   execution: string; // texto da coluna "Execução" (seção 5)
   images: {
     cover: string; // /portfolio/<slug>/cover.jpg
+    // Imagem de fundo do hero do case. Se ausente, o hero usa `cover` — o
+    // mesmo thumbnail do grid. Defina quando o hero deve diferir do card.
+    hero?: string;
     // detail e series são do case padrão — cases de site (website) não usam.
     detail?: string;
     series?: [string, string, string];
   };
+  // Modo de encaixe da foto do "Sobre o projeto". Padrão "cover" (corta pela
+  // altura do painel de texto); "contain" mostra a foto inteira, sem corte.
+  aboutImageFit?: "cover" | "contain";
   // Todas as peças da faixa automática da Galeria; se ausente,
   // a página usa [detail, ...series] como fallback.
   gallery?: string[];
@@ -339,7 +345,9 @@ export const projects: Project[] = [
       "Pesquisa de mercado, definição da base visual e desenvolvimento da landing page conduzidos em parceria terceirizada, com entrega pronta para publicação.",
     images: {
       cover: "/portfolio/cbricks/cover.png",
+      hero: "/portfolio/cbricks/detail.png",
     },
+    aboutImageFit: "contain",
     about:
       "O projeto começou sem ponto de partida. A Cbricks chegou sem marca, sem presença digital e sem material de referência, com o desafio de se posicionar diante de concorrentes já estabelecidos no mercado de construção sustentável. A primeira etapa foi entender o terreno: uma pesquisa de mercado para mapear como os concorrentes se apresentam e onde havia espaço para a Cbricks ocupar.\n\nA partir dessa leitura veio o estudo de marca. Definimos uma estrutura de cores e tipografia coerente com os valores do produto, ecológico, sólido e acessível, para servir de base ao desenvolvimento. Com essa fundação, a landing page foi construída para traduzir o posicionamento em uma primeira experiência clara e consistente, pronta para receber os primeiros visitantes e sustentar a expansão futura da marca.",
     aboutImage: "/portfolio/cbricks/sobre.png",

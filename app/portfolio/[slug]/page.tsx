@@ -98,7 +98,7 @@ export default async function CasePage({
         <header className="case-hero">
           <div className="case-hero__media">
             <Image
-              src={project.images.cover}
+              src={project.images.hero ?? project.images.cover}
               alt={`Capa do projeto ${project.client}`}
               fill
               priority
@@ -211,7 +211,13 @@ export default async function CasePage({
                 }`}
               >
                 {project.aboutImage && (
-                  <div className="case-about__media sr-left">
+                  <div
+                    className={`case-about__media sr-left${
+                      project.aboutImageFit === "contain"
+                        ? " case-about__media--contain"
+                        : ""
+                    }`}
+                  >
                     <Image
                       src={project.aboutImage}
                       alt={`Bastidores do projeto ${project.client}`}

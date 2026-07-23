@@ -3753,6 +3753,16 @@ img {
   object-fit: cover;
 }
 
+/* Modo "sem corte": a coluna não estica à altura do painel; a foto aparece
+   inteira, na proporção natural, alinhada ao topo do texto. */
+.case-about__media--contain {
+  align-self: start;
+}
+.case-about__media--contain .case-about__photo {
+  height: auto;
+  object-fit: contain;
+}
+
 .case-about__panel::before {
   content: "";
   position: absolute;
