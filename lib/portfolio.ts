@@ -367,15 +367,14 @@ export const projects: Project[] = [
       "Plataforma de marca e identidade visual para a Dazz, estúdio de marketing 360° para pequenos e médios negócios.",
     statement: "Um estúdio de marketing ganhou uma marca de verdade.",
     scope: [
-      "Posicionamento de marca",
-      "Plataforma de branding",
-      "Nome e essência da marca",
-      "Tom de voz",
       "Identidade visual",
-      "Copy aplicada",
+      "Manual de copy",
+      "Posicionamento",
+      "UI components",
+      "Posts de feed",
     ],
     execution:
-      "A Dazz é o estúdio de marketing 360° de Felipe Silva, que reúne conteúdo, vídeo próprio, tráfego, landing page e identidade visual sob um mesmo time. O trabalho de marca cobriu o pacote completo: posicionamento, plataforma de branding, missão, visão e valores, tom de voz em três regras e um sistema visual de estética pôster — tudo aplicado em página institucional, página de vendas e num feed de lançamento de doze posts. A construção rodou em etapas: estruturação comercial, discovery de posicionamento e fechamento do manual de marca. Por ser a marca do próprio estúdio, foi um projeto interno, sem prazo de contrato definido.",
+      "Marca da Dazz de ponta a ponta: posicionamento, identidade visual, manual de copy, UI components e posts de feed. Por ser a marca do próprio estúdio, correu como projeto interno, sem prazo de contrato definido.",
     images: {
       cover: "/portfolio/dazz/cover.png",
       hero: "/portfolio/dazz/hero.png",
