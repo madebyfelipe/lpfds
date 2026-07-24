@@ -3089,7 +3089,7 @@ img {
   display: block;
   overflow: visible;
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
-  transform-origin: 3px 3px; /* escala a partir da ponta da seta */
+  transform-origin: 3.5px 3.5px; /* escala a partir da ponta da seta */
   /* aparição: entra da escala menor com um leve overshoot */
   transform: scale(0.5);
   transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
