@@ -3074,7 +3074,7 @@ img {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 120;
+  z-index: 9999; /* acima de popup, nav e qualquer overlay */
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -3088,27 +3088,41 @@ img {
 .site-cursor svg {
   display: block;
   overflow: visible;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
-  transform-origin: 3px 3px; /* escala a partir da ponta da seta */
-  transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1);
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+  transform-origin: 2px 2px; /* escala a partir da ponta da seta */
+  /* aparição: entra da escala menor com um leve overshoot */
+  transform: scale(0.5);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.18s ease;
 }
 
+/* Já visível → tamanho natural */
+.site-cursor--visible svg {
+  transform: scale(1);
+}
+
+/* Sobre elementos interativos: cresce e ganha um brilho vermelho */
 .site-cursor--link svg {
-  transform: scale(1.2);
+  transform: scale(1.35);
+  filter: drop-shadow(0 0 10px var(--accent-glow))
+    drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
 }
 
+/* Clique: comprime rápido (fica depois de --link para vencer no conflito) */
 .site-cursor--down svg {
-  transform: scale(0.82);
+  transform: scale(0.78);
+  transition: transform 0.09s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.18s ease;
 }
 
 .site-cursor__arrow {
   transition: fill 0.18s ease, stroke 0.18s ease;
 }
 
-/* Sobre elementos interativos a seta inverte: branca com contorno vermelho */
+/* Sobre elementos interativos a seta inverte: vermelha com contorno branco */
 .site-cursor--link .site-cursor__arrow {
-  fill: #fff;
-  stroke: var(--accent);
+  fill: var(--accent);
+  stroke: #ffffff;
 }
 
 @media (hover: none), (pointer: coarse) {
