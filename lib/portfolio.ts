@@ -358,6 +358,59 @@ export const projects: Project[] = [
       text: "A landing page por inteiro, da definição visual à tela final.",
     },
   },
+  {
+    slug: "dazz",
+    client: "Dazz",
+    displayName: "DAZZ",
+    category: "Marca",
+    tagline:
+      "Plataforma de marca e identidade visual para a Dazz, estúdio de marketing 360° para pequenos e médios negócios.",
+    statement: "Um estúdio de marketing ganhou uma marca de verdade.",
+    scope: [
+      "Posicionamento de marca",
+      "Plataforma de branding",
+      "Nome e essência da marca",
+      "Tom de voz",
+      "Identidade visual",
+      "Copy aplicada",
+    ],
+    execution:
+      "A Dazz é o estúdio de marketing 360° de Felipe Silva, que reúne conteúdo, vídeo próprio, tráfego, landing page e identidade visual sob um mesmo time. O trabalho de marca cobriu o pacote completo: posicionamento, plataforma de branding, missão, visão e valores, tom de voz em três regras e um sistema visual de estética pôster — tudo aplicado em página institucional, página de vendas e num feed de lançamento de doze posts. A construção rodou em etapas: estruturação comercial, discovery de posicionamento e fechamento do manual de marca. Por ser a marca do próprio estúdio, foi um projeto interno, sem prazo de contrato definido.",
+    images: {
+      cover: "/portfolio/dazz/cover.png",
+      hero: "/portfolio/dazz/hero.png",
+    },
+    gallery: [
+      "/portfolio/dazz/gallery/01.png",
+      "/portfolio/dazz/gallery/02.png",
+      "/portfolio/dazz/gallery/03.png",
+      "/portfolio/dazz/gallery/04.png",
+      "/portfolio/dazz/gallery/05.png",
+      "/portfolio/dazz/gallery/06.png",
+      "/portfolio/dazz/gallery/07.png",
+      "/portfolio/dazz/gallery/08.png",
+      "/portfolio/dazz/gallery/09.png",
+      "/portfolio/dazz/gallery/10.png",
+    ],
+    about:
+      "A Dazz é o estúdio de marketing 360° de Felipe Silva, que reúne conteúdo, produção de vídeo, tráfego, landing page e identidade visual num só time — algo que o mercado local costuma terceirizar ou nem oferecer. O estúdio já entregava um serviço completo, mas faltava o essencial: a marca. Operava sem nome público consolidado, sem voz definida e sem sistema visual próprio. O desafio foi dar forma de marca a um serviço que já era forte.\n\nO projeto partiu de um discovery de posicionamento pela lógica das 3 Ondas do branding e cresceu para uma plataforma de marca completa no método Ana Couto: propósito, arquétipo de Guia que cuida e uma personalidade próxima, estratégica e direta. Dali saíram o tom de voz em três regras — inquisitivo, consultivo e confiante — e um sistema visual de estética brutalista em vermelho, preto e off-white, com tipografia condensada em caixa alta. Por fim, a marca ganhou aplicação real: copy da página institucional, da página de vendas e um feed de lançamento com doze posts prontos para ir a mercado.",
+    aboutImage: "/portfolio/dazz/sobre.png",
+    presentation: {
+      layout: "grid-1",
+      images: [
+        "/portfolio/dazz/manual/01.png",
+        "/portfolio/dazz/manual/02.png",
+        "/portfolio/dazz/manual/03.png",
+        "/portfolio/dazz/manual/04.png",
+        "/portfolio/dazz/manual/05.png",
+        "/portfolio/dazz/manual/06.png",
+        "/portfolio/dazz/manual/07.png",
+        "/portfolio/dazz/manual/08.png",
+        "/portfolio/dazz/manual/09.png",
+      ],
+      text: "O manual de marca completo, capítulo a capítulo — do tom de voz e do logo à paleta e à tipografia.",
+    },
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
