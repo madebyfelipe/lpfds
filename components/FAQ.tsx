@@ -16,8 +16,7 @@ export function FAQ() {
               Perguntas <em>frequentes</em>
             </h2>
             <p className="section-copy sr">
-              Respostas diretas, sem floreio, para você entender como funciona a parceria antes da
-              conversa.
+              O que você precisa saber antes de agendar a conversa.
             </p>
           </div>
 

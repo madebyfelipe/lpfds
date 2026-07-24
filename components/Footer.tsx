@@ -24,8 +24,8 @@ export function Footer() {
               className="footer__logo"
             />
             <p className="footer__description">
-              Branding + Social Media Estratégico pra profissionais e escritórios que precisam ser
-              percebidos à altura do que entregam.
+              Branding + Social Media Estratégico pra profissionais e escritórios que já entregam
+              bem e precisam comunicar isso.
             </p>
           </div>
 

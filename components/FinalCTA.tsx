@@ -11,7 +11,7 @@ export function FinalCTA() {
 
           <div className="cta-box__header">
             <h2 className="cta-box__title">
-              Pronto pra ser percebido à <em>altura do seu trabalho</em>?
+              Seu trabalho já é bom. <em>Falta o mercado enxergar isso.</em>
             </h2>
             <p className="cta-box__copy">
               15 minutos de conversa. Vou entender seu negócio e te mostrar o caminho mais curto

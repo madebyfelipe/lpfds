@@ -162,7 +162,7 @@ export function Process() {
           <h2 className="section-title sr">
             Como <em>funciona</em>
           </h2>
-          <p className="section-copy sr">Simples, direto e sem enrolação.</p>
+          <p className="section-copy sr">Quatro etapas. Você sabe o que acontece em cada uma.</p>
         </div>
 
         <div className="process__grid">

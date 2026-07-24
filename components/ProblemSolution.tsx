@@ -7,10 +7,10 @@ export function ProblemSolution() {
         <div className="section-header">
           <span className="section-kicker sr">Solução</span>
           <h2 className="section-title sr">
-            Por que a maioria das marcas desiste de produzir conteúdo
+            Por que tanta marca boa desiste de produzir conteúdo
           </h2>
           <p className="section-copy sr">
-            (e como a Made by Felipe resolve isso)
+            (e o que a Made by Felipe faz diferente)
           </p>
         </div>
         <div className="compare">

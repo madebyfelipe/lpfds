@@ -47,8 +47,8 @@ export function MetricsBar() {
         <div className="about-section__header sr">
           <span className="section-kicker">Sobre</span>
           <h2 className="about-section__headline">
-            Sua marca vai parecer no nível que ela realmente opera{" "}
-            <em>e começar a atrair os clientes certos.</em>
+            Sua marca no nível do serviço que você já entrega.{" "}
+            <em>É isso que atrai o cliente certo e sustenta o seu preço.</em>
           </h2>
         </div>
 

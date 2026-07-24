@@ -96,12 +96,10 @@ export function Services() {
         <div className="section-header">
           <span className="section-kicker sr">/SERVIÇOS</span>
           <h2 className="section-title sr">
-            Não é sobre o que eu faço.
-            <br />
-            <em>É sobre onde eu entro.</em>
+            Onde a minha cabeça entra <em>no seu negócio.</em>
           </h2>
           <p className="section-copy sr">
-            Onde a minha cabeça faz diferença no seu negócio. Branding, conteúdo e design alinhados para mudar sua percepção no mercado.
+            Branding, conteúdo e design trabalhando juntos pra mudar como o mercado enxerga a sua marca.
           </p>
         </div>
 

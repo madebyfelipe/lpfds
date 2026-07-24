@@ -77,17 +77,17 @@ export const metrics: Metric[] = [
 export const services: Service[] = [
   {
     title: "Assessoria de Conteúdo",
-    description: "Produção completa para redes sociais, com estratégia, captação, edição e publicação.",
+    description: "Produção completa para redes sociais: estratégia, captação, edição e publicação.",
     tags: ["Conteúdo estratégico", "Consistência visual", "Execução contínua"]
   },
   {
     title: "Posicionamento de Marca",
-    description: "Ajuste fino de como sua marca é percebida — do discurso à estética.",
+    description: "Ajuste fino na forma como sua marca é percebida, do discurso à estética.",
     tags: ["Clareza de mensagem", "Materiais institucionais", "Identidade visual"]
   },
   {
     title: "Design & Identidade",
-    description: "Sua marca vai precisar de materiais para manter-se na frente da concorrência.",
+    description: "Os materiais que sustentam sua marca no dia a dia: propostas, apresentações, papelaria e merchandise.",
     tags: ["Materiais institucionais", "Apresentações e propostas", "Papelaria e merchandise"]
   }
 ];
@@ -103,7 +103,7 @@ export const problemItems = [
 export const solutionItems = [
   "Marca que vende antes da primeira consulta",
   "Conteúdo estratégico e recorrente",
-  "Posicionamento que diferencia de verdade",
+  "Posicionamento que te tira da guerra de preço",
   "Preço justo sem negociação",
   "Agenda lotada com o cliente certo"
 ];
@@ -112,7 +112,7 @@ export const processSteps: ProcessStep[] = [
   {
     number: "01",
     title: "Conversa de diagnóstico",
-    description: "15 min pra entender seu negócio, público e objetivos reais."
+    description: "15 min pra entender seu negócio, seu público e o que você quer alcançar."
   },
   {
     number: "02",
@@ -229,12 +229,12 @@ export const faqs: FAQItem[] = [
   {
     question: "O que exatamente a Made by Felipe faz?",
     answer:
-      "A Made by Felipe é uma assessoria estratégica de conteúdo. A gente cuida de toda a operação: estratégia, captação, edição, design, redação e distribuição. O objetivo é posicionar sua marca com clareza e gerar demanda qualificada."
+      "A Made by Felipe é uma assessoria estratégica de conteúdo. Eu cuido de toda a operação: estratégia, captação, edição, design, redação e distribuição. O objetivo é posicionar sua marca com clareza e gerar demanda qualificada."
   },
   {
     question: "Isso é só gestão de redes sociais?",
     answer:
-      "Não. Gestão de redes é execução. Aqui, o foco é posicionamento + estratégia + execução integrada. O conteúdo existe para gerar percepção de valor e conversão."
+      "Não. Gestão de redes cuida da execução. A Made by Felipe entra antes: define posicionamento, monta a estratégia e aí executa. Cada conteúdo existe pra gerar percepção de valor e conversão."
   },
   {
     question: "Pra quem é esse serviço?",
@@ -244,12 +244,12 @@ export const faqs: FAQItem[] = [
   {
     question: "Pra quem não é?",
     answer:
-      "Quem busca só post bonito, volume de conteúdo ou algo barato. O foco aqui é construção de marca e resultado."
+      "Quem quer só post bonito ou o menor preço possível. O trabalho aqui é construção de marca, e isso pede tempo e investimento."
   },
   {
-    question: "Vocês garantem resultado?",
+    question: "Você garante resultado?",
     answer:
-      "Garantimos estratégia, consistência e execução de alto nível. Resultado depende também do seu negócio, oferta e processo comercial."
+      "O que eu garanto: estratégia, consistência e execução de alto nível. O resultado final também depende da sua oferta e do seu processo comercial."
   },
 ];
 

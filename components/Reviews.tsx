@@ -37,7 +37,7 @@ export function Reviews() {
             Quem parou de <em>improvisar</em>
           </h2>
           <p className="section-copy sr">
-            Parcerias de longo prazo que geram resultado real, não só likes.
+            Parcerias de longo prazo, com resultado que aparece na agenda e no caixa.
           </p>
         </div>
 
