@@ -45,20 +45,22 @@ export function CustomCursor() {
 
   return (
     <div ref={ref} className="site-cursor" aria-hidden="true">
-      {/* Seta estilo pointer — a ponta fica em (2,2), alinhada ao hotspot */}
+      {/* Seta estilo pointer — ponta (hotspot) em (3,3); silhueta do anexo:
+          arredondada, encorpada e levemente inclinada para a direita */}
       <svg
-        width="22"
-        height="28"
-        viewBox="0 0 22 28"
+        width="26"
+        height="32"
+        viewBox="0 0 26 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
           className="site-cursor__arrow"
-          d="M2 2 L2 23.5 L7.7 18.4 L11.4 26 L15.4 24.1 L11.8 16.4 L19 15.9 Z"
+          transform="rotate(14 3 3)"
+          d="M3 3 L3 24.5 L9 19 L13 27.5 L17 25.5 L13.2 17.1 L20.5 16.6 Z"
           fill="#fff"
           stroke="#111111"
-          strokeWidth="2"
+          strokeWidth="2.4"
           strokeLinejoin="round"
           strokeLinecap="round"
         />
