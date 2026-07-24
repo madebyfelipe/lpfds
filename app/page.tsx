@@ -1,3 +1,4 @@
+import { EmailPopup } from "@/components/EmailPopup";
 import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
@@ -30,6 +31,7 @@ export default function Home() {
         <FinalCTA />
       </main>
       <Footer />
+      <EmailPopup />
     </>
   );
 }

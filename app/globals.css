@@ -4306,3 +4306,184 @@ img {
     padding: 16px;
   }
 }
+
+/* ============================================================
+   Email popup — "Receba um manual de conteúdo"
+   ============================================================ */
+.email-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.68);
+  backdrop-filter: blur(6px);
+  animation: email-popup-fade 0.3s ease;
+}
+
+@keyframes email-popup-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.email-popup__card {
+  position: relative;
+  width: min(440px, 100%);
+  padding: 40px 34px 30px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  animation: email-popup-rise 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.email-popup__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0% 0%, rgba(212, 43, 43, 0.12), transparent 55%);
+  pointer-events: none;
+}
+
+@keyframes email-popup-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.email-popup__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--panel-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.email-popup__close:hover {
+  color: var(--panel-text);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.email-popup__kicker {
+  position: relative;
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.email-popup__title {
+  position: relative;
+  margin: 14px 0 12px;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 1.7rem;
+  line-height: 1.12;
+  font-weight: 700;
+  color: var(--panel-text);
+}
+
+.email-popup__title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.email-popup__copy {
+  position: relative;
+  margin: 0 0 22px;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--panel-muted);
+}
+
+.email-popup__form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.email-popup__input {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--panel-soft);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-pill);
+  color: var(--panel-text);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.email-popup__input::placeholder {
+  color: var(--panel-muted);
+}
+
+.email-popup__input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.email-popup__submit {
+  width: 100%;
+  justify-content: center;
+}
+
+.email-popup__feedback {
+  position: relative;
+  margin: 14px 0 0;
+  font-size: 0.88rem;
+  color: var(--accent);
+}
+
+.email-popup__note {
+  position: relative;
+  margin: 16px 0 0;
+  font-size: 0.78rem;
+  color: var(--panel-muted);
+  text-align: center;
+}
+
+.email-popup__done {
+  position: relative;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .email-popup__card {
+    padding: 34px 22px 26px;
+  }
+
+  .email-popup__title {
+    font-size: 1.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email-popup,
+  .email-popup__card {
+    animation: none;
+  }
+}
