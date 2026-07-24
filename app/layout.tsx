@@ -14,7 +14,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL("https://madebyfelipe.com"),
   verification: {
-    google: "tN5Kf-NTmvEzkHjSlfQwhrcnv5LpZf4XWn899JNRZkM"
+    google: "hWQpfk8fLurpgK8t39nD8F0ABbFwEhWT9UmdtvW22Gg"
   },
   title: "Made by Felipe | Branding + Social Media Estratégico",
   description:
