@@ -9,3 +9,9 @@ tsconfig.tsbuildinfo
 
 # arquivos-fonte dos projetos (originais pesados; versoes otimizadas em public/portfolio)
 projects/
+
+# entrega do prototipo do site institucional + fotos brutas do Felipe
+# (material de referencia; o site portado vive em app/(institucional))
+Site institucional para Felipe/
+Site institucional para Felipe.zip
+fotos Felipe/

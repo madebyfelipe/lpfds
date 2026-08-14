@@ -7,6 +7,11 @@ Next.js 16 (App Router, Turbopack) + TypeScript landing page for **Made by Felip
 Live domain: `madebyfelipe.com`  
 Language: **Portuguese (pt-BR)** — all user-facing copy stays in Portuguese.
 
+> **Branch `beta` only:** the home is no longer the dark landing page — it is the
+> new institutional site (light/editorial). See "Site institucional (branch beta)"
+> at the bottom of this file. Everything else in this document still describes the
+> dark theme, which keeps serving `/hub`, `/contato` and `/portfolio` unchanged.
+
 ---
 
 ## Stack
@@ -128,3 +133,50 @@ Key exports: `metrics`, `services`, `problemItems`, `solutionItems`, `processSte
 - **One client = one case, folded structure**: `[slug]/page.tsx` is a single case layout with mandatory folds (hero, tagline, gallery, statement, scope) and optional ones that render only when their field is set — `about`/`aboutImage` (Sobre), `website` (O site, ao vivo — `SiteFrame`), `presentation` (Apresentação). Don't create a second slug when scope grows; add the fold to the existing case and redirect the dead slug in `next.config.ts`. The old standalone `WebsiteCase.tsx` was removed — the browser-window fold now lives inline in the standard case.
 - **Nav**: portfolio pages (grid and cases) always use `<Nav collapsible />`.
 - On touch (`hover: none`) and reduced motion, the Galeria marquee becomes a manual horizontal scroll and the duplicated loop copy (`case-gallery__item--dup`) is hidden.
+
+---
+
+## Site institucional (branch `beta`)
+
+Port of the approved prototype `Site institucional para Felipe/Site Institucional.dc.html`
+(a Claude design-canvas SPA). It replaces the old dark home on `beta`; `main` stays as is.
+
+**Routes** — all inside the `app/(institucional)/` route group, which supplies the
+shared shell (`InstNav` + `InstFooter` + the `.inst` wrapper):
+
+| Route | File | Prototype view |
+|---|---|---|
+| `/` | `app/(institucional)/page.tsx` | `isHome` |
+| `/projetos` | `app/(institucional)/projetos/page.tsx` | `isProjetos` (hub de portfólio) |
+| `/projetos/[slug]` | `app/(institucional)/projetos/[slug]/page.tsx` | `isProjeto` |
+| `/imersao` | `app/(institucional)/imersao/page.tsx` | `isContato` |
+
+The prototype's contact view lives at **`/imersao`**, not `/contato` — `/contato` is a
+satellite of `/hub` (shares `hub.css`, linked from `HubProducts`) and must not be touched.
+
+**Styling**: `app/institucional.css`, everything scoped under `.inst`, so the dark
+`globals.css` (still applied by the root layout) can't leak into it and vice-versa.
+Tokens are the Made by Felipe design system: cream `#f6f6f6`, black `#151515`,
+red `#bc0319`, gray ramp `#ececec…#454545`. Font is **Neue Haas Grotesk Display**,
+`@font-face`-declared from the TTFs already in `public/fonts/`. Class naming is
+`inst-block__element--modifier`. The prototype is desktop-only; the responsive rules
+at the bottom of the file are additions, not part of the approved design.
+
+**Content**: `lib/institucional.ts` holds the copy transcribed verbatim from the
+prototype (steps, deliverables, depoimentos, agenda, social). **Do not rewrite it** —
+it is approved copy. The portfolio is *not* duplicated there: `/projetos` and
+`/projetos/[slug]` read `lib/portfolio.ts`, the single source of truth shared with the
+old `/portfolio` case pages.
+
+**Case field mapping** (prototype → real project data, no invented copy):
+`nome` → `client`, `meta` → `category`, "Ponto de partida" → `tagline`,
+"Trabalho" → `execution`, "Resultado" → `statement`. The three full-bleed shots come
+from `caseShots()`, which walks `detail → series → gallery → aboutImage → hero` and
+takes the first three distinct images (cases with fewer simply render fewer).
+
+**Pending**: the 8-cell image strip under the hero (`heroStrip` in
+`lib/institucional.ts`) is still placeholder slots — Felipe will pick the photos.
+Raw candidates sit in the gitignored `fotos Felipe/`.
+
+**Untouched by this port**: `/hub`, `/contato`, `/portfolio`, `/portfolio/[slug]` and
+every component they use. The institutional footer carries a backlink to `/hub`.
