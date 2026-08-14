@@ -29,7 +29,8 @@ export default function Home() {
               src={foto.src}
               alt={foto.alt}
               fill
-              sizes="(max-width: 900px) 45vw, 20vw"
+              sizes="(max-width: 900px) 50vw, 25vw"
+              quality={90}
               className="inst-strip__img"
             />
           </div>

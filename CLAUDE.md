@@ -181,7 +181,20 @@ it is approved copy. The portfolio is *not* duplicated there: `/projetos` reads
 **Hero strip**: `heroStrip` in `lib/institucional.ts` → `public/institucional/hero/0N.jpg`,
 five real photos of Felipe (the prototype drew eight cells; five is what exists).
 Optimized with sharp from the gitignored `fotos Felipe/` — `.rotate()` matters, one
-source carries EXIF orientation 6.
+source carries EXIF orientation 6. They render **in full colour** (the prototype's
+grayscale filter was removed on request) at `quality={90}`, which is why
+`next.config.ts` has to allowlist it in `images.qualities`. Cells 1 and 3 are capped by
+their originals (693px and 1080px wide) — no re-export will sharpen them.
+
+**Theme toggle**: `InstThemeToggle` in the nav writes `data-inst-theme="dark"` on
+`<html>` (not on a wrapper — the nav also renders on case pages, outside `.inst`) and
+persists to `localStorage["inst-theme"]`. The root layout carries an inline `<script>`
+that applies it before paint; without it the page flashes light. Dark mode swaps the
+*roles* of the four brand colours (`--cream` becomes the ink, `--black` the surface), so
+`.inst-dark` sections flip to light and the alternating rhythm survives. Any new
+hardcoded `rgba(246,246,246,…)` on a `.inst-dark` surface must become a token
+(`--line-inverse`, `--line-inverse-strong`, `--nav-bg`) or it won't invert. Values sitting
+on `.inst-red` stay hardcoded — the red never inverts.
 
 **Clientes**: the prototype's client-logo section was **dropped from the home** at
 Felipe's request. Don't reinstate it.

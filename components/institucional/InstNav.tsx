@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { InstThemeToggle } from "@/components/institucional/InstThemeToggle";
 
 const links = [
   { href: "/", label: "Início" },
@@ -31,6 +32,7 @@ export function InstNav() {
             {link.label}
           </Link>
         ))}
+        <InstThemeToggle />
       </div>
     </nav>
   );

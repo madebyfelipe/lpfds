@@ -69,6 +69,12 @@
   --gray-500: #7a7a7a;
   --gray-700: #454545;
 
+  /* Derivados que precisam inverter junto com o tema: linhas e rótulos
+     que ficam sobre a superfície oposta (.inst-dark) e o fundo da nav. */
+  --line-inverse: rgba(246, 246, 246, 0.18);
+  --line-inverse-strong: rgba(246, 246, 246, 0.4);
+  --nav-bg: rgba(246, 246, 246, 0.94);
+
   --inst-font: "Neue Haas Grotesk Display", "Archivo", Helvetica, Arial, sans-serif;
   --inst-max: 1200px;
   --inst-pad: 40px;
@@ -77,10 +83,34 @@
   font-size: 16px;
 }
 
+/* Tema escuro (InstThemeToggle marca data-inst-theme="dark" no <html>).
+   A paleta da marca só tem quatro cores, então o tema escuro troca os
+   papéis: o que era superfície vira tinta e vice-versa. As seções que já
+   eram escuras (.inst-dark) passam a ser as claras, mantendo o ritmo
+   alternado e o contraste de cada par. O vermelho não muda. */
+:root[data-inst-theme="dark"] .inst,
+:root[data-inst-theme="dark"] .inst-nav,
+:root[data-inst-theme="dark"] .inst-footer {
+  --cream: #151515;
+  --black: #f6f6f6;
+  --gray-100: #1c1c1c;
+  --gray-200: #2a2a2a;
+  --gray-300: #7a7a7a;
+  --gray-500: #9a9a9a;
+  --gray-700: #b8b8b8;
+
+  --line-inverse: rgba(21, 21, 21, 0.18);
+  --line-inverse-strong: rgba(21, 21, 21, 0.4);
+  --nav-bg: rgba(21, 21, 21, 0.94);
+}
+
 .inst {
   min-height: 100vh;
   background: var(--cream);
   color: var(--black);
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
 }
 
 .inst ::selection {
@@ -165,7 +195,7 @@
   justify-content: space-between;
   gap: 24px;
   padding: 18px var(--inst-pad);
-  background: rgba(246, 246, 246, 0.94);
+  background: var(--nav-bg);
   border-bottom: 1px solid var(--gray-200);
 }
 
@@ -193,6 +223,47 @@
 .inst-nav__link:hover,
 .inst-nav__link[aria-current="page"] {
   color: var(--red);
+}
+
+/* Botão claro/escuro — mesmo desenho do /hub, nos tokens daqui. */
+.inst-theme-toggle {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--gray-200);
+  background: transparent;
+  color: var(--black);
+  cursor: pointer;
+  transition:
+    border-color 180ms cubic-bezier(0.2, 0, 0, 1),
+    color 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.inst-theme-toggle:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.inst-theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Sol no tema claro (leva ao escuro), lua no tema escuro. */
+.inst-theme-toggle__moon {
+  display: none;
+}
+
+:root[data-inst-theme="dark"] .inst-theme-toggle__sun {
+  display: none;
+}
+
+:root[data-inst-theme="dark"] .inst-theme-toggle__moon {
+  display: block;
 }
 
 /* --------------------------------------------------------------------------
@@ -250,12 +321,11 @@
   border-bottom-color: var(--red-dark);
 }
 
-/* Faixa de imagens do hero — fotos ainda não definidas (placeholders). */
+/* Faixa de fotos abaixo do hero — em cor, sem filtro. */
 .inst-strip {
   display: flex;
   width: 100%;
   height: 340px;
-  filter: grayscale(1) contrast(1.05);
   border-top: 1px solid var(--gray-200);
   border-bottom: 1px solid var(--gray-200);
 }
@@ -282,7 +352,7 @@
 }
 
 .inst-step {
-  border-top: 2px solid rgba(246, 246, 246, 0.18);
+  border-top: 2px solid var(--line-inverse);
   padding-top: 24px;
 }
 
@@ -633,7 +703,7 @@
 .inst-field__input {
   background: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(246, 246, 246, 0.4);
+  border-bottom: 1px solid var(--line-inverse-strong);
   color: var(--cream);
   font-family: inherit;
   font-size: 1.25rem;

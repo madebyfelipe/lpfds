@@ -37,6 +37,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        {/* Tema do site institucional aplicado antes da pintura — sem isso
+            a página pisca no claro antes da hidratação. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("inst-theme")==="dark"){document.documentElement.dataset.instTheme="dark"}}catch(e){}`
+          }}
+        />
+      </head>
       <body className={`${poppins.variable} site-body`}>
         {children}
         <CustomCursor />
