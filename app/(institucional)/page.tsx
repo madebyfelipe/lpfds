@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Depoimentos } from "@/components/institucional/Depoimentos";
 import { InstContato } from "@/components/institucional/InstContato";
-import { InstTrustBar } from "@/components/institucional/InstTrustBar";
 import { agenda, deliverables, heroStrip, steps } from "@/lib/institucional";
 
 export default function Home() {
@@ -67,13 +66,6 @@ export default function Home() {
             próprio porte.
           </p>
         </div>
-      </section>
-
-      <section className="inst-clients-section">
-        <div className="inst-shell">
-          <p className="inst-kicker inst-kicker--md">— Clientes</p>
-        </div>
-        <InstTrustBar />
       </section>
 
       {/* id="servicos": o card "Social Kit" do /hub aponta para /#servicos. */}

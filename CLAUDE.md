@@ -157,6 +157,14 @@ The prototype's `isProjeto` view was **not** ported: by Felipe's call, a cover i
 `/projetos` opens the existing rich case at `/portfolio/[slug]`. `/projetos` is the hub,
 `/portfolio/[slug]` is the case — don't add a second case layout under `/projetos`.
 
+**Case chrome**: `/portfolio/[slug]` keeps its old dark **body** but wears the new
+`InstNav` + `InstFooter`. That's why `app/institucional.css` declares the design tokens on
+`.inst, .inst-nav, .inst-footer` (not `.inst` alone) and keeps `background`/`min-height`
+on `.inst` only — the nav and footer have to work standalone, outside the light wrapper,
+without repainting the dark case. The case page imports `institucional.css` directly,
+since it sits outside the `(institucional)` route group. Don't wrap the case in `.inst`:
+sticky positioning would break and the dark body would turn cream.
+
 **Styling**: `app/institucional.css`, everything scoped under `.inst`, so the dark
 `globals.css` (still applied by the root layout) can't leak into it and vice-versa.
 Tokens are the Made by Felipe design system: cream `#f6f6f6`, black `#151515`,
@@ -175,16 +183,23 @@ five real photos of Felipe (the prototype drew eight cells; five is what exists)
 Optimized with sharp from the gitignored `fotos Felipe/` — `.rotate()` matters, one
 source carries EXIF orientation 6.
 
-**Clientes**: not the prototype's 5-cell grid — the white client PNGs vanished on the
-cream background, so it uses `InstTrustBar`, the red marquee band inherited from the old
-dark home's `TrustBar` (`filter: brightness(0) invert(1)` over `--red`).
+**Clientes**: the prototype's client-logo section was **dropped from the home** at
+Felipe's request. Don't reinstate it.
+
+**`/projetos` layout** follows the manifesto-branding reference Felipe supplied, not the
+prototype's full-bleed stack: a small "Projetos" label, cards inside the 1200px column
+with a 12px gap and `aspect-ratio: 3 / 1`, and on hover the whole card becomes a solid
+`--red` panel with scope → client → tagline → "Ver projeto →" pinned to the bottom.
+Touch devices (`hover: none`) get `inst-project__caption` instead, since the panel would
+never appear — keep both in sync when adding fields.
 
 **Anchors the home must keep**: `/hub`'s product cards link to `/#servicos` (Entregas)
 and `/#processo` (Como funciona). Those ids live on the institutional home — removing
 them breaks the hub. `lib/data.ts`'s `navigationLinks` was likewise repointed at the new
 routes, since the old home's section anchors no longer exist.
 
-**Untouched by this port**: `/contato`, `/portfolio`, `/portfolio/[slug]` and every
-component they use. `/hub` keeps its content; only its desktop footer/deck full-bleed
+**Untouched by this port**: `/contato` and `/portfolio` (the old dark grid, still linked
+from `/hub`'s "Trabalhos" card — `components/Nav.tsx` and `components/Footer.tsx` now
+exist only for it). `/hub` keeps its content; only its desktop footer/deck full-bleed
 padding was fixed (the content used to stretch to 100vw instead of the hub column).
 The institutional footer carries a backlink to `/hub`.

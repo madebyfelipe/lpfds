@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Footer } from "@/components/Footer";
-import { Nav } from "@/components/Nav";
+import { InstFooter } from "@/components/institucional/InstFooter";
+import { InstNav } from "@/components/institucional/InstNav";
 import { Lightbox } from "@/components/portfolio/Lightbox";
 import { PresentationBoard } from "@/components/portfolio/PresentationBoard";
 import { SiteFrame } from "@/components/portfolio/SiteFrame";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { getImageSize } from "@/lib/image-size";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
+import "../../institucional.css";
 
 type Params = { slug: string };
 
@@ -92,7 +93,9 @@ export default async function CasePage({
   return (
     <>
       <ScrollRevealInit />
-      <Nav collapsible />
+      {/* Header e rodapé são os do site novo; só o corpo do case continua
+          sendo a estrutura antiga (escura). */}
+      <InstNav />
       <main className="case">
         {/* 1 — Hero */}
         <header className="case-hero">
@@ -314,7 +317,7 @@ export default async function CasePage({
           </div>
         </Link>
       </main>
-      <Footer />
+      <InstFooter />
     </>
   );
 }

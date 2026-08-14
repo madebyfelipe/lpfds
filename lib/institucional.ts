@@ -68,14 +68,6 @@ export const steps = [
   }
 ];
 
-export const clientLogos = [
-  { src: "/logo-client-1.png", alt: "Cliente 1" },
-  { src: "/logo-client-2.png", alt: "Cliente 2" },
-  { src: "/logo-client-3.png", alt: "Cliente 3" },
-  { src: "/logo-client-4.png", alt: "Cliente 4" },
-  { src: "/logo-client-5.png", alt: "Cliente 5" }
-];
-
 export const deliverables = [
   "Posicionamento",
   "Naming",
