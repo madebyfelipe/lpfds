@@ -24,17 +24,30 @@ export const social = [
   }
 ];
 
-// Faixa de imagens abaixo do hero: as fotos ainda serão definidas pelo
-// Felipe, então os slots ficam como placeholders com a descrição da pauta.
+// Faixa de imagens abaixo do hero. Fotos do Felipe, otimizadas a partir de
+// "fotos Felipe/" para public/institucional/hero. O protótipo previa oito
+// células; entraram as cinco fotos que existem.
 export const heroStrip = [
-  "Mesa de imersão com os sócios",
-  "Parede de estudo de território",
-  "Impressões espalhadas",
-  "Prova de papelaria sobre a mesa",
-  "Aplicação em ambiente de escritório",
-  "Detalhe de tipografia impressa",
-  "Reunião de aprovação",
-  "Bastidor da imersão"
+  {
+    src: "/institucional/hero/01.jpg",
+    alt: "Reunião de trabalho em volta da mesa, com o time analisando um documento na tela"
+  },
+  {
+    src: "/institucional/hero/02.jpg",
+    alt: "Felipe no palco, ao microfone, durante uma apresentação"
+  },
+  {
+    src: "/institucional/hero/03.jpg",
+    alt: "Felipe ao lado de clientes na OAB — Subseção Sorocaba"
+  },
+  {
+    src: "/institucional/hero/04.jpg",
+    alt: "Entrevista no palco durante o Know How Experience"
+  },
+  {
+    src: "/institucional/hero/05.jpg",
+    alt: "Felipe ao lado do painel do Know How Experience"
+  }
 ];
 
 export const steps = [
@@ -102,20 +115,7 @@ export const depoimentos = [
 export const agenda = { numProjetos: 3, mesImersao: "setembro" };
 
 // Imagem de capa do projeto no hub — mesma regra do grid atual do portfólio.
+// O card abre o case completo já existente em /portfolio/[slug].
 export function projectCover(project: Project): string {
   return project.images.hero ?? project.images.cover;
-}
-
-// Peças de tela cheia do case: reaproveita o material já publicado do
-// projeto, na ordem detail → série → galeria → sobre, sem repetir.
-export function caseShots(project: Project): string[] {
-  const pool = [
-    project.images.detail,
-    ...(project.images.series ?? []),
-    ...(project.gallery ?? []),
-    project.aboutImage,
-    project.images.hero
-  ].filter((src): src is string => Boolean(src));
-
-  return [...new Set(pool)].slice(0, 3);
 }

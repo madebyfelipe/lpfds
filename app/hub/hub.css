@@ -808,13 +808,33 @@
     font-size: 1.8rem;
   }
 
+  /* O footer é full-bleed (margin: calc(50% - 50vw)), então no desktop o
+     padding fixo espalhava as linhas de link pela viewport inteira, longe
+     da coluna do hub. Recolhe o conteúdo para a largura da .hub, mantendo
+     o fundo escuro de ponta a ponta. */
   .hub-footer {
-    padding: 44px;
+    padding: 44px max(44px, calc((100vw - 720px) / 2));
+  }
+
+  /* Mesmo caso no fallback do baralho (sem JS / reduced motion): os cards
+     ficavam com 100vw de largura. */
+  .hub-products__grid:not(.is-live) {
+    max-width: 720px;
+    margin-inline: auto;
+    padding-inline: var(--pad-x);
   }
 }
 
 @media (min-width: 1024px) {
   .hub {
+    max-width: 860px;
+  }
+
+  .hub-footer {
+    padding-inline: max(44px, calc((100vw - 860px) / 2));
+  }
+
+  .hub-products__grid:not(.is-live) {
     max-width: 860px;
   }
 

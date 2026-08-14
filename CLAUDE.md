@@ -148,11 +148,14 @@ shared shell (`InstNav` + `InstFooter` + the `.inst` wrapper):
 |---|---|---|
 | `/` | `app/(institucional)/page.tsx` | `isHome` |
 | `/projetos` | `app/(institucional)/projetos/page.tsx` | `isProjetos` (hub de portfólio) |
-| `/projetos/[slug]` | `app/(institucional)/projetos/[slug]/page.tsx` | `isProjeto` |
 | `/imersao` | `app/(institucional)/imersao/page.tsx` | `isContato` |
 
 The prototype's contact view lives at **`/imersao`**, not `/contato` — `/contato` is a
 satellite of `/hub` (shares `hub.css`, linked from `HubProducts`) and must not be touched.
+
+The prototype's `isProjeto` view was **not** ported: by Felipe's call, a cover in
+`/projetos` opens the existing rich case at `/portfolio/[slug]`. `/projetos` is the hub,
+`/portfolio/[slug]` is the case — don't add a second case layout under `/projetos`.
 
 **Styling**: `app/institucional.css`, everything scoped under `.inst`, so the dark
 `globals.css` (still applied by the root layout) can't leak into it and vice-versa.
@@ -164,19 +167,24 @@ at the bottom of the file are additions, not part of the approved design.
 
 **Content**: `lib/institucional.ts` holds the copy transcribed verbatim from the
 prototype (steps, deliverables, depoimentos, agenda, social). **Do not rewrite it** —
-it is approved copy. The portfolio is *not* duplicated there: `/projetos` and
-`/projetos/[slug]` read `lib/portfolio.ts`, the single source of truth shared with the
-old `/portfolio` case pages.
+it is approved copy. The portfolio is *not* duplicated there: `/projetos` reads
+`lib/portfolio.ts`, the single source of truth shared with the `/portfolio` case pages.
 
-**Case field mapping** (prototype → real project data, no invented copy):
-`nome` → `client`, `meta` → `category`, "Ponto de partida" → `tagline`,
-"Trabalho" → `execution`, "Resultado" → `statement`. The three full-bleed shots come
-from `caseShots()`, which walks `detail → series → gallery → aboutImage → hero` and
-takes the first three distinct images (cases with fewer simply render fewer).
+**Hero strip**: `heroStrip` in `lib/institucional.ts` → `public/institucional/hero/0N.jpg`,
+five real photos of Felipe (the prototype drew eight cells; five is what exists).
+Optimized with sharp from the gitignored `fotos Felipe/` — `.rotate()` matters, one
+source carries EXIF orientation 6.
 
-**Pending**: the 8-cell image strip under the hero (`heroStrip` in
-`lib/institucional.ts`) is still placeholder slots — Felipe will pick the photos.
-Raw candidates sit in the gitignored `fotos Felipe/`.
+**Clientes**: not the prototype's 5-cell grid — the white client PNGs vanished on the
+cream background, so it uses `InstTrustBar`, the red marquee band inherited from the old
+dark home's `TrustBar` (`filter: brightness(0) invert(1)` over `--red`).
 
-**Untouched by this port**: `/hub`, `/contato`, `/portfolio`, `/portfolio/[slug]` and
-every component they use. The institutional footer carries a backlink to `/hub`.
+**Anchors the home must keep**: `/hub`'s product cards link to `/#servicos` (Entregas)
+and `/#processo` (Como funciona). Those ids live on the institutional home — removing
+them breaks the hub. `lib/data.ts`'s `navigationLinks` was likewise repointed at the new
+routes, since the old home's section anchors no longer exist.
+
+**Untouched by this port**: `/contato`, `/portfolio`, `/portfolio/[slug]` and every
+component they use. `/hub` keeps its content; only its desktop footer/deck full-bleed
+padding was fixed (the content used to stretch to 100vw instead of the hub column).
+The institutional footer carries a backlink to `/hub`.

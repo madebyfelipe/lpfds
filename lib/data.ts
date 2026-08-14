@@ -49,14 +49,13 @@ export type PricingTier = {
   social: PricingFeature[];
 };
 
+// A home virou o site institucional, então as âncoras antigas (#servicos,
+// #processo, #resultados, #faq) não existem mais. O Nav escuro sobrevive nas
+// páginas de case e aponta para as rotas do site novo.
 export const navigationLinks = [
-  { href: "/#servicos", label: "Serviços" },
-  { href: "/#processo", label: "Processo" },
-  // { href: "/#planos", label: "Planos" }, // seção de preços desativada temporariamente
-  { href: "/#resultados", label: "Resultados" },
-  { href: "/portfolio", label: "Portfólio" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/contato", label: "Contato" }
+  { href: "/", label: "Início" },
+  { href: "/projetos", label: "Portfólio" },
+  { href: "/imersao", label: "Contato" }
 ] as const;
 
 export const trustedMarks = [

@@ -5,6 +5,9 @@ import { InstContato } from "@/components/institucional/InstContato";
 import { projectCover } from "@/lib/institucional";
 import { projects } from "@/lib/portfolio";
 
+// O cover abre o case completo já existente em /portfolio/[slug] — a
+// estrutura de página individual de projeto continua sendo aquela.
+
 export const metadata: Metadata = {
   title: "Projetos — Made by Felipe",
   description:
@@ -22,7 +25,7 @@ export default function ProjetosPage() {
         {projects.map((project, index) => (
           <Link
             key={project.slug}
-            href={`/projetos/${project.slug}`}
+            href={`/portfolio/${project.slug}`}
             className="inst-project"
           >
             <Image

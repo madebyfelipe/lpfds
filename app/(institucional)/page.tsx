@@ -2,13 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Depoimentos } from "@/components/institucional/Depoimentos";
 import { InstContato } from "@/components/institucional/InstContato";
-import {
-  agenda,
-  clientLogos,
-  deliverables,
-  heroStrip,
-  steps
-} from "@/lib/institucional";
+import { InstTrustBar } from "@/components/institucional/InstTrustBar";
+import { agenda, deliverables, heroStrip, steps } from "@/lib/institucional";
 
 export default function Home() {
   return (
@@ -28,16 +23,22 @@ export default function Home() {
         </Link>
       </header>
 
-      {/* Faixa do hero — fotos ainda a definir pelo Felipe. */}
       <div className="inst-strip">
-        {heroStrip.map((pauta) => (
-          <div key={pauta} className="inst-strip__cell">
-            <span className="inst-slot">{pauta}</span>
+        {heroStrip.map((foto) => (
+          <div key={foto.src} className="inst-strip__cell">
+            <Image
+              src={foto.src}
+              alt={foto.alt}
+              fill
+              sizes="(max-width: 900px) 45vw, 20vw"
+              className="inst-strip__img"
+            />
           </div>
         ))}
       </div>
 
-      <section className="inst-dark">
+      {/* id="processo": o card "Como trabalho" do /hub aponta para /#processo. */}
+      <section id="processo" className="inst-dark">
         <div className="inst-section">
           <p className="inst-kicker inst-kicker--inverse">— Como funciona</p>
           <div className="inst-steps">
@@ -68,24 +69,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="inst-section inst-section--flush-top">
-        <p className="inst-kicker inst-kicker--md">— Clientes</p>
-        <div className="inst-clients">
-          {clientLogos.map((logo) => (
-            <div key={logo.src} className="inst-clients__cell">
-              <Image
-                src={logo.src}
-                alt={logo.alt}
-                width={160}
-                height={72}
-                className="inst-clients__logo"
-              />
-            </div>
-          ))}
+      <section className="inst-clients-section">
+        <div className="inst-shell">
+          <p className="inst-kicker inst-kicker--md">— Clientes</p>
         </div>
+        <InstTrustBar />
       </section>
 
-      <section className="inst-section--rule">
+      {/* id="servicos": o card "Social Kit" do /hub aponta para /#servicos. */}
+      <section id="servicos" className="inst-section--rule">
         <div className="inst-section">
           <p className="inst-kicker inst-kicker--lg">— Entregas</p>
           <div className="inst-deliverables">
