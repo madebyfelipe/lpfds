@@ -4,14 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { useCardDeck } from "@/hooks/useCardDeck";
+import { ebook } from "@/lib/newsletter";
 
 const products = [
   {
-    kicker: "/SOCIAL",
-    title: "Social Kit",
-    desc: "Sua marca com a mesma força em cada post. Não arte solta — sistema.",
-    cta: "Acessar",
-    href: "/#servicos",
+    kicker: "/E-BOOK",
+    title: ebook.short,
+    desc: "Construção de marca para psicólogos. Grátis pra quem entra na newsletter.",
+    cta: "Baixar grátis",
+    href: "#ebook",
     bgColor: "#d4eb95",
     textColor: "#1b350f",
     invert: false,

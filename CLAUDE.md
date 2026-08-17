@@ -221,13 +221,36 @@ with a 12px gap and `aspect-ratio: 3 / 1`, and on hover the whole card becomes a
 Touch devices (`hover: none`) get `inst-project__caption` instead, since the panel would
 never appear — keep both in sync when adding fields.
 
-**Anchors the home must keep**: `/hub`'s product cards link to `/#servicos` (Entregas)
-and `/#processo` (Como funciona). Those ids live on the institutional home — removing
-them breaks the hub. `lib/data.ts`'s `navigationLinks` was likewise repointed at the new
-routes, since the old home's section anchors no longer exist.
+**Anchors the home must keep**: `/hub`'s "Como trabalho" card links to `/#processo`
+(Como funciona), and `/#servicos` (Entregas) is still linked from bios/externos. Those
+ids live on the institutional home — removing them breaks those links. `lib/data.ts`'s
+`navigationLinks` was likewise repointed at the new routes, since the old home's section
+anchors no longer exist.
 
 **Untouched by this port**: `/contato` and `/portfolio` (the old dark grid, still linked
 from `/hub`'s "Trabalhos" card — `components/Nav.tsx` and `components/Footer.tsx` now
 exist only for it). `/hub` keeps its content; only its desktop footer/deck full-bleed
 padding was fixed (the content used to stretch to 100vw instead of the hub column).
 The institutional footer carries a backlink to `/hub`.
+
+---
+
+## Newsletter + e-book (portão de download)
+
+O antigo produto **"Social Kit"** do deck do `/hub` virou o **e-book de construção de
+marca para psicólogos** (card `/E-BOOK`, `href="#ebook"` → seção `HubMedia`). O download
+é **gated**: só quem assina a newsletter recebe o link.
+
+- **`lib/newsletter.ts`** — fonte única: `ebook` (título, `id` mandado ao CRM e a URL do
+  mirror `https://file.madebyfelipe.agency/s/ebook`) e o helper cliente `subscribe()`.
+  A URL do mirror **nunca** é renderizada antes do opt-in; ela chega na resposta da API.
+- **`app/api/newsletter/route.ts`** — rota de servidor (a única do projeto). Valida o
+  e-mail e dispara em paralelo para **Twenty** (`crm.madebyfelipe.agency/webhooks/workflows/…`)
+  e **Make** (automação antiga de e-mail). Basta **um** dos dois aceitar para o cadastro
+  valer e o `download` voltar. Motivo: o webhook do Twenty responde
+  `400 INVALID_WORKFLOW_STATUS` enquanto o workflow não estiver **ativado** no workspace —
+  sem esse fallback, um workflow desativado derrubaria o e-book inteiro.
+- Os componentes (`HubMedia`, `EmailPopup`) não conhecem mais nenhuma URL de webhook —
+  chamam `subscribe(email, source)`. Ao adicionar um novo formulário, use o mesmo helper e
+  registre a origem em `NewsletterSource`.
+- `EmailPopup` não está montado em nenhuma página hoje (código dormente), mas já usa a rota.

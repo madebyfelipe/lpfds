@@ -82,7 +82,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* id="servicos": o card "Social Kit" do /hub aponta para /#servicos. */}
+      {/* id="servicos": âncora de Entregas, usada por links externos e pelo /hub. */}
       <section id="servicos" className="inst-section--rule">
         <div className="inst-section">
           <p className="inst-kicker inst-kicker--lg">— Entregas</p>

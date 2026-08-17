@@ -435,6 +435,14 @@
   gap: 12px;
 }
 
+.hub-media__newsletter-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 .hub-media__newsletter-title {
   font-size: 1.35rem;
   font-weight: 700;
@@ -507,6 +515,34 @@
 .hub-media__submit-btn:hover {
   background: var(--accent-dark);
   transform: translateY(-1px);
+}
+
+/* Aparece só depois do opt-in — é a entrega do e-book. */
+.hub-media__download-btn {
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 12px 24px;
+  text-decoration: none;
+  transition: all 0.28s ease;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hub-media__download-btn:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.hub-media__newsletter-note {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 10px 0 0;
 }
 
 .hub-media__coupon {

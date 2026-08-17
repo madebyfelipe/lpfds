@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { subscribe } from "@/lib/newsletter";
 
-const NEWSLETTER_WEBHOOK = "https://hook.us2.make.com/1fnsymphi9b64q1tcq8we9ap7xxgxcv7";
 const STORAGE_KEY = "mbf-manual-popup";
 const OPEN_DELAY = 12000;
 
@@ -57,17 +57,8 @@ export function EmailPopup() {
     setStatus("sending");
 
     try {
-      const res = await fetch(NEWSLETTER_WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          source: "landing-manual-popup",
-          submittedAt: new Date().toISOString(),
-        }),
-      });
-
-      if (!res.ok) throw new Error(`Webhook respondeu ${res.status}`);
+      const result = await subscribe(email, "landing-manual-popup");
+      if (!result.ok) throw new Error("cadastro recusado");
       setStatus("sent");
       setEmail("");
       try {

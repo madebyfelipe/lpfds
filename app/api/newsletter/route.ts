@@ -1,0 +1,78 @@
+import { NextResponse } from "next/server";
+import { ebook } from "@/lib/newsletter";
+
+/**
+ * Cadastro na newsletter — repassa para os dois destinos:
+ *
+ *  - Twenty (crm.madebyfelipe.agency): workflow que cria/atualiza o contato.
+ *  - Make: automação antiga de disparo de e-mail, ainda em uso.
+ *
+ * Regra: basta UM dos dois aceitar para o cadastro valer. Se o workflow do
+ * Twenty estiver desativado (ele responde 400 INVALID_WORKFLOW_STATUS), o
+ * visitante ainda entra na lista e continua liberando o download do e-book.
+ */
+const TWENTY_WEBHOOK =
+  "https://crm.madebyfelipe.agency/webhooks/workflows/a14da497-8251-4656-9f2b-29817711eb70/101a12f0-aa21-4f20-b0f0-51b3ba7ca398";
+const MAKE_WEBHOOK = "https://hook.us2.make.com/1fnsymphi9b64q1tcq8we9ap7xxgxcv7";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const TIMEOUT_MS = 10000;
+
+async function post(url: string, payload: unknown) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(TIMEOUT_MS)
+  });
+  if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+  return true;
+}
+
+export async function POST(request: Request) {
+  let email: unknown;
+  let source: unknown;
+
+  try {
+    ({ email, source } = await request.json());
+  } catch {
+    return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
+  }
+
+  if (typeof email !== "string" || !EMAIL_RE.test(email.trim())) {
+    return NextResponse.json({ ok: false, error: "invalid_email" }, { status: 400 });
+  }
+
+  const payload = {
+    email: email.trim().toLowerCase(),
+    source: typeof source === "string" ? source : "site",
+    product: ebook.id,
+    submittedAt: new Date().toISOString()
+  };
+
+  const [twenty, make] = await Promise.allSettled([
+    post(TWENTY_WEBHOOK, payload),
+    post(MAKE_WEBHOOK, payload)
+  ]);
+
+  if (twenty.status === "rejected") {
+    console.error("[newsletter] Twenty falhou:", twenty.reason);
+  }
+  if (make.status === "rejected") {
+    console.error("[newsletter] Make falhou:", make.reason);
+  }
+
+  const ok = twenty.status === "fulfilled" || make.status === "fulfilled";
+  if (!ok) {
+    return NextResponse.json({ ok: false, error: "webhooks_down" }, { status: 502 });
+  }
+
+  return NextResponse.json({
+    ok: true,
+    download: ebook.url,
+    delivered: {
+      twenty: twenty.status === "fulfilled",
+      make: make.status === "fulfilled"
+    }
+  });
+}

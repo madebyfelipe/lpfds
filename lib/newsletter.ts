@@ -1,0 +1,48 @@
+/**
+ * Newsletter — ponto único de configuração.
+ *
+ * O opt-in é o portão do e-book: o link do mirror só aparece depois que o
+ * e-mail é aceito pelo /api/newsletter (que repassa para o Twenty e o Make).
+ */
+
+/** Material entregue em troca do opt-in. */
+export const ebook = {
+  /** Nome completo do produto (usado no CRM e nos títulos). */
+  title: "E-book de construção de marca para psicólogos",
+  /** Versão curta, para o card do deck do hub. */
+  short: "E-book de marca",
+  /** Identificador enviado ao CRM. */
+  id: "ebook-marca-psicologos",
+  /** Mirror do arquivo — só é revelado depois do opt-in. */
+  url: "https://file.madebyfelipe.agency/s/ebook"
+} as const;
+
+/** De onde veio o cadastro — vira o campo `source` no Twenty. */
+export type NewsletterSource =
+  | "hub-ebook"
+  | "hub-newsletter"
+  | "landing-manual-popup";
+
+export type SubscribeResult = {
+  ok: boolean;
+  /** URL do e-book — presente apenas quando o cadastro foi aceito. */
+  download?: string;
+};
+
+/**
+ * Envia o cadastro para /api/newsletter (rota de servidor: mantém as URLs dos
+ * webhooks fora do bundle e evita depender do CORS de cada provedor).
+ */
+export async function subscribe(
+  email: string,
+  source: NewsletterSource
+): Promise<SubscribeResult> {
+  const res = await fetch("/api/newsletter", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, source })
+  });
+
+  if (!res.ok) throw new Error(`Newsletter respondeu ${res.status}`);
+  return (await res.json()) as SubscribeResult;
+}
