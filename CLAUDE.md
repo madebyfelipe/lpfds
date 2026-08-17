@@ -174,9 +174,24 @@ red `#bc0319`, gray ramp `#ececec…#454545`. Font is **Neue Haas Grotesk Displa
 at the bottom of the file are additions, not part of the approved design.
 
 **Content**: `lib/institucional.ts` holds the copy transcribed verbatim from the
-prototype (steps, deliverables, depoimentos, agenda, social). **Do not rewrite it** —
-it is approved copy. The portfolio is *not* duplicated there: `/projetos` reads
+approved copy doc (steps, deliverables, depoimentos, agenda, social). **Do not rewrite
+it** — it is approved copy. The portfolio is *not* duplicated there: `/projetos` reads
 `lib/portfolio.ts`, the single source of truth shared with the `/portfolio` case pages.
+
+**ICP (agosto/2026)**: the site no longer speaks to law firms — it speaks to
+**consultórios de psicologia**. Headline is "meio dia de imersão", compliance line is
+the *artigo 20 do Código de Ética Profissional do Psicólogo* (it replaced "Provimento
+205 da OAB"), the studio block reads receita/carteira/valor de sessão/ocupação de
+agenda, and the `/imersao` form asks **Nome · CRP · WhatsApp** (CRP replaced
+"Escritório"). `Naming` was removed from `deliverables` on purpose: artigo 20 requires
+the divulgação to carry nome completo, título and CRP, and nome fantasia depends on a
+registered PJ — naming is an optional, case-by-case item, not a listed deliverable.
+`depoimentos` are studio clients talking about the *design service*; never write one
+that mentions atendimento, caso clínico or resultado de terapia. Same rule for the hero
+strip: no image suggesting a session, a patient, or a couch. The copy doc's
+"Investimento" block (preço na página) and its dark `#0d0d0d`/`#e30613` palette note
+were **not** applied — Felipe held the price until it is defined, and the design system
+(cream/black/`--red` + theme toggle) stays as is.
 
 **Hero strip**: `heroStrip` in `lib/institucional.ts` → `public/institucional/hero/0N.jpg`,
 five real photos of Felipe (the prototype drew eight cells; five is what exists).

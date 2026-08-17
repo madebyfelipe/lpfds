@@ -1,22 +1,33 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Depoimentos } from "@/components/institucional/Depoimentos";
 import { InstContato } from "@/components/institucional/InstContato";
 import { agenda, deliverables, heroStrip, steps } from "@/lib/institucional";
 
+// Title/description da home vêm do copy aprovado e sobrescrevem os do
+// layout raiz, que seguem servindo /hub, /contato e /portfolio.
+export const metadata: Metadata = {
+  title: "Marca para consultório de psicologia em 30 dias | Made by Felipe",
+  description:
+    "Construa a marca do seu consultório em meio dia de imersão. Posicionamento, identidade visual e verbal no ar em 30 dias, dentro do artigo 20 do Código de Ética."
+};
+
 export default function Home() {
   return (
     <main>
       <header className="inst-hero">
         <h1 className="inst-hero__title">
-          Construa a marca da sua banca em{" "}
-          <span className="inst-hero__accent">uma imersão de dois dias</span>.
+          Construa a marca do seu consultório em{" "}
+          <span className="inst-hero__accent">meio dia de imersão</span>.
         </h1>
         <p className="inst-hero__lead">
-          Dois dias com os sócios. Posicionamento, identidade visual e verbal no
-          ar em 30 dias.
+          Uma manhã com você. Posicionamento, identidade visual e verbal no ar
+          em 30 dias.
         </p>
-        <p className="inst-hero__note">Dentro do Provimento 205 da OAB.</p>
+        <p className="inst-hero__note">
+          Dentro do artigo 20 do Código de Ética Profissional do Psicólogo.
+        </p>
         <Link href="/imersao" className="inst-hero__cta">
           Agendar a imersão →
         </Link>
@@ -58,13 +69,15 @@ export default function Home() {
         <div className="inst-studio">
           <p className="inst-studio__copy">
             Made by Felipe constrói marca a partir da leitura do negócio.{" "}
-            <strong>Receita, carteira, ticket e processo comercial</strong>{" "}
+            <strong>
+              Receita, carteira, valor de sessão e ocupação de agenda
+            </strong>{" "}
             entram na mesa antes de qualquer decisão visual.
           </p>
           <p className="inst-studio__copy inst-studio__copy--muted">
-            O foco em advocacia empresarial veio da mesma constatação repetida
-            na região: bancas com reputação técnica sólida e presença abaixo do
-            próprio porte.
+            O foco em consultório de psicologia veio da mesma constatação
+            repetida na região: profissionais com formação longa e uma presença
+            que comunica muito abaixo do próprio preparo.
           </p>
         </div>
       </section>

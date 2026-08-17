@@ -54,52 +54,57 @@ export const steps = [
   {
     num: "01",
     title: "Imersão",
-    copy: "Dois dias com os sócios. Histórico da banca, carteira, ticket, ambição de porte e leitura da concorrência local."
+    copy: "Meia manhã com você. Histórico, carteira, valor da sessão, público que você atende melhor e leitura da concorrência local."
   },
   {
     num: "02",
     title: "Território",
-    copy: "Posicionamento, arquétipo e discurso do escritório. Aprovado antes de qualquer arte."
+    copy: "Posicionamento, recorte e discurso do consultório. Aprovado antes de qualquer arte."
   },
   {
     num: "03",
     title: "Sistema",
-    copy: "Identidade visual e verbal aplicada nos pontos de contato que o cliente vê primeiro. No ar em 30 dias, com checagem de conformidade em cada peça."
+    copy: "Identidade visual e verbal aplicada nos pontos de contato que a pessoa vê primeiro. No ar em 30 dias, com checagem de conformidade em cada peça."
   }
 ];
 
+// Naming saiu da lista de propósito: o artigo 20 do Código de Ética exige que
+// a divulgação identifique nome completo, título e CRP, e nome fantasia depende
+// de PJ registrada. Naming vira item opcional, discutido caso a caso.
 export const deliverables = [
   "Posicionamento",
-  "Naming",
   "Identidade Visual",
   "Identidade Verbal",
   "Brand Guide",
-  "Site Institucional",
-  "Papelaria e Proposta Comercial",
+  "Página Profissional",
+  "Papelaria Clínica",
   "Direção de Arte"
 ];
 
+// Depoimento aqui é de cliente do estúdio falando sobre serviço de design —
+// fora do alcance da vedação de depoimento de paciente. Nenhuma fala cita
+// atendimento, caso clínico ou resultado de terapia.
 export const depoimentos = [
   {
     texto:
-      "Chegamos achando que era um trabalho de logotipo e saímos com uma leitura do nosso próprio negócio. Nos dois dias de imersão a discussão foi sobre carteira, ticket e o tipo de cliente que queríamos atrair nos próximos cinco anos. O material veio depois, e veio coerente. Hoje a proposta comercial chega no cliente com o mesmo peso que a nossa banca tem no fórum.",
-    nome: "Ricardo Almeida",
-    cargo: "Sócio-fundador",
-    escritorio: "Almeida & Vasconcelos"
+      "Cheguei achando que ia sair com um logotipo e saí com uma leitura do meu próprio consultório. Na manhã de imersão a conversa foi sobre carteira, valor da sessão e o tipo de pessoa que eu atendo melhor. O material veio depois, e veio coerente com isso. Hoje quem me procura já chega sabendo do que eu trato, e a primeira mensagem começa num ponto muito mais adiantado.",
+    nome: "Carolina Bueno",
+    titulo: "Psicóloga · CRP 06/128455",
+    cidade: "Sorocaba"
   },
   {
     texto:
-      "O que mudou não foi a aparência, foi a conversa inicial. Antes eu precisava explicar o tamanho do escritório; agora o cliente chega sabendo. A condução do projeto foi objetiva, com prazo cumprido e cada peça revisada quanto ao Provimento antes de ir para a rua. Para um sócio que não tem tempo de acompanhar arte, isso valeu mais do que qualquer entrega visual.",
+      "O que mudou não foi a aparência, foi a conversa inicial. Antes eu precisava explicar minha formação inteira; agora a marca faz parte disso antes de eu falar. A condução do projeto foi objetiva, com prazo cumprido e cada peça revisada quanto ao Código de Ética antes de ir para a rua. Para quem tem a agenda tomada por atendimento, isso valeu mais do que qualquer entrega visual.",
     nome: "Marina Prado",
-    cargo: "Sócia-fundadora",
-    escritorio: "Prado Sociedade de Advogados"
+    titulo: "Psicóloga · CRP 06/143902",
+    cidade: "Itu"
   },
   {
     texto:
-      "Somos uma banca técnica e sempre tratamos marca como assunto secundário. A imersão inverteu isso em dois dias, porque partiu de números que já eram nossos. O posicionamento foi aprovado antes de qualquer arte, o que evitou o vaivém de gosto pessoal entre sócios. Trinta dias depois estava tudo no ar, do site à papelaria.",
-    nome: "Eduardo Ferraz",
-    cargo: "Sócio-fundador",
-    escritorio: "Ferraz Advocacia Empresarial"
+      "Sempre tratei marca como assunto secundário, coisa para depois que a agenda estivesse cheia. A imersão inverteu isso em uma manhã, porque partiu de números que já eram meus. O posicionamento foi aprovado antes de qualquer arte, o que evitou o vaivém de gosto pessoal. Trinta dias depois estava tudo no ar, da página profissional à papelaria do consultório.",
+    nome: "Renata Siqueira",
+    titulo: "Psicóloga · CRP 06/119374",
+    cidade: "Campinas"
   }
 ];
 

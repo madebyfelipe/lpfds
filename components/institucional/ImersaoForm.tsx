@@ -3,9 +3,11 @@
 import { useState } from "react";
 
 // Formulário da imersão. Mantém o comportamento do protótipo: os três
-// campos e a confirmação em texto após o envio.
+// campos e a confirmação em texto após o envio. O campo CRP substituiu
+// "Escritório": confirma registro profissional e sinaliza que o estúdio
+// conhece a regra da categoria.
 export function ImersaoForm() {
-  const [form, setForm] = useState({ nome: "", escritorio: "", whatsapp: "" });
+  const [form, setForm] = useState({ nome: "", crp: "", whatsapp: "" });
   const [enviado, setEnviado] = useState(false);
 
   const set =
@@ -30,11 +32,11 @@ export function ImersaoForm() {
         />
       </label>
       <label className="inst-field">
-        <span className="inst-field__label">Escritório</span>
+        <span className="inst-field__label">CRP</span>
         <input
           type="text"
-          value={form.escritorio}
-          onChange={set("escritorio")}
+          value={form.crp}
+          onChange={set("crp")}
           className="inst-field__input"
         />
       </label>

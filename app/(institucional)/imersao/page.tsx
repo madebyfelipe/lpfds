@@ -6,7 +6,7 @@ import { social } from "@/lib/institucional";
 export const metadata: Metadata = {
   title: "Contato — Made by Felipe",
   description:
-    "Agende a imersão de dois dias: posicionamento, identidade visual e verbal no ar em 30 dias."
+    "Agende a imersão de meio dia: posicionamento, identidade visual e verbal no ar em 30 dias."
 };
 
 export default function ImersaoPage() {
@@ -14,7 +14,7 @@ export default function ImersaoPage() {
     <main>
       <header className="inst-shell" style={{ padding: "128px 40px 96px" }}>
         <p className="inst-manifesto">
-          O cliente decide muito antes da primeira reunião.
+          Quem procura você decide muito antes da primeira mensagem.
         </p>
       </header>
 

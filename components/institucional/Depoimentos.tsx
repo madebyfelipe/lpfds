@@ -22,7 +22,7 @@ export function Depoimentos() {
           <div>
             <p className="inst-quote__name">{depoimento.nome}</p>
             <p className="inst-quote__role">
-              {depoimento.cargo} · {depoimento.escritorio}
+              {depoimento.titulo} · {depoimento.cidade}
             </p>
           </div>
           <div className="inst-quote__nav">
