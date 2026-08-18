@@ -71,10 +71,13 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Tema escuro do hub (ThemeToggle define data-theme="dark" no .hub).
-   Os painéis Bio/Footer já são escuros por natureza — aqui escurecemos
-   as seções claras do topo (hero, produtos, media). */
-.hub[data-theme="dark"] {
+/* Tema escuro do hub. Duas origens: o /hub usa o header padrão do site
+   (InstNav), cujo botão marca `data-inst-theme="dark"` no <html>; o /contato
+   ainda tem o header antigo, cujo ThemeToggle marca `data-theme="dark"` no
+   próprio `.hub`. Os painéis Bio/Footer já são escuros por natureza — aqui
+   escurecemos as seções claras do topo (hero, produtos, media). */
+.hub[data-theme="dark"],
+:root[data-inst-theme="dark"] .hub {
   --bg: #0d0d0d;
   --bg-soft: #111111;
   --text: #f0ece6;

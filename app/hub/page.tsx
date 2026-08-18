@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { HubHeader } from "@/components/hub/HubHeader";
+import { InstNav } from "@/components/institucional/InstNav";
 import { HubHero } from "@/components/hub/HubHero";
 import { HubProducts } from "@/components/hub/HubProducts";
 import { HubMedia } from "@/components/hub/HubMedia";
 import { EbookModal } from "@/components/hub/EbookModal";
 import { HubBio } from "@/components/hub/HubBio";
 import { HubFooter } from "@/components/hub/HubFooter";
+import "../institucional.css";
 import "./hub.css";
 
 export const metadata: Metadata = {
@@ -24,16 +25,21 @@ export const metadata: Metadata = {
 
 export default function HubPage() {
   return (
-    <div className="hub">
-      <HubHeader />
-      <main>
-        <HubBio />
-        <HubProducts />
-        <HubMedia />
-        <HubHero />
-      </main>
-      <HubFooter />
-      <EbookModal />
-    </div>
+    <>
+      {/* Header padrão do site principal. Fica fora do `.hub` porque o wrapper
+          usa `overflow-x: clip` (full-bleed do baralho) e o sticky da nav tem
+          de valer contra a viewport. */}
+      <InstNav />
+      <div className="hub">
+        <main>
+          <HubBio />
+          <HubProducts />
+          <HubMedia />
+          <HubHero />
+        </main>
+        <HubFooter />
+        <EbookModal />
+      </div>
+    </>
   );
 }

@@ -211,6 +211,26 @@ hardcoded `rgba(246,246,246,…)` on a `.inst-dark` surface must become a token
 (`--line-inverse`, `--line-inverse-strong`, `--nav-bg`) or it won't invert. Values sitting
 on `.inst-red` stay hardcoded — the red never inverts.
 
+**Nav (padronizada em todo o site)**: `InstNav` is the single header — home,
+`/projetos`, `/imersao`, `/portfolio/[slug]` **and `/hub`**. The old `HubHeader` was
+deleted; `/hub` imports `institucional.css` alongside `hub.css` and renders `<InstNav />`
+**outside** the `.hub` wrapper (that wrapper has `overflow-x: clip` for the deck's
+full-bleed, which would scope the nav's `position: sticky`). Because the nav's toggle
+writes `data-inst-theme` on `<html>`, `hub.css`'s dark block answers to **both**
+`.hub[data-theme="dark"]` (still set by `/contato`'s own inline header, the last user of
+`components/hub/ThemeToggle.tsx` and of the `.hub-header*` rules) and
+`:root[data-inst-theme="dark"] .hub`.
+
+**Nav no mobile (≤720px)**: the links leave the bar and become a panel opened by a
+burger (`inst-nav__burger`, three bars that cross into an X). `InstNav` is stateful —
+`data-open="true"` on the `<nav>` drives the panel, Esc closes it, and a route change or
+a link click resets it. The theme toggle stays visible in the bar (`inst-nav__end`),
+never inside the panel. On desktop the burger is `display: none` and
+`inst-nav__links { margin-left: auto }` keeps links + toggle flush right — the nav has
+three children now, so `justify-content: space-between` would centre the links.
+`--inst-pad: 24px` at ≤900px is declared on `.inst, .inst-nav, .inst-footer` because the
+nav and footer also render outside `.inst`.
+
 **Clientes**: the prototype's client-logo section was **dropped from the home** at
 Felipe's request. Don't reinstate it.
 
@@ -229,8 +249,9 @@ anchors no longer exist.
 
 **Untouched by this port**: `/contato` and `/portfolio` (the old dark grid, still linked
 from `/hub`'s "Trabalhos" card — `components/Nav.tsx` and `components/Footer.tsx` now
-exist only for it). `/hub` keeps its content; only its desktop footer/deck full-bleed
-padding was fixed (the content used to stretch to 100vw instead of the hub column).
+exist only for it). `/hub` keeps its content and its own body/footer; only its desktop
+footer/deck full-bleed padding was fixed (the content used to stretch to 100vw instead of
+the hub column) and its header was swapped for `InstNav` (see "Nav" above).
 The institutional footer carries a backlink to `/hub`.
 
 ---

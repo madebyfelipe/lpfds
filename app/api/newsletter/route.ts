@@ -43,10 +43,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "invalid_email" }, { status: 400 });
   }
 
+  // `productTitle` e `downloadUrl` vão no payload para o passo "Send Email" do
+  // workflow do Twenty montar o e-mail de entrega sem link hardcoded lá dentro:
+  // trocar o mirror aqui em lib/newsletter.ts basta para os dois caminhos.
   const payload = {
     email: email.trim().toLowerCase(),
     source: typeof source === "string" ? source : "site",
     product: ebook.id,
+    productTitle: ebook.title,
+    downloadUrl: ebook.url,
     submittedAt: new Date().toISOString()
   };
 

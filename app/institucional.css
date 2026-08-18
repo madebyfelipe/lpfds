@@ -192,8 +192,7 @@
   z-index: 50;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  gap: 28px;
   padding: 18px var(--inst-pad);
   background: var(--nav-bg);
   border-bottom: 1px solid var(--gray-200);
@@ -206,10 +205,19 @@
   color: var(--black);
 }
 
+/* `margin-left: auto` empurra links + ações para a direita como um bloco só
+   (a nav tem três filhos; `space-between` centralizaria os links). */
 .inst-nav__links {
+  margin-left: auto;
   display: flex;
   gap: 28px;
   align-items: center;
+}
+
+.inst-nav__end {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .inst-nav__link {
@@ -223,6 +231,56 @@
 .inst-nav__link:hover,
 .inst-nav__link[aria-current="page"] {
   color: var(--red);
+}
+
+/* Burguer — só aparece no mobile (ver media query no fim do arquivo). */
+.inst-nav__burger {
+  display: none;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--gray-200);
+  background: transparent;
+  color: var(--black);
+  cursor: pointer;
+  transition: border-color 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.inst-nav__burger:hover {
+  border-color: var(--red);
+}
+
+.inst-nav__burger-bar {
+  width: 14px;
+  height: 1.5px;
+  background: currentColor;
+  transition:
+    transform 220ms cubic-bezier(0.2, 0, 0, 1),
+    opacity 140ms linear,
+    background-color 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.inst-nav__burger:hover .inst-nav__burger-bar {
+  background: var(--red);
+}
+
+/* Aberto: as barras viram um X. */
+.inst-nav[data-open="true"] .inst-nav__burger-bar:first-child {
+  transform: translateY(5.5px) rotate(45deg);
+}
+
+.inst-nav[data-open="true"] .inst-nav__burger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.inst-nav[data-open="true"] .inst-nav__burger-bar:last-child {
+  transform: translateY(-5.5px) rotate(-45deg);
 }
 
 /* Botão claro/escuro — mesmo desenho do /hub, nos tokens daqui. */
@@ -810,7 +868,11 @@
    -------------------------------------------------------------------------- */
 
 @media (max-width: 900px) {
-  .inst {
+  /* A nav e o rodapé também aparecem fora do `.inst` (páginas de case e /hub),
+     então precisam do padding reduzido por conta própria. */
+  .inst,
+  .inst-nav,
+  .inst-footer {
     --inst-pad: 24px;
   }
 
@@ -848,16 +910,62 @@
 
 }
 
-@media (max-width: 600px) {
+/* Mobile: os links saem da barra e viram um painel aberto pelo burguer. */
+@media (max-width: 720px) {
   .inst-nav {
-    flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
+  }
+
+  .inst-nav__burger {
+    display: flex;
   }
 
   .inst-nav__links {
-    gap: 20px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 4px var(--inst-pad) 16px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--gray-200);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition:
+      opacity 200ms cubic-bezier(0.2, 0, 0, 1),
+      transform 200ms cubic-bezier(0.2, 0, 0, 1),
+      visibility 0s linear 200ms;
   }
 
+  .inst-nav[data-open="true"] .inst-nav__links {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    transition:
+      opacity 200ms cubic-bezier(0.2, 0, 0, 1),
+      transform 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .inst-nav__link {
+    padding: 16px 0;
+    border-top: 1px solid var(--gray-200);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inst-nav__links,
+  .inst-nav__burger-bar {
+    transition-duration: 0s;
+  }
+}
+
+@media (max-width: 600px) {
   .inst-quote__foot {
     flex-direction: column;
     align-items: flex-start;
