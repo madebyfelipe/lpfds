@@ -140,7 +140,7 @@ export default function ContatoPage() {
         <span className="contato-footer__copy">
           © {new Date().getFullYear()} Made by Felipe
         </span>
-        <Link href="/portfolio" className="contato-footer__link">
+        <Link href="/projetos" className="contato-footer__link">
           Ver portfólio completo →
         </Link>
       </footer>

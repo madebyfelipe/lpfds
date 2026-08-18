@@ -89,6 +89,21 @@
   --panel-soft: #202020;
 }
 
+/* O /hub e o /contato vivem no layout raiz, cujo body vem do globals.css e é
+   escuro. Como a coluna do hub tem largura maxima (720/860px), esse escuro
+   aparecia como moldura em volta do conteudo. Pinta o body junto com a coluna
+   — o seletor fica preso ao `.hub` porque o hub.css continua carregado depois
+   de uma navegacao client-side para fora do hub. */
+body:has(.hub) {
+  background: #f6f6f6;
+  transition: background-color 0.3s ease;
+}
+
+:root[data-inst-theme="dark"] body:has(.hub),
+body:has(.hub[data-theme="dark"]) {
+  background: #0d0d0d;
+}
+
 /* Base styles inside hub */
 .hub * {
   box-sizing: border-box;
