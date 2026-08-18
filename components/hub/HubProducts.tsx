@@ -25,7 +25,7 @@ const products = [
     title: "Trabalhos",
     desc: "Cases selecionados de branding e posicionamento.",
     cta: "Ver Cases",
-    href: "/portfolio",
+    href: "/projetos",
     bgColor: "#fecb4d",
     textColor: "#3b2901",
     invert: false,

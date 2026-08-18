@@ -9,8 +9,8 @@ export const EMAIL = "contato@madebyfelipe.com.br";
 export const social = [
   {
     label: "Instagram",
-    href: "https://instagram.com/madebyfelipe",
-    display: "Instagram: @madebyfelipe"
+    href: "https://instagram.com/madebyfelipe.com.br",
+    display: "Instagram: @madebyfelipe.com.br"
   },
   {
     label: "LinkedIn",
