@@ -341,6 +341,14 @@
   transition: background-color 0.28s ease, color 0.28s ease, transform 0.28s ease;
 }
 
+/* O card do e-book usa <button> (abre o modal) no lugar do <a> do Link. */
+button.hub-card-ref__pill-btn,
+button.hub-card-ref__action-btn {
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
 .hub-card-ref__pill-btn:hover {
   background: var(--accent);
   transform: translateY(-1px);
@@ -457,45 +465,6 @@
   margin: 0 0 8px;
 }
 
-.hub-media__newsletter-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.hub-media__input {
-  background: #fbfbfb;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-pill);
-  padding: 12px 18px;
-  font-size: 0.92rem;
-  color: var(--text);
-  outline: none;
-  width: 100%;
-  transition: border-color 0.28s ease, box-shadow 0.28s ease;
-}
-
-.hub-media__input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(212, 43, 43, 0.1);
-}
-
-.hub-media__input:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.hub-media__newsletter-feedback {
-  font-size: 0.85rem;
-  line-height: 1.4;
-  margin: 10px 0 0;
-  color: var(--muted);
-}
-
-.hub-media__newsletter-feedback[role="alert"] {
-  color: var(--accent);
-}
-
 .hub-media__submit-btn {
   background: var(--accent);
   color: #fff;
@@ -513,27 +482,6 @@
 }
 
 .hub-media__submit-btn:hover {
-  background: var(--accent-dark);
-  transform: translateY(-1px);
-}
-
-/* Aparece só depois do opt-in — é a entrega do e-book. */
-.hub-media__download-btn {
-  background: var(--accent);
-  color: #fff;
-  border-radius: var(--radius-pill);
-  font-size: 0.92rem;
-  font-weight: 700;
-  padding: 12px 24px;
-  text-decoration: none;
-  transition: all 0.28s ease;
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hub-media__download-btn:hover {
   background: var(--accent-dark);
   transform: translateY(-1px);
 }
@@ -585,6 +533,181 @@
   font-size: 0.88rem;
   color: var(--muted);
   margin: 4px 0 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Modal do e-book — portão de newsletter. É a única superfície
+   com formulário: o card do deck e a seção Media apenas o abrem.
+   ═══════════════════════════════════════════════════════ */
+.hub-ebook {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(10, 10, 10, 0.62);
+  backdrop-filter: blur(4px);
+  animation: hub-ebook-fade 0.24s ease;
+}
+
+@keyframes hub-ebook-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hub-ebook__card {
+  position: relative;
+  width: min(460px, 100%);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.28);
+  animation: hub-ebook-rise 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes hub-ebook-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hub-ebook__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--panel-soft);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.28s ease, color 0.28s ease;
+}
+
+.hub-ebook__close:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.hub-ebook__kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hub-ebook__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+  padding-right: 28px;
+}
+
+.hub-ebook__copy {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
+.hub-ebook__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.hub-ebook__input {
+  background: #fbfbfb;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  padding: 12px 18px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: var(--text);
+  outline: none;
+  width: 100%;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.hub-ebook__input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(212, 43, 43, 0.1);
+}
+
+.hub-ebook__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hub-ebook__submit,
+.hub-ebook__download {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 12px 24px;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.28s ease, transform 0.28s ease;
+}
+
+.hub-ebook__submit:hover,
+.hub-ebook__download:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.hub-ebook__submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  transform: none;
+}
+
+.hub-ebook__feedback {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 0;
+}
+
+.hub-ebook__feedback[role="alert"] {
+  color: var(--accent);
+}
+
+.hub-ebook__note {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--soft);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-ebook,
+  .hub-ebook__card {
+    animation: none;
+  }
 }
 
 /* Bio Section - DARK THEME (painel escuro fixo, primeira dobra do hub) */
@@ -797,16 +920,6 @@
 
   .hub-media__newsletter {
     padding: 28px;
-  }
-
-  .hub-media__newsletter-form {
-    flex-direction: row;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .hub-media__input {
-    flex: 1;
   }
 
   .hub-media__submit-btn {

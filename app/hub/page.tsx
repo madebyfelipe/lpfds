@@ -3,6 +3,7 @@ import { HubHeader } from "@/components/hub/HubHeader";
 import { HubHero } from "@/components/hub/HubHero";
 import { HubProducts } from "@/components/hub/HubProducts";
 import { HubMedia } from "@/components/hub/HubMedia";
+import { EbookModal } from "@/components/hub/EbookModal";
 import { HubBio } from "@/components/hub/HubBio";
 import { HubFooter } from "@/components/hub/HubFooter";
 import "./hub.css";
@@ -32,6 +33,7 @@ export default function HubPage() {
         <HubHero />
       </main>
       <HubFooter />
+      <EbookModal />
     </div>
   );
 }

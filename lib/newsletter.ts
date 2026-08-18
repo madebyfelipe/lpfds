@@ -14,7 +14,7 @@ export const ebook = {
   /** Identificador enviado ao CRM. */
   id: "ebook-marca-psicologos",
   /** Mirror do arquivo — só é revelado depois do opt-in. */
-  url: "https://file.madebyfelipe.agency/s/ebook"
+  url: "https://file.madebyfelipe.agency/api/shares/ebook/files/05379551-d4cf-4f87-af58-92e533912124"
 } as const;
 
 /** De onde veio o cadastro — vira o campo `source` no Twenty. */

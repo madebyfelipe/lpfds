@@ -242,14 +242,27 @@ marca para psicólogos** (card `/E-BOOK`, `href="#ebook"` → seção `HubMedia`
 é **gated**: só quem assina a newsletter recebe o link.
 
 - **`lib/newsletter.ts`** — fonte única: `ebook` (título, `id` mandado ao CRM e a URL do
-  mirror `https://file.madebyfelipe.agency/s/ebook`) e o helper cliente `subscribe()`.
-  A URL do mirror **nunca** é renderizada antes do opt-in; ela chega na resposta da API.
+  mirror, hoje `file.madebyfelipe.agency/api/shares/ebook/files/…`) e o helper cliente
+  `subscribe()`. A URL do mirror **nunca** é renderizada antes do opt-in — ela chega na
+  resposta da API, então não vaza no HTML do `/hub`.
 - **`app/api/newsletter/route.ts`** — rota de servidor (a única do projeto). Valida o
   e-mail e dispara em paralelo para **Twenty** (`crm.madebyfelipe.agency/webhooks/workflows/…`)
   e **Make** (automação antiga de e-mail). Basta **um** dos dois aceitar para o cadastro
   valer e o `download` voltar. Motivo: o webhook do Twenty responde
   `400 INVALID_WORKFLOW_STATUS` enquanto o workflow não estiver **ativado** no workspace —
-  sem esse fallback, um workflow desativado derrubaria o e-book inteiro.
+  sem esse fallback, um workflow desativado derrubaria o e-book inteiro. O workflow no
+  Twenty é o `email_listing_hub`; quando ativo, responde
+  `{"success":true,"workflowRunId":…}`. O trigger de webhook do Twenty **não** tem
+  "escuta" como o Make: o schema se define à mão em *Define expected body* (colar o JSON
+  de exemplo e salvar), e os campos viram `{{trigger.body.email}}` nos passos seguintes.
+- **`components/hub/EbookModal.tsx`** — o portão é um **modal**, e é a única superfície do
+  hub com formulário. O card `/E-BOOK` do deck e o botão da seção `HubMedia` só chamam
+  `openEbookModal()` (evento `mbf:ebook-open` no `window`, para não passar estado entre
+  componentes irmãos). `/hub#ebook` também abre o modal, para os links externos antigos.
+  Quem já assinou tem o link guardado em `localStorage["mbf-ebook-download"]` e reabre
+  direto no download.
+- O card do e-book é o único do deck com `href: null` — ele renderiza `<button>` no lugar
+  do `<Link>`, por isso o reset `button.hub-card-ref__pill-btn` no `hub.css`.
 - Os componentes (`HubMedia`, `EmailPopup`) não conhecem mais nenhuma URL de webhook —
   chamam `subscribe(email, source)`. Ao adicionar um novo formulário, use o mesmo helper e
   registre a origem em `NewsletterSource`.

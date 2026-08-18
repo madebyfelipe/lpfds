@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { useCardDeck } from "@/hooks/useCardDeck";
 import { ebook } from "@/lib/newsletter";
+import { openEbookModal } from "./EbookModal";
 
 const products = [
   {
@@ -12,7 +13,8 @@ const products = [
     title: ebook.short,
     desc: "Construção de marca para psicólogos. Grátis pra quem entra na newsletter.",
     cta: "Baixar grátis",
-    href: "#ebook",
+    // Não navega: abre o modal de newsletter, que é o portão do download.
+    href: null,
     bgColor: "#d4eb95",
     textColor: "#1b350f",
     invert: false,
@@ -53,6 +55,21 @@ const products = [
   },
 ];
 
+const arrowIcon = (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    aria-hidden="true"
+  >
+    <line x1="7" y1="17" x2="17" y2="7" />
+    <polyline points="7 7 17 7 17 17" />
+  </svg>
+);
+
 export function HubProducts() {
   const gridRef = useRef<HTMLDivElement>(null);
   const [spread, setSpread] = useState(false);
@@ -62,7 +79,7 @@ export function HubProducts() {
     <section className="hub-products">
       <div className="hub-products__grid" ref={gridRef}>
         {products.map((item) => {
-          const isExternal = item.href.startsWith("http");
+          const isExternal = item.href?.startsWith("http") ?? false;
           const externalProps = isExternal
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {};
@@ -74,38 +91,48 @@ export function HubProducts() {
           >
             <div className="hub-card-ref__header">
               <span className="hub-card-ref__kicker">{item.kicker}</span>
-              <Link
-                href={item.href}
-                className="hub-card-ref__action-btn"
-                aria-label={`Acessar ${item.title}`}
-                {...externalProps}
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  aria-hidden="true"
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="hub-card-ref__action-btn"
+                  aria-label={`Acessar ${item.title}`}
+                  {...externalProps}
                 >
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
-              </Link>
+                  {arrowIcon}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className="hub-card-ref__action-btn"
+                  aria-label={`Acessar ${item.title}`}
+                  onClick={openEbookModal}
+                >
+                  {arrowIcon}
+                </button>
+              )}
             </div>
 
             <h3 className="hub-card-ref__title">{item.title}</h3>
             <p className="hub-card-ref__desc">{item.desc}</p>
 
             <div className="hub-card-ref__bottom">
-              <Link
-                href={item.href}
-                className="hub-card-ref__pill-btn"
-                {...externalProps}
-              >
-                {item.cta}
-              </Link>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="hub-card-ref__pill-btn"
+                  {...externalProps}
+                >
+                  {item.cta}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className="hub-card-ref__pill-btn"
+                  onClick={openEbookModal}
+                >
+                  {item.cta}
+                </button>
+              )}
             </div>
           </article>
           );
