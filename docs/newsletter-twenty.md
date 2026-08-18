@@ -32,6 +32,9 @@ abaixo e **Save**. É o Save que cria as variáveis usadas nos passos seguintes.
 ```json
 {
   "email": "voce@email.com",
+  "name": "Maria Silva",
+  "firstName": "Maria",
+  "lastName": "Silva",
   "source": "hub-ebook",
   "product": "ebook-marca-psicologos",
   "productTitle": "E-book de construção de marca para psicólogos",
@@ -45,7 +48,12 @@ Este é exatamente o corpo que a rota manda — a fonte dele é `lib/newsletter.
 de propósito**: assim o e-mail não carrega URL hardcoded e trocar o mirror em
 `lib/newsletter.ts` conserta os dois caminhos de uma vez.
 
-Campos disponíveis nos passos: `{{trigger.body.email}}`, `{{trigger.body.source}}`,
+O nome chega **partido em `firstName` / `lastName`** (além do `name` inteiro) porque o
+objeto *People* do Twenty tem os dois campos separados — assim o Upsert mapeia direto,
+sem precisar quebrar string dentro do CRM. Quem tem nome único vem com `lastName: ""`.
+
+Campos disponíveis nos passos: `{{trigger.body.email}}`, `{{trigger.body.name}}`,
+`{{trigger.body.firstName}}`, `{{trigger.body.lastName}}`, `{{trigger.body.source}}`,
 `{{trigger.body.product}}`, `{{trigger.body.productTitle}}`,
 `{{trigger.body.downloadUrl}}`, `{{trigger.body.submittedAt}}`.
 
@@ -57,6 +65,8 @@ duas vezes não pode virar dois registros).
 | Campo | Valor |
 |---|---|
 | Emails → Primary Email | `{{trigger.body.email}}` |
+| Name → First Name | `{{trigger.body.firstName}}` |
+| Name → Last Name | `{{trigger.body.lastName}}` |
 | (campo de origem, se existir) | `{{trigger.body.source}}` |
 
 ## 3. Passo 2 — mandar o e-book
@@ -69,7 +79,7 @@ duas vezes não pode virar dois registros).
 - **Body:**
 
 ```
-Oi!
+Oi, {{trigger.body.firstName}}!
 
 Aqui está o material que você pediu:
 
@@ -98,7 +108,7 @@ Com o workflow ativo, dispare do terminal:
 ```bash
 curl -X POST "https://crm.madebyfelipe.agency/webhooks/workflows/a14da497-8251-4656-9f2b-29817711eb70/101a12f0-aa21-4f20-b0f0-51b3ba7ca398" \
   -H "Content-Type: application/json" \
-  -d '{"email":"SEU-EMAIL@exemplo.com","source":"hub-ebook","product":"ebook-marca-psicologos","productTitle":"E-book de construção de marca para psicólogos","downloadUrl":"https://file.madebyfelipe.agency/api/shares/ebook/files/05379551-d4cf-4f87-af58-92e533912124","submittedAt":"2026-08-17T20:00:00.000Z"}'
+  -d '{"email":"SEU-EMAIL@exemplo.com","name":"Maria Silva","firstName":"Maria","lastName":"Silva","source":"hub-ebook","product":"ebook-marca-psicologos","productTitle":"E-book de construção de marca para psicólogos","downloadUrl":"https://file.madebyfelipe.agency/api/shares/ebook/files/05379551-d4cf-4f87-af58-92e533912124","submittedAt":"2026-08-17T20:00:00.000Z"}'
 ```
 
 Use o seu próprio e-mail no `to` do teste. Depois abra o **run** do workflow no
@@ -110,7 +120,7 @@ Para testar o caminho inteiro (site → rota → Twenty + Make):
 ```bash
 curl -X POST http://localhost:3000/api/newsletter \
   -H "Content-Type: application/json" \
-  -d '{"email":"SEU-EMAIL@exemplo.com","source":"hub-ebook"}'
+  -d '{"email":"SEU-EMAIL@exemplo.com","name":"Maria Silva","source":"hub-ebook"}'
 ```
 
 Resposta boa: `{"ok":true,"download":"…","delivered":{"twenty":true,"make":true}}`.

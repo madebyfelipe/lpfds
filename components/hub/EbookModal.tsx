@@ -18,6 +18,7 @@ export function openEbookModal() {
 
 export function EbookModal() {
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [download, setDownload] = useState<string | null>(null);
@@ -84,10 +85,11 @@ export function EbookModal() {
     setStatus("sending");
 
     try {
-      const result = await subscribe(email, "hub-ebook");
+      const result = await subscribe({ name, email, source: "hub-ebook" });
       if (!result.ok || !result.download) throw new Error("cadastro recusado");
       setDownload(result.download);
       setStatus("sent");
+      setName("");
       setEmail("");
       try {
         localStorage.setItem(STORAGE_KEY, result.download);
@@ -152,16 +154,31 @@ export function EbookModal() {
               {ebook.title}
             </h2>
             <p className="hub-ebook__copy">
-              Deixe seu e-mail para entrar na newsletter e o download libera na
-              hora.
+              Deixe seu nome e e-mail para entrar na newsletter — o download libera
+              na hora e o e-book também vai para a sua caixa de entrada.
             </p>
             <form className="hub-ebook__form" onSubmit={handleSubmit}>
               <input
                 ref={inputRef}
+                type="text"
+                className="hub-ebook__input"
+                placeholder="Seu nome"
+                required
+                autoComplete="name"
+                aria-label="Seu nome"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (status === "error") setStatus("idle");
+                }}
+                disabled={status === "sending"}
+              />
+              <input
                 type="email"
                 className="hub-ebook__input"
                 placeholder="voce@email.com"
                 required
+                autoComplete="email"
                 aria-label="Seu e-mail"
                 value={email}
                 onChange={(e) => {

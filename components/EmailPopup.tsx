@@ -57,7 +57,7 @@ export function EmailPopup() {
     setStatus("sending");
 
     try {
-      const result = await subscribe(email, "landing-manual-popup");
+      const result = await subscribe({ email, source: "landing-manual-popup" });
       if (!result.ok) throw new Error("cadastro recusado");
       setStatus("sent");
       setEmail("");

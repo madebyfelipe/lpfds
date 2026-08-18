@@ -23,6 +23,13 @@ export type NewsletterSource =
   | "hub-newsletter"
   | "landing-manual-popup";
 
+export type SubscribeInput = {
+  email: string;
+  /** Opcional: o popup da landing só pede e-mail. */
+  name?: string;
+  source: NewsletterSource;
+};
+
 export type SubscribeResult = {
   ok: boolean;
   /** URL do e-book — presente apenas quando o cadastro foi aceito. */
@@ -33,14 +40,11 @@ export type SubscribeResult = {
  * Envia o cadastro para /api/newsletter (rota de servidor: mantém as URLs dos
  * webhooks fora do bundle e evita depender do CORS de cada provedor).
  */
-export async function subscribe(
-  email: string,
-  source: NewsletterSource
-): Promise<SubscribeResult> {
+export async function subscribe(input: SubscribeInput): Promise<SubscribeResult> {
   const res = await fetch("/api/newsletter", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, source })
+    body: JSON.stringify(input)
   });
 
   if (!res.ok) throw new Error(`Newsletter respondeu ${res.status}`);

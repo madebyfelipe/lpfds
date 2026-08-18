@@ -17,6 +17,7 @@ const MAKE_WEBHOOK = "https://hook.us2.make.com/1fnsymphi9b64q1tcq8we9ap7xxgxcv7
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const TIMEOUT_MS = 10000;
+const MAX_NAME = 120;
 
 async function post(url: string, payload: unknown) {
   const res = await fetch(url, {
@@ -31,10 +32,11 @@ async function post(url: string, payload: unknown) {
 
 export async function POST(request: Request) {
   let email: unknown;
+  let name: unknown;
   let source: unknown;
 
   try {
-    ({ email, source } = await request.json());
+    ({ email, name, source } = await request.json());
   } catch {
     return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
   }
@@ -43,11 +45,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "invalid_email" }, { status: 400 });
   }
 
+  // O nome vem do modal do e-book; o popup da landing não pede. Fica opcional
+  // aqui para os dois caminhos usarem a mesma rota.
+  const fullName = typeof name === "string" ? name.trim().slice(0, MAX_NAME) : "";
+  const [firstName, ...rest] = fullName.split(/\s+/).filter(Boolean);
+
   // `productTitle` e `downloadUrl` vão no payload para o passo "Send Email" do
   // workflow do Twenty montar o e-mail de entrega sem link hardcoded lá dentro:
   // trocar o mirror aqui em lib/newsletter.ts basta para os dois caminhos.
   const payload = {
     email: email.trim().toLowerCase(),
+    // `firstName`/`lastName` vão separados porque o objeto People do Twenty tem
+    // os dois campos — assim o Upsert mapeia direto, sem partir string no CRM.
+    name: fullName,
+    firstName: firstName ?? "",
+    lastName: rest.join(" "),
     source: typeof source === "string" ? source : "site",
     product: ebook.id,
     productTitle: ebook.title,

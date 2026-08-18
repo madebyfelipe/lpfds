@@ -284,7 +284,10 @@ marca para psicólogos** (card `/E-BOOK`, `href="#ebook"` → seção `HubMedia`
   direto no download.
 - O card do e-book é o único do deck com `href: null` — ele renderiza `<button>` no lugar
   do `<Link>`, por isso o reset `button.hub-card-ref__pill-btn` no `hub.css`.
+- O modal pede **nome e e-mail**; a rota parte o nome em `firstName`/`lastName` no
+  payload (o *People* do Twenty tem os dois campos separados). O nome é opcional na rota
+  porque o `EmailPopup` da landing só pede e-mail.
 - Os componentes (`HubMedia`, `EmailPopup`) não conhecem mais nenhuma URL de webhook —
-  chamam `subscribe(email, source)`. Ao adicionar um novo formulário, use o mesmo helper e
+  chamam `subscribe({ email, name, source })`. Ao adicionar um novo formulário, use o mesmo helper e
   registre a origem em `NewsletterSource`.
 - `EmailPopup` não está montado em nenhuma página hoje (código dormente), mas já usa a rota.
