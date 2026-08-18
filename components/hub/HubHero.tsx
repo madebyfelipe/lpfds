@@ -3,26 +3,26 @@ import { ScheduleLink } from "@/components/ScheduleLink";
 export function HubHero() {
   return (
     <section className="hub-hero">
-      <span className="hub-hero__kicker">/SOBRE</span>
+      <span className="hub-hero__kicker">/A IMERSÃO</span>
       <h1 className="hub-hero__title">
-        O design é só
+        Meio dia com você.
         <br />
-        <em>o começo.</em>
+        <em>Trinta dias no ar.</em>
       </h1>
       <div className="hub-hero__subtitle">
         <p>
-          Eu junto estratégia, branding, conteúdo e experiência digital numa coisa só — pra que sua marca diga a mesma coisa em cada ponto de contato.
+          Uma manhã para ler o consultório: histórico, carteira, valor da sessão, o público que você atende melhor e a concorrência da sua região.
         </p>
         <p>
-          Da identidade ao site, do conteúdo às campanhas: uma marca só é levada a sério quando comunica a mesma mensagem em todo lugar. Eu cuido pra que isso aconteça.
+          Depois vem o território — posicionamento, recorte e discurso —, aprovado antes de qualquer arte. E o sistema aplicado nos pontos de contato que a pessoa vê primeiro, com checagem de conformidade em cada peça.
         </p>
         <p>
-          É isso que eu construo.
+          Trinta dias do briefing ao ar. Começa com quinze minutos de conversa.
         </p>
       </div>
       <div className="hub-hero__actions">
         <ScheduleLink className="button button--primary hub-hero__cta">
-          Começar um projeto
+          Agendar 15 minutos
         </ScheduleLink>
       </div>
     </section>

@@ -186,6 +186,9 @@ agenda, and the `/imersao` form asks **Nome · CRP · WhatsApp** (CRP replaced
 "Escritório"). `Naming` was removed from `deliverables` on purpose: artigo 20 requires
 the divulgação to carry nome completo, título and CRP, and nome fantasia depends on a
 registered PJ — naming is an optional, case-by-case item, not a listed deliverable.
+O `/hub` fala a mesma oferta: a primeira dobra (`HubBio`) abre com "Marca de consultório
+em meio dia de imersão" e o bloco de fechamento (`HubHero`) descreve imersão → território
+→ sistema. Não voltar essas duas para a copy genérica de branding.
 `depoimentos` are studio clients talking about the *design service*; never write one
 that mentions atendimento, caso clínico or resultado de terapia. Same rule for the hero
 strip: no image suggesting a session, a patient, or a couch. The copy doc's
