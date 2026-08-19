@@ -4,6 +4,7 @@ const links = [
   { label: "Instagram", href: "https://www.instagram.com/madebyfelipe.com.br" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/madebyfelipe/" },
   { label: "Behance", href: "https://www.behance.net/madebyfelipe" },
+  { label: "TikTok", href: "https://www.tiktok.com/@madebyfelipe" },
   { label: "WhatsApp", href: "https://wa.me/5515992835226" },
   { label: "E-mail", href: "mailto:alo@madebyfelipe.com.br" },
 ];

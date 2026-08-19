@@ -7,7 +7,7 @@ import "../hub/hub.css";
 export const metadata: Metadata = {
   title: "Contato | Made by Felipe",
   description:
-    "Agende uma conversa, mande uma mensagem ou siga no Instagram. Vamos construir sua presença digital juntos.",
+    "Agende uma conversa, mande uma mensagem ou siga no Instagram e no TikTok. Vamos construir sua presença digital juntos.",
   robots: { index: false, follow: false }
 };
 
@@ -15,6 +15,7 @@ const WHATSAPP_NUMBER = "5515992835226";
 const CALCOM_URL = "https://cal.com/madebyfelipe";
 const EMAIL = "alo@madebyfelipe.com.br";
 const INSTAGRAM_HANDLE = "madebyfelipe.com.br";
+const TIKTOK_HANDLE = "madebyfelipe";
 
 export default function ContatoPage() {
   return (
@@ -129,6 +130,21 @@ export default function ContatoPage() {
             <span className="contato-cta__body">
               <span className="contato-cta__label">Instagram</span>
               <span className="contato-cta__sub">@{INSTAGRAM_HANDLE}</span>
+            </span>
+            <span className="contato-cta__arrow">→</span>
+          </a>
+
+          {/* 5. TikTok */}
+          <a
+            href={`https://www.tiktok.com/@${TIKTOK_HANDLE}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="contato-cta"
+          >
+            <span className="contato-cta__icon">🎵</span>
+            <span className="contato-cta__body">
+              <span className="contato-cta__label">TikTok</span>
+              <span className="contato-cta__sub">@{TIKTOK_HANDLE}</span>
             </span>
             <span className="contato-cta__arrow">→</span>
           </a>

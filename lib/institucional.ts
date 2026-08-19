@@ -21,6 +21,11 @@ export const social = [
     label: "Behance",
     href: "https://behance.net/madebyfelipe",
     display: "Behance: behance.net/madebyfelipe"
+  },
+  {
+    label: "TikTok",
+    href: "https://www.tiktok.com/@madebyfelipe",
+    display: "TikTok: @madebyfelipe"
   }
 ];
 
