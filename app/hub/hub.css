@@ -440,15 +440,16 @@ button.hub-card-ref__action-btn {
   padding: 8px 18px;
 }
 
-/* TikTok — embed oficial de perfil (creator embed). O conteudo vem num iframe
-   servido pelo TikTok: nao da para estilizar por dentro, entao a moldura abaixo
-   e o que integra o widget ao hub. O script so entra quando a secao se aproxima
-   da tela (ver components/hub/HubTikTok.tsx). */
-.hub-tiktok {
+/* Redes — TikTok (feed ao vivo, creator embed oficial) e Instagram (posts
+   escolhidos a mao: la nao existe embed de feed). Os dois chegam num iframe
+   servido por eles, sem estilo por dentro; as molduras abaixo sao o que
+   integra os widgets ao hub. Nenhum dos scripts e baixado antes da secao
+   chegar perto da tela — ver components/hub/HubSocial.tsx. */
+.hub-social {
   padding: 20px var(--pad-x);
 }
 
-.hub-tiktok__head {
+.hub-social__head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -456,7 +457,7 @@ button.hub-card-ref__action-btn {
   margin-bottom: 12px;
 }
 
-.hub-tiktok__kicker {
+.hub-social__kicker {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.24em;
@@ -464,7 +465,7 @@ button.hub-card-ref__action-btn {
   color: var(--accent);
 }
 
-.hub-tiktok__handle {
+.hub-social__link {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--muted);
@@ -472,25 +473,71 @@ button.hub-card-ref__action-btn {
   transition: color 0.2s ease;
 }
 
-.hub-tiktok__handle:hover {
+.hub-social__link:hover {
   color: var(--text);
 }
 
-.hub-tiktok__frame {
+.hub-social__frame {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: 12px;
   overflow: hidden;
-  /* Reserva a altura do widget para o resto da pagina nao pular quando ele monta. */
-  min-height: 600px;
+  /* So reserva espaco enquanto o widget nao monta: a altura final quem decide
+     e o TikTok, e o valor reservado sobrava como vazio embaixo do embed. */
+  min-height: 420px;
 }
 
-/* O embed.js escreve estilo inline no blockquote e no iframe que ele cria. */
-.hub-tiktok__frame .tiktok-embed,
-.hub-tiktok__frame iframe {
+.hub-social__frame--ready {
+  min-height: 0;
+}
+
+/* Faixa do Instagram. O embed deles tem largura minima propria (326px), que
+   nao cabe em tres colunas na coluna do hub nem em uma coluna no celular —
+   dai a rolagem horizontal, que absorve a largura fixa sem estourar a pagina. */
+.hub-social__strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  /* Full-bleed dentro da coluna: o primeiro card alinha com o resto do hub e
+     o ultimo pode rolar ate o fim sem colar na borda. */
+  margin-inline: calc(var(--pad-x) * -1);
+  padding: 2px var(--pad-x);
+  scrollbar-width: none;
+}
+
+.hub-social__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.hub-social__post {
+  flex: 0 0 auto;
+  width: 326px;
+  scroll-snap-align: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 8px;
+  overflow: hidden;
+  min-height: 480px;
+}
+
+.hub-social__strip--ready .hub-social__post {
+  min-height: 0;
+}
+
+/* Os dois widgets chegam com largura minima inline (288px no TikTok, 326px no
+   Instagram) e margem propria. Dentro da coluna do hub isso estourava a
+   lateral no celular. */
+.hub-social__frame .tiktok-embed,
+.hub-social__frame iframe,
+.hub-social__post .instagram-media,
+.hub-social__post iframe {
   width: 100% !important;
   max-width: 100% !important;
+  min-width: 0 !important;
   margin: 0 !important;
   border-radius: var(--radius-md);
 }
@@ -985,9 +1032,8 @@ button.hub-card-ref__action-btn {
     cursor: pointer; /* dá o toque de "escolher a carta" */
   }
 
-  .hub-tiktok__frame {
+  .hub-social__frame {
     padding: 16px;
-    min-height: 740px;
   }
 
   /* Media section: 2 columns (Newsletter and Coupon) */
