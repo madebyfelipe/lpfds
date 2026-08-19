@@ -24,18 +24,25 @@ const INSTAGRAM_POSTS = [
   "https://www.instagram.com/p/DZDCoidlpdR/"
 ];
 
-// Markup oficial dos dois widgets. Vao por dangerouslySetInnerHTML de proposito:
-// os scripts apagam o <blockquote> e poem um iframe no lugar, entao o React nao
-// pode estar gerenciando esses filhos, ou quebra ao desmontar numa navegacao.
+// Markup oficial dos dois widgets. E injetado imperativamente (innerHTML num
+// ref), nunca por dangerouslySetInnerHTML: o React 19 reaplica esse prop a cada
+// re-render — o objeto {__html} e novo toda vez — e a reaplicacao apaga os
+// iframes que os scripts acabaram de criar no lugar do <blockquote>.
 const TIKTOK_HTML = `
-  <blockquote class="tiktok-embed" cite="${TIKTOK_PROFILE}" data-unique-id="${TIKTOK_HANDLE}" data-embed-from="oembed" data-embed-type="creator" style="max-width:100%;min-width:0;">
+  <blockquote class="tiktok-embed" cite="${TIKTOK_PROFILE}" data-unique-id="${TIKTOK_HANDLE}" data-embed-from="oembed" data-embed-type="creator" style="max-width:100%;min-width:288px;">
     <section><a target="_blank" rel="noopener noreferrer" href="${TIKTOK_PROFILE}">@${TIKTOK_HANDLE}</a></section>
   </blockquote>
 `;
 
 const instagramHtml = (permalink: string) => `
-  <blockquote class="instagram-media" data-instgrm-permalink="${permalink}?utm_source=ig_embed" data-instgrm-version="14" style="background:#fff;border:0;margin:0;max-width:100%;min-width:0;padding:0;width:100%;"></blockquote>
+  <blockquote class="instagram-media" data-instgrm-permalink="${permalink}?utm_source=ig_embed" data-instgrm-version="14" style="background:#fff;border:0;margin:0;max-width:100%;min-width:326px;padding:0;width:100%;"></blockquote>
 `;
+
+/**
+ * O embed.js do TikTok ja terminou de carregar ao menos uma vez nesta sessao.
+ * Fica no modulo de proposito: precisa sobreviver a desmontagem do componente.
+ */
+let tiktokScriptLoaded = false;
 
 /** Vira `true` quando o elemento chega perto da viewport — e nao volta atras. */
 function useNearViewport<T extends HTMLElement>() {
@@ -109,22 +116,44 @@ export function HubSocial() {
   const tiktokReady = useEmbedRendered(tiktokFrame, tiktokNear);
   const instagramReady = useEmbedRendered(instagramStrip, instagramNear);
 
-  // O embed.js do TikTok so varre a pagina uma vez, quando carrega. Numa
-  // navegacao client-side ele ja estaria no documento sem fazer nada — por
-  // isso e removido e reinjetado a cada montagem.
+  // O markup entra antes dos scripts — os dois widgets varrem a pagina atras dos
+  // blockquotes assim que carregam. `childElementCount` segura o StrictMode:
+  // reescrever o markup depois do widget montar apagaria o iframe dele.
+  useEffect(() => {
+    const node = tiktokFrame.current;
+    if (!node || !tiktokNear || node.childElementCount > 0) return;
+    node.innerHTML = TIKTOK_HTML;
+  }, [tiktokNear]);
+
+  useEffect(() => {
+    const node = instagramStrip.current;
+    if (!node || !instagramNear) return;
+    node.querySelectorAll<HTMLElement>(".hub-social__post").forEach((cell, index) => {
+      const permalink = INSTAGRAM_POSTS[index];
+      if (permalink && cell.childElementCount === 0) {
+        cell.innerHTML = instagramHtml(permalink);
+      }
+    });
+  }, [instagramNear]);
+
+  // O embed.js do TikTok so varre a pagina uma vez, quando carrega, e nao expoe
+  // nada para reprocessar — entao numa remontagem ele precisa ser reinjetado.
+  // O guard evita fazer isso enquanto a primeira copia ainda esta carregando
+  // (o StrictMode do dev monta o efeito duas vezes seguidas).
   useEffect(() => {
     if (!tiktokNear) return;
 
-    document.querySelectorAll(`script[src="${TIKTOK_SRC}"]`).forEach((el) => el.remove());
+    const existing = document.querySelector(`script[src="${TIKTOK_SRC}"]`);
+    if (existing && !tiktokScriptLoaded) return;
+    existing?.remove();
 
     const script = document.createElement("script");
     script.src = TIKTOK_SRC;
     script.async = true;
+    script.addEventListener("load", () => {
+      tiktokScriptLoaded = true;
+    });
     document.body.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
   }, [tiktokNear]);
 
   // O do Instagram, ao contrario, expoe `window.instgrm.Embeds.process()` para
@@ -163,7 +192,6 @@ export function HubSocial() {
         <div
           ref={tiktokFrame}
           className={`hub-social__frame${tiktokReady ? " hub-social__frame--ready" : ""}`}
-          dangerouslySetInnerHTML={{ __html: tiktokNear ? TIKTOK_HTML : "" }}
         />
       </section>
 
@@ -187,13 +215,7 @@ export function HubSocial() {
           className={`hub-social__strip${instagramReady ? " hub-social__strip--ready" : ""}`}
         >
           {INSTAGRAM_POSTS.map((permalink) => (
-            <div
-              key={permalink}
-              className="hub-social__post"
-              dangerouslySetInnerHTML={{
-                __html: instagramNear ? instagramHtml(permalink) : ""
-              }}
-            />
+            <div key={permalink} className="hub-social__post" />
           ))}
         </div>
       </section>

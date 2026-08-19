@@ -481,8 +481,12 @@ button.hub-card-ref__action-btn {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 12px;
-  overflow: hidden;
+  padding: 8px;
+  /* O widget tem largura minima propria (288px) e nao monta o feed abaixo
+     disso — em telas bem estreitas ele rola dentro da moldura em vez de
+     encolher ou vazar para fora da coluna. */
+  overflow-x: auto;
+  overflow-y: hidden;
   /* So reserva espaco enquanto o widget nao monta: a altura final quem decide
      e o TikTok, e o valor reservado sobrava como vazio embaixo do embed. */
   min-height: 420px;
@@ -514,7 +518,9 @@ button.hub-card-ref__action-btn {
 
 .hub-social__post {
   flex: 0 0 auto;
-  width: 326px;
+  /* 326px do embed + o padding e a borda da moldura: assim o iframe recebe
+     exatamente a largura minima que o Instagram exige. */
+  width: 344px;
   scroll-snap-align: start;
   background: var(--panel);
   border: 1px solid var(--line);
@@ -528,16 +534,15 @@ button.hub-card-ref__action-btn {
   min-height: 0;
 }
 
-/* Os dois widgets chegam com largura minima inline (288px no TikTok, 326px no
-   Instagram) e margem propria. Dentro da coluna do hub isso estourava a
-   lateral no celular. */
+/* Os dois widgets chegam com margem propria e largura fixa. A largura minima
+   deles NAO e sobrescrita aqui: abaixo dela o embed cai no esqueleto e nunca
+   carrega — quem absorve o excesso e a rolagem da moldura/faixa. */
 .hub-social__frame .tiktok-embed,
 .hub-social__frame iframe,
 .hub-social__post .instagram-media,
 .hub-social__post iframe {
   width: 100% !important;
   max-width: 100% !important;
-  min-width: 0 !important;
   margin: 0 !important;
   border-radius: var(--radius-md);
 }
@@ -604,6 +609,32 @@ button.hub-card-ref__action-btn {
 .hub-media__submit-btn:hover {
   background: var(--accent-dark);
   transform: translateY(-1px);
+}
+
+.hub-media__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.hub-media__form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.hub-media__submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.hub-media__newsletter-sent {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 8px 0 0;
 }
 
 .hub-media__newsletter-note {
@@ -1033,7 +1064,7 @@ button.hub-card-ref__action-btn {
   }
 
   .hub-social__frame {
-    padding: 16px;
+    padding: 12px;
   }
 
   /* Media section: 2 columns (Newsletter and Coupon) */
