@@ -440,6 +440,61 @@ button.hub-card-ref__action-btn {
   padding: 8px 18px;
 }
 
+/* TikTok — embed oficial de perfil (creator embed). O conteudo vem num iframe
+   servido pelo TikTok: nao da para estilizar por dentro, entao a moldura abaixo
+   e o que integra o widget ao hub. O script so entra quando a secao se aproxima
+   da tela (ver components/hub/HubTikTok.tsx). */
+.hub-tiktok {
+  padding: 20px var(--pad-x);
+}
+
+.hub-tiktok__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.hub-tiktok__kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hub-tiktok__handle {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.hub-tiktok__handle:hover {
+  color: var(--text);
+}
+
+.hub-tiktok__frame {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  overflow: hidden;
+  /* Reserva a altura do widget para o resto da pagina nao pular quando ele monta. */
+  min-height: 600px;
+}
+
+/* O embed.js escreve estilo inline no blockquote e no iframe que ele cria. */
+.hub-tiktok__frame .tiktok-embed,
+.hub-tiktok__frame iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  border-radius: var(--radius-md);
+}
+
 /* Media Section (Newsletter + Coupon) */
 .hub-media {
   padding: 20px var(--pad-x);
@@ -928,6 +983,11 @@ button.hub-card-ref__action-btn {
     padding: 32px;
     gap: 20px;
     cursor: pointer; /* dá o toque de "escolher a carta" */
+  }
+
+  .hub-tiktok__frame {
+    padding: 16px;
+    min-height: 740px;
   }
 
   /* Media section: 2 columns (Newsletter and Coupon) */

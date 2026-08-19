@@ -3,6 +3,7 @@ import { InstNav } from "@/components/institucional/InstNav";
 import { HubHero } from "@/components/hub/HubHero";
 import { HubProducts } from "@/components/hub/HubProducts";
 import { HubMedia } from "@/components/hub/HubMedia";
+import { HubTikTok } from "@/components/hub/HubTikTok";
 import { EbookModal } from "@/components/hub/EbookModal";
 import { HubBio } from "@/components/hub/HubBio";
 import { HubFooter } from "@/components/hub/HubFooter";
@@ -35,6 +36,7 @@ export default function HubPage() {
           <HubBio />
           <HubProducts />
           <HubMedia />
+          <HubTikTok />
           <HubHero />
         </main>
         <HubFooter />
