@@ -10,26 +10,21 @@ export function HubBio() {
             alt="Felipe — Designer de marca"
             width={260}
             height={320}
-            priority
             className="hub-bio__image"
           />
         </div>
 
         <div className="hub-bio__content">
-          <span className="hub-bio__kicker">/CONSULTÓRIO DE PSICOLOGIA</span>
-          <h2 className="hub-bio__title">Marca de consultório em meio dia de imersão.</h2>
+          <span className="hub-bio__kicker">/QUEM FAZ</span>
+          <h2 className="hub-bio__title">Sou Felipe, designer de marca.</h2>
           <p className="hub-bio__text">
-            Sou Felipe, designer de marca. Passo uma manhã com você e ponho posicionamento, identidade visual e verbal no ar em 30 dias — dentro do artigo 20 do Código de Ética Profissional do Psicólogo.
+            Faço isso há sete anos. Comecei aos quinze, passei por quatro agências e há três anos toco meu próprio estúdio, aqui de Sorocaba.
           </p>
           <p className="hub-bio__text">
-            Antes de qualquer decisão visual, entram na mesa receita, carteira, valor de sessão e ocupação de agenda. É a leitura do negócio que decide o desenho, não o contrário.
+            Nesse tempo construí marca para mais de 150 empresas e profissionais. Liderei eventos presenciais com mais de 1500 participantes, gerei mais de 1 milhão de impressões e ajudei centenas de profissionais a construírem seu posicionamento e sua marca.
           </p>
           <p className="hub-bio__text">
-            Nomes como Nikolas Ferreira, Filipe Trindade, Lucas Scudeller e Pedro Superti já confiaram esse trabalho a mim. Ele já foi ao ar na Record, SBT e Band.
-          </p>
-          <p className="hub-bio__text">
-            Formação longa e uma presença que comunica abaixo do próprio preparo: é esse intervalo que eu fecho, mudando a{" "}
-            <span className="hub-bio__highlight">percepção da marca</span>.
+            Hoje eu faço isso para <span className="hub-bio__highlight">psicólogos e clínicas</span>. Passo uma manhã com você e, em 30 dias, seu posicionamento, sua identidade visual e o seu jeito de falar entram no ar. Tudo dentro do artigo 20 do Código de Ética.
           </p>
         </div>
       </div>

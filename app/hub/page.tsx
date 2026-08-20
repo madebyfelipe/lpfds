@@ -33,11 +33,11 @@ export default function HubPage() {
       <InstNav />
       <div className="hub">
         <main>
-          <HubBio />
+          <HubHero />
           <HubProducts />
           <HubMedia />
           <HubSocial />
-          <HubHero />
+          <HubBio />
         </main>
         <HubFooter />
         <EbookModal />
