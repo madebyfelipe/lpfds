@@ -7,7 +7,7 @@ export function HubBio() {
         <div className="hub-bio__portrait">
           <Image
             src="/eu.jpg"
-            alt="Felipe — Designer de marca"
+            alt="Felipe Silva — estrategista de marca"
             width={260}
             height={320}
             className="hub-bio__image"
@@ -16,15 +16,14 @@ export function HubBio() {
 
         <div className="hub-bio__content">
           <span className="hub-bio__kicker">/QUEM FAZ</span>
-          <h2 className="hub-bio__title">Sou Felipe, designer de marca.</h2>
+          <h2 className="hub-bio__title">
+            Felipe Silva é estrategista de marca e especialista em posicionamento visual.
+          </h2>
           <p className="hub-bio__text">
-            Faço isso há sete anos. Comecei aos quinze, passei por quatro agências e há três anos toco meu próprio estúdio, aqui de Sorocaba.
+            Mais de 7 anos de experiência de mercado. É o nome à frente do estúdio Made by Felipe, somando mais de 150 projetos entregues e ecossistemas digitais estruturados.
           </p>
           <p className="hub-bio__text">
-            Nesse tempo construí marca para mais de 150 empresas e profissionais. Liderei eventos presenciais com mais de 1500 participantes, gerei mais de 1 milhão de impressões e ajudei centenas de profissionais a construírem seu posicionamento e sua marca.
-          </p>
-          <p className="hub-bio__text">
-            Hoje eu faço isso para <span className="hub-bio__highlight">psicólogos e clínicas</span>. Passo uma manhã com você e, em 30 dias, seu posicionamento, sua identidade visual e o seu jeito de falar entram no ar. Tudo dentro do artigo 20 do Código de Ética.
+            Hoje ajuda <span className="hub-bio__highlight">psicólogos e clínicas</span> a construírem marcas e ensina sobre seu método nas redes sociais.
           </p>
         </div>
       </div>

@@ -188,8 +188,8 @@ the divulgação to carry nome completo, título and CRP, and nome fantasia depe
 registered PJ — naming is an optional, case-by-case item, not a listed deliverable.
 O `/hub` fala a mesma oferta, nesta ordem: a primeira dobra é o `HubHero` (`/A IMERSÃO`,
 "Meio dia com você. Trinta dias no ar.", imersão → território → sistema) e o bloco de
-fechamento é o `HubBio` (`/QUEM FAZ`, "Sou Felipe, designer de marca." — sete anos de
-carreira, os números do estúdio e a oferta para psicólogos e clínicas). Os dois já foram
+fechamento é o `HubBio` (`/QUEM FAZ`, bio em terceira pessoa: estrategista de marca,
+7 anos de mercado, 150+ projetos, hoje atende psicólogos e clínicas). Os dois já foram
 o inverso disso; não trocar de volta nem voltar para a copy genérica de branding.
 `depoimentos` are studio clients talking about the *design service*; never write one
 that mentions atendimento, caso clínico or resultado de terapia. Same rule for the hero
