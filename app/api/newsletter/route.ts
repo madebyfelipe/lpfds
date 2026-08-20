@@ -24,7 +24,15 @@ import { ebook, isNewsletterSource, type NewsletterSource } from "@/lib/newslett
 // distingue um workflow do outro. Não estranhe o prefixo repetido.
 const TWENTY_EBOOK_WEBHOOK =
   "https://crm.madebyfelipe.agency/webhooks/workflows/a14da497-8251-4656-9f2b-29817711eb70/101a12f0-aa21-4f20-b0f0-51b3ba7ca398";
-/** Duplicado do de cima, editado para mandar só o e-mail de confirmação. */
+/**
+ * Duplicado do de cima, editado para mandar só o e-mail de confirmação.
+ *
+ * ATENÇÃO (20/08/2026): este id responde 404 — "Workflow … not found in
+ * workspace" —, ou seja, o workflow não existe mais no Twenty. Enquanto não for
+ * trocado pela URL do duplicado atual, todo cadastro de newsletter falha no
+ * Twenty e só o Make segura a lista. Para conferir um candidato sem criar
+ * registro: GET na URL; 404 = não existe, 200 = existe (e dispara um run vazio).
+ */
 const TWENTY_NEWSLETTER_WEBHOOK =
   "https://crm.madebyfelipe.agency/webhooks/workflows/a14da497-8251-4656-9f2b-29817711eb70/445abfee-76af-4edb-ac36-8c8e70bcd200";
 const MAKE_WEBHOOK = "https://hook.us2.make.com/1fnsymphi9b64q1tcq8we9ap7xxgxcv7";
