@@ -19,10 +19,12 @@ import { ebook, isNewsletterSource, type NewsletterSource } from "@/lib/newslett
  * Por isso o payload do caminho de confirmação NÃO carrega `downloadUrl` —
  * assim um passo de e-mail mal configurado não tem como vazar o e-book.
  */
+// A rota do Twenty é /webhooks/workflows/{workspaceId}/{workflowId}: o primeiro
+// UUID é o WORKSPACE (igual em todos os workflows daqui), o segundo é o que
+// distingue um workflow do outro. Não estranhe o prefixo repetido.
 const TWENTY_EBOOK_WEBHOOK =
   "https://crm.madebyfelipe.agency/webhooks/workflows/a14da497-8251-4656-9f2b-29817711eb70/101a12f0-aa21-4f20-b0f0-51b3ba7ca398";
-// TODO: trocar pela URL do workflow DUPLICADO (o primeiro UUID tem que ser
-// diferente do de cima — hoje esta URL é outra versão do mesmo workflow).
+/** Duplicado do de cima, editado para mandar só o e-mail de confirmação. */
 const TWENTY_NEWSLETTER_WEBHOOK =
   "https://crm.madebyfelipe.agency/webhooks/workflows/a14da497-8251-4656-9f2b-29817711eb70/445abfee-76af-4edb-ac36-8c8e70bcd200";
 const MAKE_WEBHOOK = "https://hook.us2.make.com/1fnsymphi9b64q1tcq8we9ap7xxgxcv7";

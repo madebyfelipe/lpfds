@@ -287,9 +287,9 @@ marca para psicólogos** (card `/E-BOOK`, `href="#ebook"` → seção `HubMedia`
   carrega `product`/`productTitle`/`downloadUrl`, e a rota só devolve `download` no
   caminho do e-book — o mirror não vaza para quem só assinou a newsletter. A origem é
   validada contra `newsletterSources` (`isNewsletterSource`): string livre vinda do
-  cliente não consegue pedir o e-book. Atenção ao duplicar workflow no Twenty: a URL é
-  `/webhooks/workflows/{workflowId}/{workflowVersionId}` — se o **primeiro** UUID não
-  mudar, não é um workflow novo, é outra versão do mesmo.
+  cliente não consegue pedir o e-book. A URL do trigger é
+  `/webhooks/workflows/{workspaceId}/{workflowId}`: o **primeiro** UUID é o workspace e
+  é o mesmo em todos os workflows daqui — quem identifica o workflow é o **segundo**.
 - O **Make** recebe os dois caminhos (ele é o fallback que segura o cadastro quando o
   workflow do Twenty está desativado). Se o cenário do Make ainda mandar o e-book, ele
   precisa ramificar no `source` — senão quem assina a newsletter recebe o e-book por lá.
