@@ -281,6 +281,18 @@ marca para psicólogos** (card `/E-BOOK`, `href="#ebook"` → seção `HubMedia`
   `{"success":true,"workflowRunId":…}`. O trigger de webhook do Twenty **não** tem
   "escuta" como o Make: o schema se define à mão em *Define expected body* (colar o JSON
   de exemplo e salvar), e os campos viram `{{trigger.body.email}}` nos passos seguintes.
+- **Dois workflows no Twenty, escolhidos pelo `source`**: `hub-ebook` vai para o webhook
+  de **entrega** (e-mail com o link) e qualquer outra origem vai para o de
+  **confirmação** (só o “você está na lista”). O payload do caminho de confirmação não
+  carrega `product`/`productTitle`/`downloadUrl`, e a rota só devolve `download` no
+  caminho do e-book — o mirror não vaza para quem só assinou a newsletter. A origem é
+  validada contra `newsletterSources` (`isNewsletterSource`): string livre vinda do
+  cliente não consegue pedir o e-book. Atenção ao duplicar workflow no Twenty: a URL é
+  `/webhooks/workflows/{workflowId}/{workflowVersionId}` — se o **primeiro** UUID não
+  mudar, não é um workflow novo, é outra versão do mesmo.
+- O **Make** recebe os dois caminhos (ele é o fallback que segura o cadastro quando o
+  workflow do Twenty está desativado). Se o cenário do Make ainda mandar o e-book, ele
+  precisa ramificar no `source` — senão quem assina a newsletter recebe o e-book por lá.
 - **`components/hub/EbookModal.tsx`** — o portão é um **modal**, e é a única superfície do
   hub com formulário. O card `/E-BOOK` do deck e o botão da seção `HubMedia` só chamam
   `openEbookModal()` (evento `mbf:ebook-open` no `window`, para não passar estado entre
