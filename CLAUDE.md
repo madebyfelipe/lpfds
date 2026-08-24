@@ -308,3 +308,30 @@ marca para psicólogos** (card `/E-BOOK`, `href="#ebook"` → seção `HubMedia`
   chamam `subscribe({ email, name, source })`. Ao adicionar um novo formulário, use o mesmo helper e
   registre a origem em `NewsletterSource`.
 - `EmailPopup` não está montado em nenhuma página hoje (código dormente), mas já usa a rota.
+
+---
+
+## Form da imersão (`/imersao`) — disparo por e-mail
+
+O `ImersaoForm` (Nome · CRP · WhatsApp) era decorativo: o submit só trocava o texto de
+status. Hoje ele envia de verdade.
+
+- **`lib/imersao.ts`** — fonte única: destinatários (`IMERSAO_TO` = `alo@madebyfelipe.com.br`,
+  `IMERSAO_BCC` = cópia oculta), a validação `validateImersao()` compartilhada pelos dois
+  lados e o helper cliente `requestImersao()`.
+- **`app/api/imersao/route.ts`** — segunda rota de servidor do projeto. Manda o e-mail por
+  **SMTP do próprio domínio** (`smtp.hostinger.com:465`, o e-mail é Hostinger — MX
+  `mx1/mx2.hostinger.com`), autenticado como a **mesma caixa que recebe**: por isso o
+  `From` é legítimo e não esbarra em SPF/DKIM. O CCO vai no campo `bcc` do nodemailer, que
+  não escreve cabeçalho — o destinatário do `To` não vê a cópia. O corpo tem versão texto e
+  HTML (paleta do site) com botão "Responder no WhatsApp" montado a partir dos dígitos do
+  telefone (assume `+55` quando vier sem DDI). Todo valor digitado passa por `escapeHtml`.
+- **Credenciais** ficam em `.env.local` (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
+  `SMTP_PASSWORD`), com molde em `.env.example`. O `.gitignore` não ignorava `.env*` —
+  passou a ignorar. **Replicar as variáveis no painel da hospedagem**, senão a rota responde
+  `500 smtp_unconfigured` em produção.
+- Sem SMTP configurado ou com falha de envio, o form mostra erro e manda para o WhatsApp —
+  **nunca** exibe a confirmação sem ter enviado. Esse era o comportamento antigo e é
+  exatamente o que não pode voltar.
+- O form **não pede e-mail**, então não há `replyTo`: o retorno é pelo WhatsApp. Se um dia
+  entrar campo de e-mail, ligue-o ao `replyTo` da rota.

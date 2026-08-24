@@ -15,3 +15,8 @@ projects/
 Site institucional para Felipe/
 Site institucional para Felipe.zip
 fotos Felipe/
+
+# variaveis de ambiente (credenciais SMTP do form da imersao)
+.env
+.env.local
+.env*.local
