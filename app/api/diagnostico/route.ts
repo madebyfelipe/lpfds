@@ -49,6 +49,12 @@ const BANDA_TO_SELECT: Record<Banda, string> = {
 };
 const ATUACAO_SELECT = new Set(["PRESENCIAL", "ONLINE", "AMBOS"]);
 
+// gargalo do lib vem com hífen ("pontos-contato"); o SELECT do Twenty é
+// UPPER_SNAKE ("PONTOS_CONTATO"). A conversão é direta.
+function gargaloSelect(g: string) {
+  return g.toUpperCase().replace(/-/g, "_");
+}
+
 // ---------------------------------------------------------------------------
 // Cliente Twenty (Core API)
 // ---------------------------------------------------------------------------
@@ -98,16 +104,59 @@ async function upsertPerson(person: Record<string, unknown>, email: string): Pro
   return idOf(await twenty("POST", "/people", person));
 }
 
-async function attachNote(personId: string, title: string, markdown: string) {
+/** Note com as respostas, ligado ao contato e (quando há) à oportunidade. */
+async function attachNote(
+  personId: string,
+  opportunityId: string | null,
+  title: string,
+  markdown: string
+) {
   const noteId = idOf(
     await twenty("POST", "/notes", { title, bodyV2: { markdown, blocknote: null } })
   );
   await twenty("POST", "/noteTargets", { noteId, targetPersonId: personId });
+  if (opportunityId) {
+    await twenty("POST", "/noteTargets", { noteId, targetOpportunityId: opportunityId });
+  }
 }
 
-async function attachTask(personId: string, title: string, dueAt: string) {
+/** Task "Escrever análise", ligada ao contato e à oportunidade (card do Kanban). */
+async function attachTask(
+  personId: string,
+  opportunityId: string | null,
+  title: string,
+  dueAt: string
+) {
   const taskId = idOf(await twenty("POST", "/tasks", { title, status: "TODO", dueAt }));
   await twenty("POST", "/taskTargets", { taskId, targetPersonId: personId });
+  if (opportunityId) {
+    await twenty("POST", "/taskTargets", { taskId, targetOpportunityId: opportunityId });
+  }
+}
+
+/**
+ * Oportunidade = o diagnóstico no Kanban (stage começa em "Recebida"). Guarda
+ * o resultado em campos próprios, além do espelho no Person. O objeto foi
+ * repropósito para isso (stages e campos custom criados via Metadata API).
+ */
+async function createOpportunity(
+  personId: string,
+  values: DiagnosticoValues,
+  d: ReturnType<typeof computeIndice>
+): Promise<string> {
+  const nps = Number(values.fb_nps);
+  const opp: Record<string, unknown> = {
+    name: `Diagnóstico — ${(values.nome ?? "").trim() || "sem nome"}`,
+    pointOfContactId: personId,
+    stage: "RECEBIDA",
+    indice: d.indice,
+    banda: BANDA_TO_SELECT[d.banda],
+    gargalo: gargaloSelect(d.gargalo),
+    pcTotal: d.pcTotal,
+    dataEnvio: new Date().toISOString()
+  };
+  if (Number.isFinite(nps)) opp.nps = nps;
+  return idOf(await twenty("POST", "/opportunities", opp));
 }
 
 // ---------------------------------------------------------------------------
@@ -293,12 +342,21 @@ export async function POST(request: Request) {
       const personId = await upsertPerson(person, email);
       crmOk = true;
 
+      // Oportunidade = card do Kanban. Best-effort: se falhar, Person/Note/Task
+      // ainda capturam tudo e o lead não se perde.
+      let opportunityId: string | null = null;
+      try {
+        opportunityId = await createOpportunity(personId, values, d);
+      } catch (error) {
+        console.error("[diagnostico] opportunity falhou:", error);
+      }
+
       // Secundários: falha aqui não derruba o cadastro (Person já capturou tudo).
       const dueAt = new Date(Date.now() + 2 * 86400_000).toISOString();
       const tarefa = `Escrever análise — ${fullName} (Índice ${d.indice}, gargalo: ${GARGALO_LABEL[d.gargalo]})`;
       await Promise.allSettled([
-        attachNote(personId, `Respostas do form — ${fullName}`, markdown),
-        attachTask(personId, tarefa, dueAt)
+        attachNote(personId, opportunityId, `Respostas do form — ${fullName}`, markdown),
+        attachTask(personId, opportunityId, tarefa, dueAt)
       ]).then((results) => {
         for (const r of results) {
           if (r.status === "rejected") console.error("[diagnostico] secundário falhou:", r.reason);
