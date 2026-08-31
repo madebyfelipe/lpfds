@@ -870,6 +870,314 @@
 }
 
 /* --------------------------------------------------------------------------
+   Diagnóstico (/diagnostico) — form multi-etapas do Índice de Marca.
+   Vive na superfície clara (.inst), então sobrescreve o .inst-field__input
+   (que é pensado para o .inst-dark da imersão) com tinta escura. Usa só
+   tokens da marca, então inverte junto com o tema.
+   -------------------------------------------------------------------------- */
+
+.diag-lede {
+  max-width: 46ch;
+  margin: 24px 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+.diag-column {
+  max-width: 660px;
+}
+
+.diag__progress {
+  height: 3px;
+  background: var(--gray-200);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.diag__progress-bar {
+  display: block;
+  height: 100%;
+  background: var(--red);
+  transition: width 280ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.diag__step {
+  margin: 12px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.diag__head {
+  margin: 40px 0 8px;
+}
+
+.diag__title {
+  margin: 12px 0 0;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+
+.diag__intro {
+  margin: 16px 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+.diag__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-top: 40px;
+}
+
+/* Tinta escura sobre o cream — o .inst-field__input padrão é claro (dark bg). */
+.diag .inst-field__input {
+  color: var(--black);
+  border-bottom-color: var(--gray-300);
+  font-size: 1.125rem;
+}
+
+.diag .inst-field__input:focus {
+  border-bottom-color: var(--black);
+}
+
+.diag-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.diag-field__label {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--black);
+  padding: 0;
+}
+
+.diag-field__opt {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--gray-500);
+}
+
+.diag-field__help {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.diag-field__textarea {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.5;
+}
+
+/* Opções (radio/yesno) como pills clicáveis. */
+.diag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.diag-option {
+  background: transparent;
+  border: 1px solid var(--gray-300);
+  border-radius: 2px;
+  padding: 12px 18px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--black);
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    color 140ms ease;
+}
+
+.diag-option:hover {
+  border-color: var(--black);
+}
+
+.diag-option[aria-pressed="true"] {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--cream);
+}
+
+/* Matriz dos 12 pontos de contato. */
+.diag-matrix {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.diag-matrix__scale {
+  margin: 0 0 12px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--gray-500);
+}
+
+.diag-matrix__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.diag-matrix__row-label {
+  font-size: 0.9375rem;
+  color: var(--black);
+}
+
+.diag-matrix__opts,
+.diag-nps {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.diag-nps {
+  flex-wrap: wrap;
+}
+
+/* Botão numérico da matriz e do NPS. */
+.diag-chip {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gray-300);
+  border-radius: 2px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--black);
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    color 140ms ease;
+}
+
+.diag-chip:hover {
+  border-color: var(--black);
+}
+
+.diag-chip[aria-pressed="true"] {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--cream);
+}
+
+/* Consentimento — checkbox único. */
+.diag-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.diag-consent input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--red);
+  flex-shrink: 0;
+}
+
+/* Navegação entre etapas. */
+.diag__nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.diag__back {
+  background: transparent;
+  border: 0;
+  padding: 8px 0;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--gray-500);
+}
+
+.diag__back:hover {
+  color: var(--black);
+}
+
+.diag .inst-submit {
+  margin-top: 0;
+}
+
+/* Tela de agradecimento com o Índice. */
+.diag-done {
+  max-width: 520px;
+}
+
+.diag-done__index {
+  margin: 16px 0 0;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--red);
+}
+
+.diag-done__index span {
+  font-size: 1.5rem;
+  color: var(--gray-500);
+}
+
+.diag-done__band {
+  margin: 8px 0 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.diag-done__copy {
+  margin: 24px 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+@media (max-width: 600px) {
+  .diag__title {
+    font-size: 1.625rem;
+  }
+
+  .diag-matrix__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .diag-done__index {
+    font-size: 3rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Responsivo — o protótipo é desktop-only; abaixo, a versão adaptada.
    -------------------------------------------------------------------------- */
 
