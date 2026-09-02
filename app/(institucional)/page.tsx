@@ -50,7 +50,7 @@ export default function Home() {
       </div>
 
       {/* id="processo": o card "Como trabalho" do /hub aponta para /#processo.
-          Teaser gráfico do método NAVE (diagrama estratégia → identidade →
+          Teaser gráfico do método PSIQUE (diagrama estratégia → identidade →
           comunicação); a versão completa vive em /metodologia. */}
       <section id="processo" className="inst-dark">
         <div className="inst-section">

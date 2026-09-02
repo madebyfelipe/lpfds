@@ -55,27 +55,37 @@ export const heroStrip = [
   }
 ];
 
-// Método NAVE. Branding é tradução, não invenção: a marca não é criada do zero
-// — é o resultado de investigar quatro áreas do consultório até encontrar o que
-// o torna único. As quatro áreas (N-A-V-E) formam o posicionamento.
+// Método PSIQUE. Branding é tradução, não invenção: a marca não é criada do
+// zero — é o resultado de investigar seis áreas do consultório até encontrar o
+// que o torna único. As seis áreas (P-S-I-Q-U-E) formam o posicionamento.
 export const methodIntro =
-  "Branding é tradução, não invenção. A marca do seu consultório não é inventada — ela é traduzida de quatro áreas que a gente estuda até encontrar o que só existe em você.";
+  "Branding é tradução, não invenção. A marca do seu consultório não é inventada — ela é traduzida de seis áreas que a gente investiga até encontrar o que só existe em você.";
 
 export const positioning = [
   {
-    letter: "N",
-    title: "Negócio",
+    letter: "P",
+    title: "Prática",
     copy: "Como o consultório funciona de fato: receita, carteira, valor da sessão e ocupação de agenda. Não existe marca antes do negócio."
   },
   {
-    letter: "A",
-    title: "Audiência",
+    letter: "S",
+    title: "Sujeito",
     copy: "Quem você atende melhor e quem procura você. O público real, não o idealizado."
   },
   {
-    letter: "V",
-    title: "Valor",
-    copy: "A promessa do seu atendimento contra o que a concorrência local já oferece — para achar onde você é, de fato, diferente."
+    letter: "I",
+    title: "Inquietação",
+    copy: "O que move quem procura você: a necessidade por trás da busca, que a marca precisa reconhecer."
+  },
+  {
+    letter: "Q",
+    title: "Qualidade",
+    copy: "Sua proposta de valor contra o que a concorrência local já oferece — para achar onde você é, de fato, diferente."
+  },
+  {
+    letter: "U",
+    title: "Universo",
+    copy: "O contexto em que você atua: cidade, cultura e os canais onde a marca vai viver."
   },
   {
     letter: "E",

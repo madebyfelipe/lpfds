@@ -7,9 +7,9 @@ import {
 import { methodIntro, positioning, process } from "@/lib/institucional";
 
 export const metadata: Metadata = {
-  title: "Método NAVE — Made by Felipe",
+  title: "Método PSIQUE — Made by Felipe",
   description:
-    "Da estratégia à comunicação: como a marca do seu consultório é traduzida a partir de Negócio, Audiência, Valor e Estória, em oito passos e duas etapas."
+    "Da estratégia à comunicação: como a marca do seu consultório é traduzida a partir de Prática, Sujeito, Inquietação, Qualidade, Universo e Estória, em oito passos e duas etapas."
 };
 
 export default function MetodologiaPage() {
@@ -18,7 +18,7 @@ export default function MetodologiaPage() {
       <header className="inst-hero">
         <p className="inst-kicker inst-kicker--tight">— O método</p>
         <h1 className="inst-hero__title">
-          Método <span className="inst-hero__accent">NAVE</span>.
+          Método <span className="inst-hero__accent">PSIQUE</span>.
         </h1>
         <p className="inst-hero__lead">{methodIntro}</p>
       </header>
@@ -28,18 +28,18 @@ export default function MetodologiaPage() {
         <p className="inst-kicker">— Metodologia</p>
         <MetodologiaFlow />
         <p className="inst-diagram__caption">
-          O posicionamento nasce do cruzamento de quatro áreas. Dele saem a
+          O posicionamento nasce do cruzamento de seis áreas. Dele saem a
           identidade — visual e verbal — e, por fim, os pontos de contato em que
           a marca aparece.
         </p>
       </section>
 
-      {/* As quatro áreas do posicionamento (N-A-V-E) — cards no fundo escuro. */}
+      {/* As seis áreas do posicionamento (P-S-I-Q-U-E) — cards no fundo escuro. */}
       <section className="inst-dark">
         <div className="inst-section">
           <p className="inst-kicker inst-kicker--inverse">— O posicionamento</p>
           <p className="inst-method__intro">
-            O posicionamento é a tradução de quatro áreas. Investigadas juntas,
+            O posicionamento é a tradução de seis áreas. Investigadas juntas,
             elas revelam o que só existe no seu consultório.
           </p>
           <div className="inst-nave">

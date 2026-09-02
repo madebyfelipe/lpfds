@@ -1,145 +1,170 @@
-// Ilustrações do método NAVE, recriadas do deck-fonte (Modelo_Proposta_Comercial.pdf)
-// como SVG na paleta da marca. São desenhos de linha em `currentColor`, então
+// Ilustrações do método PSIQUE, recriadas do deck-fonte (Modelo_Proposta_Comercial.pdf)
+// como SVG na paleta da marca. Desenhos de linha em `currentColor`, então
 // invertem junto com o tema (.inst-dark → cream sobre preto, como o deck). O
-// vermelho da marca marca o acento. Sem estado — server components.
+// vermelho da marca é o acento. Sem estado — server components.
 
-// Buquê de pontos de contato: satélites em torno do centro, a 45° cada.
-const CONTACT_POINTS = [
-  { angle: 270, label: "EMAILS" },
-  { angle: 315, label: "PDV" },
-  { angle: 0, label: "SITE" },
-  { angle: 45, label: "ANÚNCIOS" },
-  { angle: 90, label: "PAPELARIA" },
-  { angle: 135, label: "MÍDIAS" },
-  { angle: 180, label: "BLOG" },
-  { angle: 225, label: "PRODUTOS" }
-];
-
-const CX = 1010;
-const CY = 300;
-const ORBIT = 118;
-
-function pointOnOrbit(angle: number) {
-  const rad = (angle * Math.PI) / 180;
-  return { x: CX + ORBIT * Math.cos(rad), y: CY + ORBIT * Math.sin(rad) };
+// Chevron reutilizado entre as três peças do fluxo (vira ↓ no mobile via CSS).
+function FlowArrow() {
+  return (
+    <span className="inst-flow__arrow" aria-hidden="true">
+      <svg viewBox="0 0 32 16" width="32" height="16">
+        <line x1="0" y1="8" x2="28" y2="8" />
+        <polyline points="20,2 30,8 20,14" />
+      </svg>
+    </span>
+  );
 }
 
+// Buquê de pontos de contato: um anel de círculos que se encavalam (se
+// sobrepõem) em torno do centro, como no deck. Sobreposição vem do raio (40)
+// ser maior que a metade do passo angular na órbita (84).
+const CX = 165;
+const CY = 165;
+const ORBIT = 84;
+const CONTACT_POINTS = [
+  { a: 0, label: "SITE" },
+  { a: 30, label: "ANÚNCIOS" },
+  { a: 60, label: "PROPOSTAS" },
+  { a: 90, label: "SERVIÇOS" },
+  { a: 120, label: "PRODUTOS" },
+  { a: 150, label: "AMBIENTES" },
+  { a: 180, label: "BLOG" },
+  { a: 210, label: "EMAILS" },
+  { a: 240, label: "PDV" },
+  { a: 270, label: "EMBALAGEM" },
+  { a: 300, label: "PAPELARIA" },
+  { a: 330, label: "MÍDIAS" }
+].map((p) => {
+  const rad = (p.a * Math.PI) / 180;
+  return { ...p, x: CX + ORBIT * Math.cos(rad), y: CY + ORBIT * Math.sin(rad) };
+});
+
 // ─────────────────────────────────────────────────────────────────────────
-// Diagrama 1 — Metodologia: Estratégia → Identidade → Comunicação
-// (quadrado do posicionamento N-A-V-E · venn de identidade · pontos de contato)
+// Diagrama 1 — Metodologia: Estratégia → Identidade → Comunicação.
+// Três peças SVG (quadrado N-A-V-E · venn · buquê) num flex: linha no desktop,
+// coluna no mobile — sem scroll horizontal.
 // ─────────────────────────────────────────────────────────────────────────
 export function MetodologiaFlow() {
   return (
-    <div className="inst-diagram">
-      <svg
-        className="inst-diagram__svg"
-        viewBox="0 0 1240 640"
-        role="img"
-        aria-label="Fluxo do método: da estratégia (posicionamento a partir de Negócio, Audiência, Valor e Estória) à identidade (visual e verbal) e à comunicação (pontos de contato)."
-      >
-        {/* ── Zona 1 — Posicionamento (N-A-V-E) ── */}
-        <g className="inst-diagram__hatch">
-          <circle cx="210" cy="132" r="58" />
-          <circle cx="72" cy="300" r="58" />
-          <circle cx="348" cy="300" r="58" />
-          <circle cx="210" cy="468" r="58" />
-        </g>
-        <polygon
-          className="inst-diagram__dotted"
-          points="210,132 348,300 210,468 72,300"
-        />
-        <text className="inst-diagram__core" x="210" y="306">
-          POSICIONAMENTO
-        </text>
-        <text className="inst-diagram__node-label" x="210" y="138">
-          AUDIÊNCIA
-        </text>
-        <text className="inst-diagram__node-label" x="72" y="306">
-          NEGÓCIO
-        </text>
-        <text className="inst-diagram__node-label" x="348" y="306">
-          VALOR
-        </text>
-        <text className="inst-diagram__node-label" x="210" y="474">
-          ESTÓRIA
-        </text>
-
-        {/* seta 1 → */}
-        <g className="inst-diagram__arrow">
-          <line x1="430" y1="300" x2="498" y2="300" />
-          <polyline points="486,291 500,300 486,309" />
-        </g>
-
-        {/* ── Zona 2 — Identidade (venn) ── */}
-        <circle className="inst-diagram__ring" cx="620" cy="240" r="92" />
-        <circle className="inst-diagram__ring" cx="620" cy="372" r="92" />
-        <text className="inst-diagram__node-label" x="620" y="196">
-          IDENTIDADE
-        </text>
-        <text className="inst-diagram__node-label" x="620" y="214">
-          VISUAL
-        </text>
-        <text className="inst-diagram__node-label" x="620" y="404">
-          IDENTIDADE
-        </text>
-        <text className="inst-diagram__node-label" x="620" y="422">
-          VERBAL
-        </text>
-
-        {/* seta 2 → */}
-        <g className="inst-diagram__arrow">
-          <line x1="762" y1="300" x2="830" y2="300" />
-          <polyline points="818,291 832,300 818,309" />
-        </g>
-
-        {/* ── Zona 3 — Comunicação (pontos de contato) ── */}
-        {CONTACT_POINTS.map((point) => {
-          const { x, y } = pointOnOrbit(point.angle);
-          return (
-            <g key={point.label}>
-              <line
-                className="inst-diagram__spoke"
-                x1={CX}
-                y1={CY}
-                x2={x}
-                y2={y}
-              />
-              <circle className="inst-diagram__ring" cx={x} cy={y} r="42" />
-              <text className="inst-diagram__sat-label" x={x} y={y + 4}>
-                {point.label}
-              </text>
-            </g>
-          );
-        })}
-        <circle className="inst-diagram__disc" cx={CX} cy={CY} r="64" />
-        <text className="inst-diagram__disc-label" x={CX} y={CY - 4}>
-          PONTOS
-        </text>
-        <text className="inst-diagram__disc-label" x={CX} y={CY + 14}>
-          DE CONTATO
-        </text>
-
-        {/* ── Eixo inferior — Estratégia · Identidade · Comunicação ── */}
-        <line className="inst-diagram__axis" x1="210" y1="582" x2="1010" y2="582" />
-        {[
-          { x: 210, label: "ESTRATÉGIA" },
-          { x: 620, label: "IDENTIDADE" },
-          { x: 1010, label: "COMUNICAÇÃO" }
-        ].map((stage) => (
-          <g key={stage.label}>
-            <circle className="inst-diagram__axis-dot" cx={stage.x} cy="582" r="6" />
-            <text className="inst-diagram__stage" x={stage.x} y="614">
-              {stage.label}
-            </text>
+    <div className="inst-flow">
+      {/* Estratégia — o hexágono do posicionamento (P-S-I-Q-U-E) */}
+      <figure className="inst-flow__fig inst-flow__fig--hex">
+        <svg
+          className="inst-flow__svg"
+          viewBox="0 0 300 300"
+          role="img"
+          aria-label="Posicionamento a partir de seis áreas: Prática, Sujeito, Inquietação, Qualidade, Universo e Estória."
+        >
+          <g className="inst-flow__ring">
+            <circle cx="150" cy="50" r="44" />
+            <circle cx="237" cy="100" r="44" />
+            <circle cx="237" cy="200" r="44" />
+            <circle cx="150" cy="250" r="44" />
+            <circle cx="63" cy="200" r="44" />
+            <circle cx="63" cy="100" r="44" />
           </g>
-        ))}
-      </svg>
+          <polygon
+            className="inst-flow__dotted"
+            points="150,50 237,100 237,200 150,250 63,200 63,100"
+          />
+          <text className="inst-flow__core" x="150" y="146">
+            POSICIO
+          </text>
+          <text className="inst-flow__core" x="150" y="164">
+            NAMENTO
+          </text>
+          <text className="inst-flow__label" x="150" y="54">
+            PRÁTICA
+          </text>
+          <text className="inst-flow__label" x="237" y="104">
+            SUJEITO
+          </text>
+          <text className="inst-flow__label inst-flow__label--sm" x="237" y="204">
+            INQUIETAÇÃO
+          </text>
+          <text className="inst-flow__label" x="150" y="254">
+            QUALIDADE
+          </text>
+          <text className="inst-flow__label" x="63" y="204">
+            UNIVERSO
+          </text>
+          <text className="inst-flow__label" x="63" y="104">
+            ESTÓRIA
+          </text>
+        </svg>
+        <figcaption className="inst-flow__cap">Estratégia</figcaption>
+      </figure>
+
+      <FlowArrow />
+
+      {/* Identidade — os dois círculos encavalados (visual + verbal) */}
+      <figure className="inst-flow__fig inst-flow__fig--venn">
+        <svg
+          className="inst-flow__svg"
+          viewBox="0 0 200 300"
+          role="img"
+          aria-label="Identidade visual e verbal, sobrepostas."
+        >
+          <circle className="inst-flow__ring" cx="100" cy="112" r="78" />
+          <circle className="inst-flow__ring" cx="100" cy="196" r="78" />
+          <text className="inst-flow__label" x="100" y="80">
+            IDENTIDADE
+          </text>
+          <text className="inst-flow__label" x="100" y="97">
+            VISUAL
+          </text>
+          <text className="inst-flow__label" x="100" y="222">
+            IDENTIDADE
+          </text>
+          <text className="inst-flow__label" x="100" y="239">
+            VERBAL
+          </text>
+        </svg>
+        <figcaption className="inst-flow__cap">Identidade</figcaption>
+      </figure>
+
+      <FlowArrow />
+
+      {/* Comunicação — o buquê de pontos de contato encavalados */}
+      <figure className="inst-flow__fig inst-flow__fig--bouquet">
+        <svg
+          className="inst-flow__svg"
+          viewBox="0 0 330 330"
+          role="img"
+          aria-label="Pontos de contato acumulados em torno da marca: site, anúncios, propostas, produtos, e-mails, PDV, embalagem, papelaria, mídias e mais."
+        >
+          <g className="inst-flow__ring">
+            {CONTACT_POINTS.map((p) => (
+              <circle key={p.label} cx={p.x} cy={p.y} r="40" />
+            ))}
+          </g>
+          <circle className="inst-flow__disc" cx={CX} cy={CY} r="52" />
+          {CONTACT_POINTS.map((p) => (
+            <text
+              key={p.label}
+              className="inst-flow__sat"
+              x={p.x}
+              y={p.y + 3}
+            >
+              {p.label}
+            </text>
+          ))}
+          <text className="inst-flow__disc-label" x={CX} y={CY - 3}>
+            PONTOS
+          </text>
+          <text className="inst-flow__disc-label" x={CX} y={CY + 13}>
+            DE CONTATO
+          </text>
+        </svg>
+        <figcaption className="inst-flow__cap">Comunicação</figcaption>
+      </figure>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-// Diagrama 2 — Linha do tempo: oito passos, duas etapas, quatro fases
+// Diagrama 2 — Linha do tempo: oito passos, duas etapas, quatro fases.
+// Some no mobile (a lista numerada `.inst-proc` logo abaixo carrega o mesmo).
 // ─────────────────────────────────────────────────────────────────────────
 const NODES = [
   "ENTREVISTA",
@@ -154,7 +179,6 @@ const NODES = [
 const NODE_X = [90, 240, 390, 540, 690, 840, 990, 1140];
 const LINE_Y = 236;
 
-// Fases (2 passos cada) → colunas com rótulo descritivo e etiqueta de baixo.
 const PHASES = [
   { from: 90, to: 240, desc: ["Diagnóstico"], tag: "COLETANDO" },
   {
@@ -174,14 +198,13 @@ const PHASES = [
 
 export function LinhaTempo() {
   return (
-    <div className="inst-diagram">
+    <div className="inst-diagram inst-diagram--timeline">
       <svg
         className="inst-diagram__svg"
         viewBox="0 0 1240 500"
         role="img"
         aria-label="Linha do tempo do método: etapa de estratégia (entrevista, workshop, pesquisa, diagnóstico) e etapa de identidade (plataforma, keyword, keyvisual, guia da marca), agrupadas em quatro fases — coletando, explorando, criando e definindo."
       >
-        {/* Etapas (brackets de cima) */}
         <g className="inst-diagram__bracket">
           <path d="M90 108 V96 H540 V108" />
           <path d="M690 108 V96 H1140 V108" />
@@ -193,7 +216,6 @@ export function LinhaTempo() {
           Identidade de marca
         </text>
 
-        {/* Rótulos dos passos + setas entre eles */}
         {NODES.map((label, i) => (
           <text
             key={label}
@@ -215,7 +237,6 @@ export function LinhaTempo() {
           );
         })}
 
-        {/* Linha e nós */}
         <line
           className="inst-diagram__axis"
           x1="90"
@@ -237,7 +258,6 @@ export function LinhaTempo() {
           />
         ))}
 
-        {/* Separadores tracejados entre fases */}
         {[315, 615, 915].map((x) => (
           <line
             key={x}
@@ -249,7 +269,6 @@ export function LinhaTempo() {
           />
         ))}
 
-        {/* Rótulos descritivos + etiquetas de fase (brackets de baixo) */}
         {PHASES.map((phase) => {
           const center = (phase.from + phase.to) / 2;
           return (
@@ -291,7 +310,6 @@ export function LinhaTempo() {
           );
         })}
 
-        {/* Acento no último nó: desce até a entrega */}
         <g className="inst-diagram__arrow inst-diagram__arrow--accent">
           <line x1="1140" y1="248" x2="1140" y2="278" />
           <polyline points="1131,268 1140,280 1149,268" />

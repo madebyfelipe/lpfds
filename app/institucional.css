@@ -418,10 +418,10 @@
   letter-spacing: -0.01em;
 }
 
-/* As quatro áreas do posicionamento (N-A-V-E). */
+/* As seis áreas do posicionamento (P-S-I-Q-U-E). */
 .inst-nave {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 48px;
 }
 
@@ -554,82 +554,6 @@
   text-anchor: middle;
 }
 
-/* Círculos e anéis */
-.inst-diagram__hatch circle {
-  fill: currentColor;
-  fill-opacity: 0.06;
-  stroke: currentColor;
-  stroke-width: 1.25;
-}
-
-.inst-diagram__ring {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.25;
-}
-
-/* Disco central = superfície oposta à seção. Padrão: seção cream → disco
-   escuro. Dentro de .inst-dark, inverte. */
-.inst-diagram__disc {
-  fill: var(--black);
-  stroke: none;
-}
-
-.inst-dark .inst-diagram__disc {
-  fill: var(--cream);
-}
-
-.inst-diagram__dotted {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1;
-  stroke-dasharray: 2 6;
-  opacity: 0.55;
-}
-
-.inst-diagram__spoke {
-  stroke: currentColor;
-  stroke-width: 1;
-  opacity: 0.22;
-}
-
-/* Textos */
-.inst-diagram__core {
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
-.inst-diagram__node-label {
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.inst-diagram__sat-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.inst-diagram__disc-label {
-  fill: var(--cream);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-.inst-dark .inst-diagram__disc-label {
-  fill: var(--black);
-}
-
-.inst-diagram__stage {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  opacity: 0.85;
-}
-
 /* Setas e eixo */
 .inst-diagram__arrow line,
 .inst-diagram__arrow polyline,
@@ -654,7 +578,6 @@
   stroke-width: 1.5;
 }
 
-.inst-diagram__axis-dot,
 .inst-diagram__node {
   fill: currentColor;
 }
@@ -743,6 +666,142 @@
 
 .inst-method__more:hover {
   color: var(--red);
+}
+
+/* --------------------------------------------------------------------------
+   Fluxo do método (três peças SVG) — linha no desktop, coluna no mobile. Cada
+   peça é um <svg> que cabe na largura da coluna, então não há scroll lateral.
+   -------------------------------------------------------------------------- */
+
+.inst-flow {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(4px, 1.5vw, 20px);
+}
+
+.inst-flow__fig {
+  margin: 0;
+  flex: 0 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.inst-flow__fig--hex {
+  flex-basis: 300px;
+  max-width: 300px;
+}
+
+.inst-flow__fig--venn {
+  flex-basis: 190px;
+  max-width: 190px;
+}
+
+.inst-flow__fig--bouquet {
+  flex-basis: 320px;
+  max-width: 320px;
+}
+
+.inst-flow__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: inherit;
+  overflow: visible;
+}
+
+.inst-flow text {
+  fill: currentColor;
+  font-family: var(--inst-font);
+  text-anchor: middle;
+}
+
+.inst-flow__ring circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+}
+
+.inst-flow__dotted {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  opacity: 0.55;
+}
+
+/* Disco central = superfície oposta à seção; inverte sob .inst-dark. */
+.inst-flow__disc {
+  fill: var(--black);
+  stroke: none;
+}
+
+.inst-dark .inst-flow__disc {
+  fill: var(--cream);
+}
+
+.inst-flow__core {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.inst-flow__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.inst-flow__label--sm {
+  font-size: 8.5px;
+}
+
+.inst-flow__sat {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.inst-flow__disc-label {
+  fill: var(--cream);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.inst-dark .inst-flow__disc-label {
+  fill: var(--black);
+}
+
+.inst-flow__cap {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* Seta entre as peças (vira ↓ no mobile via rotação). */
+.inst-flow__arrow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+}
+
+.inst-flow__arrow svg {
+  display: block;
+}
+
+.inst-flow__arrow line,
+.inst-flow__arrow polyline {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
 }
 
 .inst-step {
@@ -1619,6 +1678,22 @@
   .inst-nav__link {
     padding: 16px 0;
     border-top: 1px solid var(--gray-200);
+  }
+
+  /* Fluxo do método empilha; as setas apontam para baixo. */
+  .inst-flow {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .inst-flow__arrow svg {
+    transform: rotate(90deg);
+  }
+
+  /* A linha do tempo é larga demais para o mobile — a lista numerada
+     `.inst-proc` logo abaixo já carrega os oito passos na vertical. */
+  .inst-diagram--timeline {
+    display: none;
   }
 }
 

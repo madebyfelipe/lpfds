@@ -195,34 +195,42 @@ o inverso disso; não trocar de volta nem voltar para a copy genérica de brandi
 
 **Oferta e método (setembro/2026)**: a oferta passou de "meio dia / 30 dias" para
 **dois dias de imersão / 45 dias no ar** — Felipe adaptou os números ao escopo real do
-método NAVE. Trocar esses números em qualquer superfície é regressão; eles vivem no hero
+método PSIQUE. Trocar esses números em qualquer superfície é regressão; eles vivem no hero
 e na metadata da home, na metadata do `/imersao`, no `HubHero` e nas referências
 numéricas dos `depoimentos`. **Preço continua fora do site** (a decisão de segurar o
 preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos: Imersão
-→ Território → Sistema) foi **substituída** por um **teaser gráfico** do método NAVE
+→ Território → Sistema) foi **substituída** por um **teaser gráfico** do método PSIQUE
 (ainda em `id="processo"`, que o `/hub` linka): `methodIntro` + o diagrama
 `MetodologiaFlow` + link "Ver o método completo →" para **`/metodologia`**.
 
-**Método NAVE em `/metodologia`** (página dedicada, na `InstNav`) — três blocos com
-tratamentos visuais **distintos de propósito** (a primeira versão empilhava dois grids de
-4 cards e confundia): (1) `MetodologiaFlow` cream — o fluxo Estratégia → Identidade →
-Comunicação; (2) **O posicionamento** numa seção `.inst-dark` — as quatro áreas **N-A-V-E**
-como cards de letra grande (`.inst-nave`, export `positioning`); (3) **O processo** numa
-seção cream — o diagrama `LinhaTempo` + os **oito passos** como **lista numerada**
-(`.inst-proc`, nº · passo · descrição, agrupada nas duas etapas Estratégia/Identidade,
-export `process`), **não** outro grid de cards. Copy adaptada ao ICP de psicologia e ao
-escopo de 45 dias — **não** é a copy genérica B2B do deck-fonte
-(`Modelo_Proposta_Comercial.pdf`).
+**Método PSIQUE** (o nome era NAVE; virou PSIQUE por ressoar com o ICP de psicologia —
+a tese "branding é tradução, não invenção" e a hipótese "o posicionamento nasce de
+investigar áreas" continuam). São **seis áreas** (export `positioning`, `.inst-nave` em
+3 colunas): **P**rática (o negócio), **S**ujeito (audiência), **I**nquietação (a
+necessidade por trás da busca), **Q**ualidade (proposta de valor vs concorrência),
+**U**niverso (contexto/canais), **E**stória (origem/crenças/personalidade). No diagrama
+`MetodologiaFlow` elas viram um **hexágono** (não mais o quadrado de 4).
+
+**`/metodologia`** (página dedicada, na `InstNav`) — três blocos com tratamentos visuais
+**distintos de propósito** (uma versão empilhava dois grids de cards e confundia):
+(1) `MetodologiaFlow` — o fluxo Estratégia → Identidade → Comunicação; (2) **O
+posicionamento** numa seção `.inst-dark` — as seis áreas P-S-I-Q-U-E como cards de letra
+grande (`.inst-nave`); (3) **O processo** numa seção cream — o diagrama `LinhaTempo` + os
+**oito passos** como **lista numerada** (`.inst-proc`, nº · passo · descrição, agrupada
+nas duas etapas Estratégia/Identidade, export `process`), **não** outro grid de cards.
+Copy adaptada ao ICP de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B
+do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
 
 **Diagramas** (`components/institucional/MetodoDiagrams.tsx` — server components):
-`MetodologiaFlow` recria o quadrado do posicionamento + venn de identidade + buquê de
-pontos de contato; `LinhaTempo` recria a timeline. São SVG de linha em `currentColor` +
-`var(--red)`, então **invertem com o tema**; ficam em `.inst-dark` na home mas em seção
-cream em `/metodologia` (por isso o `.inst-diagram__disc` tem override sob `.inst-dark`).
-Cada `<svg>` tem `min-width` e rola no mobile (`.inst-diagram` com `overflow-x:auto`) —
-não reflui. Os cards `.inst-nave`/`.inst-step` continuam pensados para fundo escuro; se
-mudar de seção, revise as cores. Se editar coordenadas, dá para rasterizar o SVG com
-`sharp` (já é dep) e conferir o layout antes de subir.
+`MetodologiaFlow` são **três peças SVG** (hexágono do posicionamento · venn de identidade ·
+buquê de pontos de contato) num flex — **linha no desktop, coluna no mobile** (`.inst-flow`),
+cada `<svg>` cabe na coluna, então **não há scroll lateral**. O buquê tem os círculos
+**encavalados** (sobrepostos), fiel ao deck — não espaçados. `LinhaTempo` é a timeline
+larga (`.inst-diagram--timeline`): **some no mobile** (a lista `.inst-proc` logo abaixo já
+carrega os oito passos na vertical); no desktop rola em `overflow-x:auto` se faltar espaço.
+São SVG de linha em `currentColor` + `var(--red)`, então **invertem com o tema**; o disco
+central (`.inst-flow__disc`) tem override sob `.inst-dark`. Se editar coordenadas, dá para
+rasterizar o SVG com `sharp` (já é dep) e conferir o layout antes de subir.
 `depoimentos` are studio clients talking about the *design service*; never write one
 that mentions atendimento, caso clínico or resultado de terapia. Same rule for the hero
 strip: no image suggesting a session, a patient, or a couch. The copy doc's
