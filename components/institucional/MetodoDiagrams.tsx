@@ -84,28 +84,28 @@ export function MetodologiaFlow() {
             points="150,50 237,100 237,200 150,250 63,200 63,100"
           />
           <text className="inst-flow__core" x="150" y="146">
-            POSICIO
+            Posicio
           </text>
           <text className="inst-flow__core" x="150" y="164">
-            NAMENTO
+            namento
           </text>
           <text className="inst-flow__label" x="150" y="54">
-            PRÁTICA
+            Prática
           </text>
           <text className="inst-flow__label" x="237" y="104">
-            SUJEITO
+            Sujeito
           </text>
           <text className="inst-flow__label inst-flow__label--sm" x="237" y="204">
-            INQUIETAÇÃO
+            Inquietação
           </text>
           <text className="inst-flow__label" x="150" y="254">
-            QUALIDADE
+            Qualidade
           </text>
           <text className="inst-flow__label" x="63" y="204">
-            UNIVERSO
+            Universo
           </text>
           <text className="inst-flow__label" x="63" y="104">
-            ESTÓRIA
+            Estória
           </text>
         </svg>
         <figcaption className="inst-flow__cap">Estratégia</figcaption>
