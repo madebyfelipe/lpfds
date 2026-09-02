@@ -16,8 +16,9 @@ function FlowArrow() {
   );
 }
 
-// Mapa (imagem) em duas variantes de cor, uma escondida por CSS conforme a
-// superfície. `--light` é a arte escura (para fundo claro); `--dark` a clara.
+// Mapa (imagem) em duas variantes, uma escondida por CSS conforme a superfície.
+// `--light` (mostrada em superfície clara) usa a arte `_branco`; `--dark`
+// (superfície escura) usa a `_preto` — foi o que o Felipe pediu ao ver ao vivo.
 function MapaImg({
   base,
   alt,
@@ -34,7 +35,7 @@ function MapaImg({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="inst-flow__img inst-flow__img--light"
-        src={`/institucional/mapas/${base}_preto.png`}
+        src={`/institucional/mapas/${base}_branco.png`}
         alt={alt}
         width={width}
         height={height}
@@ -43,7 +44,7 @@ function MapaImg({
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="inst-flow__img inst-flow__img--dark"
-        src={`/institucional/mapas/${base}_branco.png`}
+        src={`/institucional/mapas/${base}_preto.png`}
         alt=""
         aria-hidden="true"
         width={width}
