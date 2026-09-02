@@ -3,14 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Depoimentos } from "@/components/institucional/Depoimentos";
 import { InstContato } from "@/components/institucional/InstContato";
-import {
-  agenda,
-  deliverables,
-  heroStrip,
-  methodIntro,
-  positioning,
-  process
-} from "@/lib/institucional";
+import { MetodologiaFlow } from "@/components/institucional/MetodoDiagrams";
+import { agenda, deliverables, heroStrip, methodIntro } from "@/lib/institucional";
 
 // Title/description da home vêm do copy aprovado e sobrescrevem os do
 // layout raiz, que seguem servindo /hub, /contato e /portfolio.
@@ -56,48 +50,16 @@ export default function Home() {
       </div>
 
       {/* id="processo": o card "Como trabalho" do /hub aponta para /#processo.
-          Dobra do método NAVE — o posicionamento (N-A-V-E) e a linha do tempo
-          de oito passos em duas etapas. Substituiu o antigo "Como funciona". */}
+          Teaser gráfico do método NAVE (diagrama estratégia → identidade →
+          comunicação); a versão completa vive em /metodologia. */}
       <section id="processo" className="inst-dark">
         <div className="inst-section">
           <p className="inst-kicker inst-kicker--inverse">— O método</p>
           <p className="inst-method__intro">{methodIntro}</p>
-
-          <div className="inst-method__block">
-            <p className="inst-method__label">
-              O posicionamento nasce de quatro áreas
-            </p>
-            <div className="inst-nave">
-              {positioning.map((area) => (
-                <div key={area.letter} className="inst-nave__item">
-                  <span className="inst-nave__letter">{area.letter}</span>
-                  <h3 className="inst-nave__title">{area.title}</h3>
-                  <p className="inst-nave__copy">{area.copy}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="inst-method__block">
-            <p className="inst-method__label">Do briefing ao ar, em oito passos</p>
-            {process.map((etapa) => (
-              <div key={etapa.etapa} className="inst-etapa">
-                <div className="inst-etapa__head">
-                  <h3 className="inst-etapa__title">{etapa.etapa}</h3>
-                  <span className="inst-etapa__tag">{etapa.tag}</span>
-                </div>
-                <div className="inst-etapa__steps">
-                  {etapa.steps.map((step) => (
-                    <div key={step.num} className="inst-step">
-                      <p className="inst-step__num">{step.num}</p>
-                      <h4 className="inst-step__title">{step.title}</h4>
-                      <p className="inst-step__copy">{step.copy}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <MetodologiaFlow />
+          <Link href="/metodologia" className="inst-method__more">
+            Ver o método completo →
+          </Link>
         </div>
       </section>
 

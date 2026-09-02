@@ -147,6 +147,7 @@ shared shell (`InstNav` + `InstFooter` + the `.inst` wrapper):
 | Route | File | Prototype view |
 |---|---|---|
 | `/` | `app/(institucional)/page.tsx` | `isHome` |
+| `/metodologia` | `app/(institucional)/metodologia/page.tsx` | — (novo, sem paralelo no protótipo) |
 | `/projetos` | `app/(institucional)/projetos/page.tsx` | `isProjetos` (hub de portfólio) |
 | `/imersao` | `app/(institucional)/imersao/page.tsx` | `isContato` |
 
@@ -198,14 +199,28 @@ método NAVE. Trocar esses números em qualquer superfície é regressão; eles 
 e na metadata da home, na metadata do `/imersao`, no `HubHero` e nas referências
 numéricas dos `depoimentos`. **Preço continua fora do site** (a decisão de segurar o
 preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos: Imersão
-→ Território → Sistema) foi **substituída** pela dobra do **método NAVE** (ainda em
-`id="processo"`, que o `/hub` linka): uma linha "branding é tradução, não invenção"
-(`methodIntro`), as quatro áreas do posicionamento **N-A-V-E** (Negócio · Audiência ·
-Valor · Estória, export `positioning`) e a linha do tempo de **oito passos em duas
-etapas** (Estratégia: Entrevista/Workshop/Pesquisa/Diagnóstico; Identidade: Plataforma/
-Keyword/Keyvisual/Guia da marca, export `process`). Adaptado ao ICP de psicologia e ao
-escopo de 45 dias — não é a copy genérica B2B do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
-O CSS reaproveita `.inst-step`; os grids novos são `.inst-nave` e `.inst-etapa__steps`.
+→ Território → Sistema) foi **substituída** por um **teaser gráfico** do método NAVE
+(ainda em `id="processo"`, que o `/hub` linka): `methodIntro` + o diagrama
+`MetodologiaFlow` + link "Ver o método completo →" para **`/metodologia`**.
+
+**Método NAVE em `/metodologia`** (página dedicada, na `InstNav`): hero + o diagrama
+`MetodologiaFlow` (Estratégia → Identidade → Comunicação) + as quatro áreas do
+posicionamento **N-A-V-E** (Negócio · Audiência · Valor · Estória, export `positioning`)
++ os **oito passos em duas etapas** (Estratégia: Entrevista/Workshop/Pesquisa/Diagnóstico;
+Identidade: Plataforma/Keyword/Keyvisual/Guia da marca, export `process`) + o diagrama
+`LinhaTempo` (quatro fases: Coletando/Explorando/Criando/Definindo). Copy adaptada ao ICP
+de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B do deck-fonte
+(`Modelo_Proposta_Comercial.pdf`).
+
+**Diagramas** (`components/institucional/MetodoDiagrams.tsx` — server components):
+`MetodologiaFlow` recria o quadrado do posicionamento + venn de identidade + buquê de
+pontos de contato; `LinhaTempo` recria a timeline. São SVG de linha em `currentColor` +
+`var(--red)`, então **invertem com o tema**; ficam em `.inst-dark` na home mas em seção
+cream em `/metodologia` (por isso o `.inst-diagram__disc` tem override sob `.inst-dark`).
+Cada `<svg>` tem `min-width` e rola no mobile (`.inst-diagram` com `overflow-x:auto`) —
+não reflui. Os cards `.inst-nave`/`.inst-step` continuam pensados para fundo escuro; se
+mudar de seção, revise as cores. Se editar coordenadas, dá para rasterizar o SVG com
+`sharp` (já é dep) e conferir o layout antes de subir.
 `depoimentos` are studio clients talking about the *design service*; never write one
 that mentions atendimento, caso clínico or resultado de terapia. Same rule for the hero
 strip: no image suggesting a session, a patient, or a couch. The copy doc's
@@ -232,7 +247,7 @@ hardcoded `rgba(246,246,246,…)` on a `.inst-dark` surface must become a token
 on `.inst-red` stay hardcoded — the red never inverts.
 
 **Nav (padronizada em todo o site)**: `InstNav` is the single header — home,
-`/projetos`, `/imersao`, `/portfolio/[slug]` **and `/hub`**. The old `HubHeader` was
+`/metodologia`, `/projetos`, `/imersao`, `/portfolio/[slug]` **and `/hub`**. The old `HubHeader` was
 deleted; `/hub` imports `institucional.css` alongside `hub.css` and renders `<InstNav />`
 **outside** the `.hub` wrapper (that wrapper has `overflow-x: clip` for the deck's
 full-bleed, which would scope the nav's `position: sticky`). Because the nav's toggle

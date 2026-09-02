@@ -505,6 +505,223 @@
   gap: 48px;
 }
 
+/* --------------------------------------------------------------------------
+   Diagramas do método (SVG) — recriam o deck na paleta da marca. Desenhos de
+   linha em currentColor: invertem com o tema. O vermelho é o único acento.
+   -------------------------------------------------------------------------- */
+
+.inst-diagram {
+  margin-top: 32px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.inst-diagram__svg {
+  display: block;
+  width: 100%;
+  min-width: 820px;
+  height: auto;
+  color: inherit;
+  overflow: visible;
+}
+
+.inst-diagram text {
+  fill: currentColor;
+  font-family: var(--inst-font);
+  text-anchor: middle;
+}
+
+/* Círculos e anéis */
+.inst-diagram__hatch circle {
+  fill: currentColor;
+  fill-opacity: 0.06;
+  stroke: currentColor;
+  stroke-width: 1.25;
+}
+
+.inst-diagram__ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+}
+
+/* Disco central = superfície oposta à seção. Padrão: seção cream → disco
+   escuro. Dentro de .inst-dark, inverte. */
+.inst-diagram__disc {
+  fill: var(--black);
+  stroke: none;
+}
+
+.inst-dark .inst-diagram__disc {
+  fill: var(--cream);
+}
+
+.inst-diagram__dotted {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  opacity: 0.55;
+}
+
+.inst-diagram__spoke {
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.22;
+}
+
+/* Textos */
+.inst-diagram__core {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.inst-diagram__node-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.inst-diagram__sat-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.inst-diagram__disc-label {
+  fill: var(--cream);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.inst-dark .inst-diagram__disc-label {
+  fill: var(--black);
+}
+
+.inst-diagram__stage {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  opacity: 0.85;
+}
+
+/* Setas e eixo */
+.inst-diagram__arrow line,
+.inst-diagram__arrow polyline,
+.inst-diagram__chevron {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+}
+
+.inst-diagram__chevron {
+  opacity: 0.6;
+}
+
+.inst-diagram__arrow--accent line,
+.inst-diagram__arrow--accent polyline {
+  stroke: var(--red);
+  stroke-width: 1.5;
+}
+
+.inst-diagram__axis {
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.inst-diagram__axis-dot,
+.inst-diagram__node {
+  fill: currentColor;
+}
+
+.inst-diagram__node--accent {
+  fill: var(--red);
+}
+
+/* Linha do tempo — brackets, rótulos e divisores */
+.inst-diagram__bracket,
+.inst-diagram__bracket path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.inst-diagram__bracket {
+  opacity: 0.5;
+}
+
+.inst-diagram__bracket--accent {
+  stroke: var(--red);
+  opacity: 1;
+}
+
+.inst-diagram__etapa {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.inst-diagram__step-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.inst-diagram__divider {
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  opacity: 0.4;
+}
+
+.inst-diagram__desc {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.inst-diagram__desc--accent {
+  fill: var(--red);
+}
+
+.inst-diagram__phase {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  opacity: 0.7;
+}
+
+.inst-diagram__phase--accent {
+  fill: var(--red);
+  opacity: 1;
+}
+
+.inst-diagram__caption {
+  margin: 48px 0 0;
+  max-width: 62ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+/* Link "ver o método completo" — teaser da home (fundo escuro). */
+.inst-method__more {
+  display: inline-block;
+  margin-top: 56px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cream);
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 4px;
+}
+
+.inst-method__more:hover {
+  color: var(--red);
+}
+
 .inst-step {
   border-top: 2px solid var(--line-inverse);
   padding-top: 24px;
