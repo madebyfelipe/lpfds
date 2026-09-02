@@ -4,9 +4,19 @@ import { InstContato } from "@/components/institucional/InstContato";
 import { social } from "@/lib/institucional";
 
 export const metadata: Metadata = {
-  title: "Contato — Made by Felipe",
+  title: "Agende a imersão de branding | Made by Felipe",
   description:
-    "Agende a imersão de dois dias: posicionamento, identidade visual e verbal no ar em 45 dias."
+    "Agende a imersão de dois dias: posicionamento, identidade visual e verbal no ar em 45 dias. Branding e social media em Sorocaba (SP) e São Paulo.",
+  alternates: { canonical: "/imersao" },
+  openGraph: {
+    title: "Agende a imersão de branding | Made by Felipe",
+    description:
+      "Dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias.",
+    url: "/imersao",
+    siteName: "Made by Felipe",
+    locale: "pt_BR",
+    type: "website"
+  }
 };
 
 export default function ImersaoPage() {

@@ -118,8 +118,8 @@ export function MetodologiaFlow() {
         <MapaImg
           base="id_verbal_visual"
           alt="Identidade visual e verbal, sobrepostas."
-          width={460}
-          height={472}
+          width={920}
+          height={945}
         />
         <figcaption className="inst-flow__cap">Identidade</figcaption>
       </figure>

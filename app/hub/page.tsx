@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Hub | Made by Felipe — Conexões e Projetos",
   description:
     "Branding e Social Media Estratégico. Confira nossos produtos, assine nossa newsletter, conheça o Felipe ou agende uma mentoria.",
+  alternates: { canonical: "/hub" },
   openGraph: {
     title: "Hub | Made by Felipe — Conexões e Projetos",
     description:

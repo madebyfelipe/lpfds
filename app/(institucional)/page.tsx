@@ -11,7 +11,26 @@ import { agenda, deliverables, heroStrip, methodIntro } from "@/lib/instituciona
 export const metadata: Metadata = {
   title: "Marca para consultório de psicologia em 45 dias | Made by Felipe",
   description:
-    "Construa a marca do seu consultório em dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética."
+    "Construa a marca do seu consultório em dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética. Estúdio de branding em Sorocaba (SP).",
+  alternates: { canonical: "/" },
+  keywords: [
+    "marca para psicólogo",
+    "branding para psicólogo",
+    "identidade visual para consultório",
+    "marca para consultório de psicologia",
+    "construção de marca",
+    "Sorocaba",
+    "São Paulo"
+  ],
+  openGraph: {
+    title: "Marca para consultório de psicologia em 45 dias | Made by Felipe",
+    description:
+      "Dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética.",
+    url: "/",
+    siteName: "Made by Felipe",
+    locale: "pt_BR",
+    type: "website"
+  }
 };
 
 export default function Home() {

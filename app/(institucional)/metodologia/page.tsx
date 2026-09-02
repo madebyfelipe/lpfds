@@ -7,9 +7,30 @@ import {
 import { methodIntro, positioning, process } from "@/lib/institucional";
 
 export const metadata: Metadata = {
-  title: "Método PSIQUE — Made by Felipe",
+  title: "Método de construção de marca — PSIQUE | Made by Felipe",
   description:
-    "Da estratégia à comunicação: como a marca do seu consultório é traduzida a partir de Prática, Sujeito, Inquietação, Qualidade, Universo e Estória, em oito passos e duas etapas."
+    "Como construir uma marca do zero: o método PSIQUE traduz o negócio em posicionamento, identidade visual e verbal — da estratégia à comunicação, em oito passos e duas etapas. Branding em Sorocaba e São Paulo.",
+  alternates: { canonical: "/metodologia" },
+  keywords: [
+    "construção de marca",
+    "como construir uma marca",
+    "método de branding",
+    "processo de branding",
+    "posicionamento de marca",
+    "identidade visual",
+    "identidade verbal",
+    "branding Sorocaba",
+    "branding São Paulo"
+  ],
+  openGraph: {
+    title: "Método de construção de marca — PSIQUE | Made by Felipe",
+    description:
+      "O método PSIQUE traduz o negócio em posicionamento, identidade visual e verbal — da estratégia à comunicação.",
+    url: "/metodologia",
+    siteName: "Made by Felipe",
+    locale: "pt_BR",
+    type: "article"
+  }
 };
 
 export default function MetodologiaPage() {
