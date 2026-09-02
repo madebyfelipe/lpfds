@@ -418,19 +418,6 @@
   letter-spacing: -0.01em;
 }
 
-.inst-method__block + .inst-method__block {
-  margin-top: 96px;
-}
-
-.inst-method__label {
-  margin: 0 0 40px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--red);
-}
-
 /* As quatro áreas do posicionamento (N-A-V-E). */
 .inst-nave {
   display: grid;
@@ -467,42 +454,78 @@
   color: var(--gray-300);
 }
 
-/* Cada etapa (Estratégia / Identidade) com seus quatro passos. */
-.inst-etapa + .inst-etapa {
-  margin-top: 64px;
+/* O processo como lista numerada (não outro grid de cards): cada etapa com um
+   cabeçalho e quatro linhas nº · passo · descrição. Vive na seção cream. */
+.inst-proc {
+  margin-top: 96px;
 }
 
-.inst-etapa__head {
+.inst-proc__etapa + .inst-proc__etapa {
+  margin-top: 72px;
+}
+
+.inst-proc__head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 32px;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--line-inverse-strong);
+  border-bottom: 2px solid var(--black);
 }
 
-.inst-etapa__title {
+.inst-proc__title {
   margin: 0;
-  font-size: 1.5rem;
-  line-height: 1.2;
+  font-size: 1.75rem;
+  line-height: 1.15;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-.inst-etapa__tag {
+.inst-proc__tag {
   flex-shrink: 0;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gray-300);
+  color: var(--gray-500);
 }
 
-.inst-etapa__steps {
+.inst-proc__rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inst-proc__row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 48px;
+  grid-template-columns: 48px minmax(160px, 220px) 1fr;
+  align-items: baseline;
+  column-gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.inst-proc__num {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--red);
+}
+
+.inst-proc__step {
+  margin: 0;
+  font-size: 1.375rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.inst-proc__copy {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gray-700);
 }
 
 /* --------------------------------------------------------------------------
@@ -1518,10 +1541,18 @@
     gap: 40px;
   }
 
-  .inst-nave,
-  .inst-etapa__steps {
+  .inst-nave {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
+  }
+
+  .inst-proc__row {
+    grid-template-columns: 44px 1fr;
+    row-gap: 8px;
+  }
+
+  .inst-proc__copy {
+    grid-column: 2;
   }
 
   .inst-deliverables {
@@ -1614,12 +1645,11 @@
     font-size: 1.375rem;
   }
 
-  .inst-nave,
-  .inst-etapa__steps {
+  .inst-nave {
     grid-template-columns: 1fr;
   }
 
-  .inst-etapa__head {
+  .inst-proc__head {
     flex-direction: column;
     gap: 8px;
   }

@@ -203,13 +203,15 @@ preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos
 (ainda em `id="processo"`, que o `/hub` linka): `methodIntro` + o diagrama
 `MetodologiaFlow` + link "Ver o método completo →" para **`/metodologia`**.
 
-**Método NAVE em `/metodologia`** (página dedicada, na `InstNav`): hero + o diagrama
-`MetodologiaFlow` (Estratégia → Identidade → Comunicação) + as quatro áreas do
-posicionamento **N-A-V-E** (Negócio · Audiência · Valor · Estória, export `positioning`)
-+ os **oito passos em duas etapas** (Estratégia: Entrevista/Workshop/Pesquisa/Diagnóstico;
-Identidade: Plataforma/Keyword/Keyvisual/Guia da marca, export `process`) + o diagrama
-`LinhaTempo` (quatro fases: Coletando/Explorando/Criando/Definindo). Copy adaptada ao ICP
-de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B do deck-fonte
+**Método NAVE em `/metodologia`** (página dedicada, na `InstNav`) — três blocos com
+tratamentos visuais **distintos de propósito** (a primeira versão empilhava dois grids de
+4 cards e confundia): (1) `MetodologiaFlow` cream — o fluxo Estratégia → Identidade →
+Comunicação; (2) **O posicionamento** numa seção `.inst-dark` — as quatro áreas **N-A-V-E**
+como cards de letra grande (`.inst-nave`, export `positioning`); (3) **O processo** numa
+seção cream — o diagrama `LinhaTempo` + os **oito passos** como **lista numerada**
+(`.inst-proc`, nº · passo · descrição, agrupada nas duas etapas Estratégia/Identidade,
+export `process`), **não** outro grid de cards. Copy adaptada ao ICP de psicologia e ao
+escopo de 45 dias — **não** é a copy genérica B2B do deck-fonte
 (`Modelo_Proposta_Comercial.pdf`).
 
 **Diagramas** (`components/institucional/MetodoDiagrams.tsx` — server components):

@@ -34,10 +34,14 @@ export default function MetodologiaPage() {
         </p>
       </section>
 
-      {/* As quatro áreas (N-A-V-E) e os oito passos — cards no fundo escuro. */}
+      {/* As quatro áreas do posicionamento (N-A-V-E) — cards no fundo escuro. */}
       <section className="inst-dark">
         <div className="inst-section">
           <p className="inst-kicker inst-kicker--inverse">— O posicionamento</p>
+          <p className="inst-method__intro">
+            O posicionamento é a tradução de quatro áreas. Investigadas juntas,
+            elas revelam o que só existe no seu consultório.
+          </p>
           <div className="inst-nave">
             {positioning.map((area) => (
               <div key={area.letter} className="inst-nave__item">
@@ -47,38 +51,38 @@ export default function MetodologiaPage() {
               </div>
             ))}
           </div>
-
-          <div className="inst-method__block">
-            <p className="inst-method__label">Do briefing ao ar, em oito passos</p>
-            {process.map((etapa) => (
-              <div key={etapa.etapa} className="inst-etapa">
-                <div className="inst-etapa__head">
-                  <h2 className="inst-etapa__title">{etapa.etapa}</h2>
-                  <span className="inst-etapa__tag">{etapa.tag}</span>
-                </div>
-                <div className="inst-etapa__steps">
-                  {etapa.steps.map((step) => (
-                    <div key={step.num} className="inst-step">
-                      <p className="inst-step__num">{step.num}</p>
-                      <h3 className="inst-step__title">{step.title}</h3>
-                      <p className="inst-step__copy">{step.copy}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Diagrama 2 — Linha do tempo: duas etapas, quatro fases. */}
+      {/* O processo: a linha do tempo (visão geral por fase) + a lista
+          numerada dos oito passos (o detalhe do que cada um entrega). */}
       <section className="inst-section inst-section--rule">
-        <p className="inst-kicker">— Linha do tempo</p>
+        <p className="inst-kicker">— O processo</p>
         <LinhaTempo />
         <p className="inst-diagram__caption">
           Duas etapas — estratégia e identidade — quebradas em quatro fases:
           coletar, explorar, criar e definir. No ar em 45 dias.
         </p>
+
+        <div className="inst-proc">
+          {process.map((etapa) => (
+            <div key={etapa.etapa} className="inst-proc__etapa">
+              <div className="inst-proc__head">
+                <h2 className="inst-proc__title">{etapa.etapa}</h2>
+                <span className="inst-proc__tag">{etapa.tag}</span>
+              </div>
+              <ol className="inst-proc__rows">
+                {etapa.steps.map((step) => (
+                  <li key={step.num} className="inst-proc__row">
+                    <span className="inst-proc__num">{step.num}</span>
+                    <h3 className="inst-proc__step">{step.title}</h3>
+                    <p className="inst-proc__copy">{step.copy}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
       </section>
 
       <InstContato />
