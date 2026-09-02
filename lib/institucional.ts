@@ -55,21 +55,89 @@ export const heroStrip = [
   }
 ];
 
-export const steps = [
+// Método NAVE. Branding é tradução, não invenção: a marca não é criada do zero
+// — é o resultado de investigar quatro áreas do consultório até encontrar o que
+// o torna único. As quatro áreas (N-A-V-E) formam o posicionamento.
+export const methodIntro =
+  "Branding é tradução, não invenção. A marca do seu consultório não é inventada — ela é traduzida de quatro áreas que a gente estuda até encontrar o que só existe em você.";
+
+export const positioning = [
   {
-    num: "01",
-    title: "Imersão",
-    copy: "Meia manhã com você. Histórico, carteira, valor da sessão, público que você atende melhor e leitura da concorrência local."
+    letter: "N",
+    title: "Negócio",
+    copy: "Como o consultório funciona de fato: receita, carteira, valor da sessão e ocupação de agenda. Não existe marca antes do negócio."
   },
   {
-    num: "02",
-    title: "Território",
-    copy: "Posicionamento, recorte e discurso do consultório. Aprovado antes de qualquer arte."
+    letter: "A",
+    title: "Audiência",
+    copy: "Quem você atende melhor e quem procura você. O público real, não o idealizado."
   },
   {
-    num: "03",
-    title: "Sistema",
-    copy: "Identidade visual e verbal aplicada nos pontos de contato que a pessoa vê primeiro. No ar em 30 dias, com checagem de conformidade em cada peça."
+    letter: "V",
+    title: "Valor",
+    copy: "A promessa do seu atendimento contra o que a concorrência local já oferece — para achar onde você é, de fato, diferente."
+  },
+  {
+    letter: "E",
+    title: "Estória",
+    copy: "De onde você vem, no que acredita e a personalidade que a marca vai carregar. A origem que ninguém copia."
+  }
+];
+
+// Duas etapas (Estratégia → Identidade), oito passos: é a linha do tempo do
+// método. Coletar e explorar até o diagnóstico; criar e definir até o guia.
+export const process = [
+  {
+    etapa: "Estratégia de marca",
+    tag: "Coletando · Explorando",
+    steps: [
+      {
+        num: "01",
+        title: "Entrevista",
+        copy: "Conversa individual com você — e com quem mais atua no consultório."
+      },
+      {
+        num: "02",
+        title: "Workshop",
+        copy: "Dois dias de imersão guiada, onde as quatro áreas viram estratégia."
+      },
+      {
+        num: "03",
+        title: "Pesquisa",
+        copy: "Validação das informações levantadas e leitura da concorrência da sua região."
+      },
+      {
+        num: "04",
+        title: "Diagnóstico",
+        copy: "Tudo o que foi coletado, documentado e aprovado com você antes de seguir."
+      }
+    ]
+  },
+  {
+    etapa: "Identidade de marca",
+    tag: "Criando · Definindo",
+    steps: [
+      {
+        num: "05",
+        title: "Plataforma",
+        copy: "A síntese da estratégia — o documento que orienta toda a identidade da marca."
+      },
+      {
+        num: "06",
+        title: "Keyword",
+        copy: "Uma proposta de posicionamento e identidade verbal: o discurso do consultório."
+      },
+      {
+        num: "07",
+        title: "Keyvisual",
+        copy: "Uma proposta de identidade visual: cores, grafismos e tipografia."
+      },
+      {
+        num: "08",
+        title: "Guia da marca",
+        copy: "Estratégia, posicionamento e identidade reunidos, aplicados e no ar em 45 dias."
+      }
+    ]
   }
 ];
 
@@ -92,7 +160,7 @@ export const deliverables = [
 export const depoimentos = [
   {
     texto:
-      "Cheguei achando que ia sair com um logotipo e saí com uma leitura do meu próprio consultório. Na manhã de imersão a conversa foi sobre carteira, valor da sessão e o tipo de pessoa que eu atendo melhor. O material veio depois, e veio coerente com isso. Hoje quem me procura já chega sabendo do que eu trato, e a primeira mensagem começa num ponto muito mais adiantado.",
+      "Cheguei achando que ia sair com um logotipo e saí com uma leitura do meu próprio consultório. Nos dois dias de imersão a conversa foi sobre carteira, valor da sessão e o tipo de pessoa que eu atendo melhor. O material veio depois, e veio coerente com isso. Hoje quem me procura já chega sabendo do que eu trato, e a primeira mensagem começa num ponto muito mais adiantado.",
     nome: "Carolina Bueno",
     titulo: "Psicóloga · CRP 06/128455",
     cidade: "Sorocaba"
@@ -106,7 +174,7 @@ export const depoimentos = [
   },
   {
     texto:
-      "Sempre tratei marca como assunto secundário, coisa para depois que a agenda estivesse cheia. A imersão inverteu isso em uma manhã, porque partiu de números que já eram meus. O posicionamento foi aprovado antes de qualquer arte, o que evitou o vaivém de gosto pessoal. Trinta dias depois estava tudo no ar, da página profissional à papelaria do consultório.",
+      "Sempre tratei marca como assunto secundário, coisa para depois que a agenda estivesse cheia. A imersão inverteu isso em dois dias, porque partiu de números que já eram meus. O posicionamento foi aprovado antes de qualquer arte, o que evitou o vaivém de gosto pessoal. Quarenta e cinco dias depois estava tudo no ar, da página profissional à papelaria do consultório.",
     nome: "Renata Siqueira",
     titulo: "Psicóloga · CRP 06/119374",
     cidade: "Campinas"

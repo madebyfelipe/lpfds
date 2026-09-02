@@ -6,7 +6,7 @@ import { social } from "@/lib/institucional";
 export const metadata: Metadata = {
   title: "Contato — Made by Felipe",
   description:
-    "Agende a imersão de meio dia: posicionamento, identidade visual e verbal no ar em 30 dias."
+    "Agende a imersão de dois dias: posicionamento, identidade visual e verbal no ar em 45 dias."
 };
 
 export default function ImersaoPage() {

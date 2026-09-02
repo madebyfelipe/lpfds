@@ -179,7 +179,7 @@ it** — it is approved copy. The portfolio is *not* duplicated there: `/projeto
 `lib/portfolio.ts`, the single source of truth shared with the `/portfolio` case pages.
 
 **ICP (agosto/2026)**: the site no longer speaks to law firms — it speaks to
-**consultórios de psicologia**. Headline is "meio dia de imersão", compliance line is
+**consultórios de psicologia**. Headline is "dois dias de imersão", compliance line is
 the *artigo 20 do Código de Ética Profissional do Psicólogo* (it replaced "Provimento
 205 da OAB"), the studio block reads receita/carteira/valor de sessão/ocupação de
 agenda, and the `/imersao` form asks **Nome · CRP · WhatsApp** (CRP replaced
@@ -187,10 +187,25 @@ agenda, and the `/imersao` form asks **Nome · CRP · WhatsApp** (CRP replaced
 the divulgação to carry nome completo, título and CRP, and nome fantasia depends on a
 registered PJ — naming is an optional, case-by-case item, not a listed deliverable.
 O `/hub` fala a mesma oferta, nesta ordem: a primeira dobra é o `HubHero` (`/A IMERSÃO`,
-"Meio dia com você. Trinta dias no ar.", imersão → território → sistema) e o bloco de
+"Dois dias com você. Quarenta e cinco dias no ar.") e o bloco de
 fechamento é o `HubBio` (`/QUEM FAZ`, bio em terceira pessoa: estrategista de marca,
 7 anos de mercado, 150+ projetos, hoje atende psicólogos e clínicas). Os dois já foram
 o inverso disso; não trocar de volta nem voltar para a copy genérica de branding.
+
+**Oferta e método (setembro/2026)**: a oferta passou de "meio dia / 30 dias" para
+**dois dias de imersão / 45 dias no ar** — Felipe adaptou os números ao escopo real do
+método NAVE. Trocar esses números em qualquer superfície é regressão; eles vivem no hero
+e na metadata da home, na metadata do `/imersao`, no `HubHero` e nas referências
+numéricas dos `depoimentos`. **Preço continua fora do site** (a decisão de segurar o
+preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos: Imersão
+→ Território → Sistema) foi **substituída** pela dobra do **método NAVE** (ainda em
+`id="processo"`, que o `/hub` linka): uma linha "branding é tradução, não invenção"
+(`methodIntro`), as quatro áreas do posicionamento **N-A-V-E** (Negócio · Audiência ·
+Valor · Estória, export `positioning`) e a linha do tempo de **oito passos em duas
+etapas** (Estratégia: Entrevista/Workshop/Pesquisa/Diagnóstico; Identidade: Plataforma/
+Keyword/Keyvisual/Guia da marca, export `process`). Adaptado ao ICP de psicologia e ao
+escopo de 45 dias — não é a copy genérica B2B do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
+O CSS reaproveita `.inst-step`; os grids novos são `.inst-nave` e `.inst-etapa__steps`.
 `depoimentos` are studio clients talking about the *design service*; never write one
 that mentions atendimento, caso clínico or resultado de terapia. Same rule for the hero
 strip: no image suggesting a session, a patient, or a couch. The copy doc's

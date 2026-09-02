@@ -3,14 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { Depoimentos } from "@/components/institucional/Depoimentos";
 import { InstContato } from "@/components/institucional/InstContato";
-import { agenda, deliverables, heroStrip, steps } from "@/lib/institucional";
+import {
+  agenda,
+  deliverables,
+  heroStrip,
+  methodIntro,
+  positioning,
+  process
+} from "@/lib/institucional";
 
 // Title/description da home vêm do copy aprovado e sobrescrevem os do
 // layout raiz, que seguem servindo /hub, /contato e /portfolio.
 export const metadata: Metadata = {
-  title: "Marca para consultório de psicologia em 30 dias | Made by Felipe",
+  title: "Marca para consultório de psicologia em 45 dias | Made by Felipe",
   description:
-    "Construa a marca do seu consultório em meio dia de imersão. Posicionamento, identidade visual e verbal no ar em 30 dias, dentro do artigo 20 do Código de Ética."
+    "Construa a marca do seu consultório em dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética."
 };
 
 export default function Home() {
@@ -19,11 +26,11 @@ export default function Home() {
       <header className="inst-hero">
         <h1 className="inst-hero__title">
           Construa a marca do seu consultório em{" "}
-          <span className="inst-hero__accent">meio dia de imersão</span>.
+          <span className="inst-hero__accent">dois dias de imersão</span>.
         </h1>
         <p className="inst-hero__lead">
-          Uma manhã com você. Posicionamento, identidade visual e verbal no ar
-          em 30 dias.
+          Dois dias com você. Posicionamento, identidade visual e verbal no ar
+          em 45 dias.
         </p>
         <p className="inst-hero__note">
           Dentro do artigo 20 do Código de Ética Profissional do Psicólogo.
@@ -48,16 +55,46 @@ export default function Home() {
         ))}
       </div>
 
-      {/* id="processo": o card "Como trabalho" do /hub aponta para /#processo. */}
+      {/* id="processo": o card "Como trabalho" do /hub aponta para /#processo.
+          Dobra do método NAVE — o posicionamento (N-A-V-E) e a linha do tempo
+          de oito passos em duas etapas. Substituiu o antigo "Como funciona". */}
       <section id="processo" className="inst-dark">
         <div className="inst-section">
-          <p className="inst-kicker inst-kicker--inverse">— Como funciona</p>
-          <div className="inst-steps">
-            {steps.map((step) => (
-              <div key={step.num} className="inst-step">
-                <p className="inst-step__num">{step.num}</p>
-                <h3 className="inst-step__title">{step.title}</h3>
-                <p className="inst-step__copy">{step.copy}</p>
+          <p className="inst-kicker inst-kicker--inverse">— O método</p>
+          <p className="inst-method__intro">{methodIntro}</p>
+
+          <div className="inst-method__block">
+            <p className="inst-method__label">
+              O posicionamento nasce de quatro áreas
+            </p>
+            <div className="inst-nave">
+              {positioning.map((area) => (
+                <div key={area.letter} className="inst-nave__item">
+                  <span className="inst-nave__letter">{area.letter}</span>
+                  <h3 className="inst-nave__title">{area.title}</h3>
+                  <p className="inst-nave__copy">{area.copy}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="inst-method__block">
+            <p className="inst-method__label">Do briefing ao ar, em oito passos</p>
+            {process.map((etapa) => (
+              <div key={etapa.etapa} className="inst-etapa">
+                <div className="inst-etapa__head">
+                  <h3 className="inst-etapa__title">{etapa.etapa}</h3>
+                  <span className="inst-etapa__tag">{etapa.tag}</span>
+                </div>
+                <div className="inst-etapa__steps">
+                  {etapa.steps.map((step) => (
+                    <div key={step.num} className="inst-step">
+                      <p className="inst-step__num">{step.num}</p>
+                      <h4 className="inst-step__title">{step.title}</h4>
+                      <p className="inst-step__copy">{step.copy}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
