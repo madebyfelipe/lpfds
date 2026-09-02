@@ -21,17 +21,6 @@ const products = [
     avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
   },
   {
-    kicker: "/PORTFÓLIO",
-    title: "Trabalhos",
-    desc: "Cases selecionados de branding e posicionamento.",
-    cta: "Ver Cases",
-    href: "/projetos",
-    bgColor: "#fecb4d",
-    textColor: "#3b2901",
-    invert: false,
-    avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
-  },
-  {
     kicker: "/MÉTODO",
     title: "Como trabalho",
     desc: "Meu método, não chute. Do briefing à decisão final.",

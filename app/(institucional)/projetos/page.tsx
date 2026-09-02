@@ -8,7 +8,9 @@ import { projects } from "@/lib/portfolio";
 export const metadata: Metadata = {
   title: "Projetos — Made by Felipe",
   description:
-    "Cases de marca, conteúdo e landing page entregues pela Made by Felipe."
+    "Cases de marca, conteúdo e landing page entregues pela Made by Felipe.",
+  // Não é público: abre só por link direto, fora da navegação e do índice.
+  robots: { index: false, follow: false }
 };
 
 // O cover abre o case completo já existente em /portfolio/[slug] — a

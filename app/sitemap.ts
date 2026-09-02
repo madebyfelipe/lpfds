@@ -1,10 +1,12 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/lib/portfolio";
 
+// /projetos, /portfolio e os cases /portfolio/[slug] ficam fora do sitemap
+// de propósito: são acessíveis só por link direto (noindex nas próprias
+// páginas), não devem ser públicos/indexados.
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://madebyfelipe.com";
 
-  const staticPages: MetadataRoute.Sitemap = [
+  return [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -12,22 +14,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/projetos`,
+      url: `${baseUrl}/metodologia`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/imersao`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/portfolio`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.7,
     },
     {
       url: `${baseUrl}/contato`,
@@ -42,14 +38,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
   ];
-
-  // Os cases individuais continuam em /portfolio/[slug] — /projetos é só o hub.
-  const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
-    url: `${baseUrl}/portfolio/${project.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
-
-  return [...staticPages, ...projectPages];
 }

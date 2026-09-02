@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   title: "Portfólio — Made by Felipe",
   description:
     "Cases de branding e conteúdo estratégico: marcas que passaram a publicar com consistência e cresceram em alcance, autoridade e demanda.",
+  // Não é público: abre só por link direto, fora da navegação e do índice.
+  robots: { index: false, follow: false },
   openGraph: {
     title: "Portfólio — Made by Felipe",
     description:

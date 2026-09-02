@@ -33,6 +33,8 @@ export async function generateMetadata({
   return {
     title: `${project.client} | Portfólio — Made by Felipe`,
     description: project.tagline,
+    // Não é público: abre só por link direto, fora da navegação e do índice.
+    robots: { index: false, follow: false },
     openGraph: {
       title: `${project.client} | Portfólio — Made by Felipe`,
       description: project.tagline,
