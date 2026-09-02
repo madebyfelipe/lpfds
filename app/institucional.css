@@ -697,13 +697,13 @@
 }
 
 .inst-flow__fig--venn {
-  flex-basis: 190px;
-  max-width: 190px;
+  flex-basis: 230px;
+  max-width: 230px;
 }
 
 .inst-flow__fig--bouquet {
-  flex-basis: 320px;
-  max-width: 320px;
+  flex-basis: 360px;
+  max-width: 360px;
 }
 
 .inst-flow__svg {
@@ -734,16 +734,6 @@
   opacity: 0.55;
 }
 
-/* Disco central = superfície oposta à seção; inverte sob .inst-dark. */
-.inst-flow__disc {
-  fill: var(--black);
-  stroke: none;
-}
-
-.inst-dark .inst-flow__disc {
-  fill: var(--cream);
-}
-
 .inst-flow__core {
   font-size: 15px;
   font-weight: 600;
@@ -760,21 +750,39 @@
   font-size: 8.5px;
 }
 
-.inst-flow__sat {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+/* Mapas (imagens) das peças identidade e comunicação. Duas variantes de arte
+   (preto = --light, para fundo claro; branco = --dark, para fundo escuro). A
+   visível depende da superfície REAL, que é XOR(seção .inst-dark, tema dark):
+   por padrão a seção é clara → mostra a arte escura (--light). */
+.inst-flow__img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.inst-flow__disc-label {
-  fill: var(--cream);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+.inst-flow__img--dark {
+  display: none;
 }
 
-.inst-dark .inst-flow__disc-label {
-  fill: var(--black);
+/* Superfície escura: seção .inst-dark no tema claro, OU seção cream no tema
+   escuro. Nos dois casos troca para a arte branca (--dark). */
+.inst-dark .inst-flow__img--light,
+:root[data-inst-theme="dark"] .inst-flow__img--light {
+  display: none;
+}
+
+.inst-dark .inst-flow__img--dark,
+:root[data-inst-theme="dark"] .inst-flow__img--dark {
+  display: block;
+}
+
+/* Tema escuro + seção .inst-dark = superfície clara de novo → volta ao preto. */
+:root[data-inst-theme="dark"] .inst-dark .inst-flow__img--light {
+  display: block;
+}
+
+:root[data-inst-theme="dark"] .inst-dark .inst-flow__img--dark {
+  display: none;
 }
 
 .inst-flow__cap {

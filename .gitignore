@@ -16,6 +16,10 @@ Site institucional para Felipe/
 Site institucional para Felipe.zip
 fotos Felipe/
 
+# mapas-fonte do metodo PSIQUE (originais 2600px; otimizados em
+# public/institucional/mapas). Ancorado na raiz p/ nao pegar o public.
+/mapas/
+
 # variaveis de ambiente (credenciais SMTP do form da imersao)
 .env
 .env.local

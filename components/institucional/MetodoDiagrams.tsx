@@ -1,7 +1,8 @@
-// Ilustrações do método PSIQUE, recriadas do deck-fonte (Modelo_Proposta_Comercial.pdf)
-// como SVG na paleta da marca. Desenhos de linha em `currentColor`, então
-// invertem junto com o tema (.inst-dark → cream sobre preto, como o deck). O
-// vermelho da marca é o acento. Sem estado — server components.
+// Ilustrações do método PSIQUE. A 1ª peça (posicionamento) é SVG de linha em
+// `currentColor` — inverte com o tema. As peças de identidade e comunicação são
+// os mapas que o Felipe subiu (`public/institucional/mapas/`), em duas variantes
+// (preto p/ superfície clara, branco p/ escura); o CSS mostra a certa por
+// superfície+tema. Sem estado — server components.
 
 // Chevron reutilizado entre as três peças do fluxo (vira ↓ no mobile via CSS).
 function FlowArrow() {
@@ -15,34 +16,48 @@ function FlowArrow() {
   );
 }
 
-// Buquê de pontos de contato: um anel de círculos que se encavalam (se
-// sobrepõem) em torno do centro, como no deck. Sobreposição vem do raio (40)
-// ser maior que a metade do passo angular na órbita (84).
-const CX = 165;
-const CY = 165;
-const ORBIT = 84;
-const CONTACT_POINTS = [
-  { a: 0, label: "SITE" },
-  { a: 30, label: "ANÚNCIOS" },
-  { a: 60, label: "PROPOSTAS" },
-  { a: 90, label: "SERVIÇOS" },
-  { a: 120, label: "PRODUTOS" },
-  { a: 150, label: "AMBIENTES" },
-  { a: 180, label: "BLOG" },
-  { a: 210, label: "EMAILS" },
-  { a: 240, label: "PDV" },
-  { a: 270, label: "EMBALAGEM" },
-  { a: 300, label: "PAPELARIA" },
-  { a: 330, label: "MÍDIAS" }
-].map((p) => {
-  const rad = (p.a * Math.PI) / 180;
-  return { ...p, x: CX + ORBIT * Math.cos(rad), y: CY + ORBIT * Math.sin(rad) };
-});
+// Mapa (imagem) em duas variantes de cor, uma escondida por CSS conforme a
+// superfície. `--light` é a arte escura (para fundo claro); `--dark` a clara.
+function MapaImg({
+  base,
+  alt,
+  width,
+  height
+}: {
+  base: string;
+  alt: string;
+  width: number;
+  height: number;
+}) {
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className="inst-flow__img inst-flow__img--light"
+        src={`/institucional/mapas/${base}_preto.png`}
+        alt={alt}
+        width={width}
+        height={height}
+        loading="lazy"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className="inst-flow__img inst-flow__img--dark"
+        src={`/institucional/mapas/${base}_branco.png`}
+        alt=""
+        aria-hidden="true"
+        width={width}
+        height={height}
+        loading="lazy"
+      />
+    </>
+  );
+}
 
 // ─────────────────────────────────────────────────────────────────────────
 // Diagrama 1 — Metodologia: Estratégia → Identidade → Comunicação.
-// Três peças SVG (quadrado N-A-V-E · venn · buquê) num flex: linha no desktop,
-// coluna no mobile — sem scroll horizontal.
+// Hexágono do posicionamento (SVG) + os dois mapas (imagens) num flex: linha
+// no desktop, coluna no mobile — sem scroll horizontal.
 // ─────────────────────────────────────────────────────────────────────────
 export function MetodologiaFlow() {
   return (
@@ -99,27 +114,12 @@ export function MetodologiaFlow() {
 
       {/* Identidade — os dois círculos encavalados (visual + verbal) */}
       <figure className="inst-flow__fig inst-flow__fig--venn">
-        <svg
-          className="inst-flow__svg"
-          viewBox="0 0 200 300"
-          role="img"
-          aria-label="Identidade visual e verbal, sobrepostas."
-        >
-          <circle className="inst-flow__ring" cx="100" cy="112" r="78" />
-          <circle className="inst-flow__ring" cx="100" cy="196" r="78" />
-          <text className="inst-flow__label" x="100" y="80">
-            IDENTIDADE
-          </text>
-          <text className="inst-flow__label" x="100" y="97">
-            VISUAL
-          </text>
-          <text className="inst-flow__label" x="100" y="222">
-            IDENTIDADE
-          </text>
-          <text className="inst-flow__label" x="100" y="239">
-            VERBAL
-          </text>
-        </svg>
+        <MapaImg
+          base="id_verbal_visual"
+          alt="Identidade visual e verbal, sobrepostas."
+          width={460}
+          height={472}
+        />
         <figcaption className="inst-flow__cap">Identidade</figcaption>
       </figure>
 
@@ -127,35 +127,12 @@ export function MetodologiaFlow() {
 
       {/* Comunicação — o buquê de pontos de contato encavalados */}
       <figure className="inst-flow__fig inst-flow__fig--bouquet">
-        <svg
-          className="inst-flow__svg"
-          viewBox="0 0 330 330"
-          role="img"
-          aria-label="Pontos de contato acumulados em torno da marca: site, anúncios, propostas, produtos, e-mails, PDV, embalagem, papelaria, mídias e mais."
-        >
-          <g className="inst-flow__ring">
-            {CONTACT_POINTS.map((p) => (
-              <circle key={p.label} cx={p.x} cy={p.y} r="40" />
-            ))}
-          </g>
-          <circle className="inst-flow__disc" cx={CX} cy={CY} r="52" />
-          {CONTACT_POINTS.map((p) => (
-            <text
-              key={p.label}
-              className="inst-flow__sat"
-              x={p.x}
-              y={p.y + 3}
-            >
-              {p.label}
-            </text>
-          ))}
-          <text className="inst-flow__disc-label" x={CX} y={CY - 3}>
-            PONTOS
-          </text>
-          <text className="inst-flow__disc-label" x={CX} y={CY + 13}>
-            DE CONTATO
-          </text>
-        </svg>
+        <MapaImg
+          base="mapa"
+          alt="Pontos de contato acumulados em torno da marca: ambientes, site, apresentações, relações públicas, e-mails, social media, PDV, anúncios, papelaria, propaganda, embalagem e propostas."
+          width={760}
+          height={822}
+        />
         <figcaption className="inst-flow__cap">Comunicação</figcaption>
       </figure>
     </div>
