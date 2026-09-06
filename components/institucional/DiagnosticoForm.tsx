@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   labelFor,
   pontosContato,
@@ -30,6 +31,10 @@ export function DiagnosticoForm() {
   const [resultado, setResultado] = useState<{ indice: number; banda: Banda } | null>(null);
   const [utm, setUtm] = useState<Utm>({});
 
+  const tituloRef = useRef<HTMLHeadingElement>(null);
+  // Não roubar o foco no primeiro render: só quando a etapa de fato muda.
+  const primeiraEtapa = useRef(true);
+
   // Parâmetros de campanha, se a pessoa veio de um e-mail/anúncio.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
@@ -44,6 +49,14 @@ export function DiagnosticoForm() {
   const section = sections[step];
   const total = sections.length;
   const ultima = step === total - 1;
+
+  useEffect(() => {
+    if (primeiraEtapa.current) {
+      primeiraEtapa.current = false;
+      return;
+    }
+    tituloRef.current?.focus();
+  }, [step]);
 
   const sectionNames = useMemo(
     () => new Set(section.fields.map((f) => f.name)),
@@ -125,7 +138,15 @@ export function DiagnosticoForm() {
 
   return (
     <div className="diag">
-      <div className="diag__progress" aria-hidden="true">
+      <div
+        className="diag__progress"
+        role="progressbar"
+        aria-label="Progresso do diagnóstico"
+        aria-valuemin={1}
+        aria-valuemax={total}
+        aria-valuenow={step + 1}
+        aria-valuetext={`Etapa ${step + 1} de ${total}`}
+      >
         <span className="diag__progress-bar" style={{ width: `${progresso}%` }} />
       </div>
       <p className="diag__step">
@@ -134,7 +155,11 @@ export function DiagnosticoForm() {
 
       <div className="diag__head">
         <p className="inst-kicker">— {section.kicker}</p>
-        <h2 className="diag__title">{section.title}</h2>
+        {/* tabIndex -1: alvo de foco programático na troca de etapa, sem
+            entrar na ordem de Tab. */}
+        <h2 className="diag__title" ref={tituloRef} tabIndex={-1}>
+          {section.title}
+        </h2>
         {section.intro && <p className="diag__intro">{section.intro}</p>}
       </div>
 
@@ -166,9 +191,105 @@ export function DiagnosticoForm() {
         )}
       </div>
 
-      <p className="inst-form__status" role="status">
+      <p
+        className="inst-form__status"
+        role={estado === "erro" ? "alert" : "status"}
+      >
         {estado === "erro" ? erro : ""}
       </p>
+    </div>
+  );
+}
+
+
+// ---------------------------------------------------------------------------
+// Grupo de opções
+// ---------------------------------------------------------------------------
+
+/**
+ * Um grupo de escolha única. Eram botões independentes com `aria-pressed`:
+ * dava para operar pelo teclado, mas cada opção entrava na ordem de Tab e o
+ * leitor de tela anunciava "botão pressionado" em vez de "opção 2 de 3".
+ *
+ * Aqui é o padrão radiogroup: um único ponto de parada no Tab (roving
+ * tabindex) e as setas percorrem as opções, como num `<input type="radio">`.
+ */
+function GrupoOpcoes({
+  opcoes,
+  valor,
+  onEscolher,
+  rotuloId,
+  rotulo,
+  className,
+  itemClassName
+}: {
+  opcoes: { value: string; label: string }[];
+  valor: string;
+  onEscolher: (value: string) => void;
+  rotuloId?: string;
+  rotulo?: string;
+  className: string;
+  itemClassName: string;
+}) {
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const selecionado = opcoes.findIndex((o) => o.value === valor);
+  // Sem escolha ainda, a primeira opção é quem recebe o foco — o grupo
+  // precisa de exatamente um ponto de entrada no Tab.
+  const focavel = selecionado >= 0 ? selecionado : 0;
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const n = opcoes.length;
+    let alvo: number;
+
+    switch (event.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        alvo = (focavel + 1) % n;
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        alvo = (focavel - 1 + n) % n;
+        break;
+      case "Home":
+        alvo = 0;
+        break;
+      case "End":
+        alvo = n - 1;
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    onEscolher(opcoes[alvo].value);
+    refs.current[alvo]?.focus();
+  };
+
+  return (
+    <div
+      role="radiogroup"
+      aria-labelledby={rotuloId}
+      aria-label={rotuloId ? undefined : rotulo}
+      className={className}
+      onKeyDown={onKeyDown}
+    >
+      {opcoes.map((opcao, i) => (
+        <button
+          key={opcao.value}
+          ref={(node) => {
+            refs.current[i] = node;
+          }}
+          type="button"
+          role="radio"
+          aria-checked={valor === opcao.value}
+          tabIndex={i === focavel ? 0 : -1}
+          className={itemClassName}
+          onClick={() => onEscolher(opcao.value)}
+        >
+          {opcao.label}
+        </button>
+      ))}
     </div>
   );
 }
@@ -194,20 +315,17 @@ function FieldControl({ field, values, set }: ControlProps) {
         <p className="diag-matrix__scale">{scale.map((s) => s.label).join(" · ")}</p>
         {pontosContato.map((row) => (
           <div key={row.name} className="diag-matrix__row">
-            <span className="diag-matrix__row-label">{row.label}</span>
-            <div className="diag-matrix__opts">
-              {scale.map((s) => (
-                <button
-                  key={s.value}
-                  type="button"
-                  className="diag-chip"
-                  aria-pressed={values[row.name] === s.value}
-                  onClick={() => set(row.name, s.value)}
-                >
-                  {s.value}
-                </button>
-              ))}
-            </div>
+            <span className="diag-matrix__row-label" id={`${row.name}-label`}>
+              {row.label}
+            </span>
+            <GrupoOpcoes
+              rotuloId={`${row.name}-label`}
+              className="diag-matrix__opts"
+              itemClassName="diag-chip"
+              opcoes={scale.map((s) => ({ value: s.value, label: s.value }))}
+              valor={values[row.name] ?? ""}
+              onEscolher={(v) => set(row.name, v)}
+            />
           </div>
         ))}
       </fieldset>
@@ -217,20 +335,20 @@ function FieldControl({ field, values, set }: ControlProps) {
   if (field.type === "nps") {
     return (
       <fieldset className="diag-field">
-        <legend className="diag-field__label">{field.label}</legend>
-        <div className="diag-nps">
-          {Array.from({ length: 11 }, (_, n) => (
-            <button
-              key={n}
-              type="button"
-              className="diag-chip"
-              aria-pressed={value === String(n)}
-              onClick={() => set(field.name, String(n))}
-            >
-              {n}
-            </button>
-          ))}
-        </div>
+        <legend className="diag-field__label" id={`${field.name}-label`}>
+          {field.label}
+        </legend>
+        <GrupoOpcoes
+          rotuloId={`${field.name}-label`}
+          className="diag-nps"
+          itemClassName="diag-chip"
+          opcoes={Array.from({ length: 11 }, (_, n) => ({
+            value: String(n),
+            label: String(n)
+          }))}
+          valor={value}
+          onEscolher={(v) => set(field.name, v)}
+        />
       </fieldset>
     );
   }
@@ -241,10 +359,26 @@ function FieldControl({ field, values, set }: ControlProps) {
       <label className="diag-consent">
         <input
           type="checkbox"
+          required
+          aria-required="true"
           checked={value === "sim"}
           onChange={(e) => set(field.name, e.target.checked ? "sim" : "")}
         />
-        <span>{field.label}</span>
+        {/* O aceite tem de dizer a que política se refere — senão não é
+            informado, e sem ser informado não é consentimento (LGPD art. 5º,
+            XII). O link abre em nova aba para não perder o formulário. */}
+        <span>
+          {field.label}{" "}
+          <Link
+            href="/privacidade"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inst-link"
+          >
+            Ler a Política de Privacidade
+          </Link>
+          .
+        </span>
       </label>
     );
   }
@@ -252,20 +386,20 @@ function FieldControl({ field, values, set }: ControlProps) {
   if (field.type === "radio" || field.type === "yesno") {
     return (
       <fieldset className="diag-field">
-        <legend className="diag-field__label">{field.label}</legend>
-        <div className="diag-options">
-          {(field.options ?? []).map((opt) => (
-            <button
-              key={opt.value}
-              type="button"
-              className="diag-option"
-              aria-pressed={value === opt.value}
-              onClick={() => set(field.name, opt.value)}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
+        <legend className="diag-field__label" id={`${field.name}-label`}>
+          {field.label}
+        </legend>
+        <GrupoOpcoes
+          rotuloId={`${field.name}-label`}
+          className="diag-options"
+          itemClassName="diag-option"
+          opcoes={(field.options ?? []).map((o) => ({
+            value: o.value,
+            label: o.label
+          }))}
+          valor={value}
+          onEscolher={(v) => set(field.name, v)}
+        />
       </fieldset>
     );
   }

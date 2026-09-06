@@ -32,7 +32,7 @@ export default function PortfolioPage() {
   return (
     <>
       <Nav collapsible />
-      <main>
+      <main id="conteudo">
         <h1 className="visually-hidden">Portfólio — Made by Felipe</h1>
         <PortfolioGrid projects={sized} />
       </main>

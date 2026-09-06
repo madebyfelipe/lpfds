@@ -46,8 +46,11 @@
   --bg: #f6f6f6;
   --bg-soft: #eeeeee;
   --text: #151515;
-  --muted: rgba(21, 21, 21, 0.6);
-  --soft: rgba(21, 21, 21, 0.38);
+  /* Superficie clara: 0.6/0.38 rendiam 4.65:1 e 2.41:1. --soft e usado como
+     cor de texto (rodape, legendas), entao precisa dos 4.5:1 — e --muted
+     sobe junto para continuar sendo o mais escuro dos dois. */
+  --muted: rgba(21, 21, 21, 0.72);
+  --soft: rgba(21, 21, 21, 0.6);
   --line: rgba(21, 21, 21, 0.08);
   --line-strong: rgba(21, 21, 21, 0.16);
   --panel: #ffffff;
@@ -57,6 +60,10 @@
   --accent-dark: #a81e1e;
   --accent-soft: rgba(212, 43, 43, 0.08);
   --accent-glow: rgba(212, 43, 43, 0.2);
+  /* Vermelho como TINTA. Sobre a superficie clara e o da marca (4.9:1);
+     sobre as escuras ele cai para 3.5-3.9:1, entao clareia. Preenchimento
+     de botao segue em --accent, onde quem precisa de contraste e o texto. */
+  --accent-ink: #d42b2b;
 
   background: var(--bg);
   color: var(--text);
@@ -81,12 +88,14 @@
   --bg: #0d0d0d;
   --bg-soft: #111111;
   --text: #f0ece6;
-  --muted: rgba(240, 236, 230, 0.56);
-  --soft: rgba(240, 236, 230, 0.34);
+  --muted: rgba(240, 236, 230, 0.7);
+  --soft: rgba(240, 236, 230, 0.56);
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.16);
   --panel: #181818;
   --panel-soft: #202020;
+  /* Superficie escura: o vermelho da marca so rende 3.5-3.9:1 aqui. */
+  --accent-ink: #f0566a;
 }
 
 /* O /hub e o /contato vivem no layout raiz, cujo body vem do globals.css e é
@@ -157,8 +166,8 @@ body:has(.hub[data-theme="dark"]) {
 }
 
 .theme-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--accent-ink);
+  color: var(--accent-ink);
   transform: translateY(-1px);
 }
 
@@ -188,7 +197,7 @@ body:has(.hub[data-theme="dark"]) {
 }
 
 .hub-header__link:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* Hero */
@@ -204,7 +213,7 @@ body:has(.hub[data-theme="dark"]) {
   font-weight: 300;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-bottom: 16px;
 }
 
@@ -218,7 +227,7 @@ body:has(.hub[data-theme="dark"]) {
 }
 
 .hub-hero__title em {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-style: normal;
 }
 
@@ -462,7 +471,7 @@ button.hub-card-ref__action-btn {
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .hub-social__link {
@@ -573,7 +582,7 @@ button.hub-card-ref__action-btn {
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .hub-media__newsletter-title {
@@ -633,7 +642,7 @@ button.hub-card-ref__action-btn {
 .hub-media__newsletter-sent {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin: 8px 0 0;
 }
 
@@ -660,7 +669,7 @@ button.hub-card-ref__action-btn {
 }
 
 .hub-media__coupon:hover {
-  border-color: var(--accent);
+  border-color: var(--accent-ink);
   transform: translateY(-2px);
 }
 
@@ -756,7 +765,7 @@ button.hub-card-ref__action-btn {
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .hub-ebook__title {
@@ -789,14 +798,22 @@ button.hub-card-ref__action-btn {
   padding: 12px 18px;
   font-family: inherit;
   font-size: 0.92rem;
-  color: var(--text);
+  /* O fundo do campo e fixo (#fbfbfb), entao a tinta tambem precisa ser.
+     Com var(--text) o campo ficava com texto claro sobre branco (1.1:1) no
+     tema escuro do hub — ilegivel na newsletter da secao Media. */
+  color: #151515;
   outline: none;
   width: 100%;
   transition: border-color 0.28s ease, box-shadow 0.28s ease;
 }
 
+.hub-ebook__input::placeholder {
+  /* 4.8:1 sobre #fbfbfb. */
+  color: #6b6b6b;
+}
+
 .hub-ebook__input:focus {
-  border-color: var(--accent);
+  border-color: var(--accent-ink);
   box-shadow: 0 0 0 3px rgba(212, 43, 43, 0.1);
 }
 
@@ -844,7 +861,7 @@ button.hub-card-ref__action-btn {
 }
 
 .hub-ebook__feedback[role="alert"] {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .hub-ebook__note {
@@ -866,12 +883,14 @@ button.hub-card-ref__action-btn {
   --bg: #0d0d0d;
   --bg-soft: #111111;
   --text: #f0ece6;
-  --muted: rgba(240, 236, 230, 0.56);
-  --soft: rgba(240, 236, 230, 0.34);
+  --muted: rgba(240, 236, 230, 0.7);
+  --soft: rgba(240, 236, 230, 0.56);
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.16);
   --panel: #181818;
   --panel-soft: #202020;
+  /* Superficie escura: o vermelho da marca so rende 3.5-3.9:1 aqui. */
+  --accent-ink: #f0566a;
 
   background: var(--bg);
   color: var(--text);
@@ -915,7 +934,7 @@ button.hub-card-ref__action-btn {
   font-weight: 300;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .hub-bio__title {
@@ -936,7 +955,7 @@ button.hub-card-ref__action-btn {
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* Footer Section - DARK THEME */
@@ -944,12 +963,14 @@ button.hub-card-ref__action-btn {
   --bg: #0d0d0d;
   --bg-soft: #111111;
   --text: #f0ece6;
-  --muted: rgba(240, 236, 230, 0.56);
-  --soft: rgba(240, 236, 230, 0.34);
+  --muted: rgba(240, 236, 230, 0.7);
+  --soft: rgba(240, 236, 230, 0.56);
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.16);
   --panel: #181818;
   --panel-soft: #202020;
+  /* Superficie escura: o vermelho da marca so rende 3.5-3.9:1 aqui. */
+  --accent-ink: #f0566a;
 
   background: var(--panel-soft);
   color: var(--text);
@@ -1004,7 +1025,7 @@ button.hub-card-ref__action-btn {
 }
 
 .hub-footer__link:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .hub-footer__link-arrow {
@@ -1015,7 +1036,7 @@ button.hub-card-ref__action-btn {
 }
 
 .hub-footer__link:hover .hub-footer__link-arrow {
-  color: var(--accent);
+  color: var(--accent-ink);
   transform: translate(1px, -1px);
 }
 
@@ -1188,4 +1209,117 @@ button.hub-card-ref__action-btn {
   .hub-products__spread-btn {
     display: none;
   }
+}
+
+/* Aviso no lugar do embed de TikTok/Instagram enquanto nao ha consentimento.
+   Ocupa aproximadamente o mesmo espaco do widget, para a pagina nao pular
+   quando o visitante aceita e o embed entra. */
+.hub-social__blocked {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 32px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--panel-soft);
+}
+
+.hub-social__blocked-copy {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.hub-social__blocked-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hub-social__blocked-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 15px 28px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #f6f6f6;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.hub-social__blocked-cta:hover {
+  background: var(--accent-dark);
+}
+
+/* Fileira legal do rodape do hub — mesma informacao do site institucional. */
+.hub-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.hub-footer__legal-link {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.hub-footer__legal-link:hover {
+  color: var(--text);
+}
+
+/* Aceite de opt-in — modal do e-book e newsletter do hub.
+   Mesmo desenho nos dois: caixa 18px, texto pequeno, link sublinhado. */
+.hub-ebook__consent,
+.hub-media__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.hub-ebook__consent input,
+.hub-media__consent input {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.hub-ebook__consent-link,
+.hub-media__consent-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hub-ebook__consent-link:hover,
+.hub-media__consent-link:hover {
+  color: var(--text);
+}
+
+/* Submit desabilitado enquanto o aceite nao vem: precisa parecer inativo. */
+.hub-ebook__submit:disabled,
+.hub-media__submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

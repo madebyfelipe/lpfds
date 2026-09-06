@@ -98,7 +98,7 @@ export default async function CasePage({
       {/* Header e rodapé são os do site novo; só o corpo do case continua
           sendo a estrutura antiga (escura). */}
       <InstNav />
-      <main className="case">
+      <main id="conteudo" className="case">
         {/* 1 — Hero */}
         <header className="case-hero">
           <div className="case-hero__media">

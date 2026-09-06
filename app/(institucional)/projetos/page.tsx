@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 // estrutura de página individual de projeto continua sendo aquela.
 export default function ProjetosPage() {
   return (
-    <main>
+    <main id="conteudo">
       <header className="inst-projects-header">
         <h1 className="inst-projects-header__label">Projetos</h1>
       </header>
@@ -31,7 +31,7 @@ export default function ProjetosPage() {
           >
             <Image
               src={projectCover(project)}
-              alt={project.client}
+              alt={`Capa do projeto ${project.client}: ${project.tagline}`}
               fill
               sizes="(max-width: 1280px) 100vw, 1120px"
               priority={index === 0}

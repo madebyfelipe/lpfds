@@ -67,11 +67,14 @@ export const trustedMarks = [
   "Experts"
 ];
 
-export const metrics: Metric[] = [
-  { value: 200, suffix: "+", label: "Projetos entregues" },
-  { value: 30, suffix: "+", label: "Marcas atendidas" },
-  { value: 1, suffix: "M+", label: "Impressões geradas" }
-];
+// ATENÇÃO — números sem lastro. "200+ projetos", "30+ marcas" e "1M+
+// impressões" nunca foram apurados a partir de uma fonte (relatório, painel
+// de anúncios, lista de contratos) e conflitavam entre si e com o texto do
+// JSON-LD. O `MetricsBar` que os consumia não está montado em página alguma
+// hoje. Antes de voltar ao ar, cada linha precisa de um número conferido e de
+// onde ele saiu — publicar métrica estimada é publicidade enganosa (CDC art.
+// 37, § 1º).
+export const metrics: Metric[] = [];
 
 export const services: Service[] = [
   {
@@ -188,6 +191,10 @@ export const pricingTiers: PricingTier[] = [
   }
 ];
 
+// As três "Avaliações do Google" abaixo são transcrições do perfil público
+// do estúdio; a de Milton Alves é do cliente do case /portfolio/alves-nabuco.
+// Ao acrescentar uma avaliação aqui, ela precisa existir de fato em algum
+// lugar verificável — o componente que as exibe não está montado hoje.
 export const reviews: Review[] = [
   {
     initials: "MN",
@@ -263,15 +270,10 @@ export const finalTags = [
   "Cliente certo"
 ];
 
-export const floatingProofs = [
-  {
-    initials: "AN",
-    handle: "@alves.nabuco",
-    quote: "A percepção dos nossos clientes mudou completamente."
-  },
-  {
-    initials: "NC",
-    handle: "@nutri.carolina",
-    quote: "Pacientes chegam dizendo que me escolheram pelo Instagram."
-  }
-];
+// ATENÇÃO — provas sociais sem origem. Os dois cartões atribuíam uma fala a
+// um @ de Instagram sem que exista registro de quem disse, quando, nem
+// autorização para publicar. O `Hero` que os consumia não está montado em
+// página alguma. Para voltar: fala real, com autorização escrita de quem
+// assina (LGPD art. 7º, I) — depoimento inventado com @ de terceiro é, além
+// de enganoso, uso indevido do nome de outra pessoa.
+export const floatingProofs: { initials: string; handle: string; quote: string }[] = [];

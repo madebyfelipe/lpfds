@@ -17,30 +17,36 @@ export function Depoimentos() {
         <p className="inst-kicker inst-kicker--on-red inst-kicker--lg">
           — Depoimentos
         </p>
-        <blockquote className="inst-quote">{depoimento.texto}</blockquote>
+        {/* aria-live: trocar de depoimento sem isso é uma mudança silenciosa
+            para quem usa leitor de tela — o botão responde e nada é anunciado. */}
+        <blockquote className="inst-quote" aria-live="polite">
+          {depoimento.texto}
+        </blockquote>
         <div className="inst-quote__foot">
           <div>
-            <p className="inst-quote__name">{depoimento.nome}</p>
-            <p className="inst-quote__role">
-              {depoimento.titulo} · {depoimento.cidade}
-            </p>
+            {/* Sem nome e sem CRP: a autoria fica na profissão e na cidade.
+                Ver a nota em lib/institucional.ts. */}
+            <p className="inst-quote__name">{depoimento.titulo}</p>
+            <p className="inst-quote__role">{depoimento.cidade}</p>
           </div>
           <div className="inst-quote__nav">
+            {/* "Anterior"/"Próximo" sozinhos não dizem anterior a quê: fora
+                de contexto visual o rótulo precisa se bastar. */}
             <button
               type="button"
               onClick={prev}
-              aria-label="Anterior"
+              aria-label="Ver o depoimento anterior"
               className="inst-quote__btn"
             >
-              ←
+              <span aria-hidden="true">←</span>
             </button>
             <button
               type="button"
               onClick={next}
-              aria-label="Próximo"
+              aria-label="Ver o próximo depoimento"
               className="inst-quote__btn"
             >
-              →
+              <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>

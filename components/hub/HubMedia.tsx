@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { subscribe } from "@/lib/newsletter";
@@ -11,18 +12,21 @@ import { subscribe } from "@/lib/newsletter";
  */
 export function HubMedia() {
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "sending") return;
+    if (!consent) return;
     setStatus("sending");
 
     try {
-      const result = await subscribe({ email, source: "hub-newsletter" });
+      const result = await subscribe({ email, source: "hub-newsletter", consent });
       if (!result.ok) throw new Error("cadastro recusado");
       setStatus("sent");
       setEmail("");
+      setConsent(false);
     } catch {
       setStatus("error");
     }
@@ -64,10 +68,28 @@ export function HubMedia() {
                 className="hub-ebook__input"
                 autoComplete="email"
               />
+              <label className="hub-media__consent" htmlFor="hub-newsletter-consent">
+                <input
+                  id="hub-newsletter-consent"
+                  type="checkbox"
+                  required
+                  aria-required="true"
+                  checked={consent}
+                  onChange={(event) => setConsent(event.target.checked)}
+                  disabled={status === "sending"}
+                />
+                <span>
+                  Aceito receber a newsletter por e-mail, nos termos da{" "}
+                  <Link href="/privacidade" className="hub-media__consent-link">
+                    Política de Privacidade
+                  </Link>
+                  .
+                </span>
+              </label>
               <button
                 type="submit"
                 className="button button--primary hub-media__submit-btn"
-                disabled={status === "sending"}
+                disabled={status === "sending" || !consent}
               >
                 {buttonLabel}
               </button>
@@ -77,7 +99,7 @@ export function HubMedia() {
           <p className="hub-media__newsletter-note">
             {status === "error"
               ? "Não consegui cadastrar agora. Tenta de novo em instantes."
-              : "Sem spam, cancele quando quiser."}
+              : "Cancele quando quiser pelo link de descadastro."}
           </p>
         </div>
 

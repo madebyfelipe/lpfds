@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function MetodologiaPage() {
   return (
-    <main>
+    <main id="conteudo">
       <header className="inst-hero">
         <p className="inst-kicker inst-kicker--tight">— O método</p>
         <h1 className="inst-hero__title">

@@ -22,6 +22,11 @@ export type ImersaoInput = {
   nome: string;
   crp: string;
   whatsapp: string;
+  /**
+   * Aceite da Política de Privacidade. Sem ele não há base legal para o
+   * contato, então a rota recusa o envio — não é um campo decorativo.
+   */
+  consentimento: boolean;
 };
 
 export type ImersaoResult = { ok: boolean };
@@ -35,6 +40,7 @@ export function validateImersao(input: Partial<ImersaoInput>): keyof ImersaoInpu
   if (!input.crp?.trim()) return "crp";
   // Só dígitos: aceita "(11) 99999-9999" e "+55 11 99999 9999" do mesmo jeito.
   if ((input.whatsapp ?? "").replace(/\D/g, "").length < 10) return "whatsapp";
+  if (input.consentimento !== true) return "consentimento";
   return null;
 }
 
@@ -42,7 +48,8 @@ export function validateImersao(input: Partial<ImersaoInput>): keyof ImersaoInpu
 export const fieldLabels: Record<keyof ImersaoInput, string> = {
   nome: "Nome",
   crp: "CRP",
-  whatsapp: "WhatsApp"
+  whatsapp: "WhatsApp",
+  consentimento: "aceite da Política de Privacidade"
 };
 
 /**

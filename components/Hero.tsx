@@ -48,20 +48,25 @@ export function Hero() {
             </div>
           </div>
 
-          <aside className="hero__aside sr-right" aria-label="Provas sociais">
-            <FloatingProof
-              initials={floatingProofs[1].initials}
-              handle={floatingProofs[1].handle}
-              quote={floatingProofs[1].quote}
-              className="proof-card--top float-card"
-            />
-            <FloatingProof
-              initials={floatingProofs[0].initials}
-              handle={floatingProofs[0].handle}
-              quote={floatingProofs[0].quote}
-              className="proof-card--bottom float-card-delayed"
-            />
-          </aside>
+          {/* `floatingProofs` está vazio de propósito (ver lib/data.ts): sem
+              prova social com origem, a coluna não renderiza em vez de
+              quebrar no índice. */}
+          {floatingProofs.length >= 2 && (
+            <aside className="hero__aside sr-right" aria-label="Provas sociais">
+              <FloatingProof
+                initials={floatingProofs[1].initials}
+                handle={floatingProofs[1].handle}
+                quote={floatingProofs[1].quote}
+                className="proof-card--top float-card"
+              />
+              <FloatingProof
+                initials={floatingProofs[0].initials}
+                handle={floatingProofs[0].handle}
+                quote={floatingProofs[0].quote}
+                className="proof-card--bottom float-card-delayed"
+              />
+            </aside>
+          )}
         </div>
 
       </div>

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function DiagnosticoPage() {
   return (
-    <main>
+    <main id="conteudo">
       <header className="inst-shell" style={{ padding: "128px 40px 64px" }}>
         <p className="inst-kicker">— Diagnóstico</p>
         <p className="inst-manifesto" style={{ marginTop: "16px" }}>

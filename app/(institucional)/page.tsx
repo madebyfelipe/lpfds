@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main>
+    <main id="conteudo">
       <header className="inst-hero">
         <h1 className="inst-hero__title">
           Construa a marca do seu consultório em{" "}

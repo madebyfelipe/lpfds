@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function ImersaoPage() {
   return (
-    <main>
+    <main id="conteudo">
       <header className="inst-shell" style={{ padding: "128px 40px 96px" }}>
         <p className="inst-manifesto">
           Quem procura você decide muito antes da primeira mensagem.

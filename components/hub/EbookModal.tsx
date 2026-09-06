@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ebook, subscribe } from "@/lib/newsletter";
 
 /**
@@ -20,10 +21,13 @@ export function EbookModal() {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [download, setDownload] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const openerRef = useRef<HTMLElement | null>(null);
+  const consentId = useId();
 
   const close = useCallback(() => {
     setOpen(false);
@@ -65,7 +69,30 @@ export function EbookModal() {
     if (!open) return;
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      // aria-modal="true" promete que o resto da pagina esta inerte; sem
+      // prender o Tab, a promessa e falsa e o foco sai por trás do modal.
+      const card = cardRef.current;
+      if (!card) return;
+      const foco = card.querySelectorAll<HTMLElement>(
+        'a[href], button:not(:disabled), input:not(:disabled), [tabindex]:not([tabindex="-1"])'
+      );
+      if (foco.length === 0) return;
+
+      const primeiro = foco[0];
+      const ultimo = foco[foco.length - 1];
+      if (e.shiftKey && document.activeElement === primeiro) {
+        e.preventDefault();
+        ultimo.focus();
+      } else if (!e.shiftKey && document.activeElement === ultimo) {
+        e.preventDefault();
+        primeiro.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
 
@@ -82,15 +109,17 @@ export function EbookModal() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "sending") return;
+    if (!consent) return;
     setStatus("sending");
 
     try {
-      const result = await subscribe({ name, email, source: "hub-ebook" });
+      const result = await subscribe({ name, email, source: "hub-ebook", consent });
       if (!result.ok || !result.download) throw new Error("cadastro recusado");
       setDownload(result.download);
       setStatus("sent");
       setName("");
       setEmail("");
+      setConsent(false);
       try {
         localStorage.setItem(STORAGE_KEY, result.download);
       } catch {
@@ -118,14 +147,14 @@ export function EbookModal() {
       aria-labelledby="hub-ebook-title"
       onClick={close}
     >
-      <div className="hub-ebook__card" onClick={(e) => e.stopPropagation()}>
+      <div ref={cardRef} className="hub-ebook__card" onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
           className="hub-ebook__close"
-          aria-label="Fechar"
+          aria-label="Fechar a janela do e-book"
           onClick={close}
         >
-          ✕
+          <span aria-hidden="true">✕</span>
         </button>
 
         {status === "sent" && download ? (
@@ -187,10 +216,32 @@ export function EbookModal() {
                 }}
                 disabled={status === "sending"}
               />
+              <label className="hub-ebook__consent" htmlFor={consentId}>
+                <input
+                  id={consentId}
+                  type="checkbox"
+                  required
+                  aria-required="true"
+                  checked={consent}
+                  onChange={(e) => {
+                    setConsent(e.target.checked);
+                    if (status === "error") setStatus("idle");
+                  }}
+                  disabled={status === "sending"}
+                />
+                <span>
+                  Aceito receber a newsletter e o e-book por e-mail, nos termos
+                  da{" "}
+                  <Link href="/privacidade" className="hub-ebook__consent-link">
+                    Política de Privacidade
+                  </Link>
+                  . Posso cancelar quando quiser.
+                </span>
+              </label>
               <button
                 type="submit"
                 className="hub-ebook__submit"
-                disabled={status === "sending"}
+                disabled={status === "sending" || !consent}
               >
                 {buttonLabel}
               </button>
@@ -201,8 +252,8 @@ export function EbookModal() {
               </p>
             )}
             <p className="hub-ebook__note">
-              O download exige assinatura da newsletter. Sem spam, cancele quando
-              quiser.
+              O download exige assinatura da newsletter. Usamos seu e-mail só
+              para isso.
             </p>
           </>
         )}

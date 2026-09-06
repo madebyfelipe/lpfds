@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { subscribe } from "@/lib/newsletter";
 
@@ -9,6 +10,7 @@ const OPEN_DELAY = 12000;
 export function EmailPopup() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   useEffect(() => {
@@ -54,10 +56,11 @@ export function EmailPopup() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "sending") return;
+    if (!consent) return;
     setStatus("sending");
 
     try {
-      const result = await subscribe({ email, source: "landing-manual-popup" });
+      const result = await subscribe({ email, source: "landing-manual-popup", consent });
       if (!result.ok) throw new Error("cadastro recusado");
       setStatus("sent");
       setEmail("");
@@ -94,10 +97,10 @@ export function EmailPopup() {
         <button
           type="button"
           className="email-popup__close"
-          aria-label="Fechar"
+          aria-label="Fechar o aviso"
           onClick={close}
         >
-          ✕
+          <span aria-hidden="true">✕</span>
         </button>
 
         {status === "sent" ? (
@@ -137,10 +140,28 @@ export function EmailPopup() {
                 }}
                 disabled={status === "sending"}
               />
+              <label className="email-popup__consent" htmlFor="email-popup-consent">
+                <input
+                  id="email-popup-consent"
+                  type="checkbox"
+                  required
+                  aria-required="true"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  disabled={status === "sending"}
+                />
+                <span>
+                  Aceito receber e-mails, nos termos da{" "}
+                  <Link href="/privacidade" className="email-popup__consent-link">
+                    Política de Privacidade
+                  </Link>
+                  .
+                </span>
+              </label>
               <button
                 type="submit"
                 className="button button--primary email-popup__submit"
-                disabled={status === "sending"}
+                disabled={status === "sending" || !consent}
               >
                 {buttonLabel}
               </button>
@@ -150,7 +171,9 @@ export function EmailPopup() {
                 Não consegui enviar agora. Tenta de novo em instantes.
               </p>
             )}
-            <p className="email-popup__note">Sem spam. Cancele quando quiser.</p>
+            <p className="email-popup__note">
+              Cancele quando quiser pelo link de descadastro.
+            </p>
           </>
         )}
       </div>

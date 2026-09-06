@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { empresa, paginasLegais } from "@/lib/legal";
 
 const links = [
   { label: "Instagram", href: "https://www.instagram.com/madebyfelipe.com.br" },
@@ -51,9 +53,20 @@ export function HubFooter() {
         ))}
       </div>
 
+      <div className="hub-footer__legal">
+        {paginasLegais.map((pagina) => (
+          <Link key={pagina.href} href={pagina.href} className="hub-footer__legal-link">
+            {pagina.label}
+          </Link>
+        ))}
+      </div>
+
       <div className="hub-footer__bottom">
         <span>FONTE · NEUE HAAS GROTESK</span>
-        <span>© 2026 MADE BY FELIPE</span>
+        <span>
+          © {new Date().getFullYear()} MADE BY FELIPE
+          {empresa.cnpj ? ` · CNPJ ${empresa.cnpj}` : ""}
+        </span>
       </div>
     </footer>
   );
