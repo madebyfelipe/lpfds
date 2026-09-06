@@ -46,6 +46,12 @@ export type SubscribeInput = {
   /** Opcional: o popup da landing só pede e-mail. */
   name?: string;
   source: NewsletterSource;
+  /**
+   * Aceite explícito do opt-in. Obrigatório: a rota recusa `false`, então
+   * todo formulário novo precisa passar por uma caixa de seleção — marcar
+   * `true` no código para "simplificar" é justamente o que não pode.
+   */
+  consent: boolean;
 };
 
 export type SubscribeResult = {

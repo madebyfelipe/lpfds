@@ -115,8 +115,12 @@ const graph = {
       "@id": `${SITE}/#felipe`,
       name: "Felipe",
       jobTitle: "Estrategista de marca",
+      // Sem número de projetos: "mais de 150" não tem como ser conferido por
+      // quem lê e conflitava com os "200+" de lib/data.ts. Alegação numérica
+      // em dado estruturado é lida pelo Google como fato da entidade — só
+      // entra de volta quando houver um número apurado e uma fonte.
       description:
-        "Estrategista de marca com 7 anos de mercado e mais de 150 projetos de branding e social media.",
+        "Estrategista de marca, atuando com branding e social media desde 2019.",
       url: SITE,
       worksFor: { "@id": `${SITE}/#business` },
       sameAs

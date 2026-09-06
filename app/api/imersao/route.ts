@@ -70,7 +70,10 @@ export async function POST(request: Request) {
   const clean = {
     nome: String(body.nome ?? "").trim().slice(0, MAX_FIELD),
     crp: String(body.crp ?? "").trim().slice(0, MAX_FIELD),
-    whatsapp: String(body.whatsapp ?? "").trim().slice(0, MAX_FIELD)
+    whatsapp: String(body.whatsapp ?? "").trim().slice(0, MAX_FIELD),
+    // O aceite é validado aqui também: o cliente pode ser contornado, e sem
+    // consentimento não há base legal para guardar nem responder o contato.
+    consentimento: body.consentimento === true
   };
 
   const invalid = validateImersao(clean);
@@ -94,7 +97,10 @@ export async function POST(request: Request) {
     [fieldLabels.nome, clean.nome],
     [fieldLabels.crp, clean.crp],
     [fieldLabels.whatsapp, clean.whatsapp],
-    ["Recebido em", `${recebidoEm} (horário de Brasília)`]
+    ["Recebido em", `${recebidoEm} (horário de Brasília)`],
+    // Registrado no próprio e-mail: é a prova de consentimento que o art. 8º,
+    // § 2º da LGPD põe sob responsabilidade do controlador.
+    ["Aceite da política", `sim — ${recebidoEm}`]
   ];
 
   try {

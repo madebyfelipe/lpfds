@@ -35,6 +35,14 @@ export function InstNav() {
 
   return (
     <nav className="inst-nav" data-open={open ? "true" : undefined}>
+      {/* Primeiro ponto de parada do Tab em toda página que tem a nav: sem
+          ele, quem navega por teclado atravessa o menu inteiro a cada troca
+          de página antes de chegar ao conteúdo. Fica invisível até receber
+          foco (regra .inst-skip). */}
+      <a href="#conteudo" className="inst-skip">
+        Pular para o conteúdo
+      </a>
+
       <Link href="/" className="inst-nav__brand">
         Made by Felipe®
       </Link>

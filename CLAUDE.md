@@ -1,5 +1,60 @@
 # Made by Felipe — Landing Page
 
+## ⚠️ PRIORIDADE MÁXIMA — respeitar o design system
+
+**Antes de escrever qualquer CSS ou componente novo, leia esta seção.** Nada
+neste projeto entra fora do design system da marca — nem um banner de
+consentimento, nem uma página de política, nem um aviso de erro. Uma peça
+"funcional" desenhada por fora é regressão, mesmo que funcione.
+
+**Os tokens são a fonte da verdade. Nunca escreva um valor cru** (`#333`,
+`16px` de raio, uma sombra inventada) quando existe token. Se não existe
+token para o que você precisa, **crie o token** junto dos outros, com um
+comentário dizendo por que ele existe — não espalhe o literal pelo arquivo.
+
+**Paleta** (`app/institucional.css`, declarada em `.inst, .inst-nav, .inst-footer`):
+cream `#f6f6f6`, black `#151515`, red `#bc0319` / `--red-dark` `#8f0313`,
+rampa `--gray-100…--gray-700`. São quatro cores. Não invente uma quinta.
+
+**Três tokens de vermelho, e cada um tem um trabalho:**
+
+| token | onde | por quê |
+|---|---|---|
+| `--red` | **preenchimento** (fundo de botão, faixa `.inst-red`, barra de progresso) | é o vermelho da marca |
+| `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | `#bc0319` sobre preto rende 2.75:1; sobre superfície escura ele clareia para `#ef4358` |
+| `--on-red` | **texto em cima do vermelho** | fixo `#f6f6f6` nos dois temas — o vermelho é a única cor que **não** inverte, então usar `--cream` aqui pinta texto preto sobre vermelho no tema escuro |
+
+O hub tem o mesmo par: `--accent` (preenchimento) e `--accent-ink` (tinta,
+`#f0566a` nos blocos escuros).
+
+**Forma** — o site institucional é duro, não arredondado:
+- raio **2px** em botões, campos e caixas. **Nunca pílula** (`999px`) e nunca 12/16px.
+  (O `/hub` é a exceção declarada: ele tem estética própria, com `--radius-pill`.)
+- botão: `padding: 16px 32px`, `14px / 700 / 0.04em`, **caixa alta**.
+- kicker: `12px / 700 / 0.16em`, caixa alta, `--gray-500`, precedido de `— `.
+- link de texto: `.inst-link` (cor + filete de 1px), não sublinhado do UA.
+- CTA de seção: texto + `border-bottom: 2px solid var(--red-ink)`, sem caixa.
+
+**Tipografia**: só **Neue Haas Grotesk Display**, dos TTFs em `public/fonts/`.
+Só ficam no repositório os pesos que algum `@font-face` declara — não
+adicione arquivo de fonte que ninguém usa (é tipografia licenciada exposta
+publicamente à toa).
+
+**Tema escuro**: a inversão troca os *papéis* de `--cream` e `--black`. Toda
+cor nova precisa funcionar nos dois. Regra prática: se você escreveu
+`rgba(246, 246, 246, …)` ou `rgba(21, 21, 21, …)` direto numa regra, provavelmente
+deveria ser um token (`--line-inverse`, `--nav-bg`, `--on-red`) — senão não
+inverte. Exceção: o que fica **sobre o vermelho**, que nunca inverte.
+
+**Contraste é parte do design system, não um extra.** Mínimo 4.5:1 em texto e
+3:1 em elemento gráfico, **nos dois temas**. O projeto está em zero violações
+do axe-core (WCAG 2.1 AA) — mantenha assim. Para conferir, veja
+"Verificação" mais abaixo.
+
+**Componente novo, checklist:** usa token de cor? raio 2px? rótulo em caixa
+alta com o tracking certo? funciona nos dois temas? passa contraste nos dois?
+foco visível? Se qualquer resposta for "não", ainda não está pronto.
+
 ## Project
 
 Next.js 16 (App Router, Turbopack) + TypeScript landing page for **Made by Felipe**, a branding + social media service targeting Brazilian professionals (lawyers, nutritionists, psychologists, clinics).
@@ -375,3 +430,116 @@ status. Hoje ele envia de verdade.
   exatamente o que não pode voltar.
 - O form **não pede e-mail**, então não há `replyTo`: o retorno é pelo WhatsApp. Se um dia
   entrar campo de e-mail, ligue-o ao `replyTo` da rota.
+
+---
+
+## Conformidade legal, consentimento e acessibilidade
+
+Passagem feita sobre o site inteiro cobrindo privacidade, cookies, direitos do
+consumidor e WCAG. O que está aqui não é opcional — é o que segura o site
+dentro da LGPD, do CDC e do WCAG 2.1 AA. Mexer em qualquer um destes pontos
+sem entender o porquê reintroduz um problema legal.
+
+### Páginas legais
+
+Quatro rotas em `app/(institucional)/`, todas usando a casca
+`components/institucional/LegalPage.tsx`:
+
+| rota | o que cobre |
+|---|---|
+| `/privacidade` | LGPD: o que é coletado em **cada um dos três formulários**, base legal, operadores, prazos, direitos do art. 18 |
+| `/cookies` | inventário de cookies + o painel `CookiePreferencias`, que troca a decisão |
+| `/termos` | uso do site, propriedade intelectual do portfólio, como o contrato nasce |
+| `/reembolso` | arrependimento do art. 49 do CDC, cancelamento pró-rata por etapa, art. 20 |
+
+**`lib/legal.ts` é a fonte única** dos dados de identificação (razão social,
+CNPJ, endereço, e-mail, data de atualização) e da lista de rotas legais, que os
+dois rodapés e o `sitemap.ts` consomem. `identificacaoLinhas()` **omite a linha
+do campo vazio** em vez de imprimir rótulo sem valor — por isso um dado que
+falta não vaza como "CNPJ: " na página.
+
+> **PENDENTE:** `empresa.razaoSocial`, `empresa.endereco.logradouro`, `.numero`
+> e `.cep` estão vazios. O CNPJ (`68.121.518/0001-17`, Dazz Marketing, Curitiba)
+> foi confirmado pelo Felipe e tem dígito verificador válido; o resto não foi
+> possível consultar. Preencher em `lib/legal.ts` — as páginas passam a exibir
+> sozinhas.
+
+### Consentimento de cookies (o ponto mais delicado)
+
+**Antes: o Meta Pixel disparava no `load`, direto no `layout.tsx`.** Rastreava
+sem perguntar, o que a LGPD não permite (art. 7º, I). Hoje:
+
+- **`lib/consent.ts`** — fonte única. `getConsent()` devolve `null` para quem
+  não decidiu **e para decisão vencida** (TTL de 365 dias). O padrão é **recusa,
+  nunca aceite tácito**.
+- **`components/CookieConsent.tsx`** — exporta `useConsent()` (o hook que os
+  outros componentes usam), `MetaPixel` (só monta o `<Script>` com aceite, então
+  sem aceite o `fbevents.js` **nem é baixado**), `CookieConsent` (o banner) e
+  `CookiePreferencias` (o painel da `/cookies`).
+- **`HubSocial`** — os embeds de TikTok e Instagram também estão atrás do
+  aceite; sem ele entra `EmbedBloqueado`, com link para a plataforma.
+- **Recusar tem o mesmo peso visual de aceitar.** Banner que esconde a recusa
+  não colhe consentimento livre. Não "simplifique" isso para um botão só.
+
+Verificado: com `denied` ou sem decisão, **zero** requisições para
+facebook/tiktok/instagram; com `granted`, as três aparecem.
+
+### Consentimento nos formulários
+
+Os quatro formulários pedem aceite explícito, **validado também no servidor**
+(o cliente pode ser contornado):
+
+- `ImersaoForm` → `validateImersao()` exige `consentimento === true`; a rota
+  registra o aceite no corpo do e-mail (prova do art. 8º, § 2º).
+- `EbookModal`, `HubMedia`, `EmailPopup` → `SubscribeInput.consent` é
+  **obrigatório no tipo**, e `/api/newsletter` responde `400 consent_required`
+  sem ele. Formulário novo que chame `subscribe()` não compila sem passar por
+  uma caixa de seleção — que é exatamente a intenção.
+- `DiagnosticoForm` já tinha o aceite; ganhou o link para a política (aceite
+  sem saber a que se refere não é informado).
+
+### Provas sociais e alegações
+
+- **Depoimentos anonimizados**: nome e CRP saíram de `lib/institucional.ts`.
+  Registro profissional é identificação direta e não precisa aparecer num
+  anúncio. Para voltar a nomear, é preciso autorização escrita da titular.
+- **`metrics` e `floatingProofs` (`lib/data.ts`) foram esvaziados** — "200+
+  projetos", "1M+ impressões" e falas atribuídas a @ de Instagram não tinham
+  origem verificável. Os componentes que os consumiam são código dormente. Ler
+  o comentário no arquivo antes de repovoar.
+- O JSON-LD não afirma mais "mais de 150 projetos": dado estruturado é lido
+  pelo Google como fato da entidade.
+
+### Acessibilidade
+
+- **Contraste**: `--gray-500` (claro) e `--gray-300` (escuro) subiram para
+  `#696969`; `--soft` do `globals.css`/`hub.css` foi reforçado; nasceram
+  `--red-ink`, `--on-red` e `--accent-ink` (ver a seção de design system).
+  **Bug corrigido:** no tema escuro a faixa de depoimentos, o botão de envio e
+  o painel de hover dos projetos ficavam com texto preto sobre vermelho
+  (2.75:1), porque `--cream` invertia e o vermelho não.
+- **Bug corrigido:** os filtros do `/portfolio` vinham com o cromo padrão do
+  navegador (fundo `buttonface`, cinza `#6b6b6b` sob `color-scheme: dark`) — o
+  reset global de `button` só ajusta `font` e `cursor`.
+- **Bug corrigido:** o campo da newsletter do hub tinha `color: var(--text)`
+  sobre fundo branco fixo — texto invisível (1.1:1) no tema escuro.
+- **Teclado**: os grupos de opção do diagnóstico viraram `role="radiogroup"`
+  com **roving tabindex** (um ponto de Tab, setas navegam, Home/End). O CSS
+  casa com `[aria-checked="true"]`, não mais `aria-pressed`.
+- Link "pular para o conteúdo" no `InstNav` (todo `<main>` tem `id="conteudo"`);
+  foco preso no modal do e-book e no lightbox; erro de formulário com
+  `role="alert"` e foco no campo que faltou; rótulos de botão que se bastam
+  fora do contexto visual.
+
+### Verificação
+
+Não confie na leitura do diff — estas coisas quebram em silêncio. Com o site
+rodando (`npm run build && npm run start`):
+
+- **axe-core** (WCAG 2.1 AA) nas 10 rotas × 2 temas, mais os estados que não
+  aparecem no carregamento (banner aberto, modal, erro de validação):
+  **estava em 0 violações**. Qualquer número acima disso é regressão.
+- **Consentimento**: carregar `/hub` com `mbf-consent` em `denied` e conferir
+  que nenhuma requisição sai para facebook/tiktok/instagram.
+- O `pkill` do servidor e o `npm run start` precisam ir em chamadas separadas
+  neste ambiente, senão o processo novo morre junto.

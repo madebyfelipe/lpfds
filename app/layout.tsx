@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import Script from "next/script";
+import { CookieConsent, MetaPixel } from "@/components/CookieConsent";
 import { CustomCursor } from "@/components/CustomCursor";
 import { StructuredData } from "@/components/StructuredData";
 import "./globals.css";
@@ -89,27 +89,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <StructuredData />
         {children}
         <CustomCursor />
-        <Script id="meta-pixel" strategy="lazyOnload">
-          {`!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1465893921656330');
-fbq('track', 'PageView');`}
-        </Script>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1465893921656330&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
+        {/* Medição só entra depois do aceite — o banner é quem decide.
+            O <noscript> da Meta saiu junto: ele dispara antes de qualquer
+            JavaScript, então não teria como respeitar o consentimento. */}
+        <MetaPixel />
+        <CookieConsent />
       </body>
     </html>
   );
