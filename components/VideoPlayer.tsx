@@ -39,7 +39,9 @@ export function VideoPlayer() {
           ) : (
             <iframe
               className="video-card__video"
-              src="https://www.youtube.com/embed/yQ1eYsySZ-E?autoplay=1&rel=0&modestbranding=1"
+              // youtube-nocookie: mesmo player, sem os cookies de rastreamento que o
+              // dominio normal grava assim que o iframe carrega.
+              src="https://www.youtube-nocookie.com/embed/yQ1eYsySZ-E?autoplay=1&rel=0&modestbranding=1"
               allow="autoplay; fullscreen"
               allowFullScreen
             />

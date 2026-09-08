@@ -33,7 +33,7 @@ export default function HubPage() {
           de valer contra a viewport. */}
       <InstNav />
       <div className="hub">
-        <main>
+        <main id="conteudo">
           <HubHero />
           <HubProducts />
           <HubMedia />

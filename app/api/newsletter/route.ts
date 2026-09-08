@@ -79,16 +79,23 @@ export async function POST(request: Request) {
   let email: unknown;
   let name: unknown;
   let source: unknown;
+  let consent: unknown;
   let utm: unknown;
 
   try {
-    ({ email, name, source, utm } = await request.json());
+    ({ email, name, source, consent, utm } = await request.json());
   } catch {
     return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
   }
 
   if (typeof email !== "string" || !EMAIL_RE.test(email.trim())) {
     return NextResponse.json({ ok: false, error: "invalid_email" }, { status: 400 });
+  }
+
+  // Sem aceite não há base legal para mandar e-mail de marketing (LGPD art.
+  // 7º, I). Validado no servidor porque o cliente pode ser contornado.
+  if (consent !== true) {
+    return NextResponse.json({ ok: false, error: "consent_required" }, { status: 400 });
   }
 
   // A origem decide o workflow e a entrega do e-book, então não pode ser
@@ -114,6 +121,9 @@ export async function POST(request: Request) {
     lastName: rest.join(" "),
     source: origin,
     submittedAt: new Date().toISOString(),
+    // Prova de consentimento (LGPD art. 8º, § 2º) — vai junto para o CRM.
+    consent: true,
+    consentAt: new Date().toISOString(),
     ...utmFields,
     // `product`, `productTitle` e `downloadUrl` existem só no caminho do
     // e-book, para o passo "Send Email" montar a entrega sem link hardcoded no

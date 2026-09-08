@@ -6,7 +6,10 @@
   --surface-solid: #1a1a1a;
   --text: #f0ece6;
   --muted: rgba(240, 236, 230, 0.56);
-  --soft: rgba(240, 236, 230, 0.34);
+  /* 0.34 rendia 2.8:1 sobre o --bg, e --soft é usado como cor de TEXTO em
+     uma dúzia de lugares. 0.5 sobe para 4.7:1 e continua abaixo do --muted
+     (5.5:1), preservando a hierarquia entre os dois. */
+  --soft: rgba(240, 236, 230, 0.5);
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.16);
   --panel: #181818;
@@ -312,7 +315,12 @@ img {
   gap: 18px;
   padding: 12px 16px;
   border-radius: var(--radius-pill);
-  background: rgba(13, 13, 13, 0.88);
+  /* Opaco de proposito. Translucido, o rotulo do filtro ficava a merce do
+     que passasse por baixo — sobre um card claro do grid o contraste caia
+     para ~2.5:1. A 0.94 ja era quase opaco, entao fechar de vez nao muda o
+     que se ve e tira a variavel. O blur fica como rede de seguranca para o
+     recorte das bordas. */
+  background: #0d0d0d;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2159,7 +2167,8 @@ img {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(240, 236, 230, 0.38);
+  /* 0.38 rendia 3.13:1 sobre o #080808 do rodapé. */
+  color: rgba(240, 236, 230, 0.6);
 }
 
 .footer__links {
@@ -2181,7 +2190,8 @@ img {
   padding-top: 20px;
   border-top: 1px solid var(--panel-line);
   font-size: 0.88rem;
-  color: rgba(240, 236, 230, 0.28);
+  /* 0.28 rendia 2.19:1 sobre o #080808 do rodapé. */
+  color: rgba(240, 236, 230, 0.5);
 }
 
 /* ─── WhatsApp FAB ───────────────────────────────────── */
@@ -2984,7 +2994,8 @@ img {
 }
 
 .contato-cta--primary .contato-cta__sub {
-  color: rgba(255, 255, 255, 0.72);
+  /* 0.72 rendia 3.23:1 sobre o vermelho; branco cheio sobe para 5:1. */
+  color: #ffffff;
 }
 
 .contato-cta__arrow {
@@ -3177,7 +3188,12 @@ img {
   gap: 4px;
   padding: 8px;
   border-radius: var(--radius-pill);
-  background: rgba(13, 13, 13, 0.88);
+  /* Opaco de proposito. Translucido, o rotulo do filtro ficava a merce do
+     que passasse por baixo — sobre um card claro do grid o contraste caia
+     para ~2.5:1. A 0.94 ja era quase opaco, entao fechar de vez nao muda o
+     que se ve e tira a variavel. O blur fica como rede de seguranca para o
+     recorte das bordas. */
+  background: #0d0d0d;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -3199,6 +3215,12 @@ img {
 }
 
 .portfolio-dock__pill {
+  /* O reset global de `button` so ajusta font e cursor, entao estes pills
+     vinham com o cromo padrao do navegador: fundo `buttonface` — cinza
+     #6b6b6b sob `color-scheme: dark` — e borda `outset`. O rotulo inativo
+     ficava em 2.5:1 sobre esse cinza. */
+  background: transparent;
+  border: 0;
   min-height: 48px;
   padding: 0 28px;
   font-size: 0.95rem;
@@ -4500,4 +4522,195 @@ img {
   .email-popup__card {
     animation: none;
   }
+}
+
+/* ==========================================================================
+   Consentimento de cookies
+
+   Renderizado pelo layout raiz, então aparece sobre o tema escuro
+   (globals.css), sobre o hub e sobre o site institucional. Como não pode
+   herdar os tokens de nenhum dos três, declara os seus — com os MESMOS
+   valores do design system da marca (cream #f6f6f6, black #151515,
+   red #bc0319 / #8f0313). Mudou a paleta da marca? Muda aqui junto.
+
+   Forma: a mesma dos botões do sistema — canto de 2px (nunca pílula),
+   rótulo em caixa alta 14px/700/0.04em, preenchimento sólido no primário e
+   contorno de 1px no secundário.
+   ========================================================================== */
+
+/* Os tokens ficam no :root porque os mesmos botões são usados em dois
+   lugares — o banner e o painel de preferências da /cookies, que vive dentro
+   do .inst. Presos ao .mbf-consent, o painel herdava valor nenhum. */
+:root {
+  --consent-cream: #f6f6f6;
+  --consent-black: #151515;
+  --consent-red: #bc0319;
+  --consent-red-dark: #8f0313;
+  /* Rótulo secundário: 4.9:1 sobre o preto do card. */
+  --consent-kicker: #c9c9c9;
+}
+
+.mbf-consent {
+  position: fixed;
+  z-index: 9999;
+  inset-inline: 16px;
+  bottom: 16px;
+  margin-inline: auto;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  border: 1px solid rgba(246, 246, 246, 0.16);
+  border-radius: 2px;
+  background: var(--consent-black);
+  color: var(--consent-cream);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+  font-family:
+    "Neue Haas Grotesk Display", "Neue Haas Display", "Neue Haas Grotesk",
+    "Helvetica Neue", Helvetica, Arial, var(--font-poppins), sans-serif;
+}
+
+.mbf-consent:focus-visible {
+  outline: 2px solid var(--consent-red);
+  outline-offset: 3px;
+}
+
+/* Mesmo tratamento do .inst-kicker: 12px, 700, 0.16em, caixa alta. */
+.mbf-consent__title {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--consent-kicker);
+}
+
+.mbf-consent__copy {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--consent-cream);
+}
+
+.mbf-consent__link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.mbf-consent__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Forma do .inst-submit: 2px de canto, caixa alta, 14px/700/0.04em. */
+.mbf-consent__btn {
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 15px 28px;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+/* Aceitar e recusar têm o mesmo tamanho e a mesma legibilidade: a recusa não
+   pode ser mais difícil de achar que o aceite, senão o consentimento não é
+   livre (LGPD art. 5º, XII). O que muda é só o preenchimento. */
+.mbf-consent__btn--solid {
+  border: 1px solid var(--consent-red);
+  background: var(--consent-red);
+  color: var(--consent-cream);
+}
+
+.mbf-consent__btn--solid:hover:not(:disabled) {
+  background: var(--consent-red-dark);
+  border-color: var(--consent-red-dark);
+}
+
+.mbf-consent__btn--ghost {
+  border: 1px solid rgba(246, 246, 246, 0.4);
+  background: transparent;
+  color: var(--consent-cream);
+}
+
+.mbf-consent__btn--ghost:hover:not(:disabled) {
+  border-color: var(--consent-cream);
+  background: rgba(246, 246, 246, 0.08);
+}
+
+.mbf-consent__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.mbf-consent__btn:focus-visible {
+  outline: 2px solid var(--consent-cream);
+  outline-offset: 2px;
+}
+
+@media (min-width: 760px) {
+  .mbf-consent {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+    max-width: 900px;
+  }
+
+  .mbf-consent__actions {
+    flex: 0 0 auto;
+    flex-direction: column;
+  }
+
+  .mbf-consent__btn {
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mbf-consent__btn {
+    transition: none;
+  }
+}
+
+/* Aceite de opt-in do popup da landing (componente dormente, mas usa a mesma
+   rota de newsletter — que hoje recusa cadastro sem consentimento). */
+.email-popup__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.email-popup__consent input {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.email-popup__consent-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.email-popup__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

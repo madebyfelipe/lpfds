@@ -22,7 +22,17 @@ export function Lightbox({ src, alt, className, children }: Props) {
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") close();
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      // aria-modal="true" promete que o resto da página está inerte. O único
+      // elemento focável aqui é o "fechar", então prender o Tab nele basta —
+      // sem isso o foco sai para a página coberta pelo overlay.
+      if (event.key === "Tab") {
+        event.preventDefault();
+        closeRef.current?.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";

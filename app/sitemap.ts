@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { paginasLegais } from "@/lib/legal";
 
 // /projetos, /portfolio e os cases /portfolio/[slug] ficam fora do sitemap
 // de propósito: são acessíveis só por link direto (noindex nas próprias
@@ -37,5 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    // Páginas legais: entram no sitemap porque precisam ser encontráveis —
+    // prioridade baixa, já que não disputam busca.
+    ...paginasLegais.map((pagina) => ({
+      url: `${baseUrl}${pagina.href}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
   ];
 }

@@ -52,7 +52,7 @@ export default function ContatoPage() {
         </div>
       </header>
 
-      <main>
+      <main id="conteudo">
         {/* Hero */}
         <section className="contato-hero">
           <div className="contato-hero__photo-wrap">

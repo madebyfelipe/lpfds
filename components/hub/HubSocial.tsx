@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useConsent } from "@/components/CookieConsent";
 
 declare global {
   interface Window {
@@ -106,9 +108,44 @@ function useEmbedRendered(ref: React.RefObject<HTMLElement | null>, active: bool
   return rendered;
 }
 
+/**
+ * Aviso no lugar do embed enquanto nao ha aceite. O widget do TikTok e o do
+ * Instagram gravam cookies proprios ao carregar, entao sem consentimento eles
+ * nao entram na pagina — e o visitante recebe o link direto no lugar.
+ */
+function EmbedBloqueado({ href, rede }: { href: string; rede: string }) {
+  return (
+    <div className="hub-social__blocked">
+      <p className="hub-social__blocked-copy">
+        As publicações do {rede} são carregadas pelos servidores da plataforma,
+        que gravam cookies próprios. Autorize os cookies de medição na{" "}
+        <Link href="/cookies" className="hub-social__blocked-link">
+          Política de Cookies
+        </Link>{" "}
+        para vê-las aqui.
+      </p>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hub-social__blocked-cta"
+      >
+        Abrir no {rede} &rarr;
+      </a>
+    </div>
+  );
+}
+
 export function HubSocial() {
-  const [tiktokRef, tiktokNear] = useNearViewport<HTMLElement>();
-  const [instagramRef, instagramNear] = useNearViewport<HTMLElement>();
+  const consent = useConsent();
+  const permitido = consent === "granted";
+
+  const [tiktokRef, tiktokNearViewport] = useNearViewport<HTMLElement>();
+  const [instagramRef, instagramNearViewport] = useNearViewport<HTMLElement>();
+
+  // Perto da viewport NAO basta: sem aceite o embed nao carrega.
+  const tiktokNear = tiktokNearViewport && permitido;
+  const instagramNear = instagramNearViewport && permitido;
 
   const tiktokFrame = useRef<HTMLDivElement>(null);
   const instagramStrip = useRef<HTMLDivElement>(null);
@@ -189,10 +226,14 @@ export function HubSocial() {
           </a>
         </div>
 
-        <div
-          ref={tiktokFrame}
-          className={`hub-social__frame${tiktokReady ? " hub-social__frame--ready" : ""}`}
-        />
+        {permitido ? (
+          <div
+            ref={tiktokFrame}
+            className={`hub-social__frame${tiktokReady ? " hub-social__frame--ready" : ""}`}
+          />
+        ) : (
+          <EmbedBloqueado href={TIKTOK_PROFILE} rede="TikTok" />
+        )}
       </section>
 
       <section className="hub-social" id="instagram" ref={instagramRef}>
@@ -210,14 +251,18 @@ export function HubSocial() {
 
         {/* Faixa rolavel: o embed do Instagram tem largura minima propria, entao
             nao cabem tres colunas na coluna do hub nem uma coluna no celular. */}
-        <div
-          ref={instagramStrip}
-          className={`hub-social__strip${instagramReady ? " hub-social__strip--ready" : ""}`}
-        >
-          {INSTAGRAM_POSTS.map((permalink) => (
-            <div key={permalink} className="hub-social__post" />
-          ))}
-        </div>
+        {permitido ? (
+          <div
+            ref={instagramStrip}
+            className={`hub-social__strip${instagramReady ? " hub-social__strip--ready" : ""}`}
+          >
+            {INSTAGRAM_POSTS.map((permalink) => (
+              <div key={permalink} className="hub-social__post" />
+            ))}
+          </div>
+        ) : (
+          <EmbedBloqueado href={INSTAGRAM_PROFILE} rede="Instagram" />
+        )}
       </section>
     </>
   );
