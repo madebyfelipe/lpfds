@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ebook, subscribe } from "@/lib/newsletter";
+import { captureUtm, ebook, readUtm, subscribe } from "@/lib/newsletter";
 
 /**
  * Modal do e-book — a única superfície com formulário de newsletter no hub.
@@ -32,6 +32,10 @@ export function EbookModal() {
   }, []);
 
   useEffect(() => {
+    // Retém a atribuição de campanha assim que o /hub carrega, antes de o
+    // visitante navegar e possivelmente perder os parâmetros da URL.
+    captureUtm();
+
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
@@ -85,7 +89,12 @@ export function EbookModal() {
     setStatus("sending");
 
     try {
-      const result = await subscribe({ name, email, source: "hub-ebook" });
+      const result = await subscribe({
+        name,
+        email,
+        source: "hub-ebook",
+        utm: readUtm()
+      });
       if (!result.ok || !result.download) throw new Error("cadastro recusado");
       setDownload(result.download);
       setStatus("sent");

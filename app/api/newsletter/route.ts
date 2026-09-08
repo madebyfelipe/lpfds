@@ -38,6 +38,31 @@ const MAKE_WEBHOOK = "https://hook.us2.make.com/1fnsymphi9b64q1tcq8we9ap7xxgxcv7
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const TIMEOUT_MS = 10000;
 const MAX_NAME = 120;
+const MAX_UTM = 300;
+
+// UTM snake_case (como vem da URL) → camelCase (nomes dos campos no Twenty, lidos
+// no workflow como {{trigger.utmSource}} etc). Só o que estiver aqui é repassado.
+const UTM_MAP = {
+  utm_source: "utmSource",
+  utm_medium: "utmMedium",
+  utm_campaign: "utmCampaign",
+  utm_content: "utmContent",
+  utm_term: "utmTerm"
+} as const;
+
+/** Achata os UTMs recebidos no topo do payload, já com os nomes do Twenty. */
+function normalizeUtm(raw: unknown): Record<string, string> {
+  if (!raw || typeof raw !== "object") return {};
+  const source = raw as Record<string, unknown>;
+  const out: Record<string, string> = {};
+  for (const [snake, camel] of Object.entries(UTM_MAP)) {
+    const value = source[snake];
+    if (typeof value === "string" && value.trim()) {
+      out[camel] = value.trim().slice(0, MAX_UTM);
+    }
+  }
+  return out;
+}
 
 async function post(url: string, payload: unknown) {
   const res = await fetch(url, {
@@ -54,9 +79,10 @@ export async function POST(request: Request) {
   let email: unknown;
   let name: unknown;
   let source: unknown;
+  let utm: unknown;
 
   try {
-    ({ email, name, source } = await request.json());
+    ({ email, name, source, utm } = await request.json());
   } catch {
     return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
   }
@@ -75,6 +101,10 @@ export async function POST(request: Request) {
   const fullName = typeof name === "string" ? name.trim().slice(0, MAX_NAME) : "";
   const [firstName, ...rest] = fullName.split(/\s+/).filter(Boolean);
 
+  // Atribuição de campanha capturada no /hub — vai nos dois caminhos (e-book e
+  // confirmação), já achatada com os nomes de campo do Twenty.
+  const utmFields = normalizeUtm(utm);
+
   const payload = {
     email: email.trim().toLowerCase(),
     // `firstName`/`lastName` vão separados porque o objeto People do Twenty tem
@@ -84,6 +114,7 @@ export async function POST(request: Request) {
     lastName: rest.join(" "),
     source: origin,
     submittedAt: new Date().toISOString(),
+    ...utmFields,
     // `product`, `productTitle` e `downloadUrl` existem só no caminho do
     // e-book, para o passo "Send Email" montar a entrega sem link hardcoded no
     // workflow: trocar o mirror em lib/newsletter.ts basta.

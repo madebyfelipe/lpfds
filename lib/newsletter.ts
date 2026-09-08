@@ -41,11 +41,81 @@ export function isNewsletterSource(value: unknown): value is NewsletterSource {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* UTM — atribuição de campanha                                               */
+/* -------------------------------------------------------------------------- */
+
+/** Parâmetros UTM padrão capturados da URL. */
+export const UTM_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term"
+] as const;
+
+export type UtmParams = Partial<Record<(typeof UTM_KEYS)[number], string>>;
+
+/** Onde a captura fica entre a chegada no /hub e o envio do formulário. */
+const UTM_STORAGE_KEY = "mbf-utm";
+const MAX_UTM = 300;
+
+/**
+ * Captura os UTMs da URL atual e guarda na sessão. Rodada no mount de qualquer
+ * página do /hub: se o visitante chegou por um anúncio, os parâmetros ficam
+ * retidos mesmo que ele navegue antes de abrir o modal do e-book.
+ *
+ * Só grava quando a URL traz algo — assim uma navegação interna (sem UTM) não
+ * apaga a atribuição da mesma sessão.
+ */
+export function captureUtm(): void {
+  if (typeof window === "undefined") return;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const captured: UtmParams = {};
+    for (const key of UTM_KEYS) {
+      const value = params.get(key);
+      if (value) captured[key] = value.slice(0, MAX_UTM);
+    }
+    if (Object.keys(captured).length === 0) return;
+    sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(captured));
+  } catch {
+    // sem sessionStorage: os UTMs ainda são lidos da URL viva no submit
+  }
+}
+
+/**
+ * Lê os UTMs no momento do envio: a URL viva tem prioridade e, na falta dela,
+ * cai no que a sessão guardou de uma chegada anterior.
+ */
+export function readUtm(): UtmParams {
+  if (typeof window === "undefined") return {};
+  const merged: UtmParams = {};
+  try {
+    const stored = sessionStorage.getItem(UTM_STORAGE_KEY);
+    if (stored) Object.assign(merged, JSON.parse(stored) as UtmParams);
+  } catch {
+    // ignora — segue com o que a URL trouxer
+  }
+  try {
+    const params = new URLSearchParams(window.location.search);
+    for (const key of UTM_KEYS) {
+      const value = params.get(key);
+      if (value) merged[key] = value.slice(0, MAX_UTM);
+    }
+  } catch {
+    // ignora
+  }
+  return merged;
+}
+
 export type SubscribeInput = {
   email: string;
   /** Opcional: o popup da landing só pede e-mail. */
   name?: string;
   source: NewsletterSource;
+  /** Atribuição de campanha capturada na URL do /hub. */
+  utm?: UtmParams;
 };
 
 export type SubscribeResult = {
