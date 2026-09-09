@@ -83,11 +83,11 @@ export const bordas = {
     "Perguntas (15 min): sigilo ao falar de casos, tempo até o primeiro contato, o que fazer com poucos seguidores.",
 } as const;
 
-/** O que a participante leva — o estado final, em itens curtos. */
+/** O que a participante leva — os materiais de apoio, em itens curtos. */
 export const entregas: string[] = [
-  "Três editorias escolhidas para o seu consultório.",
-  "As duas primeiras semanas de publicação agendadas.",
-  "Um plano de 30 dias no modelo 3-2-1, pronto para rodar.",
+  "E-book de consulta para a montagem do material.",
+  "Certificado de presença.",
+  "Gravação da aula.",
 ];
 
 /* -------------------------------------------------------------------------- */
