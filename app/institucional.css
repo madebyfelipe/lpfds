@@ -1308,9 +1308,10 @@
   user-select: none;
 }
 
-/* Faixa de cima: vermelha com tinta preta. */
+/* Faixa de cima: vermelha com tinta preta. Fica acima do kicker (sangra pelo
+   topo à direita), deixando o "— Workshop ao vivo" visível, como no post. */
 .inst-hero__tape--top {
-  top: 44px;
+  top: -56px;
   background: var(--red);
   color: #151515;
 }
