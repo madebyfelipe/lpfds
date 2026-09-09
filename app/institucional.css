@@ -1249,6 +1249,45 @@
    form da imersão. Só o que é próprio da página vive aqui.
    -------------------------------------------------------------------------- */
 
+/* Hero em duas colunas: texto à esquerda, foto do Felipe à direita. A foto é
+   paisagem (3:2); o recorte retrato mantém a figura inteira e corta só as
+   laterais (object-fit cover, altura cheia). */
+.inst-hero--split {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 440px);
+  gap: 56px;
+  align-items: center;
+}
+
+.inst-hero--split .inst-hero__title {
+  max-width: 18ch;
+}
+
+.inst-hero__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--gray-100);
+}
+
+.inst-hero__media-img {
+  object-fit: cover;
+  object-position: 50% 32%;
+}
+
+/* Mobile: empilha (texto e depois foto), e a foto vira paisagem para não
+   ocupar a tela inteira. */
+@media (max-width: 900px) {
+  .inst-hero--split {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .inst-hero__media {
+    aspect-ratio: 3 / 2;
+  }
+}
+
 /* Pull quote grande — herda a cor da superfície (--on-red na faixa vermelha,
    --cream no .inst-dark), então serve nos dois contextos sem repintar. */
 .inst-webinar__quote {

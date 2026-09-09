@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { WebinarForm } from "@/components/institucional/WebinarForm";
 import { blocos, entregas, webinar } from "@/lib/webinar";
 
@@ -21,20 +22,33 @@ export const metadata: Metadata = {
 export default function WebinarPage() {
   return (
     <main id="conteudo">
-      {/* Hero — promessa + data */}
-      <header className="inst-hero">
-        <p className="inst-kicker">— Workshop ao vivo · Gratuito</p>
-        <h1 className="inst-hero__title">
-          O que publicar, <span className="inst-hero__accent">para quem</span>, em que
-          ordem.
-        </h1>
-        <p className="inst-hero__lead">{webinar.promessa}</p>
-        <p className="inst-hero__note">
-          {webinar.dataLabel} · {webinar.duracao}
-        </p>
-        <a href="#inscricao" className="inst-hero__cta">
-          Garantir minha vaga →
-        </a>
+      {/* Hero — texto à esquerda, foto do Felipe (no palco) à direita */}
+      <header className="inst-hero inst-hero--split">
+        <div className="inst-hero__col">
+          <p className="inst-kicker">— Workshop ao vivo · Gratuito</p>
+          <h1 className="inst-hero__title">
+            O que publicar, <span className="inst-hero__accent">para quem</span>, em que
+            ordem.
+          </h1>
+          <p className="inst-hero__lead">{webinar.promessa}</p>
+          <p className="inst-hero__note">
+            {webinar.dataLabel} · {webinar.duracao}
+          </p>
+          <a href="#inscricao" className="inst-hero__cta">
+            Garantir minha vaga →
+          </a>
+        </div>
+        <div className="inst-hero__media">
+          <Image
+            src="/institucional/hero/02.jpg"
+            alt="Felipe apresentando ao vivo no palco, com microfone"
+            fill
+            priority
+            quality={90}
+            sizes="(max-width: 900px) 100vw, 440px"
+            className="inst-hero__media-img"
+          />
+        </div>
       </header>
 
       {/* A tese — frase-âncora sobre a faixa vermelha */}
