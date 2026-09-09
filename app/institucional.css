@@ -1279,7 +1279,9 @@
    ficar atrás dela. */
 .inst-hero--split .inst-hero__col {
   align-self: center;
-  padding-block: 172px 96px;
+  /* padding-top folga o kicker abaixo da faixa de cima; padding-bottom abre a
+     faixa de baixo abaixo do CTA, sem cobri-lo. */
+  padding-block: 172px 168px;
 }
 
 .inst-hero--split .inst-hero__title {
@@ -1333,11 +1335,15 @@
   color: #151515;
 }
 
-/* Faixa de baixo: preta com tinta vermelha, cruzando a base do hero. */
+/* Faixa de baixo: preta com tinta vermelha, na base do hero. Ângulo ESPELHADO
+   em relação à de cima (ela desce para a direita, `\`, enquanto a de cima sobe,
+   `/`) — é o cruzamento das duas que faz o visual de fita de isolamento da
+   referência. Sem o espelhamento elas ficam paralelas, como trilho. */
 .inst-hero__tape--bottom {
-  bottom: 76px;
+  bottom: 30px;
   background: #151515;
   color: var(--red);
+  transform: rotate(8deg);
 }
 
 /* Mobile: empilha (texto e depois foto); a foto vira paisagem para não ocupar

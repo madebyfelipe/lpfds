@@ -22,17 +22,7 @@ export const metadata: Metadata = {
 export default function WebinarPage() {
   return (
     <main id="conteudo">
-      {/* Hero — texto ~2/3 à esquerda, foto full-height (~1/3) à direita. As duas
-          faixas diagonais "WEBINAR" do post atravessam o hero inteiro, canto a
-          canto, por cima do texto e da foto: a de cima vermelha com tinta preta,
-          a de baixo preta com tinta vermelha. */}
       <header className="inst-hero inst-hero--split">
-        <span className="inst-hero__tape inst-hero__tape--top" aria-hidden="true">
-          WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR
-        </span>
-        <span className="inst-hero__tape inst-hero__tape--bottom" aria-hidden="true">
-          WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR
-        </span>
         <div className="inst-hero__col">
           <p className="inst-kicker">— Workshop ao vivo · Gratuito</p>
           <h1 className="inst-hero__title">
