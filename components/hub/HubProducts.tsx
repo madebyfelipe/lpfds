@@ -71,10 +71,23 @@ const arrowIcon = (
   </svg>
 );
 
+const chevron = (dir: "left" | "right") => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+    {dir === "left" ? (
+      <polyline points="15 5 8 12 15 19" />
+    ) : (
+      <polyline points="9 5 16 12 9 19" />
+    )}
+  </svg>
+);
+
 export function HubProducts() {
   const gridRef = useRef<HTMLDivElement>(null);
-  const [spread, setSpread] = useState(false);
-  useCardDeck(gridRef, ".social-card", spread);
+  // Hint de swipe (mobile): visível até a 1ª interação com o baralho.
+  const [showHint, setShowHint] = useState(true);
+  const { prev, next } = useCardDeck(gridRef, ".social-card", {
+    onFirstInteract: () => setShowHint(false),
+  });
 
   return (
     <section className="hub-products">
@@ -140,14 +153,34 @@ export function HubProducts() {
         })}
       </div>
 
-      <button
-        type="button"
-        className="hub-products__spread-btn"
-        onClick={() => setSpread((s) => !s)}
-        aria-pressed={spread}
-      >
-        {spread ? "Ver como baralho" : "Ver lado a lado"}
-      </button>
+      {/* Hint de swipe — só mobile (CSS), some na 1ª interação. Decorativo. */}
+      <div className="hub-products__hint" aria-hidden="true" hidden={!showHint}>
+        <span className="hub-products__hint-icon">
+          {chevron("left")}
+          {chevron("right")}
+        </span>
+        Arraste para ver os cards
+      </div>
+
+      {/* Navegação — só desktop (CSS). Avança/volta o baralho. */}
+      <div className="hub-products__nav">
+        <button
+          type="button"
+          className="hub-products__nav-btn"
+          onClick={prev}
+          aria-label="Card anterior"
+        >
+          {chevron("left")}
+        </button>
+        <button
+          type="button"
+          className="hub-products__nav-btn"
+          onClick={next}
+          aria-label="Próximo card"
+        >
+          {chevron("right")}
+        </button>
+      </div>
     </section>
   );
 }

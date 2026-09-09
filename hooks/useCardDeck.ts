@@ -1,30 +1,47 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 import type { RefObject } from "react";
 
 /**
  * "Baralho" horizontal de cards. Os cards ficam sobrepostos como uma mão de
  * cartas (a ativa à frente e centralizada; as outras abertas para os lados,
- * opacas). Escolher a carta se dá pelo movimento lateral:
+ * opacas). A seleção se dá pelo movimento lateral:
  *
- * • Mobile: arraste/deslize na HORIZONTAL desliza a seleção pelo baralho.
- *   O scroll vertical da página continua normal (touch-action: pan-y) —
- *   a seção não "prende" mais.
- * • Desktop: clique numa carta traz ela para a frente. O parâmetro `spread`
- *   (ligado ao botão "lado a lado") espalha as cartas em linha e volta.
+ * • Mobile: arraste/deslize na HORIZONTAL desliza a seleção pelo baralho. Um
+ *   "peek" automático (a próxima carta espia e volta, poucas vezes) mais o hint
+ *   "arraste" ensinam o gesto; os dois somem na primeira interação. O scroll
+ *   vertical da página continua normal (touch-action: pan-y) — a seção não
+ *   "prende".
+ * • Desktop: clique numa carta traz ela para a frente; os botões ‹ › (via
+ *   `prev`/`next` devolvidos aqui) avançam/voltam o baralho, com wrap-around.
  *
  * Respeita prefers-reduced-motion: nenhum branch roda → o CSS mostra os cards
- * em fluxo normal (legível, sem movimento).
+ * em fluxo normal (legível, sem movimento), e sem botões nem hint.
  */
+type DeckOptions = {
+  /** Primeira interação (arraste no mobile, clique/botão no desktop). Some o hint. */
+  onFirstInteract?: () => void;
+};
+
 export function useCardDeck(
   containerRef: RefObject<HTMLElement | null>,
   cardSelector: string,
-  spread: boolean
+  options: DeckOptions = {}
 ) {
-  const spreadRef = useRef(spread);
-  const firstSpread = useRef(true);
-  const apiRef = useRef<{ setMode: (animate: boolean) => void } | null>(null);
+  // Lido dentro do efeito sem entrar nas deps (não re-monta o baralho a cada render).
+  const optionsRef = useRef(options);
+  optionsRef.current = options;
+
+  // Preenchida pelo branch desktop; os botões ‹ › chamam por aqui.
+  const apiRef = useRef<{ go: (dir: number) => void } | null>(null);
+  const interacted = useRef(false);
+
+  const markInteract = useCallback(() => {
+    if (interacted.current) return;
+    interacted.current = true;
+    optionsRef.current.onFirstInteract?.();
+  }, []);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -48,7 +65,6 @@ export function useCardDeck(
         const mid = (n - 1) / 2;
         const REST_SHADOW = "0 10px 24px rgba(0,0,0,0.12)";
         const FOCUS_SHADOW = "0 26px 50px rgba(0,0,0,0.28)";
-        const rowGap = 18;
 
         const fanX = () => Math.min(root.offsetWidth * 0.14, 120);
 
@@ -68,23 +84,6 @@ export function useCardDeck(
           };
         };
 
-        // Linha: as n cartas lado a lado, preenchendo a largura.
-        const rowState = (j: number) => {
-          const slot = root.offsetWidth / n;
-          const cw = cards[0].offsetWidth || 260;
-          const s = Math.min(1, (slot - rowGap) / cw);
-          return {
-            xPercent: -50,
-            x: (j - mid) * slot,
-            y: 0,
-            rotation: 0,
-            scale: s,
-            zIndex: 20,
-            boxShadow: REST_SHADOW,
-            transformOrigin: "50% 50%",
-          };
-        };
-
         // Aplica um estado numa carta; zIndex sempre instantâneo.
         const applyCard = (
           card: HTMLElement,
@@ -100,7 +99,7 @@ export function useCardDeck(
 
         const mm = gsap.matchMedia();
 
-        /* ── MOBILE: seleção por ARRASTE HORIZONTAL (sem pin) ── */
+        /* ── MOBILE: seleção por ARRASTE HORIZONTAL (sem pin) + hint de swipe ── */
         mm.add(
           "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
           () => {
@@ -132,13 +131,36 @@ export function useCardDeck(
               });
             };
 
+            // Hint: a próxima carta espia e volta, poucas vezes, até a 1ª
+            // interação — demonstra que o baralho desliza no horizontal.
+            let hint: gsap.core.Timeline | undefined;
+            if (n > 1) {
+              const proxy = { v: 0 };
+              const peek = () => {
+                p = proxy.v;
+                apply(p);
+              };
+              hint = gsap.timeline({ delay: 0.9, repeat: 2, repeatDelay: 1.2 });
+              hint
+                .to(proxy, { v: 0.55, duration: 0.55, ease: "power2.inOut", onUpdate: peek })
+                .to(proxy, { v: 0, duration: 0.55, ease: "power2.inOut", onUpdate: peek });
+            }
+            const killHint = () => {
+              hint?.kill();
+              hint = undefined;
+            };
+
             const obs = Observer.create({
               target: root,
               type: "touch,pointer",
               lockAxis: true, // trava no eixo do 1º movimento → vertical rola a página
               dragMinimum: 4,
               tolerance: 10,
-              onPress: () => snapTween?.kill(),
+              onPress: () => {
+                killHint();
+                markInteract();
+                snapTween?.kill();
+              },
               onChangeX: (self) => {
                 // arrastar para a esquerda (deltaX < 0) avança para a próxima carta.
                 p = gsap.utils.clamp(0, n - 1, p - self.deltaX / dragPerCard());
@@ -151,12 +173,13 @@ export function useCardDeck(
             return () => {
               obs.kill();
               snapTween?.kill();
+              killHint();
               root.classList.remove("is-live");
             };
           }
         );
 
-        /* ── DESKTOP: baralho + botão "lado a lado" (toggle) ── */
+        /* ── DESKTOP: baralho + clique-para-frente + botões ‹ › (wrap-around) ── */
         mm.add(
           "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
           () => {
@@ -166,19 +189,17 @@ export function useCardDeck(
             let active = Math.round(mid);
 
             const applyDesktop = (animate: boolean) => {
-              cards.forEach((card, j) => {
-                const state = spreadRef.current ? rowState(j) : deckAt(j, active);
-                applyCard(card, state, animate);
-              });
+              cards.forEach((card, j) => applyCard(card, deckAt(j, active), animate));
             };
 
             applyDesktop(false);
 
-            // Clique numa carta a traz para a frente (só no modo baralho).
+            // Clique numa carta a traz para a frente.
             const cleanups: Array<() => void> = [];
             cards.forEach((card, j) => {
               const onClick = () => {
-                if (spreadRef.current || active === j) return;
+                if (active === j) return;
+                markInteract();
                 active = j;
                 applyDesktop(true);
               };
@@ -190,8 +211,14 @@ export function useCardDeck(
             window.addEventListener("resize", onResize);
             cleanups.push(() => window.removeEventListener("resize", onResize));
 
-            // Exposto para o toggle "lado a lado".
-            apiRef.current = { setMode: (animate) => applyDesktop(animate) };
+            // Navegação pelos botões ‹ › (wrap-around, sempre habilitados).
+            apiRef.current = {
+              go: (dir) => {
+                markInteract();
+                active = (active + dir + n) % n;
+                applyDesktop(true);
+              },
+            };
 
             return () => {
               cleanups.forEach((fn) => fn());
@@ -210,15 +237,10 @@ export function useCardDeck(
     return () => {
       ctx?.revert();
     };
-  }, [containerRef, cardSelector]);
+  }, [containerRef, cardSelector, markInteract]);
 
-  // Reage ao botão "lado a lado" (desktop).
-  useEffect(() => {
-    spreadRef.current = spread;
-    if (firstSpread.current) {
-      firstSpread.current = false;
-      return;
-    }
-    apiRef.current?.setMode(true);
-  }, [spread]);
+  const prev = useCallback(() => apiRef.current?.go(-1), []);
+  const next = useCallback(() => apiRef.current?.go(1), []);
+
+  return { prev, next };
 }

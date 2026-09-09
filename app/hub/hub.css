@@ -1170,44 +1170,91 @@ button.hub-card-ref__action-btn {
 }
 
 /* ═══════════════════════════════════════════════════════
-   Social Kit — botão "lado a lado" (só desktop)
-   Alterna o baralho ↔ cartas em linha (toggle, via React).
+   Baralho — navegação ‹ › (desktop) e hint de swipe (mobile)
    ═══════════════════════════════════════════════════════ */
-.hub-products__spread-btn {
-  display: none; /* escondido no mobile — lá a seleção é por scroll */
+
+/* Escondidos por padrão; cada um aparece no seu breakpoint. */
+.hub-products__nav,
+.hub-products__hint {
+  display: none;
 }
 
+/* Desktop: botões ‹ › avançam/voltam o baralho (o mobile navega por arraste). */
 @media (min-width: 768px) {
-  .hub-products__spread-btn {
+  .hub-products__nav {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .hub-products__nav-btn {
+    width: 46px;
+    height: 46px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: fit-content;
-    margin: 20px auto 0;
-    padding: 10px 22px;
     border: none;
-    border-radius: var(--radius-pill);
+    border-radius: 50%;
     background: #151515;
     color: #ffffff;
-    font-family: inherit;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
     cursor: pointer;
     transition: background-color 0.28s ease, transform 0.28s ease;
   }
 
-  .hub-products__spread-btn:hover {
+  .hub-products__nav-btn:hover {
     background: var(--accent);
     transform: translateY(-1px);
   }
+
+  .hub-products__nav-btn:active {
+    transform: scale(0.95);
+  }
 }
 
-/* Reduced motion: sem baralho nem botão — o JS não liga .is-live, então
-   os cards ficam no fluxo normal (empilhados, legíveis, sem movimento). */
+/* Mobile: hint que ensina o gesto — chevrons deslizando + rótulo. Some na 1ª
+   interação (React seta [hidden]); por isso o :not([hidden]) vence o UA. */
+@media (max-width: 767px) {
+  .hub-products__hint:not([hidden]) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+    animation: hub-hint-fade 2.4s ease-in-out infinite;
+  }
+
+  .hub-products__hint-icon {
+    display: inline-flex;
+    color: var(--accent-ink);
+    animation: hub-hint-swipe 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes hub-hint-swipe {
+  0%, 100% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+}
+
+@keyframes hub-hint-fade {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Reduced motion: sem baralho — o JS não liga .is-live, os cards ficam no fluxo
+   normal (empilhados, legíveis). Sem botões, sem hint, sem animação. */
 @media (prefers-reduced-motion: reduce) {
-  .hub-products__spread-btn {
+  .hub-products__nav,
+  .hub-products__hint {
     display: none;
+  }
+  .hub-products__hint-icon {
+    animation: none;
   }
 }
 
