@@ -9,6 +9,17 @@ import { openEbookModal } from "./EbookModal";
 
 const products = [
   {
+    kicker: "/WEBINAR",
+    title: "Webinar ao vivo",
+    desc: "Monte seu sistema de conteúdo em uma manhã. Sáb 24/10, 10h — grátis.",
+    cta: "Garantir vaga",
+    href: "/webinar",
+    bgColor: "#151515",
+    textColor: "#f6f6f6",
+    invert: true,
+    avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
+  },
+  {
     kicker: "/E-BOOK",
     title: ebook.short,
     desc: "Construção de marca para psicólogos. Grátis pra quem entra na newsletter.",

@@ -1237,6 +1237,76 @@
   color: var(--gray-300);
 }
 
+/* "(opcional)" no rótulo do campo — sai do caixa-alta e do tracking do label. */
+.inst-field__optional {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Webinar (/webinar) — reaproveita hero, faixa vermelha, steps e o layout de
+   form da imersão. Só o que é próprio da página vive aqui.
+   -------------------------------------------------------------------------- */
+
+/* Pull quote grande — herda a cor da superfície (--on-red na faixa vermelha,
+   --cream no .inst-dark), então serve nos dois contextos sem repintar. */
+.inst-webinar__quote {
+  margin: 0;
+  max-width: 24ch;
+  font-size: clamp(1.75rem, 1.4rem + 1.6vw, 3rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Corpo de texto da página. --gray-700 inverte com o tema e passa contraste
+   nas duas superfícies (cream e .inst-dark). */
+.inst-webinar__body {
+  margin: 24px 0 0;
+  max-width: 52ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+/* Bordas do programa (abertura e perguntas), abaixo do grid das três partes. */
+.inst-webinar__bordas {
+  margin-top: 64px;
+  display: grid;
+  gap: 20px;
+}
+
+.inst-webinar__note {
+  margin: 0;
+  max-width: 66ch;
+  padding-top: 20px;
+  border-top: 1px solid var(--gray-200);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--gray-700);
+}
+
+/* O que você leva — lista sem marcador, cada item numa linha com filete. */
+.inst-webinar__entregas {
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inst-webinar__entrega {
+  padding: 24px 0;
+  border-top: 1px solid var(--gray-200);
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.inst-webinar__entrega:last-child {
+  border-bottom: 1px solid var(--gray-200);
+}
+
 /* LinkRow — motivo do design system: linha de link com seta diagonal. */
 .inst-linkrow {
   display: flex;

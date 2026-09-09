@@ -1323,3 +1323,94 @@ button.hub-card-ref__action-btn {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* --------------------------------------------------------------------------
+   Faixa fixa do webinar — vive fora do `.inst` e do `.hub`, precedendo a
+   InstNav. As duas grudam no topo: a faixa em top:0 e a nav empurrada para
+   baixo dela. Vermelho da marca hardcoded (não inverte com o tema).
+   -------------------------------------------------------------------------- */
+.hub-webinar-bar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 8px 24px;
+  background: #bc0319;
+  color: #f6f6f6;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.hub-webinar-bar:hover {
+  background: #8f0313;
+}
+
+/* Empurra a nav para baixo da faixa — sem isso os dois stickies em top:0
+   se sobrepõem. Escopado pela adjacência, então só vale no /hub. */
+.hub-webinar-bar + .inst-nav {
+  top: 42px;
+}
+
+.hub-webinar-bar__dot {
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: #f6f6f6;
+  flex-shrink: 0;
+  animation: hub-webinar-pulse 2s ease-in-out infinite;
+}
+
+.hub-webinar-bar__label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hub-webinar-bar__mid {
+  color: rgba(246, 246, 246, 0.85);
+}
+
+.hub-webinar-bar__mid::before {
+  content: "·";
+  margin: 0 8px;
+  color: rgba(246, 246, 246, 0.6);
+}
+
+.hub-webinar-bar__cta {
+  margin-left: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(246, 246, 246, 0.5);
+  padding-bottom: 1px;
+}
+
+@keyframes hub-webinar-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Telas estreitas: esconde a data para a faixa caber em uma linha (a altura
+   fixa da faixa é o que mantém o offset da nav válido). */
+@media (max-width: 600px) {
+  .hub-webinar-bar {
+    font-size: 12px;
+    padding-inline: 16px;
+  }
+  .hub-webinar-bar__mid {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-webinar-bar__dot {
+    animation: none;
+  }
+}
