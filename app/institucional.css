@@ -1274,10 +1274,12 @@
 }
 
 /* O padding vertical vive na coluna de texto (que fica centrada), para a foto
-   sangrar topo e base sem margem. */
+   sangrar topo e base sem margem. O padding-top é folgado de propósito: deixa o
+   kicker cair ABAIXO da faixa vermelha do topo (como na referência), em vez de
+   ficar atrás dela. */
 .inst-hero--split .inst-hero__col {
   align-self: center;
-  padding-block: 120px 96px;
+  padding-block: 172px 96px;
 }
 
 .inst-hero--split .inst-hero__title {
@@ -1304,12 +1306,14 @@
    literais aqui não viram token. */
 .inst-hero__tape {
   position: absolute;
-  left: -12%;
-  width: 124%;
-  padding: 9px 0;
+  /* Overhang generoso para as duas pontas atravessarem o hero inteiro mesmo
+     depois da rotação (a rotação levanta a ponta direita e baixa a esquerda). */
+  left: -15%;
+  width: 130%;
+  padding: 13px 0;
   z-index: 2;
   transform: rotate(-8deg);
-  font-size: clamp(13px, 0.6vw + 9px, 18px);
+  font-size: clamp(15px, 0.7vw + 11px, 22px);
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1320,17 +1324,18 @@
   user-select: none;
 }
 
-/* Faixa de cima: vermelha com tinta preta. Fica acima do kicker (sangra pelo
-   topo à direita), deixando o "— Workshop ao vivo" visível, como no post. */
+/* Faixa de cima: vermelha com tinta preta. Cruza a parte de cima do hero de
+   ponta a ponta — assentada baixo o bastante para a rotação não jogar a ponta
+   direita para fora do recorte (era o que cortava a faixa pela metade). */
 .inst-hero__tape--top {
-  top: -56px;
+  top: 40px;
   background: var(--red);
   color: #151515;
 }
 
-/* Faixa de baixo: preta com tinta vermelha. */
+/* Faixa de baixo: preta com tinta vermelha, cruzando a base do hero. */
 .inst-hero__tape--bottom {
-  bottom: 44px;
+  bottom: 76px;
   background: #151515;
   color: var(--red);
 }
@@ -1341,7 +1346,8 @@
   .inst-hero--split {
     grid-template-columns: 1fr;
     gap: 36px;
-    padding: 88px var(--inst-pad) 0;
+    /* padding-top folgado: o kicker cai abaixo da faixa do topo, não atrás. */
+    padding: 132px var(--inst-pad) 0;
   }
   .inst-hero--split .inst-hero__col {
     padding-block: 0;
