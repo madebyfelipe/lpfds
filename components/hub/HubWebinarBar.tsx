@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { webinar } from "@/lib/webinar";
+import { hubWebinarHref, webinar } from "@/lib/webinar";
 
 /**
  * Faixa fixa no topo do /hub anunciando o webinar. Fica ANTES da InstNav e as
@@ -11,7 +11,7 @@ import { webinar } from "@/lib/webinar";
  */
 export function HubWebinarBar() {
   return (
-    <Link href="/webinar" className="hub-webinar-bar">
+    <Link href={hubWebinarHref} className="hub-webinar-bar">
       <span className="hub-webinar-bar__dot" aria-hidden="true" />
       <strong className="hub-webinar-bar__label">{webinar.short}</strong>
       <span className="hub-webinar-bar__mid">{webinar.dataCurta}</span>

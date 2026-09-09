@@ -43,6 +43,18 @@ export const webinar = {
   ctaFinal: "Conversa de diagnóstico de 20 minutos.",
 } as const;
 
+/**
+ * Atribuição de campanha dos links do /hub para o webinar. O /hub é o destino
+ * do "link da bio" do Instagram, então o clique de lá para o webinar é tráfego
+ * de social vindo da bio. O WebinarForm captura estes UTMs da URL (captureUtm)
+ * e a rota os grava no Twenty (utmSource/Medium/Content) — a atribuição segue o
+ * lead até o CRM.
+ */
+export const HUB_WEBINAR_UTM = "utm_source=ig&utm_medium=social&utm_content=link_in_bio";
+
+/** Href do webinar a partir do /hub, já com a atribuição da bio. */
+export const hubWebinarHref = `/webinar?${HUB_WEBINAR_UTM}` as const;
+
 /* -------------------------------------------------------------------------- */
 /* Programa — os blocos da aula                                               */
 /* -------------------------------------------------------------------------- */

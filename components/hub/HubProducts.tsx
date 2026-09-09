@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { useCardDeck } from "@/hooks/useCardDeck";
 import { ebook } from "@/lib/newsletter";
+import { hubWebinarHref } from "@/lib/webinar";
 import { openEbookModal } from "./EbookModal";
 
 const products = [
@@ -13,7 +14,7 @@ const products = [
     title: "Workshop de criação de conteúdo",
     desc: "Aula ao vivo para psicólogos de consultório. Sáb 24/10, 10h — grátis.",
     cta: "Garantir vaga",
-    href: "/webinar",
+    href: hubWebinarHref,
     bgColor: "#151515",
     textColor: "#f6f6f6",
     invert: true,

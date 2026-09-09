@@ -16,21 +16,39 @@ import {
  *   1. valida os campos (mesma função do cliente, para não confiar nele);
  *   2. escreve no Twenty pela Core API (Bearer): upsert Person (dedup por
  *      e-mail) com `origem: WEBINAR` + Note com a inscrição;
- *   3. manda um e-mail de aviso para o Felipe (nunca deixa o lead cair).
+ *   3. assim que o lead cai no Twenty (crmOk), dispara o WORKFLOW de
+ *      confirmação do Twenty (webhook) — é o Twenty que manda o e-mail de
+ *      "vaga confirmada" para a inscrita, no mesmo padrão da newsletter;
+ *   4. manda um e-mail de aviso para o Felipe (nunca deixa o lead cair).
  *
  * O `origem: WEBINAR` é o que separa esta lista de quem baixou o e-book
  * (origem E_BOOK). A opção foi criada no SELECT `origem` e o campo `instagram`
  * foi adicionado ao objeto Person — os dois pela Metadata API.
  *
+ * O e-mail de confirmação sai por WORKFLOW do Twenty (não pelo SMTP daqui), por
+ * decisão do Felipe: assim a inscrição e a confirmação vivem no mesmo lugar do
+ * CRM. A URL do workflow é /webhooks/workflows/{workspaceId}/{workflowId} — o
+ * workspace é o mesmo da newsletter; só o workflowId muda. Vive em
+ * TWENTY_WEBINAR_WEBHOOK (env) porque o workflow ainda precisa ser criado e
+ * ativado no workspace (duplicar o `newsletter_listing`, trocar a copy do passo
+ * Send Email pela do webinar, e em "Define expected body" colar um JSON com os
+ * campos abaixo). O gatilho é webhook, então o e-mail usa {{trigger.body.*}} —
+ * o registro já foi criado pela Core API no passo 2, o workflow só envia.
+ *
  * Degrada com segurança: sem TWENTY_API_KEY o passo do CRM é pulado e o lead
- * ainda chega por e-mail; sem SMTP, ainda entra no CRM. Só devolve erro quando
- * NENHUM caminho existe ou todos falham — o form nunca finge que enviou.
+ * ainda chega por e-mail; sem SMTP, ainda entra no CRM; sem TWENTY_WEBINAR_WEBHOOK
+ * a confirmação não sai, mas a inscrição vale. Só devolve erro quando NENHUM
+ * caminho de registro existe ou todos falham — o form nunca finge que enviou.
  */
 export const runtime = "nodejs";
 
 const { TWENTY_API_KEY, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD } = process.env;
 const TWENTY_BASE = (process.env.TWENTY_BASE_URL ?? "https://crm.madebyfelipe.agency").replace(/\/$/, "");
 const REST = `${TWENTY_BASE}/rest`;
+
+// Workflow de confirmação do webinar (webhook). Vazio até ser criado/ativado no
+// workspace do Twenty — então o disparo é pulado sem derrubar a inscrição.
+const TWENTY_WEBINAR_WEBHOOK = process.env.TWENTY_WEBINAR_WEBHOOK ?? "";
 
 const NOTIFY_TO = "alo@madebyfelipe.com.br";
 const NOTIFY_BCC = "byonichip@gmail.com";
@@ -100,6 +118,38 @@ async function attachNote(personId: string, title: string, markdown: string) {
     await twenty("POST", "/notes", { title, bodyV2: { markdown, blocknote: null } }),
   );
   await twenty("POST", "/noteTargets", { noteId, targetPersonId: personId });
+}
+
+/**
+ * Dispara o workflow de confirmação do Twenty (webhook público — sem Bearer).
+ * O payload é flat porque o passo Send Email lê {{trigger.body.email}} etc.
+ * Best-effort: se o workflow estiver desativado (400 INVALID_WORKFLOW_STATUS)
+ * ou a URL não estiver setada, a inscrição continua valendo.
+ */
+async function sendConfirmation(fields: WebinarInput, instagram: string): Promise<boolean> {
+  if (!TWENTY_WEBINAR_WEBHOOK) return false;
+  const [firstName, ...rest] = fields.nome.split(/\s+/).filter(Boolean);
+  const res = await fetch(TWENTY_WEBINAR_WEBHOOK, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: fields.email,
+      name: fields.nome,
+      firstName: firstName ?? "",
+      lastName: rest.join(" "),
+      whatsapp: fields.whatsapp,
+      instagram,
+      crp: fields.crp ?? "",
+      origem: "WEBINAR",
+      // Dados do evento para o corpo do e-mail não ficar hardcoded no workflow.
+      eventoData: webinar.dataLabel,
+      eventoDuracao: webinar.duracao,
+      submittedAt: new Date().toISOString(),
+    }),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
+  });
+  if (!res.ok) throw new Error(`Twenty workflow → ${res.status} ${await res.text()}`);
+  return true;
 }
 
 // ---------------------------------------------------------------------------
@@ -258,6 +308,17 @@ export async function POST(request: Request) {
       );
     } catch (error) {
       console.error("[webinar] Twenty falhou:", error);
+    }
+  }
+
+  // --- Confirmação para o lead (workflow do Twenty) -------------------------
+  // Só depois de o lead cair no CRM: a confirmação diz "vaga confirmada", então
+  // não pode sair sem o registro. Best-effort — não derruba a inscrição.
+  if (crmOk) {
+    try {
+      await sendConfirmation(fields, instagram);
+    } catch (error) {
+      console.error("[webinar] confirmação (workflow) falhou:", error);
     }
   }
 

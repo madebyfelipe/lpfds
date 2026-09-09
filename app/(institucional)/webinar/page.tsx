@@ -54,7 +54,7 @@ export default function WebinarPage() {
             fill
             priority
             quality={90}
-            sizes="(max-width: 900px) 100vw, 33vw"
+            sizes="(max-width: 900px) 100vw, 42vw"
             className="inst-hero__media-img"
           />
         </div>
