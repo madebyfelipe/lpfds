@@ -1270,21 +1270,89 @@
   color: var(--gray-700);
 }
 
-/* Bordas do programa (abertura e perguntas), abaixo do grid das três partes. */
-.inst-webinar__bordas {
-  margin-top: 64px;
-  display: grid;
-  gap: 20px;
+/* A aula, bloco a bloco — agenda com subtópicos (só tópico + tempo, sem
+   descrição). Cada bloco é uma linha com filete; os subtópicos vêm numerados. */
+.inst-webinar__bloco {
+  padding: 32px 0;
+  border-top: 1px solid var(--gray-200);
 }
 
-.inst-webinar__note {
+.inst-webinar__bloco:last-child {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.inst-webinar__bloco-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.inst-webinar__bloco-title {
   margin: 0;
-  max-width: 66ch;
-  padding-top: 20px;
-  border-top: 1px solid var(--gray-200);
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: var(--gray-700);
+  font-size: 1.5rem;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.inst-webinar__bloco-tempo {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-webinar__subitens {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.inst-webinar__subitem {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: baseline;
+  column-gap: 16px;
+}
+
+.inst-webinar__subitem-num {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--red-ink);
+}
+
+.inst-webinar__subitem-label {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.inst-webinar__subitem-tempo {
+  font-size: 12px;
+  color: var(--gray-500);
+  white-space: nowrap;
+}
+
+/* Mobile: o tempo do subtópico desce para a segunda coluna. */
+@media (max-width: 600px) {
+  .inst-webinar__subitem {
+    grid-template-columns: 32px 1fr;
+    column-gap: 12px;
+    row-gap: 2px;
+  }
+  .inst-webinar__subitem-tempo {
+    grid-column: 2;
+  }
+  .inst-webinar__bloco-title {
+    font-size: 1.25rem;
+  }
 }
 
 /* O que você leva — lista sem marcador, cada item numa linha com filete. */

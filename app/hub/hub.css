@@ -1343,6 +1343,10 @@ button.hub-card-ref__action-btn {
   font-size: 13px;
   line-height: 1.2;
   white-space: nowrap;
+  /* A faixa PRECISA caber em uma linha: a altura fixa é o que mantém o offset
+     da nav (`+ .inst-nav { top: 42px }`) válido. O rótulo trunca em vez de
+     quebrar; a data some no mobile e o CTA nunca encolhe. */
+  overflow: hidden;
 }
 
 .hub-webinar-bar:hover {
@@ -1366,6 +1370,10 @@ button.hub-card-ref__action-btn {
 }
 
 .hub-webinar-bar__label {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1373,6 +1381,7 @@ button.hub-card-ref__action-btn {
 }
 
 .hub-webinar-bar__mid {
+  flex: none;
   color: rgba(246, 246, 246, 0.85);
 }
 
@@ -1383,6 +1392,7 @@ button.hub-card-ref__action-btn {
 }
 
 .hub-webinar-bar__cta {
+  flex: none;
   margin-left: 14px;
   font-size: 12px;
   font-weight: 700;

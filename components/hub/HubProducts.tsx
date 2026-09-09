@@ -9,9 +9,9 @@ import { openEbookModal } from "./EbookModal";
 
 const products = [
   {
-    kicker: "/WEBINAR",
-    title: "Webinar ao vivo",
-    desc: "Monte seu sistema de conteúdo em uma manhã. Sáb 24/10, 10h — grátis.",
+    kicker: "/WORKSHOP",
+    title: "Workshop de criação de conteúdo",
+    desc: "Aula ao vivo para psicólogos de consultório. Sáb 24/10, 10h — grátis.",
     cta: "Garantir vaga",
     href: "/webinar",
     bgColor: "#151515",

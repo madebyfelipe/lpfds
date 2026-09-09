@@ -19,8 +19,8 @@
 /* -------------------------------------------------------------------------- */
 
 export const webinar = {
-  /** Rótulo curto para o card do deck e a faixa. */
-  short: "Webinar ao vivo",
+  /** Rótulo curto para o card do deck e a faixa do /hub. */
+  short: "Workshop de criação de conteúdo",
   /** Data por extenso, para hero e e-mails. */
   dataLabel: "Sábado, 24 de outubro · 10h",
   /** Versão compacta, para a faixa fixa. */
@@ -29,12 +29,15 @@ export const webinar = {
   duracao: "90 minutos — 75 de conteúdo + 15 de perguntas",
   /** Para quem é. */
   publico: "Psicólogos clínicos autônomos, de consultório particular individual.",
-  /** A promessa da aula, em uma frase (frase-âncora do brief). */
+  /**
+   * Descrição da aula para o hero. Descreve o que é ensinado — não promete
+   * resultado nem entrega individualizada (o material de apoio é padrão: e-book,
+   * gravação e certificado).
+   */
   promessa:
-    "Você sai com um sistema de conteúdo montado: o que falar, para quem, em que ordem.",
-  /** Estado final desejado — o contrato da aula. */
-  contrato:
-    "Ninguém sai sem três editorias escolhidas e as duas primeiras semanas de publicação agendadas.",
+    "Uma aula ao vivo, para psicólogos de consultório particular, sobre como montar um sistema de conteúdo: editorias, funil de consciência e formatos.",
+  /** Chamada da dobra de materiais — o que fica com quem se inscreve. */
+  materiais: "O material de apoio fica com você, para aplicar no seu tempo.",
   /** Referências regulatórias citadas na abertura. */
   referencias:
     "Resolução CFP nº 010/2005, Art. 20 · Nota Técnica CFP nº 1/2022",
@@ -46,42 +49,48 @@ export const webinar = {
 /* Programa — os blocos da aula                                               */
 /* -------------------------------------------------------------------------- */
 
-export type ParteWebinar = {
-  num: string;
-  titulo: string;
+export type SubtopicoWebinar = { n: string; label: string; duracao: string };
+
+export type BlocoWebinar = {
+  rotulo: string;
   duracao: string;
-  copy: string;
+  /** Subtópicos numerados; vazio nos blocos que não têm (abertura, Q&A…). */
+  itens: SubtopicoWebinar[];
 };
 
-/** As três partes centrais (a abertura e o Q&A entram como nota à parte). */
-export const partes: ParteWebinar[] = [
+/**
+ * A aula em cinco blocos (90 min). Só os tópicos e subtópicos, sem descrição —
+ * como no roteiro-fonte. Abertura, Parte 3 e Perguntas não têm subtópicos.
+ */
+export const blocos: BlocoWebinar[] = [
+  { rotulo: "Abertura", duracao: "5 min", itens: [] },
   {
-    num: "Parte 1",
-    titulo: "Mentalidade",
+    rotulo: "Parte 1 — Mentalidade",
     duracao: "25 min",
-    copy: "O perfil é a sala de espera. Por que não existe atração de paciente sem conteúdo, onde o ego trava a produção e como o monopólio pessoal — recorte clínico, repertório e público — é o que ninguém copia.",
+    itens: [
+      { n: "1.1", label: "Não existe atração de clientes sem conteúdo", duracao: "8 min" },
+      {
+        n: "1.2",
+        label: "O ego preenche a distância entre o que você gostaria de ser e o que você é",
+        duracao: "6 min",
+      },
+      { n: "1.3", label: "Monopólio pessoal", duracao: "6 min" },
+      { n: "1.4", label: "Influência é como juros compostos", duracao: "5 min" },
+    ],
   },
   {
-    num: "Parte 2",
-    titulo: "Funil de conversão",
+    rotulo: "Parte 2 — Funil de conversão",
     duracao: "35 min",
-    copy: "Os cinco níveis de consciência aplicados ao consultório, a jornada até a primeira mensagem e três fórmulas de conteúdo — cada uma montada ao vivo. Você roda a primeira e sai com três editorias nomeadas.",
+    itens: [
+      { n: "2.1", label: "Níveis de consciência", duracao: "10 min" },
+      { n: "2.2", label: "Jornada do cliente", duracao: "8 min" },
+      { n: "2.3", label: "Fórmulas de conteúdo", duracao: "10 min" },
+      { n: "2.4", label: "Formatos de conteúdo", duracao: "7 min" },
+    ],
   },
-  {
-    num: "Parte 3",
-    titulo: "Daqui para frente",
-    duracao: "10 min",
-    copy: "O material de apoio para você aplicar nos próximos dias: o plano de 30 dias no modelo 3-2-1 — três editorias, dois vídeos por semana em cada, uma carta branca. O que medir nas primeiras semanas e quando trocar uma editoria que não anda.",
-  },
+  { rotulo: "Parte 3 — Daqui para frente", duracao: "10 min", itens: [] },
+  { rotulo: "Perguntas", duracao: "15 min", itens: [] },
 ];
-
-/** Nota das bordas do programa — abertura e perguntas. */
-export const bordas = {
-  abertura:
-    "Abertura (5 min): a promessa em uma frase e o desarme do Art. 20, lido na íntegra, alínea por alínea.",
-  perguntas:
-    "Perguntas (15 min): sigilo ao falar de casos, tempo até o primeiro contato, o que fazer com poucos seguidores.",
-} as const;
 
 /** O que a participante leva — os materiais de apoio, em itens curtos. */
 export const entregas: string[] = [

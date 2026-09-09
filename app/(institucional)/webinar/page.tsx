@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { WebinarForm } from "@/components/institucional/WebinarForm";
-import { bordas, entregas, partes, webinar } from "@/lib/webinar";
+import { blocos, entregas, webinar } from "@/lib/webinar";
 
 export const metadata: Metadata = {
   title: "Webinar de conteúdo para psicólogos | Made by Felipe",
   description:
-    "Ao vivo, sábado 24/10 às 10h: monte seu sistema de conteúdo em uma manhã. O que publicar, para quem, em que ordem — para psicólogos de consultório particular.",
+    "Aula ao vivo, sábado 24/10 às 10h, para psicólogos de consultório particular: o que publicar, para quem e em que ordem. Com e-book de apoio, gravação e certificado.",
   alternates: { canonical: "/webinar" },
   openGraph: {
     title: "Webinar de conteúdo para psicólogos | Made by Felipe",
     description:
-      "Sábado, 24 de outubro, 10h. Você sai com três editorias escolhidas e as duas primeiras semanas de publicação agendadas.",
+      "Sábado, 24 de outubro, 10h. Editorias, funil de consciência e formatos de conteúdo, ao vivo. Com e-book de apoio, gravação e certificado.",
     url: "/webinar",
     siteName: "Made by Felipe",
     locale: "pt_BR",
@@ -23,10 +23,10 @@ export default function WebinarPage() {
     <main id="conteudo">
       {/* Hero — promessa + data */}
       <header className="inst-hero">
-        <p className="inst-kicker">— Webinar ao vivo · Gratuito</p>
+        <p className="inst-kicker">— Workshop ao vivo · Gratuito</p>
         <h1 className="inst-hero__title">
-          Monte seu <span className="inst-hero__accent">sistema de conteúdo</span> em
-          uma manhã.
+          O que publicar, <span className="inst-hero__accent">para quem</span>, em que
+          ordem.
         </h1>
         <p className="inst-hero__lead">{webinar.promessa}</p>
         <p className="inst-hero__note">
@@ -62,30 +62,36 @@ export default function WebinarPage() {
         </div>
       </section>
 
-      {/* A aula, bloco a bloco */}
+      {/* A aula, bloco a bloco — só os tópicos e subtópicos */}
       <section className="inst-section">
         <p className="inst-kicker">— A aula, bloco a bloco</p>
-        <div className="inst-steps">
-          {partes.map((parte) => (
-            <div key={parte.num} className="inst-step">
-              <p className="inst-step__num">
-                {parte.num} · {parte.duracao}
-              </p>
-              <h2 className="inst-step__title">{parte.titulo}</h2>
-              <p className="inst-step__copy">{parte.copy}</p>
+        <div className="inst-webinar__aula">
+          {blocos.map((bloco) => (
+            <div key={bloco.rotulo} className="inst-webinar__bloco">
+              <div className="inst-webinar__bloco-head">
+                <h2 className="inst-webinar__bloco-title">{bloco.rotulo}</h2>
+                <span className="inst-webinar__bloco-tempo">{bloco.duracao}</span>
+              </div>
+              {bloco.itens.length > 0 && (
+                <ul className="inst-webinar__subitens">
+                  {bloco.itens.map((item) => (
+                    <li key={item.n} className="inst-webinar__subitem">
+                      <span className="inst-webinar__subitem-num">{item.n}</span>
+                      <span className="inst-webinar__subitem-label">{item.label}</span>
+                      <span className="inst-webinar__subitem-tempo">{item.duracao}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
-        </div>
-        <div className="inst-webinar__bordas">
-          <p className="inst-webinar__note">{bordas.abertura}</p>
-          <p className="inst-webinar__note">{bordas.perguntas}</p>
         </div>
       </section>
 
       {/* O que você leva */}
       <section className="inst-section inst-section--rule">
         <p className="inst-kicker">— O que você leva</p>
-        <p className="inst-method__intro">{webinar.contrato}</p>
+        <p className="inst-method__intro">{webinar.materiais}</p>
         <ul className="inst-webinar__entregas">
           {entregas.map((item) => (
             <li key={item} className="inst-webinar__entrega">
