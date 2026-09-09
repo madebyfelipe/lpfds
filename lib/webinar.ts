@@ -30,12 +30,10 @@ export const webinar = {
   /** Para quem é. */
   publico: "Psicólogos clínicos autônomos, de consultório particular individual.",
   /**
-   * Descrição da aula para o hero. Descreve o que é ensinado — não promete
-   * resultado nem entrega individualizada (o material de apoio é padrão: e-book,
-   * gravação e certificado).
+   * Subtítulo do hero — mesmo texto do post de divulgação no Instagram.
    */
   promessa:
-    "Uma aula ao vivo, para psicólogos de consultório particular, sobre como montar um sistema de conteúdo: editorias, funil de consciência e formatos.",
+    "O processo de criação de conteúdo para psicólogas clínicas atraírem pacientes pelo Instagram — dentro do que o Art. 20 permite.",
   /** Chamada da dobra de materiais — o que fica com quem se inscreve. */
   materiais: "O material de apoio fica com você, para aplicar no seu tempo.",
   /** Referências regulatórias citadas na abertura. */

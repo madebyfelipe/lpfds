@@ -6,12 +6,12 @@ import { blocos, entregas, webinar } from "@/lib/webinar";
 export const metadata: Metadata = {
   title: "Webinar de conteúdo para psicólogos | Made by Felipe",
   description:
-    "Aula ao vivo, sábado 24/10 às 10h, para psicólogos de consultório particular: o que publicar, para quem e em que ordem. Com e-book de apoio, gravação e certificado.",
+    "Webinar ao vivo, sábado 24/10 às 10h: como transformar seu perfil em agenda cheia. Criação de conteúdo para psicólogas clínicas atraírem pacientes pelo Instagram, dentro do Art. 20.",
   alternates: { canonical: "/webinar" },
   openGraph: {
     title: "Webinar de conteúdo para psicólogos | Made by Felipe",
     description:
-      "Sábado, 24 de outubro, 10h. Editorias, funil de consciência e formatos de conteúdo, ao vivo. Com e-book de apoio, gravação e certificado.",
+      "Sábado, 24 de outubro, 10h. Como transformar seu perfil em agenda cheia — criação de conteúdo para psicólogas clínicas, dentro do que o Art. 20 permite.",
     url: "/webinar",
     siteName: "Made by Felipe",
     locale: "pt_BR",
@@ -22,13 +22,14 @@ export const metadata: Metadata = {
 export default function WebinarPage() {
   return (
     <main id="conteudo">
-      {/* Hero — texto à esquerda, foto do Felipe (no palco) à direita */}
+      {/* Hero — texto ~2/3 à esquerda, foto full-height (~1/3) à direita, com
+          as faixas diagonais "WEBINAR" do post emoldurando a foto */}
       <header className="inst-hero inst-hero--split">
         <div className="inst-hero__col">
           <p className="inst-kicker">— Workshop ao vivo · Gratuito</p>
           <h1 className="inst-hero__title">
-            O que publicar, <span className="inst-hero__accent">para quem</span>, em que
-            ordem.
+            Como transformar seu perfil em{" "}
+            <span className="inst-hero__accent">agenda cheia.</span>
           </h1>
           <p className="inst-hero__lead">{webinar.promessa}</p>
           <p className="inst-hero__note">
@@ -45,9 +46,15 @@ export default function WebinarPage() {
             fill
             priority
             quality={90}
-            sizes="(max-width: 900px) 100vw, 440px"
+            sizes="(max-width: 900px) 100vw, 33vw"
             className="inst-hero__media-img"
           />
+          <span className="inst-hero__tape inst-hero__tape--top" aria-hidden="true">
+            WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR
+          </span>
+          <span className="inst-hero__tape inst-hero__tape--bottom" aria-hidden="true">
+            WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR · WEBINAR
+          </span>
         </div>
       </header>
 
