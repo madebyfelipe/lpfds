@@ -1257,6 +1257,10 @@
   grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
   gap: 56px;
   align-items: stretch;
+  /* As faixas diagonais são posicionadas contra o hero e recortadas nas
+     bordas — canto a canto, como no post. */
+  position: relative;
+  overflow: hidden;
 }
 
 .inst-hero--split .inst-hero__col {
@@ -1281,20 +1285,21 @@
   object-position: 50% 30%;
 }
 
-/* Faixas diagonais "WEBINAR" (fita), como no post de divulgação. Decorativas
-   (aria-hidden); o overflow do container as recorta na moldura da foto. Texto
-   preto fixo sobre o vermelho — o vermelho não inverte, então não vira token. */
+/* Faixas diagonais "WEBINAR" (fita), como no post de divulgação. Atravessam o
+   hero inteiro, canto a canto, por cima do texto e da foto (z-index acima das
+   duas colunas); o overflow do hero recorta as pontas. Decorativas
+   (aria-hidden). Cores fixas — o vermelho não inverte com o tema, então os
+   literais aqui não viram token. */
 .inst-hero__tape {
   position: absolute;
-  left: -30%;
-  width: 160%;
-  padding: 6px 0;
+  left: -12%;
+  width: 124%;
+  padding: 9px 0;
+  z-index: 2;
   transform: rotate(-8deg);
-  background: var(--red);
-  color: #151515;
-  font-size: 13px;
+  font-size: clamp(13px, 0.6vw + 9px, 18px);
   font-weight: 800;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   text-align: center;
   white-space: nowrap;
@@ -1303,12 +1308,18 @@
   user-select: none;
 }
 
+/* Faixa de cima: vermelha com tinta preta. */
 .inst-hero__tape--top {
-  top: 22px;
+  top: 44px;
+  background: var(--red);
+  color: #151515;
 }
 
+/* Faixa de baixo: preta com tinta vermelha. */
 .inst-hero__tape--bottom {
-  bottom: 22px;
+  bottom: 44px;
+  background: #151515;
+  color: var(--red);
 }
 
 /* Mobile: empilha (texto e depois foto); a foto vira paisagem para não ocupar
