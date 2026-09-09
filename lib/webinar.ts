@@ -71,7 +71,7 @@ export const partes: ParteWebinar[] = [
     num: "Parte 3",
     titulo: "Daqui para frente",
     duracao: "10 min",
-    copy: "O plano de 30 dias no modelo 3-2-1: três editorias, dois vídeos por semana em cada, uma carta branca. O que medir nos primeiros trinta dias e quando trocar uma editoria que não anda.",
+    copy: "O material de apoio para você aplicar nos próximos dias: o plano de 30 dias no modelo 3-2-1 — três editorias, dois vídeos por semana em cada, uma carta branca. O que medir nas primeiras semanas e quando trocar uma editoria que não anda.",
   },
 ];
 
