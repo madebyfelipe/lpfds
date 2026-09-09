@@ -44,6 +44,31 @@ export const webinar = {
 } as const;
 
 /**
+ * Data/hora do evento em ISO com fuso de Brasília (-03:00, sem horário de verão
+ * desde 2019). Fonte única para o cálculo dos lembretes — o `dataLabel` acima é
+ * a versão por extenso para exibir; este é o que a máquina compara.
+ */
+export const WEBINAR_DATE_ISO = "2026-10-24T10:00:00-03:00";
+
+/** Dias antes do evento em que sai lembrete por e-mail (mais próximo primeiro). */
+export const REMINDER_DAYS = [7, 3, 1] as const;
+
+/**
+ * Dias inteiros de calendário (no fuso de Brasília) entre hoje e o dia do
+ * evento. Compara datas-civis, não 24h corridas: no dia 17/10 devolve 7,
+ * independentemente da hora. Serve para a rota de lembretes decidir se hoje é
+ * um dos marcos (7/3/1).
+ */
+export function webinarDaysUntil(now: Date = new Date()): number {
+  const brtDay = (d: Date) => {
+    // "YYYY-MM-DD" no fuso de São Paulo → epoch do início daquele dia (UTC).
+    const s = d.toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
+    return Date.UTC(Number(s.slice(0, 4)), Number(s.slice(5, 7)) - 1, Number(s.slice(8, 10)));
+  };
+  return Math.round((brtDay(new Date(WEBINAR_DATE_ISO)) - brtDay(now)) / 86_400_000);
+}
+
+/**
  * Atribuição de campanha dos links do /hub para o webinar. O /hub é o destino
  * do "link da bio" do Instagram, então o clique de lá para o webinar é tráfego
  * de social vindo da bio. O WebinarForm captura estes UTMs da URL (captureUtm)
