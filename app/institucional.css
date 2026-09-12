@@ -408,23 +408,64 @@
 }
 
 /* Faixa de fotos abaixo do hero — em cor, sem filtro. */
+/* Faixa de fotos do hero — carrossel contínuo.
+   O trilho carrega duas cópias da lista e anda até -50%, então o fim da 1ª
+   cópia cai exatamente sobre o começo da 2ª e o loop não tem salto. Por isso
+   a célula tem largura fixa (25vw), não `flex: 1`. */
 .inst-strip {
-  display: flex;
   width: 100%;
   height: 340px;
+  overflow: hidden;
   border-top: 1px solid var(--gray-200);
   border-bottom: 1px solid var(--gray-200);
 }
 
+.inst-strip__track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation: inst-strip-scroll var(--inst-strip-duration, 36s) linear infinite;
+}
+
+.inst-strip:hover .inst-strip__track {
+  animation-play-state: paused;
+}
+
+@keyframes inst-strip-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .inst-strip__cell {
-  flex: 1;
-  min-width: 0;
+  flex: 0 0 25vw;
   position: relative;
+  height: 100%;
   background: var(--gray-100);
 }
 
 .inst-strip__img {
   object-fit: cover;
+}
+
+/* Reduced motion: vira um trilho rolável à mão, e a 2ª cópia some para não
+   rolar as fotos em dobro — mesma saída da galeria dos cases.
+   Diferente da galeria, o touch NÃO cai aqui: a faixa continua girando no
+   celular. Lá os itens abrem o lightbox e sem hover não há como pausar antes
+   de mirar; aqui são fotos decorativas, sem alvo de clique, e girar é o
+   comportamento pedido. O reduced motion segue sendo a saída de acessibilidade. */
+@media (prefers-reduced-motion: reduce) {
+  .inst-strip {
+    overflow-x: auto;
+  }
+
+  .inst-strip__track {
+    animation: none;
+  }
+
+  .inst-strip__cell--dup {
+    display: none;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1925,11 +1966,10 @@
 
   .inst-strip {
     height: 220px;
-    overflow-x: auto;
   }
 
   .inst-strip__cell {
-    flex: 0 0 45%;
+    flex: 0 0 45vw;
   }
 
   .inst-project {

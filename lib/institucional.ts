@@ -31,7 +31,8 @@ export const social = [
 
 // Faixa de imagens abaixo do hero. Fotos do Felipe, otimizadas a partir de
 // "fotos Felipe/" para public/institucional/hero. O protótipo previa oito
-// células; entraram as cinco fotos que existem.
+// células estáticas; hoje a faixa é um carrossel contínuo (ver .inst-strip),
+// que duplica esta lista para fechar o loop. Seis fotos.
 export const heroStrip = [
   {
     src: "/institucional/hero/01.jpg",
@@ -52,6 +53,10 @@ export const heroStrip = [
   {
     src: "/institucional/hero/05.jpg",
     alt: "Felipe ao lado do painel do Know How Experience"
+  },
+  {
+    src: "/institucional/hero/06.jpg",
+    alt: "Felipe trabalhando no notebook, sentado em frente a uma estante de livros"
   }
 ];
 

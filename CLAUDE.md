@@ -294,12 +294,23 @@ were **not** applied — Felipe held the price until it is defined, and the desi
 (cream/black/`--red` + theme toggle) stays as is.
 
 **Hero strip**: `heroStrip` in `lib/institucional.ts` → `public/institucional/hero/0N.jpg`,
-five real photos of Felipe (the prototype drew eight cells; five is what exists).
+seis fotos reais do Felipe (o protótipo desenhou oito células estáticas).
 Optimized with sharp from the gitignored `fotos Felipe/` — `.rotate()` matters, one
 source carries EXIF orientation 6. They render **in full colour** (the prototype's
 grayscale filter was removed on request) at `quality={90}`, which is why
 `next.config.ts` has to allowlist it in `images.qualities`. Cells 1 and 3 are capped by
 their originals (693px and 1080px wide) — no re-export will sharpen them.
+
+A faixa é um **carrossel contínuo**, não um grid: `.inst-strip__track` roda até
+`translateX(-50%)` em loop, e por isso `page.tsx` renderiza a lista **duas vezes** (a 2ª
+cópia é `inst-strip__cell--dup`, `alt=""` + `aria-hidden`). O loop só fecha sem salto
+porque a célula tem **largura fixa** (`25vw`, `45vw` no mobile) — trocar por `flex: 1`
+quebra a conta. As imagens são **`loading="eager"`**: as células nascem fora da viewport
+e só entram nela pelo `transform` do trilho, que o lazy-load nativo não enxerga — no
+lazy, a última foto ficava em branco para sempre. Hover pausa; `prefers-reduced-motion`
+desliga a animação, esconde a 2ª cópia e devolve o scroll manual. Diferente da galeria
+dos cases, **o touch não desliga a animação**: lá os itens abrem o lightbox e sem hover
+não há como pausar antes de mirar, aqui são fotos decorativas, sem alvo de clique.
 
 **Theme toggle**: `InstThemeToggle` in the nav writes `data-inst-theme="dark"` on
 `<html>` (not on a wrapper — the nav also renders on case pages, outside `.inst`) and

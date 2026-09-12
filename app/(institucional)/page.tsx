@@ -53,19 +53,45 @@ export default function Home() {
         </Link>
       </header>
 
+      {/* Carrossel contínuo: o trilho roda sozinho e o loop fecha em -50%,
+          por isso a lista é renderizada duas vezes. A 2ª cópia é decorativa
+          (aria-hidden) e some onde não há animação — ver .inst-strip. */}
       <div className="inst-strip">
-        {heroStrip.map((foto) => (
-          <div key={foto.src} className="inst-strip__cell">
-            <Image
-              src={foto.src}
-              alt={foto.alt}
-              fill
-              sizes="(max-width: 900px) 50vw, 25vw"
-              quality={90}
-              className="inst-strip__img"
-            />
-          </div>
-        ))}
+        <div
+          className="inst-strip__track"
+          style={
+            {
+              // velocidade constante: duração proporcional ao nº de fotos
+              "--inst-strip-duration": `${heroStrip.length * 6}s`
+            } as React.CSSProperties
+          }
+        >
+          {[0, 1].map((copy) =>
+            heroStrip.map((foto) => (
+              <div
+                key={`${copy}-${foto.src}`}
+                className={`inst-strip__cell${
+                  copy === 1 ? " inst-strip__cell--dup" : ""
+                }`}
+              >
+                {/* eager: as células nascem fora da viewport e só entram nela
+                    pelo transform do trilho, que o lazy-load nativo não
+                    enxerga — no lazy, a última foto ficava em branco pra
+                    sempre. São 6 arquivos, e a 2ª cópia reusa as mesmas URLs. */}
+                <Image
+                  src={foto.src}
+                  alt={copy === 0 ? foto.alt : ""}
+                  aria-hidden={copy === 1 || undefined}
+                  fill
+                  loading="eager"
+                  sizes="(max-width: 900px) 45vw, 25vw"
+                  quality={90}
+                  className="inst-strip__img"
+                />
+              </div>
+            ))
+          )}
+        </div>
       </div>
 
       {/* id="processo": o card "Como trabalho" do /hub aponta para /#processo.
