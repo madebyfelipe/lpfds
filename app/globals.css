@@ -3085,7 +3085,13 @@ img {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999; /* acima de popup, nav e qualquer overlay */
+  /* Acima de popup, nav e qualquer overlay — inclusive o banner de cookies,
+     que é o mais alto do projeto (.mbf-consent, 9999). Precisa ser MAIOR, não
+     igual: os dois são fixed e irmãos no <body>, e com z-index empatado quem
+     pinta por cima é o último do DOM — o banner, que o layout.tsx monta depois
+     do cursor. Era esse o empate que deixava a seta por baixo do banner.
+     Ao criar um overlay novo, mantenha-o abaixo deste valor. */
+  z-index: 10000;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease;

@@ -201,7 +201,7 @@ export const depoimentos = [
 ];
 
 // Props "Agenda" do protótipo (numProjetos / mesImersao).
-export const agenda = { numProjetos: 3, mesImersao: "setembro" };
+export const agenda = { numProjetos: 3, mesImersao: "outubro" };
 
 // Imagem de capa do projeto no hub — mesma regra do grid atual do portfólio.
 // O card abre o case completo já existente em /portfolio/[slug].
