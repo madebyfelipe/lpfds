@@ -61,8 +61,11 @@ export default function Home() {
           className="inst-strip__track"
           style={
             {
-              // velocidade constante: duração proporcional ao nº de fotos
-              "--inst-strip-duration": `${heroStrip.length * 6}s`
+              // Só o nº de fotos vai inline; os segundos por foto são do CSS,
+              // que os ajusta por breakpoint. Se a duração inteira viesse
+              // daqui, a media query não conseguiria corrigir a velocidade —
+              // custom property inline vence folha de estilo.
+              "--inst-strip-photos": String(heroStrip.length)
             } as React.CSSProperties
           }
         >

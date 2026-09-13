@@ -83,7 +83,16 @@
      que ficam sobre a superfície oposta (.inst-dark) e o fundo da nav. */
   --line-inverse: rgba(246, 246, 246, 0.18);
   --line-inverse-strong: rgba(246, 246, 246, 0.4);
-  --nav-bg: rgba(246, 246, 246, 0.94);
+  /* Fundo da nav: OPACO, e por isso é só var(--cream) — resolve na hora do
+     uso, então inverte junto com o tema sem precisar ser redeclarado no
+     bloco escuro. Era rgba(…, 0.94) e vazava: a nav é sticky e não tem
+     backdrop-filter, então 6% bastavam para o texto da página passar
+     legível por trás dela e colidir com o logo no mobile (DPR alto deixa a
+     letra nítida mesmo lavada). No globals.css a barra translúcida sempre
+     vem acompanhada de blur; aqui o site é editorial, não glassmorphism,
+     então a saída é opacidade — sem custo de GPU num elemento que repinta
+     a cada frame de scroll. */
+  --nav-bg: var(--cream);
 
   --inst-font: "Neue Haas Grotesk Display", "Archivo", Helvetica, Arial, sans-serif;
   --inst-max: 1200px;
@@ -111,7 +120,7 @@
 
   --line-inverse: rgba(21, 21, 21, 0.18);
   --line-inverse-strong: rgba(21, 21, 21, 0.4);
-  --nav-bg: rgba(21, 21, 21, 0.94);
+  /* --nav-bg não se repete aqui: é var(--cream), que este bloco já inverteu. */
 }
 
 .inst {
@@ -424,7 +433,17 @@
   display: flex;
   width: max-content;
   height: 100%;
-  animation: inst-strip-scroll var(--inst-strip-duration, 36s) linear infinite;
+  /* O nº de fotos vem inline do page.tsx; os segundos por foto são daqui.
+     A conta é por foto, e não uma duração fixa, porque a distância do loop
+     muda com a viewport: uma volta são 6 células, e a célula mede 25vw no
+     desktop contra 45vw no mobile. Com duração fixa o mobile andava a
+     ~30px/s contra ~60px/s do desktop — metade da velocidade, lento o
+     bastante para parecer parado no celular. */
+  --inst-strip-photos: 6;
+  --inst-strip-sec-per-photo: 6s;
+  animation: inst-strip-scroll
+    calc(var(--inst-strip-photos) * var(--inst-strip-sec-per-photo)) linear
+    infinite;
 }
 
 .inst-strip:hover .inst-strip__track {
@@ -1966,6 +1985,12 @@
 
   .inst-strip {
     height: 220px;
+  }
+
+  /* Célula mais larga (45vw) = volta mais curta em px, então menos segundos
+     por foto para o carrossel andar na mesma velocidade do desktop. */
+  .inst-strip__track {
+    --inst-strip-sec-per-photo: 3s;
   }
 
   .inst-strip__cell {

@@ -307,7 +307,13 @@ cópia é `inst-strip__cell--dup`, `alt=""` + `aria-hidden`). O loop só fecha s
 porque a célula tem **largura fixa** (`25vw`, `45vw` no mobile) — trocar por `flex: 1`
 quebra a conta. As imagens são **`loading="eager"`**: as células nascem fora da viewport
 e só entram nela pelo `transform` do trilho, que o lazy-load nativo não enxerga — no
-lazy, a última foto ficava em branco para sempre. Hover pausa; `prefers-reduced-motion`
+lazy, a última foto ficava em branco para sempre. A **velocidade** se calibra por foto,
+não por duração fixa: o `page.tsx` manda inline só `--inst-strip-photos` e o CSS aplica
+`--inst-strip-sec-per-photo` (6s desktop, **3s** no ≤900px). É assim porque a volta mede
+6 células e a célula muda de 25vw para 45vw no mobile — com duração fixa o celular andava
+a ~30px/s contra ~60px/s do desktop, lento a ponto de parecer parado. Custom property
+inline vence folha de estilo, então mandar a duração pronta do JS tira da media query a
+chance de corrigir. Hover pausa; `prefers-reduced-motion`
 desliga a animação, esconde a 2ª cópia e devolve o scroll manual. Diferente da galeria
 dos cases, **o touch não desliga a animação**: lá os itens abrem o lightbox e sem hover
 não há como pausar antes de mirar, aqui são fotos decorativas, sem alvo de clique.
@@ -321,6 +327,14 @@ that applies it before paint; without it the page flashes light. Dark mode swaps
 hardcoded `rgba(246,246,246,…)` on a `.inst-dark` surface must become a token
 (`--line-inverse`, `--line-inverse-strong`, `--nav-bg`) or it won't invert. Values sitting
 on `.inst-red` stay hardcoded — the red never inverts.
+
+`--nav-bg` é **opaco** e é literalmente `var(--cream)` — resolve na hora do uso, então
+inverte sozinho e **não** se redeclara no bloco escuro. Não devolva alfa para ele: era
+`rgba(…, 0.94)` e, como a `.inst-nav` é sticky e **não tem `backdrop-filter`**, 6%
+bastavam para o texto da página passar legível por trás e colidir com o logo (pior no
+mobile, onde o DPR alto mantém a letra nítida mesmo lavada). No `globals.css` toda barra
+translúcida vem com blur junto; aqui o site é editorial, não glassmorphism, então a saída
+é opacidade — e sem custo de GPU num elemento que repinta a cada frame de scroll.
 
 **Nav (padronizada em todo o site)**: `InstNav` is the single header — home,
 `/metodologia`, `/projetos`, `/imersao`, `/portfolio/[slug]` **and `/hub`**. The old `HubHeader` was
