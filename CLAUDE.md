@@ -568,3 +568,30 @@ rodando (`npm run build && npm run start`):
   que nenhuma requisição sai para facebook/tiktok/instagram.
 - O `pkill` do servidor e o `npm run start` precisam ir em chamadas separadas
   neste ambiente, senão o processo novo morre junto.
+
+---
+
+## Prospecção ativa (`/painel/campanhas` + rotina noturna)
+
+Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-rotina.md`
+(a sessão agendada só diz "leia e siga" — mudar a rotina é editar esse arquivo).
+
+- **Nicho:** psicólogas que atendem pais de crianças/adolescentes autistas e
+  neurodivergentes. Não volte para "consultórios de psicologia" genérico.
+- **Banco = Twenty.** Lead é Person com `origem: PROSPECCAO` e campos `prosp*`. Não há
+  outro armazenamento. Descadastrado **não se apaga** (é a lista de supressão).
+- **A rotina não envia.** Ela grava como `REVISAR`; quem envia é o Vercel Cron
+  (`/api/prospeccao/disparo`, 9h/11h/14h dias úteis). Nada sai sem `PROSPECCAO_INICIO`.
+- **Regras de copy são código** (`checarCopy` em `lib/prospeccao/config.ts`): 1º e-mail
+  ≤ 100 palavras, uma pergunta, sem pedido de reunião; assunto de e-mail interno; até 3
+  follow-ups ≤ 70 palavras. Valem para a rotina e para a edição no painel. Afrouxar uma
+  regra é decisão do Felipe, não ajuste de código.
+- **Sem rastreio:** só texto puro, sem pixel nem link rastreado. Rodapé (assinatura,
+  origem do dado, descadastro) é do servidor — a rotina não escreve.
+- **Dedup contra o CRM inteiro:** quem já é contato por outra origem (webinar, newsletter,
+  cliente) nunca vira prospecção fria. Rota de leads só cria, nunca sobrescreve.
+- **LinkedIn:** só rascunho de convite; o envio é manual (termos de uso).
+- **Painel** fica atrás de HTTP Basic (`proxy.ts`, `PAINEL_SENHA`) e as rotas
+  `/painel/api/*` conferem a credencial de novo. Usa os tokens do design system via
+  `.inst .painel` (`app/painel/painel.css`).
+- `previews/campanhas/` é o protótipo estático do Codex, arquivado.
