@@ -9,7 +9,7 @@ Abra `index.html` em um navegador. O dashboard é independente, sem dependência
 
 O painel contém os dados de planejamento e os rascunhos preparados em 16/10/2026. Os contatos não têm intenção de compra confirmada. Os cenários são ilustrativos, não previsões de vendas.
 
-Nenhum e-mail foi enviado. Não há conexão com SMTP nem credenciais neste arquivo. As edições são salvas no armazenamento local do navegador, quando disponível; exporte os rascunhos para preservar suas alterações fora dele.
+O teste para `byonichip@gmail.com` foi enviado pelo webmail da Hostinger em 16/10/2026 e confirmado na pasta Enviado. A entrega ao destinatário não foi verificada. Os nove contatos da campanha continuam sem envio. Não há conexão com SMTP nem credenciais neste arquivo. As edições são salvas no armazenamento local do navegador, quando disponível; exporte os rascunhos para preservar suas alterações fora dele.
 
 Este diretório não é uma rota do site Next.js e não é servido pela pasta `public`.
 
