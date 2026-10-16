@@ -44,6 +44,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/recem-formados`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     // Páginas legais: entram no sitemap porque precisam ser encontráveis —
     // prioridade baixa, já que não disputam busca.
     ...paginasLegais.map((pagina) => ({

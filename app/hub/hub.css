@@ -118,6 +118,35 @@ body:has(.hub[data-theme="dark"]) {
   box-sizing: border-box;
 }
 
+/* Gancho das lives: reutiliza a paleta e os cantos do próprio hub. */
+.hub-lives {
+  padding: 0 calc(var(--pad-x) + 24px) 40px;
+}
+.hub-lives__link {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+}
+.hub-lives__link:hover {
+  border-color: var(--accent-ink);
+  background: var(--accent-soft);
+}
+.hub-lives__link:focus-visible { outline-color: var(--accent-ink); }
+.hub-lives__kicker { display: block; color: var(--accent-ink); font-size: 0.72rem; letter-spacing: 0.16em; font-weight: 700; margin-bottom: 16px; }
+.hub-lives h2 { margin: 0 0 12px; font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; }
+.hub-lives p { max-width: 52ch; margin: 0 0 24px; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+.hub-lives__cta { display: inline-flex; align-items: center; gap: 24px; font-size: 0.875rem; font-weight: 700; border-bottom: 2px solid var(--accent-ink); padding-bottom: 4px; }
+.hub-lives__arrow { width: clamp(48px, 7vw, 90px); height: auto; flex-shrink: 0; color: var(--accent-ink); align-self: center; }
+@media (max-width: 600px) {
+  .hub-lives { padding-inline: var(--pad-x); }
+  .hub-lives__arrow { display: none; }
+}
+
 /* Header */
 .hub-header {
   display: flex;
@@ -349,6 +378,11 @@ body:has(.hub[data-theme="dark"]) {
   margin: 0;
   font-weight: 400;
   opacity: 0.85;
+}
+
+/* Sobre o vermelho, a transparência baixava o contraste para 3.98:1. */
+.hub-card-ref--invert .hub-card-ref__desc {
+  opacity: 1;
 }
 
 .hub-card-ref__bottom {
@@ -1225,8 +1259,8 @@ button.hub-card-ref__action-btn {
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--soft);
-    animation: hub-hint-fade 2.4s ease-in-out infinite;
+    /* O texto fica opaco para manter contraste; só os chevrons se movem. */
+    color: var(--muted);
   }
 
   .hub-products__hint-icon {
@@ -1241,16 +1275,11 @@ button.hub-card-ref__action-btn {
   50% { transform: translateX(5px); }
 }
 
-@keyframes hub-hint-fade {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
 /* Reduced motion: sem baralho — o JS não liga .is-live, os cards ficam no fluxo
    normal (empilhados, legíveis). Sem botões, sem hint, sem animação. */
 @media (prefers-reduced-motion: reduce) {
   .hub-products__nav,
-  .hub-products__hint {
+  .hub-products__hint:not([hidden]) {
     display: none;
   }
   .hub-products__hint-icon {
