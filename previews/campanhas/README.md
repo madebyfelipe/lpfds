@@ -1,5 +1,11 @@
 # Prévia de campanhas — Made by Felipe
 
+> **Arquivado.** Este é o protótipo estático (out/2026). O painel em uso é
+> `/painel/campanhas`, ligado ao Twenty, ao disparo e à rotina noturna — ver
+> `docs/prospeccao.md`. Os dois leads deste protótipo que se encaixam no nicho
+> atual (Personart e Atenta) foram regravados no CRM com a copy nova; os outros
+> sete ficaram de fora por não atenderem pais de crianças neurodivergentes.
+
 Abra `index.html` em um navegador. O dashboard é independente, sem dependências externas, e oferece:
 
 - Visão do negócio e meta financeira.
