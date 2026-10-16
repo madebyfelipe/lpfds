@@ -1,29 +1,32 @@
 import { NextResponse } from "next/server";
-import { remetente, testarImap, testarSmtp } from "@/lib/prospeccao/caixa";
-import { checarDominio } from "@/lib/prospeccao/dominio";
+import { listarCaixas, publica, testarImap, testarSmtp } from "@/lib/prospeccao/caixas";
+import { checarDominio, type Checagem } from "@/lib/prospeccao/dominio";
 import { autorizaPainel } from "@/lib/prospeccao/painel";
 
-/** DNS do domínio de envio + login no SMTP e no IMAP da caixa de prospecção. */
+/** Por caixa: DNS do domínio (MX/SPF/DKIM/DMARC/Spamhaus) + login no SMTP e no IMAP. */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 export async function GET(request: Request) {
   if (!autorizaPainel(request)) return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
-  const r = remetente();
-  const relatorio = process.env.PROSPECCAO_DMARC_RUA || r.email || "alo@madebyfelipe.com.br";
-  const [dns, smtp, imap] = await Promise.all([
-    r.dominio
-      ? checarDominio(r.dominio, relatorio).catch(() => [
-          {
-            id: "dns",
-            rotulo: "DNS",
-            estado: "atencao" as const,
-            detalhe: "Não consegui consultar o DNS agora (rede). Tente de novo em instantes."
-          }
-        ])
-      : Promise.resolve([]),
-    testarSmtp(),
-    testarImap()
-  ]);
-  return NextResponse.json({ ok: true, remetente: r, dns, smtp, imap });
+  const caixas = listarCaixas();
+  const porDominio = new Map<string, Promise<Checagem[]>>();
+  const resultado = await Promise.all(
+    caixas.map(async (c) => {
+      const dominio = c.email.split("@")[1] ?? "";
+      const relatorio = process.env.PROSPECCAO_DMARC_RUA || c.email;
+      if (!porDominio.has(dominio)) {
+        porDominio.set(
+          dominio,
+          checarDominio(dominio, relatorio).catch(() => [
+            { id: "dns", rotulo: "DNS", estado: "atencao" as const, detalhe: "Não consegui consultar o DNS agora (rede). Tente de novo." }
+          ])
+        );
+      }
+      const [dns, smtp, imap] = await Promise.all([porDominio.get(dominio)!, testarSmtp(c), testarImap(c)]);
+      return { caixa: publica(c), dns, smtp, imap };
+    })
+  );
+  return NextResponse.json({ ok: true, caixas: resultado });
 }

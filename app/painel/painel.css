@@ -773,3 +773,353 @@
     flex-wrap: wrap;
   }
 }
+
+/* ==========================================================================
+   v2 — conversas, campanhas, resultados, caixas
+   ========================================================================== */
+
+.painel-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.painel-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: 20px;
+}
+
+.painel-grid2--tight {
+  gap: 12px;
+}
+
+.painel-pad-x {
+  padding: 24px 24px 8px;
+}
+
+.painel-input--grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.painel-list__tools--wrap {
+  flex-wrap: wrap;
+}
+
+.painel-field--inline {
+  margin-top: 0;
+  min-width: 180px;
+}
+
+.painel-help {
+  font-size: 13px;
+}
+
+.painel-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+}
+
+.painel-muted code,
+.painel-form code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  background: var(--painel-bg);
+  padding: 2px 4px;
+  border-radius: var(--painel-radius);
+  overflow-wrap: anywhere;
+}
+
+.painel-actions--sep {
+  padding-top: 16px;
+  border-top: 1px solid var(--painel-line);
+}
+
+.painel-mini-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  max-height: 220px;
+  overflow: auto;
+}
+
+/* --- lista de conversas -------------------------------------------------- */
+
+.painel-row__end {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.painel-row__end small {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+/* Bolinha "esperando você": é reforço — o rótulo acessível diz o mesmo. */
+.painel-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--red-ink);
+  vertical-align: middle;
+}
+
+.painel-tag {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--painel-line);
+  border-radius: var(--painel-radius);
+  color: var(--gray-700);
+  white-space: nowrap;
+}
+
+.painel-tag--hot {
+  border-color: var(--red-ink);
+  color: var(--red-ink);
+}
+
+/* --- conversa ------------------------------------------------------------ */
+
+.painel-thread {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.painel-msg {
+  padding: 14px 16px;
+  border: 1px solid var(--painel-line);
+  border-radius: var(--painel-radius);
+  background: var(--painel-bg);
+}
+
+/* A fala dela ganha o filete vermelho: é o que importa ler. */
+.painel-msg--dela {
+  background: var(--painel-card);
+  border-left: 3px solid var(--red);
+}
+
+.painel-msg__meta {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.painel-msg__body {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* --- campanhas ----------------------------------------------------------- */
+
+.painel-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 12px 0 0;
+}
+
+.painel-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--painel-line);
+  border-bottom: 1px solid var(--painel-line);
+}
+
+.painel-kpis dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.painel-kpis dd {
+  margin: 6px 0 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.painel-kpis small {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+.painel-form .painel-h2 {
+  margin-bottom: 4px;
+}
+
+/* --- funil e barras (uma série, uma cor: --red-ink passa 3:1 nos dois temas) */
+
+.painel-funnel {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.painel-funnel li {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 90px;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.painel-funnel__track {
+  height: 14px;
+  background: var(--painel-bg);
+  border-radius: var(--painel-radius);
+  overflow: hidden;
+}
+
+.painel-funnel__bar {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  background: var(--red-ink);
+  border-radius: 0 4px 4px 0;
+}
+
+.painel-funnel__value {
+  text-align: right;
+  font-weight: 500;
+}
+
+.painel-funnel__value small {
+  color: var(--gray-500);
+  font-weight: 400;
+}
+
+.painel-chart {
+  margin: 20px 0 0;
+}
+
+.painel-chart__plot {
+  position: relative;
+  /* Espaço para o tooltip da barra mais alta. */
+  margin-top: 28px;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  border-bottom: 1px solid var(--gray-300);
+  /* Grade recessiva: três linhas de referência, sem números. */
+  background-image: linear-gradient(to top, var(--painel-line) 1px, transparent 1px);
+  background-size: 100% 33.33%;
+}
+
+.painel-chart__col {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  /* Alvo do hover/foco é a coluna inteira, maior que a barra. */
+  cursor: default;
+}
+
+.painel-chart__bar {
+  display: block;
+  width: 100%;
+  min-height: 2px;
+  background: var(--red-ink);
+  border-radius: 4px 4px 0 0;
+}
+
+.painel-chart__col:hover .painel-chart__bar,
+.painel-chart__col:focus-visible .painel-chart__bar {
+  background: var(--black);
+}
+
+.painel-chart__tip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  background: var(--black);
+  color: var(--cream);
+  border-radius: var(--painel-radius);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+}
+
+.painel-chart__col:hover .painel-chart__tip,
+.painel-chart__col:focus-visible .painel-chart__tip {
+  opacity: 1;
+}
+
+.painel-chart__axis {
+  display: flex;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+.painel-chart__axis span {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: var(--gray-500);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.painel-chart figcaption {
+  margin-top: 10px;
+}
+
+.painel-details--flat {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.painel-table--compact {
+  min-width: 0;
+  margin-top: 8px;
+}
+
+.painel-table--compact td,
+.painel-table--compact th {
+  padding: 6px 12px;
+}
+
+@media (max-width: 600px) {
+  .painel-kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .painel-funnel li {
+    grid-template-columns: 90px minmax(0, 1fr) 72px;
+  }
+  .painel-row__end small {
+    display: none;
+  }
+}
