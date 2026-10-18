@@ -15,7 +15,7 @@ aplica limite diário, aquecimento, supressão e leitura de respostas.
 
 - `PROSPECCAO_TOKEN` — variável de ambiente da sessão (configurada no ambiente
   do Claude Code). Vai em `Authorization: Bearer $PROSPECCAO_TOKEN`.
-- Base: `https://madebyfelipe.com.br` (ou `$PROSPECCAO_SITE_URL`, se existir).
+- Base: `https://www.madebyfelipe.com.br` — com `www`: o domínio sem `www` é o WordPress antigo e devolve 404 (ou `$PROSPECCAO_SITE_URL`, se existir).
 - Ferramentas: WebSearch e WebFetch para pesquisar; `curl` para a API.
 
 Se `PROSPECCAO_TOKEN` não existir ou a API não responder: **pare**. Não
