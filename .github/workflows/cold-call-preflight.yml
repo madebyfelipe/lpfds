@@ -1,0 +1,40 @@
+name: Cold call - pre-voo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      PROSPECCAO_TOKEN: ${{ secrets.prospeccao_cold }}
+      PROSPECCAO_SITE_URL: https://www.madebyfelipe.com.br
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar segredo
+        run: |
+          if [ -z "$PROSPECCAO_TOKEN" ]; then
+            echo "::error::Secret prospeccao_cold ausente ou vazio."
+            exit 1
+          fi
+      - name: Consultar pre-voo sem divulgar contatos
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/cold-call-sync.py status > "$RUNNER_TEMP/cold-call-status.json"
+          python - "$RUNNER_TEMP/cold-call-status.json" <<'PY'
+          import json, sys
+          with open(sys.argv[1], encoding="utf-8") as f:
+              data = json.load(f)
+          if not data.get("ok"):
+              raise SystemExit("Pré-voo retornou ok=false.")
+          print("Pré-voo autenticado com sucesso.")
+          print("Capacidade disponível:", data.get("pesquisarAte", "indisponível"))
+          print("Contatos conhecidos:", len(data.get("conhecidos") or []))
+          print("Pedidos pendentes:", len(data.get("pedidos") or []))
+          print("Rotina pausada:", (data.get("config") or {}).get("pausada", "indisponível"))
+          PY
