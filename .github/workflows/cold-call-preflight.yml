@@ -18,7 +18,7 @@ jobs:
       - name: Validar segredo
         run: |
           if [ -z "$PROSPECCAO_TOKEN" ]; then
-            echo "::error::Secret prospeccao_cold ausente ou vazio."
+            echo "::error::PROSPECCAO_COLD indisponível neste job. Confira Repository secrets (não Environment secrets), valor preenchido e execução nova na branch main."
             exit 1
           fi
       - name: Consultar pre-voo sem divulgar contatos
