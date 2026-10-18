@@ -103,6 +103,7 @@ export function PainelCampanhas() {
           <h1 className="painel-title">Campanhas, com intenção.</h1>
         </div>
         <div className="painel-top__end">
+          <a className="painel-btn painel-btn--ghost" href="/painel/cold-call">Cold call ↗</a>
           {cfg && (
             <span className={`painel-pill${cfg.pausado ? " painel-pill--red" : ""}`}>
               {cfg.pausado ? "Pausado" : cfg.inicio ? `Modo ${cfg.modo === "automatico" ? "automático" : "revisão"}` : "Ensaio · sem início"}
