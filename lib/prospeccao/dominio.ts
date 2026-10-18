@@ -33,7 +33,7 @@ const SELETORES_DKIM = (process.env.PROSPECCAO_DKIM_SELETORES || "hostingermail-
 type Resposta = { Status: number; Answer?: Array<{ type: number; data: string }> };
 const TIPOS = { A: 1, MX: 15, TXT: 16 } as const;
 
-async function doh(nome: string, tipo: keyof typeof TIPOS): Promise<string[]> {
+export async function doh(nome: string, tipo: keyof typeof TIPOS): Promise<string[]> {
   const urls = [
     `https://dns.google/resolve?name=${encodeURIComponent(nome)}&type=${tipo}`,
     `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(nome)}&type=${tipo}`
@@ -188,4 +188,27 @@ export async function checarDominio(dominio: string, emailRelatorio: string): Pr
   }
 
   return out;
+}
+
+/**
+ * O domínio do destinatário recebe e-mail? Sem MX (nem A, o fallback do SMTP)
+ * o envio é bounce certo — e bounce é o que mais derruba a reputação da caixa.
+ * É a verificação barata que dá para fazer sem sondar o servidor de lá (a
+ * Vercel não abre a porta 25). Falha de rede = `null` (não sabe), não recusa.
+ */
+const cacheMx = new Map<string, boolean>();
+
+export async function dominioRecebeEmail(dominio: string): Promise<boolean | null> {
+  const d = dominio.toLowerCase();
+  if (cacheMx.has(d)) return cacheMx.get(d)!;
+  try {
+    const mx = await doh(d, "MX");
+    // MX "0 ." (RFC 7505) = o domínio declara que não recebe e-mail.
+    const valido = mx.some((r) => !/^0\s+\.$/.test(r.trim()));
+    const ok = valido || (mx.length === 0 && (await doh(d, "A")).length > 0);
+    cacheMx.set(d, ok);
+    return ok;
+  } catch {
+    return null;
+  }
 }

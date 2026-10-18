@@ -1,18 +1,20 @@
 import { NextResponse } from "next/server";
 import { autorizaRotina } from "@/lib/prospeccao/seguranca";
-import { DOMINIOS_WEBMAIL, conhecidos, criarLead } from "@/lib/prospeccao/twenty";
+import { triar, type Triagem } from "@/lib/prospeccao/triagem";
+import { criarLead, type NovoLead } from "@/lib/prospeccao/twenty";
 import { validarNovoLead } from "@/lib/prospeccao/validacao";
 
 /**
  * Entrada da rotina noturna (POST, Bearer PROSPECCAO_TOKEN).
  *
- * Corpo: { campanha: "psico-interior-sp", leads: [{ email, empresa, ... }] }
+ * Corpo: { campanha: "psico-neurodivergencia", leads: [{ email, empresa, ... }] }
  * (formato completo em docs/prospeccao-rotina.md).
  *
- * Cada lead é validado (lib/prospeccao/validacao.ts) e deduplicado contra o
- * CRM inteiro — qualquer origem. Quem já é contato (inscrito do webinar,
- * newsletter, cliente) NUNCA vira prospecção fria, e nada existente é
- * sobrescrito: esta rota só cria. Tudo entra como REVISAR.
+ * Cada lead é validado (lib/prospeccao/validacao.ts), deduplicado contra o
+ * CRM inteiro — qualquer origem —, conferido contra a lista de bloqueio e
+ * contra o DNS (domínio sem MX = bounce certo). Quem já é contato (inscrito do
+ * webinar, newsletter, cliente) NUNCA vira prospecção fria, e nada existente
+ * é sobrescrito: esta rota só cria. Tudo entra como REVISAR.
  */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,43 +40,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "too_many", max: MAX_POR_LOTE }, { status: 400 });
   }
 
-  let base: Awaited<ReturnType<typeof conhecidos>>;
+  const ignorados: Triagem[] = [];
+  const validos: NovoLead[] = [];
+  for (const raw of brutos) {
+    const v = validarNovoLead(raw, campanha);
+    if (v.ok) validos.push(v.valor);
+    else ignorados.push({ email: String((raw as { email?: unknown })?.email ?? ""), motivo: v.motivo });
+  }
+
+  let aceitos: NovoLead[];
   try {
-    base = await conhecidos();
+    aceitos = await triar(validos, ignorados);
   } catch (error) {
-    console.error("[prospeccao/leads] dedup falhou:", error);
+    console.error("[prospeccao/leads] triagem falhou:", error);
     // Sem dedup, não grava — melhor perder uma noite que prospectar um cliente.
     return NextResponse.json({ ok: false, error: "twenty_failed" }, { status: 502 });
   }
-  const emails = new Set(base.emails);
-  const dominios = new Set(base.dominios);
 
   const criados: Array<{ email: string; id: string }> = [];
-  const ignorados: Array<{ email: string; motivo: string }> = [];
-
-  for (const raw of brutos) {
-    const v = validarNovoLead(raw, campanha);
-    const emailBruto = String((raw as { email?: unknown })?.email ?? "");
-    if (!v.ok) {
-      ignorados.push({ email: emailBruto, motivo: v.motivo });
-      continue;
-    }
-    const { lead } = v;
-    const dom = lead.email.split("@")[1] ?? "";
-    if (emails.has(lead.email)) {
-      ignorados.push({ email: lead.email, motivo: "email_no_crm" });
-      continue;
-    }
-    if (!DOMINIOS_WEBMAIL.has(dom) && dominios.has(dom)) {
-      ignorados.push({ email: lead.email, motivo: "dominio_no_crm" });
-      continue;
-    }
+  for (const lead of aceitos) {
     try {
-      const id = await criarLead(lead);
-      criados.push({ email: lead.email, id });
-      // Vale para o resto do lote também (dois e-mails da mesma clínica).
-      emails.add(lead.email);
-      if (!DOMINIOS_WEBMAIL.has(dom)) dominios.add(dom);
+      criados.push({ email: lead.email, id: await criarLead(lead) });
     } catch (error) {
       console.error("[prospeccao/leads] criar falhou:", error);
       ignorados.push({ email: lead.email, motivo: "twenty_failed" });

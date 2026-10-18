@@ -594,4 +594,14 @@ Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-r
 - **Painel** fica atrás de HTTP Basic (`proxy.ts`, `PAINEL_SENHA`) e as rotas
   `/painel/api/*` conferem a credencial de novo. Usa os tokens do design system via
   `.inst .painel` (`app/painel/painel.css`).
+- **Campanhas** são o objeto custom `campanhaProspeccao` do Twenty (briefing que a rotina
+  lê + interruptor do disparo). Lead liga pelo slug (`prospCampanha`); o slug não muda.
+- **Pool de caixas** (`PROSPECCAO_CAIXAS`): lead fica preso à caixa que mandou o 1º
+  e-mail (follow-up e réplica saem dela); caixa com bounce > 5% se pausa sozinha.
+- **Respostas**: o disparo lê as caixas por IMAP antes de enviar. "Não quero"/"não"
+  descadastra na hora (`classificarPorRegra`); a IA (opcional, `ANTHROPIC_API_KEY`)
+  ou a rotina rascunha a réplica — **quem envia é o Felipe**, pela aba Conversas.
+  Não automatize o envio da réplica.
+- Leitura de IMAP é pelas últimas 500 mensagens por sequência (não `SEARCH SINCE`) e o
+  parser recebe o Buffer cru — os dois foram bugs reais no teste.
 - `previews/campanhas/` é o protótipo estático do Codex, arquivado.

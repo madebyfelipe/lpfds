@@ -13,18 +13,49 @@ autistas e neurodivergentes. Critérios e buscas em `docs/prospeccao-rotina.md`.
 
 ```
 2h56 seg–sex   Rotina (sessão agendada do Claude, roteiro em docs/prospeccao-rotina.md)
-               pesquisa → lê site/LinkedIn → escreve 1º e-mail + 3 follow-ups
+               lê a pauta (GET /api/prospeccao/status):
+                 respostas a ler (se não houver IA no painel) · reescritas pedidas ·
+                 importados a completar · cota de pesquisa por campanha ativa
+               pesquisa → lê site/LinkedIn → 1º e-mail (+ assunto B) + 3 follow-ups
                → POST /api/prospeccao/leads → Twenty (Person, origem PROSPECCAO, REVISAR)
 
-até 9h         Felipe revisa em /painel/campanhas: edita, aprova (PRONTO) ou descarta.
+até 9h         Felipe revisa em /painel/campanhas (aba Revisão): edita, pede
+               reescrita (IA na hora ou rotina à noite), aprova ou descarta.
                Modo automático: o que não for vetado sai 4h depois de chegar.
 
 9h · 11h · 14h Vercel Cron → /api/prospeccao/disparo
-               1. lê a caixa (IMAP): resposta ou bounce encerram a sequência
-               2. follow-ups vencidos (+3, +4, +5 dias úteis, na mesma conversa)
-               3. 1ºs e-mails, A → B → C, um por domínio, 14–26 s entre envios
-               dentro do limite do dia (aquecimento: 5, 7, 9… até 30)
+               1. lê TODAS as caixas (IMAP): resposta → Conversas; "não quero" →
+                  descadastro na hora; bounce → supressão; férias não conta
+               2. follow-ups vencidos (+3, +4, +5 dias úteis), pela caixa da conversa
+               3. 1ºs e-mails, A → B → C, um por domínio, na caixa com mais folga
+               4. saúde: caixa com bounce > 5% (20+ envios) sai do pool sozinha
+               5. IA (se ligada): lê as respostas novas e rascunha a réplica
+
+Conversas      Felipe lê, ajusta o rascunho e responde pelo painel — mesma caixa,
+               mesma conversa. Marca reunião ou encerra.
 ```
+
+## Paridade com o Explee
+
+| Explee | Aqui |
+|---|---|
+| Busca em linguagem natural / ICP | Campanha com briefing (`icp`, `oferta`, `regioes`) lido pela rotina |
+| Lookalike por domínio | Campo "Parecidas com" da campanha |
+| Excluir geografias | Campo "Excluir" + lista "não contatar" global |
+| Upload de CSV + validação | Aba Campanhas → Importar (triagem: CRM, bloqueios, MX) |
+| E-mail personalizado por lead | Rotina escreve; regras de copy no servidor; reescrita com instrução |
+| Revisar lista antes de lançar | Aba Revisão (modo revisão) / janela de veto (modo automático) |
+| Pool de caixas aquecidas, uma caixa por conversa | `PROSPECCAO_CAIXAS`, rampa por caixa, lead preso à caixa |
+| Limite diário e rampa | 5 → +2/dia útil → teto (30 por padrão, por caixa) |
+| Tira caixa degradada do pool | Auto-pausa por bounce > 5% |
+| Pausa por campanha e geral | Status da campanha + "Pausar tudo" |
+| Caixa de respostas | Aba Conversas, com leitura e rascunho |
+| Agente responde e leva para a call | IA rascunha com `PROSPECCAO_LINK_AGENDA`; **o Felipe envia** (de propósito) |
+| Opt-out imediato | Palavra-chave na resposta + link + botão do Gmail (RFC 8058) |
+| Resultados / leads quentes | Aba Resultados: funil, por campanha, etapa, A/B, caixas |
+| "Aprende o que funciona" | Cota da pesquisa alocada pela taxa de positivas de cada campanha |
+| Base própria de 100M+ empresas | **Não**: a rotina pesquisa a web aberta e só usa e-mail publicado pela própria profissional |
+| Caixas pré-aquecidas do Explee | **Não**: as caixas são suas (Hostinger), aquecidas pela rampa |
 
 ## Regras de copy (o servidor recusa o que fugir)
 
@@ -47,25 +78,35 @@ infla a métrica), sem link rastreado. A métrica que importa é **resposta**.
 
 | arquivo | papel |
 |---|---|
-| `lib/prospeccao/config.ts` | status, cadência, rampa, regras de copy, rodapé — sem I/O, usado no painel também |
-| `lib/prospeccao/twenty.ts` | Twenty como banco: leads (Person `prosp*`), execuções e pausa (Notes) |
-| `lib/prospeccao/caixa.ts` | SMTP (envio, `List-Unsubscribe` RFC 8058), IMAP (cópia em Enviados, respostas, bounces) |
-| `lib/prospeccao/operacao.ts` | a fila e o disparo |
-| `lib/prospeccao/validacao.ts` | o que a rotina manda passa por aqui antes de virar lead |
-| `lib/prospeccao/dominio.ts` | MX/SPF/DKIM/DMARC/Spamhaus por DNS-over-HTTPS |
+| `lib/prospeccao/config.ts` | status, cadência, rampa, saúde, regras de copy, rodapé, leitura de resposta, métricas — sem I/O, usado no painel também |
+| `lib/prospeccao/twenty.ts` | Twenty como banco: leads, campanhas e as Notes de execução, pausa, caixas pausadas e bloqueios |
+| `lib/prospeccao/caixas.ts` | pool de caixas: SMTP (envio, `List-Unsubscribe`), resposta na conversa, IMAP (Enviados, respostas com texto, bounces) |
+| `lib/prospeccao/operacao.ts` | fila, distribuição pelas caixas, disparo, saúde |
+| `lib/prospeccao/ia.ts` | Claude API (opcional): reescrever, ler resposta e rascunhar |
+| `lib/prospeccao/validacao.ts` · `triagem.ts` | o que entra (rotina, importação) e a triagem (CRM, bloqueios, MX) |
+| `lib/prospeccao/dominio.ts` | MX/SPF/DKIM/DMARC/Spamhaus por DNS-over-HTTPS; MX do destinatário |
 | `lib/prospeccao/seguranca.ts` | tokens e assinatura do link de descadastro |
-| `app/api/prospeccao/*` | `status` · `checar` · `leads` · `execucoes` (rotina) · `disparo` (cron) · `descadastro` (público) |
-| `app/painel/*`, `components/painel/PainelCampanhas.tsx` | painel, atrás de HTTP Basic (`proxy.ts`) |
+| `app/api/prospeccao/*` | `status` · `checar` · `leads` · `leads/[id]` · `execucoes` (rotina) · `disparo` (cron) · `descadastro` (público) |
+| `app/painel/*`, `components/painel/*` | painel (Conversas, Revisão, Campanhas, Leads, Resultados, Caixas, Rotina, Meta), atrás de HTTP Basic (`proxy.ts`) |
 
-### Campos no Twenty (Person)
+### No Twenty
 
-Criados pela Metadata API em 16/10/2026: `prospStatus`, `prospPrioridade`,
-`prospScore`, `prospEtapa`, `prospEmpresa`, `prospCidade`, `prospFonte`,
-`prospEvidencia`, `prospHipotese`, `prospLimite`, `prospAssunto`,
-`prospMensagem`, `prospFollowup`, `prospFollowup2`, `prospFollowup3`,
-`prospCampanha`, `prospMessageId`, `prospEnviadoEm`, `prospFollowupEm`,
-`prospRespondeuEm`, `prospErro`, `prospLinkedinStatus`, `prospLinkedinNota`, e a
-opção `PROSPECCAO` no `origem`.
+- **Person** (lead): `prospStatus` (PESQUISAR, REVISAR, PRONTO, ENVIADO,
+  FOLLOWUP_ENVIADO, RESPONDEU, REUNIAO, DESCADASTRADO, BOUNCE, DESCARTADO),
+  `prospPrioridade`, `prospScore`, `prospEtapa`, `prospEmpresa`, `prospCidade`,
+  `prospFonte`, `prospEvidencia`, `prospHipotese`, `prospLimite`,
+  `prospAssunto`, `prospAssuntoB`, `prospVariante`, `prospMensagem`,
+  `prospFollowup`/`2`/`3`, `prospCampanha` (slug), `prospCaixa`,
+  `prospMessageId`, `prospEnviadoEm`, `prospFollowupEm`, `prospRespondeuEm`,
+  `prospEtapaResposta`, `prospClassificacao`, `prospResposta`,
+  `prospRespostaMessageId`, `prospRespostaSugerida`, `prospRespondidoEm`,
+  `prospInstrucao`, `prospErro`, `prospLinkedinStatus`, `prospLinkedinNota`, e a
+  opção `PROSPECCAO` no `origem`.
+- **Campanha de prospecção** (`campanhaProspeccao`): `name`, `slug` (único),
+  `status` (ATIVA/PAUSADA/ARQUIVADA), `icp`, `oferta`, `regioes`, `excluir`,
+  `referencias`, `tom`.
+- **Notes** com título fixo: `Prospecção · PAUSADA`, `Prospecção · caixa
+  pausada · <email>`, `Prospecção · bloqueios`, `Prospecção · execução · …`.
 
 ## Ligar — checklist
 
@@ -73,8 +114,10 @@ opção `PROSPECCAO` no `origem`.
    `PROSPECCAO_TOKEN`, `PROSPECCAO_SECRET` (aleatórios; o SECRET nunca muda
    depois do 1º envio), `TWENTY_API_KEY` e `CRON_SECRET` (já usados pelo
    webinar), `PROSPECCAO_MODO=revisao`. Redeploy.
-2. **Caixa de prospecção (recomendado).** Criar `felipe@madebyfelipe.agency` no
-   hPanel e preencher `PROSPECCAO_SMTP_USER`/`PROSPECCAO_SMTP_PASSWORD`. O
+2. **Caixa(s) de prospecção (recomendado).** Criar `felipe@madebyfelipe.agency` no
+   hPanel e listar em `PROSPECCAO_CAIXAS` (JSON: `[{"email":"…","senha":"…","inicio":"YYYY-MM-DD"}]`,
+   uma entrada por caixa — cada uma com rampa própria; `teto` opcional). Para uma
+   caixa só, `PROSPECCAO_SMTP_USER`/`PROSPECCAO_SMTP_PASSWORD` também servem. O
    `.agency` já tem MX, SPF, DKIM e DMARC com relatório. Sem isso, a prospecção
    sai de `alo@madebyfelipe.com.br` — o mesmo domínio do webinar, da imersão e
    do e-book; uma onda de denúncias de spam derruba tudo junto.
@@ -90,13 +133,22 @@ opção `PROSPECCAO` no `origem`.
    `madebyfelipe.com.br` no acesso de rede, se o nível não for o completo.
 7. **Definir `PROSPECCAO_INICIO`** (YYYY-MM-DD) na Vercel — só aí algo sai.
    Começa com 5/dia e sobe sozinho.
-8. Depois de 2–3 semanas com taxa de bounce < 2% e sem denúncias, considerar
+8. **Opcional:** `ANTHROPIC_API_KEY` (IA no painel: reescrita na hora, leitura e
+   rascunho das respostas) e `PROSPECCAO_LINK_AGENDA` (link que entra na réplica
+   para quem demonstrou interesse). Sem a chave, a rotina noturna faz o mesmo.
+9. Depois de 2–3 semanas com taxa de bounce < 2% e sem denúncias, considerar
    `PROSPECCAO_MODO=automatico` e DMARC `p=quarantine`.
 
 ## Operação
 
-- **Pausar:** botão no topo do painel (vale no próximo lote, sem redeploy).
-  `PROSPECCAO_PAUSADO=1` faz o mesmo pelo ambiente.
+- **Pausar:** "Pausar tudo" no topo do painel; uma campanha (aba Campanhas); ou
+  uma caixa (aba Caixas). Vale no próximo lote, sem redeploy.
+  `PROSPECCAO_PAUSADO=1` pausa tudo pelo ambiente.
+- **Conversas:** a aba abre sozinha quando há resposta esperando. A réplica sai
+  da caixa que conduz o lead, na mesma conversa, sem rodapé de descadastro.
+- **Importar lista:** aba Campanhas. "De onde veio a lista" é obrigatório — vai
+  para o rodapé do e-mail (LGPD art. 9º). A rotina completa a pesquisa à noite.
+- **Não contatar:** aba Campanhas → um e-mail ou domínio por linha.
 - **Disparo manual / prévia da fila:** painel → Rotina.
 - **Descadastro:** link no rodapé + botão "Cancelar inscrição" do Gmail/Yahoo
   (headers `List-Unsubscribe`). Responder "não" também para a sequência (é
@@ -127,10 +179,14 @@ curl -H "Authorization: Bearer $CRON_SECRET" "localhost:3000/api/prospeccao/disp
 
 ## O que ainda não existe (de propósito ou por fazer)
 
-- **Classificação de resposta** (interessada / não agora / não): hoje qualquer
-  resposta humana vira `RESPONDEU` e para a sequência; ler e responder é com o Felipe.
-- **Várias caixas em rodízio** (o que o Explee faz para escalar volume): uma
-  caixa por vez. Acima de ~30/dia, o caminho é uma 2ª caixa/domínio.
-- **Enriquecimento pago** (Apollo, Hunter): fora — a rotina só usa e-mail
-  publicado pela própria profissional.
+- **Resposta automática pelo agente**: a IA só rascunha; quem envia é o
+  Felipe. Conversa com uma possível cliente não sai sem leitura humana.
+- **Base de dados própria / enriquecimento pago** (Apollo, Hunter): fora — a
+  rotina só usa e-mail publicado pela própria profissional.
+- **Verificação SMTP do destinatário** (RCPT probe): a Vercel não abre a porta
+  25; a checagem é de MX, e bounce real tira o lead e pode pausar a caixa.
+- **Rastreio de abertura/clique**: fora de propósito (consentimento e entregabilidade).
 - **Automação de LinkedIn:** fora, pelos termos de uso.
+- **IA testada com chave real:** o código segue o SDK oficial, mas foi testado
+  só sem a chave (cai para a rotina). Na 1ª vez com `ANTHROPIC_API_KEY`, teste
+  "Reescrever agora" e "Sugerir com IA" num lead antes de confiar.
