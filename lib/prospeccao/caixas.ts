@@ -324,7 +324,7 @@ export async function varrerCaixa(
 
     // O endereço que voltou vem no corpo do DSN, não no envelope.
     for (const b of bounces.slice(-40)) {
-      const texto = (await fonteDe(client, b.uid, 60_000)).toLowerCase();
+      const texto = (await fonteDe(client, b.uid, 60_000)).toString("utf8").toLowerCase();
       for (const email of porEmail) {
         if (texto.includes(email)) achados.push({ email, tipo: "bounce", data: b.data });
       }
@@ -335,18 +335,20 @@ export async function varrerCaixa(
   return achados;
 }
 
-async function fonteDe(client: ImapFlow, uid: number, maxBytes: number): Promise<string> {
+async function fonteDe(client: ImapFlow, uid: number, maxBytes: number): Promise<Buffer> {
   const dl = await client.download(String(uid), undefined, { uid: true, maxBytes }).catch(() => null);
-  if (!dl) return "";
+  if (!dl) return Buffer.alloc(0);
   const chunks: Buffer[] = [];
   for await (const c of dl.content) chunks.push(c as Buffer);
-  return Buffer.concat(chunks).toString("utf8");
+  return Buffer.concat(chunks);
 }
 
 async function textoDe(client: ImapFlow, uid: number): Promise<string> {
   const fonte = await fonteDe(client, uid, 200_000);
-  if (!fonte) return "";
+  if (!fonte.length) return "";
   try {
+    // Buffer cru, não string: o parser decodifica pelo charset da própria
+    // mensagem (texto 8bit em latin1 virava "N�o" se viesse já como UTF-8).
     const parsed = await simpleParser(fonte);
     const texto = parsed.text || (typeof parsed.html === "string" ? parsed.html.replace(/<[^>]+>/g, " ") : "");
     return limparResposta(texto);

@@ -315,6 +315,7 @@ export async function disparar(opts: { dry?: boolean; tudo?: boolean; prazoMs?: 
     let leads = await listarLeads();
     const acompanhados = leads.filter((l) => STATUS_EM_SEQUENCIA.includes(l.status) || STATUS_CONVERSA.includes(l.status));
     const desde = new Date(Date.now() - 45 * 86400_000);
+    const tratados = new Set<string>();
     for (const c of caixas) {
       try {
         const client = await abrirImap(c);
@@ -324,6 +325,10 @@ export async function disparar(opts: { dry?: boolean; tudo?: boolean; prazoMs?: 
         for (const a of achados) {
           const lead = acompanhados.find((l) => l.email === a.email);
           if (!lead || opts.dry) continue;
+          // Duas caixas podem ver a mesma mensagem (encaminhamento, cópia):
+          // cada lead é tratado uma vez por execução.
+          if (tratados.has(lead.id)) continue;
+          tratados.add(lead.id);
           if (a.tipo === "bounce") {
             if (lead.status === "BOUNCE" || STATUS_CONVERSA.includes(lead.status)) continue;
             await atualizarLead(lead.id, { prospStatus: "BOUNCE", prospErro: "bounce detectado na caixa" });

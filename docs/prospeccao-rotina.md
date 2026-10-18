@@ -22,7 +22,7 @@ Se `PROSPECCAO_TOKEN` não existir ou a API não responder: **pare**. Não
 pesquise, não invente, não grave em arquivo. Termine com uma linha dizendo o que
 faltou (token ausente, host bloqueado pela rede, 401, 503…).
 
-## 1. Pré-voo
+## 1. Pré-voo e pauta
 
 ```bash
 curl -sS -H "Authorization: Bearer $PROSPECCAO_TOKEN" "$BASE/api/prospeccao/status"
@@ -30,13 +30,29 @@ curl -sS -H "Authorization: Bearer $PROSPECCAO_TOKEN" "$BASE/api/prospeccao/stat
 
 - `ok: false` → pare e reporte o `error`.
 - `pausado: true` → pare ("prospecção pausada no painel").
-- `pesquisarAte` é quantos leads novos trazer esta noite (já desconta o que
-  está na fila). `0` → pare ("fila cheia").
+- A resposta traz a **pauta da noite**, nesta ordem de prioridade:
+  1. `tarefas.responder` — respostas recebidas sem leitura (só aparece quando o
+     painel não tem IA). Para cada uma: classifique e rascunhe a réplica (§ 8).
+  2. `tarefas.reescrever` — o Felipe pediu mudança no texto (`instrucao`).
+     Reescreva seguindo a instrução e as regras de copy (§ 5) e grave (§ 8).
+  3. `tarefas.completar` — leads importados de planilha: abra o site, escreva
+     evidência + sequência, ou descarte se não servir (§ 8).
+  4. `campanhas` — pesquisa nova: cada campanha ativa traz o briefing (`icp`,
+     `oferta`, `regioes`, `excluir`, `referencias`, `tom`) e **`pesquisar`**,
+     quantos leads novos trazer para ela. A cota já foi dividida pelo
+     desempenho de cada campanha — respeite-a, não redistribua.
+- `bloqueios`: domínios/e-mails que **não** se contata. Nem pesquise.
 
-Nunca traga mais que `pesquisarAte`. Menos é normal — **qualidade manda**: um
-lead fraco ocupa a vaga de envio de um bom.
+Nunca traga mais que a cota. Menos é normal — **qualidade manda**: um lead
+fraco ocupa a vaga de envio de um bom. Cota 0 em tudo e pauta vazia → pare
+("nada a fazer esta noite").
 
 ## 2. Quem procurar (ICP)
+
+> O briefing da **campanha** (vindo do pré-voo) manda sobre o texto abaixo.
+> Este é o ICP da campanha `psico-neurodivergencia`, a primeira; campanhas
+> novas trazem o próprio. `referencias` são sites de negócios parecidos com o
+> que se procura (lookalike): busque perfis semelhantes a eles.
 
 **Psicólogas que atendem pais de crianças e adolescentes autistas (TEA) e
 neurodivergentes** (TDAH, dislexia, altas habilidades, atraso de
@@ -109,7 +125,9 @@ Registre também:
   e-mail em …" e o link de descadastro em todo envio.
 
 **Assunto** — como e-mail interno: até 7 palavras, minúsculas, sem exclamação,
-sem emoji, sem "Re:"/"Fwd:". Ex.: `grupo de pais em sorocaba`,
+sem emoji, sem "Re:"/"Fwd:". Em metade dos leads, mande também `assuntoB` (um
+segundo assunto, com outro ângulo): o disparo sorteia qual sai e a aba
+Resultados compara as taxas de resposta. Ex.: `grupo de pais em sorocaba`,
 `pergunta sobre a orientação parental`, `o site da clínica`.
 
 **Follow-ups (até 3, na mesma conversa)** — a maioria das respostas vem no 2º
@@ -158,7 +176,9 @@ curl -sS -X POST -H "Authorization: Bearer $PROSPECCAO_TOKEN" -H "Content-Type: 
   -d '{"emails":["contato@clinica.com.br","fulana@gmail.com"]}' "$BASE/api/prospeccao/checar"
 ```
 
-Descarte quem vier `conhecido: true`. Depois grave o lote (máx. 25):
+Descarte quem vier `conhecido: true`. Depois grave **um lote por campanha**
+(máx. 25), com `campanha` = o `slug` que veio na pauta. A rota ainda confere
+CRM, lista de bloqueio e MX do domínio — o que ela recusar volta em `ignorados`:
 
 ```bash
 curl -sS -X POST -H "Authorization: Bearer $PROSPECCAO_TOKEN" -H "Content-Type: application/json" \
@@ -198,7 +218,41 @@ regra de copy (`mensagem_mais_de_100_palavras`, `mensagem_com_mais_de_uma_pergun
 `mensagem_pede_reuniao`, `assunto_longo`…), corrija **só aquele** e reenvie uma
 vez. Se voltar de novo, deixe de fora.
 
-## 8. Relatório
+## 8. Tarefas sobre leads que já existem
+
+Todas por `PATCH $BASE/api/prospeccao/leads/{id}` com o mesmo Bearer. As regras
+de copy valem igual; se voltar recusado, corrija aquele lead uma vez.
+
+```bash
+# importado → pesquisado (vira "aguardando revisão")
+curl -sS -X PATCH -H "Authorization: Bearer $PROSPECCAO_TOKEN" -H "Content-Type: application/json" \
+  -d '{"acao":"completar","fonte":"https://site-dela.com.br/contato","evidencia":"…","hipotese":"…",
+       "limite":"…","prioridade":"A","score":8,"assunto":"…","assuntoB":"","mensagem":"…?",
+       "followups":["…","…","…"],"linkedinNota":""}' "$BASE/api/prospeccao/leads/ID"
+
+# importado que não serve (site fora do ar, fora do ICP, sem e-mail publicado)
+  -d '{"acao":"descartar","motivo":"site fora do ar"}'
+
+# pedido de reescrita do Felipe (texto novo inteiro; volta para revisão)
+  -d '{"acao":"reescrever","assunto":"…","assuntoB":"","mensagem":"…?","followups":["…","",""]}'
+
+# resposta recebida: leitura + rascunho (NÃO envia; quem envia é o Felipe)
+  -d '{"acao":"responder","classificacao":"INTERESSADA","sugestao":"…"}'
+```
+
+No `completar`, troque `fonte` pela página onde o e-mail aparece publicado, se
+achar — o rodapé passa a dizer "vi seu e-mail em …". Se não achar o e-mail no
+site, mantenha a `fonte` que veio (a origem da planilha).
+
+**Classificações**: `INTERESSADA` (quer saber mais), `PERGUNTA` (perguntou algo
+concreto), `NAO_AGORA`, `SEM_INTERESSE`, `INDICOU_OUTRA` (passou outro
+contato), `OUTRO`. **Rascunho da réplica**: até 90 palavras, responde o que ela
+disse; interessada → propõe uma conversa curta (pode citar dois horários);
+pergunta → responde em poucas linhas e devolve uma pergunta; não agora →
+agradece e pergunta se pode voltar em alguns meses; sem interesse → sugestão
+vazia (não se insiste).
+
+## 9. Relatório
 
 Feche registrando a execução (aparece na aba Rotina do painel):
 
@@ -207,11 +261,11 @@ curl -sS -X POST -H "Authorization: Bearer $PROSPECCAO_TOKEN" -H "Content-Type: 
   -d '{"titulo":"rotina 2026-10-20","markdown":"…"}' "$BASE/api/prospeccao/execucoes"
 ```
 
-No `markdown`: buscas feitas, quantos perfis olhados, gravados, ignorados (com
+No `markdown`: tarefas feitas (respostas lidas, reescritas, importados completados/descartados), buscas feitas por campanha, quantos perfis olhados, gravados, ignorados (com
 motivo) e qualquer coisa estranha (site fora do ar, padrão de nicho novo). A
 última mensagem da sessão é o mesmo resumo em 3–5 linhas.
 
-## 9. Orçamento
+## 10. Orçamento
 
 - No máximo ~60 páginas abertas por noite.
 - Não reprocesse o que já está no CRM (o `checar` existe para isso).

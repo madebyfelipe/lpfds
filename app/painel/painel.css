@@ -550,6 +550,9 @@
 /* --- tabela -------------------------------------------------------------- */
 
 .painel-table-wrap {
+  /* position: o caption .painel-sr é absoluto; sem um contêiner posicionado
+     ele escapa da rolagem e alarga a página no celular. */
+  position: relative;
   overflow-x: auto;
 }
 
