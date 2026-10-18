@@ -41,7 +41,7 @@ export type CaixaPublica = Omit<Caixa, "senha"> & { dominio: string };
 
 const env = process.env;
 const NOME_PADRAO = env.PROSPECCAO_REMETENTE_NOME || "Felipe | Made by Felipe";
-const SITE = (env.PROSPECCAO_SITE_URL || "https://madebyfelipe.com.br").replace(/\/$/, "");
+const SITE = (env.PROSPECCAO_SITE_URL || "https://www.madebyfelipe.com.br").replace(/\/$/, "");
 const TIMEOUT_MS = 15000;
 
 function montar(c: Partial<Caixa> & { email: string; senha: string }): Caixa {
