@@ -1,4 +1,8 @@
-export type ProjectCategory = "Marca" | "Conteúdo" | "Landing Page";
+export type ProjectCategory =
+  | "Marca"
+  | "Conteúdo"
+  | "Landing Page"
+  | "Produto digital";
 
 // Página do site na dobra "O site" de um case: vira aba + card-índice na
 // janela de navegador (SiteFrame). O screenshot é a captura da página
@@ -74,6 +78,177 @@ const posts = (slug: string, count: number): string[] =>
 
 // A ordem do array define a ordem do grid (1º = destaque) e o "próximo projeto".
 export const projects: Project[] = [
+  {
+    slug: "estruturart",
+    client: "Estruturart Capital",
+    displayName: "ESTRUTURART\nCAPITAL",
+    category: "Landing Page",
+    tagline:
+      "Site institucional e criativos de performance para um grupo de soluções financeiras empresariais.",
+    statement: "Solidez financeira também se comunica.",
+    scope: ["Site institucional", "Direção de arte", "Criativos para mídia paga"],
+    execution:
+      "Desenvolvimento do site institucional e criação de anúncios para apresentar Home Equity, conta digital e soluções de capital com clareza e consistência visual.",
+    images: {
+      cover: "/portfolio/estruturart/posts/post-01.jpg",
+    },
+    gallery: posts("estruturart", 3),
+    aboutImageFit: "contain",
+    about:
+      "A Estruturart reúne diferentes frentes financeiras para empresas, da antecipação de recebíveis ao Home Equity. O site institucional organiza esse portfólio em uma navegação clara, apresentando cada solução, os diferenciais do grupo e os caminhos de contato sem perder a percepção de solidez que o setor exige.\n\nA comunicação ganhou continuidade nos criativos de performance. As peças transformam temas complexos em mensagens diretas, combinando copy de dor e solução, imagens de alto impacto e a identidade em laranja, preto e branco. O resultado é um sistema consistente entre o destino da campanha e os anúncios que levam o público até ele.",
+    aboutImage: "/portfolio/estruturart/posts/post-02.jpg",
+    website: {
+      url: "estruturart-institucional.vercel.app",
+      intro:
+        "A página institucional apresenta as soluções do grupo, sua história e os canais de contato em uma experiência completa. Role dentro da janela para percorrer o site do início ao fim.",
+      pages: [
+        {
+          label: "Início",
+          path: "/",
+          description:
+            "Apresentação do grupo, produtos financeiros, história, formulário de contato e dúvidas frequentes.",
+          src: "/portfolio/estruturart/pagina-inicio.jpg",
+        },
+      ],
+    },
+    presentation: {
+      layout: "grid-4",
+      text: "Os três criativos entregues para as campanhas de Home Equity e soluções financeiras.",
+    },
+  },
+  {
+    slug: "arflam-engenharia",
+    client: "Arflam Engenharia",
+    displayName: "ARFLAM\nENGENHARIA",
+    category: "Landing Page",
+    tagline:
+      "Landing page de captação para projetos estruturais em 2D e 3D, com qualificação do pedido de orçamento.",
+    statement: "Confiança para construir começa antes da obra.",
+    scope: [
+      "Landing page",
+      "Copy para conversão",
+      "Formulário de qualificação",
+      "Visualização 3D",
+    ],
+    execution:
+      "Estruturação da página, apresentação dos serviços e desenvolvimento de uma jornada de orçamento conectada ao WhatsApp, com demonstração interativa da estrutura em 3D.",
+    images: {
+      cover: "/portfolio/arflam-engenharia/cover.jpg",
+    },
+    aboutImageFit: "contain",
+    about:
+      "A Arflam precisava explicar um serviço técnico sem afastar quem ainda está começando a planejar a obra. A página conduz o visitante do problema à solução: o projeto arquitetônico enviado pelo cliente se transforma em cálculo estrutural, plantas e modelo 3D, com engenheiro responsável e entrega preparada para obra e prefeitura.\n\nA experiência inclui uma visualização 3D alternável entre construção e ampliação, blocos que respondem às principais dúvidas e um formulário de seis perguntas. As respostas qualificam o tipo e o momento da obra antes de abrir a conversa no WhatsApp, deixando o primeiro contato mais objetivo para cliente e engenharia.",
+    aboutImage: "/portfolio/arflam-engenharia/cover.jpg",
+    website: {
+      url: "lp-arflam-engenharia.vercel.app",
+      intro:
+        "Uma landing page construída para transformar um serviço de engenharia em uma decisão simples: entender o processo, tirar dúvidas e solicitar o orçamento. Role dentro da janela para ver a página inteira.",
+      pages: [
+        {
+          label: "Início",
+          path: "/",
+          description:
+            "Proposta de valor, estrutura 3D, processo, entregáveis, perguntas frequentes e formulário de orçamento.",
+          src: "/portfolio/arflam-engenharia/pagina-inicio.jpg",
+        },
+      ],
+    },
+  },
+  {
+    slug: "prismapay",
+    client: "PrismaPay",
+    displayName: "PRISMAPAY",
+    category: "Landing Page",
+    tagline:
+      "Landing page e criativos de performance para câmbio e pagamentos globais entre empresas.",
+    statement: "Operações globais pedem uma mensagem sem fronteiras.",
+    scope: ["Landing page", "Direção de arte", "Criativos para mídia paga"],
+    execution:
+      "Desenvolvimento da página de apresentação e conversão, com simulador de economia e demonstrações de produto, além de uma série de seis anúncios para as campanhas digitais.",
+    images: {
+      cover: "/portfolio/prismapay/posts/post-01.jpg",
+    },
+    gallery: posts("prismapay", 6),
+    aboutImageFit: "contain",
+    about:
+      "A PrismaPay oferece câmbio, pagamentos internacionais e infraestrutura financeira para empresas que compram e vendem além da fronteira. A landing page organiza esse ecossistema em uma narrativa orientada à conversão, começando pelo pagamento de fornecedores no exterior e avançando para o funcionamento da plataforma, os públicos atendidos e os demais serviços.\n\nElementos de produto tornam a proposta tangível: simulações de câmbio, acompanhamento de remessas, comparativo de spread e painéis de conta multimoeda. Nos criativos, a mesma linguagem visual e verbal se adapta a mensagens de liberdade, estratégia e simplicidade, mantendo o reconhecimento da marca do anúncio até a página de destino.",
+    aboutImage: "/portfolio/prismapay/posts/post-05.jpg",
+    website: {
+      url: "lp.prismapay.com.br",
+      intro:
+        "A página reúne explicação de produto, simulador interativo, serviços e chamadas para a mesa de câmbio. Role dentro da janela para percorrer toda a experiência.",
+      pages: [
+        {
+          label: "Início",
+          path: "/",
+          description:
+            "Câmbio B2B, funcionamento da plataforma, simulador de economia, serviços financeiros e contato comercial.",
+          src: "/portfolio/prismapay/pagina-inicio.jpg",
+        },
+      ],
+    },
+    presentation: {
+      layout: "grid-4",
+      text: "A série completa de criativos para posicionar a PrismaPay nas campanhas digitais.",
+    },
+  },
+  {
+    slug: "rei-das-barras",
+    client: "Rei das Barras",
+    displayName: "REI DAS\nBARRAS",
+    category: "Marca",
+    tagline:
+      "Sistema visual e aplicações de marca para uma empresa de soluções em acessibilidade.",
+    statement: "Acessibilidade ganha presença em cada detalhe.",
+    scope: [
+      "Aplicações de identidade",
+      "Embalagem",
+      "Catálogo",
+      "Sinalização",
+      "Uniformes",
+    ],
+    execution:
+      "Direção de arte e aplicação da identidade em embalagem, catálogo, uniforme, frota, sinalização e fachada, criando um sistema consistente nos pontos de contato da marca.",
+    images: {
+      cover: "/portfolio/rei-das-barras/posts/post-07.jpg",
+    },
+    gallery: posts("rei-das-barras", 7),
+    aboutImageFit: "contain",
+    about:
+      "O projeto traduz a atuação do Rei das Barras em uma presença visual reconhecível e funcional. O azul profundo sustenta a percepção de segurança, enquanto o laranja cria contraste e destaca a assinatura em diferentes materiais, sempre com leitura clara e proximidade com o universo da construção e da acessibilidade.\n\nAs aplicações cobrem o caminho completo do produto e da empresa: embalagem, catálogo comercial, comunicação no ponto de venda, uniformes, veículo e fachada. Cada peça respeita o mesmo sistema de cor, tipografia e composição, fazendo a marca permanecer consistente tanto na apresentação ao cliente quanto na rotina de instalação e atendimento.",
+    aboutImage: "/portfolio/rei-das-barras/posts/post-05.jpg",
+    presentation: {
+      layout: "grid-4",
+      text: "As sete aplicações entregues, da embalagem do produto à fachada da loja.",
+    },
+  },
+  {
+    slug: "oliveira-health-score",
+    client: "Oliveira & Co",
+    displayName: "OLIVEIRA & CO\nHEALTH SCORE",
+    category: "Produto digital",
+    tagline:
+      "Dashboard de saúde do cliente com dados automáticos de campanhas e rotina comercial em uma única interface.",
+    statement: "Performance e relacionamento no mesmo painel.",
+    scope: [
+      "Dashboard de performance",
+      "Integração com Google Ads e Meta Ads",
+      "Health score",
+      "CRM kanban",
+    ],
+    execution:
+      "Desenvolvimento da V4 do dashboard, com sincronização de campanhas, consolidação de indicadores, acompanhamento da carteira e recursos de check-in, churn e gestão comercial em fluxo kanban.",
+    images: {
+      cover: "/portfolio/oliveira-health-score/dashboard.jpg",
+    },
+    gallery: ["/portfolio/oliveira-health-score/dashboard.jpg"],
+    about:
+      "Criei um dashboard de saúde do cliente para centralizar a leitura da operação da Oliveira & Co. A plataforma puxa automaticamente os dados das campanhas conectadas às APIs de Google e Meta e transforma investimento, leads, CPL, CTR e taxa de conversão em uma visão comparável por período, canal e campanha. Em vez de montar relatórios manualmente, a equipe acompanha a performance em uma interface atualizada e pronta para a reunião.\n\nO produto vai além do relatório de mídia. A carteira ganha sinais de saúde, histórico e registro de atividades, enquanto check-ins e churn ajudam a acompanhar o relacionamento ao longo do tempo. A lógica de CRM em formato kanban organiza os próximos passos comerciais, unindo dados de aquisição e gestão de clientes no mesmo ambiente. A V4 consolida essa operação com visão geral, performance detalhada, gráficos diários e leitura campanha a campanha.",
+    presentation: {
+      layout: "grid-1",
+      text: "A tela de performance do dashboard, com indicadores consolidados, evolução diária e detalhamento das campanhas sincronizadas.",
+    },
+  },
   {
     slug: "alves-nabuco",
     client: "Alves & Nabuco",
@@ -325,37 +500,6 @@ export const projects: Project[] = [
       layout: "grid-1",
       images: posts("ivoei", 17),
       text: "O guia completo, capítulo a capítulo — do símbolo às diretrizes de fotografia.",
-    },
-  },
-  {
-    slug: "cbricks",
-    client: "Cbricks",
-    displayName: "CBRICKS",
-    category: "Landing Page",
-    tagline:
-      "Pesquisa de mercado, estudo de marca e desenvolvimento de uma landing page para um fabricante de tijolos ecológicos partindo do zero.",
-    statement: "Toda marca começa por uma decisão.",
-    scope: [
-      "Pesquisa de mercado",
-      "Estudo de marca",
-      "Sistema de cores e tipografia",
-      "Landing page",
-    ],
-    execution:
-      "Pesquisa de mercado, definição da base visual e desenvolvimento da landing page conduzidos em parceria terceirizada, com entrega pronta para publicação.",
-    images: {
-      cover: "/portfolio/cbricks/cover.png",
-      hero: "/portfolio/cbricks/detail.png",
-    },
-    aboutImageFit: "contain",
-    about:
-      "O projeto começou sem ponto de partida. A Cbricks chegou sem marca, sem presença digital e sem material de referência, com o desafio de se posicionar diante de concorrentes já estabelecidos no mercado de construção sustentável. A primeira etapa foi entender o terreno: uma pesquisa de mercado para mapear como os concorrentes se apresentam e onde havia espaço para a Cbricks ocupar.\n\nA partir dessa leitura veio o estudo de marca. Definimos uma estrutura de cores e tipografia coerente com os valores do produto, ecológico, sólido e acessível, para servir de base ao desenvolvimento. Com essa fundação, a landing page foi construída para traduzir o posicionamento em uma primeira experiência clara e consistente, pronta para receber os primeiros visitantes e sustentar a expansão futura da marca.",
-    aboutImage: "/portfolio/cbricks/sobre.png",
-    presentation: {
-      src: "/portfolio/cbricks/apresentacao.png",
-      width: 2160,
-      height: 11892,
-      text: "A landing page por inteiro, da definição visual à tela final.",
     },
   },
   {

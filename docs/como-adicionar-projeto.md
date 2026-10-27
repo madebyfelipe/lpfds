@@ -63,7 +63,7 @@ renderiza:
   slug: "novo-cliente",            // = nome da pasta e da URL (/portfolio/novo-cliente)
   client: "Novo Cliente",          // nome exibido no card, no floater e no case
   displayName: "NOVO\nCLIENTE",    // \n = quebra de linha no título gigante do hero
-  category: "Marca",               // "Marca" ou "Conteúdo" (usado no filtro do grid)
+  category: "Marca",               // categoria usada no filtro do grid
   tagline: "Frase-resumo do projeto em uma linha.",
   statement: "Frase de efeito do case.",
   scope: ["Item 1", "Item 2", "Item 3"],   // exibidos unidos por " · "
@@ -126,8 +126,8 @@ renderiza:
   um segundo slug — foi o que fizemos com a Alves & Nabuco. Se um slug antigo
   precisar morrer, adicione um redirect permanente em `next.config.ts`
   (ex.: `/portfolio/alves-nabuco-institucional` → `/portfolio/alves-nabuco`).
-- **Categoria** deve ser `"Marca"` ou `"Conteúdo"`. Para criar uma categoria
-  nova:
+- **Categoria** deve ser `"Marca"`, `"Conteúdo"`, `"Landing Page"` ou
+  `"Produto digital"`. Para criar uma categoria nova:
   1. adicione o valor ao type `ProjectCategory` em `lib/portfolio.ts`;
   2. adicione o mesmo valor ao array `FILTERS` em
      `components/portfolio/PortfolioGrid.tsx`.
@@ -145,8 +145,8 @@ npm run dev
 ```
 
 1. Abra `/portfolio` — o novo projeto aparece no grid.
-2. Teste o **filtro** `Todos / Marca / Conteúdo` (inclusive uma categoria sem
-   projetos → deve mostrar "Nenhum projeto nesta categoria.").
+2. Teste todos os **filtros** (inclusive uma categoria sem projetos → deve
+   mostrar "Nenhum projeto nesta categoria.").
 3. Passe o mouse nos cards — o **cursor customizado** mostra o nome do projeto.
 4. Abra o case novo e role até o fim conferindo as dobras na ordem:
    hero → tagline → galeria → statement → escopo → sobre → site →

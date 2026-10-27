@@ -3420,9 +3420,12 @@ img {
   .portfolio-dock {
     bottom: 16px;
     max-width: calc(100vw - 24px);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
   }
 
   .portfolio-dock__pill {
+    flex-shrink: 0;
     min-height: 44px;
     padding: 0 20px;
     font-size: 0.9rem;
@@ -4290,6 +4293,10 @@ img {
   .case-hero {
     min-height: 72vh;
     padding-bottom: 20px;
+  }
+
+  .case-hero__title {
+    font-size: clamp(2.25rem, 10.5vw, 3.2rem);
   }
 
   .case-tagline {
