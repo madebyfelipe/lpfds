@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ScheduleLink } from "@/components/ScheduleLink";
 import { Depoimentos } from "@/components/institucional/Depoimentos";
 import { InstContato } from "@/components/institucional/InstContato";
 import { MetodologiaFlow } from "@/components/institucional/MetodoDiagrams";
@@ -48,9 +49,13 @@ export default function Home() {
         <p className="inst-hero__note">
           Dentro do artigo 20 do Código de Ética Profissional do Psicólogo.
         </p>
-        <Link href="/imersao" className="inst-hero__cta">
-          Agendar a imersão →
-        </Link>
+        <p className="inst-hero__note">
+          Antes da imersão, 15 minutos para conversar sobre a marca do seu
+          consultório.
+        </p>
+        <ScheduleLink className="inst-hero__cta">
+          Conversar por 15 minutos →
+        </ScheduleLink>
       </header>
 
       <div className="inst-strip">
@@ -120,9 +125,9 @@ export default function Home() {
         <div className="inst-section" style={{ paddingBlock: "96px" }}>
           <p className="inst-kicker inst-kicker--tight">— Agenda</p>
           <p className="inst-agenda__line">
-            {agenda.numProjetos} projetos por trimestre. Próxima imersão
-            disponível em{" "}
-            <span className="inst-agenda__accent">{agenda.mesImersao}</span>.
+            {agenda.numProjetos} projetos por trimestre.{" "}
+            <span className="inst-agenda__accent">Consulte a disponibilidade</span>{" "}
+            para a próxima imersão.
           </p>
         </div>
       </section>

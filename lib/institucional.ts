@@ -109,7 +109,7 @@ export const process = [
       {
         num: "02",
         title: "Workshop",
-        copy: "Dois dias de imersão guiada, onde as quatro áreas viram estratégia."
+        copy: "Dois dias de imersão guiada, onde as seis áreas viram estratégia."
       },
       {
         num: "03",
@@ -195,8 +195,8 @@ export const depoimentos = [
   }
 ];
 
-// Props "Agenda" do protótipo (numProjetos / mesImersao).
-export const agenda = { numProjetos: 3, mesImersao: "setembro" };
+// Capacidade do estúdio; disponibilidade é confirmada no contato inicial.
+export const agenda = { numProjetos: 3 };
 
 // Imagem de capa do projeto no hub — mesma regra do grid atual do portfólio.
 // O card abre o case completo já existente em /portfolio/[slug].
