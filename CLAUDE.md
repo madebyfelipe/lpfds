@@ -370,7 +370,7 @@ absoluta à mão em outro arquivo.
 `renderOg` em `lib/og.tsx`, que espelha os tokens — o Satori não lê CSS vars). O Next
 **não mescla** `openGraph` entre layout e página: toda página que declara `openGraph`
 próprio precisa repetir `images: [OG_IMAGE]`. Posts têm imagem própria com o título
-(`blog/[slug]/opengraph-image.tsx`). `/hub` mantém a dele.
+(`blog/[slug]/og.png/route.tsx`), ou a capa quando o post tem `cover`. `/hub` mantém a dele.
 
 **Metadata/JSON-LD alinhados ao ICP (nov/2026)**: o title padrão do layout raiz, a
 description e o `StructuredData` falam de branding para psicólogos e consultórios de
@@ -409,6 +409,32 @@ famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 
 - **CTA**: todo post termina com o bloco "— Próximo passo" + `ScheduleLink`
   ("Conversar por 15 minutos →", mesma frase do hero da home). Não remover.
 - **Nav**: item "Blog" na `InstNav`, entre Método e Contato.
+- **Imagens (pedido do Felipe, nov/2026)** — campo opcional `cover` no `Post`
+  (`src`, `alt`, `caption?`, `width`, `height`). Uma única imagem serve de banner, de
+  thumb na lista, de og:image/twitter:image, de `image` no JSON-LD e de entrada no
+  sitemap de imagens (`<image:image>`). Padrão:
+  - **Arquivo-fonte**: `public/blog/<slug>/<palavra-chave-com-hifens>.jpg` (ex.:
+    `public/blog/branding-para-psicologos/branding-para-psicologos-consultorio.jpg`).
+    Nome em minúsculas, sem acento, com a palavra-chave do post. Nada de `IMG_1234.jpg`.
+  - **Tamanho**: 16:9, mínimo **1920×1080** (ideal 2400×1350). JPG com qualidade 80–85,
+    sRGB, sem EXIF de localização, **até ~500 KB**. Use PNG só para arte gráfica com
+    texto. Não suba WebP/AVIF à mão: o `next/image` já entrega AVIF/WebP redimensionado
+    (`images.formats`). O original em alta é o que vai para o og:image, o JSON-LD e o
+    sitemap — é ele que o Google Imagens indexa.
+  - **Thumb**: o mesmo arquivo, recortado em 16:9 pelo CSS (`.inst-blog__thumb`) e servido
+    pequeno pelo `sizes`. Não existe arquivo separado de thumb.
+  - **alt**: frase em pt-BR que descreve o que a imagem mostra, com a palavra-chave quando
+    couber naturalmente (mín. 15 caracteres). Nada de "imagem", "foto" nem lista de
+    palavras-chave. **caption**: legenda visível opcional (crédito, contexto).
+  - **Art. 20 vale para imagem**: nada de sessão, paciente, criança atendida, divã, antes e
+    depois ou material de atendimento. Prefira o espaço de trabalho, objetos, detalhes de
+    identidade visual, o próprio Felipe ou arte gráfica da marca. Banco de imagem só com
+    licença comercial; registre o crédito na `caption`.
+  - **Trava**: `assertCover` em `lib/blog.ts` derruba o `next build` se a capa estiver fora
+    da pasta do post, abaixo de 1920×1080, fora de 16:9, em formato estranho ou sem alt.
+  - Sem capa, o post usa o og:image gerado com o título (`blog/[slug]/og.png/route.tsx`,
+    URL fixa). Ele é uma rota, e não um `opengraph-image.tsx`, porque arquivo de metadata
+    tem prioridade sobre o `openGraph.images` da página e esconderia a capa.
 - **Regras editoriais (não negociáveis)**: artigo 20 do Código de Ética — nada de
   promessa de resultado terapêutico, de preço/gratuidade como chamariz, de imagem de
   sessão/paciente. **Não inventar números, depoimentos nem fontes**: toda afirmação

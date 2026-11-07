@@ -2303,6 +2303,34 @@
   padding-top: 40px;
 }
 
+/* Capa (banner) e thumb: 16:9 fixo, canto de 2px como toda caixa do site.
+   O fundo --gray-100 segura o espaço enquanto a imagem carrega. */
+.inst-blog__cover {
+  margin: 40px 0 0;
+}
+
+.inst-blog__cover-img,
+.inst-blog__thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 2px;
+  background: var(--gray-100);
+}
+
+.inst-blog__thumb {
+  margin-bottom: 20px;
+}
+
+.inst-blog__caption {
+  margin-top: 12px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--gray-500);
+}
+
 .inst-blog__back:hover {
   color: var(--red-ink);
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { OG_IMAGE } from "@/lib/site";
+import Image from "next/image";
 import Link from "next/link";
 import { formatDate, posts } from "@/lib/blog";
 
@@ -37,6 +38,17 @@ export default function BlogPage() {
         {posts.map((post) => (
           <li key={post.slug} className="inst-blog__item">
             <Link href={`/blog/${post.slug}`} className="inst-blog__link">
+              {/* Thumb: o mesmo arquivo da capa, servido pequeno pelo next/image. */}
+              {post.cover && (
+                <Image
+                  src={post.cover.src}
+                  alt={post.cover.alt}
+                  width={post.cover.width}
+                  height={post.cover.height}
+                  sizes="(max-width: 900px) 100vw, 640px"
+                  className="inst-blog__thumb"
+                />
+              )}
               <time className="inst-blog__date" dateTime={post.publishedAt}>
                 {formatDate(post.publishedAt)}
               </time>

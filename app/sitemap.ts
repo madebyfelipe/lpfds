@@ -54,6 +54,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(post.updatedAt ?? post.publishedAt),
       changeFrequency: "monthly" as const,
       priority: 0.7,
+      // Sitemap de imagens (image:image): só a capa real, em alta, para o
+      // Google Imagens — o og.png gerado não é conteúdo.
+      ...(post.cover && { images: [`${baseUrl}${post.cover.src}`] }),
     })),
     // Páginas legais: entram no sitemap porque precisam ser encontráveis —
     // prioridade baixa, já que não disputam busca.
