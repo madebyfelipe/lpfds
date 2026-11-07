@@ -8,6 +8,7 @@ import { InstThemeToggle } from "@/components/institucional/InstThemeToggle";
 const links = [
   { href: "/", label: "Início" },
   { href: "/metodologia", label: "Método" },
+  { href: "/blog", label: "Blog" },
   { href: "/imersao", label: "Contato" }
 ];
 

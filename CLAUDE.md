@@ -59,7 +59,7 @@ foco visível? Se qualquer resposta for "não", ainda não está pronto.
 
 Next.js 16 (App Router, Turbopack) + TypeScript landing page for **Made by Felipe**, a branding + social media service targeting Brazilian professionals (lawyers, nutritionists, psychologists, clinics).
 
-Live domain: `madebyfelipe.com`  
+Live domain: `www.madebyfelipe.com.br` (ver "Domínio canônico")  
 Language: **Portuguese (pt-BR)** — all user-facing copy stays in Portuguese.
 
 > **Branch `beta` only:** the home is no longer the dark landing page — it is the
@@ -205,6 +205,7 @@ shared shell (`InstNav` + `InstFooter` + the `.inst` wrapper):
 | `/metodologia` | `app/(institucional)/metodologia/page.tsx` | — (novo, sem paralelo no protótipo) |
 | `/projetos` | `app/(institucional)/projetos/page.tsx` | `isProjetos` (hub de portfólio) |
 | `/imersao` | `app/(institucional)/imersao/page.tsx` | `isContato` |
+| `/blog`, `/blog/[slug]` | `app/(institucional)/blog/` | — (novo; ver "Blog") |
 
 The prototype's contact view lives at **`/imersao`**, not `/contato` — `/contato` is a
 satellite of `/hub` (shares `hub.css`, linked from `HubProducts`) and must not be touched.
@@ -353,6 +354,49 @@ exist only for it). `/hub` keeps its content and its own body/footer; only its d
 footer/deck full-bleed padding was fixed (the content used to stretch to 100vw instead of
 the hub column) and its header was swapped for `InstNav` (see "Nav" above).
 The institutional footer carries a backlink to `/hub`.
+
+---
+
+## Domínio canônico
+
+**`lib/site.ts` (`SITE_URL`) é a fonte única da origem do site** — `metadataBase` do
+layout raiz, `sitemap.ts`, `robots.ts`, `StructuredData` e o JSON-LD dos posts leem
+dali. Hoje é `https://www.madebyfelipe.com.br` (a produção responde em `www`; o apex
+redireciona 301). Antes era `https://madebyfelipe.com`, que **não resolve** — canonical,
+`og:url`, sitemap e `@id` do JSON-LD apontavam para fora do site. Não escreva a URL
+absoluta à mão em outro arquivo.
+
+---
+
+## Blog (`/blog`, `/blog/[slug]`)
+
+Objetivo: tráfego orgânico do ICP (psicólogas, consultórios, com foco em quem atende
+famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 minutos.
+
+- **Conteúdo em arquivo, sem CMS.** Cada post é `content/blog/<slug>.tsx`, que exporta
+  `post: Post` (`slug`, `title`, `description`, `keyword`, `publishedAt`, `updatedAt?`,
+  `body` em JSX). Para publicar: criar o arquivo e registrá-lo no array de
+  `lib/blog.ts`. A rota é estática (`generateStaticParams` + `dynamicParams = false`),
+  então slug fora da lista dá 404.
+- **SEO por post sai sozinho**: `<title>`, description, canonical, Open Graph
+  `article` (com datas), Twitter card, JSON-LD `Article` (autor/publisher apontam
+  para os `@id` `#felipe`/`#business` do `StructuredData`, não redeclaram a entidade)
+  e entrada no `sitemap.ts` com `lastModified` = data do post (não a do build).
+  O `title` do post leva a palavra-chave principal e vira o H1.
+- **Visual**: reaproveita a casca de texto corrido das páginas legais
+  (`.inst-legal`, `.inst-legal__head`, `.inst-legal__body`). O CSS próprio
+  (`.inst-blog__*`, em `institucional.css`) é só a lista de posts, o respiro do corpo
+  e o CTA final. Links no corpo: `inst-link` (externos com `target="_blank"` +
+  `rel="noopener noreferrer"`).
+- **CTA**: todo post termina com o bloco "— Próximo passo" + `ScheduleLink`
+  ("Conversar por 15 minutos →", mesma frase do hero da home). Não remover.
+- **Nav**: item "Blog" na `InstNav`, entre Método e Contato.
+- **Regras editoriais (não negociáveis)**: artigo 20 do Código de Ética — nada de
+  promessa de resultado terapêutico, de preço/gratuidade como chamariz, de imagem de
+  sessão/paciente. **Não inventar números, depoimentos nem fontes**: toda afirmação
+  normativa cita a fonte (CFP, CRP) com link no fim do post. Preço do estúdio fica
+  fora, como no resto do site. Oferta citada só com os números aprovados (dois dias de
+  imersão, 45 dias no ar).
 
 ---
 
