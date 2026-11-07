@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { post as brandingParaPsicologos } from "@/content/blog/branding-para-psicologos";
 import { post as identidadeVisualParaPsicologo } from "@/content/blog/identidade-visual-para-psicologo";
+import { post as logoParaPsicologoInfantil } from "@/content/blog/logo-para-psicologo-infantil";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -22,7 +24,11 @@ export type Post = {
 };
 
 /** Mais recente primeiro. */
-export const posts: Post[] = [identidadeVisualParaPsicologo].sort((a, b) =>
+export const posts: Post[] = [
+  brandingParaPsicologos,
+  logoParaPsicologoInfantil,
+  identidadeVisualParaPsicologo
+].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
 

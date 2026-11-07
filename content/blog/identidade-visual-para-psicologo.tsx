@@ -223,7 +223,11 @@ export const post: Post = {
           <li>
             <strong>Cuidado com símbolos prontos.</strong> A peça de
             quebra-cabeça, muito associada ao autismo, é contestada por parte da
-            própria comunidade autista. Um símbolo próprio, construído a partir
+            própria comunidade autista, e um{" "}
+            <a href="https://doi.org/10.1177/1362361317727125" {...ext}>
+              estudo publicado na revista Autism
+            </a>{" "}
+            encontrou associações negativas com esse tipo de imagem. Um símbolo próprio, construído a partir
             do seu posicionamento, evita esse ruído e diferencia o consultório.
           </li>
           <li>
@@ -299,6 +303,14 @@ export const post: Post = {
               Orientações sobre publicidade profissional
             </a>
             , edição de 2026.
+          </li>
+          <li>
+            Gernsbacher, M. A. et al.{" "}
+            <a href="https://doi.org/10.1177/1362361317727125" {...ext}>
+              Do puzzle pieces and autism puzzle piece logos evoke negative
+              associations?
+            </a>{" "}
+            <em>Autism</em>.
           </li>
           <li>
             W3C.{" "}
