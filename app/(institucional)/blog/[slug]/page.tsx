@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
-import { formatDate, getPost, posts } from "@/lib/blog";
+import { formatDate, getPost, postImage, posts } from "@/lib/blog";
 import { SITE_URL } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost((await params).slug);
   if (!post) return {};
   const url = `/blog/${post.slug}`;
+  const image = postImage(post);
   return {
     title: `${post.title} | Made by Felipe`,
     description: post.description,
@@ -30,12 +32,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt ?? post.publishedAt,
-      authors: ["Felipe"]
+      authors: ["Felipe"],
+      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.description
+      description: post.description,
+      images: [image]
     }
   };
 }
@@ -57,6 +61,7 @@ export default async function PostPage({ params }: Props) {
     inLanguage: "pt-BR",
     mainEntityOfPage: url,
     url,
+    image: `${SITE_URL}${postImage(post).url}`,
     author: { "@id": `${SITE_URL}/#felipe` },
     publisher: { "@id": `${SITE_URL}/#business` },
     isPartOf: { "@id": `${SITE_URL}/#website` }
@@ -81,6 +86,23 @@ export default async function PostPage({ params }: Props) {
             {" · "}Por Felipe
           </p>
         </header>
+        {post.cover && (
+          <figure className="inst-blog__cover">
+            {/* Banner é o LCP do post: priority + sizes até a largura da coluna. */}
+            <Image
+              src={post.cover.src}
+              alt={post.cover.alt}
+              width={post.cover.width}
+              height={post.cover.height}
+              sizes="(max-width: 1200px) 100vw, 1120px"
+              priority
+              className="inst-blog__cover-img"
+            />
+            {post.cover.caption && (
+              <figcaption className="inst-blog__caption">{post.cover.caption}</figcaption>
+            )}
+          </figure>
+        )}
         <div className="inst-legal__body inst-blog__body">{post.body}</div>
       </article>
 
