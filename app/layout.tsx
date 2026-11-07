@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { CookieConsent, MetaPixel } from "@/components/CookieConsent";
 import { CustomCursor } from "@/components/CustomCursor";
 import { StructuredData } from "@/components/StructuredData";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -13,7 +14,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://madebyfelipe.com"),
+  metadataBase: new URL(SITE_URL),
   verification: {
     google: "hWQpfk8fLurpgK8t39nD8F0ABbFwEhWT9UmdtvW22Gg"
   },

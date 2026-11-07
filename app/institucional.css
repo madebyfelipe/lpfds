@@ -2245,6 +2245,87 @@
   }
 }
 
+/* --------------------------------------------------------------------------
+   Blog (/blog, /blog/[slug])
+
+   Reaproveita a casca de texto corrido das páginas legais (.inst-legal,
+   .inst-legal__head, .inst-legal__body): é a mesma tarefa — prosa longa em
+   medida de leitura. Aqui só entram a lista de posts e o CTA do fim.
+   -------------------------------------------------------------------------- */
+
+.inst-blog__list {
+  max-width: 68ch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inst-blog__item {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.inst-blog__link {
+  display: block;
+  padding: 40px 0;
+}
+
+.inst-blog__date {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-blog__title {
+  margin: 12px 0 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: color 200ms ease;
+}
+
+.inst-blog__link:hover .inst-blog__title {
+  color: var(--red-ink);
+}
+
+.inst-blog__excerpt {
+  margin: 12px 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+/* As páginas legais abrem o corpo com <section> (margin-top próprio); o
+   post abre com parágrafos de introdução, que colariam no filete. */
+.inst-blog__body {
+  padding-top: 40px;
+}
+
+.inst-blog__back:hover {
+  color: var(--red-ink);
+}
+
+.inst-blog__cta {
+  max-width: 68ch;
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.inst-blog__cta-line {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.inst-blog__cta .inst-hero__cta {
+  margin-top: 32px;
+}
+
 /* Fileira legal do rodapé: linha própria abaixo da social + copyright.
    `order` porque o inner é space-between com duas colunas — sem isso o
    terceiro filho entraria no meio e quebraria o alinhamento existente. */

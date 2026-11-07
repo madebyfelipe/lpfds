@@ -1,4 +1,5 @@
 import { EMAIL, social } from "@/lib/institucional";
+import { SITE_URL } from "@/lib/site";
 
 // Structured data (JSON-LD) do site inteiro. Estabelece a entidade
 // "Made by Felipe" como estúdio de branding/social media em Sorocaba (SP),
@@ -7,7 +8,7 @@ import { EMAIL, social } from "@/lib/institucional";
 // então vale para todas as rotas. Puxa social/e-mail de lib/institucional
 // (fonte única) para não duplicar.
 
-const SITE = "https://madebyfelipe.com";
+const SITE = SITE_URL;
 const sameAs = social.map((s) => s.href);
 
 // Serviços oferecidos — os termos que queremos disputar no orgânico.
