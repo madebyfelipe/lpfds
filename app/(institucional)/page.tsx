@@ -58,7 +58,7 @@ export default function Home() {
         </ScheduleLink>
       </header>
 
-      <div className="inst-strip">
+      <div className="inst-strip" tabIndex={0} role="group" aria-label="Fotos de Felipe">
         {heroStrip.map((foto) => (
           <div key={foto.src} className="inst-strip__cell">
             <Image

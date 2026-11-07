@@ -133,6 +133,49 @@
   outline-offset: 3px;
 }
 
+:root {
+  /* Compartilhado com o banner, que fica fora de .inst. */
+  --inst-mobile-cta-height: calc(88px + env(safe-area-inset-bottom, 0px));
+}
+
+.inst-mobile-cta {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .inst:has(.inst-mobile-cta) {
+    padding-bottom: var(--inst-mobile-cta-height);
+  }
+
+  .inst-mobile-cta {
+    position: fixed;
+    z-index: 100;
+    inset-inline: 0;
+    bottom: 0;
+    height: var(--inst-mobile-cta-height);
+    display: flex;
+    align-items: center;
+    padding: 16px var(--inst-pad);
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    background: var(--cream);
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .inst-mobile-cta .inst-submit {
+    align-self: auto;
+    margin-top: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* O banner mantém prioridade e espaço próprio acima do CTA. */
+  body:has(.inst-mobile-cta) .mbf-consent {
+    bottom: calc(16px + var(--inst-mobile-cta-height));
+    max-height: calc(100dvh - 32px - var(--inst-mobile-cta-height));
+    overflow-y: auto;
+  }
+}
+
 .inst-shell {
   max-width: var(--inst-max);
   margin: 0 auto;

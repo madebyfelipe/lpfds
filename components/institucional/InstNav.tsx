@@ -8,7 +8,7 @@ import { InstThemeToggle } from "@/components/institucional/InstThemeToggle";
 const links = [
   { href: "/", label: "Início" },
   { href: "/metodologia", label: "Método" },
-  { href: "/imersao", label: "Contato" }
+  { href: "/imersao", label: "Imersão" }
 ];
 
 export function InstNav() {
