@@ -4,7 +4,9 @@ import type { Project } from "@/lib/portfolio";
 // aprovado "Site institucional para Felipe/Site Institucional.dc.html".
 // Os projetos vêm de lib/portfolio.ts — fonte única do portfólio.
 
-export const EMAIL = "contato@madebyfelipe.com.br";
+// Mesma caixa do form da imersão e das páginas legais (lib/legal.ts): o
+// site exibia contato@, mas é alo@ que recebe e autentica no SMTP.
+export { CONTATO_EMAIL as EMAIL } from "@/lib/legal";
 
 export const social = [
   {

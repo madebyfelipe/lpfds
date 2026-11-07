@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/site";
 import { ImersaoForm } from "@/components/institucional/ImersaoForm";
 import { InstContato } from "@/components/institucional/InstContato";
 import { social } from "@/lib/institucional";
@@ -6,7 +7,7 @@ import { social } from "@/lib/institucional";
 export const metadata: Metadata = {
   title: "Agende a imersão de branding | Made by Felipe",
   description:
-    "Agende a imersão de dois dias: posicionamento, identidade visual e verbal no ar em 45 dias. Branding e social media em Sorocaba (SP) e São Paulo.",
+    "Agende a imersão de dois dias: posicionamento, identidade visual e verbal no ar em 45 dias, para consultórios de psicologia, dentro do artigo 20 do Código de Ética.",
   alternates: { canonical: "/imersao" },
   openGraph: {
     title: "Agende a imersão de branding | Made by Felipe",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
       "Dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias.",
     url: "/imersao",
     siteName: "Made by Felipe",
+    images: [OG_IMAGE],
     locale: "pt_BR",
     type: "website"
   }
@@ -23,9 +25,9 @@ export default function ImersaoPage() {
   return (
     <main id="conteudo">
       <header className="inst-shell" style={{ padding: "128px 40px 96px" }}>
-        <p className="inst-manifesto">
+        <h1 className="inst-manifesto">
           Quem procura você decide muito antes da primeira mensagem.
-        </p>
+        </h1>
       </header>
 
       <section id="imersao" className="inst-dark">

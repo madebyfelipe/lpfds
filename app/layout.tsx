@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import { CookieConsent, MetaPixel } from "@/components/CookieConsent";
 import { CustomCursor } from "@/components/CustomCursor";
 import { StructuredData } from "@/components/StructuredData";
-import { SITE_URL } from "@/lib/site";
+import { OG_IMAGE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -18,23 +18,21 @@ export const metadata: Metadata = {
   verification: {
     google: "hWQpfk8fLurpgK8t39nD8F0ABbFwEhWT9UmdtvW22Gg"
   },
-  title: "Made by Felipe | Branding e Social Media em Sorocaba (SP)",
+  title: "Made by Felipe | Branding para consultórios de psicologia",
   description:
-    "Estúdio de branding e social media estratégico em Sorocaba (SP). Construção de marca, posicionamento, identidade visual e verbal para profissionais, clínicas e negócios em Sorocaba, São Paulo e região.",
+    "Estúdio de branding para psicólogos e consultórios de psicologia. Posicionamento, identidade visual e verbal em dois dias de imersão, no ar em 45 dias, dentro do artigo 20 do Código de Ética. Sorocaba (SP).",
   applicationName: "Made by Felipe",
   authors: [{ name: "Made by Felipe" }],
   creator: "Made by Felipe",
   publisher: "Made by Felipe",
   category: "Branding",
   keywords: [
-    "branding",
+    "branding para psicólogos",
+    "marca para psicólogo",
+    "identidade visual para psicólogo",
+    "marca para consultório de psicologia",
     "construção de marca",
-    "criação de marca",
-    "identidade visual",
     "posicionamento de marca",
-    "agência de branding",
-    "agência de marketing",
-    "social media",
     "Sorocaba",
     "São Paulo",
     "Made by Felipe"
@@ -56,21 +54,21 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Made by Felipe | Branding e Social Media em Sorocaba (SP)",
+    title: "Made by Felipe | Branding para consultórios de psicologia",
     description:
-      "Construção de marca, posicionamento, identidade visual e verbal para profissionais, clínicas e negócios em Sorocaba, São Paulo e região.",
+      "Posicionamento, identidade visual e verbal para consultórios de psicologia, em dois dias de imersão e no ar em 45 dias.",
     url: "/",
     siteName: "Made by Felipe",
-    images: ["/logo-white.png"],
+    images: [OG_IMAGE],
     locale: "pt_BR",
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Made by Felipe | Branding e Social Media em Sorocaba (SP)",
+    title: "Made by Felipe | Branding para consultórios de psicologia",
     description:
-      "Estúdio de branding e social media estratégico em Sorocaba (SP), atendendo Sorocaba, São Paulo e região.",
-    images: ["/logo-white.png"]
+      "Estúdio de branding para psicólogos e consultórios de psicologia, em Sorocaba (SP).",
+    images: [OG_IMAGE]
   }
 };
 
