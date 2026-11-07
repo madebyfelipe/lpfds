@@ -10,6 +10,13 @@ export const post: Post = {
     "O que compõe a identidade visual de um consultório de psicologia, o que o artigo 20 do Código de Ética exige da divulgação e um checklist para revisar a sua marca.",
   keyword: "identidade visual para psicólogo",
   publishedAt: "2026-11-07",
+  cover: {
+    src: "/blog/identidade-visual-para-psicologo/identidade-visual-para-psicologo-paleta-de-cores.jpg",
+    alt: "Leque de amostras de cores aberto, com tons do amarelo ao azul, usado para definir a paleta de uma identidade visual",
+    caption: "Foto: Artsy Crafty / StockSnap (licença CC0).",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>
