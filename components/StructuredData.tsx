@@ -2,8 +2,8 @@ import { EMAIL, social } from "@/lib/institucional";
 import { SITE_URL } from "@/lib/site";
 
 // Structured data (JSON-LD) do site inteiro. Estabelece a entidade
-// "Made by Felipe" como estúdio de branding/social media em Sorocaba (SP),
-// atendendo Sorocaba, São Paulo e região — a base para busca de marca,
+// "Made by Felipe" como estúdio de branding para psicólogos e consultórios
+// de psicologia, sediado em Sorocaba (SP) — a base para busca de marca,
 // pacote local do Google e resultados ricos. Renderizado no layout raiz,
 // então vale para todas as rotas. Puxa social/e-mail de lib/institucional
 // (fonte única) para não duplicar.
@@ -11,37 +11,28 @@ import { SITE_URL } from "@/lib/site";
 const SITE = SITE_URL;
 const sameAs = social.map((s) => s.href);
 
-// Serviços oferecidos — os termos que queremos disputar no orgânico.
+// Serviços oferecidos — a oferta atual (imersão / método PSIQUE), nos
+// termos que queremos disputar no orgânico. Sem preço, como no site.
 const services: { name: string; description: string }[] = [
   {
-    name: "Construção de marca (branding)",
+    name: "Imersão de marca para consultório de psicologia",
     description:
-      "Estratégia e construção de marca: posicionamento, identidade visual e verbal a partir da leitura do negócio."
+      "Dois dias de imersão: posicionamento, identidade visual e verbal do consultório, no ar em 45 dias, dentro do artigo 20 do Código de Ética Profissional do Psicólogo."
   },
   {
-    name: "Posicionamento de marca",
+    name: "Posicionamento de marca para psicólogos",
     description:
-      "Definição do território de marca — o que torna o negócio único diante da concorrência local."
+      "Método PSIQUE: Prática, Sujeito, Inquietação, Qualidade, Universo e Estória — o que distingue o consultório."
   },
   {
-    name: "Identidade visual",
+    name: "Identidade visual para psicólogos",
     description:
-      "Identidade visual completa: cores, tipografia, grafismos e direção de arte da marca."
+      "Assinatura com nome e CRP, cores, tipografia, grafismos e direção de imagem do consultório."
   },
   {
-    name: "Identidade verbal",
+    name: "Identidade verbal para psicólogos",
     description:
-      "Identidade verbal e discurso de marca: tom de voz, mensagens-chave e naming."
-  },
-  {
-    name: "Social media estratégico",
-    description:
-      "Gestão e conteúdo estratégico de social media para presença digital consistente."
-  },
-  {
-    name: "Página profissional / landing page",
-    description:
-      "Página profissional e landing page alinhadas à marca, prontas para converter."
+      "Tom de voz e mensagens-chave do consultório, sem promessa de resultado terapêutico."
   }
 ];
 
@@ -60,7 +51,7 @@ const graph = {
       "@type": ["ProfessionalService", "Organization"],
       "@id": `${SITE}/#business`,
       name: "Made by Felipe",
-      alternateName: "Made by Felipe — Branding & Social Media",
+      alternateName: "Made by Felipe — Branding para consultórios de psicologia",
       url: SITE,
       image: `${SITE}/logo-black.png`,
       logo: {
@@ -68,19 +59,20 @@ const graph = {
         url: `${SITE}/logo-black.png`
       },
       description:
-        "Estúdio de branding e social media estratégico em Sorocaba (SP): construção de marca, posicionamento, identidade visual e verbal para profissionais, clínicas e negócios em Sorocaba, São Paulo e região.",
+        "Estúdio de branding para psicólogos e consultórios de psicologia, em Sorocaba (SP): posicionamento, identidade visual e verbal em dois dias de imersão, no ar em 45 dias, dentro do artigo 20 do Código de Ética Profissional do Psicólogo.",
       slogan: "Branding é tradução, não invenção.",
       email: EMAIL,
+      audience: {
+        "@type": "Audience",
+        audienceType: "Psicólogos e consultórios de psicologia"
+      },
       knowsAbout: [
-        "Branding",
-        "Construção de marca",
+        "Branding para psicólogos",
+        "Marca para consultório de psicologia",
         "Posicionamento de marca",
         "Identidade visual",
         "Identidade verbal",
-        "Design de marca",
-        "Social media estratégico",
-        "Marketing",
-        "Naming"
+        "Publicidade profissional do psicólogo (artigo 20 do Código de Ética)"
       ],
       areaServed,
       address: {
@@ -98,7 +90,7 @@ const graph = {
       sameAs,
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Serviços de branding e social media",
+        name: "Branding para consultórios de psicologia",
         itemListElement: services.map((service) => ({
           "@type": "Offer",
           itemOffered: {

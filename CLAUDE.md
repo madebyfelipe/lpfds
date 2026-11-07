@@ -366,6 +366,24 @@ redireciona 301). Antes era `https://madebyfelipe.com`, que **não resolve** —
 `og:url`, sitemap e `@id` do JSON-LD apontavam para fora do site. Não escreva a URL
 absoluta à mão em outro arquivo.
 
+**og:image**: a padrão é `/og.png` (`app/og.png/route.tsx`, gerada no build por
+`renderOg` em `lib/og.tsx`, que espelha os tokens — o Satori não lê CSS vars). O Next
+**não mescla** `openGraph` entre layout e página: toda página que declara `openGraph`
+próprio precisa repetir `images: [OG_IMAGE]`. Posts têm imagem própria com o título
+(`blog/[slug]/opengraph-image.tsx`). `/hub` mantém a dele.
+
+**Metadata/JSON-LD alinhados ao ICP (nov/2026)**: o title padrão do layout raiz, a
+description e o `StructuredData` falam de branding para psicólogos e consultórios de
+psicologia (imersão de dois dias, 45 dias, artigo 20) — não mais "Branding e Social Media
+em Sorocaba". O catálogo de serviços do JSON-LD é a oferta atual, sem preço.
+
+**E-mail público**: `EMAIL` (`lib/institucional.ts`) reexporta `CONTATO_EMAIL`
+(`lib/legal.ts`, `alo@`) — a mesma caixa que recebe o form e autentica no SMTP. O site
+mostrava `contato@`; não voltar a ter dois endereços.
+
+**H1**: `/imersao` e `/diagnostico` usam `<h1 className="inst-manifesto">` (era `<p>`; a
+classe zera margem e define tamanho/peso, então o visual não muda).
+
 ---
 
 ## Blog (`/blog`, `/blog/[slug]`)

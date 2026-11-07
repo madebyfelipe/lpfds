@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/site";
 import Link from "next/link";
 import { formatDate, posts } from "@/lib/blog";
 
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
     description,
     url: "/blog",
     siteName: "Made by Felipe",
+    images: [OG_IMAGE],
     locale: "pt_BR",
     type: "website"
   }

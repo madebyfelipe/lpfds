@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/site";
 import Image from "next/image";
 import { WebinarForm } from "@/components/institucional/WebinarForm";
 import { blocos, entregas, webinar } from "@/lib/webinar";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
       "Sábado, 24 de outubro, 10h. Como transformar seu perfil em agenda cheia — criação de conteúdo para psicólogas clínicas, dentro do que o Art. 20 permite.",
     url: "/webinar",
     siteName: "Made by Felipe",
+    images: [OG_IMAGE],
     locale: "pt_BR",
     type: "website",
   },

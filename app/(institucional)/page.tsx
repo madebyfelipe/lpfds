@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/site";
 import Image from "next/image";
 import Link from "next/link";
 import { ScheduleLink } from "@/components/ScheduleLink";
@@ -29,6 +30,7 @@ export const metadata: Metadata = {
       "Dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética.",
     url: "/",
     siteName: "Made by Felipe",
+    images: [OG_IMAGE],
     locale: "pt_BR",
     type: "website"
   }

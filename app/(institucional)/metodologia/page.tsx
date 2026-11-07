@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/site";
 import { InstContato } from "@/components/institucional/InstContato";
 import {
   LinhaTempo,
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
       "O método PSIQUE traduz o negócio em posicionamento, identidade visual e verbal — da estratégia à comunicação.",
     url: "/metodologia",
     siteName: "Made by Felipe",
+    images: [OG_IMAGE],
     locale: "pt_BR",
     type: "article"
   }
