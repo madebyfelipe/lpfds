@@ -1,5 +1,6 @@
 import { InstFooter } from "@/components/institucional/InstFooter";
 import { InstNav } from "@/components/institucional/InstNav";
+import { InstMobileCta } from "@/components/institucional/InstMobileCta";
 import "../institucional.css";
 
 // Shell do site institucional (beta). O wrapper `.inst` escopa o tema
@@ -13,6 +14,7 @@ export default function InstitucionalLayout({
       <InstNav />
       {children}
       <InstFooter />
+      <InstMobileCta />
     </div>
   );
 }

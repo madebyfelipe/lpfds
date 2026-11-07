@@ -9,7 +9,7 @@ const links = [
   { href: "/", label: "Início" },
   { href: "/metodologia", label: "Método" },
   { href: "/blog", label: "Blog" },
-  { href: "/imersao", label: "Contato" }
+  { href: "/imersao", label: "Imersão" }
 ];
 
 export function InstNav() {
