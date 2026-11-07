@@ -10,6 +10,13 @@ export const post: Post = {
     "Quem escolhe o psicólogo infantil é o adulto. Como criar o logo e a marca de um consultório infantil que comunica com os pais, dentro do Código de Ética.",
   keyword: "logo para psicólogo infantil",
   publishedAt: "2026-11-07",
+  cover: {
+    src: "/blog/logo-para-psicologo-infantil/logo-para-psicologo-infantil-esbocos.jpg",
+    alt: "Caderno com vários esboços de logo desenhados a lápis, em preto e branco, mostrando o processo de criação de um símbolo",
+    caption: "Foto: Messala Ciulla / StockSnap (licença CC0).",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

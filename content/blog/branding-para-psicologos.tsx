@@ -10,6 +10,13 @@ export const post: Post = {
     "O que é branding para um consultório de psicologia, sinais de que chegou a hora, como funciona o processo e o que perguntar antes de contratar.",
   keyword: "branding para psicólogos",
   publishedAt: "2026-11-07",
+  cover: {
+    src: "/blog/branding-para-psicologos/branding-para-psicologos-planejamento-de-marca.jpg",
+    alt: "Caderno aberto com caneta sobre mesa branca e três vasos de suculentas ao fundo, cena de planejamento de marca",
+    caption: "Foto: Ylanite Koppens / StockSnap (licença CC0).",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>
