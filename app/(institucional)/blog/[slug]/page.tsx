@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
+import { ComentarioForm } from "@/components/institucional/ComentarioForm";
+import { comentarios } from "@/content/blog/comentarios";
 import { formatDate, getPost, postImage, posts } from "@/lib/blog";
 import { SITE_URL } from "@/lib/site";
 
@@ -49,6 +51,7 @@ export default async function PostPage({ params }: Props) {
   if (!post) notFound();
 
   const url = `${SITE_URL}/blog/${post.slug}`;
+  const aprovados = comentarios.filter((c) => c.slug === post.slug);
   // Autor e publisher apontam para as entidades do StructuredData global
   // (mesmos @id), em vez de redeclarar o estúdio a cada post.
   const jsonLd = {
@@ -118,6 +121,33 @@ export default async function PostPage({ params }: Props) {
           Conversar por 15 minutos →
         </ScheduleLink>
       </aside>
+
+      {/* Comentários: só os aprovados (content/blog/comentarios.ts); o form
+          manda para moderação por e-mail (ver lib/comentarios.ts). */}
+      <section className="inst-dark inst-blog__comments" aria-labelledby="comentarios-titulo">
+        <p className="inst-kicker inst-kicker--inverse inst-kicker--tight">— Comentários</p>
+        <h2 id="comentarios-titulo" className="inst-blog__cta-line">
+          E no seu consultório, como isso aparece? Conte a sua experiência ou
+          deixe a sua dúvida.
+        </h2>
+        {aprovados.length > 0 && (
+          <ol className="inst-blog__comment-list">
+            {aprovados.map((c) => (
+              <li key={`${c.data}-${c.nome}-${c.texto.slice(0, 20)}`} className="inst-blog__comment">
+                <p className="inst-blog__comment-meta">
+                  {c.nome} · <time dateTime={c.data}>{formatDate(c.data)}</time>
+                </p>
+                <p className="inst-blog__comment-text">{c.texto}</p>
+              </li>
+            ))}
+          </ol>
+        )}
+        <p className="inst-blog__comment-note">
+          Os comentários passam por moderação antes de aparecer. Pedimos só o
+          seu nome; não publique dados de pacientes.
+        </p>
+        <ComentarioForm slug={post.slug} />
+      </section>
     </main>
   );
 }

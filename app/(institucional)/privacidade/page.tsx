@@ -76,7 +76,17 @@ export default function PrivacidadePage() {
           formulário não é enviado.
         </p>
 
-        <h3>2.4 Dados técnicos</h3>
+        <h3>2.4 Comentários do blog</h3>
+        <p>
+          O formulário de comentários dos posts do blog coleta apenas o
+          <strong> nome</strong> que você informar e o <strong>texto do comentário</strong>.
+          Não pedimos e-mail. O comentário vai primeiro para a nossa caixa de
+          e-mail para moderação e só é publicado no post, com o nome informado,
+          se for aprovado. Comentários recusados são apagados. Para pedir a
+          remoção de um comentário publicado, escreva para o e-mail da seção 1.
+        </p>
+
+        <h3>2.5 Dados técnicos</h3>
         <p>
           A hospedagem registra dados técnicos de acesso (endereço IP, data e
           hora, tipo de navegador) em logs de servidor, pelo tempo necessário à
@@ -107,6 +117,10 @@ export default function PrivacidadePage() {
             revogável a qualquer momento.
           </li>
           <li>
+            <strong>Comentários do blog</strong> — consentimento (art. 7º, I),
+            dado no envio e revogável pedindo a remoção do comentário.
+          </li>
+          <li>
             <strong>Cookies de medição</strong> — consentimento (art. 7º, I),
             pedido no banner e revogável a qualquer momento.
           </li>
@@ -130,7 +144,7 @@ export default function PrivacidadePage() {
           </li>
           <li>
             <strong>Hostinger</strong> — servidor de e-mail que entrega os
-            pedidos de imersão e diagnóstico à nossa caixa.
+            pedidos de imersão, diagnóstico e os comentários do blog à nossa caixa.
           </li>
           <li>
             <strong>Twenty CRM</strong> — cadastro de contatos e histórico de
@@ -168,6 +182,10 @@ export default function PrivacidadePage() {
           <li>
             <strong>Clientes</strong> — pelo prazo do contrato e mais 5 anos,
             para fins fiscais e de defesa em eventual processo.
+          </li>
+          <li>
+            <strong>Comentários do blog</strong> — publicados enquanto o post
+            estiver no ar ou até você pedir a remoção; recusados são apagados.
           </li>
           <li>
             <strong>Newsletter</strong> — até você se descadastrar.
