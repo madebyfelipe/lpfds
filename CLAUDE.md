@@ -435,6 +435,15 @@ famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 
   - Sem capa, o post usa o og:image gerado com o título (`blog/[slug]/og.png/route.tsx`,
     URL fixa). Ele é uma rota, e não um `opengraph-image.tsx`, porque arquivo de metadata
     tem prioridade sobre o `openGraph.images` da página e esconderia a capa.
+- **Comentários (nov/2026)** — fim de todo post, numa caixa `.inst-dark` (reusa
+  `.inst-form`/`.inst-field` do form da imersão). Moderação por e-mail, sem banco: o
+  form (`ComentarioForm`) → `/api/comentarios` (honeypot `site`, limite de 3 envios
+  por IP a cada 10 min em memória, aceite obrigatório validado no servidor) → e-mail
+  "Comentário pendente" para `alo@` com a linha pronta. **Nada é publicado pela rota.**
+  Publicar = colar a linha aprovada em `content/blog/comentarios.ts` + deploy. O repo é
+  público: comentário pendente nunca entra no repo. Coleta só nome + texto (sem
+  e-mail); `/privacidade` 2.4 descreve isso. Nunca adicionar comentário inventado, de
+  teste ou de seed.
 - **Regras editoriais (não negociáveis)**: artigo 20 do Código de Ética — nada de
   promessa de resultado terapêutico, de preço/gratuidade como chamariz, de imagem de
   sessão/paciente. **Não inventar números, depoimentos nem fontes**: toda afirmação

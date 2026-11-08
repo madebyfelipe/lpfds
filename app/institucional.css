@@ -2331,6 +2331,69 @@
   color: var(--gray-500);
 }
 
+/* Comentários: caixa .inst-dark (a mesma superfície do form da imersão, então
+   .inst-form/.inst-field funcionam sem override e invertem com o tema). */
+.inst-blog__comments {
+  max-width: 68ch;
+  margin-top: 72px;
+  padding: 40px;
+  border-radius: 2px;
+}
+
+.inst-blog__comment-list {
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inst-blog__comment {
+  padding: 20px 0;
+  border-top: 1px solid var(--line-inverse);
+}
+
+.inst-blog__comment-meta {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-300);
+}
+
+.inst-blog__comment-text {
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.inst-blog__comment-note {
+  margin: 24px 0 32px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--gray-300);
+}
+
+.inst-field__input--area {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Honeypot do form de comentário: fora da tela (não display:none — alguns
+   robôs pulam campos escondidos assim). */
+.inst-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+@media (max-width: 720px) {
+  .inst-blog__comments {
+    padding: 28px 20px;
+  }
+}
+
 .inst-blog__back:hover {
   color: var(--red-ink);
 }
