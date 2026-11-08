@@ -2,6 +2,9 @@ import type { ReactNode } from "react";
 import { post as brandingParaPsicologos } from "@/content/blog/branding-para-psicologos";
 import { post as identidadeVisualParaPsicologo } from "@/content/blog/identidade-visual-para-psicologo";
 import { post as logoParaPsicologoInfantil } from "@/content/blog/logo-para-psicologo-infantil";
+import { post as marcaAutismo } from "@/content/blog/marca-para-psicologo-autismo-neurodivergencia";
+import { post as precoPsicologo } from "@/content/blog/psicologo-pode-divulgar-preco";
+import { post as sitePsicologo } from "@/content/blog/site-para-psicologo";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -68,7 +71,10 @@ function assertCover(post: Post) {
 export const posts: Post[] = [
   brandingParaPsicologos,
   logoParaPsicologoInfantil,
-  identidadeVisualParaPsicologo
+  identidadeVisualParaPsicologo,
+  marcaAutismo,
+  sitePsicologo,
+  precoPsicologo
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
