@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { InstNav } from "@/components/institucional/InstNav";
 import { HubWebinarBar } from "@/components/hub/HubWebinarBar";
+import { webinarNoAr } from "@/lib/webinar";
 import { HubHero } from "@/components/hub/HubHero";
 import { HubProducts } from "@/components/hub/HubProducts";
 import { HubMedia } from "@/components/hub/HubMedia";
@@ -30,7 +31,7 @@ export default function HubPage() {
   return (
     <>
       {/* Faixa fixa do webinar — precede a nav e as duas grudam no topo. */}
-      <HubWebinarBar />
+      {webinarNoAr && <HubWebinarBar />}
       {/* Header padrão do site principal. Fica fora do `.hub` porque o wrapper
           usa `overflow-x: clip` (full-bleed do baralho) e o sticky da nav tem
           de valer contra a viewport. */}
