@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { posts } from "@/lib/blog";
 import { paginasLegais } from "@/lib/legal";
 import { SITE_URL } from "@/lib/site";
+import { webinarNoAr } from "@/lib/webinar";
 
 // /projetos, /portfolio e os cases /portfolio/[slug] ficam fora do sitemap
 // de propósito: são acessíveis só por link direto (noindex nas próprias
@@ -29,12 +30,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/webinar`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
+    ...(webinarNoAr
+      ? [{ url: `${baseUrl}/webinar`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 }]
+      : []),
     {
       url: `${baseUrl}/hub`,
       lastModified: new Date(),

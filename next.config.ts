@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
     return [
       // Link antigo (bios/links externos) — mantém as URLs /cases funcionando.
       { source: "/cases", destination: "/portfolio", permanent: true },
+      // Workshop fora do ar (webinarNoAr em lib/webinar.ts). Temporário (307):
+      // a página continua no repo e pode voltar; remova esta linha para reativar.
+      { source: "/webinar", destination: "/", permanent: false },
       // O case institucional foi fundido ao case principal da Alves & Nabuco.
       {
         source: "/portfolio/alves-nabuco-institucional",

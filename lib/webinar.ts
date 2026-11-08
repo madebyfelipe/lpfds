@@ -18,6 +18,14 @@
 /* Dados fixos do evento                                                      */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Workshop fora do ar (08/11/2026, pedido do Felipe). Com `false`: o /hub some
+ * com a faixa e o card, o sitemap deixa de listar /webinar e o next.config
+ * redireciona /webinar para a home. Página, conteúdo e API continuam no repo —
+ * para voltar, mude para `true` e remova o redirect em next.config.ts.
+ */
+export const webinarNoAr = false;
+
 export const webinar = {
   /** Rótulo curto para o card do deck e a faixa do /hub. */
   short: "Workshop de criação de conteúdo",
