@@ -12,8 +12,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Link antigo (bios/links externos) — mantém as URLs /cases funcionando.
-      { source: "/cases", destination: "/portfolio", permanent: true },
+      // /cases era redirect para /portfolio (links antigos de bio). Desde
+      // nov/2026 é a página de cases própria, que linka o portfólio.
       // Workshop fora do ar (webinarNoAr em lib/webinar.ts). Temporário (307):
       // a página continua no repo e pode voltar; remova esta linha para reativar.
       { source: "/webinar", destination: "/", permanent: false },

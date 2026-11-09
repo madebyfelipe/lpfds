@@ -600,6 +600,79 @@
 }
 
 /* --------------------------------------------------------------------------
+   Cases (/cases) — reaproveita hero, seções e a lista .inst-proc. Só o layout
+   do "site entregue" e o ajuste da lista sobre a superfície .inst-dark.
+   -------------------------------------------------------------------------- */
+
+.inst-case {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.inst-case__figure {
+  margin: 0;
+}
+
+.inst-case__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  background: var(--gray-100);
+}
+
+.inst-case__title {
+  margin: 0 0 16px;
+  font-size: 1.75rem;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.inst-case__copy p {
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.inst-case__list {
+  margin: 0 0 24px;
+  padding-left: 1.25em;
+  line-height: 1.6;
+}
+
+.inst-case__list li {
+  margin-bottom: 8px;
+}
+
+.inst-case__copy .inst-case__note {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+}
+
+/* A lista do processo vive sobre .inst-dark: o --gray-700 e o filete
+   --gray-200 da versão clara somem ali, então usam os tokens inversos. */
+.inst-case__steps {
+  margin-top: 40px;
+}
+
+.inst-case__steps .inst-proc__row {
+  border-bottom-color: var(--line-inverse);
+}
+
+.inst-case__steps .inst-proc__copy {
+  color: var(--gray-300);
+}
+
+@media (max-width: 900px) {
+  .inst-case {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Diagramas do método (SVG) — recriam o deck na paleta da marca. Desenhos de
    linha em currentColor: invertem com o tema. O vermelho é o único acento.
    -------------------------------------------------------------------------- */
