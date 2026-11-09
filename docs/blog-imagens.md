@@ -32,3 +32,8 @@ Lote de 08/11/2026; licença CC0 conferida na página de cada foto.
 | `public/blog/posicionamento-para-psicologo/posicionamento-para-psicologo-bussola.jpg` | posicionamento-para-psicologo | https://stocksnap.io/photo/vintage-compass-F0K1NRJJ4D | Alex Andrews | CC0 1.0 | 7360×4912 | recorte central 16:9, 2400×1350, JPG mozjpeg q80–84, sem metadados |
 
 Lote de 09/11/2026; licença CC0 conferida na página de cada foto.
+
+| Arquivo | Post | Fonte | Autor | Licença | Original | Tratamento |
+|---|---|---|---|---|---|---|
+| `public/blog/criacao-de-site-para-psicologos/criacao-de-site-para-psicologos-wireframe.jpg` | criacao-de-site-para-psicologos | https://stocksnap.io/photo/design-wireframe-20VFXOOUWG | FOCA Stock | CC0 1.0 | 4340×3255 | recorte central 16:9, 2400×1350, JPG mozjpeg q84, sem metadados |
+| `public/cases/exemplo-site-para-psicologa-dados-ficticios.jpg` | /cases e criacao-de-site-para-psicologos | arte própria (Estagiário Executor A, `Shared/marketing/imagens-disparo/exemplo-site-psicologa-1080x1350.png`) | Made by Felipe | própria | 1080×1350 | recorte do mockup 960×880; **dados fictícios**, não é cliente real |

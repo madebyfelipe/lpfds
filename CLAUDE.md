@@ -206,6 +206,7 @@ shared shell (`InstNav` + `InstFooter` + the `.inst` wrapper):
 | `/projetos` | `app/(institucional)/projetos/page.tsx` | `isProjetos` (hub de portfólio) |
 | `/imersao` | `app/(institucional)/imersao/page.tsx` | `isContato` |
 | `/blog`, `/blog/[slug]` | `app/(institucional)/blog/` | — (novo; ver "Blog") |
+| `/cases` | `app/(institucional)/cases/page.tsx` | — (nov/2026: site entregue + processo criativo; o exemplo é **fictício** e rotulado; nada de depoimento, métrica ou cliente real sem autorização escrita) |
 
 The prototype's contact view lives at **`/imersao`**, not `/contato` — `/contato` is a
 satellite of `/hub` (shares `hub.css`, linked from `HubProducts`) and must not be touched.
