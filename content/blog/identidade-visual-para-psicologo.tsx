@@ -9,6 +9,7 @@ export const post: Post = {
   description:
     "O que compõe a identidade visual de um consultório de psicologia, o que o artigo 20 do Código de Ética exige da divulgação e um checklist para revisar a sua marca.",
   keyword: "identidade visual para psicólogo",
+  tags: ["identidade-visual", "divulgacao-etica"],
   publishedAt: "2026-11-07",
   summary:
     "A identidade visual de um consultório de psicologia é o sistema que dá forma à marca: assinatura com nome completo e CRP, paleta de cores com função definida, tipografia, direção de imagem e aplicações. Ela deve nascer do posicionamento, respeitar o artigo 20 do Código de Ética (sem preço, promessa ou imagem de atendimento) e ser legível, com contraste mínimo de 4,5:1 para texto.",

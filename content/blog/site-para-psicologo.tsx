@@ -9,6 +9,7 @@ export const post: Post = {
   description:
     "O que um site de psicólogo precisa ter, as páginas essenciais, os cuidados com o artigo 20 e a LGPD, e quando vale ter um site além do Instagram.",
   keyword: "site para psicólogo",
+  tags: ["presenca-digital", "divulgacao-etica"],
   publishedAt: "2026-11-08",
   summary:
     "Um site de psicólogo precisa trazer nome completo, a palavra psicólogo(a) e o CRP; dizer para quem você atende e como; mostrar formação real; oferecer um caminho de contato claro; e ter política de privacidade se coletar dados. O Código de Ética não permite preço como chamariz, promessa de resultado, comparação com colegas nem imagens de atendimento.",

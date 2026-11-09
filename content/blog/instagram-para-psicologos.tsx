@@ -13,6 +13,7 @@ export const post: Post = {
   description:
     "Como montar o Instagram profissional de psicólogo: bio com CRP, perfil pessoal x profissional, destaques, identidade visual e o que a Nota Técnica do CFP orienta.",
   keyword: "instagram para psicólogos",
+  tags: ["presenca-digital", "divulgacao-etica"],
   publishedAt: "2026-11-09",
   summary:
     "O Instagram profissional do psicólogo precisa trazer nome completo, a palavra psicólogo(a) e o CRP, dizer em uma linha para quem você atende e como, e manter a mesma identidade visual em todos os posts. A cartilha do CRP-MG recomenda separar perfil pessoal e profissional, e tudo o que é publicado como psicólogo segue o Código de Ética.",

@@ -9,6 +9,7 @@ export const post: Post = {
   description:
     "Quem escolhe o psicólogo infantil é o adulto. Como criar o logo e a marca de um consultório infantil que comunica com os pais, dentro do Código de Ética.",
   keyword: "logo para psicólogo infantil",
+  tags: ["identidade-visual"],
   publishedAt: "2026-11-07",
   summary:
     "O logo de um psicólogo infantil deve falar com o adulto que escolhe o consultório — mãe, pai ou responsável —, não só com a criança. Evite clichês como lápis, arco-íris e peça de quebra-cabeça; prefira um símbolo próprio, legível em tamanho pequeno, com uma versão que traga nome completo e CRP. Imagens de crianças atendidas ou de material de sessão ficam fora da marca.",

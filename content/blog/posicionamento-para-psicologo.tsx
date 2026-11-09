@@ -12,6 +12,7 @@ export const post: Post = {
   description:
     "O que é posicionamento de marca para psicólogo, como escolher um público (por exemplo, famílias de crianças neurodivergentes) e como comunicar o nicho dentro do Código de Ética.",
   keyword: "posicionamento para psicólogo",
+  tags: ["posicionamento"],
   publishedAt: "2026-11-09",
   summary:
     "Posicionamento é a decisão de para quem o consultório existe, que necessidade ele atende e o que o distingue — e é o que orienta toda a marca. Para psicólogos, escolher um foco (como crianças e adolescentes neurodivergentes e suas famílias) não impede atender outros públicos; ajuda quem procura a se reconhecer. A divulgação do nicho deve citar só títulos e qualificações que você possui.",

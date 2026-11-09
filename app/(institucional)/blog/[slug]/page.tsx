@@ -4,8 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { ComentarioForm } from "@/components/institucional/ComentarioForm";
+import { PostCard } from "@/components/institucional/PostCard";
 import { comentarios } from "@/content/blog/comentarios";
-import { formatDate, getPost, postImage, posts } from "@/lib/blog";
+import { formatDate, getPost, postImage, posts, relatedPosts } from "@/lib/blog";
+import { readBody, toCard } from "@/lib/blog-body";
 import { SITE_URL } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -51,6 +53,19 @@ export default async function PostPage({ params }: Props) {
   if (!post) notFound();
 
   const url = `${SITE_URL}/blog/${post.slug}`;
+  const { body, headings, minutes } = readBody(post);
+  const related = relatedPosts(post).map(toCard);
+  const toc = headings.length > 1 && (
+    <ol className="inst-toc__list">
+      {headings.map((h) => (
+        <li key={h.id}>
+          <a href={`#${h.id}`} className="inst-toc__link">
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ol>
+  );
   const aprovados = comentarios.filter((c) => c.slug === post.slug);
   // Autor e publisher apontam para as entidades do StructuredData global
   // (mesmos @id), em vez de redeclarar o estúdio a cada post.
@@ -103,7 +118,7 @@ export default async function PostPage({ params }: Props) {
           <p className="inst-legal__lead">{post.description}</p>
           <p className="inst-legal__updated">
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-            {" · "}Por Felipe
+            {" · "}{minutes} min de leitura{" · "}Por Felipe
           </p>
         </header>
         {post.cover && (
@@ -123,26 +138,45 @@ export default async function PostPage({ params }: Props) {
             )}
           </figure>
         )}
-        {/* Resposta direta no topo: o trecho que buscadores e assistentes citam. */}
-        {post.summary && (
-          <aside className="inst-blog__summary" aria-label="Resposta rápida">
-            <p className="inst-kicker inst-kicker--tight">— Resposta rápida</p>
-            <p className="inst-blog__summary-text">{post.summary}</p>
-          </aside>
-        )}
-        <div className="inst-legal__body inst-blog__body">
-          {post.body}
-          {post.faq?.length ? (
-            <section>
-              <h2>Perguntas frequentes</h2>
-              {post.faq.map((item) => (
-                <div key={item.q}>
-                  <h3>{item.q}</h3>
-                  <p>{item.a}</p>
-                </div>
-              ))}
-            </section>
-          ) : null}
+        <div className="inst-post">
+          <div className="inst-post__main">
+            {/* Resposta direta no topo: o trecho que buscadores e assistentes citam. */}
+            {post.summary && (
+              <aside className="inst-blog__summary" aria-label="Resposta rápida">
+                <p className="inst-kicker inst-kicker--tight">— Resposta rápida</p>
+                <p className="inst-blog__summary-text">{post.summary}</p>
+              </aside>
+            )}
+            {/* Sumário no mobile: recolhido; no desktop fica fixo ao lado. */}
+            {toc && (
+              <details className="inst-toc inst-toc--inline">
+                <summary>Neste artigo</summary>
+                {toc}
+              </details>
+            )}
+            <div className="inst-legal__body inst-blog__body">
+              {body}
+              {post.faq?.length ? (
+                <section>
+                  <h2 id="perguntas-frequentes">Perguntas frequentes</h2>
+                  {post.faq.map((item) => (
+                    <div key={item.q}>
+                      <h3>{item.q}</h3>
+                      <p>{item.a}</p>
+                    </div>
+                  ))}
+                </section>
+              ) : null}
+            </div>
+          </div>
+          {toc && (
+            <div className="inst-post__side">
+              <nav className="inst-toc" aria-label="Neste artigo">
+                <p className="inst-kicker inst-kicker--tight">— Neste artigo</p>
+                {toc}
+              </nav>
+            </div>
+          )}
         </div>
       </article>
 
@@ -185,6 +219,20 @@ export default async function PostPage({ params }: Props) {
         </p>
         <ComentarioForm slug={post.slug} />
       </section>
+
+      {related.length > 0 && (
+        <section className="inst-blog__related" aria-labelledby="relacionados-titulo">
+          <p className="inst-kicker inst-kicker--tight">— Continue lendo</p>
+          <h2 id="relacionados-titulo" className="inst-blog__cta-line">
+            Mais sobre os mesmos temas.
+          </h2>
+          <div className="inst-blog__grid">
+            {related.map((p) => (
+              <PostCard key={p.slug} post={p} as="h3" />
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }

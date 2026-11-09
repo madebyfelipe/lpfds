@@ -9,6 +9,7 @@ export const post: Post = {
   description:
     "O que é branding para um consultório de psicologia, sinais de que chegou a hora, como funciona o processo e o que perguntar antes de contratar.",
   keyword: "branding para psicólogos",
+  tags: ["posicionamento", "identidade-visual"],
   publishedAt: "2026-11-07",
   summary:
     "Branding para psicólogos é o trabalho de definir o posicionamento do consultório — para quem ele existe e o que o distingue — e traduzir isso em identidade visual e verbal. Vale contratar quando a marca deixou de acompanhar o consultório: você explica o seu trabalho do zero em toda conversa ou os canais contam histórias diferentes. Um bom processo aprova a estratégia antes da arte e respeita o artigo 20 do Código de Ética.",

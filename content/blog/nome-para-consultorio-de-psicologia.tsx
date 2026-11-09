@@ -12,6 +12,7 @@ export const post: Post = {
   description:
     "Quando o consultório pode usar nome fantasia, o que muda com a pessoa jurídica registrada no CRP e como escolher um nome que funcione na divulgação.",
   keyword: "nome para consultório de psicologia",
+  tags: ["posicionamento", "identidade-visual"],
   publishedAt: "2026-11-09",
   summary:
     "Psicólogo que atende como pessoa física divulga o próprio nome completo, a palavra psicólogo(a) e o CRP. Nome fantasia (“Espaço…”, “Clínica…”) só entra na divulgação quando há pessoa jurídica registrada no Conselho Regional, com responsável técnico, e acompanhado do número de inscrição da empresa. Um bom nome é fácil de dizer, de buscar e não promete resultado.",

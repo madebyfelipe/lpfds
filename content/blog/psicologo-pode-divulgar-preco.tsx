@@ -9,6 +9,7 @@ export const post: Post = {
   description:
     "O que o artigo 20 do Código de Ética diz sobre preço na divulgação do psicólogo, o que conta como propaganda por preço e como falar de valor sem infringir.",
   keyword: "psicólogo pode divulgar preço",
+  tags: ["divulgacao-etica"],
   publishedAt: "2026-11-08",
   summary:
     "O psicólogo pode ter preço e informá-lo a quem pergunta, mas não pode usar o preço como forma de propaganda (artigo 20, alínea d, do Código de Ética). Segundo a cartilha do CRP-MG, isso inclui destacar gratuidade, desconto, pacote, cupom, sorteio e “preço social” na divulgação.",
