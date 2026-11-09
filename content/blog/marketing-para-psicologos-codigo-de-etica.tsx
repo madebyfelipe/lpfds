@@ -12,6 +12,7 @@ export const post: Post = {
   description:
     "Um guia de marketing para psicólogos que respeita o artigo 20: o que pode e o que não pode na divulgação, canais que funcionam e como organizar a presença do consultório.",
   keyword: "marketing para psicólogos",
+  tags: ["divulgacao-etica"],
   publishedAt: "2026-11-09",
   summary:
     "Psicólogo pode e deve divulgar o seu trabalho, desde que siga o artigo 20 do Código de Ética: identificar-se com nome completo e CRP, citar só títulos que possui, não usar preço como propaganda, não prometer resultado, não se comparar a colegas e não ser sensacionalista. Um marketing ético começa pela marca — clareza sobre para quem você atende — e se sustenta em indicação, presença digital consistente e conteúdo útil.",

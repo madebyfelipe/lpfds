@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { TemaSlug } from "@/lib/blog-temas";
 import { post as brandingParaPsicologos } from "@/content/blog/branding-para-psicologos";
 import { post as identidadeVisualParaPsicologo } from "@/content/blog/identidade-visual-para-psicologo";
 import { post as logoParaPsicologoInfantil } from "@/content/blog/logo-para-psicologo-infantil";
@@ -26,6 +27,8 @@ export type Post = {
   description: string;
   /** Palavra-chave principal — só referência editorial, não é renderizada. */
   keyword: string;
+  /** Temas do post (filtro da listagem e "continue lendo"). Ao menos um. */
+  tags: TemaSlug[];
   /** ISO `AAAA-MM-DD`. */
   publishedAt: string;
   updatedAt?: string;
@@ -107,6 +110,19 @@ for (const field of ["slug", "title", "description"] as const) {
     if (seen.has(p[field])) throw new Error(`[blog] ${field} repetido: "${p[field]}"`);
     seen.add(p[field]);
   }
+}
+
+for (const p of posts) {
+  if (!p.tags.length) throw new Error(`[blog] "${p.slug}" precisa de ao menos um tema`);
+}
+
+/** Posts que dividem tema com o atual: mais temas em comum primeiro, depois o mais recente. */
+export function relatedPosts(post: Post, limit = 3) {
+  const overlap = (p: Post) => p.tags.filter((t) => post.tags.includes(t)).length;
+  return posts
+    .filter((p) => p.slug !== post.slug && overlap(p) > 0)
+    .sort((a, b) => overlap(b) - overlap(a))
+    .slice(0, limit);
 }
 
 export function getPost(slug: string) {

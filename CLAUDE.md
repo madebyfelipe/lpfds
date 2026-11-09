@@ -406,6 +406,13 @@ famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 
   (`.inst-blog__*`, em `institucional.css`) é só a lista de posts, o respiro do corpo
   e o CTA final. Links no corpo: `inst-link` (externos com `target="_blank"` +
   `rel="noopener noreferrer"`).
+- **Temas, filtro e leitura (nov/2026)** — todo post tem `tags` (ao menos um slug de
+  `lib/blog-temas.ts`; o build falha sem). A listagem (`BlogIndex`, cliente) filtra por
+  tema (`?tema=`, via `history.replaceState`) e por título; o HTML estático já traz todos
+  os posts e o canonical segue `/blog`, então a página continua estática e sem JS mostra
+  a lista completa. `readBody` (`lib/blog-body.tsx`) percorre o JSX do corpo para dar `id`
+  aos `h2` (sumário "Neste artigo", fixo ≥1100px, `<details>` abaixo) e contar o tempo de
+  leitura (~200 palavras/min). "Continue lendo" = posts com mais temas em comum.
 - **CTA**: todo post termina com o bloco "— Próximo passo" + `ScheduleLink`
   ("Conversar por 15 minutos →", mesma frase do hero da home). Não remover.
 - **Nav**: item "Blog" na `InstNav`, entre Método e Contato.

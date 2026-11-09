@@ -9,6 +9,7 @@ export const post: Post = {
   description:
     "Como construir a marca de um consultório que atende crianças autistas e neurodivergentes: linguagem, símbolos, clareza para os pais e os limites do artigo 20.",
   keyword: "psicólogo autismo marca",
+  tags: ["neurodivergencia", "identidade-visual"],
   publishedAt: "2026-11-08",
   summary:
     "A marca de um consultório que atende crianças autistas e neurodivergentes precisa ser clara para os pais (público, faixa etária, formato, primeiro contato), usar linguagem respeitosa e consistente, evitar símbolos genéricos ou contestados como o quebra-cabeça e nunca prometer cura ou resultado. Fotos de crianças atendidas e relatos de casos ficam fora da divulgação.",

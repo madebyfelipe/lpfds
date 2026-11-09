@@ -12,6 +12,7 @@ export const post: Post = {
   description:
     "Depoimento, feedback e print de mensagem de paciente na divulgação do psicólogo: o que o Código de Ética e a cartilha do CRP-MG dizem e como mostrar credibilidade sem expor ninguém.",
   keyword: "psicólogo pode postar depoimento de paciente",
+  tags: ["divulgacao-etica"],
   publishedAt: "2026-11-09",
   summary:
     "É vedado expor dados, imagens, mensagens ou depoimentos que possam identificar o paciente. Mesmo com identidade preservada ou autorização expressa, a cartilha do CRP-MG diz que o uso é permitido, mas não recomendado quando o objetivo é promover o profissional — e o psicólogo responde pelo conteúdo. Para mostrar credibilidade, prefira formação, clareza sobre o atendimento e conteúdo útil.",

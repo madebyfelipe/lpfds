@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { OG_IMAGE } from "@/lib/site";
-import Image from "next/image";
-import Link from "next/link";
-import { formatDate, posts } from "@/lib/blog";
+import { BlogIndex } from "@/components/institucional/BlogIndex";
+import { posts } from "@/lib/blog";
+import { toCard } from "@/lib/blog-body";
 
 const title = "Blog — marca e divulgação para consultórios de psicologia | Made by Felipe";
 const description =
@@ -34,30 +34,7 @@ export default function BlogPage() {
         <p className="inst-legal__lead">{description}</p>
       </header>
 
-      <ul className="inst-blog__list">
-        {posts.map((post) => (
-          <li key={post.slug} className="inst-blog__item">
-            <Link href={`/blog/${post.slug}`} className="inst-blog__link">
-              {/* Thumb: o mesmo arquivo da capa, servido pequeno pelo next/image. */}
-              {post.cover && (
-                <Image
-                  src={post.cover.src}
-                  alt={post.cover.alt}
-                  width={post.cover.width}
-                  height={post.cover.height}
-                  sizes="(max-width: 900px) 100vw, 640px"
-                  className="inst-blog__thumb"
-                />
-              )}
-              <time className="inst-blog__date" dateTime={post.publishedAt}>
-                {formatDate(post.publishedAt)}
-              </time>
-              <h2 className="inst-blog__title">{post.title}</h2>
-              <p className="inst-blog__excerpt">{post.description}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <BlogIndex posts={posts.map(toCard)} />
     </main>
   );
 }

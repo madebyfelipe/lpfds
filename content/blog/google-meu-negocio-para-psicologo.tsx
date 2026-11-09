@@ -14,6 +14,7 @@ export const post: Post = {
   description:
     "Como criar o Perfil da Empresa no Google (antigo Google Meu Negócio) para consultório de psicologia: nome, endereço, categoria, descrição e avaliações.",
   keyword: "google meu negócio para psicólogo",
+  tags: ["presenca-digital", "divulgacao-etica"],
   publishedAt: "2026-11-09",
   summary:
     "O Perfil da Empresa no Google (antigo Google Meu Negócio) faz o consultório aparecer no Maps e na busca local. Vale para quem atende em um endereço físico: use seu nome real, sem palavras-chave no nome, o endereço exato, poucas categorias e uma descrição sem preço nem promessa. Não peça avaliações a pacientes e, ao responder, nunca confirme que alguém é paciente.",
