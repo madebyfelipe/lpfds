@@ -665,7 +665,24 @@
   color: var(--gray-300);
 }
 
+/* Capturas de celular lado a lado (case real); viram faixa rolável no mobile. */
+.inst-case__shots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
 @media (max-width: 900px) {
+  .inst-case__shots {
+    grid-template-columns: repeat(3, 70vw);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .inst-case__shots > * {
+    scroll-snap-align: start;
+  }
+
   .inst-case {
     grid-template-columns: 1fr;
     gap: 32px;
