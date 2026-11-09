@@ -10,6 +10,13 @@ export const post: Post = {
     "O que um site de psicólogo precisa ter, as páginas essenciais, os cuidados com o artigo 20 e a LGPD, e quando vale ter um site além do Instagram.",
   keyword: "site para psicólogo",
   publishedAt: "2026-11-08",
+  summary:
+    "Um site de psicólogo precisa trazer nome completo, a palavra psicólogo(a) e o CRP; dizer para quem você atende e como; mostrar formação real; oferecer um caminho de contato claro; e ter política de privacidade se coletar dados. O Código de Ética não permite preço como chamariz, promessa de resultado, comparação com colegas nem imagens de atendimento.",
+  faq: [
+    { q: "Psicólogo precisa de site ou basta o Instagram?", a: "Depende. O Instagram é bom para conteúdo e relacionamento; o site ajuda a ser encontrado no Google e reúne informações estáveis. Para quem recebe muitas indicações ou quer ser encontrado por busca, um site simples costuma valer a pena." },
+    { q: "Posso colocar o valor da sessão no site?", a: "O artigo 20 veda usar o preço como forma de propaganda, e a cartilha do CRP-MG inclui o destaque ao valor. Na dúvida sobre como informar, consulte o seu Conselho Regional." },
+    { q: "O site precisa de política de privacidade?", a: "Se ele coleta dados — formulário, newsletter ou cookies de medição —, sim. A LGPD exige informar o que é coletado, para quê e por quanto tempo." }
+  ],
   cover: {
     src: "/blog/site-para-psicologo/site-para-psicologo-notebook-na-mesa.jpg",
     alt: "Notebook aberto sobre mesa de madeira clara, com xícara de café, lápis e bloco de notas, cena de trabalho em um site",

@@ -5,6 +5,11 @@ import { post as logoParaPsicologoInfantil } from "@/content/blog/logo-para-psic
 import { post as marcaAutismo } from "@/content/blog/marca-para-psicologo-autismo-neurodivergencia";
 import { post as precoPsicologo } from "@/content/blog/psicologo-pode-divulgar-preco";
 import { post as sitePsicologo } from "@/content/blog/site-para-psicologo";
+import { post as instagramPsicologos } from "@/content/blog/instagram-para-psicologos";
+import { post as marketingPsicologos } from "@/content/blog/marketing-para-psicologos-codigo-de-etica";
+import { post as nomeConsultorio } from "@/content/blog/nome-para-consultorio-de-psicologia";
+import { post as posicionamentoPsicologo } from "@/content/blog/posicionamento-para-psicologo";
+import { post as depoimentoPaciente } from "@/content/blog/psicologo-pode-postar-depoimento-de-paciente";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -23,6 +28,13 @@ export type Post = {
   /** ISO `AAAA-MM-DD`. */
   publishedAt: string;
   updatedAt?: string;
+  /**
+   * Resposta direta (2–3 frases) exibida no topo — o trecho que o Google e
+   * assistentes de IA citam. Responde a pergunta do título sem rodeio.
+   */
+  summary?: string;
+  /** Perguntas frequentes: renderizadas no fim do post e marcadas como FAQPage. */
+  faq?: { q: string; a: string }[];
   /** Banner do post (opcional). Sem ele, o og:image é o gerado com o título. */
   cover?: Cover;
   body: ReactNode;
@@ -74,12 +86,26 @@ export const posts: Post[] = [
   identidadeVisualParaPsicologo,
   marcaAutismo,
   sitePsicologo,
-  precoPsicologo
+  precoPsicologo,
+  instagramPsicologos,
+  marketingPsicologos,
+  nomeConsultorio,
+  posicionamentoPsicologo,
+  depoimentoPaciente
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
 
 posts.forEach(assertCover);
+
+// Trava de build: slug, título e description repetidos competem entre si na busca.
+for (const field of ["slug", "title", "description"] as const) {
+  const seen = new Set<string>();
+  for (const p of posts) {
+    if (seen.has(p[field])) throw new Error(`[blog] ${field} repetido: "${p[field]}"`);
+    seen.add(p[field]);
+  }
+}
 
 export function getPost(slug: string) {
   return posts.find((post) => post.slug === slug);

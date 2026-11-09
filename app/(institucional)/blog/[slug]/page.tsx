@@ -67,8 +67,22 @@ export default async function PostPage({ params }: Props) {
     image: `${SITE_URL}${postImage(post).url}`,
     author: { "@id": `${SITE_URL}/#felipe` },
     publisher: { "@id": `${SITE_URL}/#business` },
-    isPartOf: { "@id": `${SITE_URL}/#website` }
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    keywords: post.keyword,
+    ...(post.summary && { abstract: post.summary })
   };
+  // FAQPage só com as perguntas que aparecem visíveis no post (regra do Google).
+  const faqLd = post.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a }
+        }))
+      }
+    : null;
 
   return (
     <main id="conteudo" className="inst-legal">
@@ -77,6 +91,9 @@ export default async function PostPage({ params }: Props) {
         // Conteúdo estático do repositório; JSON.stringify escapa as aspas.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      )}
       <article>
         <header className="inst-legal__head">
           <p className="inst-kicker inst-kicker--tight">
@@ -106,7 +123,27 @@ export default async function PostPage({ params }: Props) {
             )}
           </figure>
         )}
-        <div className="inst-legal__body inst-blog__body">{post.body}</div>
+        {/* Resposta direta no topo: o trecho que buscadores e assistentes citam. */}
+        {post.summary && (
+          <aside className="inst-blog__summary" aria-label="Resposta rápida">
+            <p className="inst-kicker inst-kicker--tight">— Resposta rápida</p>
+            <p className="inst-blog__summary-text">{post.summary}</p>
+          </aside>
+        )}
+        <div className="inst-legal__body inst-blog__body">
+          {post.body}
+          {post.faq?.length ? (
+            <section>
+              <h2>Perguntas frequentes</h2>
+              {post.faq.map((item) => (
+                <div key={item.q}>
+                  <h3>{item.q}</h3>
+                  <p>{item.a}</p>
+                </div>
+              ))}
+            </section>
+          ) : null}
+        </div>
       </article>
 
       {/* CTA de todo post: a conversa de 15 minutos (mesmo link e mesma

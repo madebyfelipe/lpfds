@@ -10,6 +10,13 @@ export const post: Post = {
     "O que é branding para um consultório de psicologia, sinais de que chegou a hora, como funciona o processo e o que perguntar antes de contratar.",
   keyword: "branding para psicólogos",
   publishedAt: "2026-11-07",
+  summary:
+    "Branding para psicólogos é o trabalho de definir o posicionamento do consultório — para quem ele existe e o que o distingue — e traduzir isso em identidade visual e verbal. Vale contratar quando a marca deixou de acompanhar o consultório: você explica o seu trabalho do zero em toda conversa ou os canais contam histórias diferentes. Um bom processo aprova a estratégia antes da arte e respeita o artigo 20 do Código de Ética.",
+  faq: [
+    { q: "Qual a diferença entre branding e marketing para psicólogos?", a: "Branding define quem é o consultório e como ele se apresenta; marketing decide como levar essa apresentação às pessoas certas. O branding vem antes e orienta o marketing." },
+    { q: "Quanto tempo leva um projeto de branding para consultório?", a: "Depende do escopo de cada estúdio. Na Made by Felipe, o processo é de dois dias de imersão, com a marca no ar em 45 dias." },
+    { q: "O que perguntar antes de contratar um estúdio de branding?", a: "Como o processo chega ao posicionamento, se quem conduz conhece o artigo 20 e as orientações do seu CRP, o que é entregue (inclusive guia da marca) e como são as aprovações." }
+  ],
   cover: {
     src: "/blog/branding-para-psicologos/branding-para-psicologos-planejamento-de-marca.jpg",
     alt: "Caderno aberto com caneta sobre mesa branca e três vasos de suculentas ao fundo, cena de planejamento de marca",

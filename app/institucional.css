@@ -2394,6 +2394,23 @@
   }
 }
 
+/* Resposta rápida (AEO): caixa no topo do post, mesma linguagem do
+   .inst-legal__id — filete --red-ink à esquerda, fundo --gray-100, raio 2px. */
+.inst-blog__summary {
+  max-width: 68ch;
+  margin-top: 40px;
+  padding: 24px 28px;
+  border-left: 3px solid var(--red-ink);
+  border-radius: 0 2px 2px 0;
+  background: var(--gray-100);
+}
+
+.inst-blog__summary-text {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
 .inst-blog__back:hover {
   color: var(--red-ink);
 }

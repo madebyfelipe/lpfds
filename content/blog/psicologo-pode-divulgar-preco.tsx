@@ -10,6 +10,13 @@ export const post: Post = {
     "O que o artigo 20 do Código de Ética diz sobre preço na divulgação do psicólogo, o que conta como propaganda por preço e como falar de valor sem infringir.",
   keyword: "psicólogo pode divulgar preço",
   publishedAt: "2026-11-08",
+  summary:
+    "O psicólogo pode ter preço e informá-lo a quem pergunta, mas não pode usar o preço como forma de propaganda (artigo 20, alínea d, do Código de Ética). Segundo a cartilha do CRP-MG, isso inclui destacar gratuidade, desconto, pacote, cupom, sorteio e “preço social” na divulgação.",
+  faq: [
+    { q: "Psicólogo pode divulgar valor social?", a: "Pela orientação do CRP-MG, “custo ou preço social” não deve ser destaque da publicidade. Valores diferenciados podem ser tratados no contato direto, quando a pessoa pergunta." },
+    { q: "Posso responder o valor da sessão no WhatsApp?", a: "Sim. Informar o valor a quem pergunta, no contato individual, faz parte do atendimento e não é propaganda por preço." },
+    { q: "Psicólogo pode fazer promoção ou pacote de sessões?", a: "A cartilha do CRP-MG inclui promoções e pacotes entre as formas vedadas de usar o preço na divulgação e observa que pacotes podem configurar prolongamento desnecessário do serviço." }
+  ],
   cover: {
     src: "/blog/psicologo-pode-divulgar-preco/psicologo-pode-divulgar-preco-calculadora.jpg",
     alt: "Calculadora, lápis e bloco de notas amarelo sobre a mesa, representando a definição do valor da sessão",
@@ -148,7 +155,7 @@ export const post: Post = {
       </section>
 
       <section>
-        <h2>Perguntas frequentes</h2>
+        <h2>Mais dúvidas sobre preço</h2>
         <h3>Posso responder o valor quando alguém pergunta no WhatsApp?</h3>
         <p>
           A regra trata da propaganda, ou seja, da divulgação pública. Informar
