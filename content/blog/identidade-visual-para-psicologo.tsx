@@ -10,6 +10,13 @@ export const post: Post = {
     "O que compõe a identidade visual de um consultório de psicologia, o que o artigo 20 do Código de Ética exige da divulgação e um checklist para revisar a sua marca.",
   keyword: "identidade visual para psicólogo",
   publishedAt: "2026-11-07",
+  summary:
+    "A identidade visual de um consultório de psicologia é o sistema que dá forma à marca: assinatura com nome completo e CRP, paleta de cores com função definida, tipografia, direção de imagem e aplicações. Ela deve nascer do posicionamento, respeitar o artigo 20 do Código de Ética (sem preço, promessa ou imagem de atendimento) e ser legível, com contraste mínimo de 4,5:1 para texto.",
+  faq: [
+    { q: "Psicólogo pode ter logotipo?", a: "Pode. A cartilha do CRP-MG orienta que logomarcas são permitidas desde que vinculadas ao nome completo, à palavra psicólogo(a) e ao número do CRP." },
+    { q: "Quais cores usar na marca de um consultório de psicologia?", a: "Não existe cor certa para a psicologia. A paleta deve vir do posicionamento — público, tom, diferencial — e ter poucas cores com função definida, com contraste suficiente para leitura." },
+    { q: "Posso usar o símbolo Ψ (psi) no logo?", a: "Pode, mas sozinho ele não diferencia: é usado por muitos consultórios. Um símbolo construído a partir do seu posicionamento costuma comunicar melhor." }
+  ],
   cover: {
     src: "/blog/identidade-visual-para-psicologo/identidade-visual-para-psicologo-paleta-de-cores.jpg",
     alt: "Leque de amostras de cores aberto, com tons do amarelo ao azul, usado para definir a paleta de uma identidade visual",

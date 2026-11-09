@@ -435,6 +435,14 @@ famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 
   - Sem capa, o post usa o og:image gerado com o título (`blog/[slug]/og.png/route.tsx`,
     URL fixa). Ele é uma rota, e não um `opengraph-image.tsx`, porque arquivo de metadata
     tem prioridade sobre o `openGraph.images` da página e esconderia a capa.
+- **AEO (nov/2026)** — todo post tem `summary` (resposta direta de 2–3 frases, caixa
+  "— Resposta rápida" no topo, também vai em `abstract` no JSON-LD) e `faq` (3–4
+  perguntas reais, renderizadas no fim do corpo como "Perguntas frequentes" e marcadas
+  como `FAQPage`). Não repita um h2 "Perguntas frequentes" dentro do `body`. Article
+  JSON-LD leva `keywords` = `keyword`. `lib/blog.ts` trava o build se slug, título ou
+  description se repetirem. **Sem superlativo nem autoridade sem prova**: nada de "o
+  melhor", "rei", "referência", "número 1" nem promessa de posição no Google — vale o
+  art. 20 e o CDC para o próprio estúdio.
 - **Comentários (nov/2026)** — fim de todo post, numa caixa `.inst-dark` (reusa
   `.inst-form`/`.inst-field` do form da imersão). Moderação por e-mail, sem banco: o
   form (`ComentarioForm`) → `/api/comentarios` (honeypot `site`, limite de 3 envios

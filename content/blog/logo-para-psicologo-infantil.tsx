@@ -10,6 +10,13 @@ export const post: Post = {
     "Quem escolhe o psicólogo infantil é o adulto. Como criar o logo e a marca de um consultório infantil que comunica com os pais, dentro do Código de Ética.",
   keyword: "logo para psicólogo infantil",
   publishedAt: "2026-11-07",
+  summary:
+    "O logo de um psicólogo infantil deve falar com o adulto que escolhe o consultório — mãe, pai ou responsável —, não só com a criança. Evite clichês como lápis, arco-íris e peça de quebra-cabeça; prefira um símbolo próprio, legível em tamanho pequeno, com uma versão que traga nome completo e CRP. Imagens de crianças atendidas ou de material de sessão ficam fora da marca.",
+  faq: [
+    { q: "O logo de psicologia infantil precisa ser colorido?", a: "Não necessariamente. Ele pode ter leveza e acolhimento sem estética infantilizada; o importante é ser legível, próprio e coerente com o posicionamento do consultório." },
+    { q: "Por que evitar a peça de quebra-cabeça em logos ligados ao autismo?", a: "Ela é contestada por parte da comunidade autista, e um estudo publicado na revista Autism encontrou associações negativas com peças de quebra-cabeça, inclusive em logos ligados ao autismo." },
+    { q: "Posso usar desenhos de pacientes na identidade visual?", a: "Não. Desenhos feitos em sessão são material decorrente do atendimento e estão protegidos pelo sigilo profissional." }
+  ],
   cover: {
     src: "/blog/logo-para-psicologo-infantil/logo-para-psicologo-infantil-esbocos.jpg",
     alt: "Caderno com vários esboços de logo desenhados a lápis, em preto e branco, mostrando o processo de criação de um símbolo",

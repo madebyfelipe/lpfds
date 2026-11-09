@@ -22,3 +22,13 @@ cada foto em 07/11/2026.
 | `public/blog/psicologo-pode-divulgar-preco/psicologo-pode-divulgar-preco-calculadora.jpg` | psicologo-pode-divulgar-preco | https://stocksnap.io/photo/calculator-numbers-JY874BSKKC | Martin Vorel | CC0 1.0 | 3000×1973 | idem |
 
 Lote de 08/11/2026; licença CC0 conferida na página de cada foto.
+
+| Arquivo | Post | Fonte | Autor | Licença | Original | Tratamento |
+|---|---|---|---|---|---|---|
+| `public/blog/nome-para-consultorio-de-psicologia/nome-para-consultorio-de-psicologia-letras.jpg` | nome-para-consultorio-de-psicologia | https://stocksnap.io/photo/scrabble-boardgame-L4AS0Y1OT2 | Jakub Rostkowski | CC0 1.0 | 4584×3056 | recorte central 16:9, 2400×1350, JPG mozjpeg q80–84, sem metadados |
+| `public/blog/psicologo-pode-postar-depoimento-de-paciente/psicologo-pode-postar-depoimento-maquina-de-escrever.jpg` | psicologo-pode-postar-depoimento-de-paciente | https://stocksnap.io/photo/typewriter-vintage-HX6YSHGXRB | Camille Kimberly | CC0 1.0 | 5011×3341 | recorte central 16:9, 2400×1350, JPG mozjpeg q80–84, sem metadados |
+| `public/blog/instagram-para-psicologos/instagram-para-psicologos-mesa-de-trabalho.jpg` | instagram-para-psicologos | https://stocksnap.io/photo/top-workspace-DTL0R2W7UJ | Kristin Hardwick | CC0 1.0 | 5760×3840 | recorte central 16:9, 2400×1350, JPG mozjpeg q80–84, sem metadados |
+| `public/blog/marketing-para-psicologos-codigo-de-etica/marketing-para-psicologos-planejamento.jpg` | marketing-para-psicologos-codigo-de-etica | https://stocksnap.io/photo/flatlay-desk-MSW2HCIHXJ | Beauty and Fashion | CC0 1.0 | 4138×2759 | recorte central 16:9, 2400×1350, JPG mozjpeg q80–84, sem metadados |
+| `public/blog/posicionamento-para-psicologo/posicionamento-para-psicologo-bussola.jpg` | posicionamento-para-psicologo | https://stocksnap.io/photo/vintage-compass-F0K1NRJJ4D | Alex Andrews | CC0 1.0 | 7360×4912 | recorte central 16:9, 2400×1350, JPG mozjpeg q80–84, sem metadados |
+
+Lote de 09/11/2026; licença CC0 conferida na página de cada foto.
