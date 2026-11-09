@@ -10,6 +10,7 @@ import { post as marketingPsicologos } from "@/content/blog/marketing-para-psico
 import { post as nomeConsultorio } from "@/content/blog/nome-para-consultorio-de-psicologia";
 import { post as posicionamentoPsicologo } from "@/content/blog/posicionamento-para-psicologo";
 import { post as depoimentoPaciente } from "@/content/blog/psicologo-pode-postar-depoimento-de-paciente";
+import { post as googleMeuNegocio } from "@/content/blog/google-meu-negocio-para-psicologo";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -91,7 +92,8 @@ export const posts: Post[] = [
   marketingPsicologos,
   nomeConsultorio,
   posicionamentoPsicologo,
-  depoimentoPaciente
+  depoimentoPaciente,
+  googleMeuNegocio
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
