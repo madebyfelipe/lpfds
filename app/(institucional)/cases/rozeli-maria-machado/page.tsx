@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
 
 // RASCUNHO — case real, aguardando aprovação do conteúdo pelo Felipe.
@@ -34,6 +35,9 @@ const capturas = [
 ];
 
 export default function CaseRozeliPage() {
+  // Trava: enquanto o Felipe não aprovar o conteúdo, a página só existe nos
+  // previews (beta). Em produção dá 404. Ao aprovar, remover esta linha.
+  if (process.env.VERCEL_ENV === "production") notFound();
   return (
     <main id="conteudo">
       <header className="inst-hero">
