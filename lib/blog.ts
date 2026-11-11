@@ -14,6 +14,11 @@ import { post as depoimentoPaciente } from "@/content/blog/psicologo-pode-postar
 import { post as googleMeuNegocio } from "@/content/blog/google-meu-negocio-para-psicologo";
 import { post as criacaoSite } from "@/content/blog/criacao-de-site-para-psicologos";
 import { post as cartaoVisita } from "@/content/blog/cartao-de-visita-para-psicologo";
+import { post as conseguirPacientes } from "@/content/blog/como-conseguir-pacientes-psicologo";
+import { post as googleAds } from "@/content/blog/google-ads-para-psicologos";
+import { post as whatsappBusiness } from "@/content/blog/whatsapp-business-para-psicologo";
+import { post as conteudoInfantil } from "@/content/blog/conteudo-para-psicologo-infantil";
+import { post as linguagemNeuro } from "@/content/blog/linguagem-neuroafirmativa-psicologo";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -100,7 +105,12 @@ export const posts: Post[] = [
   depoimentoPaciente,
   googleMeuNegocio,
   criacaoSite,
-  cartaoVisita
+  cartaoVisita,
+  conseguirPacientes,
+  googleAds,
+  whatsappBusiness,
+  conteudoInfantil,
+  linguagemNeuro
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
