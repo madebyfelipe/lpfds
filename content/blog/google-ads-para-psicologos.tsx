@@ -37,6 +37,13 @@ export const post: Post = {
       a: "O anúncio precisa levar para algum destino. Uma página própria, que diga para quem você atende e como agendar, costuma converter melhor que mandar direto para o Instagram."
     }
   ],
+  cover: {
+    src: "/blog/google-ads-para-psicologos/google-ads-para-psicologos-notebook-na-mesa.jpg",
+    alt: "Notebook aberto sobre uma mesa clara com caderno, óculos e planta, espaço de trabalho",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

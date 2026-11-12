@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Para ilustrar um texto, sim, com licença comercial. Para mostrar quem atende, use foto sua: a família precisa saber com quem vai conversar."
     }
   ],
+  cover: {
+    src: "/blog/foto-profissional-para-psicologo/foto-profissional-para-psicologo-camera-na-mesa.jpg",
+    alt: "Câmera fotográfica sobre uma mesa de trabalho com monitor e acessórios",
+    caption: "Foto: lookstudio / Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

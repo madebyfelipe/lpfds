@@ -33,6 +33,13 @@ export const post: Post = {
       a: "Pode, desde que o paciente concorde e a mensagem diga apenas o necessário: data, horário e local, sem conteúdo clínico no assunto nem no corpo."
     }
   ],
+  cover: {
+    src: "/blog/email-profissional-para-psicologo/email-profissional-para-psicologo-notebook-e-cafe.jpg",
+    alt: "Notebook ao lado de um caderno com caneta e uma xícara de café com espuma",
+    caption: "Foto: freestockcenter / Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

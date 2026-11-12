@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Um é suficiente: o WhatsApp do consultório ou a página do site. Muitos links confundem quem só quer entrar em contato."
     }
   ],
+  cover: {
+    src: "/blog/bio-instagram-psicologo-exemplos/bio-instagram-psicologo-exemplos-celular-e-folhas.jpg",
+    alt: "Celular com a tela em branco sobre papéis e folhas em tons de rosa, visto de cima",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Cuidado com o pedido direto, que pode constranger quem está em atendimento. É mais seguro cuidar da rede de profissionais que indicam (escola, pediatra, fonoaudiologia) e deixar fácil encontrar seus dados."
     }
   ],
+  cover: {
+    src: "/blog/como-conseguir-pacientes-psicologo/como-conseguir-pacientes-psicologo-poltrona-e-planta.jpg",
+    alt: "Poltrona branca ao lado de uma planta em um canto claro, sugerindo um consultório acolhedor",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

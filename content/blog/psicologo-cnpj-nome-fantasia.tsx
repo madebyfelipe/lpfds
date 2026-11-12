@@ -35,6 +35,13 @@ export const post: Post = {
       a: "Evite. Nomes que sugerem resultado garantido ou superioridade esbarram na vedação de previsão taxativa de resultados e de sensacionalismo."
     }
   ],
+  cover: {
+    src: "/blog/psicologo-cnpj-nome-fantasia/psicologo-cnpj-nome-fantasia-calculadora-e-cadernos.jpg",
+    alt: "Cadernos, papéis, óculos e uma calculadora sobre uma mesa organizada, material de organização financeira",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

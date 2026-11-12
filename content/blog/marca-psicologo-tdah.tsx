@@ -35,6 +35,13 @@ export const post: Post = {
       a: "Vale. A ideia de tratar o funcionamento neurodivergente como parte de quem a pessoa é, sem tratá-lo como defeito, aplica-se ao TDAH. Evite expressões que culpem a pessoa (“preguiça”, “desorganizada”) e que a descrevam só pelas dificuldades."
     }
   ],
+  cover: {
+    src: "/blog/marca-psicologo-tdah/marca-psicologo-tdah-caderno-e-post-its.jpg",
+    alt: "Caderno de espiral com post-its e lápis sobre uma mesa de madeira clara, organização de tarefas",
+    caption: "Foto: ijeab / Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

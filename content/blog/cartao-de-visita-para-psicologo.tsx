@@ -35,6 +35,13 @@ export const post: Post = {
       a: "Só se você tiver doutorado. O artigo 20 permite citar apenas títulos e qualificações que você possui."
     }
   ],
+  cover: {
+    src: "/blog/cartao-de-visita-para-psicologo/cartao-de-visita-para-psicologo-cartoes-em-branco.jpg",
+    alt: "Cartões de visita em branco empilhados sobre uma mesa de madeira escura ao lado de um teclado",
+    caption: "Foto: zaozaa09 / Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>
