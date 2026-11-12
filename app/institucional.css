@@ -2543,9 +2543,14 @@
   transition: color 200ms ease;
 }
 
-.inst-toc__link:hover {
+.inst-toc__link:hover,
+.inst-toc__link[aria-current="location"] {
   border-left-color: var(--red-ink);
   color: var(--black);
+}
+
+.inst-toc__link[aria-current="location"] {
+  font-weight: 700;
 }
 
 .inst-toc--inline {
@@ -2689,14 +2694,63 @@
   color: inherit;
 }
 
+/* Recorte 16:9 e canto de 2px ficam no wrapper: o zoom do hover escala só a
+   imagem e o overflow esconde o que passar da moldura. */
+.inst-card__media {
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--gray-100);
+}
+
 .inst-card__img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 2px;
-  background: var(--gray-100);
+  transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.inst-card__link:hover .inst-card__img,
+.inst-card__link:focus-visible .inst-card__img {
+  transform: scale(1.04);
+}
+
+.inst-card__arrow {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--red-ink);
+  transform: translateX(-6px);
+  opacity: 0;
+  transition:
+    transform 250ms ease,
+    opacity 250ms ease;
+}
+
+.inst-card__link:hover .inst-card__arrow,
+.inst-card__link:focus-visible .inst-card__arrow {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Sem hover (toque) a seta ficaria escondida para sempre: fica visível. */
+@media (hover: none) {
+  .inst-card__arrow {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inst-card__img,
+  .inst-card__arrow {
+    transition: none;
+  }
+
+  .inst-card__link:hover .inst-card__img,
+  .inst-card__link:focus-visible .inst-card__img {
+    transform: none;
+  }
 }
 
 .inst-card__text {
@@ -2895,4 +2949,200 @@
 
 .inst-skip:focus {
   left: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Leitura do artigo: progresso, compartilhar, autor e anterior/próximo.
+   Tudo em tokens e raio de 2px; nada depende de cor fixa.
+   -------------------------------------------------------------------------- */
+
+/* Barra de progresso: preenchimento = --red (a cor da marca como fundo). Fica
+   acima da nav (z 50) e abaixo do skip link/CTA mobile (z 100). */
+.inst-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: 3px;
+  pointer-events: none;
+}
+
+.inst-progress__bar {
+  width: 100%;
+  height: 100%;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Compartilhar: no desktop mora na coluna fixa do sumário; abaixo de 1100px
+   (sem coluna) aparece uma vez, no fim do texto. */
+.inst-share__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inst-share__btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--gray-500);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--black);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.inst-share__btn:hover {
+  border-color: var(--black);
+  background: var(--black);
+  color: var(--cream);
+}
+
+.inst-share__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.inst-share__status {
+  min-height: 1.5em;
+  margin: 12px 0 0;
+  font-size: 0.8125rem;
+  color: var(--gray-700);
+}
+
+.inst-post__share {
+  margin-top: 40px;
+}
+
+.inst-post__end {
+  max-width: 68ch;
+  margin-top: 64px;
+}
+
+.inst-post__share-end {
+  padding-top: 32px;
+  border-top: 1px solid var(--gray-200);
+}
+
+@media (min-width: 1100px) {
+  .inst-post__share-end {
+    display: none;
+  }
+
+  .inst-post__end {
+    margin-top: 40px;
+  }
+}
+
+/* Autor: foto quadrada pequena + texto, canto de 2px. */
+.inst-author {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 40px;
+  padding: 28px;
+  border: 1px solid var(--gray-200);
+  border-radius: 2px;
+}
+
+.inst-author__img {
+  flex: none;
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+  object-fit: cover;
+  object-position: center 20%;
+  background: var(--gray-100);
+}
+
+.inst-author__name {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.inst-author__bio {
+  margin: 8px 0 16px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--gray-700);
+}
+
+/* Anterior / próximo: duas colunas, título grande, seta que anda no hover. */
+.inst-postnav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.inst-postnav__link {
+  display: block;
+  color: inherit;
+}
+
+.inst-postnav__link--next {
+  text-align: right;
+}
+
+.inst-postnav__dir {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  transition: color 200ms ease;
+}
+
+.inst-postnav__title {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: color 200ms ease;
+}
+
+.inst-postnav__link:hover .inst-postnav__title,
+.inst-postnav__link:hover .inst-postnav__dir {
+  color: var(--red-ink);
+}
+
+@media (max-width: 720px) {
+  .inst-postnav {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inst-postnav__link--next {
+    text-align: left;
+  }
+
+  .inst-author {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
