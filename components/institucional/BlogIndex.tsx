@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { temas, type TemaSlug } from "@/lib/blog-temas";
+import { CursorLabel } from "@/components/institucional/CursorLabel";
 import { PostCard, type PostCardData } from "@/components/institucional/PostCard";
 
 const fold = (s: string) =>
@@ -20,6 +22,8 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
   const [tema, setTema] = useState<TemaSlug | null>(null);
   const [q, setQ] = useState("");
   const [ready, setReady] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const search = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const t = new URLSearchParams(window.location.search).get("tema");
@@ -28,13 +32,38 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
     setReady(true);
   }, []);
 
+  // Troca de filtro com transição animada (View Transitions): cada card tem
+  // nome próprio, então os que ficam deslizam e os que saem/entram esmaecem.
+  // Sem suporte ou com movimento reduzido, troca na hora.
+  const animate = (change: () => void) => {
+    const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
+    if (!doc.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return change();
+    doc.startViewTransition(() => flushSync(change));
+  };
+
   const choose = (next: TemaSlug | null) => {
-    setTema(next);
+    animate(() => setTema(next));
     const url = new URL(window.location.href);
     if (next) url.searchParams.set("tema", next);
     else url.searchParams.delete("tema");
     window.history.replaceState(null, "", url);
   };
+
+  // Atalho "/" foca a busca; Esc limpa. Ignora quando já está digitando.
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      const el = event.target as HTMLElement | null;
+      const typing = el?.matches?.("input, textarea, select, [contenteditable]");
+      if (event.key === "/" && !typing && !event.metaKey && !event.ctrlKey && !event.altKey) {
+        event.preventDefault();
+        search.current?.focus();
+      } else if (event.key === "Escape" && el === search.current) {
+        setQ("");
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
 
   const needle = fold(q.trim());
   const shown = posts.filter(
@@ -45,12 +74,37 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
   const cards = filtering ? shown : rest;
   const temaNome = temas.find((x) => x.slug === tema)?.label;
 
+  // Entrada dos cards ao rolar: só depois da hidratação (sem JS a lista toda
+  // aparece). Cada card ganha data-in ao cruzar a borda inferior da tela.
+  useEffect(() => {
+    if (!ready || !root.current) return;
+    const cards = [...root.current.querySelectorAll<HTMLElement>(".inst-card:not([data-in])")];
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      cards.forEach((card) => card.setAttribute("data-in", ""));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.setAttribute("data-in", "");
+          io.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px" }
+    );
+    cards.forEach((card) => io.observe(card));
+    return () => io.disconnect();
+  }, [ready, tema, needle, shown.length]);
+
   return (
-    <>
+    <div ref={root} className="inst-reveal" data-ready={ready ? "" : undefined}>
+      <CursorLabel />
       <div className="inst-filters" data-ready={ready ? "" : undefined}>
         <div role="group" aria-label="Filtrar por tema" className="inst-filters__chips">
           <button type="button" className="inst-chip" aria-pressed={!tema} onClick={() => choose(null)}>
             Todos
+            <span className="inst-chip__n">{posts.length}</span>
           </button>
           {temas.map((t) => (
             <button
@@ -61,6 +115,7 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
               onClick={() => choose(t.slug)}
             >
               {t.label}
+              <span className="inst-chip__n">{posts.filter((p) => p.tags.includes(t.slug)).length}</span>
             </button>
           ))}
         </div>
@@ -70,9 +125,10 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
           </label>
           <input
             id="blog-busca"
+            ref={search}
             type="search"
             className="inst-filters__input"
-            placeholder="Buscar por título"
+            placeholder="Buscar por título  ( / )"
             value={q}
             onChange={(e) => setQ(e.target.value)}
           />
@@ -101,14 +157,14 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
         </div>
       ) : (
         <>
-          {!filtering && first && <PostCard post={first} featured />}
+          {!filtering && first && <PostCard post={first} featured morph />}
           <div className="inst-blog__grid">
-            {cards.map((p) => (
-              <PostCard key={p.slug} post={p} />
+            {cards.map((p, i) => (
+              <PostCard key={p.slug} post={p} index={i} morph />
             ))}
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

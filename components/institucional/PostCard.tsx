@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
 /** Dados já serializados no servidor: o filtro (cliente) não importa lib/blog. */
 export type PostCardData = {
@@ -17,14 +18,24 @@ export type PostCardData = {
 export function PostCard({
   post,
   featured = false,
-  as: Heading = "h2"
+  as: Heading = "h2",
+  index = 0,
+  morph = false
 }: {
   post: PostCardData;
   featured?: boolean;
   as?: "h2" | "h3";
+  /** Posição na grade: escalona a entrada dos cards (coluna a coluna). */
+  index?: number;
+  /** Dá nome de transição ao card para o filtro animar a troca (View Transitions). */
+  morph?: boolean;
 }) {
+  const style = {
+    "--i": featured ? 0 : index % 3,
+    ...(morph && { viewTransitionName: `card-${post.slug}` })
+  } as CSSProperties;
   return (
-    <article className={`inst-card${featured ? " inst-card--featured" : ""}`}>
+    <article className={`inst-card${featured ? " inst-card--featured" : ""}`} style={style}>
       <Link href={`/blog/${post.slug}`} className="inst-card__link">
         {post.cover && (
           <div className="inst-card__media">

@@ -3146,3 +3146,402 @@
     gap: 16px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Blog — redesign com movimento (nov/2026).
+   Regras: só transform/opacity (sem layout), tudo desligado em
+   prefers-reduced-motion, e sem JS a página inteira continua legível.
+   -------------------------------------------------------------------------- */
+
+/* Hero da listagem: título gigante que sobe linha a linha de uma máscara. */
+.inst-bloghero {
+  padding-bottom: 8px;
+}
+
+.inst-bloghero__title {
+  margin: 0;
+  font-size: clamp(2.75rem, 7.2vw, 6rem);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.inst-kin__line {
+  display: block;
+  /* a máscara corta a linha que ainda está embaixo; o respiro evita cortar o descendente */
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.inst-kin__line > span {
+  display: inline-block;
+  transform: translateY(108%);
+  animation: inst-kin 700ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--l, 0) * 90ms + 80ms);
+}
+
+@keyframes inst-kin {
+  to {
+    transform: none;
+  }
+}
+
+.inst-bloghero__lead {
+  max-width: 56ch;
+  margin: 32px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--gray-700);
+}
+
+/* Números reais da própria listagem (artigos, temas, minutos somados). */
+.inst-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 64px;
+  margin: 48px 0 0;
+}
+
+.inst-stats > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.inst-stats dd {
+  margin: 0;
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.inst-stats dt {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+/* Faixa rolante dos temas (decorativa). Pausa no hover. */
+.inst-marquee {
+  margin-top: 56px;
+  overflow: hidden;
+  border-block: 1px solid var(--gray-200);
+  white-space: nowrap;
+}
+
+.inst-marquee__track {
+  display: inline-flex;
+  animation: inst-marquee 60s linear infinite;
+  will-change: transform;
+}
+
+.inst-marquee:hover .inst-marquee__track {
+  animation-play-state: paused;
+}
+
+.inst-marquee__group {
+  display: inline-flex;
+  flex: none;
+  gap: 48px;
+  padding: 18px 48px 18px 0;
+}
+
+.inst-marquee__item {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-marquee__item::before {
+  content: "— ";
+  color: var(--red-ink);
+}
+
+@keyframes inst-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Entrada dos cards ao rolar (só depois da hidratação: data-ready). */
+.inst-card {
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.inst-reveal[data-ready] .inst-card:not([data-in]) {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Contagem ao lado do tema no chip. */
+.inst-chip__n {
+  margin-left: 10px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.inst-chip[aria-pressed="true"] .inst-chip__n {
+  opacity: 0.85;
+}
+
+/* Etiqueta "LER →" que segue o mouse sobre os cards. Retângulo de 2px (nada
+   de círculo ou pílula no design system), vermelho de marca como fundo. */
+.inst-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  padding: 10px 14px;
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0);
+  transition: opacity 180ms ease;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .inst-cursor {
+    display: none;
+  }
+}
+
+/* Destaque maior e título mais forte no primeiro card. */
+.inst-card--featured .inst-card__title {
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+}
+
+/* Troca de filtro (View Transitions): os cards que ficam deslizam para o novo lugar. */
+::view-transition-group(*) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Artigo: título palavra a palavra. */
+.inst-kw {
+  display: inline-block;
+  animation: inst-kw 560ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--w, 0) * 38ms);
+}
+
+@keyframes inst-kw {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+}
+
+/* Capa do artigo: moldura corta o zoom; o parallax roda por scroll (CSS puro). */
+.inst-blog__cover {
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+@keyframes inst-cover {
+  from {
+    transform: scale(1.14);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes inst-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .inst-blog__cover-img {
+    animation: inst-cover linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 55%;
+  }
+
+  .inst-blog__body h2,
+  .inst-blog__summary {
+    animation: inst-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 45%;
+  }
+}
+
+/* Clique no h2 copia o link da seção (SectionLinkCopy marca data-copy). */
+.inst-blog__body[data-copy] h2 {
+  cursor: pointer;
+}
+
+.inst-blog__body[data-copy] h2::after {
+  content: " #";
+  color: var(--gray-300);
+  opacity: 0;
+  transition:
+    opacity 200ms ease,
+    color 200ms ease;
+}
+
+.inst-blog__body[data-copy] h2:hover::after {
+  color: var(--red-ink);
+  opacity: 1;
+}
+
+.inst-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 80;
+  margin: 0;
+  padding: 12px 18px;
+  border-radius: 2px;
+  background: var(--black);
+  color: var(--cream);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.inst-toast[data-show] {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+/* "Faltam X min" na coluna do sumário. */
+.inst-readleft {
+  margin: 28px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Voltar ao topo: quadrado de 2px, vermelho de marca; acima da barra mobile. */
+.inst-totop {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 55;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  visibility: hidden;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 220ms;
+}
+
+.inst-totop[data-show] {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.inst-totop:hover {
+  background: var(--red-dark);
+}
+
+.inst-totop:focus-visible {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .inst-bloghero__title {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+  }
+
+  .inst-stats {
+    gap: 20px 40px;
+  }
+
+  /* No mobile existe a barra fixa de CTA (InstMobileCta): o botão sobe acima dela. */
+  .inst-totop {
+    right: 16px;
+    bottom: calc(var(--inst-mobile-cta-height) + 16px);
+  }
+}
+
+/* Movimento reduzido: tudo parado e visível. */
+@media (prefers-reduced-motion: reduce) {
+  .inst-kin__line > span,
+  .inst-kw {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .inst-marquee {
+    white-space: normal;
+  }
+
+  .inst-marquee__track {
+    animation: none;
+    display: block;
+  }
+
+  .inst-marquee__group {
+    flex-wrap: wrap;
+    padding-right: 0;
+  }
+
+  .inst-marquee__group[data-copy="1"] {
+    display: none;
+  }
+
+  .inst-reveal .inst-card,
+  .inst-reveal[data-ready] .inst-card:not([data-in]) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .inst-blog__cover-img,
+  .inst-blog__body h2,
+  .inst-blog__summary {
+    animation: none;
+  }
+
+  .inst-cursor,
+  .inst-toast,
+  .inst-totop {
+    transition: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}
