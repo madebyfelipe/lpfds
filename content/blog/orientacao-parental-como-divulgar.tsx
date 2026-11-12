@@ -138,6 +138,61 @@ export const post: Post = {
       </section>
 
       <section>
+        <h2>Erros comuns ao divulgar orientação parental</h2>
+        <ul>
+          <li><strong>Prometer “filhos mais obedientes”</strong> ou “fim das birras”. É previsão de resultado, vedada pelo artigo 20, e culpabiliza a família quando a promessa não se cumpre.</li>
+          <li><strong>Usar casos reais</strong> de famílias atendidas, mesmo sem nomes, em posts e vídeos.</li>
+          <li><strong>Fotos de crianças</strong> como ilustração do serviço.</li>
+          <li><strong>Misturar orientação parental com práticas que não são da psicologia</strong> no mesmo perfil profissional.</li>
+          <li><strong>Tom de julgamento</strong> nos conteúdos (“o erro que todo pai comete”), que afasta justamente quem precisaria procurar ajuda.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Ideias de conteúdo que respeitam as regras</h2>
+        <p>
+          Divulgar orientação parental é, em boa parte, produzir conteúdo útil para pais. Alguns formatos que funcionam sem expor ninguém:
+        </p>
+        <ul>
+          <li><strong>Explicar como é a orientação</strong>: quem participa, como são os encontros, o que se trabalha.</li>
+          <li><strong>Responder dúvidas frequentes</strong> de forma geral, com base na ciência psicológica.</li>
+          <li><strong>Conteúdos sobre rotina, escola e comunicação</strong>, sem tom de receita pronta.</li>
+          <li><strong>Para famílias de crianças neurodivergentes</strong>: como funciona a orientação depois de um diagnóstico, como conversar com a escola, onde buscar informação confiável.</li>
+          <li><strong>Convites para conversar</strong> que deixam claro como é o primeiro contato.</li>
+        </ul>
+        <p>
+          Esse tipo de conteúdo qualifica quem chega: a família já entende o trabalho antes de mandar mensagem. Veja também <Link href="/blog/conteudo-para-psicologo-infantil" className="inst-link">conteúdo para psicólogo infantil</Link>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Checklist</h2>
+        <ul>
+          <li>A divulgação explica como funciona a orientação, sem prometer resultado?</li>
+          <li>Nenhum post usa caso real ou foto de criança?</li>
+          <li>O tom acolhe, sem julgar os pais?</li>
+          <li>O perfil não mistura a psicologia com práticas de outra natureza?</li>
+          <li>O caminho do primeiro contato está claro?</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Para famílias de crianças neurodivergentes</h2>
+        <p>
+          Muitas famílias procuram orientação parental logo depois de um diagnóstico de autismo, TDAH ou outra condição do neurodesenvolvimento. Nesse momento, chegam com muita informação acumulada e pouca clareza sobre o próximo passo. A divulgação ajuda quando:
+        </p>
+        <ul>
+          <li><strong>Explica o lugar da orientação</strong> no cuidado da criança, ao lado de outros profissionais, sem prometer substituir nenhum deles.</li>
+          <li><strong>Usa a linguagem que a família reconhece</strong>, com a mesma escolha de termos em todos os canais — veja <Link href="/blog/linguagem-neuroafirmativa-psicologo" className="inst-link">linguagem neuroafirmativa</Link>.</li>
+          <li><strong>Mostra o formato</strong>: encontros só com os responsáveis, com quem cuida da criança no dia a dia, online ou presencial.</li>
+          <li><strong>Evita a lógica do “consertar”</strong>: o foco descrito é a família entender e apoiar a criança, não “normalizá-la”.</li>
+        </ul>
+        <p>
+          Esse cuidado diferencia o consultório sem nenhum superlativo: a família percebe, pela forma de falar, que encontrou alguém que conhece a realidade dela.
+        </p>
+      </section>
+
+      <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe constrói a marca de consultórios de psicologia em dois

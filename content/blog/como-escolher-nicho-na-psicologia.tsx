@@ -143,6 +143,52 @@ export const post: Post = {
       </section>
 
       <section>
+        <h2>Erros comuns ao escolher um nicho</h2>
+        <ul>
+          <li><strong>Escolher pelo que “está em alta”</strong> nas redes, e não pela própria formação e experiência.</li>
+          <li><strong>Recortar demais cedo demais</strong>, antes de ter atendido o público o suficiente para conhecê-lo.</li>
+          <li><strong>Anunciar especialidade sem título</strong>. Sem especialização ou registro de especialista, divulgue área de atuação e experiência, como orienta a cartilha do CRP-MG.</li>
+          <li><strong>Mudar de nicho a todo momento</strong>, perdendo o que já foi construído em conteúdo e indicações.</li>
+          <li><strong>Confundir nicho com exclusividade</strong>: comunicar um foco não obriga a recusar outros pacientes.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Como validar o nicho na prática</h2>
+        <p>
+          Antes de mudar bio, site e identidade, dá para testar o recorte com pouco esforço:
+        </p>
+        <ul>
+          <li><strong>Olhe a agenda real</strong>: que demandas chegaram nos últimos meses e em quais você se sentiu mais preparada?</li>
+          <li><strong>Converse com quem indica</strong>: como colegas, escolas e médicos descrevem o seu trabalho?</li>
+          <li><strong>Escreva alguns conteúdos</strong> para o público escolhido e veja quais dúvidas aparecem nos comentários e no direct.</li>
+          <li><strong>Pesquise a busca</strong>: como esse público pesquisa no Google? Os resultados mostram espaço para alguém explicar melhor?</li>
+          <li><strong>Confira a formação</strong>: tudo o que o recorte sugere está sustentado por formação e experiência reais?</li>
+        </ul>
+        <p>
+          Se as respostas convergem, o nicho está maduro para virar posicionamento. O passo seguinte está em <Link href="/blog/posicionamento-para-psicologo" className="inst-link">posicionamento para psicólogo</Link>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Checklist</h2>
+        <ul>
+          <li>O nicho nasce da sua prática e da sua formação?</li>
+          <li>Você consegue descrevê-lo em uma frase, sem superlativos?</li>
+          <li>Ele está sustentado por títulos ou experiência que você pode comprovar?</li>
+          <li>Você testou o recorte em conteúdo e conversas antes de mudar a marca?</li>
+          <li>A comunicação deixa claro o foco sem fechar a porta para outros públicos?</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Nicho e marca andam juntos</h2>
+        <p>
+          Depois de escolhido, o nicho precisa aparecer de forma coerente na bio, no site, no nome e na identidade visual. Um recorte claro que só existe na cabeça da profissional não ajuda ninguém a encontrá-la. O texto sobre <Link href="/blog/branding-para-psicologos" className="inst-link">branding para psicólogos</Link> mostra como essa decisão vira marca.
+        </p>
+      </section>
+
+      <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe constrói a marca de consultórios de psicologia em dois

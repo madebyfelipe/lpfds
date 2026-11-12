@@ -152,6 +152,48 @@ export const post: Post = {
       </section>
 
       <section>
+        <h2>Erros comuns na comunicação sobre TDAH</h2>
+        <ul>
+          <li><strong>Testes e quizzes de “você tem TDAH?”</strong> no Instagram ou no site. Eles sugerem diagnóstico a distância, que nenhuma postagem substitui.</li>
+          <li><strong>Prometer “foco”, “produtividade” ou “organização garantida”</strong> como resultado do acompanhamento — previsão de resultado que o artigo 20 veda.</li>
+          <li><strong>Tratar o TDAH como piada ou como “superpoder”</strong>. Os dois extremos afastam quem vive as dificuldades no dia a dia.</li>
+          <li><strong>Usar títulos que você não tem</strong>, como “especialista em TDAH” sem a especialização correspondente.</li>
+          <li><strong>Textos longos e densos</strong> numa página feita justamente para pessoas que têm dificuldade de manter a atenção.</li>
+        </ul>
+        <p>
+          O caminho mais seguro é descrever o trabalho: para quem é, como funciona, o que acontece no primeiro encontro. Veja também <Link href="/blog/linguagem-neuroafirmativa-psicologo" className="inst-link">linguagem neuroafirmativa</Link>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Como deixar o site fácil para quem tem TDAH</h2>
+        <p>
+          A marca de um consultório que atende TDAH também se mostra no formato. Algumas decisões práticas:
+        </p>
+        <ul>
+          <li><strong>Parágrafos curtos e subtítulos claros</strong>, para a pessoa achar o que procura sem ler tudo.</li>
+          <li><strong>Um único caminho de contato</strong> em destaque, dizendo o que acontece depois do clique.</li>
+          <li><strong>Resumo no topo</strong> de cada página, com a resposta principal em duas ou três frases.</li>
+          <li><strong>Agendamento explicado com clareza</strong>: como é feito e como a pessoa é avisada.</li>
+          <li><strong>Nada de pop-ups e animações</strong> que disputam a atenção com o conteúdo.</li>
+        </ul>
+        <p>
+          Esses cuidados beneficiam todo mundo, mas fazem diferença para o público que você atende. É acessibilidade aplicada ao seu nicho.
+        </p>
+      </section>
+
+      <section>
+        <h2>Checklist</h2>
+        <ul>
+          <li>A página descreve o atendimento sem rotular a pessoa?</li>
+          <li>Nenhum conteúdo sugere autodiagnóstico ou diagnóstico a distância?</li>
+          <li>Nenhuma frase promete foco, organização ou resultado?</li>
+          <li>Você cita só títulos e qualificações que possui?</li>
+          <li>O site é fácil de escanear, com resumo, subtítulos e um contato claro?</li>
+        </ul>
+      </section>
+
+      <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe constrói a marca de consultórios de psicologia em dois

@@ -157,6 +157,49 @@ export const post: Post = {
       </section>
 
       <section>
+        <h2>Erros comuns na página de avaliação</h2>
+        <ul>
+          <li><strong>Não dizer o que a avaliação é</strong> — só o nome do serviço, sem explicar para que serve e quem pode precisar.</li>
+          <li><strong>Prometer um laudo “em X dias”</strong> ou uma conclusão antes de conhecer o caso.</li>
+          <li><strong>Listar testes pelo nome</strong> como se fossem diferencial, o que pouco ajuda a família.</li>
+          <li><strong>Não explicar as etapas</strong>: quantos encontros, quem participa, como é a devolutiva.</li>
+          <li><strong>Formulário de contato que pede histórico clínico</strong> antes de qualquer conversa, coletando dado sensível sem necessidade.</li>
+        </ul>
+        <p>
+          A família que procura avaliação neuropsicológica costuma chegar ansiosa. Clareza sobre o processo vale mais do que qualquer argumento de venda.
+        </p>
+      </section>
+
+      <section>
+        <h2>Exemplo de roteiro da página (ilustrativo)</h2>
+        <p>
+          Um exemplo, com dados fictícios, de como organizar a página de avaliação de um consultório que atende crianças:
+        </p>
+        <ul>
+          <li><strong>O que é</strong> — em duas frases, sem jargão.</li>
+          <li><strong>Para quem</strong> — faixas etárias e situações em que costuma ser procurada, sem lista de sintomas.</li>
+          <li><strong>Como funciona</strong> — entrevista com os responsáveis, encontros com a criança, conversa com a escola quando necessário e devolutiva.</li>
+          <li><strong>O que a família recebe</strong> — devolutiva e documento, descritos sem antecipar conclusão.</li>
+          <li><strong>Quem conduz</strong> — nome completo, formação e CRP.</li>
+          <li><strong>Como agendar</strong> — o primeiro passo e o que acontece depois.</li>
+        </ul>
+        <p>
+          Cada bloco responde a uma pergunta que a família faria no primeiro contato. Veja também como estruturar o <Link href="/blog/site-para-psicologo" className="inst-link">site do consultório</Link>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Checklist</h2>
+        <ul>
+          <li>A página explica o que é a avaliação em linguagem simples?</li>
+          <li>As etapas estão descritas, da entrevista à devolutiva?</li>
+          <li>Nenhuma frase promete prazo de laudo ou conclusão?</li>
+          <li>A formação de quem conduz aparece com CRP?</li>
+          <li>O formulário pede só o necessário para o primeiro contato?</li>
+        </ul>
+      </section>
+
+      <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe constrói a marca de consultórios de psicologia em dois
