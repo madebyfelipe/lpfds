@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { OG_IMAGE } from "@/lib/site";
 import { BlogIndex } from "@/components/institucional/BlogIndex";
+import { CountUp } from "@/components/institucional/CountUp";
 import { posts } from "@/lib/blog";
 import { toCard } from "@/lib/blog-body";
+import { temas } from "@/lib/blog-temas";
 
 const title = "Blog — marca e divulgação para consultórios de psicologia | Made by Felipe";
 const description =
@@ -23,18 +25,68 @@ export const metadata: Metadata = {
   }
 };
 
+// O h1 inteiro continua sendo uma frase só; as linhas existem para a animação
+// de entrada (cada uma sobe de dentro de uma máscara, em sequência).
+const linhas = ["Marca e divulgação", "para consultórios", "de psicologia."];
+
 export default function BlogPage() {
+  const cards = posts.map(toCard);
+  const minutos = cards.reduce((soma, p) => soma + p.minutes, 0);
+  const faixa = temas.map((t) => t.label);
+
   return (
-    <main id="conteudo" className="inst-legal">
-      <header className="inst-legal__head">
+    <main id="conteudo" className="inst-legal inst-blog">
+      <header className="inst-bloghero">
         <p className="inst-kicker inst-kicker--tight">— Blog</p>
-        <h1 className="inst-legal__title">
-          Marca e divulgação para consultórios de psicologia.
+        <h1 className="inst-bloghero__title">
+          {linhas.map((linha, i) => (
+            <span key={linha}>
+              <span className="inst-kin__line" style={{ "--l": i } as React.CSSProperties}>
+                <span>{linha}</span>
+              </span>{" "}
+            </span>
+          ))}
         </h1>
-        <p className="inst-legal__lead">{description}</p>
+        <p className="inst-bloghero__lead">{description}</p>
+
+        <dl className="inst-stats">
+          <div>
+            <dd>
+              <CountUp to={cards.length} />
+            </dd>
+            <dt>artigos</dt>
+          </div>
+          <div>
+            <dd>
+              <CountUp to={temas.length} />
+            </dd>
+            <dt>temas</dt>
+          </div>
+          <div>
+            <dd>
+              <CountUp to={minutos} />
+            </dd>
+            <dt>min de leitura somados</dt>
+          </div>
+        </dl>
       </header>
 
-      <BlogIndex posts={posts.map(toCard)} />
+      {/* Faixa rolante dos temas: decorativa. A 2ª cópia existe só para o loop fechar. */}
+      <div className="inst-marquee" aria-hidden="true">
+        <div className="inst-marquee__track">
+          {[0, 1].map((copia) => (
+            <div key={copia} className="inst-marquee__group" data-copy={copia}>
+              {faixa.concat(faixa).map((nome, i) => (
+                <span key={`${nome}-${i}`} className="inst-marquee__item">
+                  {nome}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <BlogIndex posts={cards} />
     </main>
   );
 }
