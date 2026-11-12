@@ -5,11 +5,11 @@ const ext = { target: "_blank", rel: "noopener noreferrer", className: "inst-lin
 const CARTILHA =
   "https://acervodigital.crp04.org.br/wp-content/uploads/tainacan-items/9483/81624/CRP-MG_Cartilha-Publicidade-profissional-abril-2026.pdf";
 const CODIGO = "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo-de-etica-psicologia.pdf";
-const NOTA = "https://site.cfp.org.br/documentos/nota-tecnica-sobre-uso-profissional-das-redes-sociais-publicidade-e-cuidados-eticos";
+const NOTA = "https://site.cfp.org.br/wp-content/uploads/2022/06/SEI_CFP-0612475-Nota-Tecnica.pdf";
 
 export const post: Post = {
   slug: "instagram-para-psicologos",
-  title: "Instagram para psicólogos: bio, CRP e identidade visual consistente",
+  title: "Instagram para psicólogos: bio, o que postar e o que o Código de Ética proíbe",
   description:
     "Como montar o Instagram profissional de psicólogo: bio com CRP, perfil pessoal x profissional, destaques, identidade visual e o que a Nota Técnica do CFP orienta.",
   keyword: "instagram para psicólogos",
@@ -18,6 +18,7 @@ export const post: Post = {
   summary:
     "O Instagram profissional do psicólogo precisa trazer nome completo, a palavra psicólogo(a) e o CRP, dizer em uma linha para quem você atende e como, e manter a mesma identidade visual em todos os posts. A cartilha do CRP-MG recomenda separar perfil pessoal e profissional, e tudo o que é publicado como psicólogo segue o Código de Ética.",
   faq: [
+    { q: "O que postar no Instagram de psicologia?", a: "Conteúdo educativo baseado na ciência psicológica, explicação de como funciona o atendimento, respostas gerais às dúvidas do público, bastidores do consultório sem pacientes e a sua formação, sempre com nome e CRP no perfil." },
     {
       q: "O que colocar na bio do Instagram de psicólogo?",
       a: "Nome completo (ou a versão escolhida com o número do CRP), a palavra psicólogo(a), o CRP com o número, uma linha sobre público e formato de atendimento e um link de contato. Evite preço, promessa de resultado e títulos que você não possui."
@@ -188,6 +189,44 @@ export const post: Post = {
           </li>
           <li>Evitar títulos alarmistas do tipo “5 sinais de que seu filho tem…”.</li>
         </ul>
+      </section>
+
+      <section>
+        <h2>O que postar no Instagram de psicologia</h2>
+        <p>
+          Uma das dúvidas mais buscadas é o que postar. Formatos que funcionam e cabem nas regras:
+        </p>
+        <ul>
+          <li><strong>Como funciona o atendimento</strong>: primeira conversa, formatos, duração, para quem é.</li>
+          <li><strong>Explicações baseadas na ciência psicológica</strong> sobre temas do seu público, em linguagem simples.</li>
+          <li><strong>Respostas às dúvidas que chegam no direct</strong>, de forma geral, sem caso real.</li>
+          <li><strong>Bastidores do consultório</strong>: o espaço, a rotina de estudo, eventos de formação — sem pacientes.</li>
+          <li><strong>Sua formação e trajetória</strong>, sem exagero nem superlativo.</li>
+          <li><strong>Convites claros para o primeiro contato</strong>, dizendo o que acontece depois da mensagem.</li>
+        </ul>
+        <p>
+          Para ideias específicas de quem atende crianças, veja <Link href="/blog/conteudo-para-psicologo-infantil" className="inst-link">conteúdo para psicólogo infantil</Link>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Pode e evitar: resumo</h2>
+        <div className="inst-blog__table" role="region" aria-label="O que pode e o que evitar no Instagram de psicólogo" tabIndex={0}>
+          <table>
+            <caption>O que pode e o que evitar no Instagram de psicólogo</caption>
+            <thead><tr><th scope="col">No perfil</th><th scope="col">Pode?</th></tr></thead>
+            <tbody>
+            <tr><td>Nome, “psicólogo(a)” e CRP na bio</td><td>Deve</td></tr>
+            <tr><td>Público, abordagem e formato de atendimento</td><td>Sim</td></tr>
+            <tr><td>Conteúdo educativo baseado na ciência psicológica</td><td>Sim</td></tr>
+            <tr><td>Valor da sessão, desconto ou “primeira sessão grátis”</td><td>Não</td></tr>
+            <tr><td>Depoimento, print ou foto de paciente</td><td>Evitar (sigilo e sensacionalismo)</td></tr>
+            <tr><td>“Teste” ou lista de sinais em tom de diagnóstico</td><td>Evitar</td></tr>
+            <tr><td>“Dr.” ou “especialista” sem o título correspondente</td><td>Não</td></tr>
+            <tr><td>Opiniões pessoais no perfil profissional</td><td>Evitar (a cartilha recomenda perfis separados)</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section>

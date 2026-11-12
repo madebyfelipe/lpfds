@@ -14,6 +14,8 @@ export const post: Post = {
   summary:
     "O psicólogo pode ter preço e informá-lo a quem pergunta, mas não pode usar o preço como forma de propaganda (artigo 20, alínea d, do Código de Ética). Segundo a cartilha do CRP-MG, isso inclui destacar gratuidade, desconto, pacote, cupom, sorteio e “preço social” na divulgação.",
   faq: [
+    { q: "Psicólogo pode fazer anúncios pagos?", a: "Pode. O artigo 20 vale para divulgação “por quaisquer meios”, então o anúncio pago segue as mesmas regras: identificação com nome e CRP, sem preço como chamariz, sem promessa de resultado e sem sensacionalismo." },
+    { q: "Psicólogo pode vender pacote de sessões?", a: "A cartilha do CRP-MG inclui pacotes entre as formas de usar o preço como propaganda e observa que eles podem caracterizar prolongamento desnecessário do serviço, vedado pelo Código de Ética." },
     { q: "Psicólogo pode divulgar valor social?", a: "Pela orientação do CRP-MG, “custo ou preço social” não deve ser destaque da publicidade. Valores diferenciados podem ser tratados no contato direto, quando a pessoa pergunta." },
     { q: "Posso responder o valor da sessão no WhatsApp?", a: "Sim. Informar o valor a quem pergunta, no contato individual, faz parte do atendimento e não é propaganda por preço." },
     { q: "Psicólogo pode fazer promoção ou pacote de sessões?", a: "A cartilha do CRP-MG inclui promoções e pacotes entre as formas vedadas de usar o preço na divulgação e observa que pacotes podem configurar prolongamento desnecessário do serviço." }
@@ -120,6 +122,28 @@ export const post: Post = {
           <li>Anúncio com “Atendimento com valor social” como chamada principal.</li>
           <li>Sorteio de sessões para quem seguir o perfil.</li>
         </ul>
+      </section>
+
+      <section>
+        <h2>Resumo: o que pode e o que evitar</h2>
+        <p>
+          A tabela resume a orientação do Código de Ética e da cartilha do CRP-MG. Ela não substitui a consulta ao seu Conselho Regional em casos específicos.
+        </p>
+        <div className="inst-blog__table" role="region" aria-label="O que pode e o que evitar ao falar de preço" tabIndex={0}>
+          <table>
+            <caption>O que pode e o que evitar ao falar de preço</caption>
+            <thead><tr><th scope="col">Situação</th><th scope="col">Pode?</th><th scope="col">Por quê</th></tr></thead>
+            <tbody>
+            <tr><td>Informar o valor a quem pergunta no WhatsApp ou no e-mail</td><td>Sim</td><td>É atendimento individual, não propaganda</td></tr>
+            <tr><td>Post ou story com o valor da sessão em destaque</td><td>Evitar</td><td>Usa o preço como forma de propaganda (art. 20, d)</td></tr>
+            <tr><td>“Primeira sessão grátis”</td><td>Não</td><td>A cartilha do CRP-MG inclui gratuidade na vedação</td></tr>
+            <tr><td>Desconto, promoção, cupom ou sorteio</td><td>Não</td><td>Remetem a vantagem financeira</td></tr>
+            <tr><td>Pacote de sessões com preço fechado</td><td>Não</td><td>É propaganda por preço e pode prolongar o serviço sem necessidade</td></tr>
+            <tr><td>“Atendo com valor social” como chamada</td><td>Evitar</td><td>A cartilha cita custo ou preço social</td></tr>
+            <tr><td>Dizer que atende por convênio ou emite recibo para reembolso</td><td>Sim, com cuidado</td><td>É informação de formato, desde que não vire chamariz</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section>

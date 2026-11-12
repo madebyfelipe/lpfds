@@ -14,6 +14,7 @@ export const post: Post = {
   summary:
     "A marca de um consultório que atende crianças autistas e neurodivergentes precisa ser clara para os pais (público, faixa etária, formato, primeiro contato), usar linguagem respeitosa e consistente, evitar símbolos genéricos ou contestados como o quebra-cabeça e nunca prometer cura ou resultado. Fotos de crianças atendidas e relatos de casos ficam fora da divulgação.",
   faq: [
+    { q: "Qual é o símbolo do autismo?", a: "Não há um símbolo oficial único. A peça de quebra-cabeça ainda é comum, mas é contestada por parte da comunidade autista; o símbolo do infinito, em arco-íris ou dourado, é usado por parte da comunidade como alternativa. Para a marca de um consultório, um símbolo próprio costuma comunicar melhor." },
     { q: "Devo escrever “pessoa autista” ou “pessoa com autismo”?", a: "As duas formas circulam. Parte da comunidade prefere “pessoa autista”; outras famílias usam “pessoa com autismo” ou “com TEA”. Escolha com consciência, mantenha a escolha nos canais e respeite como cada família se refere ao filho." },
     { q: "Posso dizer que sou especialista em autismo?", a: "Só se tiver o título correspondente. Sem título, divulgue a área de atuação e a experiência, sem apresentá-las como especialidade." },
     { q: "O que os pais procuram primeiro no perfil do psicólogo?", a: "Em geral: se você atende a faixa etária e a demanda do filho, como é o atendimento, se há orientação aos pais ou contato com a escola, a sua formação e como fazer o primeiro contato." }

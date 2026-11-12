@@ -5,10 +5,10 @@ const ext = { target: "_blank", rel: "noopener noreferrer", className: "inst-lin
 
 export const post: Post = {
   slug: "site-para-psicologo",
-  title: "Site para psicólogo: o que precisa ter e o que o Código de Ética não permite",
+  title: "Site profissional para psicólogo: o que precisa ter e o que o Código de Ética não permite",
   description:
     "O que um site de psicólogo precisa ter, as páginas essenciais, os cuidados com o artigo 20 e a LGPD, e quando vale ter um site além do Instagram.",
-  keyword: "site para psicólogo",
+  keyword: "site profissional para psicólogo",
   tags: ["presenca-digital", "divulgacao-etica"],
   publishedAt: "2026-11-08",
   summary:
