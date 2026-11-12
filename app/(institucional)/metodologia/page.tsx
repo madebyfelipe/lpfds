@@ -5,6 +5,7 @@ import {
   LinhaTempo,
   MetodologiaFlow
 } from "@/components/institucional/MetodoDiagrams";
+import { MetodoFoco } from "@/components/institucional/MetodoFoco";
 import { methodIntro, positioning, process } from "@/lib/institucional";
 
 export const metadata: Metadata = {
@@ -65,15 +66,16 @@ export default function MetodologiaPage() {
             O posicionamento é a tradução de seis áreas. Investigadas juntas,
             elas revelam o que só existe no seu consultório.
           </p>
-          <div className="inst-nave">
-            {positioning.map((area) => (
-              <div key={area.letter} className="inst-nave__item">
-                <span className="inst-nave__letter">{area.letter}</span>
-                <h2 className="inst-nave__title">{area.title}</h2>
-                <p className="inst-nave__copy">{area.copy}</p>
-              </div>
-            ))}
-          </div>
+          {/* Lista em foco (referência: Specia1ne). Substitui os cards
+              `.inst-nave`; o texto de cada área segue no HTML do servidor. */}
+          <MetodoFoco
+            titulo="h2"
+            itens={positioning.map((a) => ({
+              chave: a.letter,
+              titulo: a.title,
+              texto: a.copy
+            }))}
+          />
         </div>
       </section>
 

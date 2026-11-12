@@ -257,8 +257,10 @@ e na metadata da home, na metadata do `/imersao`, no `HubHero` e nas referência
 numéricas dos `depoimentos`. **Preço continua fora do site** (a decisão de segurar o
 preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos: Imersão
 → Território → Sistema) foi **substituída** por um **teaser gráfico** do método PSIQUE
-(ainda em `id="processo"`, que o `/hub` linka): `methodIntro` + o diagrama
-`MetodologiaFlow` + link "Ver o método completo →" para **`/metodologia`**.
+(ainda em `id="processo"`, que o `/hub` linka): `methodIntro` + a lista em foco
+`MetodoFoco` (as seis áreas, ver "Redesign nov/2026" abaixo) + link "Ver o método
+completo →" para **`/metodologia`**. O diagrama `MetodologiaFlow` saiu da home e segue
+em `/metodologia`.
 
 **Método PSIQUE** (o nome era NAVE; virou PSIQUE por ressoar com o ICP de psicologia —
 a tese "branding é tradução, não invenção" e a hipótese "o posicionamento nasce de
@@ -277,6 +279,25 @@ grande (`.inst-nave`); (3) **O processo** numa seção cream — o diagrama `Lin
 nas duas etapas Estratégia/Identidade, export `process`), **não** outro grid de cards.
 Copy adaptada ao ICP de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B
 do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
+
+**Redesign nov/2026 (referências do One Page Love, pedido do Felipe)** — três peças, todas
+em tokens (raio 2px, quatro cores, Neue Haas), claro/escuro, sem lib nova:
+- **Hero em cartaz (ref. Monolog)** — só na home: `.inst-hero--poster` (título até 8.25rem,
+  apoio em duas colunas `.inst-hero__row`) + faixa `.inst-facts` com **2 · 45 · 6 · 8**
+  (dias de imersão, dias no ar, áreas, passos). Os dois últimos saem de `positioning.length`
+  e dos `steps` de `process`; **só entram números da própria oferta** — nada de projeto,
+  cliente ou resultado (ver "Provas sociais e alegações"). O `.inst-hero` base não mudou.
+- **Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente):
+  título à direita, marcador numerado no eixo, texto à esquerda; só a linha em foco acende
+  (`data-ativo`), as outras ficam em `--gray-300`. O foco segue o mouse e a linha que passa
+  pelo meio da tela. Usado nas seis áreas P-S-I-Q-U-E na home e em `/metodologia` (onde
+  substituiu os cards `.inst-nave`, hoje sem uso). Todo o texto está no HTML do servidor.
+  Fica dentro de `.inst-dark`: o marcador usa `--black` de fundo para cobrir o eixo.
+- **Rodapé (ref. Mammut Studios)** — `InstFooter`: selo `agenda.numProjetos` + e-mail em tipo
+  grande + fileira (hora de Sorocaba · redes · voltar ao topo) + linha legal + nome da
+  marca na largura inteira (`.inst-footer__mark`, `16.3cqw`; refazer a medida se a fonte
+  ou o texto mudar). Relógio e "voltar ao topo" estão em `FooterExtras.tsx` (cliente; o
+  relógio só aparece após a hidratação). O rodapé vale também para `/portfolio/[slug]`.
 
 **Diagramas** (`components/institucional/MetodoDiagrams.tsx` — server components):
 `MetodologiaFlow` são **três peças SVG** (hexágono do posicionamento · venn de identidade ·
