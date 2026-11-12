@@ -296,8 +296,10 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
   "Método PSIQUE" (3 passos, bolha do cursor) → FAQ (acordeão, JSON-LD `FAQPage`) → CTA com
   recorte no scroll → rodapé. **Sem grade de marcas e sem cases** ("Success Stories") — Felipe
   pediu para tirar; não recolocar.
-- **Fotos**: de banco (Freepik via MCP do Magnific) e geradas no Magnific, em
-  `public/institucional/home/`; crédito "Imagens de banco: Freepik" no rodapé. **Foto do Felipe só
+- **Fotos**: de banco (Freepik via MCP do Magnific) e enviadas pelo Felipe (passos do método e
+  posicionamento/brand guide/página/direção de arte — substituíram as geradas por IA, nenhuma
+  imagem de IA resta), em `public/institucional/home/`; crédito "Imagens de banco: Freepik" no
+  rodapé. As do Felipe vieram em baixa (~736px de largura) — trocar por originais quando houver. **Foto do Felipe só
   onde o texto fala dele** (FAQ: `felipe-avatar.jpg`, recorte de `public/eu.jpg`, a mesma do /hub).
 - **Paleta própria** (pedra `#e8e8e3` / quase-preto `#080807`, tokens `--m-*` com tema escuro);
   o vermelho da marca aparece só no marcador dos rótulos e no card "45". É exceção declarada ao
