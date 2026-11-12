@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Com a frequência que você consegue manter com qualidade. Um post útil por semana, com o mesmo tom e a mesma identidade, vale mais que posts diários sem direção."
     }
   ],
+  cover: {
+    src: "/blog/conteudo-para-psicologo-infantil/conteudo-para-psicologo-infantil-caderno-e-lapis-de-cor.jpg",
+    alt: "Caderno aberto e lápis de cor sobre uma mesa de madeira, planejamento de conteúdo",
+    caption: "Foto: fabrikasimf / Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

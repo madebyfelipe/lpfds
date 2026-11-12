@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Monetização de plataforma é um tema que vale conferir com o seu CRP. Em qualquer caso, a vedação de preço e promessa como chamariz continua, e patrocínio de produto deve ser claramente identificado."
     }
   ],
+  cover: {
+    src: "/blog/psicologo-youtube-e-lives/psicologo-youtube-e-lives-microfone-e-notebook.jpg",
+    alt: "Microfone, notebook e fones de ouvido sobre uma mesa perto da janela, estação de gravação",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

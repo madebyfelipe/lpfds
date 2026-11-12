@@ -35,6 +35,13 @@ export const post: Post = {
       a: "Sim. A LGPD exige informar a finalidade do uso dos dados e, para dados de saúde, que são sensíveis, ter ainda mais cuidado. Peça só o necessário no formulário (nome e contato) e não colete queixa clínica."
     }
   ],
+  cover: {
+    src: "/blog/site-para-clinica-de-psicologia/site-para-clinica-de-psicologia-sala-de-espera.jpg",
+    alt: "Duas poltronas claras em uma sala de espera com parede de madeira e piso claro",
+    caption: "Foto: topntp26 / Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

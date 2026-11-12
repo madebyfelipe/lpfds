@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Evite listas de transmissão com pacientes para conteúdo promocional. Mensagens individuais de confirmação são mais seguras para o sigilo e para a relação terapêutica."
     }
   ],
+  cover: {
+    src: "/blog/whatsapp-business-para-psicologo/whatsapp-business-para-psicologo-celular-e-cafe.jpg",
+    alt: "Celular sobre um caderno de espiral ao lado de uma xícara de café e óculos, em uma mesa de trabalho",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

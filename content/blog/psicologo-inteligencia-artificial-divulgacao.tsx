@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Com cuidado. A imagem não deve sugerir sessão, paciente ou resultado, nem representar uma pessoa real sem autorização. Para foto de perfil, use uma foto real sua."
     }
   ],
+  cover: {
+    src: "/blog/psicologo-inteligencia-artificial-divulgacao/psicologo-inteligencia-artificial-divulgacao-notebook-com-luz.jpg",
+    alt: "Notebook aberto sobre um piso de madeira com feixes de luz saindo da tela",
+    caption: "Foto: jannoon028 / Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

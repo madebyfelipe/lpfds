@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Pode divulgar a existência e o formato do grupo, sem preço, desconto ou vaga limitada como chamariz, e sem expor quem participa."
     }
   ],
+  cover: {
+    src: "/blog/orientacao-parental-como-divulgar/orientacao-parental-como-divulgar-sala-acolhedora.jpg",
+    alt: "Poltrona com manta clara entre plantas diante de uma parede de tijolos brancos, sala acolhedora",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

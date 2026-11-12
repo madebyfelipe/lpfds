@@ -35,6 +35,13 @@ export const post: Post = {
       a: "Pode pedir, e o psicólogo decide o que cabe informar, com autorização da família e dentro dos limites do sigilo. Vale conversar com o CRP em caso de dúvida sobre o formato do documento."
     }
   ],
+  cover: {
+    src: "/blog/parceria-psicologo-escola/parceria-psicologo-escola-carteiras-vazias.jpg",
+    alt: "Carteiras escolares de madeira vazias, com um livro aberto e um copo de lápis de cor",
+    caption: "Foto: wahyu_t / Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

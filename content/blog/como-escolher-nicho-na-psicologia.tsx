@@ -34,6 +34,13 @@ export const post: Post = {
       a: "Dá para ajustar. Trate o primeiro nicho como hipótese e revise depois de alguns meses, com base em quem procurou você, em que pontos a conversa fluiu e o que você gostou de atender."
     }
   ],
+  cover: {
+    src: "/blog/como-escolher-nicho-na-psicologia/como-escolher-nicho-na-psicologia-bussola-e-mapa.jpg",
+    alt: "Bússola sobre um mapa antigo ao lado de uma lupa, símbolo de escolha de caminho",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

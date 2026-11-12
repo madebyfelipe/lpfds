@@ -35,6 +35,13 @@ export const post: Post = {
       a: "Pode, mas são símbolos contestados por parte da comunidade autista. Para uma marca nova, pense em elementos próprios, que não dependam de nenhum símbolo do tema."
     }
   ],
+  cover: {
+    src: "/blog/marca-clinica-multidisciplinar-autismo/marca-clinica-multidisciplinar-autismo-espaco-claro-com-plantas.jpg",
+    alt: "Espaço amplo e iluminado com plantas, um banco de madeira e luz natural",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

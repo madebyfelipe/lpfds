@@ -33,6 +33,13 @@ export const post: Post = {
       a: "O Código de Ética não define cores. As regras valem para o conteúdo da divulgação: nome, CRP, sem promessa de resultado e sem sensacionalismo. A escolha visual é livre, desde que a peça cumpra essas regras."
     }
   ],
+  cover: {
+    src: "/blog/cores-para-consultorio-de-psicologia/cores-para-consultorio-de-psicologia-amostras-de-cores.jpg",
+    alt: "Amostras de cores, roda cromática e tintas sobre uma superfície rosa",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

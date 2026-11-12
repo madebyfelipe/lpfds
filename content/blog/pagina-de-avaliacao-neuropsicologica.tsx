@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Não é recomendável. Materiais de avaliação têm uso restrito e não devem ser expostos publicamente. Descreva a etapa em palavras, sem fotos do material."
     }
   ],
+  cover: {
+    src: "/blog/pagina-de-avaliacao-neuropsicologica/pagina-de-avaliacao-neuropsicologica-mesa-de-trabalho.jpg",
+    alt: "Notebook, caderno e um vaso de planta sobre uma mesa clara, espaço de trabalho organizado",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

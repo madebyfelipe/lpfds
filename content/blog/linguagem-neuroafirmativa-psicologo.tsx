@@ -36,6 +36,13 @@ export const post: Post = {
       a: "Pode, mas ela é contestada por parte da comunidade autista e um estudo encontrou associações negativas com o símbolo. Para uma marca nova, costuma ser melhor escolher outro elemento."
     }
   ],
+  cover: {
+    src: "/blog/linguagem-neuroafirmativa-psicologo/linguagem-neuroafirmativa-psicologo-livro-aberto.jpg",
+    alt: "Livro aberto sobre uma mesa de madeira clara, visto de cima",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>

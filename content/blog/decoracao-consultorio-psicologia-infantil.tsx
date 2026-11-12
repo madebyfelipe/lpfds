@@ -34,6 +34,13 @@ export const post: Post = {
       a: "Sim. Pense em entrada sem degraus, circulação livre, sinalização clara e banheiro acessível, e informe no site e no perfil do Google como é o acesso. Essa informação ajuda as famílias a decidir."
     }
   ],
+  cover: {
+    src: "/blog/decoracao-consultorio-psicologia-infantil/decoracao-consultorio-psicologia-infantil-poltrona-verde-e-plantas.jpg",
+    alt: "Poltrona verde, plantas e prateleiras em uma sala de paredes claras, sem pessoas",
+    caption: "Foto: Magnific",
+    width: 2400,
+    height: 1350
+  },
   body: (
     <>
       <p>
