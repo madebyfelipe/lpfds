@@ -34,6 +34,16 @@ import { post as clinicaMultidisciplinar } from "@/content/blog/marca-clinica-mu
 import { post as youtubeLives } from "@/content/blog/psicologo-youtube-e-lives";
 import { post as emailProfissional } from "@/content/blog/email-profissional-para-psicologo";
 import { post as parceriaEscola } from "@/content/blog/parceria-psicologo-escola";
+import { post as rebranding } from "@/content/blog/rebranding-consultorio-de-psicologia";
+import { post as tomDeVoz } from "@/content/blog/tom-de-voz-para-psicologo";
+import { post as quantoCusta } from "@/content/blog/quanto-custa-identidade-visual-psicologo";
+import { post as humorRedes } from "@/content/blog/psicologo-humor-redes-sociais";
+import { post as seoPsicologos } from "@/content/blog/seo-para-psicologos";
+import { post as recemFormado } from "@/content/blog/psicologo-recem-formado-como-comecar";
+import { post as consultorioSensorial } from "@/content/blog/consultorio-acessivel-sensorial-autismo";
+import { post as impulsionarPost } from "@/content/blog/impulsionar-post-psicologo";
+import { post as tituloEspecialista } from "@/content/blog/psicologo-titulo-de-especialista";
+import { post as psicologoOnline } from "@/content/blog/psicologo-online-divulgacao";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -140,7 +150,17 @@ export const posts: Post[] = [
   clinicaMultidisciplinar,
   youtubeLives,
   emailProfissional,
-  parceriaEscola
+  parceriaEscola,
+  rebranding,
+  tomDeVoz,
+  quantoCusta,
+  humorRedes,
+  seoPsicologos,
+  recemFormado,
+  consultorioSensorial,
+  impulsionarPost,
+  tituloEspecialista,
+  psicologoOnline
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
