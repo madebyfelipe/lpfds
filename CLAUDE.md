@@ -280,53 +280,41 @@ nas duas etapas Estratégia/Identidade, export `process`), **não** outro grid d
 Copy adaptada ao ICP de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B
 do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
 
-**Redesign nov/2026 (referências do One Page Love, pedido do Felipe)** — quatro peças, todas
-em tokens (raio 2px, quatro cores, Neue Haas), claro/escuro, sem lib nova:
-- **Hero Monolog (ref. Monolog, fiel a pedido do Felipe)** — só na home: `#inicio.inst-dark.inst-mono`,
-  altura de tela, foto do palco desfocada (`public/institucional/hero/fundo-hero.jpg`, 120px em
-  cinza, 1 KB; o `blur` do CSS só suaviza) + grão em SVG, ícone do hexágono PSIQUE, H1 (a
-  headline aprovada) e dois parágrafos curtos **centralizados**, e o nome da marca na largura
-  inteira encostado na base (`.inst-mono__mark`, `16.3cqw`, decorativo). A `InstNav` fica
-  **transparente** por cima dele (`data-hero`, ligado por IntersectionObserver; o hero sobe
-  `--inst-nav-h` = 71px para ficar sob a nav — refazer a conta se a nav mudar de altura). Logo
-  abaixo, o **manifesto** (`.inst-manifest`, mesma superfície): rótulo + nota + CTA à esquerda e
-  o texto do antigo bloco "O estúdio" em tipo grande à direita, assinado com
-  `public/institucional/felipe-avatar.jpg` (recorte da 02.jpg). O bloco "O estúdio" saiu de
-  baixo para não repetir. **Sem faixa de números grandes**: a de 2 · 45 · 6 · 8 e os contadores
-  do `/blog` foram removidos a pedido do Felipe — não recolocar. O `.inst-hero` base segue
-  nas outras páginas.
-- **Resto da home (ref. Monolog, estrutura seguida à risca a pedido do Felipe)** — depois do
-  manifesto, nesta ordem, cada seção copiando a grade da equivalente do Monolog:
-  `.inst-clients` (rótulo + grade 4 × 2 de marcas, "Clients") → `.inst-thesis` ("BRANDING É
-  TRADUÇÃO" em tipo gigante com a 05.jpg atrás, "We close that gap") → `.inst-stories`
-  (superfície clara, 5 cases de `lib/portfolio.ts` com foto, contador "Case ← 01/05", texto e
-  a categoria no chip — **sem métrica**, não há número de resultado verificado; fecha com
-  "## Ver todos os projetos (→)", "Success Stories") → `#servicos.inst-help` (`DepoSlider` à
-  esquerda, `deliverables` em tipo grande com a 1ª acesa e o hover acendendo as outras, foto
-  pequena à direita, "What we can help with") → `#processo.inst-journey` ("MÉTODO PSIQUE" na
-  largura inteira + três passos com foto que agrupam os oito de `process`, "Project
-  Journey") → `.inst-faq` (rótulo + contato à esquerda, título + `<details name="faq">` à
-  direita, JSON-LD `FAQPage`; **as respostas só usam fatos já aprovados** — oferta, método,
-  entregas, art. 20, preço fora do site, agenda) → `.inst-final` (frase gigante escalonada
-  sobre a 02.jpg em cinza + botão + fala de depoimento, "Let's build") → rodapé atual.
-  Rótulos de seção usam `.inst-dot` (ponto + tracking do kicker); o botão claro com seta em
-  caixa vermelha é `.inst-btn`; o cinza apagado da lista é o token `--dim-inverse`. A faixa
-  de fotos, "O estúdio", Entregas em grade, `Depoimentos`, "Agenda" e `InstContato` **saíram
-  da home** (os componentes seguem nas outras páginas). `MetodoFoco` segue só em `/metodologia`.
-- **Nav (ref. Monolog)** — no desktop a `InstNav` é grade de três colunas: marca à esquerda,
-  links no centro, CTA "Conversar ↗" (`.inst-nav__cta`, `ScheduleLink`) + tema à direita. No
-  mobile (≤720px) volta a flex com o painel e o CTA some (o `InstMobileCta` cobre).
-- **Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente):
-  título à direita, marcador numerado no eixo, texto à esquerda; só a linha em foco acende
-  (`data-ativo`), as outras ficam em `--gray-300`. O foco segue o mouse e a linha que passa
-  pelo meio da tela. Usado nas seis áreas P-S-I-Q-U-E em `/metodologia` (onde
-  substituiu os cards `.inst-nave`, hoje sem uso). Todo o texto está no HTML do servidor.
-  Fica dentro de `.inst-dark`: o marcador usa `--black` de fundo para cobrir o eixo.
-- **Rodapé (ref. Mammut Studios)** — `InstFooter`: fileira (hora de Sorocaba · redes · voltar ao topo) + linha legal + nome da
-  marca na largura inteira (`.inst-footer__mark`, `16.3cqw`; refazer a medida se a fonte
-  ou o texto mudar). Relógio e "voltar ao topo" estão em `FooterExtras.tsx` (cliente; o
-  relógio só aparece após a hidratação). O rodapé vale também para `/portfolio/[slug]`.
-  O selo "3 projetos por trimestre" e o e-mail em tipo grande **saíram** a pedido do Felipe.
+**Home = clone do bymonolog.com (nov/2026, pedido do Felipe: "igualzinho, animações etc.")** —
+substituiu o redesign anterior (hero escuro `.inst-mono`, `.inst-thesis`, `.inst-help`…, removidos).
+Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos estilos calculados:
+- **Arquivos**: `app/(institucional)/page.tsx` (seções `.mh-*`), `app/home.css` (só a home),
+  `app/monolog.css` (tokens `--m-*`, botão `.mbtn`, rótulo `.meyebrow`, nav `.mnav`, rodapé
+  `.mfoot`, bolha do cursor, grão — importado no layout institucional, no `/hub` e no case),
+  `components/institucional/home/` (`HomeMotion` = todas as animações GSAP; `HomeSlider`,
+  `HomeFaq`, `MButton`, `loadGsap` com as curvas `ease-transition` etc.) e `SmoothScroll` (Lenis,
+  dep nova, desligado em toque e movimento reduzido).
+- **Ordem**: hero (título display + lead + 2 cards que se revezam em 8s sobre a foto) → manifesto
+  com texto que acende no scroll + slider de `depoimentos` (card empilhado) → tese "Branding é
+  tradução" (200vh sticky, letras vindo dos lados, fotos trocando a cada 800ms) → `#servicos`
+  (`deliverables` em tipo grande, imagem segue o hover; slider das seis áreas) → `#processo`
+  "Método PSIQUE" (3 passos, bolha do cursor) → FAQ (acordeão, JSON-LD `FAQPage`) → CTA com
+  recorte no scroll → rodapé. **Sem grade de marcas e sem cases** ("Success Stories") — Felipe
+  pediu para tirar; não recolocar.
+- **Fotos**: de banco (Freepik via MCP do Magnific) e geradas no Magnific, em
+  `public/institucional/home/`; crédito "Imagens de banco: Freepik" no rodapé. **Foto do Felipe só
+  onde o texto fala dele** (FAQ: `felipe-avatar.jpg`, recorte de `public/eu.jpg`, a mesma do /hub).
+- **Paleta própria** (pedra `#e8e8e3` / quase-preto `#080807`, tokens `--m-*` com tema escuro);
+  o vermelho da marca aparece só no marcador dos rótulos e no card "45". É exceção declarada ao
+  design system, como o `/hub`.
+- **Nav** (`InstNav`, todas as páginas): grade de 12 colunas do Monolog; na home é fixa e
+  transparente e troca de tinta pela seção sob ela (`data-theme-section` → `data-theme-nav`) e
+  some quando o rodapé entra; nas outras páginas é sticky e sólida. Mobile: botão "Menu" abre
+  painel escuro de cima. `InstMobileCta` não aparece mais na home.
+- **Rodapé** (`InstFooter`): navegação em tipo grande, estúdio/redes/legal, hora de Sorocaba,
+  voltar ao topo, **"Made by Felipe" gigante na largura inteira** (`.mfoot__mark`, Felipe pediu
+  para manter) e a faixa de meio-tom em canvas ("Segure para agitar").
+- O estado inicial das animações só vale com `data-mh-motion` no `<html>` (script inline na
+  página); sem JS ou com movimento reduzido nada fica escondido. Itens `display:none` não entram
+  em stagger do GSAP (travava o botão Menu).
+
+**Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente), nas
+seis áreas P-S-I-Q-U-E em `/metodologia`.
 
 **Diagramas** (`components/institucional/MetodoDiagrams.tsx` — server components):
 `MetodologiaFlow` são **três peças SVG** (hexágono do posicionamento · venn de identidade ·

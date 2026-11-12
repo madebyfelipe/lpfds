@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { IBM_Plex_Mono, Poppins } from "next/font/google";
 import { CookieConsent, MetaPixel } from "@/components/CookieConsent";
 import { CustomCursor } from "@/components/CustomCursor";
 import { StructuredData } from "@/components/StructuredData";
@@ -11,6 +11,14 @@ const poppins = Poppins({
   variable: "--font-poppins",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"]
+});
+
+// Rótulos em mono do site institucional (o Monolog usa Suisse Mono, pago).
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["500"]
 });
 
 export const metadata: Metadata = {
@@ -84,7 +92,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           }}
         />
       </head>
-      <body className={`${poppins.variable} site-body`}>
+      <body className={`${poppins.variable} ${plexMono.variable} site-body`}>
         <StructuredData />
         {children}
         <CustomCursor />

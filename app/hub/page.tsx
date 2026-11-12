@@ -10,6 +10,7 @@ import { EbookModal } from "@/components/hub/EbookModal";
 import { HubBio } from "@/components/hub/HubBio";
 import { HubFooter } from "@/components/hub/HubFooter";
 import "../institucional.css";
+import "../monolog.css";
 import "./hub.css";
 
 export const metadata: Metadata = {
