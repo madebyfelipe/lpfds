@@ -24,6 +24,16 @@ import { post as orientacaoParental } from "@/content/blog/orientacao-parental-c
 import { post as iaPsicologo } from "@/content/blog/psicologo-inteligencia-artificial-divulgacao";
 import { post as fotoProfissional } from "@/content/blog/foto-profissional-para-psicologo";
 import { post as bioInstagram } from "@/content/blog/bio-instagram-psicologo-exemplos";
+import { post as coresConsultorio } from "@/content/blog/cores-para-consultorio-de-psicologia";
+import { post as cnpjNomeFantasia } from "@/content/blog/psicologo-cnpj-nome-fantasia";
+import { post as escolherNicho } from "@/content/blog/como-escolher-nicho-na-psicologia";
+import { post as marcaTdah } from "@/content/blog/marca-psicologo-tdah";
+import { post as decoracaoInfantil } from "@/content/blog/decoracao-consultorio-psicologia-infantil";
+import { post as siteClinica } from "@/content/blog/site-para-clinica-de-psicologia";
+import { post as clinicaMultidisciplinar } from "@/content/blog/marca-clinica-multidisciplinar-autismo";
+import { post as youtubeLives } from "@/content/blog/psicologo-youtube-e-lives";
+import { post as emailProfissional } from "@/content/blog/email-profissional-para-psicologo";
+import { post as parceriaEscola } from "@/content/blog/parceria-psicologo-escola";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -120,7 +130,17 @@ export const posts: Post[] = [
   orientacaoParental,
   iaPsicologo,
   fotoProfissional,
-  bioInstagram
+  bioInstagram,
+  coresConsultorio,
+  cnpjNomeFantasia,
+  escolherNicho,
+  marcaTdah,
+  decoracaoInfantil,
+  siteClinica,
+  clinicaMultidisciplinar,
+  youtubeLives,
+  emailProfissional,
+  parceriaEscola
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
