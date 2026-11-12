@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/site";
 import { InstContato } from "@/components/institucional/InstContato";
 import {
   LinhaTempo,
   MetodologiaFlow
 } from "@/components/institucional/MetodoDiagrams";
+import { MetodoFoco } from "@/components/institucional/MetodoFoco";
 import { methodIntro, positioning, process } from "@/lib/institucional";
 
 export const metadata: Metadata = {
@@ -28,6 +30,7 @@ export const metadata: Metadata = {
       "O método PSIQUE traduz o negócio em posicionamento, identidade visual e verbal — da estratégia à comunicação.",
     url: "/metodologia",
     siteName: "Made by Felipe",
+    images: [OG_IMAGE],
     locale: "pt_BR",
     type: "article"
   }
@@ -37,7 +40,7 @@ export default function MetodologiaPage() {
   return (
     <main id="conteudo">
       <header className="inst-hero">
-        <p className="inst-kicker inst-kicker--tight">— O método</p>
+        <p className="inst-kicker inst-kicker--tight">O método</p>
         <h1 className="inst-hero__title">
           Método <span className="inst-hero__accent">PSIQUE</span>.
         </h1>
@@ -46,7 +49,7 @@ export default function MetodologiaPage() {
 
       {/* Diagrama 1 — Metodologia: estratégia → identidade → comunicação. */}
       <section className="inst-section inst-section--rule inst-section--flush-top">
-        <p className="inst-kicker">— Metodologia</p>
+        <p className="inst-kicker">Metodologia</p>
         <MetodologiaFlow />
         <p className="inst-diagram__caption">
           O posicionamento nasce do cruzamento de seis áreas. Dele saem a
@@ -58,27 +61,28 @@ export default function MetodologiaPage() {
       {/* As seis áreas do posicionamento (P-S-I-Q-U-E) — cards no fundo escuro. */}
       <section className="inst-dark">
         <div className="inst-section">
-          <p className="inst-kicker inst-kicker--inverse">— O posicionamento</p>
+          <p className="inst-kicker inst-kicker--inverse">O posicionamento</p>
           <p className="inst-method__intro">
             O posicionamento é a tradução de seis áreas. Investigadas juntas,
             elas revelam o que só existe no seu consultório.
           </p>
-          <div className="inst-nave">
-            {positioning.map((area) => (
-              <div key={area.letter} className="inst-nave__item">
-                <span className="inst-nave__letter">{area.letter}</span>
-                <h2 className="inst-nave__title">{area.title}</h2>
-                <p className="inst-nave__copy">{area.copy}</p>
-              </div>
-            ))}
-          </div>
+          {/* Lista em foco (referência: Specia1ne). Substitui os cards
+              `.inst-nave`; o texto de cada área segue no HTML do servidor. */}
+          <MetodoFoco
+            titulo="h2"
+            itens={positioning.map((a) => ({
+              chave: a.letter,
+              titulo: a.title,
+              texto: a.copy
+            }))}
+          />
         </div>
       </section>
 
       {/* O processo: a linha do tempo (visão geral por fase) + a lista
           numerada dos oito passos (o detalhe do que cada um entrega). */}
       <section className="inst-section inst-section--rule">
-        <p className="inst-kicker">— O processo</p>
+        <p className="inst-kicker">O processo</p>
         <LinhaTempo />
         <p className="inst-diagram__caption">
           Duas etapas — estratégia e identidade — quebradas em quatro fases:

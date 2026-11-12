@@ -5,10 +5,10 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { useCardDeck } from "@/hooks/useCardDeck";
 import { ebook } from "@/lib/newsletter";
-import { hubWebinarHref } from "@/lib/webinar";
+import { hubWebinarHref, webinarNoAr } from "@/lib/webinar";
 import { openEbookModal } from "./EbookModal";
 
-const products = [
+const allProducts = [
   {
     kicker: "/WORKSHOP",
     title: "Workshop de criação de conteúdo",
@@ -49,12 +49,15 @@ const products = [
     desc: "Agende um horário ou mande uma mensagem — do seu jeito.",
     cta: "Falar comigo",
     href: "/contato",
-    bgColor: "#d42b2b",
+    bgColor: "#bc0319",
     textColor: "#ffffff",
     invert: true,
     avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],
   },
 ];
+
+// Card do workshop sai junto com a página (ver webinarNoAr).
+const products = allProducts.filter((p) => webinarNoAr || p.href !== hubWebinarHref);
 
 const arrowIcon = (
   <svg

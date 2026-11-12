@@ -21,11 +21,11 @@ rampa `--gray-100…--gray-700`. São quatro cores. Não invente uma quinta.
 | token | onde | por quê |
 |---|---|---|
 | `--red` | **preenchimento** (fundo de botão, faixa `.inst-red`, barra de progresso) | é o vermelho da marca |
-| `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | `#bc0319` sobre preto rende 2.75:1; sobre superfície escura ele clareia para `#ef4358` |
+| `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | **sempre `#bc0319`, nos dois temas** (Felipe, nov/2026: "só o vermelho REAL"). A versão clareada `#ef4358` foi removida — sobre o escuro ele rende ~2.8:1, então use em tipo grande/ênfase, não em texto corrido pequeno |
 | `--on-red` | **texto em cima do vermelho** | fixo `#f6f6f6` nos dois temas — o vermelho é a única cor que **não** inverte, então usar `--cream` aqui pinta texto preto sobre vermelho no tema escuro |
 
-O hub tem o mesmo par: `--accent` (preenchimento) e `--accent-ink` (tinta,
-`#f0566a` nos blocos escuros).
+O hub tem o mesmo par: `--accent` e `--accent-ink`, hoje ambos `#bc0319` (o
+`#d42b2b` antigo e o `#f0566a` clareado saíram; `globals.css` também usa `#bc0319`).
 
 **Forma** — o site institucional é duro, não arredondado:
 - raio **2px** em botões, campos e caixas. **Nunca pílula** (`999px`) e nunca 12/16px.
@@ -59,7 +59,7 @@ foco visível? Se qualquer resposta for "não", ainda não está pronto.
 
 Next.js 16 (App Router, Turbopack) + TypeScript landing page for **Made by Felipe**, a branding + social media service targeting Brazilian professionals (lawyers, nutritionists, psychologists, clinics).
 
-Live domain: `madebyfelipe.com`  
+Live domain: `www.madebyfelipe.com.br` (ver "Domínio canônico")  
 Language: **Portuguese (pt-BR)** — all user-facing copy stays in Portuguese.
 
 > **Branch `beta` only:** the home is no longer the dark landing page — it is the
@@ -205,6 +205,8 @@ shared shell (`InstNav` + `InstFooter` + the `.inst` wrapper):
 | `/metodologia` | `app/(institucional)/metodologia/page.tsx` | — (novo, sem paralelo no protótipo) |
 | `/projetos` | `app/(institucional)/projetos/page.tsx` | `isProjetos` (hub de portfólio) |
 | `/imersao` | `app/(institucional)/imersao/page.tsx` | `isContato` |
+| `/blog`, `/blog/[slug]` | `app/(institucional)/blog/` | — (novo; ver "Blog") |
+| `/cases` | `app/(institucional)/cases/page.tsx` | — (nov/2026: site entregue + processo criativo; o exemplo é **fictício** e rotulado; nada de depoimento, métrica ou cliente real sem autorização escrita) |
 
 The prototype's contact view lives at **`/imersao`**, not `/contato` — `/contato` is a
 satellite of `/hub` (shares `hub.css`, linked from `HubProducts`) and must not be touched.
@@ -255,8 +257,10 @@ e na metadata da home, na metadata do `/imersao`, no `HubHero` e nas referência
 numéricas dos `depoimentos`. **Preço continua fora do site** (a decisão de segurar o
 preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos: Imersão
 → Território → Sistema) foi **substituída** por um **teaser gráfico** do método PSIQUE
-(ainda em `id="processo"`, que o `/hub` linka): `methodIntro` + o diagrama
-`MetodologiaFlow` + link "Ver o método completo →" para **`/metodologia`**.
+(ainda em `id="processo"`, que o `/hub` linka) — hoje é o "Método PSIQUE" em três passos
+do redesign Monolog (ver "Redesign nov/2026" abaixo), com link "Ver o método completo →"
+para **`/metodologia`**. O diagrama `MetodologiaFlow` saiu da home e segue
+em `/metodologia`.
 
 **Método PSIQUE** (o nome era NAVE; virou PSIQUE por ressoar com o ICP de psicologia —
 a tese "branding é tradução, não invenção" e a hipótese "o posicionamento nasce de
@@ -275,6 +279,59 @@ grande (`.inst-nave`); (3) **O processo** numa seção cream — o diagrama `Lin
 nas duas etapas Estratégia/Identidade, export `process`), **não** outro grid de cards.
 Copy adaptada ao ICP de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B
 do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
+
+**Home = clone do bymonolog.com (nov/2026, pedido do Felipe: "igualzinho, animações etc.")** —
+substituiu o redesign anterior (hero escuro `.inst-mono`, `.inst-thesis`, `.inst-help`…, removidos).
+Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos estilos calculados:
+- **Arquivos**: `app/(institucional)/page.tsx` (seções `.mh-*`), `app/home.css` (só a home),
+  `app/monolog.css` (tokens `--m-*`, botão `.mbtn`, rótulo `.meyebrow`, nav `.mnav`, rodapé
+  `.mfoot`, bolha do cursor, grão — importado no layout institucional, no `/hub` e no case),
+  `components/institucional/home/` (`HomeMotion` = todas as animações GSAP; `HomeSlider`,
+  `HomeFaq`, `MButton`, `loadGsap` com as curvas `ease-transition` etc.) e `SmoothScroll` (Lenis,
+  dep nova, desligado em toque e movimento reduzido).
+- **Ordem**: hero (título display + lead + 2 cards que se revezam em 8s sobre a foto) → manifesto
+  com texto que acende no scroll + slider de `depoimentos` (card empilhado) → tese "Branding é
+  tradução" (200vh sticky, letras vindo dos lados, fotos trocando a cada 800ms) → `#servicos`
+  (`deliverables` em tipo grande, imagem segue o hover; slider das seis áreas) → `#processo`
+  "Método PSIQUE" (3 passos, bolha do cursor) → FAQ (acordeão, JSON-LD `FAQPage`) → CTA com
+  recorte no scroll → rodapé. **Sem grade de marcas e sem cases** ("Success Stories") — Felipe
+  pediu para tirar; não recolocar.
+- **Fotos**: de banco (Freepik via MCP do Magnific) e enviadas pelo Felipe (passos do método e
+  posicionamento/brand guide/página/direção de arte — substituíram as geradas por IA, nenhuma
+  imagem de IA resta), em `public/institucional/home/`; crédito "Imagens de banco: Freepik" no
+  rodapé. As do Felipe vieram em baixa (~736px de largura) — trocar por originais quando houver. **Foto do Felipe só
+  onde o texto fala dele** (FAQ: `felipe-avatar.jpg`, recorte de `public/eu.jpg`, a mesma do /hub).
+- **Paleta própria** (pedra `#e8e8e3` / quase-preto `#080807`, tokens `--m-*` com tema escuro);
+  o vermelho da marca aparece só no marcador dos rótulos e no card "45". É exceção declarada ao
+  design system, como o `/hub`.
+- **Nav** (`InstNav`, todas as páginas): grade de 12 colunas do Monolog; na home é fixa e
+  transparente e troca de tinta pela seção sob ela (`data-theme-section` → `data-theme-nav`) e
+  some quando o rodapé entra; nas outras páginas é sticky e sólida. Mobile: botão "Menu" abre
+  painel escuro de cima. `InstMobileCta` não aparece mais na home.
+- **Rodapé** (`InstFooter`): navegação em tipo grande, estúdio/redes/legal, hora de Sorocaba,
+  voltar ao topo, **"Made by Felipe" gigante na largura inteira** (`.mfoot__mark`, Felipe pediu
+  para manter) e a faixa de meio-tom em canvas ("Segure para agitar").
+- O estado inicial das animações só vale com `data-mh-motion` no `<html>` (script inline na
+  página); sem JS ou com movimento reduzido nada fica escondido. Itens `display:none` não entram
+  em stagger do GSAP (travava o botão Menu).
+
+**Resto do site na mesma estética (nov/2026)** — paleta base remapeada: `--cream` `#e8e8e3`,
+`--black` `#080807` (papéis trocam no tema escuro), rampa `--gray-*` em tons de pedra, coluna
+`--inst-max` 1440px com a margem fluida do Monolog. A camada no fim de `app/monolog.css`
+reveste as peças compartilhadas sem mexer no markup: `.inst-kicker` virou rótulo mono com ponto
+vermelho (o "— " saiu do texto de todos os rótulos), títulos em display pesado, CTA de seção
+com filete vermelho, `.inst-submit` no ritmo do botão Monolog, texto corrido maior. O **blog**
+lista os posts no padrão "Success Stories" (número grande · capa · texto) e o CTA do post usa
+`.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois dias de imersão", "tradução",
+"PSIQUE", "→ marca", "começar.".
+
+**`/sobre`** (nav + rodapé + sitemap) — mesma linguagem da home (`.ms-*` em `home.css`,
+`HomeMotion` reaproveitado): "Eu sou o Felipe.", foto (`public/institucional/sobre/`, recortes
+de `public/eu.jpg`), a bio já publicada no `HubBio` com texto que acende no scroll, três
+princípios só com fatos aprovados e CTA. A nav fica transparente na home e no `/sobre`.
+
+**Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente), nas
+seis áreas P-S-I-Q-U-E em `/metodologia`.
 
 **Diagramas** (`components/institucional/MetodoDiagrams.tsx` — server components):
 `MetodologiaFlow` são **três peças SVG** (hexágono do posicionamento · venn de identidade ·
@@ -356,8 +413,11 @@ three children now, so `justify-content: space-between` would centre the links.
 `--inst-pad: 24px` at ≤900px is declared on `.inst, .inst-nav, .inst-footer` because the
 nav and footer also render outside `.inst`.
 
-**Clientes**: the prototype's client-logo section was **dropped from the home** at
-Felipe's request. Don't reinstate it.
+**Clientes**: the prototype's client-logo section was dropped at Felipe's request; in
+nov/2026 he asked for the home to follow the Monolog structure *à risca*, so a **grade de
+marcas** came back as `.inst-clients` — client names as typographic marks (no logo files
+exist) read from `lib/portfolio.ts`, each linking to its case. Same clients already public
+on `/projetos`.
 
 **`/projetos` layout** follows the manifesto-branding reference Felipe supplied, not the
 prototype's full-bleed stack: a small "Projetos" label, cards inside the 1200px column
@@ -378,6 +438,117 @@ exist only for it). `/hub` keeps its content and its own body/footer; only its d
 footer/deck full-bleed padding was fixed (the content used to stretch to 100vw instead of
 the hub column) and its header was swapped for `InstNav` (see "Nav" above).
 The institutional footer carries a backlink to `/hub`.
+
+---
+
+## Domínio canônico
+
+**`lib/site.ts` (`SITE_URL`) é a fonte única da origem do site** — `metadataBase` do
+layout raiz, `sitemap.ts`, `robots.ts`, `StructuredData` e o JSON-LD dos posts leem
+dali. Hoje é `https://www.madebyfelipe.com.br` (a produção responde em `www`; o apex
+redireciona 301). Antes era `https://madebyfelipe.com`, que **não resolve** — canonical,
+`og:url`, sitemap e `@id` do JSON-LD apontavam para fora do site. Não escreva a URL
+absoluta à mão em outro arquivo.
+
+**og:image**: a padrão é `/og.png` (`app/og.png/route.tsx`, gerada no build por
+`renderOg` em `lib/og.tsx`, que espelha os tokens — o Satori não lê CSS vars). O Next
+**não mescla** `openGraph` entre layout e página: toda página que declara `openGraph`
+próprio precisa repetir `images: [OG_IMAGE]`. Posts têm imagem própria com o título
+(`blog/[slug]/og.png/route.tsx`), ou a capa quando o post tem `cover`. `/hub` mantém a dele.
+
+**Metadata/JSON-LD alinhados ao ICP (nov/2026)**: o title padrão do layout raiz, a
+description e o `StructuredData` falam de branding para psicólogos e consultórios de
+psicologia (imersão de dois dias, 45 dias, artigo 20) — não mais "Branding e Social Media
+em Sorocaba". O catálogo de serviços do JSON-LD é a oferta atual, sem preço.
+
+**E-mail público**: `EMAIL` (`lib/institucional.ts`) reexporta `CONTATO_EMAIL`
+(`lib/legal.ts`, `alo@`) — a mesma caixa que recebe o form e autentica no SMTP. O site
+mostrava `contato@`; não voltar a ter dois endereços.
+
+**H1**: `/imersao` e `/diagnostico` usam `<h1 className="inst-manifesto">` (era `<p>`; a
+classe zera margem e define tamanho/peso, então o visual não muda).
+
+---
+
+## Blog (`/blog`, `/blog/[slug]`)
+
+Objetivo: tráfego orgânico do ICP (psicólogas, consultórios, com foco em quem atende
+famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 minutos.
+
+- **Conteúdo em arquivo, sem CMS.** Cada post é `content/blog/<slug>.tsx`, que exporta
+  `post: Post` (`slug`, `title`, `description`, `keyword`, `publishedAt`, `updatedAt?`,
+  `body` em JSX). Para publicar: criar o arquivo e registrá-lo no array de
+  `lib/blog.ts`. A rota é estática (`generateStaticParams` + `dynamicParams = false`),
+  então slug fora da lista dá 404.
+- **SEO por post sai sozinho**: `<title>`, description, canonical, Open Graph
+  `article` (com datas), Twitter card, JSON-LD `Article` (autor/publisher apontam
+  para os `@id` `#felipe`/`#business` do `StructuredData`, não redeclaram a entidade)
+  e entrada no `sitemap.ts` com `lastModified` = data do post (não a do build).
+  O `title` do post leva a palavra-chave principal e vira o H1.
+- **Visual**: reaproveita a casca de texto corrido das páginas legais
+  (`.inst-legal`, `.inst-legal__head`, `.inst-legal__body`). O CSS próprio
+  (`.inst-blog__*`, em `institucional.css`) é só a lista de posts, o respiro do corpo
+  e o CTA final. Links no corpo: `inst-link` (externos com `target="_blank"` +
+  `rel="noopener noreferrer"`).
+- **Temas, filtro e leitura (nov/2026)** — todo post tem `tags` (ao menos um slug de
+  `lib/blog-temas.ts`; o build falha sem). A listagem (`BlogIndex`, cliente) filtra por
+  tema (`?tema=`, via `history.replaceState`) e por título; o HTML estático já traz todos
+  os posts e o canonical segue `/blog`, então a página continua estática e sem JS mostra
+  a lista completa. `readBody` (`lib/blog-body.tsx`) percorre o JSX do corpo para dar `id`
+  aos `h2` (sumário "Neste artigo", fixo ≥1100px, `<details>` abaixo) e contar o tempo de
+  leitura (~200 palavras/min). "Continue lendo" = posts com mais temas em comum.
+- **CTA**: todo post termina com o bloco "— Próximo passo" + `ScheduleLink`
+  ("Conversar por 15 minutos →", mesma frase do hero da home). Não remover.
+- **Nav**: item "Blog" na `InstNav`, entre Método e Contato.
+- **Imagens (pedido do Felipe, nov/2026)** — campo opcional `cover` no `Post`
+  (`src`, `alt`, `caption?`, `width`, `height`). Uma única imagem serve de banner, de
+  thumb na lista, de og:image/twitter:image, de `image` no JSON-LD e de entrada no
+  sitemap de imagens (`<image:image>`). Padrão:
+  - **Arquivo-fonte**: `public/blog/<slug>/<palavra-chave-com-hifens>.jpg` (ex.:
+    `public/blog/branding-para-psicologos/branding-para-psicologos-consultorio.jpg`).
+    Nome em minúsculas, sem acento, com a palavra-chave do post. Nada de `IMG_1234.jpg`.
+  - **Tamanho**: 16:9, mínimo **1920×1080** (ideal 2400×1350). JPG com qualidade 80–85,
+    sRGB, sem EXIF de localização, **até ~500 KB**. Use PNG só para arte gráfica com
+    texto. Não suba WebP/AVIF à mão: o `next/image` já entrega AVIF/WebP redimensionado
+    (`images.formats`). O original em alta é o que vai para o og:image, o JSON-LD e o
+    sitemap — é ele que o Google Imagens indexa.
+  - **Thumb**: o mesmo arquivo, recortado em 16:9 pelo CSS (`.inst-blog__thumb`) e servido
+    pequeno pelo `sizes`. Não existe arquivo separado de thumb.
+  - **alt**: frase em pt-BR que descreve o que a imagem mostra, com a palavra-chave quando
+    couber naturalmente (mín. 15 caracteres). Nada de "imagem", "foto" nem lista de
+    palavras-chave. **caption**: legenda visível opcional (crédito, contexto).
+  - **Art. 20 vale para imagem**: nada de sessão, paciente, criança atendida, divã, antes e
+    depois ou material de atendimento. Prefira o espaço de trabalho, objetos, detalhes de
+    identidade visual, o próprio Felipe ou arte gráfica da marca. Banco de imagem só com
+    licença comercial; registre o crédito na `caption`.
+  - **Trava**: `assertCover` em `lib/blog.ts` derruba o `next build` se a capa estiver fora
+    da pasta do post, abaixo de 1920×1080, fora de 16:9, em formato estranho ou sem alt.
+  - Sem capa, o post usa o og:image gerado com o título (`blog/[slug]/og.png/route.tsx`,
+    URL fixa). Ele é uma rota, e não um `opengraph-image.tsx`, porque arquivo de metadata
+    tem prioridade sobre o `openGraph.images` da página e esconderia a capa.
+- **AEO (nov/2026)** — todo post tem `summary` (resposta direta de 2–3 frases, caixa
+  "— Resposta rápida" no topo, também vai em `abstract` no JSON-LD) e `faq` (3–4
+  perguntas reais, renderizadas no fim do corpo como "Perguntas frequentes" e marcadas
+  como `FAQPage`). Não repita um h2 "Perguntas frequentes" dentro do `body`. Article
+  JSON-LD leva `keywords` = `keyword`. `lib/blog.ts` trava o build se slug, título ou
+  description se repetirem. **Sem superlativo nem autoridade sem prova**: nada de "o
+  melhor", "rei", "referência", "número 1" nem promessa de posição no Google — vale o
+  art. 20 e o CDC para o próprio estúdio.
+- **Comentários (nov/2026)** — fim de todo post, numa caixa `.inst-dark` (reusa
+  `.inst-form`/`.inst-field` do form da imersão). Moderação por e-mail, sem banco: o
+  form (`ComentarioForm`) → `/api/comentarios` (honeypot `site`, limite de 3 envios
+  por IP a cada 10 min em memória, aceite obrigatório validado no servidor) → e-mail
+  "Comentário pendente" para `alo@` com a linha pronta. **Nada é publicado pela rota.**
+  Publicar = colar a linha aprovada em `content/blog/comentarios.ts` + deploy. O repo é
+  público: comentário pendente nunca entra no repo. Coleta só nome + texto (sem
+  e-mail); `/privacidade` 2.4 descreve isso. Nunca adicionar comentário inventado, de
+  teste ou de seed.
+- **Regras editoriais (não negociáveis)**: artigo 20 do Código de Ética — nada de
+  promessa de resultado terapêutico, de preço/gratuidade como chamariz, de imagem de
+  sessão/paciente. **Não inventar números, depoimentos nem fontes**: toda afirmação
+  normativa cita a fonte (CFP, CRP) com link no fim do post. Preço do estúdio fica
+  fora, como no resto do site. Oferta citada só com os números aprovados (dois dias de
+  imersão, 45 dias no ar).
 
 ---
 

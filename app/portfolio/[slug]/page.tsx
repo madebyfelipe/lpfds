@@ -11,6 +11,7 @@ import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { getImageSize } from "@/lib/image-size";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
 import "../../institucional.css";
+import "../../monolog.css";
 
 type Params = { slug: string };
 

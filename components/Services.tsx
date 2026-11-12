@@ -16,7 +16,7 @@ function VisualSocial() {
 
       {/* Post 2 – center, elevated */}
       <rect x="121" y="18" width="78" height="96" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(212,43,43,0.22)" strokeWidth="1" className="svc-float-2" />
-      <rect x="121" y="18" width="78" height="5" rx="4" fill="#d42b2b" />
+      <rect x="121" y="18" width="78" height="5" rx="4" fill="#bc0319" />
       <rect x="130" y="34" width="60" height="5" rx="3" fill="rgba(255,255,255,0.1)" />
       <rect x="130" y="44" width="46" height="5" rx="3" fill="rgba(255,255,255,0.07)" />
       <rect x="130" y="54" width="56" height="5" rx="3" fill="rgba(255,255,255,0.07)" />
@@ -49,7 +49,7 @@ function VisualPosition() {
       <circle cx="145" cy="95" r="3" fill="rgba(255,255,255,0.1)" />
       <circle cx="230" cy="40" r="22" fill="rgba(212,43,43,0.07)" className="svc-pulse" />
       <circle cx="230" cy="40" r="14" fill="rgba(212,43,43,0.12)" />
-      <circle cx="230" cy="40" r="7" fill="#d42b2b" />
+      <circle cx="230" cy="40" r="7" fill="#bc0319" />
     </svg>
   );
 }
@@ -62,19 +62,19 @@ function VisualBrand() {
       <line x1="160" y1="78" x2="244" y2="112" stroke="rgba(212,43,43,0.3)" strokeWidth="1.2" strokeDasharray="5 4" />
       <circle cx="160" cy="78" r="30" fill="rgba(212,43,43,0.1)" stroke="rgba(212,43,43,0.4)" strokeWidth="1.5" className="svc-float-2" />
       <circle cx="160" cy="78" r="22" fill="rgba(212,43,43,0.07)" />
-      <text x="160" y="84" textAnchor="middle" fill="#d42b2b" fontSize="18" fontWeight="700" fontFamily="system-ui, sans-serif">F</text>
+      <text x="160" y="84" textAnchor="middle" fill="#bc0319" fontSize="18" fontWeight="700" fontFamily="system-ui, sans-serif">F</text>
       <rect x="40" y="56" width="36" height="44" rx="9" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" className="svc-float-1" />
-      <rect x="47" y="63" width="22" height="7" rx="3" fill="#d42b2b" />
+      <rect x="47" y="63" width="22" height="7" rx="3" fill="#bc0319" />
       <rect x="47" y="74" width="22" height="7" rx="3" fill="rgba(212,43,43,0.5)" />
       <rect x="47" y="85" width="22" height="7" rx="3" fill="rgba(212,43,43,0.2)" />
-      <circle cx="76" cy="78" r="4" fill="#d42b2b" opacity="0.9" className="svc-pulse" />
+      <circle cx="76" cy="78" r="4" fill="#bc0319" opacity="0.9" className="svc-pulse" />
       <rect x="216" y="22" width="56" height="44" rx="9" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" className="svc-float-3" />
       <text x="244" y="52" textAnchor="middle" fill="rgba(255,255,255,0.75)" fontSize="22" fontWeight="700" fontFamily="Georgia, serif">Aa</text>
-      <circle cx="244" cy="44" r="4" fill="#d42b2b" opacity="0.9" className="svc-pulse" />
+      <circle cx="244" cy="44" r="4" fill="#bc0319" opacity="0.9" className="svc-pulse" />
       <rect x="216" y="90" width="56" height="44" rx="9" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" className="svc-float-1" />
       <path d="M244 100 L252 104.5 L252 116 Q244 120.5 236 116 L236 104.5 Z" fill="none" stroke="rgba(212,43,43,0.65)" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M240 110.5 L243 113.5 L248.5 108" stroke="#d42b2b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="244" cy="112" r="4" fill="#d42b2b" opacity="0.9" className="svc-pulse" />
+      <path d="M240 110.5 L243 113.5 L248.5 108" stroke="#bc0319" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="244" cy="112" r="4" fill="#bc0319" opacity="0.9" className="svc-pulse" />
     </svg>
   );
 }

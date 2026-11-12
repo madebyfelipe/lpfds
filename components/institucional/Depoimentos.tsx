@@ -15,7 +15,7 @@ export function Depoimentos() {
     <section className="inst-red">
       <div className="inst-section">
         <p className="inst-kicker inst-kicker--on-red inst-kicker--lg">
-          — Depoimentos
+          Depoimentos
         </p>
         {/* aria-live: trocar de depoimento sem isso é uma mudança silenciosa
             para quem usa leitor de tela — o botão responde e nada é anunciado. */}

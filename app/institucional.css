@@ -58,31 +58,30 @@
 .inst,
 .inst-nav,
 .inst-footer {
-  --cream: #f6f6f6;
-  --black: #151515;
+  --cream: #e8e8e3;
+  --black: #080807;
   --charcoal: #2b2d2b;
   --red: #bc0319;
   --red-dark: #8f0313;
   /* Vermelho como TINTA (texto, traço de SVG, sublinhado, anel de foco).
-     Sobre superfície clara é o vermelho da marca — 6.1:1. O mesmo tom sobre
-     preto cai para 2.8:1, abaixo dos 4.5:1 de texto e dos 3:1 de elemento
-     gráfico do WCAG, então nas superfícies escuras ele clareia. Fundo
-     vermelho continua em --red: ali quem precisa de contraste é o texto. */
+     Sempre o vermelho real da marca, nos dois temas (Felipe, nov/2026: nada
+     da versão clareada #ef4358). Sobre o escuro ele rende ~2.8:1 — use em
+     tipo grande/ênfase, não em texto corrido pequeno. */
   --red-ink: #bc0319;
   /* Tinta sobre o vermelho. Fixa nos dois temas, porque o vermelho é a única
      cor da paleta que não inverte: usar --cream aqui fazia o texto virar
      preto sobre vermelho (2.75:1) quando o tema escuro trocava os papéis. */
   --on-red: #f6f6f6;
-  --gray-100: #ececec;
-  --gray-200: #dcdcdc;
+  --gray-100: #ddddd5;
+  --gray-200: #d1d1c7;
   --gray-300: #b8b8b8;
-  --gray-500: #696969;
+  --gray-500: #6b645c;
   --gray-700: #454545;
 
   /* Derivados que precisam inverter junto com o tema: linhas e rótulos
      que ficam sobre a superfície oposta (.inst-dark) e o fundo da nav. */
-  --line-inverse: rgba(246, 246, 246, 0.18);
-  --line-inverse-strong: rgba(246, 246, 246, 0.4);
+  --line-inverse: rgba(232, 232, 227, 0.18);
+  --line-inverse-strong: rgba(232, 232, 227, 0.4);
   /* Fundo da nav: OPACO, e por isso é só var(--cream) — resolve na hora do
      uso, então inverte junto com o tema sem precisar ser redeclarado no
      bloco escuro. Era rgba(…, 0.94) e vazava: a nav é sticky e não tem
@@ -93,10 +92,14 @@
      então a saída é opacidade — sem custo de GPU num elemento que repinta
      a cada frame de scroll. */
   --nav-bg: var(--cream);
+  /* Texto "apagado" sobre a superfície invertida (.inst-dark): a lista de
+     entregas da home. #696969 rende 3.3:1 sobre #151515 e 5.3:1 sobre
+     #f6f6f6, então passa como texto grande nos dois temas sem inverter. */
+  --dim-inverse: #696969;
 
   --inst-font: "Neue Haas Grotesk Display", "Archivo", Helvetica, Arial, sans-serif;
-  --inst-max: 1200px;
-  --inst-pad: 40px;
+  --inst-max: 1440px;
+  --inst-pad: clamp(12px, 8.2px + 1.24vw, 28px);
 
   font-family: var(--inst-font);
   font-size: 16px;
@@ -110,16 +113,16 @@
 :root[data-inst-theme="dark"] .inst,
 :root[data-inst-theme="dark"] .inst-nav,
 :root[data-inst-theme="dark"] .inst-footer {
-  --cream: #151515;
-  --black: #f6f6f6;
-  --gray-100: #1c1c1c;
-  --gray-200: #2a2a2a;
+  --cream: #080807;
+  --black: #e8e8e3;
+  --gray-100: #181715;
+  --gray-200: #2a2925;
   --gray-300: #696969;
   --gray-500: #9a9a9a;
   --gray-700: #b8b8b8;
 
-  --line-inverse: rgba(21, 21, 21, 0.18);
-  --line-inverse-strong: rgba(21, 21, 21, 0.4);
+  --line-inverse: rgba(8, 8, 7, 0.18);
+  --line-inverse-strong: rgba(8, 8, 7, 0.4);
   /* --nav-bg não se repete aqui: é var(--cream), que este bloco já inverteu. */
 }
 
@@ -140,6 +143,56 @@
 .inst :focus-visible {
   outline: 2px solid var(--red-ink);
   outline-offset: 3px;
+}
+
+:root {
+  /* Compartilhado com o banner, que fica fora de .inst. */
+  --inst-mobile-cta-height: calc(88px + env(safe-area-inset-bottom, 0px));
+  /* Altura da .inst-nav (18px + 34px dos botões + 18px + 1px de borda). O hero
+     da home sobe esse tanto para ficar por baixo da nav transparente; se o
+     padding da nav ou o tamanho dos botões mudar, refaça a conta. */
+  --inst-nav-h: 71px;
+  /* Grão do hero e do manifesto da home (ruído SVG em cinza, 10% de opacidade).
+     Neutro, então serve aos dois temas. */
+  --inst-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.1'/%3E%3C/svg%3E");
+}
+
+.inst-mobile-cta {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .inst:has(.inst-mobile-cta) {
+    padding-bottom: var(--inst-mobile-cta-height);
+  }
+
+  .inst-mobile-cta {
+    position: fixed;
+    z-index: 100;
+    inset-inline: 0;
+    bottom: 0;
+    height: var(--inst-mobile-cta-height);
+    display: flex;
+    align-items: center;
+    padding: 16px var(--inst-pad);
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    background: var(--cream);
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .inst-mobile-cta .inst-submit {
+    align-self: auto;
+    margin-top: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* O banner mantém prioridade e espaço próprio acima do CTA. */
+  body:has(.inst-mobile-cta) .mbf-consent {
+    bottom: calc(16px + var(--inst-mobile-cta-height));
+    max-height: calc(100dvh - 32px - var(--inst-mobile-cta-height));
+    overflow-y: auto;
+  }
 }
 
 .inst-shell {
@@ -165,23 +218,6 @@
 .inst-dark {
   background: var(--black);
   color: var(--cream);
-}
-
-/* A superfície REAL é XOR(seção .inst-dark, tema escuro): a nav e o rodapé
-   acompanham porque também trocam de fundo com o tema. */
-.inst-dark,
-.inst-footer {
-  --red-ink: #ef4358;
-}
-
-:root[data-inst-theme="dark"] .inst,
-:root[data-inst-theme="dark"] .inst-nav {
-  --red-ink: #ef4358;
-}
-
-:root[data-inst-theme="dark"] .inst-dark,
-:root[data-inst-theme="dark"] .inst-footer {
-  --red-ink: #bc0319;
 }
 
 .inst-red {
@@ -217,107 +253,6 @@
 
 .inst-kicker--lg {
   margin-bottom: 56px;
-}
-
-/* --------------------------------------------------------------------------
-   Nav
-   -------------------------------------------------------------------------- */
-
-.inst-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  padding: 18px var(--inst-pad);
-  background: var(--nav-bg);
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.inst-nav__brand {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--black);
-}
-
-/* `margin-left: auto` empurra links + ações para a direita como um bloco só
-   (a nav tem três filhos; `space-between` centralizaria os links). */
-.inst-nav__links {
-  margin-left: auto;
-  display: flex;
-  gap: 28px;
-  align-items: center;
-}
-
-.inst-nav__end {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.inst-nav__link {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--black);
-}
-
-.inst-nav__link:hover,
-.inst-nav__link[aria-current="page"] {
-  color: var(--red-ink);
-}
-
-/* Burguer — só aparece no mobile (ver media query no fim do arquivo). */
-.inst-nav__burger {
-  display: none;
-  width: 34px;
-  height: 34px;
-  flex-shrink: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 0;
-  border-radius: 50%;
-  border: 1px solid var(--gray-200);
-  background: transparent;
-  color: var(--black);
-  cursor: pointer;
-  transition: border-color 180ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.inst-nav__burger:hover {
-  border-color: var(--red-ink);
-}
-
-.inst-nav__burger-bar {
-  width: 14px;
-  height: 1.5px;
-  background: currentColor;
-  transition:
-    transform 220ms cubic-bezier(0.2, 0, 0, 1),
-    opacity 140ms linear,
-    background-color 180ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.inst-nav__burger:hover .inst-nav__burger-bar {
-  background: var(--red-ink);
-}
-
-/* Aberto: as barras viram um X. */
-.inst-nav[data-open="true"] .inst-nav__burger-bar:first-child {
-  transform: translateY(5.5px) rotate(45deg);
-}
-
-.inst-nav[data-open="true"] .inst-nav__burger-bar:nth-child(2) {
-  opacity: 0;
-}
-
-.inst-nav[data-open="true"] .inst-nav__burger-bar:last-child {
-  transform: translateY(-5.5px) rotate(-45deg);
 }
 
 /* Botão claro/escuro — mesmo desenho do /hub, nos tokens daqui. */
@@ -614,6 +549,96 @@
   font-size: 1rem;
   line-height: 1.6;
   color: var(--gray-700);
+}
+
+/* --------------------------------------------------------------------------
+   Cases (/cases) — reaproveita hero, seções e a lista .inst-proc. Só o layout
+   do "site entregue" e o ajuste da lista sobre a superfície .inst-dark.
+   -------------------------------------------------------------------------- */
+
+.inst-case {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.inst-case__figure {
+  margin: 0;
+}
+
+.inst-case__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  background: var(--gray-100);
+}
+
+.inst-case__title {
+  margin: 0 0 16px;
+  font-size: 1.75rem;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.inst-case__copy p {
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.inst-case__list {
+  margin: 0 0 24px;
+  padding-left: 1.25em;
+  line-height: 1.6;
+}
+
+.inst-case__list li {
+  margin-bottom: 8px;
+}
+
+.inst-case__copy .inst-case__note {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+}
+
+/* A lista do processo vive sobre .inst-dark: o --gray-700 e o filete
+   --gray-200 da versão clara somem ali, então usam os tokens inversos. */
+.inst-case__steps {
+  margin-top: 40px;
+}
+
+.inst-case__steps .inst-proc__row {
+  border-bottom-color: var(--line-inverse);
+}
+
+.inst-case__steps .inst-proc__copy {
+  color: var(--gray-300);
+}
+
+/* Capturas de celular lado a lado (case real); viram faixa rolável no mobile. */
+.inst-case__shots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .inst-case__shots {
+    grid-template-columns: repeat(3, 70vw);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .inst-case__shots > * {
+    scroll-snap-align: start;
+  }
+
+  .inst-case {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1574,50 +1599,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   Footer
-   -------------------------------------------------------------------------- */
-
-.inst-footer {
-  background: var(--black);
-  color: var(--cream);
-}
-
-.inst-footer__inner {
-  max-width: var(--inst-max);
-  margin: 0 auto;
-  padding: 56px var(--inst-pad);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.inst-footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 28px;
-}
-
-.inst-footer__link {
-  color: var(--cream);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.inst-footer__link:hover {
-  color: var(--gray-300);
-}
-
-.inst-footer__copy {
-  margin: 0;
-  font-size: 0.875rem;
-  color: var(--gray-300);
-}
-
-/* --------------------------------------------------------------------------
    Diagnóstico (/diagnostico) — form multi-etapas do Índice de Marca.
    Vive na superfície clara (.inst), então sobrescreve o .inst-field__input
    (que é pensado para o .inst-dark da imersão) com tinta escura. Usa só
@@ -1947,7 +1928,7 @@
   .inst,
   .inst-nav,
   .inst-footer {
-    --inst-pad: 24px;
+    --inst-pad: clamp(12px, 8.2px + 1.24vw, 28px);
   }
 
   .inst-section {
@@ -2005,50 +1986,19 @@
 
 /* Mobile: os links saem da barra e viram um painel aberto pelo burguer. */
 @media (max-width: 720px) {
-  .inst-nav {
-    gap: 16px;
-  }
+  
 
-  .inst-nav__burger {
-    display: flex;
-  }
+  
 
-  .inst-nav__links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    margin-left: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 4px var(--inst-pad) 16px;
-    background: var(--cream);
-    border-bottom: 1px solid var(--gray-200);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    pointer-events: none;
-    transition:
-      opacity 200ms cubic-bezier(0.2, 0, 0, 1),
-      transform 200ms cubic-bezier(0.2, 0, 0, 1),
-      visibility 0s linear 200ms;
-  }
+  
 
-  .inst-nav[data-open="true"] .inst-nav__links {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    pointer-events: auto;
-    transition:
-      opacity 200ms cubic-bezier(0.2, 0, 0, 1),
-      transform 200ms cubic-bezier(0.2, 0, 0, 1);
-  }
+  
 
-  .inst-nav__link {
-    padding: 16px 0;
-    border-top: 1px solid var(--gray-200);
-  }
+  
+
+  
+
+  
 
   /* Fluxo do método empilha; as setas apontam para baixo. */
   .inst-flow {
@@ -2064,13 +2014,6 @@
      `.inst-proc` logo abaixo já carrega os oito passos na vertical. */
   .inst-diagram--timeline {
     display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .inst-nav__links,
-  .inst-nav__burger-bar {
-    transition-duration: 0s;
   }
 }
 
@@ -2267,25 +2210,591 @@
   }
 }
 
-/* Fileira legal do rodapé: linha própria abaixo da social + copyright.
-   `order` porque o inner é space-between com duas colunas — sem isso o
-   terceiro filho entraria no meio e quebraria o alinhamento existente. */
-.inst-footer__links--legal {
-  order: 1;
-  flex: 1 0 100%;
-  gap: 20px;
-  padding-top: 24px;
+/* --------------------------------------------------------------------------
+   Blog (/blog, /blog/[slug])
+
+   Reaproveita a casca de texto corrido das páginas legais (.inst-legal,
+   .inst-legal__head, .inst-legal__body): é a mesma tarefa — prosa longa em
+   medida de leitura. Aqui só entram a lista de posts e o CTA do fim.
+   -------------------------------------------------------------------------- */
+
+/* As páginas legais abrem o corpo com <section> (margin-top próprio); o
+   post abre com parágrafos de introdução, que colariam no filete. */
+.inst-blog__body {
+  padding-top: 40px;
+}
+
+/* Capa (banner): 16:9 fixo, canto de 2px como toda caixa do site.
+   O fundo --gray-100 segura o espaço enquanto a imagem carrega. */
+.inst-blog__cover {
+  margin: 40px 0 0;
+}
+
+.inst-blog__cover-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 2px;
+  background: var(--gray-100);
+}
+
+.inst-blog__caption {
+  margin-top: 12px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--gray-500);
+}
+
+/* Comentários: caixa .inst-dark (a mesma superfície do form da imersão, então
+   .inst-form/.inst-field funcionam sem override e invertem com o tema). */
+.inst-blog__comments {
+  max-width: 68ch;
+  margin-top: 72px;
+  padding: 40px;
+  border-radius: 2px;
+}
+
+.inst-blog__comment-list {
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inst-blog__comment {
+  padding: 20px 0;
   border-top: 1px solid var(--line-inverse);
 }
 
-.inst-footer__link--legal {
-  font-size: 11px;
-  letter-spacing: 0.14em;
+.inst-blog__comment-meta {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--gray-300);
 }
 
-.inst-footer__link--legal:hover {
+.inst-blog__comment-text {
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.inst-blog__comment-note {
+  margin: 24px 0 32px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--gray-300);
+}
+
+.inst-field__input--area {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Honeypot do form de comentário: fora da tela (não display:none — alguns
+   robôs pulam campos escondidos assim). */
+.inst-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+@media (max-width: 720px) {
+  .inst-blog__comments {
+    padding: 28px 20px;
+  }
+}
+
+/* Resposta rápida (AEO): caixa no topo do post, mesma linguagem do
+   .inst-legal__id — filete --red-ink à esquerda, fundo --gray-100, raio 2px. */
+.inst-blog__summary {
+  max-width: 68ch;
+  margin-top: 40px;
+  padding: 24px 28px;
+  border-left: 3px solid var(--red-ink);
+  border-radius: 0 2px 2px 0;
+  background: var(--gray-100);
+}
+
+.inst-blog__summary-text {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+/* Tabelas no corpo do post (resumos "pode / evitar"): filetes --gray-200,
+   cabeçalho no estilo do kicker, rolagem lateral no celular. */
+.inst-blog__table {
+  margin: 8px 0 24px;
+  overflow-x: auto;
+  border: 1px solid var(--gray-200);
+  border-radius: 2px;
+}
+
+.inst-blog__table table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.inst-blog__table caption {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-blog__table th,
+.inst-blog__table td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--gray-200);
+}
+
+.inst-blog__table th {
+  font-weight: 700;
+  background: var(--gray-100);
+}
+
+.inst-blog__back:hover {
+  color: var(--red-ink);
+}
+
+.inst-blog__cta {
+  max-width: 68ch;
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.inst-blog__cta-line {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.inst-blog__cta .inst-hero__cta {
+  margin-top: 32px;
+}
+
+/* Corpo do post: tipografia de leitura um grau acima das páginas legais. */
+.inst-blog__body p,
+.inst-blog__body li {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.inst-blog__body p {
+  margin-bottom: 20px;
+}
+
+.inst-blog__body h2 {
+  margin-bottom: 24px;
+  font-size: 1.75rem;
+  line-height: 1.15;
+  scroll-margin-top: 104px;
+}
+
+.inst-blog__body h3 {
+  scroll-margin-top: 104px;
+}
+
+/* Layout do post: coluna de leitura + sumário fixo (só ≥1100px; abaixo, o
+   sumário vira um <details> recolhido dentro da coluna). */
+.inst-post__side {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .inst-post {
+    display: grid;
+    grid-template-columns: minmax(0, 68ch) 260px;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .inst-post__side {
+    display: block;
+    position: sticky;
+    top: 104px;
+    max-height: calc(100vh - 128px);
+    padding-top: 40px;
+    overflow-y: auto;
+  }
+
+  .inst-toc--inline {
+    display: none;
+  }
+}
+
+.inst-toc__list {
+  margin: 16px 0 0;
+  padding: 0;
+  border-left: 1px solid var(--gray-200);
+  list-style: none;
+}
+
+.inst-toc__link {
+  display: block;
+  margin-left: -1px;
+  padding: 8px 0 8px 16px;
+  border-left: 2px solid transparent;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--gray-700);
+  transition: color 200ms ease;
+}
+
+.inst-toc__link:hover,
+.inst-toc__link[aria-current="location"] {
+  border-left-color: var(--red-ink);
+  color: var(--black);
+}
+
+.inst-toc__link[aria-current="location"] {
+  font-weight: 700;
+}
+
+.inst-toc--inline {
+  margin-top: 24px;
+  padding: 0 20px;
+  border: 1px solid var(--gray-200);
+  border-radius: 2px;
+}
+
+.inst-toc--inline summary {
+  min-height: 48px;
+  padding: 14px 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  cursor: pointer;
+}
+
+.inst-toc--inline .inst-toc__list {
+  margin: 0 0 16px;
+}
+
+/* Filtros da listagem: botões com aria-pressed (BlogIndex). Sem JS a barra
+   fica invisível — o espaço é reservado para não empurrar a lista. */
+.inst-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-top: 40px;
+  min-height: 44px;
+}
+
+.inst-filters:not([data-ready]) {
+  visibility: hidden;
+}
+
+.inst-filters__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.inst-chip {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--gray-500);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--black);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.inst-chip:hover {
+  border-color: var(--black);
+}
+
+.inst-chip[aria-pressed="true"] {
+  border-color: var(--black);
+  background: var(--black);
   color: var(--cream);
+}
+
+.inst-filters__search {
+  flex: 0 1 280px;
+  min-width: 200px;
+}
+
+.inst-filters__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.inst-filters__input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--gray-500);
+  border-radius: 2px;
+  background: var(--cream);
+  color: var(--black);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.inst-filters__input::placeholder {
+  color: var(--gray-500);
+  opacity: 1;
+}
+
+.inst-filters__status {
+  margin: 24px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-blog__empty {
+  margin-top: 48px;
+  font-size: 1.125rem;
+}
+
+.inst-blog__empty button {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--red-ink);
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Cards da listagem e do "continue lendo". Destaque = primeiro post, em duas
+   colunas; a grade tem 3 → 2 → 1 colunas. */
+.inst-blog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px 32px;
+  margin-top: 48px;
+}
+
+.inst-card__link {
+  display: block;
+  color: inherit;
+}
+
+/* Recorte 16:9 e canto de 2px ficam no wrapper: o zoom do hover escala só a
+   imagem e o overflow esconde o que passar da moldura. */
+.inst-card__media {
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--gray-100);
+}
+
+.inst-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.inst-card__link:hover .inst-card__img,
+.inst-card__link:focus-visible .inst-card__img {
+  transform: scale(1.04);
+}
+
+.inst-card__arrow {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--red-ink);
+  transform: translateX(-6px);
+  opacity: 0;
+  transition:
+    transform 250ms ease,
+    opacity 250ms ease;
+}
+
+.inst-card__link:hover .inst-card__arrow,
+.inst-card__link:focus-visible .inst-card__arrow {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Sem hover (toque) a seta ficaria escondida para sempre: fica visível. */
+@media (hover: none) {
+  .inst-card__arrow {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inst-card__img,
+  .inst-card__arrow {
+    transition: none;
+  }
+
+  .inst-card__link:hover .inst-card__img,
+  .inst-card__link:focus-visible .inst-card__img {
+    transform: none;
+  }
+}
+
+.inst-card__text {
+  padding-top: 20px;
+}
+
+.inst-card__tema {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-card__tema::before {
+  content: "— ";
+}
+
+.inst-card__title {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: color 200ms ease;
+}
+
+.inst-card__link:hover .inst-card__title {
+  color: var(--red-ink);
+}
+
+.inst-card__excerpt {
+  display: -webkit-box;
+  margin: 12px 0 0;
+  overflow: hidden;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--gray-700);
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.inst-card__meta {
+  margin: 16px 0 0;
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.inst-card--featured {
+  margin-top: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.inst-card--featured .inst-card__link {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.inst-card--featured .inst-card__text {
+  padding-top: 0;
+}
+
+.inst-card--featured .inst-card__title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.inst-card--featured .inst-card__excerpt {
+  display: block;
+  font-size: 1.0625rem;
+}
+
+.inst-blog__related {
+  margin-top: 96px;
+  padding-top: 40px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.inst-blog__related .inst-blog__grid {
+  margin-top: 40px;
+}
+
+@media (max-width: 1000px) {
+  .inst-blog__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .inst-card--featured .inst-card__link {
+    display: block;
+  }
+
+  .inst-card--featured .inst-card__text {
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  /* Cinco botões em linha quebrariam em cinco linhas: no mobile viram uma
+     faixa rolável (os botões continuam focáveis por Tab). */
+  .inst-filters__chips {
+    flex: 1 1 100%;
+    flex-wrap: nowrap;
+    margin-inline: calc(var(--inst-pad) * -1);
+    padding: 4px var(--inst-pad);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .inst-chip {
+    flex: 0 0 auto;
+  }
+
+  .inst-filters__search {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .inst-blog__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
 }
 
 /* Aceite da política nos formulários. Vive dentro do .inst-dark da imersão,
@@ -2334,4 +2843,792 @@
 
 .inst-skip:focus {
   left: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Leitura do artigo: progresso, compartilhar, autor e anterior/próximo.
+   Tudo em tokens e raio de 2px; nada depende de cor fixa.
+   -------------------------------------------------------------------------- */
+
+/* Barra de progresso: preenchimento = --red (a cor da marca como fundo). Fica
+   acima da nav (z 50) e abaixo do skip link/CTA mobile (z 100). */
+.inst-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: 3px;
+  pointer-events: none;
+}
+
+.inst-progress__bar {
+  width: 100%;
+  height: 100%;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Compartilhar: no desktop mora na coluna fixa do sumário; abaixo de 1100px
+   (sem coluna) aparece uma vez, no fim do texto. */
+.inst-share__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inst-share__btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--gray-500);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--black);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.inst-share__btn:hover {
+  border-color: var(--black);
+  background: var(--black);
+  color: var(--cream);
+}
+
+.inst-share__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.inst-share__status {
+  min-height: 1.5em;
+  margin: 12px 0 0;
+  font-size: 0.8125rem;
+  color: var(--gray-700);
+}
+
+.inst-post__share {
+  margin-top: 40px;
+}
+
+.inst-post__end {
+  max-width: 68ch;
+  margin-top: 64px;
+}
+
+.inst-post__share-end {
+  padding-top: 32px;
+  border-top: 1px solid var(--gray-200);
+}
+
+@media (min-width: 1100px) {
+  .inst-post__share-end {
+    display: none;
+  }
+
+  .inst-post__end {
+    margin-top: 40px;
+  }
+}
+
+/* Autor: foto quadrada pequena + texto, canto de 2px. */
+.inst-author {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 40px;
+  padding: 28px;
+  border: 1px solid var(--gray-200);
+  border-radius: 2px;
+}
+
+.inst-author__img {
+  flex: none;
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+  object-fit: cover;
+  object-position: center 20%;
+  background: var(--gray-100);
+}
+
+.inst-author__name {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.inst-author__bio {
+  margin: 8px 0 16px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--gray-700);
+}
+
+/* Anterior / próximo: duas colunas, título grande, seta que anda no hover. */
+.inst-postnav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.inst-postnav__link {
+  display: block;
+  color: inherit;
+}
+
+.inst-postnav__link--next {
+  text-align: right;
+}
+
+.inst-postnav__dir {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  transition: color 200ms ease;
+}
+
+.inst-postnav__title {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: color 200ms ease;
+}
+
+.inst-postnav__link:hover .inst-postnav__title,
+.inst-postnav__link:hover .inst-postnav__dir {
+  color: var(--red-ink);
+}
+
+@media (max-width: 720px) {
+  .inst-postnav {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inst-postnav__link--next {
+    text-align: left;
+  }
+
+  .inst-author {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.inst-manifest__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 56px var(--inst-pad) 128px;
+}
+
+.inst-manifest__side {
+  align-self: start;
+  max-width: 300px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-inverse-strong);
+}
+
+.inst-manifest__note {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--gray-300);
+}
+
+.inst-hero__cta.inst-manifest__cta {
+  margin-top: 28px;
+}
+
+/* --red-dark sobre a superfície escura cai abaixo de 3:1; o hover aqui clareia. */
+.inst-hero__cta.inst-manifest__cta:hover {
+  color: var(--cream);
+  border-bottom-color: var(--cream);
+}
+
+.inst-manifest__text {
+  max-width: 22em;
+  margin: 0 0 0.9em;
+  font-size: clamp(1.625rem, 1rem + 1.9vw, 2.75rem);
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.inst-manifest__sign {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.inst-manifest__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.inst-manifest__who {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+.inst-manifest__who span {
+  display: block;
+  color: var(--gray-300);
+}
+
+@media (max-width: 900px) {
+  
+
+  .inst-manifest__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    padding-bottom: 96px;
+  }
+
+  .inst-manifest__side {
+    max-width: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Método em foco (referência: Specia1ne). Vive em seção `.inst-dark`: a
+   superfície real é `--black`, a tinta é `--cream`, e as linhas apagadas
+   usam `--gray-300` (contraste conferido nos dois temas).
+   -------------------------------------------------------------------------- */
+
+.inst-foco__count {
+  margin: 0 0 24px;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-300);
+}
+
+.inst-foco__count b {
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.inst-foco__list {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Eixo vertical; os marcadores numerados ficam em cima dele. */
+.inst-foco__list::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--line-inverse);
+}
+
+.inst-foco__row {
+  display: grid;
+  grid-template-columns: 1fr 72px 1fr;
+  align-items: center;
+  padding: 28px 0;
+  border-top: 1px solid var(--line-inverse);
+}
+
+.inst-foco__row:last-child {
+  border-bottom: 1px solid var(--line-inverse);
+}
+
+.inst-foco__title {
+  margin: 0;
+  padding-right: 40px;
+  text-align: right;
+  font-size: clamp(2rem, 1rem + 3vw, 3.75rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--gray-300);
+  transition: color 0.25s ease;
+}
+
+.inst-foco__box {
+  position: relative;
+  justify-self: center;
+  padding: 6px 10px;
+  border: 1px solid var(--line-inverse-strong);
+  border-radius: 2px;
+  background: var(--black);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gray-300);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.inst-foco__copy {
+  margin: 0;
+  padding-left: 40px;
+  max-width: 40ch;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--gray-300);
+  transition: color 0.25s ease;
+}
+
+.inst-foco__row[data-ativo="true"] .inst-foco__title,
+.inst-foco__row[data-ativo="true"] .inst-foco__copy {
+  color: var(--cream);
+}
+
+.inst-foco__row[data-ativo="true"] .inst-foco__box {
+  border-color: var(--red);
+  background: var(--red);
+  color: var(--on-red);
+}
+
+@media (max-width: 900px) {
+  .inst-foco__count {
+    text-align: left;
+  }
+
+  .inst-foco__list::before {
+    left: 28px;
+  }
+
+  .inst-foco__row {
+    grid-template-columns: 56px minmax(0, 1fr);
+    row-gap: 12px;
+  }
+
+  .inst-foco__box {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .inst-foco__title {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0;
+    text-align: left;
+  }
+
+  .inst-foco__copy {
+    grid-column: 2;
+    grid-row: 2;
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inst-foco__title,
+  .inst-foco__box,
+  .inst-foco__copy {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Blog — redesign com movimento (nov/2026).
+   Regras: só transform/opacity (sem layout), tudo desligado em
+   prefers-reduced-motion, e sem JS a página inteira continua legível.
+   -------------------------------------------------------------------------- */
+
+/* Hero da listagem: título gigante que sobe linha a linha de uma máscara. */
+.inst-bloghero {
+  padding-bottom: 8px;
+}
+
+.inst-bloghero__title {
+  margin: 0;
+  font-size: clamp(2.75rem, 7.2vw, 6rem);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.inst-kin__line {
+  display: block;
+  /* a máscara corta a linha que ainda está embaixo; o respiro evita cortar o descendente */
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.inst-kin__line > span {
+  display: inline-block;
+  transform: translateY(108%);
+  animation: inst-kin 700ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--l, 0) * 90ms + 80ms);
+}
+
+@keyframes inst-kin {
+  to {
+    transform: none;
+  }
+}
+
+.inst-bloghero__lead {
+  max-width: 56ch;
+  margin: 32px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--gray-700);
+}
+
+/* Faixa rolante dos temas (decorativa). Pausa no hover. */
+.inst-marquee {
+  margin-top: 56px;
+  overflow: hidden;
+  border-block: 1px solid var(--gray-200);
+  white-space: nowrap;
+}
+
+.inst-marquee__track {
+  display: inline-flex;
+  animation: inst-marquee 60s linear infinite;
+  will-change: transform;
+}
+
+.inst-marquee:hover .inst-marquee__track {
+  animation-play-state: paused;
+}
+
+.inst-marquee__group {
+  display: inline-flex;
+  flex: none;
+  gap: 48px;
+  padding: 18px 48px 18px 0;
+}
+
+.inst-marquee__item {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-marquee__item::before {
+  content: "— ";
+  color: var(--red-ink);
+}
+
+@keyframes inst-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Entrada dos cards ao rolar (só depois da hidratação: data-ready). */
+.inst-card {
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.inst-reveal[data-ready] .inst-card:not([data-in]) {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Contagem ao lado do tema no chip. */
+.inst-chip__n {
+  margin-left: 10px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.inst-chip[aria-pressed="true"] .inst-chip__n {
+  opacity: 0.85;
+}
+
+/* Etiqueta "LER →" que segue o mouse sobre os cards. Retângulo de 2px (nada
+   de círculo ou pílula no design system), vermelho de marca como fundo. */
+.inst-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  padding: 10px 14px;
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0);
+  transition: opacity 180ms ease;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .inst-cursor {
+    display: none;
+  }
+}
+
+/* Destaque maior e título mais forte no primeiro card. */
+.inst-card--featured .inst-card__title {
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+}
+
+/* Troca de filtro (View Transitions): os cards que ficam deslizam para o novo lugar. */
+::view-transition-group(*) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Artigo: título palavra a palavra. */
+.inst-kw {
+  display: inline-block;
+  animation: inst-kw 560ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--w, 0) * 38ms);
+}
+
+@keyframes inst-kw {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+}
+
+/* Capa do artigo: moldura corta o zoom; o parallax roda por scroll (CSS puro). */
+.inst-blog__cover {
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+@keyframes inst-cover {
+  from {
+    transform: scale(1.14);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes inst-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .inst-blog__cover-img {
+    animation: inst-cover linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 55%;
+  }
+
+  /* A "Resposta rápida" fica de fora: parada no meio da entrada ela ficava
+     semitransparente e perdia contraste (axe no tablet). */
+  .inst-blog__body h2 {
+    animation: inst-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 45%;
+  }
+}
+
+/* Clique no h2 copia o link da seção (SectionLinkCopy marca data-copy). */
+.inst-blog__body[data-copy] h2 {
+  cursor: pointer;
+}
+
+.inst-blog__body[data-copy] h2::after {
+  content: " #";
+  color: var(--gray-300);
+  opacity: 0;
+  transition:
+    opacity 200ms ease,
+    color 200ms ease;
+}
+
+.inst-blog__body[data-copy] h2:hover::after {
+  color: var(--red-ink);
+  opacity: 1;
+}
+
+.inst-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 80;
+  margin: 0;
+  padding: 12px 18px;
+  border-radius: 2px;
+  background: var(--black);
+  color: var(--cream);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.inst-toast[data-show] {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+/* "Faltam X min" na coluna do sumário. */
+.inst-readleft {
+  margin: 28px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Voltar ao topo: quadrado de 2px, vermelho de marca; acima da barra mobile. */
+.inst-totop {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 55;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  visibility: hidden;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 220ms;
+}
+
+.inst-totop[data-show] {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.inst-totop:hover {
+  background: var(--red-dark);
+}
+
+.inst-totop:focus-visible {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .inst-bloghero__title {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+  }
+
+  /* No mobile existe a barra fixa de CTA (InstMobileCta): o botão sobe acima dela. */
+  .inst-totop {
+    right: 16px;
+    bottom: calc(var(--inst-mobile-cta-height) + 16px);
+  }
+}
+
+/* Movimento reduzido: tudo parado e visível. */
+@media (prefers-reduced-motion: reduce) {
+  .inst-kin__line > span,
+  .inst-kw {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .inst-marquee {
+    white-space: normal;
+  }
+
+  .inst-marquee__track {
+    animation: none;
+    display: block;
+  }
+
+  .inst-marquee__group {
+    flex-wrap: wrap;
+    padding-right: 0;
+  }
+
+  .inst-marquee__group[data-copy="1"] {
+    display: none;
+  }
+
+  .inst-reveal .inst-card,
+  .inst-reveal[data-ready] .inst-card:not([data-in]) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .inst-blog__cover-img,
+  .inst-blog__body h2,
+  .inst-blog__summary {
+    animation: none;
+  }
+
+  .inst-cursor,
+  .inst-toast,
+  .inst-totop {
+    transition: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}
+
+.inst-manifest__label {
+  margin-bottom: 24px;
 }

@@ -4,7 +4,9 @@ import type { Project } from "@/lib/portfolio";
 // aprovado "Site institucional para Felipe/Site Institucional.dc.html".
 // Os projetos vêm de lib/portfolio.ts — fonte única do portfólio.
 
-export const EMAIL = "contato@madebyfelipe.com.br";
+// Mesma caixa do form da imersão e das páginas legais (lib/legal.ts): o
+// site exibia contato@, mas é alo@ que recebe e autentica no SMTP.
+export { CONTATO_EMAIL as EMAIL } from "@/lib/legal";
 
 export const social = [
   {
@@ -114,7 +116,7 @@ export const process = [
       {
         num: "02",
         title: "Workshop",
-        copy: "Dois dias de imersão guiada, onde as quatro áreas viram estratégia."
+        copy: "Dois dias de imersão guiada, onde as seis áreas viram estratégia."
       },
       {
         num: "03",
@@ -200,8 +202,8 @@ export const depoimentos = [
   }
 ];
 
-// Props "Agenda" do protótipo (numProjetos / mesImersao).
-export const agenda = { numProjetos: 3, mesImersao: "outubro" };
+// Capacidade do estúdio; disponibilidade é confirmada no contato inicial.
+export const agenda = { numProjetos: 3 };
 
 // Imagem de capa do projeto no hub — mesma regra do grid atual do portfólio.
 // O card abre o case completo já existente em /portfolio/[slug].
