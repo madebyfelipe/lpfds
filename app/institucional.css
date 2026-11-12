@@ -4147,74 +4147,6 @@
   font-size: 20px;
 }
 
-/* ---- Marcas ------------------------------------------------------------- */
-
-.inst-clients__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 48px;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 40px var(--inst-pad) 160px;
-  border-top: 1px solid var(--line-inverse);
-}
-
-.inst-clients__title {
-  max-width: 14em;
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.35;
-  font-weight: 500;
-}
-
-.inst-clients__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.inst-clients__cell:nth-child(n + 5) {
-  border-top: 1px solid var(--line-inverse);
-}
-
-.inst-clients__link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  height: 100%;
-  padding: 32px 12px 24px;
-  text-align: center;
-  color: var(--cream);
-}
-
-.inst-clients__name {
-  display: grid;
-  place-items: center;
-  min-height: 3.2em;
-  font-size: clamp(1.125rem, 0.75rem + 0.9vw, 1.625rem);
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  transition: color 180ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.inst-clients__link:hover .inst-clients__name {
-  color: var(--red-ink);
-}
-
-.inst-clients__cat {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gray-300);
-}
-
 /* ---- Tese ("We close that gap") ------------------------------------------ */
 
 .inst-thesis {
@@ -4262,124 +4194,6 @@
   margin: 72px auto 0;
   font-size: 0.9375rem;
   line-height: 1.45;
-}
-
-/* ---- Projetos (superfície clara) ----------------------------------------- */
-
-.inst-stories__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 10fr);
-  gap: 0 48px;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 112px var(--inst-pad) 40px;
-}
-
-.inst-stories__label {
-  align-self: start;
-  position: sticky;
-  top: calc(var(--inst-nav-h) + 24px);
-}
-
-.inst-stories__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.inst-story + .inst-story {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--gray-200);
-}
-
-.inst-story__link {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 16px;
-  color: var(--black);
-}
-
-.inst-story__media {
-  position: relative;
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
-  border-radius: 2px;
-  background: var(--gray-100);
-}
-
-.inst-story__img {
-  object-fit: cover;
-  transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.inst-story__link:hover .inst-story__img {
-  transform: scale(1.03);
-}
-
-.inst-story__info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.inst-story__count {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gray-500);
-}
-
-.inst-story__client {
-  margin-top: 14px;
-  font-size: 1.375rem;
-  line-height: 1.15;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-
-.inst-story__link:hover .inst-story__client {
-  color: var(--red-ink);
-}
-
-.inst-story__tagline {
-  max-width: 30ch;
-  margin-top: 12px;
-  font-size: 1.125rem;
-  line-height: 1.3;
-  color: var(--gray-500);
-}
-
-.inst-story__chip {
-  margin-top: 40px;
-  padding: 6px 10px;
-  border-radius: 2px;
-  background: var(--gray-100);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.inst-stories__all {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 10fr) auto;
-  gap: 48px;
-  align-items: center;
-  margin-top: 20px;
-  padding: 20px 0 8px;
-  border-top: 1px solid var(--gray-300);
-  font-size: clamp(1.75rem, 1rem + 2vw, 2.75rem);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--gray-500);
-  transition: color 180ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.inst-stories__all:hover {
-  color: var(--black);
 }
 
 /* ---- Entregas ("What we can help with") ---------------------------------- */
@@ -4767,23 +4581,10 @@
 /* ---- Responsivo ---------------------------------------------------------- */
 
 @media (max-width: 900px) {
-  .inst-clients__inner,
   .inst-help__inner,
   .inst-faq__inner {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;
-  }
-
-  .inst-clients__inner {
-    padding-bottom: 96px;
-  }
-
-  .inst-clients__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .inst-clients__cell:nth-child(n + 3) {
-    border-top: 1px solid var(--line-inverse);
   }
 
   .inst-thesis {
@@ -4806,29 +4607,6 @@
     gap: 38cqw;
     font-size: 15cqw;
     white-space: normal;
-  }
-
-  .inst-stories__inner {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
-    padding-top: 88px;
-  }
-
-  .inst-stories__label {
-    position: static;
-  }
-
-  .inst-story__link {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .inst-story__chip {
-    margin-top: 20px;
-  }
-
-  .inst-stories__all {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 16px;
   }
 
   .inst-help__inner {
@@ -4892,15 +4670,29 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .inst-story__img,
   .inst-help__item,
   .inst-faq__q {
     transition: none;
   }
+}
 
-  .inst-story__link:hover .inst-story__img {
-    transform: none;
-  }
+/* ---- Entrada ao rolar ------------------------------------------------------
+   `ScrollFx` marca <html data-scrollfx="on"> e liga `data-inview` por
+   IntersectionObserver quando o elemento entra na viewport. O opacity:0 só
+   vale sob `[data-scrollfx]`: sem JS (ou com prefers-reduced-motion, que o
+   próprio ScrollFx não liga o atributo) os elementos [data-reveal] nascem
+   visíveis — nunca ficam presos escondidos. */
+:root[data-scrollfx] [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 0.84, 0.44, 1),
+    transform 0.7s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
+:root[data-scrollfx] [data-reveal][data-inview] {
+  opacity: 1;
+  transform: none;
 }
 
 .inst-manifest__label {

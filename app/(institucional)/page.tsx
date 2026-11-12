@@ -4,20 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { DepoSlider } from "@/components/institucional/DepoSlider";
-import { deliverables, process, projectCover } from "@/lib/institucional";
-import { projects } from "@/lib/portfolio";
+import { ScrollFx } from "@/components/institucional/ScrollFx";
+import { deliverables, process } from "@/lib/institucional";
 import { SITE_URL } from "@/lib/site";
 
 const pad = (n: number) => String(n).padStart(2, "0");
-
-// Grade de marcas: os oito primeiros clientes do portfólio, na ordem dele.
-const clientes = projects.slice(0, 8);
-
-// Cases em destaque: os de marca primeiro, que é o que o consultório contrata.
-const destaque = ["alves-nabuco", "rei-das-barras", "doce-afeto", "liz-helena", "estruturart"];
-const cases = destaque
-  .map((slug) => projects.find((p) => p.slug === slug))
-  .filter((p): p is (typeof projects)[number] => Boolean(p));
 
 // Os oito passos de `process` agrupados nos três da jornada. O texto do 3º é o
 // do passo 08, palavra por palavra.
@@ -121,6 +112,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main id="conteudo">
+      <ScrollFx />
       {/* Hero no padrão do Monolog: superfície escura com foto desfocada e
           grão, nav por cima (InstNav fica transparente enquanto o hero está
           sob ela), texto curto centralizado e o nome da marca na largura
@@ -172,12 +164,16 @@ export default function Home() {
             </ScheduleLink>
           </div>
           <div className="inst-manifest__body">
-            <p className="inst-manifest__text">
+            <p className="inst-manifest__text" data-reveal>
               Made by Felipe constrói marca a partir da leitura do negócio.
               Receita, carteira, valor de sessão e ocupação de agenda entram na
               mesa antes de qualquer decisão visual.
             </p>
-            <p className="inst-manifest__text">
+            <p
+              className="inst-manifest__text"
+              data-reveal
+              style={{ transitionDelay: "0.08s" }}
+            >
               O foco em consultório de psicologia veio da mesma constatação
               repetida na região: profissionais com formação longa e uma
               presença que comunica muito abaixo do próprio preparo.
@@ -199,36 +195,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Marcas que passaram pelo estúdio (padrão "Clients" do Monolog): rótulo
-          à esquerda e grade 4 × 2 à direita. Sem arquivos de logo, os nomes
-          entram como marca tipográfica, cada um levando ao case. Fonte única:
-          lib/portfolio.ts — os mesmos clientes já públicos em /projetos. */}
-      <section className="inst-dark inst-clients" aria-labelledby="clientes-titulo">
-        <div className="inst-clients__inner">
-          <h2 id="clientes-titulo" className="inst-clients__title">
-            Marcas que passaram pelo estúdio
-          </h2>
-          <ul className="inst-clients__grid">
-            {clientes.map((p) => (
-              <li key={p.slug} className="inst-clients__cell">
-                <Link href={`/portfolio/${p.slug}`} className="inst-clients__link">
-                  <span className="inst-clients__name">{p.client}</span>
-                  <span className="inst-clients__cat">{p.category}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {/* Declaração em tipo gigante com uma foto atrás do meio da frase
-          ("We close that gap" do Monolog). A frase é a tese do método. */}
+          ("We close that gap" do Monolog). A frase é a tese do método. A foto
+          é a mesma do /hub (public/eu.jpg, recortada 4:5) — antes era uma
+          foto de evento (hero/05.jpg), que ficava com o rosto pequeno e mal
+          enquadrado atrás do texto. */}
       <section className="inst-dark inst-thesis" aria-labelledby="tese-titulo">
         <div className="inst-thesis__stage">
-          <div className="inst-thesis__photo">
+          <div className="inst-thesis__photo" data-reveal>
             <Image
-              src="/institucional/hero/05.jpg"
-              alt="Felipe ao lado do painel do Know How Experience"
+              src="/institucional/felipe-traducao.jpg"
+              alt="Felipe, estrategista de marca da Made by Felipe"
               fill
               sizes="(max-width: 900px) 40vw, 240px"
               className="inst-thesis__img"
@@ -238,51 +215,10 @@ export default function Home() {
             <span>Branding é</span> <span>tradução</span>
           </h2>
         </div>
-        <p className="inst-thesis__copy">
+        <p className="inst-thesis__copy" data-reveal>
           A marca do seu consultório não é inventada — ela é traduzida de seis
           áreas que a gente investiga até encontrar o que só existe em você.
         </p>
-      </section>
-
-      {/* Projetos (padrão "Success Stories"): superfície clara, rótulo à
-          esquerda, foto grande, contador e texto à direita. Sem métrica: não
-          há número de resultado verificado — no lugar, a categoria do case. */}
-      <section className="inst-stories" aria-labelledby="projetos-titulo">
-        <div className="inst-stories__inner">
-          <h2 id="projetos-titulo" className="inst-dot inst-stories__label">
-            Projetos
-          </h2>
-          <ol className="inst-stories__list">
-            {cases.map((p, i) => (
-              <li key={p.slug} className="inst-story">
-                <Link href={`/portfolio/${p.slug}`} className="inst-story__link">
-                  <span className="inst-story__media">
-                    <Image
-                      src={projectCover(p)}
-                      alt=""
-                      fill
-                      sizes="(max-width: 900px) 100vw, 46vw"
-                      className="inst-story__img"
-                    />
-                  </span>
-                  <span className="inst-story__info">
-                    <span className="inst-story__count" aria-hidden="true">
-                      Case ← {pad(i + 1)}/{pad(cases.length)}
-                    </span>
-                    <span className="inst-story__client">{p.client}</span>
-                    <span className="inst-story__tagline">{p.tagline}</span>
-                    <span className="inst-story__chip">{p.category}</span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
-          <Link href="/projetos" className="inst-stories__all">
-            <span aria-hidden="true">##</span>
-            <span className="inst-stories__all-text">Ver todos os projetos</span>
-            <span aria-hidden="true">(→)</span>
-          </Link>
-        </div>
       </section>
 
       {/* id="servicos": âncora de Entregas, usada por links externos e pelo /hub.
@@ -297,14 +233,19 @@ export default function Home() {
               O que entregamos
             </h2>
             <ul className="inst-help__list">
-              {deliverables.map((item) => (
-                <li key={item} className="inst-help__item">
+              {deliverables.map((item, i) => (
+                <li
+                  key={item}
+                  className="inst-help__item"
+                  data-reveal
+                  style={{ transitionDelay: `${i * 0.05}s` }}
+                >
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="inst-help__card">
+          <div className="inst-help__card" data-reveal>
             <Image
               src="/institucional/hero/04.jpg"
               alt="Felipe em entrevista no palco do Know How Experience"
@@ -326,7 +267,7 @@ export default function Home() {
         </h2>
         <ol className="inst-journey__steps">
           {jornada.map((passo, i) => (
-            <li key={passo.titulo} className="inst-journey__step">
+            <li key={passo.titulo} className="inst-journey__step" data-reveal>
               <p className="inst-journey__num">Passo • {pad(i + 1)}</p>
               <div className="inst-journey__text">
                 <h3 className="inst-journey__name">{passo.titulo}</h3>
@@ -385,7 +326,14 @@ export default function Home() {
             </h2>
             <div className="inst-faq__list">
               {faq.map((item, i) => (
-                <details key={item.q} className="inst-faq__item" name="faq" open={i === 0}>
+                <details
+                  key={item.q}
+                  className="inst-faq__item"
+                  name="faq"
+                  open={i === 0}
+                  data-reveal
+                  style={{ transitionDelay: `${i * 0.05}s` }}
+                >
                   <summary className="inst-faq__q">{item.q}</summary>
                   <p className="inst-faq__a">{item.a}</p>
                 </details>
@@ -412,20 +360,43 @@ export default function Home() {
           />
         </div>
         <h2 id="final-titulo" className="inst-final__title">
-          <span className="inst-final__line inst-final__line--1">Vamos traduzir</span>{" "}
-          <span className="inst-final__line inst-final__line--2">o seu consultório</span>{" "}
-          <span className="inst-final__line inst-final__line--3">em uma</span>{" "}
-          <span className="inst-final__line inst-final__line--4">
+          <span
+            className="inst-final__line inst-final__line--1"
+            data-reveal
+          >
+            Vamos traduzir
+          </span>{" "}
+          <span
+            className="inst-final__line inst-final__line--2"
+            data-reveal
+            style={{ transitionDelay: "0.08s" }}
+          >
+            o seu consultório
+          </span>{" "}
+          <span
+            className="inst-final__line inst-final__line--3"
+            data-reveal
+            style={{ transitionDelay: "0.16s" }}
+          >
+            em uma
+          </span>{" "}
+          <span
+            className="inst-final__line inst-final__line--4"
+            data-reveal
+            style={{ transitionDelay: "0.24s" }}
+          >
             <span aria-hidden="true">→ </span>marca
           </span>
         </h2>
-        <ScheduleLink className="inst-btn inst-btn--lg">
-          Conversar por 15 minutos
-          <span className="inst-btn__arrow" aria-hidden="true">
-            ↗
-          </span>
-        </ScheduleLink>
-        <figure className="inst-final__quote">
+        <div data-reveal style={{ transitionDelay: "0.3s" }}>
+          <ScheduleLink className="inst-btn inst-btn--lg">
+            Conversar por 15 minutos
+            <span className="inst-btn__arrow" aria-hidden="true">
+              ↗
+            </span>
+          </ScheduleLink>
+        </div>
+        <figure className="inst-final__quote" data-reveal style={{ transitionDelay: "0.36s" }}>
           <blockquote>“O que mudou não foi a aparência, foi a conversa inicial.”</blockquote>
           <figcaption>— Psicóloga, Itu</figcaption>
         </figure>
