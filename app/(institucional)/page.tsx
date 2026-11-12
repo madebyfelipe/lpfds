@@ -5,8 +5,28 @@ import Link from "next/link";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { Depoimentos } from "@/components/institucional/Depoimentos";
 import { InstContato } from "@/components/institucional/InstContato";
-import { MetodologiaFlow } from "@/components/institucional/MetodoDiagrams";
-import { agenda, deliverables, heroStrip, methodIntro } from "@/lib/institucional";
+import { CountUp } from "@/components/institucional/CountUp";
+import { MetodoFoco } from "@/components/institucional/MetodoFoco";
+import {
+  agenda,
+  deliverables,
+  heroStrip,
+  methodIntro,
+  positioning,
+  process
+} from "@/lib/institucional";
+
+// Números da oferta, derivados dos dados aprovados — se o método mudar de
+// seis áreas ou oito passos, a faixa acompanha sozinha.
+const facts = [
+  { num: 2, label: "dias de imersão" },
+  { num: 45, label: "dias até estar no ar" },
+  { num: positioning.length, label: "áreas de posicionamento" },
+  {
+    num: process.reduce((n, etapa) => n + etapa.steps.length, 0),
+    label: "passos em duas etapas"
+  }
+];
 
 // Title/description da home vêm do copy aprovado e sobrescrevem os do
 // layout raiz, que seguem servindo /hub, /contato e /portfolio.
@@ -39,25 +59,43 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main id="conteudo">
-      <header className="inst-hero">
+      {/* Hero em cartaz (referência: Monolog): tipo gigante, texto de apoio em
+          duas colunas e uma faixa de números. Os números são os da própria
+          oferta (2 dias, 45 dias, 6 áreas, 8 passos) — nenhum dado de
+          resultado ou de cliente. */}
+      <header className="inst-hero inst-hero--poster">
         <h1 className="inst-hero__title">
           Construa a marca do seu consultório em{" "}
           <span className="inst-hero__accent">dois dias de imersão</span>.
         </h1>
-        <p className="inst-hero__lead">
-          Dois dias com você. Posicionamento, identidade visual e verbal no ar
-          em 45 dias.
-        </p>
-        <p className="inst-hero__note">
-          Dentro do artigo 20 do Código de Ética Profissional do Psicólogo.
-        </p>
-        <p className="inst-hero__note">
-          Antes da imersão, 15 minutos para conversar sobre a marca do seu
-          consultório.
-        </p>
-        <ScheduleLink className="inst-hero__cta">
-          Conversar por 15 minutos →
-        </ScheduleLink>
+        <div className="inst-hero__row">
+          <p className="inst-hero__lead">
+            Dois dias com você. Posicionamento, identidade visual e verbal no
+            ar em 45 dias.
+          </p>
+          <div className="inst-hero__aside">
+            <p className="inst-hero__note">
+              Dentro do artigo 20 do Código de Ética Profissional do Psicólogo.
+            </p>
+            <p className="inst-hero__note">
+              Antes da imersão, 15 minutos para conversar sobre a marca do seu
+              consultório.
+            </p>
+            <ScheduleLink className="inst-hero__cta">
+              Conversar por 15 minutos →
+            </ScheduleLink>
+          </div>
+        </div>
+        <dl className="inst-facts">
+          {facts.map((f) => (
+            <div key={f.label} className="inst-facts__item">
+              <dt className="inst-facts__label">{f.label}</dt>
+              <dd className="inst-facts__num">
+                <CountUp to={f.num} />
+              </dd>
+            </div>
+          ))}
+        </dl>
       </header>
 
       <div className="inst-strip" tabIndex={0} role="group" aria-label="Fotos de Felipe">
@@ -82,7 +120,14 @@ export default function Home() {
         <div className="inst-section">
           <p className="inst-kicker inst-kicker--inverse">— O método</p>
           <p className="inst-method__intro">{methodIntro}</p>
-          <MetodologiaFlow />
+          <MetodoFoco
+            titulo="h2"
+            itens={positioning.map((a) => ({
+              chave: a.letter,
+              titulo: a.title,
+              texto: a.copy
+            }))}
+          />
           <Link href="/metodologia" className="inst-method__more">
             Ver o método completo →
           </Link>
