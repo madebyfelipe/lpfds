@@ -41,7 +41,7 @@ export default function CaseRozeliPage() {
   return (
     <main id="conteudo">
       <header className="inst-hero">
-        <p className="inst-kicker inst-kicker--tight">— Case · Site institucional · Psicologia</p>
+        <p className="inst-kicker inst-kicker--tight">Case · Site institucional · Psicologia</p>
         <h1 className="inst-hero__title">
           Um site que recebe <span className="inst-hero__accent">com calma e cuidado</span>.
         </h1>
@@ -58,7 +58,7 @@ export default function CaseRozeliPage() {
       </header>
 
       <section className="inst-section inst-section--rule">
-        <p className="inst-kicker">— Como ficou no celular</p>
+        <p className="inst-kicker">Como ficou no celular</p>
         <div className="inst-case__shots" tabIndex={0} role="region" aria-label="Capturas do site no celular">
           {capturas.map((c) => (
             <figure key={c.src} className="inst-case__figure">
@@ -71,7 +71,7 @@ export default function CaseRozeliPage() {
 
       <section className="inst-dark">
         <div className="inst-section">
-          <p className="inst-kicker inst-kicker--inverse">— O que foi feito</p>
+          <p className="inst-kicker inst-kicker--inverse">O que foi feito</p>
           <ol className="inst-proc__rows inst-case__steps">
             {entregas.map((e, i) => (
               <li key={e} className="inst-proc__row">
@@ -84,7 +84,7 @@ export default function CaseRozeliPage() {
       </section>
 
       <section className="inst-section">
-        <p className="inst-kicker inst-kicker--tight">— Processo</p>
+        <p className="inst-kicker inst-kicker--tight">Processo</p>
         <p className="inst-contact__line">
           Veja as etapas do nosso processo criativo em{" "}
           <Link href="/cases" className="inst-link">cases</Link> e como pesquisamos

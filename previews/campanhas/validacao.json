@@ -1,0 +1,82 @@
+[
+  {
+    "width": 1440,
+    "view": "overview",
+    "violations": []
+  },
+  {
+    "width": 1440,
+    "view": "leads",
+    "violations": []
+  },
+  {
+    "width": 1440,
+    "view": "finance",
+    "violations": []
+  },
+  {
+    "width": 1440,
+    "view": "campaigns",
+    "violations": []
+  },
+  {
+    "width": 1024,
+    "view": "overview",
+    "violations": []
+  },
+  {
+    "width": 1024,
+    "view": "leads",
+    "violations": []
+  },
+  {
+    "width": 1024,
+    "view": "finance",
+    "violations": []
+  },
+  {
+    "width": 1024,
+    "view": "campaigns",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "view": "overview",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "view": "leads",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "view": "finance",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "view": "campaigns",
+    "violations": []
+  },
+  {
+    "width": 320,
+    "view": "overview",
+    "violations": []
+  },
+  {
+    "width": 320,
+    "view": "leads",
+    "violations": []
+  },
+  {
+    "width": 320,
+    "view": "finance",
+    "violations": []
+  },
+  {
+    "width": 320,
+    "view": "campaigns",
+    "violations": []
+  }
+]

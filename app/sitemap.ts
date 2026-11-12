@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${baseUrl}/sobre`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/metodologia`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -35,6 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       : []),
     {
       url: `${baseUrl}/hub`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/recem-formados`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

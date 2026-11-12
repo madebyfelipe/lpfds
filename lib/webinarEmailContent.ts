@@ -13,7 +13,7 @@
  * (EVENTO/MEET_URL) — é por ele que a aula acontece.
  */
 
-const URL_WEBINAR = "https://madebyfelipe.com.br/webinar";
+const URL_WEBINAR = "https://www.madebyfelipe.com.br/webinar";
 
 /** Videochamada oficial (Google Meet) e rótulos do evento, como no convite. */
 const MEET_URL = "https://meet.google.com/ayi-kbtv-inw";

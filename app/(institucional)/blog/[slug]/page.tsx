@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
+import { MButtonInner } from "@/components/institucional/home/MButton";
 import { ComentarioForm } from "@/components/institucional/ComentarioForm";
 import { AuthorBox } from "@/components/institucional/AuthorBox";
 import { BackToTop } from "@/components/institucional/BackToTop";
@@ -122,7 +123,7 @@ export default async function PostPage({ params }: Props) {
       <article>
         <header className="inst-legal__head">
           <p className="inst-kicker inst-kicker--tight">
-            — <Link href="/blog" className="inst-blog__back">Blog</Link>
+            <Link href="/blog" className="inst-blog__back">Blog</Link>
             {" / "}
             <Link href={`/blog?tema=${tema}`} className="inst-blog__back">
               {temaLabel(tema)}
@@ -166,7 +167,7 @@ export default async function PostPage({ params }: Props) {
             {/* Resposta direta no topo: o trecho que buscadores e assistentes citam. */}
             {post.summary && (
               <aside className="inst-blog__summary" aria-label="Resposta rápida">
-                <p className="inst-kicker inst-kicker--tight">— Resposta rápida</p>
+                <p className="inst-kicker inst-kicker--tight">Resposta rápida</p>
                 <p className="inst-blog__summary-text">{post.summary}</p>
               </aside>
             )}
@@ -195,12 +196,12 @@ export default async function PostPage({ params }: Props) {
           <div className="inst-post__side">
             {hasToc && (
               <nav className="inst-toc" aria-label="Neste artigo">
-                <p className="inst-kicker inst-kicker--tight">— Neste artigo</p>
+                <p className="inst-kicker inst-kicker--tight">Neste artigo</p>
                 <PostToc headings={headings} spy />
               </nav>
             )}
             <div className="inst-post__share">
-              <p className="inst-kicker inst-kicker--tight">— Compartilhar</p>
+              <p className="inst-kicker inst-kicker--tight">Compartilhar</p>
               <ShareBar url={url} title={post.title} />
             </div>
             <ReadingLeft targetId="leitura" minutes={minutes} />
@@ -208,7 +209,7 @@ export default async function PostPage({ params }: Props) {
         </div>
         <footer className="inst-post__end">
           <div className="inst-post__share-end">
-            <p className="inst-kicker inst-kicker--tight">— Compartilhar</p>
+            <p className="inst-kicker inst-kicker--tight">Compartilhar</p>
             <ShareBar url={url} title={post.title} />
           </div>
           <AuthorBox />
@@ -218,20 +219,20 @@ export default async function PostPage({ params }: Props) {
       {/* CTA de todo post: a conversa de 15 minutos (mesmo link e mesma
           frase do hero da home). */}
       <aside className="inst-blog__cta" aria-label="Próximo passo">
-        <p className="inst-kicker inst-kicker--tight">— Próximo passo</p>
+        <p className="inst-kicker inst-kicker--tight">Próximo passo</p>
         <p className="inst-blog__cta-line">
           Antes da imersão, 15 minutos para conversar sobre a marca do seu
           consultório.
         </p>
-        <ScheduleLink className="inst-hero__cta">
-          Conversar por 15 minutos →
+        <ScheduleLink className="mbtn mbtn--secondary inst-blog__cta-btn">
+          <MButtonInner>Conversar por 15 minutos</MButtonInner>
         </ScheduleLink>
       </aside>
 
       {/* Comentários: só os aprovados (content/blog/comentarios.ts); o form
           manda para moderação por e-mail (ver lib/comentarios.ts). */}
       <section className="inst-dark inst-blog__comments" aria-labelledby="comentarios-titulo">
-        <p className="inst-kicker inst-kicker--inverse inst-kicker--tight">— Comentários</p>
+        <p className="inst-kicker inst-kicker--inverse inst-kicker--tight">Comentários</p>
         <h2 id="comentarios-titulo" className="inst-blog__cta-line">
           E no seu consultório, como isso aparece? Conte a sua experiência ou
           deixe a sua dúvida.
@@ -262,7 +263,7 @@ export default async function PostPage({ params }: Props) {
 
       {related.length > 0 && (
         <section className="inst-blog__related" aria-labelledby="relacionados-titulo">
-          <p className="inst-kicker inst-kicker--tight">— Continue lendo</p>
+          <p className="inst-kicker inst-kicker--tight">Continue lendo</p>
           <h2 id="relacionados-titulo" className="inst-blog__cta-line">
             Mais sobre os mesmos temas.
           </h2>

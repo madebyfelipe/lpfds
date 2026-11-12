@@ -58,40 +58,48 @@
 .inst,
 .inst-nav,
 .inst-footer {
-  --cream: #f6f6f6;
-  --black: #151515;
+  --cream: #e8e8e3;
+  --black: #080807;
   --charcoal: #2b2d2b;
   --red: #bc0319;
   --red-dark: #8f0313;
   /* Vermelho como TINTA (texto, traço de SVG, sublinhado, anel de foco).
-     Sobre superfície clara é o vermelho da marca — 6.1:1. O mesmo tom sobre
-     preto cai para 2.8:1, abaixo dos 4.5:1 de texto e dos 3:1 de elemento
-     gráfico do WCAG, então nas superfícies escuras ele clareia. Fundo
-     vermelho continua em --red: ali quem precisa de contraste é o texto. */
+     Sempre o vermelho real da marca, nos dois temas (Felipe, nov/2026: nada
+     da versão clareada #ef4358). Sobre o escuro ele rende ~2.8:1 — use em
+     tipo grande/ênfase, não em texto corrido pequeno. */
   --red-ink: #bc0319;
   /* Tinta sobre o vermelho. Fixa nos dois temas, porque o vermelho é a única
      cor da paleta que não inverte: usar --cream aqui fazia o texto virar
      preto sobre vermelho (2.75:1) quando o tema escuro trocava os papéis. */
   --on-red: #f6f6f6;
-  --gray-100: #ececec;
-  --gray-200: #dcdcdc;
+  --gray-100: #ddddd5;
+  --gray-200: #d1d1c7;
   --gray-300: #b8b8b8;
-  --gray-500: #696969;
+  --gray-500: #6b645c;
   --gray-700: #454545;
 
   /* Derivados que precisam inverter junto com o tema: linhas e rótulos
      que ficam sobre a superfície oposta (.inst-dark) e o fundo da nav. */
-  --line-inverse: rgba(246, 246, 246, 0.18);
-  --line-inverse-strong: rgba(246, 246, 246, 0.4);
-  --nav-bg: rgba(246, 246, 246, 0.94);
+  --line-inverse: rgba(232, 232, 227, 0.18);
+  --line-inverse-strong: rgba(232, 232, 227, 0.4);
+  /* Fundo da nav: OPACO, e por isso é só var(--cream) — resolve na hora do
+     uso, então inverte junto com o tema sem precisar ser redeclarado no
+     bloco escuro. Era rgba(…, 0.94) e vazava: a nav é sticky e não tem
+     backdrop-filter, então 6% bastavam para o texto da página passar
+     legível por trás dela e colidir com o logo no mobile (DPR alto deixa a
+     letra nítida mesmo lavada). No globals.css a barra translúcida sempre
+     vem acompanhada de blur; aqui o site é editorial, não glassmorphism,
+     então a saída é opacidade — sem custo de GPU num elemento que repinta
+     a cada frame de scroll. */
+  --nav-bg: var(--cream);
   /* Texto "apagado" sobre a superfície invertida (.inst-dark): a lista de
      entregas da home. #696969 rende 3.3:1 sobre #151515 e 5.3:1 sobre
      #f6f6f6, então passa como texto grande nos dois temas sem inverter. */
   --dim-inverse: #696969;
 
   --inst-font: "Neue Haas Grotesk Display", "Archivo", Helvetica, Arial, sans-serif;
-  --inst-max: 1200px;
-  --inst-pad: 40px;
+  --inst-max: 1440px;
+  --inst-pad: clamp(12px, 8.2px + 1.24vw, 28px);
 
   font-family: var(--inst-font);
   font-size: 16px;
@@ -105,17 +113,17 @@
 :root[data-inst-theme="dark"] .inst,
 :root[data-inst-theme="dark"] .inst-nav,
 :root[data-inst-theme="dark"] .inst-footer {
-  --cream: #151515;
-  --black: #f6f6f6;
-  --gray-100: #1c1c1c;
-  --gray-200: #2a2a2a;
+  --cream: #080807;
+  --black: #e8e8e3;
+  --gray-100: #181715;
+  --gray-200: #2a2925;
   --gray-300: #696969;
   --gray-500: #9a9a9a;
   --gray-700: #b8b8b8;
 
-  --line-inverse: rgba(21, 21, 21, 0.18);
-  --line-inverse-strong: rgba(21, 21, 21, 0.4);
-  --nav-bg: rgba(21, 21, 21, 0.94);
+  --line-inverse: rgba(8, 8, 7, 0.18);
+  --line-inverse-strong: rgba(8, 8, 7, 0.4);
+  /* --nav-bg não se repete aqui: é var(--cream), que este bloco já inverteu. */
 }
 
 .inst {
@@ -212,23 +220,6 @@
   color: var(--cream);
 }
 
-/* A superfície REAL é XOR(seção .inst-dark, tema escuro): a nav e o rodapé
-   acompanham porque também trocam de fundo com o tema. */
-.inst-dark,
-.inst-footer {
-  --red-ink: #ef4358;
-}
-
-:root[data-inst-theme="dark"] .inst,
-:root[data-inst-theme="dark"] .inst-nav {
-  --red-ink: #ef4358;
-}
-
-:root[data-inst-theme="dark"] .inst-dark,
-:root[data-inst-theme="dark"] .inst-footer {
-  --red-ink: #bc0319;
-}
-
 .inst-red {
   background: var(--red);
   color: var(--on-red);
@@ -262,20 +253,6 @@
 
 .inst-kicker--lg {
   margin-bottom: 56px;
-}
-
-/* Por cima do hero da home: sem fundo nem filete, tinta da superfície escura
-   (--cream) e o CTA invertido. O vermelho como tinta segue a regra de
-   .inst-dark (clareia no tema claro, volta ao da marca no escuro). Com o menu
-   mobile aberto a barra volta ao normal, para casar com o painel. */
-.inst-nav[data-hero="true"]:not([data-open="true"]) {
-  --red-ink: #ef4358;
-  background: transparent;
-  border-bottom-color: transparent;
-}
-
-:root[data-inst-theme="dark"] .inst-nav[data-hero="true"]:not([data-open="true"]) {
-  --red-ink: #bc0319;
 }
 
 /* Botão claro/escuro — mesmo desenho do /hub, nos tokens daqui. */
@@ -375,23 +352,74 @@
 }
 
 /* Faixa de fotos abaixo do hero — em cor, sem filtro. */
+/* Faixa de fotos do hero — carrossel contínuo.
+   O trilho carrega duas cópias da lista e anda até -50%, então o fim da 1ª
+   cópia cai exatamente sobre o começo da 2ª e o loop não tem salto. Por isso
+   a célula tem largura fixa (25vw), não `flex: 1`. */
 .inst-strip {
-  display: flex;
   width: 100%;
   height: 340px;
+  overflow: hidden;
   border-top: 1px solid var(--gray-200);
   border-bottom: 1px solid var(--gray-200);
 }
 
+.inst-strip__track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  /* O nº de fotos vem inline do page.tsx; os segundos por foto são daqui.
+     A conta é por foto, e não uma duração fixa, porque a distância do loop
+     muda com a viewport: uma volta são 6 células, e a célula mede 25vw no
+     desktop contra 45vw no mobile. Com duração fixa o mobile andava a
+     ~30px/s contra ~60px/s do desktop — metade da velocidade, lento o
+     bastante para parecer parado no celular. */
+  --inst-strip-photos: 6;
+  --inst-strip-sec-per-photo: 6s;
+  animation: inst-strip-scroll
+    calc(var(--inst-strip-photos) * var(--inst-strip-sec-per-photo)) linear
+    infinite;
+}
+
+.inst-strip:hover .inst-strip__track {
+  animation-play-state: paused;
+}
+
+@keyframes inst-strip-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .inst-strip__cell {
-  flex: 1;
-  min-width: 0;
+  flex: 0 0 25vw;
   position: relative;
+  height: 100%;
   background: var(--gray-100);
 }
 
 .inst-strip__img {
   object-fit: cover;
+}
+
+/* Reduced motion: vira um trilho rolável à mão, e a 2ª cópia some para não
+   rolar as fotos em dobro — mesma saída da galeria dos cases.
+   Diferente da galeria, o touch NÃO cai aqui: a faixa continua girando no
+   celular. Lá os itens abrem o lightbox e sem hover não há como pausar antes
+   de mirar; aqui são fotos decorativas, sem alvo de clique, e girar é o
+   comportamento pedido. O reduced motion segue sendo a saída de acessibilidade. */
+@media (prefers-reduced-motion: reduce) {
+  .inst-strip {
+    overflow-x: auto;
+  }
+
+  .inst-strip__track {
+    animation: none;
+  }
+
+  .inst-strip__cell--dup {
+    display: none;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1900,7 +1928,7 @@
   .inst,
   .inst-nav,
   .inst-footer {
-    --inst-pad: 24px;
+    --inst-pad: clamp(12px, 8.2px + 1.24vw, 28px);
   }
 
   .inst-section {
@@ -1938,11 +1966,16 @@
 
   .inst-strip {
     height: 220px;
-    overflow-x: auto;
+  }
+
+  /* Célula mais larga (45vw) = volta mais curta em px, então menos segundos
+     por foto para o carrossel andar na mesma velocidade do desktop. */
+  .inst-strip__track {
+    --inst-strip-sec-per-photo: 3s;
   }
 
   .inst-strip__cell {
-    flex: 0 0 45%;
+    flex: 0 0 45vw;
   }
 
   .inst-project {

@@ -26,7 +26,7 @@ export default function WebinarPage() {
     <main id="conteudo">
       <header className="inst-hero inst-hero--split">
         <div className="inst-hero__col">
-          <p className="inst-kicker">— Workshop ao vivo · Gratuito</p>
+          <p className="inst-kicker">Workshop ao vivo · Gratuito</p>
           <h1 className="inst-hero__title">
             Como transformar seu perfil em{" "}
             <span className="inst-hero__accent">agenda cheia.</span>
@@ -55,7 +55,7 @@ export default function WebinarPage() {
       {/* A tese — frase-âncora sobre a faixa vermelha */}
       <section className="inst-red">
         <div className="inst-section">
-          <p className="inst-kicker inst-kicker--on-red">— A tese</p>
+          <p className="inst-kicker inst-kicker--on-red">A tese</p>
           <p className="inst-webinar__quote">
             A decisão do paciente acontece antes da primeira sessão. O conteúdo é o
             que ocupa esse intervalo.
@@ -66,7 +66,7 @@ export default function WebinarPage() {
       {/* Desarme do Art. 20 */}
       <section className="inst-dark">
         <div className="inst-section">
-          <p className="inst-kicker inst-kicker--inverse">— Antes de tudo</p>
+          <p className="inst-kicker inst-kicker--inverse">Antes de tudo</p>
           <p className="inst-webinar__quote">Divulgar não é infração.</p>
           <p className="inst-webinar__body">
             A aula abre lendo o Art. 20 do Código de Ética na íntegra, alínea por
@@ -79,7 +79,7 @@ export default function WebinarPage() {
 
       {/* A aula, bloco a bloco — só os tópicos e subtópicos */}
       <section className="inst-section">
-        <p className="inst-kicker">— A aula, bloco a bloco</p>
+        <p className="inst-kicker">A aula, bloco a bloco</p>
         <div className="inst-webinar__aula">
           {blocos.map((bloco) => (
             <div key={bloco.rotulo} className="inst-webinar__bloco">
@@ -105,7 +105,7 @@ export default function WebinarPage() {
 
       {/* O que você leva */}
       <section className="inst-section inst-section--rule">
-        <p className="inst-kicker">— O que você leva</p>
+        <p className="inst-kicker">O que você leva</p>
         <p className="inst-method__intro">{webinar.materiais}</p>
         <ul className="inst-webinar__entregas">
           {entregas.map((item) => (
@@ -118,7 +118,7 @@ export default function WebinarPage() {
 
       {/* Para quem é */}
       <section className="inst-section inst-section--rule">
-        <p className="inst-kicker">— Para quem é</p>
+        <p className="inst-kicker">Para quem é</p>
         <p className="inst-webinar__body">{webinar.publico}</p>
       </section>
 
@@ -127,7 +127,7 @@ export default function WebinarPage() {
         <div className="inst-section">
           <div className="inst-imersao">
             <div>
-              <p className="inst-kicker inst-kicker--inverse">— Inscrição</p>
+              <p className="inst-kicker inst-kicker--inverse">Inscrição</p>
               <p className="inst-imersao__title">Garanta sua vaga.</p>
               <p className="inst-webinar__body">
                 {webinar.dataLabel} · {webinar.duracao}. A confirmação e o link de

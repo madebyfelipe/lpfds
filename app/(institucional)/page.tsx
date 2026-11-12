@@ -22,33 +22,33 @@ const jornada = [
     titulo: "Investigamos o seu consultório",
     texto:
       "Entrevista individual e dois dias de imersão guiada, em que as seis áreas do método — Prática, Sujeito, Inquietação, Qualidade, Universo e Estória — viram estratégia, documentada e aprovada com você antes de seguir.",
-    foto: `${H}/passo-1.jpg`,
-    alt: "Mãos organizando anotações num quadro de cortiça durante um workshop de estratégia de marca"
+    foto: `${H}/passo-1-v2.jpg`,
+    alt: "Parede coberta de post-its coloridos com anotações de um workshop de estratégia"
   },
   {
     titulo: "A estratégia vira identidade",
     texto:
       "A plataforma sintetiza a estratégia. Dela saem a identidade verbal — o discurso do consultório — e a identidade visual: cores, grafismos e tipografia.",
-    foto: `${H}/passo-2.jpg`,
-    alt: "Guia de marca impresso e aberto sobre a mesa, com a paleta de cores e a tipografia"
+    foto: `${H}/passo-2-v2.jpg`,
+    alt: "Caderno com esboços de símbolos e um lápis sobre o teclado de um notebook"
   },
   {
     titulo: "A marca vai para o ar",
     texto: passo("08"),
-    foto: `${H}/passo-3.jpg`,
-    alt: "Notebook sobre uma mesa de madeira mostrando um site editorial no ar"
+    foto: `${H}/passo-3-v2.jpg`,
+    alt: "Mão com caneta desenhando numa mesa digitalizadora diante do monitor"
   }
 ];
 
 // Uma imagem por entrega, na mesma ordem de `deliverables`.
 const fotosEntregas: Record<string, { src: string; alt: string }> = {
-  Posicionamento: { src: `${H}/servico-posicionamento.jpg`, alt: "Anotações de posicionamento presas num quadro" },
+  Posicionamento: { src: `${H}/servico-posicionamento-v2.jpg`, alt: "Parede de post-its com anotações de posicionamento" },
   "Identidade Visual": { src: `${H}/servico-identidade-visual.jpg`, alt: "Leque de amostras de cor em tons de vermelho" },
   "Identidade Verbal": { src: `${H}/servico-identidade-verbal.jpg`, alt: "Tipos móveis de metal com letras e números" },
-  "Brand Guide": { src: `${H}/servico-brand-guide.jpg`, alt: "Guia de marca impresso aberto na página de paleta" },
-  "Página Profissional": { src: `${H}/servico-pagina.jpg`, alt: "Site editorial aberto num notebook" },
+  "Brand Guide": { src: `${H}/servico-brand-guide-v2.jpg`, alt: "Caderno com esboços de símbolos ao lado do teclado" },
+  "Página Profissional": { src: `${H}/servico-pagina-v2.jpg`, alt: "Notebook com um logotipo aberto no editor e o esboço no caderno" },
   "Papelaria Clínica": { src: `${H}/servico-papelaria.jpg`, alt: "Cartões, envelopes e papéis timbrados em branco" },
-  "Direção de Arte": { src: `${H}/servico-direcao.jpg`, alt: "Set de fotografia de produto com softbox e câmera no tripé" }
+  "Direção de Arte": { src: `${H}/servico-direcao-v2.jpg`, alt: "Câmera, lentes e notebook sobre a mesa de um set de fotografia" }
 };
 
 // Fotos de banco (Freepik) que se revezam atrás da tese, a cada 800ms.
@@ -192,7 +192,7 @@ export default function Home() {
           </div>
           <div className="mh-hero__aside" data-animate>
             <h1 className="mh-hero__title" data-hero-p data-delay="0">
-              Construa a marca do seu consultório em dois dias de imersão.
+              Construa a marca do seu consultório em <span className="mh-red">dois dias de imersão</span>.
             </h1>
           </div>
           <div className="mh-hero__visuals" data-animate>
@@ -356,7 +356,7 @@ export default function Home() {
       {/* id="processo": o card "Como trabalho" do /hub aponta para /#processo. */}
       <section id="processo" className="mh-process" data-theme-section="dark" aria-labelledby="metodo">
         <h2 id="metodo" className="mh-process__heading" data-split="heading">
-          Método PSIQUE
+          Método <span className="mh-red">PSIQUE</span>
         </h2>
         <ol className="mh-process__list">
           {jornada.map((step, i) => (
@@ -396,7 +396,7 @@ export default function Home() {
         </div>
         <div className="mh-faq__main">
           <h2 id="faq-titulo" className="mh-faq__heading" data-split="heading">
-            O que considerar antes de começar.
+            O que considerar antes de <span className="mh-red">começar.</span>
           </h2>
           <HomeFaq items={faq} />
         </div>
@@ -429,8 +429,8 @@ export default function Home() {
                 <span className="mh-cta__line is-2">o seu consultório</span>
                 <span className="mh-cta__line is-3">em uma</span>
                 <span className="mh-cta__slide">
-                  <span className="mh-cta__line is-4">→</span>
-                  <span className="mh-cta__line is-4">marca</span>
+                  <span className="mh-cta__line is-4 mh-red">→</span>
+                  <span className="mh-cta__line is-4 mh-red">marca</span>
                 </span>
               </div>
               <ScheduleLink className="mbtn mbtn--large">

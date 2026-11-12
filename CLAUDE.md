@@ -21,11 +21,11 @@ rampa `--gray-100…--gray-700`. São quatro cores. Não invente uma quinta.
 | token | onde | por quê |
 |---|---|---|
 | `--red` | **preenchimento** (fundo de botão, faixa `.inst-red`, barra de progresso) | é o vermelho da marca |
-| `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | `#bc0319` sobre preto rende 2.75:1; sobre superfície escura ele clareia para `#ef4358` |
+| `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | **sempre `#bc0319`, nos dois temas** (Felipe, nov/2026: "só o vermelho REAL"). A versão clareada `#ef4358` foi removida — sobre o escuro ele rende ~2.8:1, então use em tipo grande/ênfase, não em texto corrido pequeno |
 | `--on-red` | **texto em cima do vermelho** | fixo `#f6f6f6` nos dois temas — o vermelho é a única cor que **não** inverte, então usar `--cream` aqui pinta texto preto sobre vermelho no tema escuro |
 
-O hub tem o mesmo par: `--accent` (preenchimento) e `--accent-ink` (tinta,
-`#f0566a` nos blocos escuros).
+O hub tem o mesmo par: `--accent` e `--accent-ink`, hoje ambos `#bc0319` (o
+`#d42b2b` antigo e o `#f0566a` clareado saíram; `globals.css` também usa `#bc0319`).
 
 **Forma** — o site institucional é duro, não arredondado:
 - raio **2px** em botões, campos e caixas. **Nunca pílula** (`999px`) e nunca 12/16px.
@@ -296,8 +296,10 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
   "Método PSIQUE" (3 passos, bolha do cursor) → FAQ (acordeão, JSON-LD `FAQPage`) → CTA com
   recorte no scroll → rodapé. **Sem grade de marcas e sem cases** ("Success Stories") — Felipe
   pediu para tirar; não recolocar.
-- **Fotos**: de banco (Freepik via MCP do Magnific) e geradas no Magnific, em
-  `public/institucional/home/`; crédito "Imagens de banco: Freepik" no rodapé. **Foto do Felipe só
+- **Fotos**: de banco (Freepik via MCP do Magnific) e enviadas pelo Felipe (passos do método e
+  posicionamento/brand guide/página/direção de arte — substituíram as geradas por IA, nenhuma
+  imagem de IA resta), em `public/institucional/home/`; crédito "Imagens de banco: Freepik" no
+  rodapé. As do Felipe vieram em baixa (~736px de largura) — trocar por originais quando houver. **Foto do Felipe só
   onde o texto fala dele** (FAQ: `felipe-avatar.jpg`, recorte de `public/eu.jpg`, a mesma do /hub).
 - **Paleta própria** (pedra `#e8e8e3` / quase-preto `#080807`, tokens `--m-*` com tema escuro);
   o vermelho da marca aparece só no marcador dos rótulos e no card "45". É exceção declarada ao
@@ -312,6 +314,21 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
 - O estado inicial das animações só vale com `data-mh-motion` no `<html>` (script inline na
   página); sem JS ou com movimento reduzido nada fica escondido. Itens `display:none` não entram
   em stagger do GSAP (travava o botão Menu).
+
+**Resto do site na mesma estética (nov/2026)** — paleta base remapeada: `--cream` `#e8e8e3`,
+`--black` `#080807` (papéis trocam no tema escuro), rampa `--gray-*` em tons de pedra, coluna
+`--inst-max` 1440px com a margem fluida do Monolog. A camada no fim de `app/monolog.css`
+reveste as peças compartilhadas sem mexer no markup: `.inst-kicker` virou rótulo mono com ponto
+vermelho (o "— " saiu do texto de todos os rótulos), títulos em display pesado, CTA de seção
+com filete vermelho, `.inst-submit` no ritmo do botão Monolog, texto corrido maior. O **blog**
+lista os posts no padrão "Success Stories" (número grande · capa · texto) e o CTA do post usa
+`.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois dias de imersão", "tradução",
+"PSIQUE", "→ marca", "começar.".
+
+**`/sobre`** (nav + rodapé + sitemap) — mesma linguagem da home (`.ms-*` em `home.css`,
+`HomeMotion` reaproveitado): "Eu sou o Felipe.", foto (`public/institucional/sobre/`, recortes
+de `public/eu.jpg`), a bio já publicada no `HubBio` com texto que acende no scroll, três
+princípios só com fatos aprovados e CTA. A nav fica transparente na home e no `/sobre`.
 
 **Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente), nas
 seis áreas P-S-I-Q-U-E em `/metodologia`.
@@ -334,12 +351,29 @@ were **not** applied — Felipe held the price until it is defined, and the desi
 (cream/black/`--red` + theme toggle) stays as is.
 
 **Hero strip**: `heroStrip` in `lib/institucional.ts` → `public/institucional/hero/0N.jpg`,
-five real photos of Felipe (the prototype drew eight cells; five is what exists).
+seis fotos reais do Felipe (o protótipo desenhou oito células estáticas).
 Optimized with sharp from the gitignored `fotos Felipe/` — `.rotate()` matters, one
 source carries EXIF orientation 6. They render **in full colour** (the prototype's
 grayscale filter was removed on request) at `quality={90}`, which is why
 `next.config.ts` has to allowlist it in `images.qualities`. Cells 1 and 3 are capped by
 their originals (693px and 1080px wide) — no re-export will sharpen them.
+
+A faixa é um **carrossel contínuo**, não um grid: `.inst-strip__track` roda até
+`translateX(-50%)` em loop, e por isso `page.tsx` renderiza a lista **duas vezes** (a 2ª
+cópia é `inst-strip__cell--dup`, `alt=""` + `aria-hidden`). O loop só fecha sem salto
+porque a célula tem **largura fixa** (`25vw`, `45vw` no mobile) — trocar por `flex: 1`
+quebra a conta. As imagens são **`loading="eager"`**: as células nascem fora da viewport
+e só entram nela pelo `transform` do trilho, que o lazy-load nativo não enxerga — no
+lazy, a última foto ficava em branco para sempre. A **velocidade** se calibra por foto,
+não por duração fixa: o `page.tsx` manda inline só `--inst-strip-photos` e o CSS aplica
+`--inst-strip-sec-per-photo` (6s desktop, **3s** no ≤900px). É assim porque a volta mede
+6 células e a célula muda de 25vw para 45vw no mobile — com duração fixa o celular andava
+a ~30px/s contra ~60px/s do desktop, lento a ponto de parecer parado. Custom property
+inline vence folha de estilo, então mandar a duração pronta do JS tira da media query a
+chance de corrigir. Hover pausa; `prefers-reduced-motion`
+desliga a animação, esconde a 2ª cópia e devolve o scroll manual. Diferente da galeria
+dos cases, **o touch não desliga a animação**: lá os itens abrem o lightbox e sem hover
+não há como pausar antes de mirar, aqui são fotos decorativas, sem alvo de clique.
 
 **Theme toggle**: `InstThemeToggle` in the nav writes `data-inst-theme="dark"` on
 `<html>` (not on a wrapper — the nav also renders on case pages, outside `.inst`) and
@@ -350,6 +384,14 @@ that applies it before paint; without it the page flashes light. Dark mode swaps
 hardcoded `rgba(246,246,246,…)` on a `.inst-dark` surface must become a token
 (`--line-inverse`, `--line-inverse-strong`, `--nav-bg`) or it won't invert. Values sitting
 on `.inst-red` stay hardcoded — the red never inverts.
+
+`--nav-bg` é **opaco** e é literalmente `var(--cream)` — resolve na hora do uso, então
+inverte sozinho e **não** se redeclara no bloco escuro. Não devolva alfa para ele: era
+`rgba(…, 0.94)` e, como a `.inst-nav` é sticky e **não tem `backdrop-filter`**, 6%
+bastavam para o texto da página passar legível por trás e colidir com o logo (pior no
+mobile, onde o DPR alto mantém a letra nítida mesmo lavada). No `globals.css` toda barra
+translúcida vem com blur junto; aqui o site é editorial, não glassmorphism, então a saída
+é opacidade — e sem custo de GPU num elemento que repinta a cada frame de scroll.
 
 **Nav (padronizada em todo o site)**: `InstNav` is the single header — home,
 `/metodologia`, `/projetos`, `/imersao`, `/portfolio/[slug]` **and `/hub`**. The old `HubHeader` was
@@ -697,3 +739,40 @@ rodando (`npm run build && npm run start`):
   que nenhuma requisição sai para facebook/tiktok/instagram.
 - O `pkill` do servidor e o `npm run start` precisam ir em chamadas separadas
   neste ambiente, senão o processo novo morre junto.
+
+---
+
+## Prospecção ativa (`/painel/campanhas` + rotina noturna)
+
+Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-rotina.md`
+(a sessão agendada só diz "leia e siga" — mudar a rotina é editar esse arquivo).
+
+- **Nicho:** psicólogas que atendem pais de crianças/adolescentes autistas e
+  neurodivergentes. Não volte para "consultórios de psicologia" genérico.
+- **Banco = Twenty.** Lead é Person com `origem: PROSPECCAO` e campos `prosp*`. Não há
+  outro armazenamento. Descadastrado **não se apaga** (é a lista de supressão).
+- **A rotina não envia.** Ela grava como `REVISAR`; quem envia é o Vercel Cron
+  (`/api/prospeccao/disparo`, 9h/11h/14h dias úteis). Nada sai sem `PROSPECCAO_INICIO`.
+- **Regras de copy são código** (`checarCopy` em `lib/prospeccao/config.ts`): 1º e-mail
+  ≤ 100 palavras, uma pergunta, sem pedido de reunião; assunto de e-mail interno; até 3
+  follow-ups ≤ 70 palavras. Valem para a rotina e para a edição no painel. Afrouxar uma
+  regra é decisão do Felipe, não ajuste de código.
+- **Sem rastreio:** só texto puro, sem pixel nem link rastreado. Rodapé (assinatura,
+  origem do dado, descadastro) é do servidor — a rotina não escreve.
+- **Dedup contra o CRM inteiro:** quem já é contato por outra origem (webinar, newsletter,
+  cliente) nunca vira prospecção fria. Rota de leads só cria, nunca sobrescreve.
+- **LinkedIn:** só rascunho de convite; o envio é manual (termos de uso).
+- **Painel** fica atrás de HTTP Basic (`proxy.ts`, `PAINEL_SENHA`) e as rotas
+  `/painel/api/*` conferem a credencial de novo. Usa os tokens do design system via
+  `.inst .painel` (`app/painel/painel.css`).
+- **Campanhas** são o objeto custom `campanhaProspeccao` do Twenty (briefing que a rotina
+  lê + interruptor do disparo). Lead liga pelo slug (`prospCampanha`); o slug não muda.
+- **Pool de caixas** (`PROSPECCAO_CAIXAS`): lead fica preso à caixa que mandou o 1º
+  e-mail (follow-up e réplica saem dela); caixa com bounce > 5% se pausa sozinha.
+- **Respostas**: o disparo lê as caixas por IMAP antes de enviar. "Não quero"/"não"
+  descadastra na hora (`classificarPorRegra`); a IA (opcional, `ANTHROPIC_API_KEY`)
+  ou a rotina rascunha a réplica — **quem envia é o Felipe**, pela aba Conversas.
+  Não automatize o envio da réplica.
+- Leitura de IMAP é pelas últimas 500 mensagens por sequência (não `SEARCH SINCE`) e o
+  parser recebe o Buffer cru — os dois foram bugs reais no teste.
+- `previews/campanhas/` é o protótipo estático do Codex, arquivado.

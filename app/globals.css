@@ -17,10 +17,10 @@
   --panel-text: #f0ece6;
   --panel-muted: rgba(240, 236, 230, 0.54);
   --panel-line: rgba(255, 255, 255, 0.08);
-  --accent: #d42b2b;
-  --accent-dark: #a81e1e;
-  --accent-soft: rgba(212, 43, 43, 0.14);
-  --accent-glow: rgba(212, 43, 43, 0.32);
+  --accent: #bc0319;
+  --accent-dark: #8f0313;
+  --accent-soft: rgba(188, 3, 25, 0.14);
+  --accent-glow: rgba(188, 3, 25, 0.32);
   --danger: #e06060;
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.38);
   --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.62);
@@ -91,7 +91,7 @@ img {
 
 ::selection {
   color: #fff;
-  background: rgba(212, 43, 43, 0.5);
+  background: rgba(188, 3, 25, 0.5);
 }
 
 :focus-visible {
@@ -209,8 +209,8 @@ img {
 }
 
 .button--ghost:hover {
-  background: rgba(212, 43, 43, 0.08);
-  border-color: rgba(212, 43, 43, 0.32);
+  background: rgba(188, 3, 25, 0.08);
+  border-color: rgba(188, 3, 25, 0.32);
 }
 
 .chip {
@@ -446,8 +446,8 @@ img {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(212, 43, 43, 0.10) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(212, 43, 43, 0.05) 0%, transparent 55%);
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(188, 3, 25, 0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(188, 3, 25, 0.05) 0%, transparent 55%);
 }
 
 .hero__splineFade {
@@ -484,7 +484,7 @@ img {
   pointer-events: none;
   width: min(920px, 88vw);
   height: 520px;
-  background: radial-gradient(circle, rgba(212, 43, 43, 0.14), transparent 68%);
+  background: radial-gradient(circle, rgba(188, 3, 25, 0.14), transparent 68%);
 }
 
 .hero__layout {
@@ -636,7 +636,7 @@ img {
   color: #fff;
   font-size: 0.9rem;
   font-weight: 700;
-  border: 1px solid rgba(212, 43, 43, 0.3);
+  border: 1px solid rgba(188, 3, 25, 0.3);
 }
 
 .proof-card__handle {
@@ -706,7 +706,7 @@ img {
   inset: 20% 18% auto;
   height: 60%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(212, 43, 43, 0.16), transparent 64%);
+  background: radial-gradient(circle, rgba(188, 3, 25, 0.16), transparent 64%);
   filter: blur(44px);
 }
 
@@ -727,7 +727,7 @@ img {
   border: 1px solid rgba(255, 255, 255, 0.06);
   background:
     linear-gradient(rgba(5, 5, 5, 0.18), rgba(5, 5, 5, 0.34)),
-    radial-gradient(circle at 18% 16%, rgba(212, 43, 43, 0.28), transparent 24%),
+    radial-gradient(circle at 18% 16%, rgba(188, 3, 25, 0.28), transparent 24%),
     radial-gradient(circle at 82% 22%, rgba(100, 20, 20, 0.22), transparent 20%),
     linear-gradient(135deg, #2a1010 0%, #0d0d0d 100%);
 }
@@ -767,7 +767,7 @@ img {
 }
 
 .video-card__button:hover .video-card__play {
-  border-color: rgba(212, 43, 43, 0.6);
+  border-color: rgba(188, 3, 25, 0.6);
   transform: scale(1.06);
 }
 
@@ -785,8 +785,8 @@ img {
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  background: rgba(212, 43, 43, 0.14);
-  border: 1px solid rgba(212, 43, 43, 0.36);
+  background: rgba(188, 3, 25, 0.14);
+  border: 1px solid rgba(188, 3, 25, 0.36);
   box-shadow: 0 22px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
@@ -848,15 +848,15 @@ img {
 /* FOMO floater on video */
 .video-card__floating--fomo {
   color: #fff;
-  border-color: rgba(212, 43, 43, 0.4);
-  background: rgba(212, 43, 43, 0.15);
+  border-color: rgba(188, 3, 25, 0.4);
+  background: rgba(188, 3, 25, 0.15);
 }
 
 .video-card__fomo-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #d42b2b;
+  background: #bc0319;
   flex-shrink: 0;
   animation: fomo-pulse 1.4s ease-in-out infinite;
 }
@@ -1082,7 +1082,7 @@ img {
 .services__blob--1 {
   width: 520px;
   height: 520px;
-  background: radial-gradient(circle at 40% 40%, rgba(212, 43, 43, 0.55), rgba(140, 20, 20, 0.2) 55%, transparent 75%);
+  background: radial-gradient(circle at 40% 40%, rgba(188, 3, 25, 0.55), rgba(140, 20, 20, 0.2) 55%, transparent 75%);
   top: -160px;
   left: -180px;
   animation: liquid-drift-1 20s ease-in-out infinite alternate;
@@ -1091,7 +1091,7 @@ img {
 .services__blob--2 {
   width: 420px;
   height: 420px;
-  background: radial-gradient(circle at 55% 55%, rgba(212, 43, 43, 0.45), rgba(160, 30, 30, 0.15) 55%, transparent 75%);
+  background: radial-gradient(circle at 55% 55%, rgba(188, 3, 25, 0.45), rgba(160, 30, 30, 0.15) 55%, transparent 75%);
   bottom: -120px;
   right: -120px;
   animation: liquid-drift-2 25s ease-in-out infinite alternate;
@@ -1152,14 +1152,14 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 0% 0%, rgba(212, 43, 43, 0.07), transparent 55%);
+  background: radial-gradient(circle at 0% 0%, rgba(188, 3, 25, 0.07), transparent 55%);
   pointer-events: none;
   z-index: 0;
 }
 
 .service-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(212, 43, 43, 0.25);
+  border-color: rgba(188, 3, 25, 0.25);
   box-shadow: var(--shadow-strong), 0 20px 48px rgba(0, 0, 0, 0.45);
 }
 
@@ -1216,7 +1216,7 @@ img {
   color: var(--accent);
   font-size: 0.9rem;
   font-weight: 700;
-  border: 1px solid rgba(212, 43, 43, 0.2);
+  border: 1px solid rgba(188, 3, 25, 0.2);
 }
 
 .service-card__title {
@@ -1291,7 +1291,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 90% 90%, rgba(212, 43, 43, 0.12), transparent 55%);
+  background: radial-gradient(circle at 90% 90%, rgba(188, 3, 25, 0.12), transparent 55%);
   pointer-events: none;
 }
 
@@ -1379,14 +1379,14 @@ img {
 
 .process-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(212, 43, 43, 0.2);
+  border-color: rgba(188, 3, 25, 0.2);
 }
 
 .process-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 0% 100%, rgba(212, 43, 43, 0.06), transparent 60%);
+  background: radial-gradient(circle at 0% 100%, rgba(188, 3, 25, 0.06), transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -1427,7 +1427,7 @@ img {
   font-weight: 600;
   letter-spacing: -0.05em;
   font-family: var(--font-cormorant), Georgia, serif;
-  border: 1px solid rgba(212, 43, 43, 0.18);
+  border: 1px solid rgba(188, 3, 25, 0.18);
 }
 
 .process-card__title {
@@ -1477,8 +1477,8 @@ img {
 }
 
 .pricing-card--highlighted {
-  border-color: rgba(212, 43, 43, 0.35);
-  box-shadow: var(--shadow-strong), 0 0 0 1px rgba(212, 43, 43, 0.1);
+  border-color: rgba(188, 3, 25, 0.35);
+  box-shadow: var(--shadow-strong), 0 0 0 1px rgba(188, 3, 25, 0.1);
 }
 
 .pricing-card__top {
@@ -1627,10 +1627,10 @@ img {
   gap: 44px;
   padding: 36px 40px;
   border-radius: 28px;
-  border: 1px solid rgba(212, 43, 43, 0.25);
+  border: 1px solid rgba(188, 3, 25, 0.25);
   background: linear-gradient(135deg, #1e1010 0%, #181818 100%);
   color: var(--panel-text);
-  box-shadow: var(--shadow-strong), 0 0 0 1px rgba(212, 43, 43, 0.08);
+  box-shadow: var(--shadow-strong), 0 0 0 1px rgba(188, 3, 25, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -1639,7 +1639,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 0% 0%, rgba(212, 43, 43, 0.12), transparent 55%);
+  background: radial-gradient(circle at 0% 0%, rgba(188, 3, 25, 0.12), transparent 55%);
   pointer-events: none;
 }
 
@@ -1713,7 +1713,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 0% 0%, rgba(212, 43, 43, 0.06), transparent 60%);
+  background: radial-gradient(circle at 0% 0%, rgba(188, 3, 25, 0.06), transparent 60%);
   pointer-events: none;
   transition: opacity 0.25s ease;
   opacity: 0;
@@ -1722,7 +1722,7 @@ img {
 .review-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-  border-color: rgba(212, 43, 43, 0.3);
+  border-color: rgba(188, 3, 25, 0.3);
 }
 
 .review-card:hover::before {
@@ -1731,13 +1731,13 @@ img {
 
 .review-card--active {
   transform: translateY(-4px);
-  box-shadow: 0 0 0 1.5px var(--accent), 0 16px 48px rgba(212, 43, 43, 0.18);
+  box-shadow: 0 0 0 1.5px var(--accent), 0 16px 48px rgba(188, 3, 25, 0.18);
   border-color: var(--accent);
 }
 
 .review-card--active::before {
   opacity: 1;
-  background: radial-gradient(circle at 0% 0%, rgba(212, 43, 43, 0.1), transparent 60%);
+  background: radial-gradient(circle at 0% 0%, rgba(188, 3, 25, 0.1), transparent 60%);
 }
 
 .review-card--dim {
@@ -1759,12 +1759,12 @@ img {
 /* Dark featured card — right bottom */
 .review-card--dark {
   background: linear-gradient(145deg, #1a0c0c 0%, #161616 100%);
-  border-color: rgba(212, 43, 43, 0.2);
+  border-color: rgba(188, 3, 25, 0.2);
   flex: 1;
 }
 
 .review-card--dark::before {
-  background: radial-gradient(circle at 100% 100%, rgba(212, 43, 43, 0.12), transparent 60%);
+  background: radial-gradient(circle at 100% 100%, rgba(188, 3, 25, 0.12), transparent 60%);
 }
 
 /* Metric */
@@ -1823,16 +1823,16 @@ img {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(212, 43, 43, 0.14);
+  background: rgba(188, 3, 25, 0.14);
   color: var(--accent);
   font-size: 0.82rem;
   font-weight: 700;
-  border: 1px solid rgba(212, 43, 43, 0.25);
+  border: 1px solid rgba(188, 3, 25, 0.25);
 }
 
 .review-card__avatar--dark {
-  background: rgba(212, 43, 43, 0.22);
-  border-color: rgba(212, 43, 43, 0.4);
+  background: rgba(188, 3, 25, 0.22);
+  border-color: rgba(188, 3, 25, 0.4);
 }
 
 .review-card__avatar--img {
@@ -1942,7 +1942,7 @@ img {
 
 .faq-item__icon--open {
   color: var(--accent);
-  border-color: rgba(212, 43, 43, 0.3);
+  border-color: rgba(188, 3, 25, 0.3);
   transform: rotate(45deg);
 }
 
@@ -1982,7 +1982,7 @@ img {
   overflow: hidden;
   padding: 56px 44px;
   border-radius: var(--radius-xl);
-  border: 1px solid rgba(212, 43, 43, 0.2);
+  border: 1px solid rgba(188, 3, 25, 0.2);
   background: linear-gradient(135deg, #1a0a0a 0%, #111111 50%, #0d0d0d 100%);
   color: var(--panel-text);
   box-shadow: var(--shadow-strong);
@@ -2024,7 +2024,7 @@ img {
   pointer-events: none;
   width: min(760px, 100%);
   height: 320px;
-  background: radial-gradient(circle at top, rgba(212, 43, 43, 0.26), transparent 64%);
+  background: radial-gradient(circle at top, rgba(188, 3, 25, 0.26), transparent 64%);
 }
 
 .cta-box::after {
@@ -2032,7 +2032,7 @@ img {
   position: absolute;
   inset: auto 0 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 43, 43, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(188, 3, 25, 0.4), transparent);
   pointer-events: none;
 }
 
@@ -2865,7 +2865,7 @@ img {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 2px rgba(212, 43, 43, 0.25);
+  box-shadow: inset 0 0 0 2px rgba(188, 3, 25, 0.25);
 }
 
 .contato-hero__eyebrow {
@@ -2940,13 +2940,13 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 0% 50%, rgba(212, 43, 43, 0.06), transparent 60%);
+  background: radial-gradient(circle at 0% 50%, rgba(188, 3, 25, 0.06), transparent 60%);
   pointer-events: none;
 }
 
 .contato-cta:hover {
   transform: translateY(-2px);
-  border-color: rgba(212, 43, 43, 0.3);
+  border-color: rgba(188, 3, 25, 0.3);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
 }
 
@@ -3085,7 +3085,13 @@ img {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999; /* acima de popup, nav e qualquer overlay */
+  /* Acima de popup, nav e qualquer overlay — inclusive o banner de cookies,
+     que é o mais alto do projeto (.mbf-consent, 9999). Precisa ser MAIOR, não
+     igual: os dois são fixed e irmãos no <body>, e com z-index empatado quem
+     pinta por cima é o último do DOM — o banner, que o layout.tsx monta depois
+     do cursor. Era esse o empate que deixava a seta por baixo do banner.
+     Ao criar um overlay novo, mantenha-o abaixo deste valor. */
+  z-index: 10000;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -3287,14 +3293,14 @@ img {
   z-index: 2;
   background: radial-gradient(
     circle at 0% 0%,
-    rgba(212, 43, 43, 0.08),
+    rgba(188, 3, 25, 0.08),
     transparent 55%
   );
   pointer-events: none;
 }
 
 .project-card:hover {
-  border-color: rgba(212, 43, 43, 0.3);
+  border-color: rgba(188, 3, 25, 0.3);
   box-shadow: var(--shadow-strong), 0 32px 60px rgba(0, 0, 0, 0.5);
 }
 
@@ -3607,7 +3613,7 @@ img {
 /* Jump leve + destaque no hover (a faixa pausa junto, via :hover do strip) */
 .case-gallery__strip .case-gallery__item:hover {
   transform: translateY(-8px);
-  border-color: rgba(212, 43, 43, 0.35);
+  border-color: rgba(188, 3, 25, 0.35);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
@@ -3692,8 +3698,8 @@ img {
 }
 
 .lightbox__close:hover {
-  background: rgba(212, 43, 43, 0.25);
-  border-color: rgba(212, 43, 43, 0.45);
+  background: rgba(188, 3, 25, 0.25);
+  border-color: rgba(188, 3, 25, 0.45);
 }
 
 @keyframes lightbox-fade {
@@ -3808,7 +3814,7 @@ img {
   inset: 0;
   background: radial-gradient(
     circle at 0% 0%,
-    rgba(212, 43, 43, 0.08),
+    rgba(188, 3, 25, 0.08),
     transparent 55%
   );
   pointer-events: none;
@@ -3940,7 +3946,7 @@ img {
 
 .presentation-board__grid .presentation-board__grid-item:hover {
   transform: translateY(-6px);
-  border-color: rgba(212, 43, 43, 0.35);
+  border-color: rgba(188, 3, 25, 0.35);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
@@ -4023,7 +4029,7 @@ img {
 }
 
 .site-frame__dots i:first-child {
-  background: rgba(212, 43, 43, 0.85);
+  background: rgba(188, 3, 25, 0.85);
 }
 
 .site-frame__tabs {
@@ -4091,7 +4097,7 @@ img {
   overscroll-behavior: contain;
   background: #0a0a0a;
   scrollbar-width: thin;
-  scrollbar-color: rgba(212, 43, 43, 0.55) rgba(255, 255, 255, 0.05);
+  scrollbar-color: rgba(188, 3, 25, 0.55) rgba(255, 255, 255, 0.05);
 }
 
 .site-frame__viewport::-webkit-scrollbar {
@@ -4103,7 +4109,7 @@ img {
 }
 
 .site-frame__viewport::-webkit-scrollbar-thumb {
-  background: rgba(212, 43, 43, 0.55);
+  background: rgba(188, 3, 25, 0.55);
   border-radius: var(--radius-pill);
   border: 2px solid #0a0a0a;
 }
@@ -4187,7 +4193,7 @@ img {
   inset: 0;
   background: radial-gradient(
     circle at 0% 0%,
-    rgba(212, 43, 43, 0.07),
+    rgba(188, 3, 25, 0.07),
     transparent 55%
   );
   pointer-events: none;
@@ -4195,11 +4201,11 @@ img {
 
 .site-frame__index-item:hover {
   transform: translateY(-4px);
-  border-color: rgba(212, 43, 43, 0.35);
+  border-color: rgba(188, 3, 25, 0.35);
 }
 
 .site-frame__index-item--active {
-  border-color: rgba(212, 43, 43, 0.5);
+  border-color: rgba(188, 3, 25, 0.5);
   background: var(--panel-soft);
 }
 
@@ -4391,7 +4397,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 0% 0%, rgba(212, 43, 43, 0.12), transparent 55%);
+  background: radial-gradient(circle at 0% 0%, rgba(188, 3, 25, 0.12), transparent 55%);
   pointer-events: none;
 }
 

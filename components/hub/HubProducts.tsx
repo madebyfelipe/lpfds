@@ -49,7 +49,7 @@ const allProducts = [
     desc: "Agende um horário ou mande uma mensagem — do seu jeito.",
     cta: "Falar comigo",
     href: "/contato",
-    bgColor: "#d42b2b",
+    bgColor: "#bc0319",
     textColor: "#ffffff",
     invert: true,
     avatars: ["/eu.jpg", "/avatar-milton.png", "/logo-no-text-white.png"],

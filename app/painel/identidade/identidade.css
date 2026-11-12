@@ -1,0 +1,24 @@
+.identidade { max-width: var(--inst-max); margin: auto; padding: 32px var(--inst-pad) 64px; color: var(--black); background: var(--cream); }
+.identidade-header, .identidade-section, .identidade-actions { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.identidade-header { padding-bottom: 28px; border-bottom: 1px solid var(--gray-300); font-size: 14px; }
+.identidade a { color: var(--red-ink); text-underline-offset: 5px; }
+.identidade-kicker { margin-top: 64px; font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--gray-500); }
+.identidade h1 { font-size: clamp(44px, 7vw, 86px); line-height: .98; letter-spacing: -.045em; margin: 24px 0; font-weight: 700; }
+.identidade-intro { max-width: 660px; color: var(--gray-700); font-size: 19px; line-height: 1.6; }
+.identidade section { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--gray-300); }
+.identidade h2 { font-size: 22px; margin-bottom: 24px; }
+.identidade h3 { font-size: 22px; margin: 0 0 8px; }
+.identidade-grid { display: grid; gap: 40px; margin-top: 28px; }
+.identidade-card > p { color: var(--gray-500); margin: 0 0 20px; }
+.identidade-card img { display: block; width: 100%; height: auto; border: 1px solid var(--gray-300); }
+.identidade-actions { justify-content: flex-start; margin-top: 22px; font-size: 14px; }
+.identidade button, .identidade-actions a { font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.identidade button { background: var(--red); color: var(--on-red); border: 0; border-radius: 2px; padding: 16px 32px; cursor: pointer; }
+.identidade button:hover { background: var(--red-dark); }
+.identidade :focus-visible { outline: 2px solid var(--red-ink); outline-offset: 5px; }
+.identidade-note { background: var(--gray-100); padding: 28px; margin-top: 32px; line-height: 1.6; }
+.identidade-note p { max-width: 850px; color: var(--gray-700); }
+.identidade-cover { max-width: 850px; }
+.identidade-cover img { width: 100%; height: auto; display: block; }
+.identidade footer { border-top: 1px solid var(--gray-300); padding-top: 28px; margin-top: 64px; font-size: 12px; letter-spacing: .12em; }
+@media (max-width: 600px) { .identidade { padding: 24px 20px 40px; } .identidade-header { align-items: flex-start; flex-direction: column; } .identidade-actions { gap: 18px; } .identidade button { padding: 16px 20px; } }

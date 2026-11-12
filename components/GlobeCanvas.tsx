@@ -29,7 +29,7 @@ export function GlobeCanvas() {
       const sphereGeo = new THREE.SphereGeometry(1, 28, 18);
       const wireGeo = new THREE.WireframeGeometry(sphereGeo);
       const wireMat = new THREE.LineBasicMaterial({
-        color: 0xd42b2b,
+        color: 0xbc0319,
         opacity: 0.14,
         transparent: true,
       });
@@ -84,7 +84,7 @@ export function GlobeCanvas() {
         const curve = new THREE.QuadraticBezierCurve3(p1, ctrl, p2);
         const arcGeo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(36));
         const arcMat = new THREE.LineBasicMaterial({
-          color: 0xd42b2b,
+          color: 0xbc0319,
           opacity: 0.28,
           transparent: true,
         });
@@ -97,7 +97,7 @@ export function GlobeCanvas() {
 
       const ring1Geo = new THREE.RingGeometry(1.22, 1.52, 80);
       const ring1Mat = new THREE.MeshBasicMaterial({
-        color: 0xd42b2b,
+        color: 0xbc0319,
         side: THREE.DoubleSide,
         transparent: true,
         opacity: 0.1,

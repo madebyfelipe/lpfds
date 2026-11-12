@@ -9,6 +9,7 @@ import { MButtonInner } from "@/components/institucional/home/MButton";
 
 const links = [
   { href: "/", label: "Início" },
+  { href: "/sobre", label: "Sobre" },
   { href: "/metodologia", label: "Método" },
   { href: "/blog", label: "Blog" },
   { href: "/imersao", label: "Imersão" }
@@ -23,7 +24,7 @@ const links = [
  */
 export function InstNav() {
   const pathname = usePathname();
-  const overlay = pathname === "/";
+  const overlay = pathname === "/" || pathname === "/sobre";
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const navRef = useRef<HTMLElement>(null);
