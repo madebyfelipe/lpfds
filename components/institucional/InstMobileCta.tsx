@@ -5,7 +5,7 @@ import { ScheduleLink } from "@/components/ScheduleLink";
 
 export function InstMobileCta() {
   const pathname = usePathname();
-  if (!["/", "/metodologia", "/projetos"].includes(pathname)) return null;
+  if (!["/metodologia", "/projetos"].includes(pathname)) return null;
 
   return (
     <div className="inst-mobile-cta">
