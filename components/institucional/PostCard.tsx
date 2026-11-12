@@ -27,24 +27,32 @@ export function PostCard({
     <article className={`inst-card${featured ? " inst-card--featured" : ""}`}>
       <Link href={`/blog/${post.slug}`} className="inst-card__link">
         {post.cover && (
-          <Image
-            src={post.cover.src}
-            alt={post.cover.alt}
-            width={post.cover.width}
-            height={post.cover.height}
-            sizes={featured ? "(max-width: 900px) 100vw, 720px" : "(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px"}
-            priority={featured}
-            className="inst-card__img"
-          />
+          <div className="inst-card__media">
+            <Image
+              src={post.cover.src}
+              alt={post.cover.alt}
+              width={post.cover.width}
+              height={post.cover.height}
+              sizes={featured ? "(max-width: 900px) 100vw, 720px" : "(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px"}
+              priority={featured}
+              className="inst-card__img"
+            />
+          </div>
         )}
         <div className="inst-card__text">
-          <p className="inst-card__tema">{post.tagLabels[0]}</p>
+          <p className="inst-card__tema">
+            {featured ? "Mais recente · " : ""}
+            {post.tagLabels[0]}
+          </p>
           <Heading className="inst-card__title">{post.title}</Heading>
           <p className="inst-card__excerpt">{post.description}</p>
           <p className="inst-card__meta">
             <time dateTime={post.publishedAt}>{post.dateLabel}</time>
             {" · "}
             {post.minutes} min de leitura
+            <span className="inst-card__arrow" aria-hidden="true">
+              →
+            </span>
           </p>
         </div>
       </Link>

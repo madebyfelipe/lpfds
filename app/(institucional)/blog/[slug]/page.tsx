@@ -4,10 +4,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { ComentarioForm } from "@/components/institucional/ComentarioForm";
+import { AuthorBox } from "@/components/institucional/AuthorBox";
 import { PostCard } from "@/components/institucional/PostCard";
+import { PostNav } from "@/components/institucional/PostNav";
+import { PostToc } from "@/components/institucional/PostToc";
+import { ReadingProgress } from "@/components/institucional/ReadingProgress";
+import { ShareBar } from "@/components/institucional/ShareBar";
 import { comentarios } from "@/content/blog/comentarios";
 import { formatDate, getPost, postImage, posts, relatedPosts } from "@/lib/blog";
 import { readBody, toCard } from "@/lib/blog-body";
+import { temaLabel } from "@/lib/blog-temas";
 import { SITE_URL } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -55,17 +61,12 @@ export default async function PostPage({ params }: Props) {
   const url = `${SITE_URL}/blog/${post.slug}`;
   const { body, headings, minutes } = readBody(post);
   const related = relatedPosts(post).map(toCard);
-  const toc = headings.length > 1 && (
-    <ol className="inst-toc__list">
-      {headings.map((h) => (
-        <li key={h.id}>
-          <a href={`#${h.id}`} className="inst-toc__link">
-            {h.text}
-          </a>
-        </li>
-      ))}
-    </ol>
-  );
+  const hasToc = headings.length > 1;
+  // posts está do mais recente para o mais antigo.
+  const at = posts.findIndex((p) => p.slug === post.slug);
+  const newer = at > 0 ? posts[at - 1] : undefined;
+  const older = at < posts.length - 1 ? posts[at + 1] : undefined;
+  const tema = post.tags[0];
   const aprovados = comentarios.filter((c) => c.slug === post.slug);
   // Autor e publisher apontam para as entidades do StructuredData global
   // (mesmos @id), em vez de redeclarar o estúdio a cada post.
@@ -101,6 +102,7 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <main id="conteudo" className="inst-legal">
+      <ReadingProgress targetId="leitura" />
       <script
         type="application/ld+json"
         // Conteúdo estático do repositório; JSON.stringify escapa as aspas.
@@ -113,6 +115,10 @@ export default async function PostPage({ params }: Props) {
         <header className="inst-legal__head">
           <p className="inst-kicker inst-kicker--tight">
             — <Link href="/blog" className="inst-blog__back">Blog</Link>
+            {" / "}
+            <Link href={`/blog?tema=${tema}`} className="inst-blog__back">
+              {temaLabel(tema)}
+            </Link>
           </p>
           <h1 className="inst-legal__title">{post.title}</h1>
           <p className="inst-legal__lead">{post.description}</p>
@@ -138,7 +144,7 @@ export default async function PostPage({ params }: Props) {
             )}
           </figure>
         )}
-        <div className="inst-post">
+        <div className="inst-post" id="leitura">
           <div className="inst-post__main">
             {/* Resposta direta no topo: o trecho que buscadores e assistentes citam. */}
             {post.summary && (
@@ -148,10 +154,10 @@ export default async function PostPage({ params }: Props) {
               </aside>
             )}
             {/* Sumário no mobile: recolhido; no desktop fica fixo ao lado. */}
-            {toc && (
+            {hasToc && (
               <details className="inst-toc inst-toc--inline">
                 <summary>Neste artigo</summary>
-                {toc}
+                <PostToc headings={headings} />
               </details>
             )}
             <div className="inst-legal__body inst-blog__body">
@@ -169,15 +175,26 @@ export default async function PostPage({ params }: Props) {
               ) : null}
             </div>
           </div>
-          {toc && (
-            <div className="inst-post__side">
+          <div className="inst-post__side">
+            {hasToc && (
               <nav className="inst-toc" aria-label="Neste artigo">
                 <p className="inst-kicker inst-kicker--tight">— Neste artigo</p>
-                {toc}
+                <PostToc headings={headings} spy />
               </nav>
+            )}
+            <div className="inst-post__share">
+              <p className="inst-kicker inst-kicker--tight">— Compartilhar</p>
+              <ShareBar url={url} title={post.title} />
             </div>
-          )}
+          </div>
         </div>
+        <footer className="inst-post__end">
+          <div className="inst-post__share-end">
+            <p className="inst-kicker inst-kicker--tight">— Compartilhar</p>
+            <ShareBar url={url} title={post.title} />
+          </div>
+          <AuthorBox />
+        </footer>
       </article>
 
       {/* CTA de todo post: a conversa de 15 minutos (mesmo link e mesma
@@ -219,6 +236,11 @@ export default async function PostPage({ params }: Props) {
         </p>
         <ComentarioForm slug={post.slug} />
       </section>
+
+      <PostNav
+        older={older && { slug: older.slug, title: older.title }}
+        newer={newer && { slug: newer.slug, title: newer.title }}
+      />
 
       {related.length > 0 && (
         <section className="inst-blog__related" aria-labelledby="relacionados-titulo">
