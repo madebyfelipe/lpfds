@@ -143,6 +143,48 @@ export const post: Post = {
       </section>
 
       <section>
+        <h2>Erros comuns na marca de clínicas multidisciplinares</h2>
+        <ul>
+          <li><strong>Prometer “tratamento completo do autismo”</strong> ou falar em “recuperação”. Além de esbarrar no artigo 20, a linguagem soa desrespeitosa para muitas famílias e pessoas autistas.</li>
+          <li><strong>Misturar as profissões</strong> numa lista única de “terapias”, sem dizer quem faz o quê. A família não entende o percurso, e cada profissional precisa aparecer com o próprio registro.</li>
+          <li><strong>Usar a peça de quebra-cabeça</strong> como símbolo da clínica — um ícone contestado por parte da comunidade autista.</li>
+          <li><strong>Fotos de crianças em atendimento</strong>, mesmo com autorização, que expõem quem está em acompanhamento.</li>
+          <li><strong>Um tom diferente em cada canal</strong>: o Instagram fala de um jeito, o site de outro, a recepção de um terceiro.</li>
+        </ul>
+        <p>
+          Esses erros costumam vir de decisões tomadas sem um posicionamento comum. Quando a equipe define junta para quem a clínica existe e como ela fala, a marca fica coerente em todos os pontos de contato. O texto sobre <Link href="/blog/marca-para-psicologo-autismo-neurodivergencia" className="inst-link">marca para psicólogo que atende autismo</Link> detalha a linguagem.
+        </p>
+      </section>
+
+      <section>
+        <h2>Como explicar o percurso da família</h2>
+        <p>
+          Famílias que chegam a uma clínica multidisciplinar costumam ter a mesma dúvida: por onde começar. Uma marca clara responde isso antes da primeira ligação. Um exemplo ilustrativo de como apresentar o percurso:
+        </p>
+        <ul>
+          <li><strong>Primeiro contato</strong> — a recepção escuta a demanda e explica as possibilidades, sem fazer triagem clínica por mensagem.</li>
+          <li><strong>Acolhimento</strong> — uma conversa inicial com um profissional define quem acompanha a família.</li>
+          <li><strong>Plano de acompanhamento</strong> — cada área envolvida explica o seu papel, com o profissional responsável identificado.</li>
+          <li><strong>Conversa com a escola e a família</strong> — quando faz parte do trabalho, aparece como etapa, não como promessa.</li>
+        </ul>
+        <p>
+          Descrever o percurso não promete resultado: mostra como a clínica trabalha. É o tipo de informação que o artigo 20 permite e que a família procura.
+        </p>
+      </section>
+
+      <section>
+        <h2>Checklist da marca</h2>
+        <ul>
+          <li>Cada profissão e cada profissional aparecem com o próprio registro?</li>
+          <li>A clínica tem um símbolo próprio, sem quebra-cabeça nem clichês?</li>
+          <li>A linguagem sobre autismo foi escolhida pela equipe e é igual em todos os canais?</li>
+          <li>O percurso da família está explicado em poucas etapas?</li>
+          <li>Nenhuma peça promete cura, recuperação ou resultado garantido?</li>
+          <li>Nenhuma imagem mostra criança atendida ou material de sessão?</li>
+        </ul>
+      </section>
+
+      <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe constrói a marca de consultórios e clínicas de

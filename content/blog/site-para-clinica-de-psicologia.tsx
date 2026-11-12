@@ -161,6 +161,54 @@ export const post: Post = {
       </section>
 
       <section>
+        <h2>Erros comuns em sites de clínica</h2>
+        <p>
+          Os problemas abaixo aparecem com frequência em sites de clínicas de psicologia e, em geral, custam contatos sem que a equipe perceba:
+        </p>
+        <ul>
+          <li><strong>Uma página só para “Equipe”</strong> com fotos e nomes, sem dizer o que cada profissional atende. Quem procura não sabe com quem falar.</li>
+          <li><strong>Um único número de WhatsApp para tudo</strong>, sem explicar como a recepção encaminha. A família repete a mesma história várias vezes.</li>
+          <li><strong>Serviços listados como siglas</strong> (TCC, ABA) sem uma linha de explicação para o leigo.</li>
+          <li><strong>Fotos de banco de imagem</strong> com sessões encenadas ou crianças em atendimento, que esbarram no sigilo e no artigo 20.</li>
+          <li><strong>Nome fantasia sem identificação da pessoa jurídica</strong> e do responsável técnico registrados no CRP.</li>
+          <li><strong>Formulário que pede demais</strong> — diagnóstico, medicação, histórico — antes de qualquer conversa.</li>
+        </ul>
+        <p>
+          Cada um desses pontos tem conserto simples: explicar, identificar e pedir só o necessário. O texto sobre <Link href="/blog/site-para-psicologo" className="inst-link">site para psicólogo</Link> traz a base que vale também para clínicas.
+        </p>
+      </section>
+
+      <section>
+        <h2>Exemplo de estrutura (ilustrativo)</h2>
+        <p>
+          Um exemplo, com dados fictícios, de como uma clínica que atende crianças e famílias poderia organizar o site:
+        </p>
+        <ul>
+          <li><strong>Início</strong> — para quem é a clínica, formatos de atendimento e um botão de contato.</li>
+          <li><strong>Áreas de atendimento</strong> — uma página por público ou serviço, com as palavras que as famílias usam na busca (ex.: “avaliação neuropsicológica infantil em [cidade]”).</li>
+          <li><strong>Equipe</strong> — cada profissional com nome completo, profissão, registro e o que atende.</li>
+          <li><strong>Como funciona</strong> — do primeiro contato à primeira consulta, com o que a família precisa levar.</li>
+          <li><strong>Conteúdo</strong> — artigos que respondem às dúvidas reais das famílias.</li>
+          <li><strong>Contato e páginas legais</strong> — endereço, mapa, política de privacidade.</li>
+        </ul>
+        <p>
+          Essa estrutura ajuda no SEO local, porque cada página responde a uma busca diferente, e na leitura, porque a família vai direto ao que procura.
+        </p>
+      </section>
+
+      <section>
+        <h2>Checklist do site da clínica</h2>
+        <ul>
+          <li>Cada profissional aparece com nome completo, profissão e número de registro?</li>
+          <li>A pessoa jurídica e o responsável técnico estão identificados?</li>
+          <li>Cada serviço tem uma página própria, explicada em linguagem simples?</li>
+          <li>O caminho do primeiro contato está claro e curto?</li>
+          <li>Nenhuma página promete resultado, usa preço como chamariz ou expõe pacientes?</li>
+          <li>Há política de privacidade e o formulário pede só o necessário?</li>
+        </ul>
+      </section>
+
+      <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe constrói a marca de consultórios de psicologia em dois
