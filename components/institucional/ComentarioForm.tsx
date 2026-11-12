@@ -2,18 +2,51 @@
 
 import Link from "next/link";
 import { useId, useRef, useState } from "react";
-import { enviarComentario, MAX_NOME, MAX_TEXTO, validateComentario } from "@/lib/comentarios";
+import {
+  buscarDesafio,
+  enviarComentario,
+  MAX_NOME,
+  MAX_TEXTO,
+  MENSAGEM_BLOQUEIO,
+  motivoBloqueio,
+  resolverDesafio,
+  validateComentario,
+  type Comentario,
+  type MotivoTexto,
+  type SolucaoDesafio
+} from "@/lib/comentarios";
 
 type Estado = "idle" | "enviando" | "enviado" | "erro";
 
+/** O servidor recusa resposta mais rápida que isso (robô de formulário). */
+const ESPERA_MIN_MS = 3200;
+
 // Formulário de comentário do blog. Mesmo padrão do ImersaoForm (classes
 // .inst-form/.inst-field sobre superfície .inst-dark, erro com foco no campo,
-// aceite obrigatório). O envio vai para moderação — nunca aparece na hora.
-export function ComentarioForm({ slug }: { slug: string }) {
+// aceite obrigatório). Publica na hora; o captcha (prova de trabalho) roda em
+// segundo plano a partir do primeiro foco, sem pedir clique nem imagem.
+export function ComentarioForm({
+  slug,
+  onPublicado
+}: {
+  slug: string;
+  onPublicado: (comentario: Comentario) => void;
+}) {
   const [form, setForm] = useState({ nome: "", texto: "", consentimento: false, site: "" });
   const [estado, setEstado] = useState<Estado>("idle");
   const [erro, setErro] = useState("");
   const [campoInvalido, setCampoInvalido] = useState<string | null>(null);
+
+  // Cada desafio resolvido vale para um envio só: depois de usar, descarta.
+  const desafio = useRef<{ promessa: Promise<SolucaoDesafio>; inicio: number } | null>(null);
+  const prepararCaptcha = () => {
+    if (desafio.current) return;
+    const promessa = buscarDesafio().then(resolverDesafio);
+    desafio.current = { promessa, inicio: Date.now() };
+    promessa.catch(() => {
+      desafio.current = null;
+    });
+  };
 
   const uid = useId();
   const statusId = `${uid}-status`;
@@ -48,18 +81,42 @@ export function ComentarioForm({ slug }: { slug: string }) {
       return;
     }
 
+    const bloqueio = motivoBloqueio(`${form.nome} ${form.texto}`);
+    if (bloqueio) {
+      setErro(MENSAGEM_BLOQUEIO[bloqueio]);
+      setCampoInvalido("texto");
+      setEstado("erro");
+      refs.texto.current?.focus();
+      return;
+    }
+
     setEstado("enviando");
     try {
-      await enviarComentario({ slug, ...form });
+      prepararCaptcha();
+      const atual = desafio.current!;
+      const captcha = await atual.promessa;
+      const falta = ESPERA_MIN_MS - (Date.now() - atual.inicio);
+      if (falta > 0) await new Promise((resolve) => setTimeout(resolve, falta));
+      const publicado = await enviarComentario({ slug, ...form, captcha });
+      desafio.current = null;
+      onPublicado(publicado);
       setEstado("enviado");
       setForm({ nome: "", texto: "", consentimento: false, site: "" });
     } catch (e) {
+      desafio.current = null;
+      const codigo = e instanceof Error ? e.message : "";
       setErro(
-        e instanceof Error && e.message === "429"
+        codigo === "429" || codigo === "rate_limited" || codigo === "busy"
           ? "Muitos envios seguidos. Tente de novo daqui a alguns minutos."
-          : "Não consegui enviar agora. Tente de novo mais tarde."
+          : codigo === "unconfigured" || codigo === "503"
+            ? "Os comentários estão indisponíveis no momento. Tente de novo mais tarde."
+            : codigo.startsWith("blocked_content:")
+              ? MENSAGEM_BLOQUEIO[codigo.split(":")[1] as MotivoTexto]
+              : codigo === "captcha_failed" || codigo === "captcha_unsolved"
+                ? "Não consegui confirmar que você não é um robô. Recarregue a página e tente de novo."
+                : "Não consegui enviar agora. Tente de novo mais tarde."
       );
-      setCampoInvalido(null);
+      setCampoInvalido(codigo.startsWith("blocked_content:") ? "texto" : null);
       setEstado("erro");
     }
   };
@@ -68,7 +125,7 @@ export function ComentarioForm({ slug }: { slug: string }) {
     estado === "enviando"
       ? "Enviando…"
       : estado === "enviado"
-        ? "Recebido. O comentário aparece aqui depois de aprovado."
+        ? "Comentário publicado. Obrigado por participar."
         : estado === "erro"
           ? erro
           : "";
@@ -76,7 +133,7 @@ export function ComentarioForm({ slug }: { slug: string }) {
   const invalido = (campo: string) => (estado === "erro" && campoInvalido === campo ? true : undefined);
 
   return (
-    <form className="inst-form" onSubmit={enviar} noValidate>
+    <form className="inst-form" onSubmit={enviar} onFocus={prepararCaptcha} noValidate>
       <label className="inst-field">
         <span className="inst-field__label">Nome</span>
         <input
@@ -144,8 +201,8 @@ export function ComentarioForm({ slug }: { slug: string }) {
           }}
         />
         <span>
-          Autorizo a publicação do meu nome e do comentário neste post, após
-          moderação, nos termos da{" "}
+          Autorizo a publicação imediata do meu nome e do comentário neste post,
+          nos termos da{" "}
           <Link href="/privacidade" className="inst-link">
             Política de Privacidade
           </Link>
