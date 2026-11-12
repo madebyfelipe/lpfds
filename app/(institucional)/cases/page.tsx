@@ -81,7 +81,7 @@ export default function CasesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <header className="inst-hero">
-        <p className="inst-kicker inst-kicker--tight">— Cases</p>
+        <p className="inst-kicker inst-kicker--tight">Cases</p>
         <h1 className="inst-hero__title">
           O site de uma psicóloga, <span className="inst-hero__accent">do zero ao ar</span>.
         </h1>
@@ -93,7 +93,7 @@ export default function CasesPage() {
       </header>
 
       <section className="inst-section inst-section--rule">
-        <p className="inst-kicker">— O site entregue</p>
+        <p className="inst-kicker">O site entregue</p>
         <div className="inst-case">
           <figure className="inst-case__figure">
             <Image
@@ -132,7 +132,7 @@ export default function CasesPage() {
 
       <section className="inst-dark">
         <div className="inst-section">
-          <p className="inst-kicker inst-kicker--inverse">— O processo criativo</p>
+          <p className="inst-kicker inst-kicker--inverse">O processo criativo</p>
           <p className="inst-method__intro">
             Seis etapas, da primeira conversa ao suporte depois do ar.
           </p>
@@ -149,7 +149,7 @@ export default function CasesPage() {
       </section>
 
       <section className="inst-section">
-        <p className="inst-kicker inst-kicker--tight">— Leia também</p>
+        <p className="inst-kicker inst-kicker--tight">Leia também</p>
         <p className="inst-contact__line">
           Como pesquisamos nicho, público, concorrentes e palavras-chave antes do
           design:{" "}

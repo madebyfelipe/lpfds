@@ -34,7 +34,7 @@ export default function ImersaoPage() {
         <div className="inst-section">
           <div className="inst-imersao">
             <div>
-              <p className="inst-kicker inst-kicker--inverse">— Imersão</p>
+              <p className="inst-kicker inst-kicker--inverse">Imersão</p>
               <p className="inst-imersao__title">
                 Para agendar, três informações bastam.
               </p>
@@ -48,7 +48,7 @@ export default function ImersaoPage() {
 
       <section className="inst-section" style={{ paddingBlock: "0 96px" }}>
         <p className="inst-kicker" style={{ marginBottom: "8px" }}>
-          — Social
+          Social
         </p>
         {social.map((item) => (
           <a

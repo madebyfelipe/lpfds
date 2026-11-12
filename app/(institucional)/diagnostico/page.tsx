@@ -12,7 +12,7 @@ export default function DiagnosticoPage() {
   return (
     <main id="conteudo">
       <header className="inst-shell" style={{ padding: "128px 40px 64px" }}>
-        <p className="inst-kicker">— Diagnóstico</p>
+        <p className="inst-kicker">Diagnóstico</p>
         <h1 className="inst-manifesto" style={{ marginTop: "16px" }}>
           Onde a sua marca está hoje — e o próximo passo, por escrito.
         </h1>

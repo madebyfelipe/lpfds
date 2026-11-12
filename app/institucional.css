@@ -58,31 +58,30 @@
 .inst,
 .inst-nav,
 .inst-footer {
-  --cream: #f6f6f6;
-  --black: #151515;
+  --cream: #e8e8e3;
+  --black: #080807;
   --charcoal: #2b2d2b;
   --red: #bc0319;
   --red-dark: #8f0313;
   /* Vermelho como TINTA (texto, traço de SVG, sublinhado, anel de foco).
-     Sobre superfície clara é o vermelho da marca — 6.1:1. O mesmo tom sobre
-     preto cai para 2.8:1, abaixo dos 4.5:1 de texto e dos 3:1 de elemento
-     gráfico do WCAG, então nas superfícies escuras ele clareia. Fundo
-     vermelho continua em --red: ali quem precisa de contraste é o texto. */
+     Sempre o vermelho real da marca, nos dois temas (Felipe, nov/2026: nada
+     da versão clareada #ef4358). Sobre o escuro ele rende ~2.8:1 — use em
+     tipo grande/ênfase, não em texto corrido pequeno. */
   --red-ink: #bc0319;
   /* Tinta sobre o vermelho. Fixa nos dois temas, porque o vermelho é a única
      cor da paleta que não inverte: usar --cream aqui fazia o texto virar
      preto sobre vermelho (2.75:1) quando o tema escuro trocava os papéis. */
   --on-red: #f6f6f6;
-  --gray-100: #ececec;
-  --gray-200: #dcdcdc;
+  --gray-100: #ddddd5;
+  --gray-200: #d1d1c7;
   --gray-300: #b8b8b8;
-  --gray-500: #696969;
+  --gray-500: #6b645c;
   --gray-700: #454545;
 
   /* Derivados que precisam inverter junto com o tema: linhas e rótulos
      que ficam sobre a superfície oposta (.inst-dark) e o fundo da nav. */
-  --line-inverse: rgba(246, 246, 246, 0.18);
-  --line-inverse-strong: rgba(246, 246, 246, 0.4);
+  --line-inverse: rgba(232, 232, 227, 0.18);
+  --line-inverse-strong: rgba(232, 232, 227, 0.4);
   --nav-bg: rgba(246, 246, 246, 0.94);
   /* Texto "apagado" sobre a superfície invertida (.inst-dark): a lista de
      entregas da home. #696969 rende 3.3:1 sobre #151515 e 5.3:1 sobre
@@ -90,8 +89,8 @@
   --dim-inverse: #696969;
 
   --inst-font: "Neue Haas Grotesk Display", "Archivo", Helvetica, Arial, sans-serif;
-  --inst-max: 1200px;
-  --inst-pad: 40px;
+  --inst-max: 1440px;
+  --inst-pad: clamp(12px, 8.2px + 1.24vw, 28px);
 
   font-family: var(--inst-font);
   font-size: 16px;
@@ -105,17 +104,17 @@
 :root[data-inst-theme="dark"] .inst,
 :root[data-inst-theme="dark"] .inst-nav,
 :root[data-inst-theme="dark"] .inst-footer {
-  --cream: #151515;
-  --black: #f6f6f6;
-  --gray-100: #1c1c1c;
-  --gray-200: #2a2a2a;
+  --cream: #080807;
+  --black: #e8e8e3;
+  --gray-100: #181715;
+  --gray-200: #2a2925;
   --gray-300: #696969;
   --gray-500: #9a9a9a;
   --gray-700: #b8b8b8;
 
-  --line-inverse: rgba(21, 21, 21, 0.18);
-  --line-inverse-strong: rgba(21, 21, 21, 0.4);
-  --nav-bg: rgba(21, 21, 21, 0.94);
+  --line-inverse: rgba(8, 8, 7, 0.18);
+  --line-inverse-strong: rgba(8, 8, 7, 0.4);
+  --nav-bg: rgba(8, 8, 7, 0.94);
 }
 
 .inst {
@@ -212,23 +211,6 @@
   color: var(--cream);
 }
 
-/* A superfície REAL é XOR(seção .inst-dark, tema escuro): a nav e o rodapé
-   acompanham porque também trocam de fundo com o tema. */
-.inst-dark,
-.inst-footer {
-  --red-ink: #ef4358;
-}
-
-:root[data-inst-theme="dark"] .inst,
-:root[data-inst-theme="dark"] .inst-nav {
-  --red-ink: #ef4358;
-}
-
-:root[data-inst-theme="dark"] .inst-dark,
-:root[data-inst-theme="dark"] .inst-footer {
-  --red-ink: #bc0319;
-}
-
 .inst-red {
   background: var(--red);
   color: var(--on-red);
@@ -262,20 +244,6 @@
 
 .inst-kicker--lg {
   margin-bottom: 56px;
-}
-
-/* Por cima do hero da home: sem fundo nem filete, tinta da superfície escura
-   (--cream) e o CTA invertido. O vermelho como tinta segue a regra de
-   .inst-dark (clareia no tema claro, volta ao da marca no escuro). Com o menu
-   mobile aberto a barra volta ao normal, para casar com o painel. */
-.inst-nav[data-hero="true"]:not([data-open="true"]) {
-  --red-ink: #ef4358;
-  background: transparent;
-  border-bottom-color: transparent;
-}
-
-:root[data-inst-theme="dark"] .inst-nav[data-hero="true"]:not([data-open="true"]) {
-  --red-ink: #bc0319;
 }
 
 /* Botão claro/escuro — mesmo desenho do /hub, nos tokens daqui. */
@@ -1900,7 +1868,7 @@
   .inst,
   .inst-nav,
   .inst-footer {
-    --inst-pad: 24px;
+    --inst-pad: clamp(12px, 8.2px + 1.24vw, 28px);
   }
 
   .inst-section {

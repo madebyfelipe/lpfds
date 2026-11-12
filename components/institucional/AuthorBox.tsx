@@ -18,7 +18,7 @@ export function AuthorBox() {
         className="inst-author__img"
       />
       <div>
-        <p className="inst-kicker inst-kicker--tight">— Sobre o autor</p>
+        <p className="inst-kicker inst-kicker--tight">Sobre o autor</p>
         <p className="inst-author__name">Felipe Silva</p>
         <p className="inst-author__bio">
           Estrategista de marca. Constrói marca há sete anos e hoje atende exclusivamente psicólogos.

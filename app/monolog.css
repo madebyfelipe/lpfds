@@ -956,3 +956,352 @@
     display: none;
   }
 }
+
+/* ==========================================================================
+   Resto do site na estética da home (nov/2026). Sobrescreve as peças
+   compartilhadas de app/institucional.css — rótulos, títulos, botões, texto
+   corrido, blog — sem tocar no markup das páginas. Escopo `.inst` para vencer
+   a especificidade das regras originais.
+   ========================================================================== */
+
+.inst {
+  font-family: var(--m-font);
+  letter-spacing: -0.01em;
+}
+
+/* Rótulo: mono em caixa alta com o ponto vermelho do Monolog. */
+.inst .inst-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.inst .inst-kicker::before {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+.inst .inst-kicker--on-red::before {
+  background: var(--on-red);
+}
+
+/* Títulos: Neue Haas pesada, apertada, em tamanho de display. */
+.inst :is(.inst-hero__title, .inst-legal__title, .inst-bloghero__title) {
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+.inst .inst-hero__title {
+  max-width: 13ch;
+  font-size: min(7.6vw, 8.5rem);
+}
+
+.inst .inst-legal__title {
+  max-width: 17ch;
+  font-size: max(2.4rem, min(5.4vw, 6rem));
+}
+
+.inst .inst-bloghero__title {
+  font-size: var(--t-display);
+  line-height: 0.82;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+.inst .inst-manifesto {
+  max-width: 16ch;
+  font-style: normal;
+  font-weight: 700;
+  font-size: max(2rem, var(--t-h1));
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.inst :is(.inst-hero__lead, .inst-legal__lead, .inst-bloghero__lead) {
+  font-size: var(--t-large);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.inst :is(.inst-hero__note, .inst-legal__updated) {
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst .inst-hero__accent {
+  color: var(--red);
+}
+
+/* CTA de seção: texto grande com filete vermelho. */
+.inst .inst-hero__cta {
+  font-size: var(--t-large);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  text-transform: none;
+  color: inherit;
+  border-bottom: 2px solid var(--red);
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.inst .inst-hero__cta:hover {
+  color: var(--red);
+  border-bottom-color: var(--red);
+}
+
+/* Botão de envio: bloco vermelho com o ritmo do botão do Monolog. */
+.inst .inst-submit {
+  padding: 14px 20px;
+  border-radius: var(--m-radius);
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  transition: transform 0.35s var(--ease-active), background-color 0.25s;
+}
+
+.inst .inst-submit:active {
+  transform: scale(0.95);
+}
+
+.inst :is(.inst-section--rule, .inst-legal__head) {
+  border-top-style: dotted;
+  border-bottom-style: dotted;
+}
+
+/* Texto corrido (páginas legais e posts). */
+.inst .inst-legal__body {
+  max-width: 40em;
+}
+
+.inst :is(.inst-legal__body p, .inst-legal__body li) {
+  font-size: var(--t-main);
+  line-height: 1.55;
+}
+
+.inst .inst-legal__body h2 {
+  margin-top: 8px;
+  font-size: max(1.75rem, min(2.6vw, 2.5rem));
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.inst .inst-legal__body h3 {
+  font-size: var(--t-large);
+  letter-spacing: -0.015em;
+}
+
+.inst .inst-link {
+  text-decoration-color: var(--red);
+}
+
+/* ---- Blog: listagem no padrão "Success Stories" -------------------------- */
+.inst .inst-bloghero {
+  padding-top: 24px;
+}
+
+.inst .inst-marquee {
+  border-block: 1px dotted var(--gray-300);
+}
+
+.inst .inst-marquee__item {
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.inst .inst-marquee__item::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  vertical-align: 1px;
+}
+
+.inst .inst-chip {
+  border-radius: var(--m-radius);
+  font-family: var(--m-font);
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.inst .inst-chip[aria-pressed="true"] {
+  background: var(--black);
+  color: var(--cream);
+  border-color: var(--black);
+}
+
+.inst .inst-filters__input {
+  border-radius: var(--m-radius);
+}
+
+.inst .inst-filters__status {
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  text-transform: uppercase;
+}
+
+.inst .inst-reveal {
+  counter-reset: post;
+}
+
+.inst .inst-blog__grid {
+  display: block;
+  margin-top: 0;
+}
+
+.inst .inst-card {
+  counter-increment: post;
+  padding: 32px 0;
+  border-top: 1px dotted var(--gray-300);
+}
+
+.inst .inst-card--featured {
+  margin-top: 32px;
+  padding-bottom: 32px;
+  border-bottom: 0;
+}
+
+.inst :is(.inst-card__link, .inst-card--featured .inst-card__link) {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 16px;
+  align-items: start;
+}
+
+.inst .inst-card__link::before {
+  content: counter(post, decimal-leading-zero);
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  font-size: var(--t-h4);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gray-300);
+  transition: color 0.25s;
+}
+
+.inst .inst-card__link:hover::before {
+  color: var(--red);
+}
+
+.inst .inst-card__media {
+  grid-column: 3 / span 6;
+  grid-row: 1;
+  border-radius: var(--m-radius);
+}
+
+.inst .inst-card__text,
+.inst .inst-card--featured .inst-card__text {
+  grid-column: 9 / -1;
+  grid-row: 1;
+  padding-top: 0;
+}
+
+.inst .inst-card__tema {
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.inst .inst-card__tema::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  vertical-align: 1px;
+}
+
+.inst .inst-card__title {
+  font-size: var(--t-large);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.inst .inst-card--featured .inst-card__title {
+  font-size: max(1.75rem, var(--t-h1));
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.inst .inst-card__link:hover .inst-card__title {
+  color: var(--red);
+}
+
+.inst .inst-card__excerpt {
+  font-size: var(--t-small);
+  line-height: 1.3;
+  color: var(--gray-500);
+}
+
+.inst .inst-card__meta {
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  .inst :is(.inst-card__link, .inst-card--featured .inst-card__link) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .inst .inst-card__link::before {
+    font-size: 1.5rem;
+  }
+}
+
+/* ---- Blog: post ---------------------------------------------------------- */
+.inst .inst-blog__cover-img,
+.inst .inst-blog__cover {
+  border-radius: var(--m-radius);
+}
+
+.inst .inst-blog__summary {
+  border-radius: var(--m-radius);
+  border-left-color: var(--red);
+}
+
+.inst :is(.inst-toc__link, .inst-toc--inline summary) {
+  font-size: var(--t-small);
+  letter-spacing: -0.01em;
+}
+
+.inst .inst-toc__link[aria-current="location"] {
+  color: var(--red);
+}
+
+.inst .inst-blog__cta-line {
+  font-size: max(1.75rem, var(--t-h1));
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.inst .inst-blog__cta-btn {
+  margin-top: 32px;
+}

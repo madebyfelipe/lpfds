@@ -35,7 +35,7 @@ export default function BlogPage() {
   return (
     <main id="conteudo" className="inst-legal inst-blog">
       <header className="inst-bloghero">
-        <p className="inst-kicker inst-kicker--tight">— Blog</p>
+        <p className="inst-kicker inst-kicker--tight">Blog</p>
         <h1 className="inst-bloghero__title">
           {linhas.map((linha, i) => (
             <span key={linha}>

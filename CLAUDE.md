@@ -21,11 +21,11 @@ rampa `--gray-100…--gray-700`. São quatro cores. Não invente uma quinta.
 | token | onde | por quê |
 |---|---|---|
 | `--red` | **preenchimento** (fundo de botão, faixa `.inst-red`, barra de progresso) | é o vermelho da marca |
-| `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | `#bc0319` sobre preto rende 2.75:1; sobre superfície escura ele clareia para `#ef4358` |
+| `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | **sempre `#bc0319`, nos dois temas** (Felipe, nov/2026: "só o vermelho REAL"). A versão clareada `#ef4358` foi removida — sobre o escuro ele rende ~2.8:1, então use em tipo grande/ênfase, não em texto corrido pequeno |
 | `--on-red` | **texto em cima do vermelho** | fixo `#f6f6f6` nos dois temas — o vermelho é a única cor que **não** inverte, então usar `--cream` aqui pinta texto preto sobre vermelho no tema escuro |
 
-O hub tem o mesmo par: `--accent` (preenchimento) e `--accent-ink` (tinta,
-`#f0566a` nos blocos escuros).
+O hub tem o mesmo par: `--accent` e `--accent-ink`, hoje ambos `#bc0319` (o
+`#d42b2b` antigo e o `#f0566a` clareado saíram; `globals.css` também usa `#bc0319`).
 
 **Forma** — o site institucional é duro, não arredondado:
 - raio **2px** em botões, campos e caixas. **Nunca pílula** (`999px`) e nunca 12/16px.
@@ -312,6 +312,21 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
 - O estado inicial das animações só vale com `data-mh-motion` no `<html>` (script inline na
   página); sem JS ou com movimento reduzido nada fica escondido. Itens `display:none` não entram
   em stagger do GSAP (travava o botão Menu).
+
+**Resto do site na mesma estética (nov/2026)** — paleta base remapeada: `--cream` `#e8e8e3`,
+`--black` `#080807` (papéis trocam no tema escuro), rampa `--gray-*` em tons de pedra, coluna
+`--inst-max` 1440px com a margem fluida do Monolog. A camada no fim de `app/monolog.css`
+reveste as peças compartilhadas sem mexer no markup: `.inst-kicker` virou rótulo mono com ponto
+vermelho (o "— " saiu do texto de todos os rótulos), títulos em display pesado, CTA de seção
+com filete vermelho, `.inst-submit` no ritmo do botão Monolog, texto corrido maior. O **blog**
+lista os posts no padrão "Success Stories" (número grande · capa · texto) e o CTA do post usa
+`.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois dias de imersão", "tradução",
+"PSIQUE", "→ marca", "começar.".
+
+**`/sobre`** (nav + rodapé + sitemap) — mesma linguagem da home (`.ms-*` em `home.css`,
+`HomeMotion` reaproveitado): "Eu sou o Felipe.", foto (`public/institucional/sobre/`, recortes
+de `public/eu.jpg`), a bio já publicada no `HubBio` com texto que acende no scroll, três
+princípios só com fatos aprovados e CTA. A nav fica transparente na home e no `/sobre`.
 
 **Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente), nas
 seis áreas P-S-I-Q-U-E em `/metodologia`.

@@ -13,7 +13,7 @@ function VisualDiagnostico() {
       <text x="89" y="34" textAnchor="middle" fill="rgba(212,43,43,0.9)" fontSize="9.5" fontWeight="700" fontFamily="system-ui">MARÇO</text>
       {/* Calendar grid dots */}
       {[0,1,2,3,4,5,6].map((i) => (
-        <circle key={i} cx={56 + i * 12} cy={56} r="3" fill={i === 3 ? "#d42b2b" : "rgba(255,255,255,0.1)"} />
+        <circle key={i} cx={56 + i * 12} cy={56} r="3" fill={i === 3 ? "#bc0319" : "rgba(255,255,255,0.1)"} />
       ))}
       {[0,1,2,3,4,5,6].map((i) => (
         <circle key={i} cx={56 + i * 12} cy={70} r="3" fill="rgba(255,255,255,0.07)" />
@@ -46,7 +46,7 @@ function VisualMarca() {
       {/* Central brand circle */}
       <circle cx="110" cy="63" r="32" fill="rgba(212,43,43,0.08)" stroke="rgba(212,43,43,0.35)" strokeWidth="1.5" className="svc-float-2" />
       <circle cx="110" cy="63" r="22" fill="rgba(212,43,43,0.06)" />
-      <text x="110" y="69" textAnchor="middle" fill="#d42b2b" fontSize="20" fontWeight="700" fontFamily="system-ui">F</text>
+      <text x="110" y="69" textAnchor="middle" fill="#bc0319" fontSize="20" fontWeight="700" fontFamily="system-ui">F</text>
 
       {/* Lines to satellites */}
       <line x1="110" y1="63" x2="44" y2="35" stroke="rgba(212,43,43,0.25)" strokeWidth="1" strokeDasharray="4 3" />
@@ -56,10 +56,10 @@ function VisualMarca() {
 
       {/* Palette node */}
       <rect x="22" y="22" width="44" height="26" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" className="svc-float-1" />
-      <circle cx="33" cy="35" r="5" fill="#d42b2b" />
+      <circle cx="33" cy="35" r="5" fill="#bc0319" />
       <circle cx="45" cy="35" r="5" fill="rgba(212,43,43,0.4)" />
       <circle cx="57" cy="35" r="5" fill="rgba(255,255,255,0.15)" />
-      <circle cx="44" cy="35" r="4" fill="#d42b2b" opacity="0" />
+      <circle cx="44" cy="35" r="4" fill="#bc0319" opacity="0" />
 
       {/* Typography node */}
       <rect x="154" y="22" width="44" height="26" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" className="svc-float-3" />
@@ -72,13 +72,13 @@ function VisualMarca() {
       {/* Shield node */}
       <rect x="154" y="78" width="44" height="26" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" className="svc-float-1" />
       <path d="M176 84 L182 87 L182 95 Q176 98 170 95 L170 87 Z" fill="none" stroke="rgba(212,43,43,0.6)" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M173 91 L175.5 93.5 L179.5 89" stroke="#d42b2b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M173 91 L175.5 93.5 L179.5 89" stroke="#bc0319" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 
       {/* Pulse dots on lines */}
-      <circle cx="44" cy="35" r="3" fill="#d42b2b" className="svc-pulse" />
-      <circle cx="176" cy="35" r="3" fill="#d42b2b" className="svc-pulse" />
-      <circle cx="44" cy="91" r="3" fill="#d42b2b" className="svc-pulse" />
-      <circle cx="176" cy="91" r="3" fill="#d42b2b" className="svc-pulse" />
+      <circle cx="44" cy="35" r="3" fill="#bc0319" className="svc-pulse" />
+      <circle cx="176" cy="35" r="3" fill="#bc0319" className="svc-pulse" />
+      <circle cx="44" cy="91" r="3" fill="#bc0319" className="svc-pulse" />
+      <circle cx="176" cy="91" r="3" fill="#bc0319" className="svc-pulse" />
     </svg>
   );
 }
@@ -105,7 +105,7 @@ function VisualConteudo() {
 
       {/* LIVE badge */}
       <rect x="22" y="22" width="42" height="18" rx="9" fill="rgba(212,43,43,0.15)" stroke="rgba(212,43,43,0.4)" strokeWidth="1" />
-      <circle cx="33" cy="31" r="3" fill="#d42b2b" className="svc-pulse" />
+      <circle cx="33" cy="31" r="3" fill="#bc0319" className="svc-pulse" />
       <text x="50" y="35" textAnchor="middle" fill="rgba(212,43,43,0.9)" fontSize="8.5" fontWeight="700" fontFamily="system-ui">LIVE</text>
 
       {/* Upload arrow right */}
@@ -114,7 +114,7 @@ function VisualConteudo() {
 
       {/* Engagement below */}
       <rect x="22" y="80" width="44" height="32" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)" strokeWidth="1" className="svc-float-1" />
-      <text x="44" y="94" textAnchor="middle" fill="#d42b2b" fontSize="10" fontWeight="700" fontFamily="system-ui">❤ 248</text>
+      <text x="44" y="94" textAnchor="middle" fill="#bc0319" fontSize="10" fontWeight="700" fontFamily="system-ui">❤ 248</text>
     </svg>
   );
 }
@@ -134,17 +134,17 @@ function VisualCrescimento() {
       <path d="M30 85 L72 75 L114 60 L156 38 L190 22 L190 88 L30 88 Z" fill="rgba(212,43,43,0.06)" />
 
       {/* Trend line */}
-      <path d="M30 85 L72 75 L114 60 L156 38 L190 22" stroke="#d42b2b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M30 85 L72 75 L114 60 L156 38 L190 22" stroke="#bc0319" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 
       {/* Milestone dots */}
       <circle cx="30" cy="85" r="4" fill="rgba(212,43,43,0.5)" stroke="rgba(212,43,43,0.8)" strokeWidth="1" />
       <circle cx="72" cy="75" r="4" fill="rgba(212,43,43,0.5)" stroke="rgba(212,43,43,0.8)" strokeWidth="1" />
       <circle cx="114" cy="60" r="4" fill="rgba(212,43,43,0.5)" stroke="rgba(212,43,43,0.8)" strokeWidth="1" />
-      <circle cx="156" cy="38" r="4" fill="rgba(212,43,43,0.7)" stroke="#d42b2b" strokeWidth="1.5" />
-      <circle cx="190" cy="22" r="6" fill="#d42b2b" className="svc-pulse" />
+      <circle cx="156" cy="38" r="4" fill="rgba(212,43,43,0.7)" stroke="#bc0319" strokeWidth="1.5" />
+      <circle cx="190" cy="22" r="6" fill="#bc0319" className="svc-pulse" />
 
       {/* Up arrow at end */}
-      <polygon points="190,14 194,22 186,22" fill="#d42b2b" opacity="0.8" />
+      <polygon points="190,14 194,22 186,22" fill="#bc0319" opacity="0.8" />
     </svg>
   );
 }

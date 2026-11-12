@@ -56,14 +56,14 @@
   --panel: #ffffff;
   --panel-soft: #eaeaea;
   
-  --accent: #d42b2b;
-  --accent-dark: #a81e1e;
-  --accent-soft: rgba(212, 43, 43, 0.08);
-  --accent-glow: rgba(212, 43, 43, 0.2);
+  --accent: #bc0319;
+  --accent-dark: #8f0313;
+  --accent-soft: rgba(188, 3, 25, 0.08);
+  --accent-glow: rgba(188, 3, 25, 0.2);
   /* Vermelho como TINTA. Sobre a superficie clara e o da marca (4.9:1);
      sobre as escuras ele cai para 3.5-3.9:1, entao clareia. Preenchimento
      de botao segue em --accent, onde quem precisa de contraste e o texto. */
-  --accent-ink: #d42b2b;
+  --accent-ink: var(--accent);
 
   background: var(--bg);
   color: var(--text);
@@ -94,8 +94,9 @@
   --line-strong: rgba(255, 255, 255, 0.16);
   --panel: #181818;
   --panel-soft: #202020;
-  /* Superficie escura: o vermelho da marca so rende 3.5-3.9:1 aqui. */
-  --accent-ink: #f0566a;
+  /* Vermelho real nos dois temas (pedido do Felipe, nov/2026): sem a versao
+     clareada para contraste. */
+  --accent-ink: var(--accent);
 }
 
 /* O /hub e o /contato vivem no layout raiz, cujo body vem do globals.css e é
@@ -814,7 +815,7 @@ button.hub-card-ref__action-btn {
 
 .hub-ebook__input:focus {
   border-color: var(--accent-ink);
-  box-shadow: 0 0 0 3px rgba(212, 43, 43, 0.1);
+  box-shadow: 0 0 0 3px rgba(188, 3, 25, 0.1);
 }
 
 .hub-ebook__input:disabled {
@@ -889,8 +890,9 @@ button.hub-card-ref__action-btn {
   --line-strong: rgba(255, 255, 255, 0.16);
   --panel: #181818;
   --panel-soft: #202020;
-  /* Superficie escura: o vermelho da marca so rende 3.5-3.9:1 aqui. */
-  --accent-ink: #f0566a;
+  /* Vermelho real nos dois temas (pedido do Felipe, nov/2026): sem a versao
+     clareada para contraste. */
+  --accent-ink: var(--accent);
 
   background: var(--bg);
   color: var(--text);
@@ -969,8 +971,9 @@ button.hub-card-ref__action-btn {
   --line-strong: rgba(255, 255, 255, 0.16);
   --panel: #181818;
   --panel-soft: #202020;
-  /* Superficie escura: o vermelho da marca so rende 3.5-3.9:1 aqui. */
-  --accent-ink: #f0566a;
+  /* Vermelho real nos dois temas (pedido do Felipe, nov/2026): sem a versao
+     clareada para contraste. */
+  --accent-ink: var(--accent);
 
   background: var(--panel-soft);
   color: var(--text);

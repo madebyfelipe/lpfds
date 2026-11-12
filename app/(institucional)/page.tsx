@@ -192,7 +192,7 @@ export default function Home() {
           </div>
           <div className="mh-hero__aside" data-animate>
             <h1 className="mh-hero__title" data-hero-p data-delay="0">
-              Construa a marca do seu consultório em dois dias de imersão.
+              Construa a marca do seu consultório em <span className="mh-red">dois dias de imersão</span>.
             </h1>
           </div>
           <div className="mh-hero__visuals" data-animate>
@@ -356,7 +356,7 @@ export default function Home() {
       {/* id="processo": o card "Como trabalho" do /hub aponta para /#processo. */}
       <section id="processo" className="mh-process" data-theme-section="dark" aria-labelledby="metodo">
         <h2 id="metodo" className="mh-process__heading" data-split="heading">
-          Método PSIQUE
+          Método <span className="mh-red">PSIQUE</span>
         </h2>
         <ol className="mh-process__list">
           {jornada.map((step, i) => (
@@ -396,7 +396,7 @@ export default function Home() {
         </div>
         <div className="mh-faq__main">
           <h2 id="faq-titulo" className="mh-faq__heading" data-split="heading">
-            O que considerar antes de começar.
+            O que considerar antes de <span className="mh-red">começar.</span>
           </h2>
           <HomeFaq items={faq} />
         </div>
@@ -429,8 +429,8 @@ export default function Home() {
                 <span className="mh-cta__line is-2">o seu consultório</span>
                 <span className="mh-cta__line is-3">em uma</span>
                 <span className="mh-cta__slide">
-                  <span className="mh-cta__line is-4">→</span>
-                  <span className="mh-cta__line is-4">marca</span>
+                  <span className="mh-cta__line is-4 mh-red">→</span>
+                  <span className="mh-cta__line is-4 mh-red">marca</span>
                 </span>
               </div>
               <ScheduleLink className="mbtn mbtn--large">

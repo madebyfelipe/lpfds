@@ -48,8 +48,8 @@ export function HomeMotion() {
         const btn = one(".mh-hero__btn");
         const visuals = one(".mh-hero__visuals");
         gsap.set(heroSplit.lines, { yPercent: 150 });
-        gsap.set(btn, { yPercent: 150 });
-        gsap.set(visuals, { clipPath: "inset(100% 0% 0% 100% round 2px)" });
+        if (btn) gsap.set(btn, { yPercent: 150 });
+        if (visuals) gsap.set(visuals, { clipPath: "inset(100% 0% 0% 100% round 2px)" });
 
         const intro = gsap.timeline({ defaults: { ease: "ease-transition" } });
         intro.set(q("[data-animate]"), { autoAlpha: 1 });
@@ -70,8 +70,8 @@ export function HomeMotion() {
           const lines = heroSplit.lines.filter((l) => p.contains(l));
           intro.to(lines, { yPercent: 0, duration: T.slow, stagger: 0.075 }, Number(p.dataset.delay) || 0);
         });
-        intro.to(btn, { yPercent: 0, duration: T.slow }, 0.55);
-        intro.to(visuals, { clipPath: "inset(0% 0% 0% 0% round 2px)", duration: T.slower }, 0);
+        if (btn) intro.to(btn, { yPercent: 0, duration: T.slow }, 0.55);
+        if (visuals) intro.to(visuals, { clipPath: "inset(0% 0% 0% 0% round 2px)", duration: T.slower }, 0);
 
         /* ---- Rótulos (eyebrow): palavras entram inclinadas ------------- */
         q("[data-eyebrow]").forEach((el) => {

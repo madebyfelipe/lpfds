@@ -120,7 +120,7 @@ export function DiagnosticoForm() {
   if (estado === "enviado" && resultado) {
     return (
       <div className="diag-done">
-        <p className="inst-kicker">— Recebido</p>
+        <p className="inst-kicker">Recebido</p>
         <p className="diag-done__index">
           Índice {resultado.indice}
           <span>/100</span>
@@ -154,7 +154,7 @@ export function DiagnosticoForm() {
       </p>
 
       <div className="diag__head">
-        <p className="inst-kicker">— {section.kicker}</p>
+        <p className="inst-kicker">{section.kicker}</p>
         {/* tabIndex -1: alvo de foco programático na troca de etapa, sem
             entrar na ordem de Tab. */}
         <h2 className="diag__title" ref={tituloRef} tabIndex={-1}>

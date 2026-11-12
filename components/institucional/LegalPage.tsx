@@ -21,7 +21,7 @@ export function LegalPage({
   return (
     <main id="conteudo" className="inst-legal">
       <header className="inst-legal__head">
-        <p className="inst-kicker inst-kicker--tight">— {kicker}</p>
+        <p className="inst-kicker inst-kicker--tight">{kicker}</p>
         <h1 className="inst-legal__title">{titulo}</h1>
         {resumo && <p className="inst-legal__lead">{resumo}</p>}
         <p className="inst-legal__updated">
