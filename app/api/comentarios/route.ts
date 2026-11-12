@@ -1,20 +1,28 @@
 import { NextResponse } from "next/server";
 import { getPost } from "@/lib/blog";
-import { MAX_NOME, MAX_TEXTO, validateComentario, type ComentarioInput } from "@/lib/comentarios";
+import {
+  MAX_NOME,
+  MAX_TEXTO,
+  motivoBloqueio,
+  validateComentario,
+  type ComentarioInput
+} from "@/lib/comentarios";
+import { configurado, contarRecentes, gravar, listar, verificarDesafio } from "@/lib/comentarios-server";
 import { IMERSAO_TO } from "@/lib/imersao";
 import { SITE_URL } from "@/lib/site";
 import { escapeHtml } from "@/lib/webinarEmailContent";
 import { MAIL_FROM, getTransporter } from "@/lib/webinarMailer";
 
 /**
- * Comentário do blog → e-mail de moderação para o Felipe. Nada é publicado
- * aqui: a aprovação é adicionar o comentário em content/blog/comentarios.ts.
+ * Comentários do blog. POST publica na hora (sem aprovação prévia) e avisa o
+ * Felipe por e-mail; GET lista os visíveis de um post. Ver lib/comentarios.ts
+ * para as camadas de defesa e CLAUDE.md ("Blog → Comentários").
  */
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 // shortcut: limite por IP em memória — vale por instância e zera a cada cold
-// start. Basta como anti-spam básico; trocar por store compartilhado (KV) se
-// o volume de spam crescer.
+// start. O disjuntor global abaixo (conta no banco) cobre o que isso não pega.
 const JANELA_MS = 10 * 60 * 1000;
 const MAX_POR_JANELA = 3;
 const envios = new Map<string, number[]>();
@@ -28,21 +36,49 @@ function excedeuLimite(ip: string) {
   return recentes.length > MAX_POR_JANELA;
 }
 
+// Disjuntor global: mais de N comentários no site todo em 10 min = enxurrada.
+// Passa a recusar até esfriar. Conta no banco, então vale entre instâncias e
+// não guarda dado pessoal nenhum.
+const MAX_GLOBAL_NA_JANELA = 20;
+
+const erro = (error: string, status: number, extra: Record<string, unknown> = {}) =>
+  NextResponse.json({ ok: false, error, ...extra }, { status });
+
+export async function GET(request: Request) {
+  const slug = new URL(request.url).searchParams.get("slug") ?? "";
+  if (!getPost(slug)) return erro("invalid_slug", 400);
+  // Sem banco configurado a lista é só vazia; o formulário é quem avisa a indisponibilidade.
+  if (!configurado()) return NextResponse.json({ comentarios: [] });
+  try {
+    return NextResponse.json(
+      { comentarios: await listar(slug) },
+      { headers: { "Cache-Control": "public, max-age=0, s-maxage=20, stale-while-revalidate=60" } }
+    );
+  } catch (e) {
+    console.error("[comentarios] listar falhou:", e);
+    return erro("list_failed", 502);
+  }
+}
+
 export async function POST(request: Request) {
   let body: Partial<ComentarioInput>;
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
+    return erro("invalid_json", 400);
   }
 
   // Honeypot preenchido: responde "ok" para o robô não insistir, e descarta.
   if (String(body.site ?? "").trim()) return NextResponse.json({ ok: true });
 
-  const ip = (request.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "anon";
-  if (excedeuLimite(ip)) {
-    return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
+  // Nunca mostrar "publicado" sem ter gravado: sem banco, o form avisa que está fora.
+  if (!configurado()) {
+    console.error("[comentarios] Supabase/COMENTARIOS_SECRET não configurados.");
+    return erro("unconfigured", 503);
   }
+
+  const ip = (request.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "anon";
+  if (excedeuLimite(ip)) return erro("rate_limited", 429);
 
   const clean = {
     slug: String(body.slug ?? ""),
@@ -52,54 +88,59 @@ export async function POST(request: Request) {
   };
 
   const post = getPost(clean.slug);
-  const invalid = post ? validateComentario(clean) : "slug";
-  if (invalid) {
-    return NextResponse.json({ ok: false, error: "invalid_field", field: invalid }, { status: 400 });
-  }
+  const invalido = post ? validateComentario(clean) : "slug";
+  if (invalido) return erro("invalid_field", 400, { field: invalido });
 
+  const bloqueio = motivoBloqueio(`${clean.nome} ${clean.texto}`);
+  if (bloqueio) return erro("blocked_content", 400, { reason: bloqueio });
+
+  if (!verificarDesafio(body.captcha)) return erro("captcha_failed", 400);
+
+  try {
+    if ((await contarRecentes(JANELA_MS)) >= MAX_GLOBAL_NA_JANELA) return erro("busy", 429);
+
+    const gravado = await gravar({ ...clean, assinatura: body.captcha!.signature });
+    // Desafio já usado: trata como robô repetindo e descarta sem dar pista.
+    if (gravado.status === "reuso") return NextResponse.json({ ok: true });
+
+    void avisar(clean.slug, post!.title, gravado.comentario.id ?? "", clean.nome, clean.texto);
+    return NextResponse.json({ ok: true, comentario: gravado.comentario });
+  } catch (e) {
+    console.error("[comentarios] gravar falhou:", e);
+    return erro("save_failed", 502);
+  }
+}
+
+/** Aviso ao Felipe depois de publicar. Falha de e-mail não derruba o comentário. */
+async function avisar(slug: string, titulo: string, id: string, nome: string, texto: string) {
   const mailer = getTransporter();
-  if (!mailer) {
-    console.error("[comentarios] SMTP não configurado.");
-    return NextResponse.json({ ok: false, error: "smtp_unconfigured" }, { status: 500 });
-  }
-
-  const recebidoEm = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
-  const url = `${SITE_URL}/blog/${clean.slug}`;
-  const hoje = new Date().toISOString().slice(0, 10);
-  // Linha pronta para colar em content/blog/comentarios.ts ao aprovar.
-  const entrada = `{ slug: ${JSON.stringify(clean.slug)}, nome: ${JSON.stringify(clean.nome)}, texto: ${JSON.stringify(clean.texto)}, data: "${hoje}" },`;
-
+  if (!mailer) return;
+  const url = `${SITE_URL}/blog/${slug}`;
+  const quando = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
   try {
     await mailer.sendMail({
       from: MAIL_FROM,
       to: IMERSAO_TO,
-      subject: `Comentário pendente — ${post!.title}`,
+      subject: `Novo comentário — ${titulo}`,
       text: [
         `Post: ${url}`,
-        `Nome: ${clean.nome}`,
-        `Recebido em: ${recebidoEm} (horário de Brasília)`,
-        `Aceite da política: sim — ${recebidoEm}`,
+        `Nome: ${nome}`,
+        `Publicado em: ${quando} (horário de Brasília)`,
         "",
-        clean.texto,
+        texto,
         "",
-        "O comentário NÃO está publicado. Para aprovar, peça a publicação (ou cole a linha abaixo em content/blog/comentarios.ts). Para recusar, apague este e-mail.",
-        "",
-        entrada
+        `O comentário JÁ ESTÁ PUBLICADO. Para ocultar, abra a tabela blog_comments no Supabase e marque hidden = true na linha id ${id}. Some da página em até 1 minuto, sem deploy.`
       ].join("\n"),
       html: `
         <div style="font-family:Helvetica,Arial,sans-serif;color:#151515;max-width:560px">
-          <p style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#bc0319;margin:0 0 16px">Comentário pendente de aprovação</p>
-          <p style="margin:0 0 8px"><a href="${url}" style="color:#bc0319">${escapeHtml(post!.title)}</a></p>
-          <p style="margin:0 0 16px;color:#696969;font-size:13px">${escapeHtml(clean.nome)} · ${escapeHtml(recebidoEm)} · aceite da política: sim</p>
-          <blockquote style="margin:0 0 24px;padding:16px 20px;border-left:3px solid #bc0319;background:#f6f6f6;white-space:pre-wrap">${escapeHtml(clean.texto)}</blockquote>
-          <p style="font-size:13px;color:#454545">O comentário <strong>não está publicado</strong>. Para aprovar, peça a publicação ou cole a linha abaixo em <code>content/blog/comentarios.ts</code>. Para recusar, apague este e-mail.</p>
-          <pre style="font-size:12px;background:#ececec;padding:12px;white-space:pre-wrap;border-radius:2px">${escapeHtml(entrada)}</pre>
+          <p style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#bc0319;margin:0 0 16px">Novo comentário publicado</p>
+          <p style="margin:0 0 8px"><a href="${url}" style="color:#bc0319">${escapeHtml(titulo)}</a></p>
+          <p style="margin:0 0 16px;color:#696969;font-size:13px">${escapeHtml(nome)} · ${escapeHtml(quando)}</p>
+          <blockquote style="margin:0 0 24px;padding:16px 20px;border-left:3px solid #bc0319;background:#f6f6f6;white-space:pre-wrap">${escapeHtml(texto)}</blockquote>
+          <p style="font-size:13px;color:#454545">O comentário <strong>já está publicado</strong>. Para ocultar, abra a tabela <code>blog_comments</code> no Supabase e marque <code>hidden = true</code> na linha <code>${escapeHtml(id)}</code>. Some da página em até 1 minuto, sem deploy.</p>
         </div>`
     });
-  } catch (error) {
-    console.error("[comentarios] Envio falhou:", error);
-    return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
+  } catch (e) {
+    console.error("[comentarios] aviso por e-mail falhou:", e);
   }
-
-  return NextResponse.json({ ok: true });
 }

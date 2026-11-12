@@ -80,10 +80,15 @@ export default function PrivacidadePage() {
         <p>
           O formulário de comentários dos posts do blog coleta apenas o
           <strong> nome</strong> que você informar e o <strong>texto do comentário</strong>.
-          Não pedimos e-mail. O comentário vai primeiro para a nossa caixa de
-          e-mail para moderação e só é publicado no post, com o nome informado,
-          se for aprovado. Comentários recusados são apagados. Para pedir a
-          remoção de um comentário publicado, escreva para o e-mail da seção 1.
+          Não pedimos e-mail e não guardamos o seu IP junto do comentário. O
+          comentário é publicado na hora, no post, com o nome informado, e fica
+          armazenado em banco de dados (Supabase). Para impedir spam, o envio
+          passa por uma verificação automática feita no próprio site (sem
+          cookies nem serviços de terceiros) e por um limite de envios por
+          endereço, que não é gravado. Nós recebemos um aviso de cada comentário
+          e podemos ocultar ou apagar os que forem ofensivos, tiverem links ou
+          dados de terceiros, ou violarem a lei. Para pedir a remoção de um
+          comentário seu, escreva para o e-mail da seção 1.
         </p>
 
         <h3>2.5 Dados técnicos</h3>
@@ -144,7 +149,11 @@ export default function PrivacidadePage() {
           </li>
           <li>
             <strong>Hostinger</strong> — servidor de e-mail que entrega os
-            pedidos de imersão, diagnóstico e os comentários do blog à nossa caixa.
+            pedidos de imersão, diagnóstico e o aviso dos comentários do blog à nossa caixa.
+          </li>
+          <li>
+            <strong>Supabase</strong> — banco de dados que armazena os
+            comentários publicados no blog (nome e texto).
           </li>
           <li>
             <strong>Twenty CRM</strong> — cadastro de contatos e histórico de
@@ -185,7 +194,8 @@ export default function PrivacidadePage() {
           </li>
           <li>
             <strong>Comentários do blog</strong> — publicados enquanto o post
-            estiver no ar ou até você pedir a remoção; recusados são apagados.
+            estiver no ar ou até você pedir a remoção; os ocultados pela
+            moderação são apagados.
           </li>
           <li>
             <strong>Newsletter</strong> — até você se descadastrar.

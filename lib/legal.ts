@@ -38,7 +38,7 @@ export const WHATSAPP_NUMERO = "5515992835226";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}`;
 
 /** Data da última revisão dos textos legais — aparece no topo das páginas. */
-export const ATUALIZADO_EM = "8 de novembro de 2026";
+export const ATUALIZADO_EM = "12 de novembro de 2026";
 
 /**
  * Linhas de identificação prontas para render. Some a linha do dado que
