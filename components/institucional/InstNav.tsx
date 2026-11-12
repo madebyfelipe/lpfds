@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ScheduleLink } from "@/components/ScheduleLink";
 import { InstThemeToggle } from "@/components/institucional/InstThemeToggle";
 
 const links = [
@@ -15,6 +16,11 @@ const links = [
 export function InstNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  // Na home a nav fica transparente por cima do hero escuro (#inicio), como
+  // no Monolog. Começa ligada já no HTML do servidor para não piscar a barra
+  // clara no primeiro paint; o observer desliga quando o hero sai de baixo.
+  const [overHero, setOverHero] = useState(pathname === "/");
+  const navRef = useRef<HTMLElement>(null);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -22,6 +28,21 @@ export function InstNav() {
   // Navegar fecha o menu (o link pode apontar para a própria página).
   useEffect(() => {
     setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const hero = pathname === "/" ? document.getElementById("inicio") : null;
+    if (!hero || !navRef.current) {
+      setOverHero(false);
+      return;
+    }
+    const navHeight = navRef.current.offsetHeight;
+    const observer = new IntersectionObserver(
+      ([entry]) => setOverHero(entry.isIntersecting),
+      { rootMargin: `-${navHeight}px 0px 0px 0px` }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, [pathname]);
 
   // Esc fecha; o burguer só existe no mobile, então não travamos o scroll.
@@ -35,7 +56,12 @@ export function InstNav() {
   }, [open]);
 
   return (
-    <nav className="inst-nav" data-open={open ? "true" : undefined}>
+    <nav
+      ref={navRef}
+      className="inst-nav"
+      data-open={open ? "true" : undefined}
+      data-hero={overHero ? "true" : undefined}
+    >
       {/* Primeiro ponto de parada do Tab em toda página que tem a nav: sem
           ele, quem navega por teclado atravessa o menu inteiro a cada troca
           de página antes de chegar ao conteúdo. Fica invisível até receber
@@ -63,6 +89,12 @@ export function InstNav() {
       </div>
 
       <div className="inst-nav__end">
+        <ScheduleLink className="inst-nav__cta">
+          Conversar
+          <span className="inst-nav__cta-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </ScheduleLink>
         <InstThemeToggle />
         <button
           type="button"

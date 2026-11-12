@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
+import { Fragment, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { ComentarioForm } from "@/components/institucional/ComentarioForm";
 import { AuthorBox } from "@/components/institucional/AuthorBox";
+import { BackToTop } from "@/components/institucional/BackToTop";
+import { CursorLabel } from "@/components/institucional/CursorLabel";
 import { PostCard } from "@/components/institucional/PostCard";
 import { PostNav } from "@/components/institucional/PostNav";
 import { PostToc } from "@/components/institucional/PostToc";
+import { ReadingLeft } from "@/components/institucional/ReadingLeft";
 import { ReadingProgress } from "@/components/institucional/ReadingProgress";
+import { SectionLinkCopy } from "@/components/institucional/SectionLinkCopy";
 import { ShareBar } from "@/components/institucional/ShareBar";
 import { comentarios } from "@/content/blog/comentarios";
 import { formatDate, getPost, postImage, posts, relatedPosts } from "@/lib/blog";
@@ -103,6 +108,9 @@ export default async function PostPage({ params }: Props) {
   return (
     <main id="conteudo" className="inst-legal">
       <ReadingProgress targetId="leitura" />
+      <CursorLabel />
+      <SectionLinkCopy scopeSelector=".inst-blog__body" />
+      <BackToTop />
       <script
         type="application/ld+json"
         // Conteúdo estático do repositório; JSON.stringify escapa as aspas.
@@ -120,7 +128,16 @@ export default async function PostPage({ params }: Props) {
               {temaLabel(tema)}
             </Link>
           </p>
-          <h1 className="inst-legal__title">{post.title}</h1>
+          {/* Título palavra a palavra: o texto continua o mesmo para leitor de tela e buscador. */}
+          <h1 className="inst-legal__title">
+            {post.title.split(" ").map((palavra, i) => (
+              <Fragment key={i}>
+                <span className="inst-kw" style={{ "--w": Math.min(i, 16) } as CSSProperties}>
+                  {palavra}
+                </span>{" "}
+              </Fragment>
+            ))}
+          </h1>
           <p className="inst-legal__lead">{post.description}</p>
           <p className="inst-legal__updated">
             <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
@@ -186,6 +203,7 @@ export default async function PostPage({ params }: Props) {
               <p className="inst-kicker inst-kicker--tight">— Compartilhar</p>
               <ShareBar url={url} title={post.title} />
             </div>
+            <ReadingLeft targetId="leitura" minutes={minutes} />
           </div>
         </div>
         <footer className="inst-post__end">

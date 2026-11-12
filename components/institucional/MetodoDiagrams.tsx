@@ -176,7 +176,14 @@ const PHASES = [
 
 export function LinhaTempo() {
   return (
-    <div className="inst-diagram inst-diagram--timeline">
+    // Rola na horizontal quando falta espaço (tablet): tabIndex deixa a área
+    // alcançável pelo teclado, exigência do WCAG para região rolável.
+    <div
+      className="inst-diagram inst-diagram--timeline"
+      tabIndex={0}
+      role="group"
+      aria-label="Linha do tempo do método"
+    >
       <svg
         className="inst-diagram__svg"
         viewBox="0 0 1240 500"

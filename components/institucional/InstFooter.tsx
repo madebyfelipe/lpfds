@@ -1,29 +1,17 @@
 import Link from "next/link";
-import { agenda, social } from "@/lib/institucional";
-import { CONTATO_EMAIL, empresa, paginasLegais } from "@/lib/legal";
+import { social } from "@/lib/institucional";
+import { empresa, paginasLegais } from "@/lib/legal";
 import { FooterRelogio, FooterTopo } from "./FooterExtras";
 
 /**
- * Rodapé no padrão do Mammut Studios: selo de agenda, contato em tipo grande,
- * fileira de apoio e o nome da marca ocupando a largura inteira. O selo usa
- * `agenda.numProjetos`, a mesma fonte da faixa "Agenda" da home — nada de
- * número solto aqui.
+ * Rodapé no padrão do Mammut Studios: fileira de apoio (hora, redes, voltar
+ * ao topo), linha legal e o nome da marca ocupando a largura inteira. O selo
+ * da agenda e o e-mail em tipo grande saíram a pedido do Felipe (nov/2026).
  */
 export function InstFooter() {
   return (
     <footer className="inst-footer">
       <div className="inst-footer__inner">
-        <p className="inst-footer__badge">
-          <span className="inst-footer__pill">
-            {agenda.numProjetos} projetos por trimestre
-          </span>
-          Consulte a disponibilidade da próxima imersão
-        </p>
-
-        <a className="inst-footer__mail" href={`mailto:${CONTATO_EMAIL}`}>
-          {CONTATO_EMAIL}
-        </a>
-
         <div className="inst-footer__meta">
           <p className="inst-footer__where">
             Sorocaba/Brasil <FooterRelogio />

@@ -136,6 +136,13 @@
 :root {
   /* Compartilhado com o banner, que fica fora de .inst. */
   --inst-mobile-cta-height: calc(88px + env(safe-area-inset-bottom, 0px));
+  /* Altura da .inst-nav (18px + 34px dos botões + 18px + 1px de borda). O hero
+     da home sobe esse tanto para ficar por baixo da nav transparente; se o
+     padding da nav ou o tamanho dos botões mudar, refaça a conta. */
+  --inst-nav-h: 71px;
+  /* Grão do hero e do manifesto da home (ruído SVG em cinza, 10% de opacidade).
+     Neutro, então serve aos dois temas. */
+  --inst-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.1'/%3E%3C/svg%3E");
 }
 
 .inst-mobile-cta {
@@ -257,16 +264,95 @@
    Nav
    -------------------------------------------------------------------------- */
 
+/* Desktop: logo à esquerda, links no centro e ações à direita (padrão do
+   Monolog). O skip link é absoluto, então não ocupa coluna da grade. No
+   mobile (≤720px) a nav volta a ser flex, com os links no painel. */
 .inst-nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 28px;
   padding: 18px var(--inst-pad);
   background: var(--nav-bg);
   border-bottom: 1px solid var(--gray-200);
+  transition:
+    background-color 200ms cubic-bezier(0.2, 0, 0, 1),
+    border-color 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.inst-nav__brand {
+  justify-self: start;
+}
+
+/* CTA da nav: botão escuro com a seta numa caixa vermelha, como o "Start a
+   project" do Monolog. 34px de altura, igual aos botões redondos ao lado. */
+.inst-nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 4px 0 12px;
+  border-radius: 2px;
+  background: var(--black);
+  color: var(--cream);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color 180ms cubic-bezier(0.2, 0, 0, 1),
+    color 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.inst-nav__cta-arrow {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.inst-nav__cta:hover .inst-nav__cta-arrow {
+  background: var(--red-dark);
+}
+
+/* Por cima do hero da home: sem fundo nem filete, tinta da superfície escura
+   (--cream) e o CTA invertido. O vermelho como tinta segue a regra de
+   .inst-dark (clareia no tema claro, volta ao da marca no escuro). Com o menu
+   mobile aberto a barra volta ao normal, para casar com o painel. */
+.inst-nav[data-hero="true"]:not([data-open="true"]) {
+  --red-ink: #ef4358;
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+:root[data-inst-theme="dark"] .inst-nav[data-hero="true"]:not([data-open="true"]) {
+  --red-ink: #bc0319;
+}
+
+.inst-nav[data-hero="true"]:not([data-open="true"]) :is(.inst-nav__brand, .inst-nav__link, .inst-theme-toggle, .inst-nav__burger) {
+  color: var(--cream);
+}
+
+.inst-nav[data-hero="true"]:not([data-open="true"]) :is(.inst-nav__link:hover, .inst-nav__link[aria-current="page"], .inst-theme-toggle:hover) {
+  color: var(--red-ink);
+}
+
+.inst-nav[data-hero="true"]:not([data-open="true"]) :is(.inst-theme-toggle, .inst-nav__burger) {
+  border-color: var(--line-inverse-strong);
+}
+
+.inst-nav[data-hero="true"]:not([data-open="true"]) .inst-nav__cta {
+  background: var(--cream);
+  color: var(--black);
 }
 
 .inst-nav__brand {
@@ -276,16 +362,14 @@
   color: var(--black);
 }
 
-/* `margin-left: auto` empurra links + ações para a direita como um bloco só
-   (a nav tem três filhos; `space-between` centralizaria os links). */
 .inst-nav__links {
-  margin-left: auto;
   display: flex;
   gap: 28px;
   align-items: center;
 }
 
 .inst-nav__end {
+  justify-self: end;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1655,7 +1739,7 @@
   color: var(--cream);
 }
 
-/* Rodapé no padrão do Mammut Studios: selo, contato gigante, fileira de apoio e
+/* Rodapé no padrão do Mammut Studios: fileira de apoio, linha legal e
    o nome da marca na largura inteira. `container-type` deixa a marca medir a
    si mesma em `cqw` (largura do conteúdo, não da janela). */
 .inst-footer__inner {
@@ -1667,50 +1751,11 @@
   container-type: inline-size;
 }
 
-.inst-footer__badge {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 16px;
-  margin: 0;
-  font-size: 0.875rem;
-  color: var(--gray-300);
-}
-
-/* Selo com a agenda. Raio 2px: o site institucional não usa pílula. */
-.inst-footer__pill {
-  padding: 6px 12px;
-  border: 1px solid var(--line-inverse-strong);
-  border-radius: 2px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--cream);
-}
-
-.inst-footer__mail {
-  align-self: flex-start;
-  margin-top: 40px;
-  font-size: clamp(1.5rem, 0.75rem + 3.6vw, 3.5rem);
-  line-height: 1.1;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: var(--cream);
-  border-bottom: 2px solid transparent;
-  overflow-wrap: anywhere;
-}
-
-.inst-footer__mail:hover {
-  border-bottom-color: var(--red-ink);
-}
-
 .inst-footer__meta {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 24px;
-  margin-top: 96px;
 }
 
 .inst-footer__where {
@@ -2170,7 +2215,16 @@
 /* Mobile: os links saem da barra e viram um painel aberto pelo burguer. */
 @media (max-width: 720px) {
   .inst-nav {
+    display: flex;
     gap: 16px;
+  }
+
+  .inst-nav__end {
+    margin-left: auto;
+  }
+
+  .inst-nav__cta {
+    display: none;
   }
 
   .inst-nav__burger {
@@ -3278,97 +3332,212 @@
 }
 
 /* --------------------------------------------------------------------------
-   Hero em cartaz (referência: Monolog) — só na home. Tipo gigante, apoio em
-   duas colunas e faixa de números. O `.inst-hero` base segue igual nas
-   outras páginas (/metodologia, /cases...).
+   Hero no padrão do Monolog — só na home (#inicio). Superfície `.inst-dark`
+   com a foto do palco desfocada e grão, nav transparente por cima, texto curto
+   centralizado e o nome da marca na largura inteira, encostado na base. Segue
+   a regra de `.inst-dark`: no tema escuro vira a superfície clara.
    -------------------------------------------------------------------------- */
 
-.inst-hero--poster {
-  padding-top: 96px;
-  padding-bottom: 0;
+.inst-mono {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: clamp(560px, 100svh, 960px);
+  /* Sobe para baixo da nav (sticky, z 50), que fica transparente aqui. */
+  margin-top: calc(-1 * var(--inst-nav-h));
+  padding: calc(var(--inst-nav-h) + 88px) var(--inst-pad) 0;
+  /* A marca mede a si mesma em cqw, como a do rodapé. */
+  container-type: inline-size;
 }
 
-.inst-hero--poster .inst-hero__title {
-  max-width: none;
-  font-size: clamp(3rem, 0.5rem + 8vw, 8.25rem);
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+/* Foto do palco já reduzida e em tons de cinza (fundo-hero.jpg, 1 KB): o
+   desfoque do CSS só suaviza a ampliação. Opacidade baixa para o texto em
+   --cream manter 4.5:1 mesmo sobre a parte mais clara da foto. */
+.inst-mono__bg {
+  position: absolute;
+  inset: -12%;
+  z-index: -1;
+  background: url("/institucional/hero/fundo-hero.jpg") center 30% / cover no-repeat;
+  filter: blur(28px);
+  opacity: 0.36;
 }
 
-.inst-hero__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
-  margin-top: 64px;
+/* Grão (--inst-grain) por cima e a foto se fundindo na superfície perto da base,
+   onde a marca encosta na seção seguinte. */
+.inst-mono::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    var(--inst-grain),
+    linear-gradient(to bottom, transparent 40%, var(--black) 88%);
 }
 
-.inst-hero--poster .inst-hero__lead {
-  margin: 0;
+.inst-mono__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 30rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.inst-mono__icon {
+  width: 48px;
+  height: 42px;
+  margin-bottom: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.inst-mono__title {
   max-width: 24ch;
-  font-size: clamp(1.375rem, 1rem + 1vw, 2rem);
-  line-height: 1.25;
+  margin: 0;
+  font-size: clamp(1.25rem, 1rem + 0.7vw, 1.625rem);
+  line-height: 1.2;
   font-weight: 500;
   letter-spacing: -0.01em;
-  color: var(--black);
 }
 
-.inst-hero__aside .inst-hero__note:first-child {
-  margin-top: 0;
+.inst-mono__lead {
+  max-width: 34ch;
+  margin: 20px 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
 }
 
-.inst-hero--poster .inst-hero__cta {
-  margin-top: 32px;
+.inst-mono__mark {
+  margin: 72px 0 0;
+  /* Respiro para as descendentes (y, p) não serem cortadas pelo overflow. */
+  padding-bottom: 0.14em;
+  font-size: 12vw;
+  font-size: 16.3cqw;
+  line-height: 0.8;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--gray-300);
+  user-select: none;
+  animation: inst-mono-rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-/* Faixa de números da oferta. O <dt> vem antes do <dd> no HTML (ordem exigida
-   pela especificação) e o `column-reverse` põe o número em cima do rótulo. */
-.inst-facts {
+@keyframes inst-mono-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24%);
+  }
+}
+
+/* Manifesto logo abaixo, na mesma superfície: coluna estreita à esquerda e o
+   texto do estúdio em tipo grande à direita, assinado. */
+/* O mesmo grão do hero, para não haver emenda entre as duas seções. */
+.inst-manifest {
+  background-image: var(--inst-grain);
+}
+
+.inst-manifest__inner {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin: 88px 0 0;
-  border-top: 2px solid var(--black);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 56px var(--inst-pad) 128px;
 }
 
-.inst-facts__item {
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 24px 24px 48px 0;
+.inst-manifest__side {
+  align-self: start;
+  max-width: 300px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-inverse-strong);
 }
 
-.inst-facts__num {
+.inst-manifest__note {
   margin: 0;
-  font-size: clamp(2.5rem, 1rem + 4vw, 5rem);
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--gray-300);
 }
 
-.inst-facts__label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gray-500);
+.inst-hero__cta.inst-manifest__cta {
+  margin-top: 28px;
+}
+
+/* --red-dark sobre a superfície escura cai abaixo de 3:1; o hover aqui clareia. */
+.inst-hero__cta.inst-manifest__cta:hover {
+  color: var(--cream);
+  border-bottom-color: var(--cream);
+}
+
+.inst-manifest__text {
+  max-width: 22em;
+  margin: 0 0 0.9em;
+  font-size: clamp(1.625rem, 1rem + 1.9vw, 2.75rem);
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.inst-manifest__sign {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.inst-manifest__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.inst-manifest__who {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+.inst-manifest__who span {
+  display: block;
+  color: var(--gray-300);
 }
 
 @media (max-width: 900px) {
-  .inst-hero--poster {
-    padding-top: 72px;
+  .inst-mono {
+    min-height: clamp(520px, 92svh, 820px);
+    padding-top: calc(var(--inst-nav-h) + 56px);
   }
 
-  .inst-hero__row {
+  .inst-manifest__inner {
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
-    margin-top: 40px;
+    gap: 40px;
+    padding-bottom: 96px;
   }
 
-  .inst-facts {
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: 56px;
+  .inst-manifest__side {
+    max-width: none;
+  }
+}
+
+/* No celular a barra fixa de CTA (InstMobileCta) ocupa a base da tela: o
+   hero desconta a altura dela para a marca não ficar escondida. */
+@media (max-width: 720px) {
+  .inst-mono {
+    min-height: clamp(480px, calc(100svh - var(--inst-mobile-cta-height)), 720px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inst-mono__mark {
+    animation: none;
   }
 }
 
@@ -3510,7 +3679,6 @@
   .inst-footer__meta {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
-    margin-top: 64px;
   }
 
   .inst-footer__top {
@@ -3523,5 +3691,372 @@
   .inst-foco__box,
   .inst-foco__copy {
     transition: none;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   Blog — redesign com movimento (nov/2026).
+   Regras: só transform/opacity (sem layout), tudo desligado em
+   prefers-reduced-motion, e sem JS a página inteira continua legível.
+   -------------------------------------------------------------------------- */
+
+/* Hero da listagem: título gigante que sobe linha a linha de uma máscara. */
+.inst-bloghero {
+  padding-bottom: 8px;
+}
+
+.inst-bloghero__title {
+  margin: 0;
+  font-size: clamp(2.75rem, 7.2vw, 6rem);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.inst-kin__line {
+  display: block;
+  /* a máscara corta a linha que ainda está embaixo; o respiro evita cortar o descendente */
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.inst-kin__line > span {
+  display: inline-block;
+  transform: translateY(108%);
+  animation: inst-kin 700ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--l, 0) * 90ms + 80ms);
+}
+
+@keyframes inst-kin {
+  to {
+    transform: none;
+  }
+}
+
+.inst-bloghero__lead {
+  max-width: 56ch;
+  margin: 32px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--gray-700);
+}
+
+/* Faixa rolante dos temas (decorativa). Pausa no hover. */
+.inst-marquee {
+  margin-top: 56px;
+  overflow: hidden;
+  border-block: 1px solid var(--gray-200);
+  white-space: nowrap;
+}
+
+.inst-marquee__track {
+  display: inline-flex;
+  animation: inst-marquee 60s linear infinite;
+  will-change: transform;
+}
+
+.inst-marquee:hover .inst-marquee__track {
+  animation-play-state: paused;
+}
+
+.inst-marquee__group {
+  display: inline-flex;
+  flex: none;
+  gap: 48px;
+  padding: 18px 48px 18px 0;
+}
+
+.inst-marquee__item {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-marquee__item::before {
+  content: "— ";
+  color: var(--red-ink);
+}
+
+@keyframes inst-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Entrada dos cards ao rolar (só depois da hidratação: data-ready). */
+.inst-card {
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.inst-reveal[data-ready] .inst-card:not([data-in]) {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Contagem ao lado do tema no chip. */
+.inst-chip__n {
+  margin-left: 10px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.inst-chip[aria-pressed="true"] .inst-chip__n {
+  opacity: 0.85;
+}
+
+/* Etiqueta "LER →" que segue o mouse sobre os cards. Retângulo de 2px (nada
+   de círculo ou pílula no design system), vermelho de marca como fundo. */
+.inst-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  padding: 10px 14px;
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0);
+  transition: opacity 180ms ease;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .inst-cursor {
+    display: none;
+  }
+}
+
+/* Destaque maior e título mais forte no primeiro card. */
+.inst-card--featured .inst-card__title {
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+}
+
+/* Troca de filtro (View Transitions): os cards que ficam deslizam para o novo lugar. */
+::view-transition-group(*) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Artigo: título palavra a palavra. */
+.inst-kw {
+  display: inline-block;
+  animation: inst-kw 560ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--w, 0) * 38ms);
+}
+
+@keyframes inst-kw {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+}
+
+/* Capa do artigo: moldura corta o zoom; o parallax roda por scroll (CSS puro). */
+.inst-blog__cover {
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+@keyframes inst-cover {
+  from {
+    transform: scale(1.14);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes inst-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .inst-blog__cover-img {
+    animation: inst-cover linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 55%;
+  }
+
+  /* A "Resposta rápida" fica de fora: parada no meio da entrada ela ficava
+     semitransparente e perdia contraste (axe no tablet). */
+  .inst-blog__body h2 {
+    animation: inst-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 45%;
+  }
+}
+
+/* Clique no h2 copia o link da seção (SectionLinkCopy marca data-copy). */
+.inst-blog__body[data-copy] h2 {
+  cursor: pointer;
+}
+
+.inst-blog__body[data-copy] h2::after {
+  content: " #";
+  color: var(--gray-300);
+  opacity: 0;
+  transition:
+    opacity 200ms ease,
+    color 200ms ease;
+}
+
+.inst-blog__body[data-copy] h2:hover::after {
+  color: var(--red-ink);
+  opacity: 1;
+}
+
+.inst-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 80;
+  margin: 0;
+  padding: 12px 18px;
+  border-radius: 2px;
+  background: var(--black);
+  color: var(--cream);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.inst-toast[data-show] {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+/* "Faltam X min" na coluna do sumário. */
+.inst-readleft {
+  margin: 28px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Voltar ao topo: quadrado de 2px, vermelho de marca; acima da barra mobile. */
+.inst-totop {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 55;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  visibility: hidden;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 220ms;
+}
+
+.inst-totop[data-show] {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.inst-totop:hover {
+  background: var(--red-dark);
+}
+
+.inst-totop:focus-visible {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .inst-bloghero__title {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+  }
+
+
+  /* No mobile existe a barra fixa de CTA (InstMobileCta): o botão sobe acima dela. */
+  .inst-totop {
+    right: 16px;
+    bottom: calc(var(--inst-mobile-cta-height) + 16px);
+  }
+}
+
+/* Movimento reduzido: tudo parado e visível. */
+@media (prefers-reduced-motion: reduce) {
+  .inst-kin__line > span,
+  .inst-kw {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .inst-marquee {
+    white-space: normal;
+  }
+
+  .inst-marquee__track {
+    animation: none;
+    display: block;
+  }
+
+  .inst-marquee__group {
+    flex-wrap: wrap;
+    padding-right: 0;
+  }
+
+  .inst-marquee__group[data-copy="1"] {
+    display: none;
+  }
+
+  .inst-reveal .inst-card,
+  .inst-reveal[data-ready] .inst-card:not([data-in]) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .inst-blog__cover-img,
+  .inst-blog__body h2,
+  .inst-blog__summary {
+    animation: none;
+  }
+
+  .inst-cursor,
+  .inst-toast,
+  .inst-totop {
+    transition: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
   }
 }
