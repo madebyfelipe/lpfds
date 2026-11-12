@@ -257,9 +257,9 @@ e na metadata da home, na metadata do `/imersao`, no `HubHero` e nas referência
 numéricas dos `depoimentos`. **Preço continua fora do site** (a decisão de segurar o
 preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos: Imersão
 → Território → Sistema) foi **substituída** por um **teaser gráfico** do método PSIQUE
-(ainda em `id="processo"`, que o `/hub` linka): `methodIntro` + a lista em foco
-`MetodoFoco` (as seis áreas, ver "Redesign nov/2026" abaixo) + link "Ver o método
-completo →" para **`/metodologia`**. O diagrama `MetodologiaFlow` saiu da home e segue
+(ainda em `id="processo"`, que o `/hub` linka) — hoje é o "Método PSIQUE" em três passos
+do redesign Monolog (ver "Redesign nov/2026" abaixo), com link "Ver o método completo →"
+para **`/metodologia`**. O diagrama `MetodologiaFlow` saiu da home e segue
 em `/metodologia`.
 
 **Método PSIQUE** (o nome era NAVE; virou PSIQUE por ressoar com o ICP de psicologia —
@@ -295,13 +295,31 @@ em tokens (raio 2px, quatro cores, Neue Haas), claro/escuro, sem lib nova:
   baixo para não repetir. **Sem faixa de números grandes**: a de 2 · 45 · 6 · 8 e os contadores
   do `/blog` foram removidos a pedido do Felipe — não recolocar. O `.inst-hero` base segue
   nas outras páginas.
+- **Resto da home (ref. Monolog, estrutura seguida à risca a pedido do Felipe)** — depois do
+  manifesto, nesta ordem, cada seção copiando a grade da equivalente do Monolog:
+  `.inst-clients` (rótulo + grade 4 × 2 de marcas, "Clients") → `.inst-thesis` ("BRANDING É
+  TRADUÇÃO" em tipo gigante com a 05.jpg atrás, "We close that gap") → `.inst-stories`
+  (superfície clara, 5 cases de `lib/portfolio.ts` com foto, contador "Case ← 01/05", texto e
+  a categoria no chip — **sem métrica**, não há número de resultado verificado; fecha com
+  "## Ver todos os projetos (→)", "Success Stories") → `#servicos.inst-help` (`DepoSlider` à
+  esquerda, `deliverables` em tipo grande com a 1ª acesa e o hover acendendo as outras, foto
+  pequena à direita, "What we can help with") → `#processo.inst-journey` ("MÉTODO PSIQUE" na
+  largura inteira + três passos com foto que agrupam os oito de `process`, "Project
+  Journey") → `.inst-faq` (rótulo + contato à esquerda, título + `<details name="faq">` à
+  direita, JSON-LD `FAQPage`; **as respostas só usam fatos já aprovados** — oferta, método,
+  entregas, art. 20, preço fora do site, agenda) → `.inst-final` (frase gigante escalonada
+  sobre a 02.jpg em cinza + botão + fala de depoimento, "Let's build") → rodapé atual.
+  Rótulos de seção usam `.inst-dot` (ponto + tracking do kicker); o botão claro com seta em
+  caixa vermelha é `.inst-btn`; o cinza apagado da lista é o token `--dim-inverse`. A faixa
+  de fotos, "O estúdio", Entregas em grade, `Depoimentos`, "Agenda" e `InstContato` **saíram
+  da home** (os componentes seguem nas outras páginas). `MetodoFoco` segue só em `/metodologia`.
 - **Nav (ref. Monolog)** — no desktop a `InstNav` é grade de três colunas: marca à esquerda,
   links no centro, CTA "Conversar ↗" (`.inst-nav__cta`, `ScheduleLink`) + tema à direita. No
   mobile (≤720px) volta a flex com o painel e o CTA some (o `InstMobileCta` cobre).
 - **Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente):
   título à direita, marcador numerado no eixo, texto à esquerda; só a linha em foco acende
   (`data-ativo`), as outras ficam em `--gray-300`. O foco segue o mouse e a linha que passa
-  pelo meio da tela. Usado nas seis áreas P-S-I-Q-U-E na home e em `/metodologia` (onde
+  pelo meio da tela. Usado nas seis áreas P-S-I-Q-U-E em `/metodologia` (onde
   substituiu os cards `.inst-nave`, hoje sem uso). Todo o texto está no HTML do servidor.
   Fica dentro de `.inst-dark`: o marcador usa `--black` de fundo para cobrir o eixo.
 - **Rodapé (ref. Mammut Studios)** — `InstFooter`: fileira (hora de Sorocaba · redes · voltar ao topo) + linha legal + nome da
@@ -365,8 +383,11 @@ three children now, so `justify-content: space-between` would centre the links.
 `--inst-pad: 24px` at ≤900px is declared on `.inst, .inst-nav, .inst-footer` because the
 nav and footer also render outside `.inst`.
 
-**Clientes**: the prototype's client-logo section was **dropped from the home** at
-Felipe's request. Don't reinstate it.
+**Clientes**: the prototype's client-logo section was dropped at Felipe's request; in
+nov/2026 he asked for the home to follow the Monolog structure *à risca*, so a **grade de
+marcas** came back as `.inst-clients` — client names as typographic marks (no logo files
+exist) read from `lib/portfolio.ts`, each linking to its case. Same clients already public
+on `/projetos`.
 
 **`/projetos` layout** follows the manifesto-branding reference Felipe supplied, not the
 prototype's full-bleed stack: a small "Projetos" label, cards inside the 1200px column
