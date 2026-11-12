@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
-import { ComentarioForm } from "@/components/institucional/ComentarioForm";
+import { ComentariosBloco } from "@/components/institucional/ComentariosBloco";
 import { AuthorBox } from "@/components/institucional/AuthorBox";
 import { PostCard } from "@/components/institucional/PostCard";
 import { PostNav } from "@/components/institucional/PostNav";
@@ -67,6 +67,7 @@ export default async function PostPage({ params }: Props) {
   const newer = at > 0 ? posts[at - 1] : undefined;
   const older = at < posts.length - 1 ? posts[at + 1] : undefined;
   const tema = post.tags[0];
+  // Comentários já aprovados em arquivo (legado). Os novos vêm do banco, no cliente.
   const aprovados = comentarios.filter((c) => c.slug === post.slug);
   // Autor e publisher apontam para as entidades do StructuredData global
   // (mesmos @id), em vez de redeclarar o estúdio a cada post.
@@ -218,23 +219,7 @@ export default async function PostPage({ params }: Props) {
           E no seu consultório, como isso aparece? Conte a sua experiência ou
           deixe a sua dúvida.
         </h2>
-        {aprovados.length > 0 && (
-          <ol className="inst-blog__comment-list">
-            {aprovados.map((c) => (
-              <li key={`${c.data}-${c.nome}-${c.texto.slice(0, 20)}`} className="inst-blog__comment">
-                <p className="inst-blog__comment-meta">
-                  {c.nome} · <time dateTime={c.data}>{formatDate(c.data)}</time>
-                </p>
-                <p className="inst-blog__comment-text">{c.texto}</p>
-              </li>
-            ))}
-          </ol>
-        )}
-        <p className="inst-blog__comment-note">
-          Os comentários passam por moderação antes de aparecer. Pedimos só o
-          seu nome; não publique dados de pacientes.
-        </p>
-        <ComentarioForm slug={post.slug} />
+        <ComentariosBloco slug={post.slug} iniciais={aprovados} />
       </section>
 
       <PostNav
