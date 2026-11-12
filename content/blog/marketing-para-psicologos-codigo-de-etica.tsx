@@ -8,7 +8,7 @@ const CODIGO = "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo-de-eti
 
 export const post: Post = {
   slug: "marketing-para-psicologos-codigo-de-etica",
-  title: "Marketing para psicólogos dentro do Código de Ética: como divulgar o consultório",
+  title: "Marketing para psicólogos: o que o Código de Ética permite e 5 canais que funcionam",
   description:
     "Um guia de marketing para psicólogos que respeita o artigo 20: o que pode e o que não pode na divulgação, canais que funcionam e como organizar a presença do consultório.",
   keyword: "marketing para psicólogos",
@@ -17,6 +17,7 @@ export const post: Post = {
   summary:
     "Psicólogo pode e deve divulgar o seu trabalho, desde que siga o artigo 20 do Código de Ética: identificar-se com nome completo e CRP, citar só títulos que possui, não usar preço como propaganda, não prometer resultado, não se comparar a colegas e não ser sensacionalista. Um marketing ético começa pela marca — clareza sobre para quem você atende — e se sustenta em indicação, presença digital consistente e conteúdo útil.",
   faq: [
+    { q: "Psicólogo pode fazer tráfego pago?", a: "Pode. O meio não é proibido; o conteúdo do anúncio é que precisa seguir o artigo 20: nome completo e CRP, sem preço como chamariz, sem promessa de resultado e sem sensacionalismo." },
     {
       q: "Psicólogo pode fazer propaganda?",
       a: "Pode. A cartilha do CRP-MG lembra que a publicidade profissional é um recurso de acesso da sociedade à psicologia. Ela só precisa seguir o artigo 20 do Código de Ética e os artigos 53 a 58 da Resolução CFP nº 003/2007."
@@ -120,6 +121,24 @@ export const post: Post = {
           Técnica CFP nº 01/2023 sobre a incompatibilidade das constelações
           familiares com o exercício profissional.
         </p>
+      </section>
+
+      <section>
+        <h2>Erros que mais contrariam o artigo 20</h2>
+        <div className="inst-blog__table" role="region" aria-label="Erros comuns no marketing de psicólogos e como corrigir" tabIndex={0}>
+          <table>
+            <caption>Erros comuns no marketing de psicólogos e como corrigir</caption>
+            <thead><tr><th scope="col">Erro</th><th scope="col">Regra</th><th scope="col">Como fazer</th></tr></thead>
+            <tbody>
+            <tr><td>“O melhor psicólogo da cidade”</td><td>Autopromoção em detrimento de colegas (art. 20, f)</td><td>Mostre formação e área de atuação, sem adjetivos</td></tr>
+            <tr><td>“Acabe com a ansiedade em 8 sessões”</td><td>Previsão taxativa de resultado (art. 20, e)</td><td>Descreva objetivos e formato, sem garantir resultado</td></tr>
+            <tr><td>Promoção, desconto ou sessão grátis</td><td>Preço como propaganda (art. 20, d)</td><td>Informe o valor só a quem pergunta</td></tr>
+            <tr><td>Depoimento ou print de paciente</td><td>Sigilo e sensacionalismo</td><td>Use conteúdo útil e clareza sobre o atendimento</td></tr>
+            <tr><td>“Especialista” sem o título</td><td>Só títulos que possui (art. 20, b)</td><td>Divulgue área de atuação e experiência</td></tr>
+            <tr><td>Divulgação sem nome completo e CRP</td><td>Identificação obrigatória (art. 20, a)</td><td>CRP na bio, no site, no anúncio e no cartão</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section>

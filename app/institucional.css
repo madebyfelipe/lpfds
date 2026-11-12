@@ -2452,6 +2452,46 @@
   line-height: 1.6;
 }
 
+/* Tabelas no corpo do post (resumos "pode / evitar"): filetes --gray-200,
+   cabeçalho no estilo do kicker, rolagem lateral no celular. */
+.inst-blog__table {
+  margin: 8px 0 24px;
+  overflow-x: auto;
+  border: 1px solid var(--gray-200);
+  border-radius: 2px;
+}
+
+.inst-blog__table table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.inst-blog__table caption {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.inst-blog__table th,
+.inst-blog__table td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--gray-200);
+}
+
+.inst-blog__table th {
+  font-weight: 700;
+  background: var(--gray-100);
+}
+
 .inst-blog__back:hover {
   color: var(--red-ink);
 }

@@ -20,6 +20,8 @@ export const post: Post = {
   summary:
     "Um site profissional para psicólogo começa pela pesquisa, não pelo layout: entender o nicho e o público, olhar como os consultórios da região se apresentam e descobrir com que palavras as pessoas buscam atendimento. Com isso, a estrutura, os textos e o SEO do site nascem prontos para quem você quer atender — e dentro do artigo 20 do Código de Ética.",
   faq: [
+    { q: "Quanto custa criar um site para psicólogo?", a: "Varia muito: há construtores com mensalidade, profissionais autônomos e estúdios que fazem o site dentro de um projeto de marca. Compare o que está incluído — pesquisa, textos, SEO, domínio, hospedagem e suporte —, não só o valor final." },
+    { q: "Como fazer um site para psicólogo?", a: "Comece pela pesquisa (público, concorrentes e palavras-chave), defina a estrutura a partir das perguntas do seu público, escreva textos dentro do artigo 20 com nome e CRP visíveis, e cuide do SEO técnico: título, descrição, dados estruturados e sitemap." },
     {
       q: "Quanto tempo leva a criação de um site para psicólogo?",
       a: "Depende do escopo de cada estúdio. Na Made by Felipe, o site faz parte do projeto de marca: dois dias de imersão e a marca no ar em 45 dias, com a página profissional entre as entregas."
