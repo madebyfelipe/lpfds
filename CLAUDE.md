@@ -280,24 +280,35 @@ nas duas etapas Estratégia/Identidade, export `process`), **não** outro grid d
 Copy adaptada ao ICP de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B
 do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
 
-**Redesign nov/2026 (referências do One Page Love, pedido do Felipe)** — três peças, todas
+**Redesign nov/2026 (referências do One Page Love, pedido do Felipe)** — quatro peças, todas
 em tokens (raio 2px, quatro cores, Neue Haas), claro/escuro, sem lib nova:
-- **Hero em cartaz (ref. Monolog)** — só na home: `.inst-hero--poster` (título até 8.25rem,
-  apoio em duas colunas `.inst-hero__row`) + faixa `.inst-facts` com **2 · 45 · 6 · 8**
-  (dias de imersão, dias no ar, áreas, passos). Os dois últimos saem de `positioning.length`
-  e dos `steps` de `process`; **só entram números da própria oferta** — nada de projeto,
-  cliente ou resultado (ver "Provas sociais e alegações"). O `.inst-hero` base não mudou.
+- **Hero Monolog (ref. Monolog, fiel a pedido do Felipe)** — só na home: `#inicio.inst-dark.inst-mono`,
+  altura de tela, foto do palco desfocada (`public/institucional/hero/fundo-hero.jpg`, 120px em
+  cinza, 1 KB; o `blur` do CSS só suaviza) + grão em SVG, ícone do hexágono PSIQUE, H1 (a
+  headline aprovada) e dois parágrafos curtos **centralizados**, e o nome da marca na largura
+  inteira encostado na base (`.inst-mono__mark`, `16.3cqw`, decorativo). A `InstNav` fica
+  **transparente** por cima dele (`data-hero`, ligado por IntersectionObserver; o hero sobe
+  `--inst-nav-h` = 71px para ficar sob a nav — refazer a conta se a nav mudar de altura). Logo
+  abaixo, o **manifesto** (`.inst-manifest`, mesma superfície): rótulo + nota + CTA à esquerda e
+  o texto do antigo bloco "O estúdio" em tipo grande à direita, assinado com
+  `public/institucional/felipe-avatar.jpg` (recorte da 02.jpg). O bloco "O estúdio" saiu de
+  baixo para não repetir. **Sem faixa de números grandes**: a de 2 · 45 · 6 · 8 e os contadores
+  do `/blog` foram removidos a pedido do Felipe — não recolocar. O `.inst-hero` base segue
+  nas outras páginas.
+- **Nav (ref. Monolog)** — no desktop a `InstNav` é grade de três colunas: marca à esquerda,
+  links no centro, CTA "Conversar ↗" (`.inst-nav__cta`, `ScheduleLink`) + tema à direita. No
+  mobile (≤720px) volta a flex com o painel e o CTA some (o `InstMobileCta` cobre).
 - **Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente):
   título à direita, marcador numerado no eixo, texto à esquerda; só a linha em foco acende
   (`data-ativo`), as outras ficam em `--gray-300`. O foco segue o mouse e a linha que passa
   pelo meio da tela. Usado nas seis áreas P-S-I-Q-U-E na home e em `/metodologia` (onde
   substituiu os cards `.inst-nave`, hoje sem uso). Todo o texto está no HTML do servidor.
   Fica dentro de `.inst-dark`: o marcador usa `--black` de fundo para cobrir o eixo.
-- **Rodapé (ref. Mammut Studios)** — `InstFooter`: selo `agenda.numProjetos` + e-mail em tipo
-  grande + fileira (hora de Sorocaba · redes · voltar ao topo) + linha legal + nome da
+- **Rodapé (ref. Mammut Studios)** — `InstFooter`: fileira (hora de Sorocaba · redes · voltar ao topo) + linha legal + nome da
   marca na largura inteira (`.inst-footer__mark`, `16.3cqw`; refazer a medida se a fonte
   ou o texto mudar). Relógio e "voltar ao topo" estão em `FooterExtras.tsx` (cliente; o
   relógio só aparece após a hidratação). O rodapé vale também para `/portfolio/[slug]`.
+  O selo "3 projetos por trimestre" e o e-mail em tipo grande **saíram** a pedido do Felipe.
 
 **Diagramas** (`components/institucional/MetodoDiagrams.tsx` — server components):
 `MetodologiaFlow` são **três peças SVG** (hexágono do posicionamento · venn de identidade ·

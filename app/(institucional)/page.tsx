@@ -5,28 +5,14 @@ import Link from "next/link";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { Depoimentos } from "@/components/institucional/Depoimentos";
 import { InstContato } from "@/components/institucional/InstContato";
-import { CountUp } from "@/components/institucional/CountUp";
 import { MetodoFoco } from "@/components/institucional/MetodoFoco";
 import {
   agenda,
   deliverables,
   heroStrip,
   methodIntro,
-  positioning,
-  process
+  positioning
 } from "@/lib/institucional";
-
-// Números da oferta, derivados dos dados aprovados — se o método mudar de
-// seis áreas ou oito passos, a faixa acompanha sozinha.
-const facts = [
-  { num: 2, label: "dias de imersão" },
-  { num: 45, label: "dias até estar no ar" },
-  { num: positioning.length, label: "áreas de posicionamento" },
-  {
-    num: process.reduce((n, etapa) => n + etapa.steps.length, 0),
-    label: "passos em duas etapas"
-  }
-];
 
 // Title/description da home vêm do copy aprovado e sobrescrevem os do
 // layout raiz, que seguem servindo /hub, /contato e /portfolio.
@@ -59,44 +45,85 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main id="conteudo">
-      {/* Hero em cartaz (referência: Monolog): tipo gigante, texto de apoio em
-          duas colunas e uma faixa de números. Os números são os da própria
-          oferta (2 dias, 45 dias, 6 áreas, 8 passos) — nenhum dado de
-          resultado ou de cliente. */}
-      <header className="inst-hero inst-hero--poster">
-        <h1 className="inst-hero__title">
-          Construa a marca do seu consultório em{" "}
-          <span className="inst-hero__accent">dois dias de imersão</span>.
-        </h1>
-        <div className="inst-hero__row">
-          <p className="inst-hero__lead">
+      {/* Hero no padrão do Monolog: superfície escura com foto desfocada e
+          grão, nav por cima (InstNav fica transparente enquanto o hero está
+          sob ela), texto curto centralizado e o nome da marca na largura
+          inteira, encostado na base. O H1 é a headline aprovada. */}
+      <header id="inicio" className="inst-dark inst-mono">
+        <div className="inst-mono__bg" aria-hidden="true" />
+        <div className="inst-mono__center">
+          <svg
+            className="inst-mono__icon"
+            viewBox="0 0 48 42"
+            aria-hidden="true"
+            focusable="false"
+          >
+            {/* O hexágono das seis áreas do método PSIQUE. */}
+            <path d="M12 1h24l11 20-11 20H12L1 21z" />
+            <path d="M12 1l24 40M36 1L12 41M1 21h46" />
+          </svg>
+          <h1 className="inst-mono__title">
+            Construa a marca do seu consultório em dois dias de imersão.
+          </h1>
+          <p className="inst-mono__lead">
             Dois dias com você. Posicionamento, identidade visual e verbal no
             ar em 45 dias.
           </p>
-          <div className="inst-hero__aside">
-            <p className="inst-hero__note">
-              Dentro do artigo 20 do Código de Ética Profissional do Psicólogo.
+          <p className="inst-mono__lead">
+            Dentro do artigo 20 do Código de Ética Profissional do Psicólogo.
+          </p>
+        </div>
+        {/* Decorativo: o nome já está na nav e no H1 do documento. */}
+        <p className="inst-mono__mark" aria-hidden="true">
+          Made by Felipe
+        </p>
+      </header>
+
+      {/* Manifesto logo abaixo do hero, como no Monolog: coluna estreita à
+          esquerda (rótulo, nota e CTA) e o texto do estúdio em tipo grande à
+          direita, assinado. A copy é a do bloco "O estúdio", que saiu daqui
+          de baixo. */}
+      <section className="inst-dark inst-manifest">
+        <div className="inst-manifest__inner">
+          <div className="inst-manifest__side">
+            <p className="inst-kicker inst-kicker--inverse inst-kicker--tight">
+              — O estúdio
             </p>
-            <p className="inst-hero__note">
+            <p className="inst-manifest__note">
               Antes da imersão, 15 minutos para conversar sobre a marca do seu
               consultório.
             </p>
-            <ScheduleLink className="inst-hero__cta">
+            <ScheduleLink className="inst-hero__cta inst-manifest__cta">
               Conversar por 15 minutos →
             </ScheduleLink>
           </div>
-        </div>
-        <dl className="inst-facts">
-          {facts.map((f) => (
-            <div key={f.label} className="inst-facts__item">
-              <dt className="inst-facts__label">{f.label}</dt>
-              <dd className="inst-facts__num">
-                <CountUp to={f.num} />
-              </dd>
+          <div className="inst-manifest__body">
+            <p className="inst-manifest__text">
+              Made by Felipe constrói marca a partir da leitura do negócio.
+              Receita, carteira, valor de sessão e ocupação de agenda entram na
+              mesa antes de qualquer decisão visual.
+            </p>
+            <p className="inst-manifest__text">
+              O foco em consultório de psicologia veio da mesma constatação
+              repetida na região: profissionais com formação longa e uma
+              presença que comunica muito abaixo do próprio preparo.
+            </p>
+            <div className="inst-manifest__sign">
+              <Image
+                src="/institucional/felipe-avatar.jpg"
+                alt=""
+                width={48}
+                height={48}
+                className="inst-manifest__avatar"
+              />
+              <p className="inst-manifest__who">
+                Felipe
+                <span>Estrategista de marca, Made by Felipe</span>
+              </p>
             </div>
-          ))}
-        </dl>
-      </header>
+          </div>
+        </div>
+      </section>
 
       <div className="inst-strip" tabIndex={0} role="group" aria-label="Fotos de Felipe">
         {heroStrip.map((foto) => (
@@ -131,24 +158,6 @@ export default function Home() {
           <Link href="/metodologia" className="inst-method__more">
             Ver o método completo →
           </Link>
-        </div>
-      </section>
-
-      <section className="inst-section">
-        <p className="inst-kicker">— O estúdio</p>
-        <div className="inst-studio">
-          <p className="inst-studio__copy">
-            Made by Felipe constrói marca a partir da leitura do negócio.{" "}
-            <strong>
-              Receita, carteira, valor de sessão e ocupação de agenda
-            </strong>{" "}
-            entram na mesa antes de qualquer decisão visual.
-          </p>
-          <p className="inst-studio__copy inst-studio__copy--muted">
-            O foco em consultório de psicologia veio da mesma constatação
-            repetida na região: profissionais com formação longa e uma presença
-            que comunica muito abaixo do próprio preparo.
-          </p>
         </div>
       </section>
 

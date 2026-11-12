@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { OG_IMAGE } from "@/lib/site";
 import { BlogIndex } from "@/components/institucional/BlogIndex";
-import { CountUp } from "@/components/institucional/CountUp";
 import { posts } from "@/lib/blog";
 import { toCard } from "@/lib/blog-body";
 import { temas } from "@/lib/blog-temas";
@@ -31,7 +30,6 @@ const linhas = ["Marca e divulgação", "para consultórios", "de psicologia."];
 
 export default function BlogPage() {
   const cards = posts.map(toCard);
-  const minutos = cards.reduce((soma, p) => soma + p.minutes, 0);
   const faixa = temas.map((t) => t.label);
 
   return (
@@ -49,26 +47,6 @@ export default function BlogPage() {
         </h1>
         <p className="inst-bloghero__lead">{description}</p>
 
-        <dl className="inst-stats">
-          <div>
-            <dd>
-              <CountUp to={cards.length} />
-            </dd>
-            <dt>artigos</dt>
-          </div>
-          <div>
-            <dd>
-              <CountUp to={temas.length} />
-            </dd>
-            <dt>temas</dt>
-          </div>
-          <div>
-            <dd>
-              <CountUp to={minutos} />
-            </dd>
-            <dt>min de leitura somados</dt>
-          </div>
-        </dl>
       </header>
 
       {/* Faixa rolante dos temas: decorativa. A 2ª cópia existe só para o loop fechar. */}
