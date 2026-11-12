@@ -52,7 +52,7 @@ export async function GET(request: Request) {
   try {
     return NextResponse.json(
       { comentarios: await listar(slug) },
-      { headers: { "Cache-Control": "public, max-age=0, s-maxage=20, stale-while-revalidate=60" } }
+      { headers: { "Cache-Control": "no-store" } }
     );
   } catch (e) {
     console.error("[comentarios] listar falhou:", e);
@@ -129,7 +129,7 @@ async function avisar(slug: string, titulo: string, id: string, nome: string, te
         "",
         texto,
         "",
-        `O comentário JÁ ESTÁ PUBLICADO. Para ocultar, abra a tabela blog_comments no Supabase e marque hidden = true na linha id ${id}. Some da página em até 1 minuto, sem deploy.`
+        `O comentário JÁ ESTÁ PUBLICADO. Para ocultar, abra a tabela blog_comments no Supabase e marque hidden = true na linha id ${id}. Some da página na hora, sem deploy.`
       ].join("\n"),
       html: `
         <div style="font-family:Helvetica,Arial,sans-serif;color:#151515;max-width:560px">
@@ -137,7 +137,7 @@ async function avisar(slug: string, titulo: string, id: string, nome: string, te
           <p style="margin:0 0 8px"><a href="${url}" style="color:#bc0319">${escapeHtml(titulo)}</a></p>
           <p style="margin:0 0 16px;color:#696969;font-size:13px">${escapeHtml(nome)} · ${escapeHtml(quando)}</p>
           <blockquote style="margin:0 0 24px;padding:16px 20px;border-left:3px solid #bc0319;background:#f6f6f6;white-space:pre-wrap">${escapeHtml(texto)}</blockquote>
-          <p style="font-size:13px;color:#454545">O comentário <strong>já está publicado</strong>. Para ocultar, abra a tabela <code>blog_comments</code> no Supabase e marque <code>hidden = true</code> na linha <code>${escapeHtml(id)}</code>. Some da página em até 1 minuto, sem deploy.</p>
+          <p style="font-size:13px;color:#454545">O comentário <strong>já está publicado</strong>. Para ocultar, abra a tabela <code>blog_comments</code> no Supabase e marque <code>hidden = true</code> na linha <code>${escapeHtml(id)}</code>. Some da página na hora, sem deploy.</p>
         </div>`
     });
   } catch (e) {

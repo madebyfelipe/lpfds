@@ -1,6 +1,6 @@
 -- Comentários do blog (publicação imediata). Rodar uma vez no SQL Editor do
--- Supabase. O navegador nunca acessa o Supabase: só o servidor, com a service
--- role. RLS ligado e SEM policy = a anon key não lê nem grava nada.
+-- Supabase. O navegador nunca acessa o Supabase: só o servidor, com a Secret
+-- key (ou service_role). RLS ligado e SEM policy = a anon key não lê nem grava nada.
 
 create table if not exists public.blog_comments (
   id            uuid primary key default gen_random_uuid(),
@@ -9,7 +9,7 @@ create table if not exists public.blog_comments (
   texto         text not null check (char_length(texto) between 3 and 2000),
   created_at    timestamptz not null default now(),
   -- Moderação depois de publicado: marcar true e o comentário some da página
-  -- (em até ~1 minuto, por causa do cache), sem deploy.
+  -- na hora, sem deploy.
   hidden        boolean not null default false,
   -- Assinatura do desafio de captcha usado no envio. Única: o mesmo desafio
   -- resolvido não vale duas vezes (barra reenvio automático).

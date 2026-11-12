@@ -472,11 +472,12 @@ famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 
     desafio não vale duas vezes. Se o spam passar disso, trocar por Cloudflare Turnstile
     (e então declarar o Cloudflare em `/privacidade` e `/cookies`).
   - **Moderação depois**: cada comentário gera um e-mail com o `id`; para ocultar, marcar
-    `hidden = true` na tabela `blog_comments` (some em ~1 min, sem deploy).
+    `hidden = true` na tabela `blog_comments` (some na hora, sem deploy).
   - **Banco**: SQL em `docs/blog-comentarios.sql` (RLS ligado, sem policy: só a service role
     do servidor lê e grava). Variáveis: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`,
-    `COMENTARIOS_SECRET` (molde em `.env.example`; replicar na Vercel). A service role
-    **nunca** com prefixo `NEXT_PUBLIC_`.
+    `COMENTARIOS_SECRET` (molde em `.env.example`; replicar na Vercel). A chave é a **Secret key** (`sb_secret_…`,
+    vai só no header `apikey`) ou a service_role legada (JWT); **nunca** a publishable e
+    nunca com prefixo `NEXT_PUBLIC_`.
   - `content/blog/comentarios.ts` virou legado (aprovados à mão, hoje vazio); a lista os
     mostra antes dos do banco. Coleta só nome + texto (sem e-mail, sem IP gravado);
     `/privacidade` 2.4 descreve isso e cita o Supabase como operador. Nunca adicionar

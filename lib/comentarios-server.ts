@@ -3,8 +3,9 @@ import { CAPTCHA_MAX, type Comentario, type Desafio, type SolucaoDesafio } from 
 
 /**
  * Servidor dos comentários: captcha de prova de trabalho + Supabase (REST).
- * Usa fetch direto no PostgREST, sem SDK. A chave é a service role: fica só
- * aqui (a tabela tem RLS ligado e nenhuma policy, então a anon key não lê nada).
+ * Usa fetch direto no PostgREST, sem SDK. A chave é a Secret key do projeto
+ * (`sb_secret_…`) ou a service_role legada (JWT): fica só aqui (a tabela tem
+ * RLS ligado e nenhuma policy, então a publishable/anon key não lê nada).
  *
  * Variáveis: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, COMENTARIOS_SECRET.
  */
@@ -54,7 +55,14 @@ function rest(caminho: string, init: RequestInit = {}) {
   return fetch(`${process.env.SUPABASE_URL!.replace(/\/$/, "")}/rest/v1/${caminho}`, {
     ...init,
     cache: "no-store",
-    headers: { apikey: chave, Authorization: `Bearer ${chave}`, "Content-Type": "application/json", ...init.headers }
+    headers: {
+      apikey: chave,
+      // As chaves novas (sb_secret_…) não são JWT: vão só em `apikey`. A
+      // service_role legada é JWT e também precisa do Authorization.
+      ...(chave.startsWith("sb_") ? {} : { Authorization: `Bearer ${chave}` }),
+      "Content-Type": "application/json",
+      ...init.headers
+    }
   });
 }
 
