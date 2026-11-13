@@ -52,8 +52,8 @@ export const lpQuiz: Record<LpOrigem, LpStep[]> = {
       question: "Que site você precisa?",
       hint: "Na dúvida, escolha a última opção: a gente decide junto.",
       options: [
-        "One page — a partir de R$ 440",
-        "Institucional — a partir de R$ 1.550",
+        "Página única — R$ 599",
+        "Site institucional — R$ 1.999",
         "Já tenho site e quero refazer",
         "Ainda não sei, quero uma recomendação"
       ]

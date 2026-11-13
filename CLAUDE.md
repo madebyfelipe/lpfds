@@ -238,7 +238,7 @@ it** — it is approved copy. The portfolio is *not* duplicated there: `/projeto
 `lib/portfolio.ts`, the single source of truth shared with the `/portfolio` case pages.
 
 **ICP (agosto/2026)**: the site no longer speaks to law firms — it speaks to
-**consultórios de psicologia**. Headline is "dois dias de imersão", compliance line is
+**consultórios de psicologia**. Headline is "dois encontros de imersão", compliance line is
 the *artigo 20 do Código de Ética Profissional do Psicólogo* (it replaced "Provimento
 205 da OAB"), the studio block reads receita/carteira/valor de sessão/ocupação de
 agenda, and the `/imersao` form asks **Nome · CRP · WhatsApp** (CRP replaced
@@ -246,16 +246,22 @@ agenda, and the `/imersao` form asks **Nome · CRP · WhatsApp** (CRP replaced
 the divulgação to carry nome completo, título and CRP, and nome fantasia depends on a
 registered PJ — naming is an optional, case-by-case item, not a listed deliverable.
 O `/hub` fala a mesma oferta, nesta ordem: a primeira dobra é o `HubHero` (`/A IMERSÃO`,
-"Dois dias com você. Quarenta e cinco dias no ar.") e o bloco de
+"Dois encontros com você. Tudo em até 30 dias.") e o bloco de
 fechamento é o `HubBio` (`/QUEM FAZ`, bio em terceira pessoa: estrategista de marca,
 7 anos de mercado, 150+ projetos, hoje atende psicólogos e clínicas). Os dois já foram
 o inverso disso; não trocar de volta nem voltar para a copy genérica de branding.
 
-**Oferta e método (setembro/2026)**: a oferta passou de "meio dia / 30 dias" para
-**dois dias de imersão / 45 dias no ar** — Felipe adaptou os números ao escopo real do
-método PSIQUE. Trocar esses números em qualquer superfície é regressão; eles vivem no hero
-e na metadata da home, na metadata do `/imersao`, no `HubHero` e nas referências
-numéricas dos `depoimentos`. **Preço continua fora do site** (a decisão de segurar o
+**Oferta e método (nov/2026)**: a oferta passou de "meio dia / 30 dias" (até ago/2026)
+para "dois dias de imersão / 45 dias no ar" (set/2026) e, em nov/2026, para a versão da
+proposta comercial enviada aos leads: **dois encontros de cerca de 1h30** (entender como a
+pessoa trabalha, para quem e aonde quer chegar) → **diagnóstico, estudo de mercado e
+construção da marca** → **tudo apresentado em até 30 dias, com o site incluso**. Trocar
+esses números em qualquer superfície é regressão; eles vivem no hero, nos pops e na
+metadata da home, no FAQ da home, em `process` (`lib/institucional.ts`), na metadata do
+`/imersao`, no `HubHero`, nas LPs, no banner do blog (`lib/blog-ads.ts`), no JSON-LD, no
+`og.png`, no `/reembolso` e no parágrafo "Como o estúdio trabalha" de cada post. **Exceção
+pendente:** os `depoimentos` ainda citam "dois dias" e "quarenta e cinco dias" — são falas
+de clientes que fizeram o formato antigo, então só mudam com o aval do Felipe. **Preço continua fora do site** (a decisão de segurar o
 preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos: Imersão
 → Território → Sistema) foi **substituída** por um **teaser gráfico** do método PSIQUE
 (ainda em `id="processo"`, que o `/hub` linka) — hoje é o "Método PSIQUE" em três passos
@@ -278,7 +284,7 @@ posicionamento** numa seção `.inst-dark` — as seis áreas P-S-I-Q-U-E como c
 grande (`.inst-nave`); (3) **O processo** numa seção cream — o diagrama `LinhaTempo` + os
 **oito passos** como **lista numerada** (`.inst-proc`, nº · passo · descrição, agrupada
 nas duas etapas Estratégia/Identidade, export `process`), **não** outro grid de cards.
-Copy adaptada ao ICP de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B
+Copy adaptada ao ICP de psicologia e ao escopo atual (dois encontros, até 30 dias) — **não** é a copy genérica B2B
 do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
 
 **Home = clone do bymonolog.com (nov/2026, pedido do Felipe: "igualzinho, animações etc.")** —
@@ -325,7 +331,7 @@ com filete vermelho, `.inst-submit` no ritmo do botão Monolog, texto corrido ma
 segue a página `/work` do Monolog (`.bwork`/`.bcard` em `monolog.css`): título "Todos os
 artigos (NN)", filtros empilhados numa coluna fixa e grade de cards 4:5 com zoom-out e
 "Ler artigo →" no hover. Leitura dos posts mais calma (título menor, texto 17–19px, entrelinha
-1.65) — Felipe achou a versão de display "agressiva". CTA do post usa `.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois dias de imersão", "tradução",
+1.65) — Felipe achou a versão de display "agressiva". CTA do post usa `.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois encontros de imersão", "tradução",
 "PSIQUE", "→ marca", "começar.".
 
 **`/hub` refeito (nov/2026)** — na linguagem do site, dentro de `.inst.hub2`
@@ -478,7 +484,7 @@ próprio precisa repetir `images: [OG_IMAGE]`. Posts têm imagem própria com o 
 
 **Metadata/JSON-LD alinhados ao ICP (nov/2026)**: o title padrão do layout raiz, a
 description e o `StructuredData` falam de branding para psicólogos e consultórios de
-psicologia (imersão de dois dias, 45 dias, artigo 20) — não mais "Branding e Social Media
+psicologia (dois encontros de imersão, até 30 dias com o site incluso, artigo 20) — não mais "Branding e Social Media
 em Sorocaba". O catálogo de serviços do JSON-LD é a oferta atual, sem preço.
 
 **E-mail público**: `EMAIL` (`lib/institucional.ts`) reexporta `CONTATO_EMAIL`
@@ -567,8 +573,8 @@ famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 
   promessa de resultado terapêutico, de preço/gratuidade como chamariz, de imagem de
   sessão/paciente. **Não inventar números, depoimentos nem fontes**: toda afirmação
   normativa cita a fonte (CFP, CRP) com link no fim do post. Preço do estúdio fica
-  fora, como no resto do site. Oferta citada só com os números aprovados (dois dias de
-  imersão, 45 dias no ar).
+  fora, como no resto do site. Oferta citada só com os números aprovados (dois encontros
+  de imersão, tudo entregue em até 30 dias, com o site incluso).
 - **Autoria + banner de anúncio (nov/2026, ref. RD Station)** — sob o lead, `PostByline`
   (avatar redondo, "Felipe Silva" em `--link-ink` levando a `#sobre-o-autor`, data e
   tempo de leitura) e um filete sólido de 2px (`.inst-legal__head--post`). Logo abaixo,
@@ -674,15 +680,18 @@ com botão de contato direto no fim.
 - **Referências One Page Love**: título gigante + foto + bloco vermelho (Tegra), lista
   numerada de dores (Specia1ne), faixa vermelha de tese, planos numa caixa única com barra
   de contato embaixo (Frontend Supply), form em painel escuro ao lado da chamada (Kelvin).
-- **`/lp/marca`** — a imersão (2 dias / 45 dias no ar), **sem preço**. Dores → tese da
+- **`/lp/marca`** — a imersão (2 encontros de ~1h30 / tudo em até 30 dias, site incluso), **sem preço**. Dores → tese da
   tribo (destacar da concorrência, sustentar o valor da sessão, ser indicada pelo motivo
   certo) → etapas → letras PSIQUE (`positioning`) → `deliverables` → `depoimentos`
   (anonimizados) → quem conduz → quiz → FAQ. Copy sem promessa de resultado.
-- **`/lp/site`** — produto de entrada, separado da imersão. **Preços passados pelo Felipe:
-  one page a partir de R$ 440, institucional a partir de R$ 1.550, parcelado no cartão** —
-  única exceção do site à regra de não publicar preço. Parcelas, prazo, domínio e
-  hospedagem **não foram informados**: ficam para o orçamento (FAQ e letra miúda dizem
-  isso). Não inventar garantia, prazo ou nº de parcelas. A seção "Sites que já estão no
+- **`/lp/site`** — produto de entrada, separado da imersão. **Condições da proposta
+  comercial (nov/2026): página única R$ 599 e site institucional R$ 1.999, os dois em até
+  12x sem juros, sem mensalidade (depois do primeiro ano, só a renovação do domínio)** —
+  única exceção do site à regra de não publicar preço. Página única: site no ar, perfil no
+  Google configurado, conteúdo revisado pelas normas do CFP. Institucional: até 8 páginas,
+  SEO, perfil no Google e revisão CFP — **não inclui blog**. Antes de fechar, a pessoa vê um
+  **rascunho sem compromisso** (CTA "Quero ver meu rascunho"). Prazo **não foi informado**:
+  fica para a conversa. Não inventar garantia ou prazo. A seção "Sites que já estão no
   ar" usa as capturas reais de `lib/portfolio.ts` (rolam no hover; `--r` = largura/altura
   da captura acerta o fim da rolagem) e leva aos cases.
 - **Quiz** (`components/lp/LpQuiz.tsx`, perguntas em `lib/lp.ts`): uma pergunta por tela,
@@ -898,5 +907,8 @@ Pedido do Felipe (via Tyler) para a campanha de cold email fora do Brasil (EUA p
   equivalente (sem par → home do outro idioma). Cookie `mbf-lang` (12 meses, listado em
   `/cookies`). O idioma do navegador só sugere (aviso discreto, dispensável), **nunca
   redireciona** — Googlebot e links compartilhados sempre recebem a página pedida.
+- **Oferta no EN** segue a do PT (dois encontros online de ~90 min, em inglês com o Felipe;
+  tudo apresentado em até 30 dias, com o site incluso), mas **sem preço** — os R$ 599 /
+  R$ 1.999 do `/lp/site` não aparecem em `/en`.
 - Diagramas do método (`MetodologiaFlow`, `LinhaTempo`) têm texto em português nas imagens
   e no SVG; `/en/method` usa só a lista dos oito passos.

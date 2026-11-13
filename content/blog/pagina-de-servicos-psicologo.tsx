@@ -488,8 +488,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, a página de serviços é escrita junto com a marca. A
-          imersão de dois dias define o posicionamento, o público e o tom de voz,
-          e o site vai ao ar em 45 dias com cada texto revisado pelo art. 20.
+          imersão em dois encontros define o posicionamento, o público e o tom de voz,
+          e o site é apresentado em até 30 dias com cada texto revisado pelo art. 20.
           Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

@@ -55,9 +55,9 @@ export const processEn = [
     etapa: "Brand strategy",
     tag: "Gathering · Exploring",
     steps: [
-      { num: "01", title: "Interview", copy: "A one-on-one conversation with you — and with anyone else who works in your practice." },
-      { num: "02", title: "Workshop", copy: "Two days of guided online immersion, in English with Felipe, where the six areas become strategy." },
-      { num: "03", title: "Research", copy: "We validate what came up and look closely at the other practices in your area." },
+      { num: "01", title: "Interview", copy: "First online session, about 90 minutes, with you — and with anyone else who works in your practice: how you work, who you work with and where you want to go." },
+      { num: "02", title: "Workshop", copy: "Second online session, also about 90 minutes, in English with Felipe, where the six areas become strategy." },
+      { num: "03", title: "Research", copy: "Market study: we validate what came up and look closely at the other practices in your area." },
       { num: "04", title: "Diagnosis", copy: "Everything we gathered, documented and approved with you before we move on." }
     ]
   },
@@ -68,7 +68,7 @@ export const processEn = [
       { num: "05", title: "Platform", copy: "The strategy distilled — the document that guides your whole brand identity." },
       { num: "06", title: "Keyword", copy: "A proposal for positioning and brand voice: how your practice speaks." },
       { num: "07", title: "Keyvisual", copy: "A proposal for visual identity: colors, graphic elements and typography." },
-      { num: "08", title: "Brand guide", copy: "Strategy, positioning and identity brought together, applied and live in 45 days." }
+      { num: "08", title: "Brand guide", copy: "Strategy, positioning and identity brought together, applied and presented within 30 days, website included." }
     ]
   }
 ];

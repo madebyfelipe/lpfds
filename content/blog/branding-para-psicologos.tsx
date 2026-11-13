@@ -15,7 +15,7 @@ export const post: Post = {
     "Branding para psicólogos é o trabalho de definir o posicionamento do consultório — para quem ele existe e o que o distingue — e traduzir isso em identidade visual e verbal. Vale contratar quando a marca deixou de acompanhar o consultório: você explica o seu trabalho do zero em toda conversa ou os canais contam histórias diferentes. Um bom processo aprova a estratégia antes da arte e respeita o artigo 20 do Código de Ética.",
   faq: [
     { q: "Qual a diferença entre branding e marketing para psicólogos?", a: "Branding define quem é o consultório e como ele se apresenta; marketing decide como levar essa apresentação às pessoas certas. O branding vem antes e orienta o marketing." },
-    { q: "Quanto tempo leva um projeto de branding para consultório?", a: "Depende do escopo de cada estúdio. Na Made by Felipe, o processo é de dois dias de imersão, com a marca no ar em 45 dias." },
+    { q: "Quanto tempo leva um projeto de branding para consultório?", a: "Depende do escopo de cada estúdio. Na Made by Felipe, o processo é de dois encontros de imersão, com a marca entregue em até 30 dias e o site incluso." },
     { q: "O que perguntar antes de contratar um estúdio de branding?", a: "Como o processo chega ao posicionamento, se quem conduz conhece o artigo 20 e as orientações do seu CRP, o que é entregue (inclusive guia da marca) e como são as aprovações." }
   ],
   cover: {
@@ -198,7 +198,7 @@ export const post: Post = {
             mais atua no consultório.
           </li>
           <li>
-            <strong>Workshop</strong>: dois dias de imersão guiada, em que seis
+            <strong>Workshop</strong>: dois encontros de imersão, de cerca de 1h30, em que seis
             áreas — Prática, Sujeito, Inquietação, Qualidade, Universo e Estória
             — viram estratégia.
           </li>
@@ -227,7 +227,7 @@ export const post: Post = {
           </li>
           <li>
             <strong>Guia da marca</strong>: estratégia, posicionamento e
-            identidade reunidos e aplicados. No nosso caso, no ar em 45 dias.
+            identidade reunidos e aplicados. No nosso caso, entregues em até 30 dias.
           </li>
         </ul>
         <p>
@@ -317,9 +317,9 @@ export const post: Post = {
       <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
-          A Made by Felipe constrói a marca de consultórios de psicologia em dois
-          dias de imersão: posicionamento, identidade visual e verbal, no ar em
-          45 dias, dentro do artigo 20 do Código de Ética. Se quiser entender se
+          A Made by Felipe constrói a marca de consultórios de psicologia a partir
+          de dois encontros de imersão: posicionamento, identidade visual e verbal, entregues em até
+          30 dias, dentro do artigo 20 do Código de Ética. Se quiser entender se
           faz sentido para o seu consultório agora, o primeiro passo é uma
           conversa de 15 minutos.
         </p>

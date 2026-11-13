@@ -504,10 +504,10 @@ export const post: Post = {
       <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
-          Na Made by Felipe, a imersão de dois dias define com você o
+          Na Made by Felipe, a imersão em dois encontros define com você o
           posicionamento e o nome com que o consultório se apresenta, e daí
           saem a identidade visual e o site, com domínio, e-mail e páginas
-          alinhados ao art. 20. A marca vai ao ar em 45 dias. Veja a{" "}
+          alinhados ao art. 20. Tudo é apresentado em até 30 dias. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia
           </Link>{" "}

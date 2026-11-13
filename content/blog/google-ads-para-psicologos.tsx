@@ -196,8 +196,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe não gerencia campanhas: constrói a marca que vem antes
-          delas. Em dois dias de imersão, definimos posicionamento, identidade
-          visual e verbal e colocamos tudo no ar em 45 dias, dentro do artigo 20.
+          delas. Em dois encontros de imersão, entendemos o consultório;
+          depois definimos posicionamento, identidade visual e verbal e entregamos tudo em até 30 dias, com o site incluso, dentro do artigo 20.
           Assim o anúncio, o site e o perfil no Google falam a mesma coisa. Se
           quiser conversar sobre a sua marca, o primeiro passo é uma conversa de
           15 minutos.

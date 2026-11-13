@@ -288,7 +288,7 @@ export const post: Post = {
           A Made by Felipe cria marcas para consultórios de psicologia em que
           informações como convênio, endereço e formas de atendimento ficam
           fáceis de achar, sem disputar espaço com o posicionamento. São dois
-          dias de imersão e a marca fica no ar em 45 dias, com site e peças
+          encontros de imersão e a marca é entregue em até 30 dias, com site e peças
           revisados pelo art. 20. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

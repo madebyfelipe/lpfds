@@ -255,9 +255,9 @@ export const post: Post = {
       <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
-          Na Made by Felipe, a imersão de dois dias define o posicionamento e o
+          Na Made by Felipe, a imersão em dois encontros define o posicionamento e o
           tom de voz do consultório, e as respostas-padrão das redes saem dessa
-          mesma base, revisadas pelo art. 20. A marca vai ao ar em 45 dias. Veja
+          mesma base, revisadas pelo art. 20. Tudo é apresentado em até 30 dias. Veja
           a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

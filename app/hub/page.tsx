@@ -72,19 +72,20 @@ export default function HubPage() {
           </div>
           <Eyebrow>A imersão</Eyebrow>
           <h1 className="hub2-hero__title">
-            Dois dias com você. <span className="mh-red">Quarenta e cinco dias no ar.</span>
+            Dois encontros com você. <span className="mh-red">Tudo em até 30 dias.</span>
           </h1>
           <div className="hub2-hero__copy">
             <p>
-              Dois dias para ler o consultório: histórico, carteira, valor da sessão, o público que você atende
-              melhor e a concorrência da sua região.
+              Dois encontros de cerca de 1h30 para ler o consultório: como você trabalha, para quem e aonde quer
+              chegar — histórico, carteira, valor da sessão, o público que você atende melhor e a concorrência da
+              sua região.
             </p>
             <p>
               Depois vem o território — posicionamento, recorte e discurso —, aprovado antes de qualquer arte. E o
               sistema aplicado nos pontos de contato que a pessoa vê primeiro, com checagem de conformidade em cada
               peça.
             </p>
-            <p>Quarenta e cinco dias do briefing ao ar. Começa com quinze minutos de conversa.</p>
+            <p>Em até 30 dias, tudo é apresentado a você, com o site já incluso. Começa com quinze minutos de conversa.</p>
           </div>
           <ScheduleLink className="mbtn mbtn--secondary hub2-hero__cta">
             <MButtonInner>Agendar 15 minutos</MButtonInner>

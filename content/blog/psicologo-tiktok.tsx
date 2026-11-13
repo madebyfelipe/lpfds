@@ -440,8 +440,8 @@ export const post: Post = {
         <p>
           A Made by Felipe define a marca e a voz do consultório antes das
           redes: para quem você fala, como fala e o que fica de fora. São dois
-          dias de imersão para posicionamento, identidade visual e verbal, com
-          a marca no ar em 45 dias e cada peça revisada pelo art. 20. O processo
+          encontros de imersão para posicionamento, identidade visual e verbal, com
+          a marca entregue em até 30 dias e cada peça revisada pelo art. 20. O processo
           está na{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

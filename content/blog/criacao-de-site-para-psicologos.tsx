@@ -24,7 +24,7 @@ export const post: Post = {
     { q: "Como fazer um site para psicólogo?", a: "Comece pela pesquisa (público, concorrentes e palavras-chave), defina a estrutura a partir das perguntas do seu público, escreva textos dentro do artigo 20 com nome e CRP visíveis, e cuide do SEO técnico: título, descrição, dados estruturados e sitemap." },
     {
       q: "Quanto tempo leva a criação de um site para psicólogo?",
-      a: "Depende do escopo de cada estúdio. Na Made by Felipe, o site faz parte do projeto de marca: dois dias de imersão e a marca no ar em 45 dias, com a página profissional entre as entregas."
+      a: "Depende do escopo de cada estúdio. Na Made by Felipe, o site faz parte do projeto de marca: dois encontros de imersão e tudo apresentado em até 30 dias, com o site entre as entregas."
     },
     {
       q: "Preciso saber de SEO para ter um site que aparece no Google?",
@@ -91,7 +91,7 @@ export const post: Post = {
           cidade, e onde estão a formação e a experiência dela.
         </p>
         <p>
-          Esse levantamento acontece na entrevista e nos dois dias de imersão do{" "}
+          Esse levantamento acontece nos dois encontros de imersão do{" "}
           <Link href="/metodologia" className="inst-link">
             método PSIQUE
           </Link>
@@ -276,8 +276,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, o site faz parte do projeto de marca do consultório:
-          dois dias de imersão, posicionamento, identidade visual e verbal, no ar
-          em 45 dias, dentro do artigo 20 do Código de Ética. O passo a passo do
+          dois encontros de imersão, posicionamento, identidade visual e verbal, entregues em
+          até 30 dias, dentro do artigo 20 do Código de Ética. O passo a passo do
           processo criativo está na{" "}
           <Link href="/cases" className="inst-link">
             página de cases

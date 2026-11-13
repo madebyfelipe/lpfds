@@ -13,7 +13,7 @@ import { OG_IMAGE } from "@/lib/site";
 
 const title = "The PSIQUE Brand Method for Therapy Practices | Made by Felipe";
 const description =
-  "How we build a therapy practice's brand: the PSIQUE method turns your practice into positioning, visual identity and brand voice — eight steps, two stages, live in 45 days.";
+  "How we build a therapy practice's brand: the PSIQUE method turns your practice into positioning, visual identity and brand voice — eight steps, two stages, delivered within 30 days.";
 
 export const metadata: Metadata = {
   title,
@@ -67,7 +67,7 @@ export default function MethodEn() {
         <p className="inst-kicker">The process</p>
         <p className="inst-diagram__caption">
           Two stages — strategy and identity — broken into four phases: gathering, exploring, creating and defining.
-          The immersion is online, in English, with Felipe. Live in 45 days.
+          The immersion is two online sessions, in English, with Felipe. Everything delivered within 30 days.
         </p>
         <div className="inst-proc">
           {processEn.map((etapa) => (

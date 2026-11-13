@@ -153,8 +153,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe prepara a marca e o perfil do consultório para receber
-          quem chega por anúncio: posicionamento, identidade visual e verbal em
-          dois dias de imersão, no ar em 45 dias, dentro do artigo 20. Se quiser
+          quem chega por anúncio: posicionamento, identidade visual e verbal a
+          partir de dois encontros de imersão, entregues em até 30 dias, dentro do artigo 20. Se quiser
           conversar sobre o seu caso, o primeiro passo é uma conversa de 15
           minutos.
         </p>

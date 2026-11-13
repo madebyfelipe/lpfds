@@ -273,7 +273,7 @@ export const post: Post = {
           A Made by Felipe cria marcas para consultórios de psicologia. Quando
           um curso ou material faz parte do posicionamento, ele entra na
           identidade e no site desde o início, com cada peça revisada pelo
-          art. 20. São dois dias de imersão e a marca fica no ar em 45 dias.
+          art. 20. São dois encontros de imersão e a marca é entregue em até 30 dias.
           Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

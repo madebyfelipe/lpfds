@@ -469,8 +469,8 @@ export const post: Post = {
         <p>
           A Made by Felipe desenha a marca do consultório para funcionar da
           tela à porta: placa, papelaria, site e redes com o mesmo nome e a
-          mesma linguagem. São dois dias de imersão para definir posicionamento,
-          identidade visual e verbal, com a marca no ar em 45 dias e cada peça
+          mesma linguagem. São dois encontros de imersão para definir posicionamento,
+          identidade visual e verbal, com a marca entregue em até 30 dias e cada peça
           revisada pelo art. 20. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

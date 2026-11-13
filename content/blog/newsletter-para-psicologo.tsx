@@ -531,8 +531,8 @@ export const post: Post = {
         <p>
           A Made by Felipe cria marcas para consultórios de psicologia, e a
           newsletter entra quando faz sentido para o posicionamento. São dois
-          dias de imersão para definir público, tom de voz e identidade
-          visual, e a marca fica no ar em 45 dias, com site, modelos de
+          encontros de imersão para definir público, tom de voz e identidade
+          visual, e a marca é entregue em até 30 dias, com site, modelos de
           e-mail e peças revisadas pelo art. 20. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

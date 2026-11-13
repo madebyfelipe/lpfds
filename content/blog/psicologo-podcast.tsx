@@ -509,10 +509,10 @@ export const post: Post = {
       <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
-          Na Made by Felipe, a imersão de dois dias define posicionamento, tom
+          Na Made by Felipe, a imersão de dois encontros define posicionamento, tom
           de voz e identidade visual do consultório. É daí que saem a capa e a
           descrição de um podcast e a página do site para onde o ouvinte vai,
-          com a marca no ar em 45 dias e tudo revisado pelo art. 20. Veja a{" "}
+          com a marca entregue em até 30 dias e tudo revisado pelo art. 20. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia
           </Link>{" "}

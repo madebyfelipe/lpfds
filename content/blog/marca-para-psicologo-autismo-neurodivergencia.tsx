@@ -240,8 +240,8 @@ export const post: Post = {
         <p>
           A Made by Felipe constrói a marca de consultórios de psicologia —
           incluindo os que atendem famílias de crianças autistas e
-          neurodivergentes — em dois dias de imersão: posicionamento, identidade
-          visual e verbal, no ar em 45 dias, dentro do artigo 20 do Código de
+          neurodivergentes — a partir de dois encontros de imersão: posicionamento, identidade
+          visual e verbal, entregues em até 30 dias, dentro do artigo 20 do Código de
           Ética. O processo completo está em{" "}
           <Link href="/metodologia" className="inst-link">
             /metodologia

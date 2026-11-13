@@ -290,8 +290,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, a marca do consultório nasce de uma imersão de dois
-          dias que define posicionamento, tom de voz e identidade visual, com a
-          marca no ar em 45 dias e cada peça revisada pelo art. 20. Uma marca
+          encontros que define posicionamento, tom de voz e identidade visual, com a
+          marca entregue em até 30 dias e cada peça revisada pelo art. 20. Uma marca
           clara reduz a dependência de publi e de influenciadores. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

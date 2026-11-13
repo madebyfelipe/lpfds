@@ -26,7 +26,7 @@ const jornada = [
   {
     titulo: "We study your practice",
     texto:
-      "A one-on-one interview and two days of guided online immersion, where the method's six areas — Practice, Subject, Inner need, Quality, Universe and Ethos — become strategy, documented and approved with you before we move on.",
+      "Two online sessions of about 90 minutes to understand how you work, who you work with and where you want to go. The method's six areas — Practice, Subject, Inner need, Quality, Universe and Ethos — become a diagnosis and a market study, documented and approved with you before we move on.",
     foto: `${H}/passo-1-v2.jpg`,
     alt: "Wall covered in colorful sticky notes from a strategy workshop"
   },
@@ -82,11 +82,11 @@ const sliderEn = { carrossel: "carousel", anterior: "Previous", proximo: "Next" 
 const faq = [
   {
     q: "How long does the project take?",
-    a: "Two days of online immersion and 45 days until your brand is live. Your positioning is documented and approved with you before any visual work begins."
+    a: "Two online sessions of about 90 minutes, and within 30 days we present everything to you, website included. Your positioning is documented and approved with you before any visual work begins."
   },
   {
-    q: "What happens during the two-day immersion?",
-    a: "It's online, in English, with Felipe. A guided workshop that follows a one-on-one interview with you — and with anyone else who works in your practice. Over the two days, the six areas of the PSIQUE method become strategy."
+    q: "What happens in the two immersion sessions?",
+    a: "They're online, in English, with Felipe: two sessions of about 90 minutes with you — and with anyone else who works in your practice. We get to know how you work, who you work with and where you want to go. From there come the diagnosis, the market study and the brand itself, across the six areas of the PSIQUE method."
   },
   {
     q: "What do I get at the end?",
@@ -120,7 +120,7 @@ const faqJsonLd = {
 
 const title = "Brand Studio for Therapists in Private Practice | Made by Felipe";
 const description =
-  "Build your therapy practice's brand in a two-day online immersion. Positioning, visual identity and brand voice, live in 45 days. Get a quote on a call with Felipe.";
+  "Build your therapy practice's brand in two online immersion sessions. Positioning, visual identity and brand voice within 30 days, website included. Get a quote on a call with Felipe.";
 
 export const metadata: Metadata = {
   title,
@@ -186,7 +186,7 @@ export default function HomeEn() {
           </svg>
           <div className="mh-hero__left" data-animate>
             <p className="mh-hero__lead" data-hero-p data-delay="0.2">
-              Two days with you, online and in English. Positioning, visual identity and brand voice, live in 45 days —
+              Two sessions with you, online and in English. Positioning, visual identity and brand voice within 30 days, website included —
               built with professional ethics guidelines in mind.
             </p>
             <div className="mh-hero__btn">
@@ -197,7 +197,7 @@ export default function HomeEn() {
           </div>
           <div className="mh-hero__aside" data-animate>
             <h1 className="mh-hero__title" data-hero-p data-delay="0">
-              Build your practice&apos;s brand in a <span className="mh-red">two-day immersion</span>.
+              Build your practice&apos;s brand in a <span className="mh-red">two immersion sessions</span>.
             </h1>
           </div>
           <div className="mh-hero__visuals" data-animate>
@@ -233,25 +233,25 @@ export default function HomeEn() {
                   </svg>
                 </div>
                 <div className="mh-pop__content">
-                  <p className="mh-pop__p">Two days of guided online immersion: the six areas of the PSIQUE method become strategy.</p>
-                  <p className="mh-pop__meta mmono">PSIQUE method • 2 days</p>
+                  <p className="mh-pop__p">Two online sessions of about 90 minutes: the six areas of the PSIQUE method become strategy.</p>
+                  <p className="mh-pop__meta mmono">PSIQUE method • 2 sessions</p>
                 </div>
                 <button type="button" className="mh-pop__trigger">
-                  <span className="sr-only">Show: two days of guided online immersion</span>
+                  <span className="sr-only">Show: two online immersion sessions</span>
                 </button>
                 <div className="mh-pop__shade" aria-hidden="true" />
               </div>
               <div className="mh-pop">
                 <div className="mh-pop__fill" aria-hidden="true" />
                 <div className="mh-pop__cover mh-pop__cover--red" aria-hidden="true">
-                  <span>45</span>
+                  <span>30</span>
                 </div>
                 <div className="mh-pop__content">
-                  <p className="mh-pop__p">Positioning, visual identity and brand voice, live in 45 days.</p>
-                  <p className="mh-pop__meta mmono">Delivery • 45 days</p>
+                  <p className="mh-pop__p">Positioning, visual identity and brand voice within 30 days, website included.</p>
+                  <p className="mh-pop__meta mmono">Delivery • up to 30 days</p>
                 </div>
                 <button type="button" className="mh-pop__trigger">
-                  <span className="sr-only">Show: your brand live in 45 days</span>
+                  <span className="sr-only">Show: your brand delivered within 30 days</span>
                 </button>
                 <div className="mh-pop__shade" aria-hidden="true" />
               </div>

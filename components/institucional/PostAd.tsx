@@ -73,9 +73,9 @@ function AdVisual({ slug }: { slug: Ad["slug"] }) {
         className="inst-ad__photo"
       />
       <span className="inst-ad__stamp">
-        <b>2</b> dias
+        <b>2</b> encontros
         <span className="inst-ad__stamp-sep" />
-        <b>45</b> no ar
+        <b>30</b> dias
       </span>
     </>
   );

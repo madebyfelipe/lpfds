@@ -7,18 +7,19 @@ import { depoimentos, deliverables, positioning } from "@/lib/institucional";
 import { WHATSAPP_URL } from "@/lib/legal";
 import { OG_IMAGE } from "@/lib/site";
 
-// LP de tráfego pago — oferta qualificada: a imersão de dois dias / 45 dias
-// no ar (mesma de /imersao). Sem preço, como no resto do site. noindex e fora
+// LP de tráfego pago — oferta qualificada: a imersão em dois encontros de
+// cerca de 1h30, com tudo apresentado em até 30 dias e o site incluso (mesma
+// de /imersao). Sem preço, como no resto do site. noindex e fora
 // do sitemap: é página de campanha, não conteúdo de busca.
 export const metadata: Metadata = {
   title: "Imersão de marca para psicólogas | Made by Felipe",
   description:
-    "Dois dias de imersão para construir uma marca que se destaca da concorrência e sustenta o valor da sua sessão. Quarenta e cinco dias depois, tudo no ar.",
+    "Dois encontros de imersão para construir uma marca que se destaca da concorrência e sustenta o valor da sua sessão. Em até 30 dias, tudo apresentado, com o site incluso.",
   robots: { index: false, follow: false },
   alternates: { canonical: "/lp/marca" },
   openGraph: {
     title: "Imersão de marca para psicólogas",
-    description: "Dois dias de imersão. Quarenta e cinco dias no ar.",
+    description: "Dois encontros de imersão. Tudo em até 30 dias, com o site incluso.",
     url: "/lp/marca",
     siteName: "Made by Felipe",
     locale: "pt_BR",
@@ -63,19 +64,19 @@ const tribo = [
 
 const etapas = [
   {
-    tag: "Dias 1 e 2",
+    tag: "Encontros 1 e 2",
     title: "Imersão",
-    copy: "Investigamos o consultório pelas seis áreas do método PSIQUE: números, público, concorrência e a sua história."
+    copy: "Dois encontros de cerca de 1h30 para entender como você trabalha, para quem e aonde quer chegar, pelas seis áreas do método PSIQUE."
   },
   {
     tag: "Depois",
     title: "Construção",
-    copy: "Com o posicionamento aprovado antes de qualquer arte, eu crio a identidade visual e verbal e o guia da marca."
+    copy: "Diagnóstico, estudo de mercado e, com o posicionamento aprovado antes de qualquer arte, a identidade visual e verbal e o guia da marca."
   },
   {
-    tag: "Dia 45",
-    title: "No ar",
-    copy: "Página profissional, papelaria do consultório e direção de arte prontas para usar."
+    tag: "Até 30 dias",
+    title: "Apresentação",
+    copy: "Apresento tudo para você, com o site já incluso, a papelaria do consultório e a direção de arte."
   }
 ];
 
@@ -108,7 +109,7 @@ export default function LpMarcaPage() {
             <span className="meyebrow__marker" aria-hidden="true" />
             <span className="meyebrow__text">Imersão de marca para psicólogas</span>
           </p>
-          <p className="lp-mono">2 dias · 45 dias no ar</p>
+          <p className="lp-mono">2 encontros · tudo em até 30 dias</p>
         </div>
         <h1 className="lp-hero__title">
           Pare de competir <span className="lp-red">por preço.</span>
@@ -116,7 +117,7 @@ export default function LpMarcaPage() {
         <div className="lp-hero__grid">
           <div className="lp-hero__copy">
             <p className="lp-hero__lead">
-              Uma imersão de dois dias para psicólogas que já atendem bem e querem uma marca à
+              Uma imersão em dois encontros para psicólogas que já atendem bem e querem uma marca à
               altura: posicionamento claro, identidade própria e uma comunicação que reúne as
               pessoas certas em volta do seu trabalho.
             </p>
@@ -199,7 +200,7 @@ export default function LpMarcaPage() {
         <div className="lp-sec__head">
           <p className="lp-mono lp-mono--dot">A imersão</p>
           <h2 id="imersao-titulo" className="lp-h2">
-            Dois dias com você. Quarenta e cinco dias no ar.
+            Dois encontros com você. Tudo em até 30 dias.
           </h2>
         </div>
         <ol className="lp-steps">
@@ -321,7 +322,7 @@ export default function LpMarcaPage() {
           <details className="lp-faq__item">
             <summary>E se eu só precisar de um site?</summary>
             <p>
-              Também faço site avulso, parcelado no cartão.{" "}
+              Também faço site avulso, em até 12x sem juros e sem mensalidade.{" "}
               <Link href="/lp/site" className="inst-link">
                 Veja os planos de site
               </Link>

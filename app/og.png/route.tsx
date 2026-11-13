@@ -8,6 +8,6 @@ export const dynamic = "force-static";
 export function GET() {
   return renderOg({
     kicker: "Branding para psicólogos",
-    title: "Marca para consultório de psicologia em 45 dias."
+    title: "Marca para consultório de psicologia em até 30 dias."
   });
 }
