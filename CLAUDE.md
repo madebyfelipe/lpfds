@@ -827,8 +827,9 @@ Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-r
   ≤ 100 palavras, uma pergunta, sem pedido de reunião; assunto de e-mail interno; até 3
   follow-ups ≤ 70 palavras. Valem para a rotina e para a edição no painel. Afrouxar uma
   regra é decisão do Felipe, não ajuste de código.
-- **Sem rastreio:** só texto puro, sem pixel nem link rastreado. Rodapé (assinatura,
-  origem do dado, descadastro) é do servidor — a rotina não escreve.
+- **Sem pixel:** e-mail frio em texto puro, sem pixel de abertura. A única exceção é o
+  **link rastreado** `/r/<token>` (nov/2026, decisão do Felipe), e o texto que o usa passa
+  por ele. Rodapé (assinatura, origem do dado, descadastro) é do servidor; a rotina não escreve.
 - **Dedup contra o CRM inteiro:** quem já é contato por outra origem (webinar, newsletter,
   cliente) nunca vira prospecção fria. Rota de leads só cria, nunca sobrescreve.
 - **LinkedIn:** só rascunho de convite; o envio é manual (termos de uso).
@@ -846,3 +847,18 @@ Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-r
 - Leitura de IMAP é pelas últimas 500 mensagens por sequência (não `SEARCH SINCE`) e o
   parser recebe o Buffer cru — os dois foram bugs reais no teste.
 - `previews/campanhas/` é o protótipo estático do Codex, arquivado.
+- **Aba "E-mail" (nov/2026)**: `/painel/api/email` lê todas as pessoas do Twenty e devolve
+  **só números** (`lib/prospeccao/email-metricas.ts`, função pura e testada). Ela soma o
+  cold mail do painel e o do Dylan (OpenBot), que grava os mesmos campos `prosp*`. As
+  definições de enviado, bounce, resposta, positiva e SAIR são as do relatório diário
+  `/data/OpenBot/Shared/campanha-email/benchmark.js`; mudar uma é mudar as duas. Vencedor
+  de variante só com 60+ envios por braço. Nunca mande nome, e-mail ou id de lead para essa tela.
+- **Link rastreado** (`app/r/[token]/route.ts`, `lib/prospeccao/clique.ts`): o token é
+  AES-256-GCM do id do lead com `CLIQUE_SECRET` (sem ele, `PROSPECCAO_SECRET`). É opaco e
+  não dá para adulterar. Grava `prospCliques` (+1) e `prospUltimoCliqueEm` no Twenty depois
+  de responder (`after`) e redireciona para `/exemplo/site-psicologa` (dados fictícios,
+  noindex). HEAD, pré-busca, robôs de prévia e scanners de e-mail não contam (`ehRobo`).
+  Quem monta o e-mail pede o link em `GET /api/prospeccao/link-clique?id=<uuid>` com
+  `Bearer PROSPECCAO_TOKEN`. `/r/` fica fora do robots.txt.
+- **Pausa de 13/11/2026**: o disparo do site está pausado pela nota "Prospecção · PAUSADA"
+  (Felipe: "Pausar o do site", para ficar só o cold mail do Dylan). Não retome sem ele.
