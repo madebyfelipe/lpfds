@@ -3667,3 +3667,363 @@
 .inst-manifest__label {
   margin-bottom: 24px;
 }
+
+/* ==========================================================================
+   Post: autoria no padrão RD Station + banner de anúncio do estúdio
+   (nov/2026). Avatar + nome + data sob o lead, filete cheio de 2px e, logo
+   abaixo, um banner de display (visual · chamada · botão) que anuncia
+   /lp/marca, /lp/site ou o e-book — ver lib/blog-ads.ts.
+   ========================================================================== */
+
+/* O filete do layout de referência é sólido e cheio, não o pontilhado das
+   páginas legais. --black é a tinta da página e inverte com o tema. */
+.inst .inst-legal__head.inst-legal__head--post {
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--black);
+}
+
+.inst-byline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* Avatar é retrato, não caixa: o círculo é o único raio fora dos 2px. */
+.inst-byline__avatar {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.inst-byline__text {
+  display: grid;
+  gap: 2px;
+}
+
+.inst-byline__name {
+  width: fit-content;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--link-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.inst-byline__name:hover {
+  border-bottom-color: var(--red-ink);
+}
+
+.inst-byline__meta {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--gray-500);
+}
+
+/* ---- Banner ------------------------------------------------------------- */
+.inst-ad {
+  /* Mesma largura do cabeçalho do post: o banner fecha a coluna do filete. */
+  max-width: 68ch;
+  margin: 28px 0 56px;
+}
+
+.inst-ad__label {
+  margin: 0 0 8px;
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+/* Superfície oposta à da página (--m-dark inverte com o tema), para o banner
+   se ler como peça à parte, como um display no meio do artigo. */
+.inst-ad__banner {
+  display: grid;
+  grid-template-columns: 196px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  min-height: 168px;
+  padding-right: 24px;
+  border-radius: var(--m-radius);
+  overflow: hidden;
+  background: var(--m-dark);
+  color: var(--m-light);
+  text-decoration: none;
+}
+
+.inst-ad__banner:focus-visible {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 3px;
+}
+
+.inst-ad__visual {
+  position: relative;
+  align-self: stretch;
+  overflow: hidden;
+  background: var(--red);
+}
+
+.inst-ad__body {
+  display: grid;
+  gap: 8px;
+  padding-block: 24px;
+}
+
+.inst-ad__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--m-muted-on-dark);
+}
+
+.inst-ad__eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+.inst-ad__title {
+  font-size: clamp(19px, 1.7vw, 25px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.inst-ad__copy {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--m-muted-on-dark);
+}
+
+.inst-ad__cta {
+  padding: 14px 18px;
+  border-radius: var(--m-radius);
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: background-color 0.25s, transform 0.35s var(--ease-active);
+}
+
+.inst-ad__banner:hover .inst-ad__cta {
+  background: var(--red-dark);
+}
+
+.inst-ad__banner:active .inst-ad__cta {
+  transform: scale(0.96);
+}
+
+/* Peça "marca": foto da paleta sobre vermelho + selo com os números da oferta. */
+.inst-ad__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 62%;
+  transition: transform 0.8s var(--ease-hover);
+}
+
+.inst-ad__stamp {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: var(--m-radius);
+  background: var(--m-dark);
+  color: var(--m-light);
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.inst-ad__stamp b {
+  font-family: var(--m-font);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.inst-ad__stamp-sep {
+  width: 1px;
+  height: 12px;
+  background: var(--m-muted-on-dark);
+}
+
+/* Peça "site": janela de navegador com um site real entregue, saindo pelo
+   canto do bloco vermelho. */
+.inst-ad__browser {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  right: -28px;
+  bottom: -40px;
+  border-radius: var(--m-radius-md) var(--m-radius-md) 0 0;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(8, 8, 7, 0.35);
+  transition: transform 0.8s var(--ease-hover);
+}
+
+.inst-ad__browser-bar {
+  display: flex;
+  gap: 4px;
+  padding: 7px 8px;
+  background: var(--m-light-2);
+}
+
+.inst-ad__browser-bar i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--m-light-4);
+}
+
+.inst-ad__browser-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Peça "e-book": capa desenhada em CSS, inclinada sobre a superfície clara. */
+.inst-ad__banner--ebook .inst-ad__visual {
+  display: grid;
+  place-items: center;
+  background: var(--m-light-3);
+}
+
+.inst-ad__book {
+  display: flex;
+  flex-direction: column;
+  width: 104px;
+  aspect-ratio: 3 / 4.2;
+  padding: 12px 10px 10px 14px;
+  border-radius: 1px var(--m-radius) var(--m-radius) 1px;
+  background: var(--red);
+  color: var(--on-red);
+  /* Lombada: faixa escura à esquerda + sombra de objeto. */
+  box-shadow:
+    inset 5px 0 0 var(--red-dark),
+    10px 14px 24px rgba(8, 8, 7, 0.32);
+  transform: rotate(-7deg);
+  transition: transform 0.8s var(--ease-hover);
+}
+
+.inst-ad__book-kicker {
+  font-family: var(--m-mono);
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.inst-ad__book-title {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.inst-ad__book-brand {
+  margin-top: auto;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .inst-ad__banner:hover .inst-ad__photo {
+    transform: scale(1.06);
+  }
+  .inst-ad__banner:hover .inst-ad__browser {
+    transform: translateY(-6px);
+  }
+  .inst-ad__banner:hover .inst-ad__book {
+    transform: rotate(-3deg) translateY(-4px);
+  }
+}
+
+@media (max-width: 720px) {
+  .inst-ad {
+    margin-bottom: 40px;
+  }
+
+  /* No celular o botão desce para baixo da chamada; o visual vira coluna. */
+  .inst-ad__banner {
+    grid-template-columns: 112px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 16px;
+    row-gap: 12px;
+    min-height: 0;
+    padding-right: 16px;
+  }
+
+  .inst-ad__visual {
+    grid-row: 1 / span 2;
+  }
+
+  .inst-ad__body {
+    padding-block: 16px 0;
+    gap: 6px;
+  }
+
+  .inst-ad__copy {
+    font-size: 13px;
+  }
+
+  .inst-ad__cta {
+    justify-self: start;
+    margin-bottom: 16px;
+    padding: 11px 14px;
+    font-size: 13px;
+  }
+
+  .inst-ad__browser {
+    top: 14px;
+    left: 14px;
+  }
+
+  .inst-ad__book {
+    width: 76px;
+    padding: 9px 8px 8px 11px;
+  }
+
+  .inst-ad__book-title {
+    font-size: 10px;
+  }
+
+  .inst-ad__stamp {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    justify-content: center;
+    padding: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inst-ad__photo,
+  .inst-ad__browser,
+  .inst-ad__book,
+  .inst-ad__cta {
+    transition: none;
+  }
+}

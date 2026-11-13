@@ -9,6 +9,8 @@ import { ComentarioForm } from "@/components/institucional/ComentarioForm";
 import { AuthorBox } from "@/components/institucional/AuthorBox";
 import { BackToTop } from "@/components/institucional/BackToTop";
 import { PostCard } from "@/components/institucional/PostCard";
+import { PostAd } from "@/components/institucional/PostAd";
+import { PostByline } from "@/components/institucional/PostByline";
 import { PostNav } from "@/components/institucional/PostNav";
 import { PostToc } from "@/components/institucional/PostToc";
 import { ReadingLeft } from "@/components/institucional/ReadingLeft";
@@ -16,6 +18,7 @@ import { ReadingProgress } from "@/components/institucional/ReadingProgress";
 import { SectionLinkCopy } from "@/components/institucional/SectionLinkCopy";
 import { ShareBar } from "@/components/institucional/ShareBar";
 import { comentarios } from "@/content/blog/comentarios";
+import { adForPost } from "@/lib/blog-ads";
 import { formatDate, getPost, postImage, posts, relatedPosts } from "@/lib/blog";
 import { readBody, toCard } from "@/lib/blog-body";
 import { temaLabel } from "@/lib/blog-temas";
@@ -119,7 +122,7 @@ export default async function PostPage({ params }: Props) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       )}
       <article>
-        <header className="inst-legal__head">
+        <header className="inst-legal__head inst-legal__head--post">
           <p className="inst-kicker inst-kicker--tight">
             <Link href="/blog" className="inst-blog__back">Blog</Link>
             {" / "}
@@ -138,11 +141,13 @@ export default async function PostPage({ params }: Props) {
             ))}
           </h1>
           <p className="inst-legal__lead">{post.description}</p>
-          <p className="inst-legal__updated">
-            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-            {" · "}{minutes} min de leitura{" · "}Por Felipe
-          </p>
+          <PostByline
+            publishedAt={post.publishedAt}
+            updatedAt={post.updatedAt}
+            minutes={minutes}
+          />
         </header>
+        <PostAd ad={adForPost(post)} />
         {post.cover && (
           <figure className="inst-blog__cover">
             {/* Banner é o LCP do post: priority + sizes até a largura da coluna. */}

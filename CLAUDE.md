@@ -569,6 +569,16 @@ famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 
   normativa cita a fonte (CFP, CRP) com link no fim do post. Preço do estúdio fica
   fora, como no resto do site. Oferta citada só com os números aprovados (dois dias de
   imersão, 45 dias no ar).
+- **Autoria + banner de anúncio (nov/2026, ref. RD Station)** — sob o lead, `PostByline`
+  (avatar redondo, "Felipe Silva" em `--link-ink` levando a `#sobre-o-autor`, data e
+  tempo de leitura) e um filete sólido de 2px (`.inst-legal__head--post`). Logo abaixo,
+  `PostAd`: banner de display com visual · chamada · botão, o banner inteiro é o link,
+  rótulo "Publicidade · Made by Felipe" visível. **Só anuncia o próprio estúdio.** Três
+  peças em `lib/blog-ads.ts`: `/lp/marca`, `/lp/site` e o e-book (`/hub#ebook`, que abre
+  o modal sozinho — o `EbookModal` depende do `hub.css`, por isso não é montado no blog).
+  `adForPost()` escolhe pelo slug (site/seo/google/página… → site; marca/logo/identidade/
+  posicionamento… → marca), depois pelo tema; o resto vai para o e-book. Campo opcional
+  `ad` no `Post` força outra peça.
 
 ---
 
@@ -646,6 +656,46 @@ status. Hoje ele envia de verdade.
   exatamente o que não pode voltar.
 - O form **não pede e-mail**, então não há `replyTo`: o retorno é pelo WhatsApp. Se um dia
   entrar campo de e-mail, ligue-o ao `replyTo` da rota.
+
+---
+
+## LPs de captação (`/lp/marca`, `/lp/site`) — nov/2026
+
+Refeitas do zero depois que a primeira versão foi descartada pelo Felipe. Pedido original:
+LP de construção de marca (qualificada) + LP de construção de site (entrada), design com
+referências do One Page Love, form curto em etapas de botão terminando em Nome + WhatsApp,
+com botão de contato direto no fim.
+
+- **Casca própria**: `app/lp/layout.tsx` (fora do route group institucional; importa
+  `institucional.css` + `monolog.css` + `app/lp/lp.css` e envolve tudo em `.inst .lp`),
+  `LpHeader` (marca, WhatsApp, "Começar" → `#quiz`) e `LpFooter` (identificação de
+  `lib/legal.ts` + páginas legais). **Sem menu de propósito**: quem chega por anúncio só
+  tem o quiz e o WhatsApp. As duas são `noindex` e ficam fora do `sitemap.ts`.
+- **Referências One Page Love**: título gigante + foto + bloco vermelho (Tegra), lista
+  numerada de dores (Specia1ne), faixa vermelha de tese, planos numa caixa única com barra
+  de contato embaixo (Frontend Supply), form em painel escuro ao lado da chamada (Kelvin).
+- **`/lp/marca`** — a imersão (2 dias / 45 dias no ar), **sem preço**. Dores → tese da
+  tribo (destacar da concorrência, sustentar o valor da sessão, ser indicada pelo motivo
+  certo) → etapas → letras PSIQUE (`positioning`) → `deliverables` → `depoimentos`
+  (anonimizados) → quem conduz → quiz → FAQ. Copy sem promessa de resultado.
+- **`/lp/site`** — produto de entrada, separado da imersão. **Preços passados pelo Felipe:
+  one page a partir de R$ 440, institucional a partir de R$ 1.550, parcelado no cartão** —
+  única exceção do site à regra de não publicar preço. Parcelas, prazo, domínio e
+  hospedagem **não foram informados**: ficam para o orçamento (FAQ e letra miúda dizem
+  isso). Não inventar garantia, prazo ou nº de parcelas. A seção "Sites que já estão no
+  ar" usa as capturas reais de `lib/portfolio.ts` (rolam no hover; `--r` = largura/altura
+  da captura acerta o fim da rolagem) e leva aos cases.
+- **Quiz** (`components/lp/LpQuiz.tsx`, perguntas em `lib/lp.ts`): uma pergunta por tela,
+  4 opções na primeira (A–D, `role="radiogroup"` com roving tabindex, Enter confirma),
+  botão "OK" para seguir, "Voltar", e no fim Nome + WhatsApp + aceite. Ao lado do envio,
+  sempre o link "Prefiro falar direto com o Felipe no WhatsApp" com as respostas já
+  escritas na mensagem (`lpWhatsappUrl`). Erro de envio manda para o WhatsApp; confirmação
+  só depois do `ok` da rota.
+- **Rota** `app/api/lp-lead/route.ts`: valida as respostas contra o quiz da origem (texto
+  livre do cliente é recusado), exige aceite, honeypot `site`, até 3 envios por IP a cada
+  10 min, e manda e-mail "Novo lead — Construção de marca/site" para `IMERSAO_TO`/`BCC`.
+  O SMTP saiu para `lib/smtp.ts` (`getTransporter`, `escapeHtml`, `whatsappLink`), usado
+  também por `/api/imersao`.
 
 ---
 

@@ -93,6 +93,11 @@ export type Post = {
   faq?: { q: string; a: string }[];
   /** Banner do post (opcional). Sem ele, o og:image é o gerado com o título. */
   cover?: Cover;
+  /**
+   * Força a peça do banner de anúncio (ver `lib/blog-ads.ts`). Sem ele, a
+   * peça sai do slug e do tema do post.
+   */
+  ad?: "marca" | "site" | "ebook";
   body: ReactNode;
 };
 

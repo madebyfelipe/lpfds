@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import {
   IMERSAO_BCC,
   IMERSAO_TO,
@@ -8,6 +7,7 @@ import {
   validateImersao,
   type ImersaoInput
 } from "@/lib/imersao";
+import { escapeHtml, getTransporter, whatsappLink } from "@/lib/smtp";
 
 /**
  * Form da imersão (/imersao) — manda o pedido por e-mail.
@@ -21,42 +21,6 @@ import {
  * alternativa — nunca finge que enviou.
  */
 export const runtime = "nodejs";
-
-const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD } = process.env;
-const TIMEOUT_MS = 15000;
-
-// Uma instância só: o transporter reaproveita a conexão entre requisições.
-let transporter: nodemailer.Transporter | null = null;
-
-function getTransporter() {
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASSWORD) return null;
-  const port = Number(SMTP_PORT ?? 465);
-  transporter ??= nodemailer.createTransport({
-    host: SMTP_HOST,
-    port,
-    // 465 é TLS implícito; 587 sobe para TLS com STARTTLS.
-    secure: port === 465,
-    auth: { user: SMTP_USER, pass: SMTP_PASSWORD },
-    connectionTimeout: TIMEOUT_MS,
-    greetingTimeout: TIMEOUT_MS
-  });
-  return transporter;
-}
-
-/** O corpo em HTML carrega dados digitados por terceiros — nada entra cru. */
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-/** Só dígitos, para montar o link de WhatsApp; assume +55 quando vier sem DDI. */
-function whatsappLink(raw: string) {
-  const digits = raw.replace(/\D/g, "");
-  return `https://wa.me/${digits.length <= 11 ? `55${digits}` : digits}`;
-}
 
 export async function POST(request: Request) {
   let body: Partial<ImersaoInput>;
@@ -105,7 +69,7 @@ export async function POST(request: Request) {
 
   try {
     await mailer.sendMail({
-      from: `"Made by Felipe — site" <${SMTP_USER}>`,
+      from: `"Made by Felipe — site" <${process.env.SMTP_USER}>`,
       to: IMERSAO_TO,
       bcc: IMERSAO_BCC,
       subject: `Nova imersão — ${clean.nome} (CRP ${clean.crp})`,
