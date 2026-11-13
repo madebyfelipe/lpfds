@@ -1326,9 +1326,13 @@
 }
 
 .bcard__hover {
+  /* Rótulos presos à base da capa (sem top/bottom eles caíam no meio). */
   position: absolute;
+  left: 0;
+  bottom: 8px;
   z-index: 1;
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   width: 100%;
   padding: 0 8px;
