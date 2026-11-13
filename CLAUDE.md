@@ -22,6 +22,7 @@ rampa `--gray-100…--gray-700`. São quatro cores. Não invente uma quinta.
 |---|---|---|
 | `--red` | **preenchimento** (fundo de botão, faixa `.inst-red`, barra de progresso) | é o vermelho da marca |
 | `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | **sempre `#bc0319`, nos dois temas** (Felipe, nov/2026: "só o vermelho REAL"). A versão clareada `#ef4358` foi removida — sobre o escuro ele rende ~2.8:1, então use em tipo grande/ênfase, não em texto corrido pequeno |
+| `--link-ink` | **texto do `.inst-link`** (link em texto corrido) | vermelho real sobre o claro; sobre o escuro (tema escuro, `.inst-dark` no claro) vira `currentColor` e o vermelho fica só no filete — 3.01:1 passa como elemento gráfico, não como texto pequeno |
 | `--on-red` | **texto em cima do vermelho** | fixo `#f6f6f6` nos dois temas — o vermelho é a única cor que **não** inverte, então usar `--cream` aqui pinta texto preto sobre vermelho no tema escuro |
 
 O hub tem o mesmo par: `--accent` e `--accent-ink`, hoje ambos `#bc0319` (o
