@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { subscribe } from "@/lib/newsletter";
+import { MButtonInner } from "@/components/institucional/home/MButton";
 
 /**
  * Assinatura da newsletter + mentoria. A oferta do e-book NAO mora aqui: ela e
@@ -32,31 +33,32 @@ export function HubMedia() {
     }
   }
 
-  const buttonLabel =
-    status === "sending" ? "ENVIANDO…" : status === "error" ? "TENTAR DE NOVO" : "ASSINAR";
+  const buttonLabel = status === "sending" ? "Enviando…" : status === "error" ? "Tentar de novo" : "Assinar";
 
   return (
-    <section className="hub-media" id="newsletter">
-      <div className="hub-media__grid">
-        <div className="hub-media__newsletter">
-          <span className="hub-media__newsletter-kicker">Newsletter</span>
-          <h3 className="hub-media__newsletter-title">
-            Marca de consultório, direto no seu e-mail
-          </h3>
-          <p className="hub-media__newsletter-desc">
-            Notas sobre posicionamento, presença e o que faz um consultório ser escolhido
-            antes da primeira conversa.
-          </p>
+    <section className="hub2-media" id="newsletter" aria-labelledby="hub-news">
+      <div className="hub2-media__news">
+        <div className="meyebrow">
+          <span className="meyebrow__marker" aria-hidden="true" />
+          <p className="meyebrow__text">Newsletter</p>
+        </div>
+        <h2 id="hub-news" className="hub2-media__title">
+          Marca de consultório, direto no seu e-mail.
+        </h2>
+        <p className="hub2-media__desc">
+          Notas sobre posicionamento, presença e o que faz um consultório ser escolhido antes da primeira conversa.
+        </p>
 
-          {status === "sent" ? (
-            <p className="hub-media__newsletter-sent" role="status">
-              Pronto — você está na lista.
-            </p>
-          ) : (
-            <form className="hub-media__form" onSubmit={handleSubmit}>
-              <label className="hub-media__form-label" htmlFor="hub-newsletter-email">
-                Seu melhor e-mail
-              </label>
+        {status === "sent" ? (
+          <p className="hub2-media__sent" role="status">
+            Pronto — você está na lista.
+          </p>
+        ) : (
+          <form className="hub2-media__form" onSubmit={handleSubmit}>
+            <label className="sr-only" htmlFor="hub-newsletter-email">
+              Seu melhor e-mail
+            </label>
+            <div className="hub2-media__row">
               <input
                 id="hub-newsletter-email"
                 type="email"
@@ -65,52 +67,46 @@ export function HubMedia() {
                 onChange={(event) => setEmail(event.target.value)}
                 disabled={status === "sending"}
                 placeholder="voce@consultorio.com.br"
-                className="hub-ebook__input"
+                className="hub2-media__input"
                 autoComplete="email"
               />
-              <label className="hub-media__consent" htmlFor="hub-newsletter-consent">
-                <input
-                  id="hub-newsletter-consent"
-                  type="checkbox"
-                  required
-                  aria-required="true"
-                  checked={consent}
-                  onChange={(event) => setConsent(event.target.checked)}
-                  disabled={status === "sending"}
-                />
-                <span>
-                  Aceito receber a newsletter por e-mail, nos termos da{" "}
-                  <Link href="/privacidade" className="hub-media__consent-link">
-                    Política de Privacidade
-                  </Link>
-                  .
-                </span>
-              </label>
-              <button
-                type="submit"
-                className="button button--primary hub-media__submit-btn"
-                disabled={status === "sending" || !consent}
-              >
-                {buttonLabel}
+              <button type="submit" className="mbtn" disabled={status === "sending" || !consent}>
+                <MButtonInner>{buttonLabel}</MButtonInner>
               </button>
-            </form>
-          )}
+            </div>
+            <label className="hub2-media__consent" htmlFor="hub-newsletter-consent">
+              <input
+                id="hub-newsletter-consent"
+                type="checkbox"
+                required
+                aria-required="true"
+                checked={consent}
+                onChange={(event) => setConsent(event.target.checked)}
+                disabled={status === "sending"}
+              />
+              <span>
+                Aceito receber a newsletter por e-mail, nos termos da{" "}
+                <Link href="/privacidade" className="inst-link">
+                  Política de Privacidade
+                </Link>
+                .
+              </span>
+            </label>
+          </form>
+        )}
 
-          <p className="hub-media__newsletter-note">
-            {status === "error"
-              ? "Não consegui cadastrar agora. Tenta de novo em instantes."
-              : "Cancele quando quiser pelo link de descadastro."}
-          </p>
-        </div>
-
-        <ScheduleLink className="hub-media__coupon">
-          <span className="hub-media__coupon-label">MENTORIA</span>
-          <h3 className="hub-media__coupon-code" style={{ fontSize: "1.45rem", lineHeight: "1.2", fontWeight: 700, textTransform: "none", margin: "8px 0" }}>
-            Uma conversa, seu posicionamento destravado.
-          </h3>
-          <span className="hub-media__coupon-desc">Agendar mentoria →</span>
-        </ScheduleLink>
+        <p className="hub2-media__note mmono">
+          {status === "error"
+            ? "Não consegui cadastrar agora. Tenta de novo em instantes."
+            : "Cancele quando quiser pelo link de descadastro."}
+        </p>
       </div>
+
+      <ScheduleLink className="hub2-media__card">
+        <span className="hub2-media__card-label mmono">Mentoria</span>
+        <span className="hub2-media__card-title">Uma conversa, seu posicionamento destravado.</span>
+        <span className="hub2-media__card-cta">Agendar mentoria →</span>
+      </ScheduleLink>
     </section>
   );
 }

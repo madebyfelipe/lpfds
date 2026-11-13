@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { InstThemeToggle } from "@/components/institucional/InstThemeToggle";
+import { SoundToggle } from "@/components/institucional/UiSound";
 import { MButtonInner } from "@/components/institucional/home/MButton";
 
 const links = [
   { href: "/", label: "Início" },
-  { href: "/sobre", label: "Sobre" },
   { href: "/metodologia", label: "Método" },
   { href: "/blog", label: "Blog" },
   { href: "/imersao", label: "Imersão" }
@@ -24,7 +24,7 @@ const links = [
  */
 export function InstNav() {
   const pathname = usePathname();
-  const overlay = pathname === "/" || pathname === "/sobre";
+  const overlay = pathname === "/";
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const navRef = useRef<HTMLElement>(null);
@@ -96,6 +96,9 @@ export function InstNav() {
           </ul>
         </nav>
         <div className="mnav__cta mnav__clip">
+          <div className="mnav__square" data-nav-intro>
+            <SoundToggle />
+          </div>
           <div className="mnav__square" data-nav-intro>
             <InstThemeToggle />
           </div>

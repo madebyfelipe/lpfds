@@ -8,7 +8,6 @@ import { MButtonInner } from "@/components/institucional/home/MButton";
 import { ComentarioForm } from "@/components/institucional/ComentarioForm";
 import { AuthorBox } from "@/components/institucional/AuthorBox";
 import { BackToTop } from "@/components/institucional/BackToTop";
-import { CursorLabel } from "@/components/institucional/CursorLabel";
 import { PostCard } from "@/components/institucional/PostCard";
 import { PostNav } from "@/components/institucional/PostNav";
 import { PostToc } from "@/components/institucional/PostToc";
@@ -109,7 +108,6 @@ export default async function PostPage({ params }: Props) {
   return (
     <main id="conteudo" className="inst-legal">
       <ReadingProgress targetId="leitura" />
-      <CursorLabel />
       <SectionLinkCopy scopeSelector=".inst-blog__body" />
       <BackToTop />
       <script
@@ -267,7 +265,7 @@ export default async function PostPage({ params }: Props) {
           <h2 id="relacionados-titulo" className="inst-blog__cta-line">
             Mais sobre os mesmos temas.
           </h2>
-          <div className="inst-blog__grid">
+          <div className="bgrid">
             {related.map((p) => (
               <PostCard key={p.slug} post={p} as="h3" />
             ))}
