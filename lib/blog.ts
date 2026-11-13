@@ -49,6 +49,11 @@ import { post as papelariaConsultorio } from "@/content/blog/papelaria-consultor
 import { post as placaConsultorio } from "@/content/blog/placa-consultorio-psicologia";
 import { post as psicologoTiktok } from "@/content/blog/psicologo-tiktok";
 import { post as paginaSobreMim } from "@/content/blog/pagina-sobre-mim-psicologo";
+import { post as newsletterPsicologo } from "@/content/blog/newsletter-para-psicologo";
+import { post as marcaNeuropsicologa } from "@/content/blog/marca-para-neuropsicologa";
+import { post as venderCurso } from "@/content/blog/psicologo-vender-curso-material";
+import { post as divulgarConvenio } from "@/content/blog/psicologo-divulgar-convenio";
+import { post as nomeSocial } from "@/content/blog/nome-social-psicologo-marca";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -166,6 +171,11 @@ export const posts: Post[] = [
   impulsionarPost,
   tituloEspecialista,
   psicologoOnline,
+  newsletterPsicologo,
+  marcaNeuropsicologa,
+  venderCurso,
+  divulgarConvenio,
+  nomeSocial,
   sorteioInstagram,
   papelariaConsultorio,
   placaConsultorio,
