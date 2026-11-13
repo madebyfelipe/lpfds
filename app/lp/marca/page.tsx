@@ -101,7 +101,7 @@ const faq = [
 export default function LpMarcaPage() {
   return (
     <main id="conteudo" className="lpm">
-      {/* ---- Hero: título gigante + foto com o bloco vermelho da oferta ---- */}
+      {/* ---- Hero: título grande + foto com o bloco vermelho da oferta ---- */}
       <section className="lp-hero">
         <div className="lp-hero__top">
           <p className="meyebrow">
@@ -110,11 +110,13 @@ export default function LpMarcaPage() {
           </p>
           <p className="lp-mono">2 dias · 45 dias no ar</p>
         </div>
-        <h1 className="lp-hero__title">
-          Pare de competir <span className="lp-red">por preço.</span>
-        </h1>
-        <div className="lp-hero__grid">
+        {/* Foto em retrato: título e texto na coluna da esquerda, foto à direita
+            desde o topo — assim a chamada não cai para baixo da dobra. */}
+        <div className="lp-hero__grid lp-hero__grid--portrait">
           <div className="lp-hero__copy">
+            <h1 className="lp-hero__title lp-hero__title--side">
+              Pare de competir <span className="lp-red">por preço.</span>
+            </h1>
             <p className="lp-hero__lead">
               Uma imersão de dois dias para psicólogas que já atendem bem e querem uma marca à
               altura: posicionamento claro, identidade própria e uma comunicação que reúne as
@@ -130,14 +132,16 @@ export default function LpMarcaPage() {
             </div>
           </div>
           <figure className="lp-hero__media">
+            {/* Foto enviada pelo Felipe: a tela do Figma com o sistema de uma
+                marca em construção. Retrato, por isso a grade invertida. */}
             <Image
-              src="/institucional/home/hero-2.jpg"
-              alt="Leques de cores, régua e óculos sobre a mesa de trabalho do estúdio"
-              width={1840}
-              height={1227}
-              sizes="(max-width: 900px) 100vw, 58vw"
+              src="/institucional/lp/marca-hero-identidade.jpg"
+              alt="Tela do Figma com o sistema de identidade visual de uma marca em construção: logotipo, tipografia, cores e aplicações"
+              width={959}
+              height={1279}
+              sizes="(max-width: 900px) 100vw, 40vw"
               priority
-              className="lp-hero__img"
+              className="lp-hero__img lp-hero__img--portrait"
             />
             <div className="lp-hero__offer">
               <p>

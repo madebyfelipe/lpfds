@@ -32,7 +32,8 @@ export function PostAd({ ad }: { ad: Ad }) {
 
 function AdVisual({ slug }: { slug: Ad["slug"] }) {
   if (slug === "site") {
-    // Site real entregue pelo estúdio (o mesmo do case em /portfolio).
+    // Esquema neutro de página, não captura de site real (Felipe não quer
+    // exemplos de site nos anúncios).
     return (
       <span className="inst-ad__browser">
         <span className="inst-ad__browser-bar">
@@ -40,14 +41,16 @@ function AdVisual({ slug }: { slug: Ad["slug"] }) {
           <i />
           <i />
         </span>
-        <Image
-          src="/portfolio/alves-nabuco/pagina-inicio.png"
-          alt=""
-          width={1920}
-          height={4975}
-          sizes="240px"
-          className="inst-ad__browser-shot"
-        />
+        <span className="inst-ad__wire">
+          <span className="inst-ad__wire-line" />
+          <span className="inst-ad__wire-line inst-ad__wire-line--short" />
+          <span className="inst-ad__wire-btn" />
+          <span className="inst-ad__wire-cards">
+            <i />
+            <i />
+            <i />
+          </span>
+        </span>
       </span>
     );
   }

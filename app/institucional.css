@@ -3880,7 +3880,7 @@
   bottom: -40px;
   border-radius: var(--m-radius-md) var(--m-radius-md) 0 0;
   overflow: hidden;
-  background: #fff;
+  background: var(--m-light);
   box-shadow: 0 18px 40px rgba(8, 8, 7, 0.35);
   transition: transform 0.8s var(--ease-hover);
 }
@@ -3899,10 +3899,44 @@
   background: var(--m-light-4);
 }
 
-.inst-ad__browser-shot {
-  display: block;
+.inst-ad__wire {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  padding: 14px 12px;
+}
+
+.inst-ad__wire-line {
+  width: 80%;
+  height: 9px;
+  border-radius: var(--m-radius);
+  background: var(--m-dark);
+}
+
+.inst-ad__wire-line--short {
+  width: 52%;
+}
+
+.inst-ad__wire-btn {
+  width: 44px;
+  height: 12px;
+  margin-top: 2px;
+  border-radius: var(--m-radius);
+  background: var(--red);
+}
+
+.inst-ad__wire-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
   width: 100%;
-  height: auto;
+  margin-top: 6px;
+}
+
+.inst-ad__wire-cards i {
+  height: 38px;
+  border-radius: var(--m-radius);
+  background: var(--m-light-3);
 }
 
 /* Peça "e-book": capa desenhada em CSS, inclinada sobre a superfície clara. */

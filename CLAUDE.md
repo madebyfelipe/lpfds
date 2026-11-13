@@ -674,7 +674,10 @@ com botão de contato direto no fim.
 - **Referências One Page Love**: título gigante + foto + bloco vermelho (Tegra), lista
   numerada de dores (Specia1ne), faixa vermelha de tese, planos numa caixa única com barra
   de contato embaixo (Frontend Supply), form em painel escuro ao lado da chamada (Kelvin).
-- **`/lp/marca`** — a imersão (2 dias / 45 dias no ar), **sem preço**. Dores → tese da
+- **`/lp/marca`** — a imersão (2 dias / 45 dias no ar), **sem preço**. Foto do hero
+  enviada pelo Felipe (`public/institucional/lp/marca-hero-identidade.jpg`, tela do Figma
+  com um sistema de marca, 959×1279 — em retrato, por isso `.lp-hero__grid--portrait`;
+  trocar pelo original em alta se houver). Dores → tese da
   tribo (destacar da concorrência, sustentar o valor da sessão, ser indicada pelo motivo
   certo) → etapas → letras PSIQUE (`positioning`) → `deliverables` → `depoimentos`
   (anonimizados) → quem conduz → quiz → FAQ. Copy sem promessa de resultado.
@@ -682,9 +685,10 @@ com botão de contato direto no fim.
   one page a partir de R$ 440, institucional a partir de R$ 1.550, parcelado no cartão** —
   única exceção do site à regra de não publicar preço. Parcelas, prazo, domínio e
   hospedagem **não foram informados**: ficam para o orçamento (FAQ e letra miúda dizem
-  isso). Não inventar garantia, prazo ou nº de parcelas. A seção "Sites que já estão no
-  ar" usa as capturas reais de `lib/portfolio.ts` (rolam no hover; `--r` = largura/altura
-  da captura acerta o fim da rolagem) e leva aos cases.
+  isso). Não inventar garantia, prazo ou nº de parcelas. **Sem exemplos de site**
+  (Felipe, nov/2026): nada de captura de site de cliente nem seção de portfólio — o hero
+  usa um esquema neutro do one page (`.lp-wire`, blocos com o nome das seções), e o banner
+  de site do blog segue a mesma regra.
 - **Quiz** (`components/lp/LpQuiz.tsx`, perguntas em `lib/lp.ts`): uma pergunta por tela,
   4 opções na primeira (A–D, `role="radiogroup"` com roving tabindex, Enter confirma),
   botão "OK" para seguir, "Voltar", e no fim Nome + WhatsApp + aceite. Ao lado do envio,

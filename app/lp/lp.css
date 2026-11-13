@@ -264,6 +264,29 @@
   border-radius: var(--m-radius);
 }
 
+/* Foto em retrato (LP de marca): a coluna da foto estreita e a imagem
+   corta topo e base (menu e dock do computador) em 4:5. */
+.lp-hero__grid--portrait {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: start;
+  padding-top: clamp(28px, 3.4vw, 48px);
+}
+
+.lp-hero__grid--portrait .lp-hero__copy {
+  align-content: start;
+  gap: 28px;
+}
+
+.lp-hero__title--side {
+  margin: 0;
+  font-size: clamp(3.2rem, 8.4vw, 9.5rem);
+}
+
+.lp-hero__img--portrait {
+  aspect-ratio: 4 / 5;
+  object-position: 50% 52%;
+}
+
 /* Bloco vermelho da oferta, sobreposto à foto (o vermelho é a cor da marca
    como preenchimento; a tinta é --on-red). */
 .lp-hero__offer {
@@ -361,46 +384,90 @@
   color: var(--m-muted-on-light);
 }
 
-.lp-window__view {
-  position: relative;
-  display: block;
-  height: clamp(320px, 38vw, 560px);
-  overflow: hidden;
+/* Esquema do one page (hero do /lp/site): blocos neutros com o nome das
+   seções — não é captura de site real (Felipe não quer exemplos de site). */
+.lp-wire__page {
+  display: grid;
+  gap: clamp(12px, 1.4vw, 20px);
+  padding: clamp(16px, 2vw, 28px);
 }
 
-.lp-window__view--card {
-  height: auto;
-  aspect-ratio: 4 / 3;
+.lp-wire__nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.lp-window__shot {
-  display: block;
-  width: 100%;
-  height: auto;
+.lp-wire__nav span {
+  width: 36px;
+  height: 6px;
+  border-radius: var(--m-radius);
+  background: var(--m-light-4);
 }
 
-/* Hero: o site real rola sozinho, devagar, de cima a baixo e de volta. */
-.lp-window__shot--auto {
-  animation: lp-scroll 38s ease-in-out 1.2s infinite alternate;
+.lp-wire__nav .lp-wire__logo {
+  width: 64px;
+  height: 12px;
+  margin-right: auto;
+  background: var(--m-dark);
 }
 
-@keyframes lp-scroll {
-  to {
-    transform: translateY(calc(-100% + clamp(320px, 38vw, 560px)));
-  }
+.lp-wire__hero {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding: clamp(24px, 3vw, 44px) clamp(16px, 2vw, 28px);
+  border-radius: var(--m-radius);
+  background: var(--m-light);
 }
 
-/* Cards: rola até o fim no hover (o card tem 4:3, a captura é bem mais alta). */
-.lp-window__shot--hover {
-  transition: transform 7s cubic-bezier(0.45, 0, 0.55, 1);
+.lp-wire__label {
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  text-transform: uppercase;
+  color: var(--m-dark);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .lp-site:hover .lp-window__shot--hover,
-  .lp-site:focus-visible .lp-window__shot--hover {
-    /* Janela 4:3: a parte visível é 75% × (largura/altura) da captura. */
-    transform: translateY(calc(-100% + 75% * var(--r, 0.2)));
-  }
+.lp-wire__line {
+  width: 86%;
+  height: clamp(12px, 1.5vw, 20px);
+  border-radius: var(--m-radius);
+  background: var(--m-dark);
+}
+
+.lp-wire__line--short {
+  width: 54%;
+}
+
+.lp-wire__card .lp-wire__line {
+  height: 7px;
+  background: var(--m-light-4);
+}
+
+.lp-wire__btn {
+  margin-top: 8px;
+  padding: 8px 14px;
+  border-radius: var(--m-radius);
+  background: var(--red);
+  color: var(--on-red);
+  font-size: var(--t-micro);
+  font-weight: 700;
+}
+
+.lp-wire__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(8px, 1vw, 14px);
+}
+
+.lp-wire__card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  min-height: clamp(96px, 10vw, 150px);
+  padding: 14px;
+  border-radius: var(--m-radius);
+  background: var(--m-light);
 }
 
 /* ---- Lista numerada (dores) ---------------------------------------------- */
@@ -1202,8 +1269,7 @@
 }
 
 .lp-plan__cta:focus-visible,
-.lp-pricing__wa:focus-visible,
-.lp-site:focus-visible {
+.lp-pricing__wa:focus-visible {
   outline: 2px solid var(--red-ink);
   outline-offset: 3px;
 }
@@ -1239,38 +1305,6 @@
   font-size: var(--t-micro);
   line-height: 1.5;
   text-align: center;
-  text-transform: uppercase;
-  color: var(--m-muted-on-light);
-}
-
-/* ---- Sites no ar ---------------------------------------------------------- */
-.lp-sites {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 28px);
-}
-
-.lp-site {
-  display: grid;
-  gap: 14px;
-  color: inherit;
-  text-decoration: none;
-}
-
-.lp-site__meta {
-  display: grid;
-  gap: 4px;
-}
-
-.lp-site__client {
-  font-size: var(--t-large);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
-.lp-site__type {
-  font-family: var(--m-mono);
-  font-size: var(--t-micro);
   text-transform: uppercase;
   color: var(--m-muted-on-light);
 }
@@ -1326,10 +1360,6 @@
 
 /* ---- Responsivo ----------------------------------------------------------- */
 @media (max-width: 1100px) {
-  .lp-sites {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .lp-quotes {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1391,10 +1421,6 @@
     border-top: 1px solid var(--m-line-light);
   }
 
-  .lp-sites {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .lpq__wa {
     justify-content: flex-start;
     text-align: left;
@@ -1402,12 +1428,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lp-window__shot--auto,
   .lpq__screen {
     animation: none;
   }
 
-  .lp-window__shot--hover,
   .lpq__bar span {
     transition: none;
   }

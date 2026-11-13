@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { MButtonInner } from "@/components/institucional/home/MButton";
 import { LpQuiz } from "@/components/lp/LpQuiz";
@@ -72,41 +70,6 @@ const planos = [
   }
 ];
 
-const sites = [
-  {
-    slug: "alves-nabuco",
-    client: "Alves & Nabuco",
-    tipo: "Site institucional",
-    src: "/portfolio/alves-nabuco/pagina-inicio.png",
-    w: 1920,
-    h: 4975
-  },
-  {
-    slug: "arflam-engenharia",
-    client: "Arflam Engenharia",
-    tipo: "Landing page",
-    src: "/portfolio/arflam-engenharia/pagina-inicio.jpg",
-    w: 960,
-    h: 5800
-  },
-  {
-    slug: "estruturart",
-    client: "Estruturart Capital",
-    tipo: "Site institucional",
-    src: "/portfolio/estruturart/pagina-inicio.jpg",
-    w: 960,
-    h: 6400
-  },
-  {
-    slug: "prismapay",
-    client: "PrismaPay",
-    tipo: "Landing page",
-    src: "/portfolio/prismapay/pagina-inicio.jpg",
-    w: 960,
-    h: 6000
-  }
-];
-
 const passos = [
   {
     title: "Você responde três perguntas",
@@ -167,23 +130,37 @@ export default function LpSitePage() {
               </a>
             </div>
           </div>
-          <div className="lp-window lp-window--hero" aria-hidden="true">
+          {/* Esquema do one page, não um site real: Felipe não quer exemplos de
+              site na página. Blocos neutros com o nome de cada seção. */}
+          <div className="lp-window lp-wire" aria-hidden="true">
             <div className="lp-window__bar">
               <i />
               <i />
               <i />
               <span className="lp-window__url">seuconsultorio.com.br</span>
             </div>
-            <div className="lp-window__view">
-              <Image
-                src="/portfolio/alves-nabuco/pagina-inicio.png"
-                alt=""
-                width={1920}
-                height={4975}
-                sizes="(max-width: 900px) 100vw, 50vw"
-                priority
-                className="lp-window__shot lp-window__shot--auto"
-              />
+            <div className="lp-wire__page">
+              <div className="lp-wire__nav">
+                <span className="lp-wire__logo" />
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="lp-wire__hero">
+                <span className="lp-wire__label">Apresentação</span>
+                <span className="lp-wire__line" />
+                <span className="lp-wire__line lp-wire__line--short" />
+                <span className="lp-wire__btn">WhatsApp</span>
+              </div>
+              <div className="lp-wire__cards">
+                {["Como atendo", "Abordagem", "Contato"].map((label) => (
+                  <span key={label} className="lp-wire__card">
+                    <span className="lp-wire__label">{label}</span>
+                    <span className="lp-wire__line" />
+                    <span className="lp-wire__line lp-wire__line--short" />
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -255,53 +232,6 @@ export default function LpSitePage() {
             confirmados no orçamento, antes de qualquer pagamento.
           </p>
         </div>
-      </section>
-
-      {/* ---- Sites no ar ---- */}
-      <section className="lp-sec lp-sec--tint" aria-labelledby="sites-titulo">
-        <div className="lp-sec__head">
-          <p className="lp-mono lp-mono--dot">Feitos pelo estúdio</p>
-          <h2 id="sites-titulo" className="lp-h2">
-            Sites que já estão no ar.
-          </h2>
-          <p className="lp-sec__sub">
-            Projetos para outras áreas — passe o mouse para rolar a página. O mesmo cuidado vai
-            para o site do seu consultório.
-          </p>
-        </div>
-        <ul className="lp-sites">
-          {sites.map((s) => (
-            <li key={s.slug}>
-              <Link href={`/portfolio/${s.slug}`} className="lp-site">
-                <span className="lp-window">
-                  <span className="lp-window__bar">
-                    <i />
-                    <i />
-                    <i />
-                  </span>
-                  {/* --r = largura/altura da captura: o hover rola até o fim exato. */}
-                  <span
-                    className="lp-window__view lp-window__view--card"
-                    style={{ "--r": s.w / s.h } as CSSProperties}
-                  >
-                    <Image
-                      src={s.src}
-                      alt={`Página inicial do site de ${s.client}`}
-                      width={s.w}
-                      height={s.h}
-                      sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 25vw"
-                      className="lp-window__shot lp-window__shot--hover"
-                    />
-                  </span>
-                </span>
-                <span className="lp-site__meta">
-                  <span className="lp-site__client">{s.client}</span>
-                  <span className="lp-site__type">{s.tipo}</span>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </section>
 
       {/* ---- Como funciona ---- */}
