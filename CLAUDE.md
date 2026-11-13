@@ -321,14 +321,25 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
 reveste as peças compartilhadas sem mexer no markup: `.inst-kicker` virou rótulo mono com ponto
 vermelho (o "— " saiu do texto de todos os rótulos), títulos em display pesado, CTA de seção
 com filete vermelho, `.inst-submit` no ritmo do botão Monolog, texto corrido maior. O **blog**
-lista os posts no padrão "Success Stories" (número grande · capa · texto) e o CTA do post usa
-`.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois dias de imersão", "tradução",
+segue a página `/work` do Monolog (`.bwork`/`.bcard` em `monolog.css`): título "Todos os
+artigos (NN)", filtros empilhados numa coluna fixa e grade de cards 4:5 com zoom-out e
+"Ler artigo →" no hover. Leitura dos posts mais calma (título menor, texto 17–19px, entrelinha
+1.65) — Felipe achou a versão de display "agressiva". CTA do post usa `.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois dias de imersão", "tradução",
 "PSIQUE", "→ marca", "começar.".
 
-**`/sobre`** (nav + rodapé + sitemap) — mesma linguagem da home (`.ms-*` em `home.css`,
-`HomeMotion` reaproveitado): "Eu sou o Felipe.", foto (`public/institucional/sobre/`, recortes
-de `public/eu.jpg`), a bio já publicada no `HubBio` com texto que acende no scroll, três
-princípios só com fatos aprovados e CTA. A nav fica transparente na home e no `/sobre`.
+**`/hub` refeito (nov/2026)** — na linguagem do site, dentro de `.inst.hub2`
+(`app/hub/hub-monolog.css`): perfil + a oferta da imersão (copy do antigo `HubHero`), links em
+tipo grande numerados (`HubLinks`, padrão do menu do rodapé do Monolog; o e-book abre o
+`EbookModal`), newsletter + mentoria (`HubMedia`, mesma lógica de consentimento), embeds
+(`HubSocial`, ainda dentro de `.hub` por causa do `hub.css`) e a bio (copy do antigo `HubBio`).
+Usa `InstFooter`. O baralho de cards, `HubHero`, `HubBio`, `HubProducts`, `HubFooter` e
+`useCardDeck` foram apagados. `/contato` segue intocado.
+
+**Sons e ruído (nov/2026)** — `UiSound` (layout institucional e `/hub`): "tap" ao passar em
+algo clicável e "select" ao clicar, sintetizados com Web Audio (sem arquivo), como no Monolog.
+Começa desligado; o primeiro clique liga, a não ser que a pessoa desligue no botão de som da
+nav (`SoundToggle`, `localStorage["mbf-sound-enabled"]`). O grão (`.mgrain`) caiu para 0.45 de
+opacidade a pedido do Felipe. O `/sobre` foi criado e removido a pedido dele — não recriar.
 
 **Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente), nas
 seis áreas P-S-I-Q-U-E em `/metodologia`.
