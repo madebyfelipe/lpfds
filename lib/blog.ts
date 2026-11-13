@@ -44,6 +44,11 @@ import { post as consultorioSensorial } from "@/content/blog/consultorio-acessiv
 import { post as impulsionarPost } from "@/content/blog/impulsionar-post-psicologo";
 import { post as tituloEspecialista } from "@/content/blog/psicologo-titulo-de-especialista";
 import { post as psicologoOnline } from "@/content/blog/psicologo-online-divulgacao";
+import { post as sorteioInstagram } from "@/content/blog/psicologo-sorteio-instagram";
+import { post as papelariaConsultorio } from "@/content/blog/papelaria-consultorio-psicologia";
+import { post as placaConsultorio } from "@/content/blog/placa-consultorio-psicologia";
+import { post as psicologoTiktok } from "@/content/blog/psicologo-tiktok";
+import { post as paginaSobreMim } from "@/content/blog/pagina-sobre-mim-psicologo";
 import { post as newsletterPsicologo } from "@/content/blog/newsletter-para-psicologo";
 import { post as marcaNeuropsicologa } from "@/content/blog/marca-para-neuropsicologa";
 import { post as venderCurso } from "@/content/blog/psicologo-vender-curso-material";
@@ -170,7 +175,12 @@ export const posts: Post[] = [
   marcaNeuropsicologa,
   venderCurso,
   divulgarConvenio,
-  nomeSocial
+  nomeSocial,
+  sorteioInstagram,
+  papelariaConsultorio,
+  placaConsultorio,
+  psicologoTiktok,
+  paginaSobreMim
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
