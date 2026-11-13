@@ -582,9 +582,9 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, o manual de marca é parte da entrega da identidade
-          do consultório. Ele nasce da imersão de dois dias, junto com o
-          posicionamento, o tom de voz e as aplicações, e a marca fica no ar em
-          45 dias, com o bloco de identificação do art. 20 já previsto em cada
+          do consultório. Ele nasce da imersão de dois encontros, junto com o
+          posicionamento, o tom de voz e as aplicações, e a marca é entregue em até
+          30 dias, com o bloco de identificação do art. 20 já previsto em cada
           peça. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

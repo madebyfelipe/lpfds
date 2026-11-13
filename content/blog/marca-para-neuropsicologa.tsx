@@ -462,9 +462,9 @@ export const post: Post = {
         <p>
           A Made by Felipe cria marcas para consultórios de psicologia,
           incluindo neuropsicólogas que precisam falar com famílias e com
-          encaminhadores. São dois dias de imersão para definir
-          posicionamento, identidade visual e tom de voz, e a marca fica no ar
-          em 45 dias, com site, timbrado e materiais revisados pelo art. 20.
+          encaminhadores. São dois encontros de imersão para definir
+          posicionamento, identidade visual e tom de voz, e a marca é entregue em
+          até 30 dias, com site, timbrado e materiais revisados pelo art. 20.
           Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

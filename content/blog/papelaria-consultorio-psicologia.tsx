@@ -530,8 +530,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, a papelaria sai junto com a identidade visual do
-          consultório. São dois dias de imersão para definir posicionamento,
-          identidade visual e verbal, e a marca fica no ar em 45 dias, com as
+          consultório. São dois encontros de imersão para definir posicionamento,
+          identidade visual e verbal, e a marca é entregue em até 30 dias, com as
           peças revisadas pelo art. 20 do Código de Ética. O caminho está na{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

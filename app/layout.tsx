@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   title: "Made by Felipe | Branding para consultórios de psicologia",
   description:
-    "Estúdio de branding para psicólogos e consultórios de psicologia. Posicionamento, identidade visual e verbal em dois dias de imersão, no ar em 45 dias, dentro do artigo 20 do Código de Ética. Sorocaba (SP).",
+    "Estúdio de branding para psicólogos e consultórios de psicologia. Posicionamento, identidade visual e verbal a partir de dois encontros de imersão, entregues em até 30 dias com o site incluso, dentro do artigo 20 do Código de Ética. Sorocaba (SP).",
   applicationName: "Made by Felipe",
   authors: [{ name: "Made by Felipe" }],
   creator: "Made by Felipe",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Made by Felipe | Branding para consultórios de psicologia",
     description:
-      "Posicionamento, identidade visual e verbal para consultórios de psicologia, em dois dias de imersão e no ar em 45 dias.",
+      "Posicionamento, identidade visual e verbal para consultórios de psicologia, a partir de dois encontros de imersão e entregues em até 30 dias, com o site incluso.",
     url: "/",
     siteName: "Made by Felipe",
     images: [OG_IMAGE],

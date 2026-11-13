@@ -111,17 +111,17 @@ export const process = [
       {
         num: "01",
         title: "Entrevista",
-        copy: "Conversa individual com você — e com quem mais atua no consultório."
+        copy: "Primeiro encontro, de cerca de 1h30, com você — e com quem mais atua no consultório: como você trabalha, para quem e aonde quer chegar."
       },
       {
         num: "02",
         title: "Workshop",
-        copy: "Dois dias de imersão guiada, onde as seis áreas viram estratégia."
+        copy: "Segundo encontro, também de cerca de 1h30, em que as seis áreas viram estratégia."
       },
       {
         num: "03",
         title: "Pesquisa",
-        copy: "Validação das informações levantadas e leitura da concorrência da sua região."
+        copy: "Estudo de mercado: validação das informações levantadas e leitura da concorrência da sua região."
       },
       {
         num: "04",
@@ -152,7 +152,7 @@ export const process = [
       {
         num: "08",
         title: "Guia da marca",
-        copy: "Estratégia, posicionamento e identidade reunidos, aplicados e no ar em 45 dias."
+        copy: "Estratégia, posicionamento e identidade reunidos, aplicados e apresentados em até 30 dias, com o site incluso."
       }
     ]
   }

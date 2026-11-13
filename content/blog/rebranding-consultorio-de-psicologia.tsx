@@ -293,9 +293,9 @@ export const post: Post = {
       <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
-          A Made by Felipe faz o rebranding de consultórios de psicologia em
-          dois dias de imersão: posicionamento, nome quando precisa,
-          identidade visual e verbal, com a marca no ar em 45 dias, dentro do
+          A Made by Felipe faz o rebranding de consultórios de psicologia a
+          partir de dois encontros de imersão: posicionamento, nome quando precisa,
+          identidade visual e verbal, com a marca entregue em até 30 dias, dentro do
           artigo 20 do Código de Ética. O processo está descrito na{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

@@ -165,8 +165,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, a forma de apresentar formação e títulos é revisada
-          junto com o posicionamento, nos dois dias de imersão, com a marca no ar
-          em 45 dias e dentro do artigo 20. Se quiser conversar sobre como se
+          junto com o posicionamento, nos dois encontros de imersão, com a marca entregue em
+          até 30 dias e dentro do artigo 20. Se quiser conversar sobre como se
           apresentar, o primeiro passo é uma conversa de 15 minutos.
         </p>
       </section>

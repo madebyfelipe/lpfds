@@ -513,11 +513,11 @@ export const post: Post = {
       <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
-          Na Made by Felipe, o slogan sai da mesma imersão de dois dias que
+          Na Made by Felipe, o slogan sai da mesma imersão de dois encontros que
           define o posicionamento, o nome e a identidade visual do consultório.
           Escrevemos as versões juntos, passamos cada uma pelo art. 20 e
-          aplicamos a frase escolhida no site e nas peças, com a marca no ar em
-          45 dias. Veja a{" "}
+          aplicamos a frase escolhida no site e nas peças, com a marca entregue em até
+          30 dias. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia
           </Link>{" "}

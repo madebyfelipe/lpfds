@@ -7,12 +7,12 @@ import { social } from "@/lib/institucional";
 export const metadata: Metadata = {
   title: "Agende a imersão de branding | Made by Felipe",
   description:
-    "Agende a imersão de dois dias: posicionamento, identidade visual e verbal no ar em 45 dias, para consultórios de psicologia, dentro do artigo 20 do Código de Ética.",
+    "Agende a imersão em dois encontros de cerca de 1h30: diagnóstico, estudo de mercado e construção da marca do consultório de psicologia, apresentados em até 30 dias com o site incluso, dentro do artigo 20 do Código de Ética.",
   alternates: { canonical: "/imersao" },
   openGraph: {
     title: "Agende a imersão de branding | Made by Felipe",
     description:
-      "Dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias.",
+      "Dois encontros de imersão. Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso.",
     url: "/imersao",
     siteName: "Made by Felipe",
     images: [OG_IMAGE],

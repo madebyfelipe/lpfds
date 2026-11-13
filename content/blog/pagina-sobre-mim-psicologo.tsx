@@ -471,8 +471,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           A página sobre é onde o posicionamento aparece por inteiro, e é por
-          ele que a Made by Felipe começa. São dois dias de imersão para
-          definir público, voz e identidade visual, e a marca fica no ar em 45
+          ele que a Made by Felipe começa. São dois encontros de imersão para
+          definir público, voz e identidade visual, e a marca é entregue em até 30
           dias, com site e textos revisados pelo art. 20 do Código de Ética. O
           processo está na{" "}
           <Link href="/metodologia" className="inst-link">

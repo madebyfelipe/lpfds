@@ -27,15 +27,15 @@ export const ads: Record<AdSlug, Ad> = {
     href: "/lp/marca",
     eyebrow: "Imersão de marca",
     title: "A marca que faz escolherem você antes de comparar preço.",
-    copy: "Dois dias de imersão. Quarenta e cinco dias depois, tudo no ar.",
+    copy: "Dois encontros de imersão. Em até 30 dias, tudo apresentado, com o site incluso.",
     cta: "Conhecer a imersão"
   },
   site: {
     slug: "site",
     href: "/lp/site",
     eyebrow: "Site para psicólogas",
-    title: "Seu site profissional a partir de R$ 440.",
-    copy: "One page ou institucional, parcelado no cartão.",
+    title: "Seu site profissional por R$ 599.",
+    copy: "Página única ou site institucional, em até 12x sem juros e sem mensalidade.",
     cta: "Ver os planos"
   },
   ebook: {

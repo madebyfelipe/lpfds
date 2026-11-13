@@ -315,9 +315,9 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe cria marcas para consultórios de psicologia que
-          atraem pela clareza, não por promoção. São dois dias de imersão para
-          definir posicionamento, identidade visual e verbal, e a marca fica no
-          ar em 45 dias, com cada peça revisada pelo art. 20. O processo está na{" "}
+          atraem pela clareza, não por promoção. São dois encontros de imersão para
+          definir posicionamento, identidade visual e verbal, e a marca é entregue
+          em até 30 dias, com cada peça revisada pelo art. 20. O processo está na{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia
           </Link>{" "}

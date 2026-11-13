@@ -86,7 +86,7 @@ export default function MetodologiaPage() {
         <LinhaTempo />
         <p className="inst-diagram__caption">
           Duas etapas — estratégia e identidade — quebradas em quatro fases:
-          coletar, explorar, criar e definir. No ar em 45 dias.
+          coletar, explorar, criar e definir. Tudo apresentado em até 30 dias, com o site incluso.
         </p>
 
         <div className="inst-proc">

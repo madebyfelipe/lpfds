@@ -21,7 +21,7 @@ const jornada = [
   {
     titulo: "Investigamos o seu consultório",
     texto:
-      "Entrevista individual e dois dias de imersão guiada, em que as seis áreas do método — Prática, Sujeito, Inquietação, Qualidade, Universo e Estória — viram estratégia, documentada e aprovada com você antes de seguir.",
+      "Dois encontros de cerca de 1h30 para entender como você trabalha, para quem e aonde quer chegar. As seis áreas do método — Prática, Sujeito, Inquietação, Qualidade, Universo e Estória — viram diagnóstico e estudo de mercado, documentados e aprovados com você antes de seguir.",
     foto: `${H}/passo-1-v2.jpg`,
     alt: "Parede coberta de post-its coloridos com anotações de um workshop de estratégia"
   },
@@ -76,11 +76,11 @@ const areaSlides = positioning.map((p, i) => ({
 const faq = [
   {
     q: "Quanto tempo leva o projeto?",
-    a: "Dois dias de imersão e 45 dias até a marca estar no ar. O posicionamento é documentado e aprovado com você antes de qualquer peça visual."
+    a: "São dois encontros de cerca de 1h30 e, em até 30 dias, apresentamos tudo para você, com o site já incluso. O posicionamento é documentado e aprovado com você antes de qualquer peça visual."
   },
   {
-    q: "Como são os dois dias de imersão?",
-    a: "Um workshop guiado, que vem depois de uma entrevista individual com você — e com quem mais atua no consultório. Nos dois dias, as seis áreas do método PSIQUE viram estratégia."
+    q: "Como são os dois encontros da imersão?",
+    a: "Dois encontros de cerca de 1h30 com você — e com quem mais atua no consultório. Neles entendemos como você trabalha, para quem e aonde quer chegar. A partir disso fazemos o diagnóstico, o estudo de mercado e a construção da marca, pelas seis áreas do método PSIQUE."
   },
   {
     q: "O que eu recebo no fim?",
@@ -114,9 +114,9 @@ const faqJsonLd = {
 // Title/description da home vêm do copy aprovado e sobrescrevem os do
 // layout raiz, que seguem servindo /hub, /contato e /portfolio.
 export const metadata: Metadata = {
-  title: "Marca para consultório de psicologia em 45 dias | Made by Felipe",
+  title: "Marca para consultório de psicologia em até 30 dias | Made by Felipe",
   description:
-    "Construa a marca do seu consultório em dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética. Estúdio de branding em Sorocaba (SP).",
+    "Construa a marca do seu consultório em dois encontros de imersão. Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso, dentro do artigo 20 do Código de Ética. Estúdio de branding em Sorocaba (SP).",
   alternates: { canonical: "/" },
   keywords: [
     "marca para psicólogo",
@@ -128,9 +128,9 @@ export const metadata: Metadata = {
     "São Paulo"
   ],
   openGraph: {
-    title: "Marca para consultório de psicologia em 45 dias | Made by Felipe",
+    title: "Marca para consultório de psicologia em até 30 dias | Made by Felipe",
     description:
-      "Dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética.",
+      "Dois encontros de imersão. Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso, dentro do artigo 20 do Código de Ética.",
     url: "/",
     siteName: "Made by Felipe",
     images: [OG_IMAGE],
@@ -181,7 +181,7 @@ export default function Home() {
           </svg>
           <div className="mh-hero__left" data-animate>
             <p className="mh-hero__lead" data-hero-p data-delay="0.2">
-              Dois dias com você. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20
+              Dois encontros com você. Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso, dentro do artigo 20
               do Código de Ética Profissional do Psicólogo.
             </p>
             <div className="mh-hero__btn">
@@ -192,7 +192,7 @@ export default function Home() {
           </div>
           <div className="mh-hero__aside" data-animate>
             <h1 className="mh-hero__title" data-hero-p data-delay="0">
-              Construa a marca do seu consultório em <span className="mh-red">dois dias de imersão</span>.
+              Construa a marca do seu consultório em <span className="mh-red">dois encontros de imersão</span>.
             </h1>
           </div>
           <div className="mh-hero__visuals" data-animate>
@@ -228,25 +228,25 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="mh-pop__content">
-                  <p className="mh-pop__p">Dois dias de imersão guiada: as seis áreas do método PSIQUE viram estratégia.</p>
-                  <p className="mh-pop__meta mmono">Método PSIQUE • 2 dias</p>
+                  <p className="mh-pop__p">Dois encontros de cerca de 1h30: as seis áreas do método PSIQUE viram estratégia.</p>
+                  <p className="mh-pop__meta mmono">Método PSIQUE • 2 encontros</p>
                 </div>
                 <button type="button" className="mh-pop__trigger">
-                  <span className="sr-only">Mostrar: dois dias de imersão guiada</span>
+                  <span className="sr-only">Mostrar: dois encontros de imersão</span>
                 </button>
                 <div className="mh-pop__shade" aria-hidden="true" />
               </div>
               <div className="mh-pop">
                 <div className="mh-pop__fill" aria-hidden="true" />
                 <div className="mh-pop__cover mh-pop__cover--red" aria-hidden="true">
-                  <span>45</span>
+                  <span>30</span>
                 </div>
                 <div className="mh-pop__content">
-                  <p className="mh-pop__p">Posicionamento, identidade visual e verbal no ar em 45 dias.</p>
-                  <p className="mh-pop__meta mmono">Entrega • 45 dias</p>
+                  <p className="mh-pop__p">Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso.</p>
+                  <p className="mh-pop__meta mmono">Entrega • até 30 dias</p>
                 </div>
                 <button type="button" className="mh-pop__trigger">
-                  <span className="sr-only">Mostrar: a marca no ar em 45 dias</span>
+                  <span className="sr-only">Mostrar: a marca entregue em até 30 dias</span>
                 </button>
                 <div className="mh-pop__shade" aria-hidden="true" />
               </div>

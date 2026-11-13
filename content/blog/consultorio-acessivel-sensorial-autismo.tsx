@@ -214,7 +214,7 @@ export const post: Post = {
         <p>
           A Made by Felipe constrói marcas de consultórios que atendem famílias
           de crianças autistas e neurodivergentes: posicionamento, identidade
-          visual e verbal em dois dias de imersão, no ar em 45 dias, dentro do
+          visual e verbal a partir de dois encontros de imersão, entregues em até 30 dias, dentro do
           artigo 20. A paleta, o guia de primeira visita e o site saem da mesma
           identidade. Veja a{" "}
           <Link href="/metodologia" className="inst-link">

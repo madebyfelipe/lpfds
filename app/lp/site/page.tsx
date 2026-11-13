@@ -7,21 +7,22 @@ import { LpQuiz } from "@/components/lp/LpQuiz";
 import { WHATSAPP_URL } from "@/lib/legal";
 import { OG_IMAGE } from "@/lib/site";
 
-// LP de tráfego pago — produto de entrada, separado da imersão: site
-// parcelado no cartão. Os dois preços "a partir de" foram passados pelo
-// Felipe (one page R$ 440, institucional R$ 1.550) e são a única exceção do
-// site à regra de não publicar preço. O que ele não informou (parcelas,
-// prazo, domínio, hospedagem) fica para o orçamento — não inventar aqui.
-// noindex e fora do sitemap: página de campanha.
+// LP de tráfego pago — produto de entrada, separado da imersão. Condições
+// alinhadas à proposta comercial enviada aos leads (nov/2026): página única
+// R$ 599 e site institucional R$ 1.999, os dois em até 12x sem juros, sem
+// mensalidade (depois do primeiro ano, só a renovação do domínio), com
+// rascunho sem compromisso antes de fechar. São a única exceção do site à
+// regra de não publicar preço. O que não foi informado (prazo) fica para a
+// conversa — não inventar aqui. noindex e fora do sitemap: página de campanha.
 export const metadata: Metadata = {
-  title: "Site para psicólogas a partir de R$ 440 | Made by Felipe",
+  title: "Site para psicólogas por R$ 599 em até 12x | Made by Felipe",
   description:
-    "Site profissional para psicólogas, parcelado no cartão: one page a partir de R$ 440 e institucional a partir de R$ 1.550.",
+    "Site profissional para psicólogas, em até 12x sem juros e sem mensalidade: página única por R$ 599 e site institucional por R$ 1.999.",
   robots: { index: false, follow: false },
   alternates: { canonical: "/lp/site" },
   openGraph: {
-    title: "Site para psicólogas a partir de R$ 440",
-    description: "One page ou institucional, parcelado no cartão.",
+    title: "Site para psicólogas por R$ 599",
+    description: "Página única ou site institucional, em até 12x sem juros e sem mensalidade.",
     url: "/lp/site",
     siteName: "Made by Felipe",
     locale: "pt_BR",
@@ -47,28 +48,29 @@ const motivos = [
 
 const planos = [
   {
-    nome: "One page",
+    nome: "Página única",
     para: "Para sair do link na bio com uma presença própria.",
-    preco: "440",
+    preco: "599",
     itens: [
-      "Uma página com rolagem: apresentação, como você atende e contato",
+      "O site no ar: uma página com apresentação, como você atende e contato",
+      "Seu perfil no Google configurado",
+      "Conteúdo revisado de acordo com as normas do CFP, com nome, título e CRP visíveis",
       "Botão de WhatsApp em destaque",
-      "Funciona bem no celular",
-      "Título e descrição configurados para o Google",
-      "Nome completo, título e CRP visíveis, como pede o artigo 20"
+      "Funciona bem no celular"
     ]
   },
   {
-    nome: "Institucional",
-    para: "Para quem quer explicar mais e publicar conteúdo.",
-    preco: "1.550",
+    nome: "Site institucional",
+    para: "Para quem quer explicar melhor o trabalho e ser encontrada nas buscas.",
+    preco: "1.999",
     itens: [
-      "Tudo o que vem no one page",
-      "Várias páginas: início, sobre, atendimentos e contato",
-      "Páginas separadas por tipo de atendimento",
-      "Blog para publicar artigos",
-      "Estrutura pensada para crescer com o consultório"
-    ]
+      "Até 8 páginas: início, sobre, atendimentos, contato e o que mais fizer sentido",
+      "Otimização para aparecer nas buscas do Google (SEO)",
+      "Seu perfil no Google configurado",
+      "Conteúdo revisado de acordo com as normas do CFP",
+      "Páginas separadas por tipo de atendimento"
+    ],
+    fora: "Não inclui blog"
   }
 ];
 
@@ -113,27 +115,35 @@ const passos = [
     copy: "Tudo no clique: o tipo de site, o que você já tem e para quando precisa."
   },
   {
-    title: "Fechamos o orçamento",
-    copy: "No WhatsApp, combinamos escopo, prazo e parcelas antes de qualquer coisa começar."
+    title: "Montamos o rascunho",
+    copy: "Sem compromisso: a gente monta, você vê como o seu site ficaria e decide."
   },
   {
     title: "Seu site no ar",
-    copy: "Eu construo, você revisa, e o site vai para o seu endereço na internet."
+    copy: "Se gostar, fechamos em até 12x sem juros. Você revisa e o site vai para o seu endereço na internet."
   }
 ];
 
 const faq = [
   {
     q: "Dá para parcelar?",
-    a: "Sim, no cartão. O número de parcelas é combinado no orçamento."
+    a: "Sim. Os dois planos saem em até 12x sem juros: R$ 599 a página única e R$ 1.999 o site institucional."
   },
   {
-    q: "Domínio e hospedagem estão inclusos?",
-    a: "Depende do plano e do que você já tem. Eu explico tudo no orçamento, antes de você decidir."
+    q: "Tem mensalidade?",
+    a: "Não. Depois do primeiro ano, você paga só a renovação do domínio."
+  },
+  {
+    q: "Preciso pagar para ver o rascunho?",
+    a: "Não. O rascunho é sem compromisso: a gente monta, você vê como o site ficaria e decide se quer seguir."
+  },
+  {
+    q: "O site institucional tem blog?",
+    a: "Não. São até 8 páginas, com SEO, perfil no Google e revisão pelas normas do CFP, mas o blog não está incluso."
   },
   {
     q: "Quanto tempo leva?",
-    a: "Depende do plano e de quando os textos e as fotos ficam prontos. O prazo entra no orçamento."
+    a: "Depende do plano e de quando os textos e as fotos ficam prontos. O prazo é combinado antes de você fechar."
   }
 ];
 
@@ -147,20 +157,21 @@ export default function LpSitePage() {
             <span className="meyebrow__marker" aria-hidden="true" />
             <span className="meyebrow__text">Sites para psicólogas</span>
           </p>
-          <p className="lp-mono">Parcelado no cartão</p>
+          <p className="lp-mono">Em até 12x sem juros</p>
         </div>
         <div className="lp-hero__split">
           <div className="lp-hero__copy">
             <h1 className="lp-hero__title lp-hero__title--site">
-              Site profissional a partir de <span className="lp-red">R$&nbsp;440.</span>
+              Site profissional por <span className="lp-red">R$&nbsp;599.</span>
             </h1>
             <p className="lp-hero__lead">
               Para psicólogas que querem sair do link na bio e ter um endereço próprio na
-              internet. One page ou institucional, com preço de partida claro.
+              internet. Página única ou site institucional, em até 12x sem juros e sem
+              mensalidade.
             </p>
             <div className="lp-hero__ctas">
               <a href="#quiz" className="mbtn mbtn--large mbtn--secondary">
-                <MButtonInner>Montar meu orçamento</MButtonInner>
+                <MButtonInner>Quero ver meu rascunho</MButtonInner>
               </a>
               <a href="#planos" className="lp-textlink">
                 Ver os planos
@@ -213,7 +224,7 @@ export default function LpSitePage() {
         <div className="lp-sec__head lp-sec__head--center">
           <p className="lp-mono lp-mono--dot">Planos</p>
           <h2 id="planos-titulo" className="lp-h2">
-            Dois formatos. <span className="lp-dim">Preço de partida claro.</span>
+            Dois formatos. <span className="lp-dim">Sem mensalidade.</span>
           </h2>
         </div>
         <div className="lp-pricing">
@@ -223,15 +234,16 @@ export default function LpSitePage() {
                 <h3 className="lp-plan__name">{p.nome}</h3>
                 <p className="lp-plan__for">{p.para}</p>
                 <p className="lp-plan__price">
-                  <span className="lp-plan__from">a partir de</span>
+                  <span className="lp-plan__from">Preço fechado</span>
                   <span className="lp-plan__value">R$ {p.preco}</span>
-                  <span className="lp-plan__note">parcelado no cartão</span>
+                  <span className="lp-plan__note">em até 12x sem juros</span>
                 </p>
                 <ul className="lp-plan__list">
                   {p.itens.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
+                {p.fora ? <p className="lp-plan__note">{p.fora}</p> : null}
                 <a href="#quiz" className="lp-plan__cta">
                   Quero o {p.nome.toLowerCase()} <span aria-hidden="true">→</span>
                 </a>
@@ -240,8 +252,8 @@ export default function LpSitePage() {
           </div>
           <div className="lp-pricing__bar">
             <p>
-              <strong>Precisa de marca também?</strong> A imersão de marca já inclui a página
-              profissional.{" "}
+              <strong>Precisa de marca também?</strong> A imersão de marca já inclui o
+              site.{" "}
               <Link href="/lp/marca" className="inst-link">
                 Conhecer a imersão
               </Link>
@@ -251,8 +263,8 @@ export default function LpSitePage() {
             </a>
           </div>
           <p className="lp-pricing__fine">
-            Valores de partida. Escopo final, prazo, parcelas, domínio e hospedagem são
-            confirmados no orçamento, antes de qualquer pagamento.
+            Sem mensalidade: depois do primeiro ano, você paga só a renovação do domínio.
+            Antes de fechar, você vê um rascunho do seu site, sem compromisso.
           </p>
         </div>
       </section>
@@ -326,13 +338,13 @@ export default function LpSitePage() {
       {/* ---- Quiz ---- */}
       <section id="quiz" className="lp-sec lp-dark lp-apply" aria-labelledby="quiz-titulo">
         <div className="lp-apply__intro">
-          <p className="lp-mono lp-mono--dot">Orçamento</p>
+          <p className="lp-mono lp-mono--dot">Rascunho</p>
           <h2 id="quiz-titulo" className="lp-h2">
-            Monte o seu orçamento em três cliques.
+            Peça o seu rascunho em três cliques.
           </h2>
           <p className="lp-apply__copy">
-            Responda, deixe o seu WhatsApp e eu volto com a proposta do site certo para o seu
-            consultório.
+            Responda, deixe o seu WhatsApp e eu te chamo para seguirmos com o rascunho do seu
+            site, sem compromisso.
           </p>
         </div>
         <LpQuiz origem="site" />
@@ -371,7 +383,7 @@ export default function LpSitePage() {
           Seu consultório, <span className="lp-red">no seu endereço.</span>
         </p>
         <a href="#quiz" className="mbtn mbtn--large mbtn--secondary">
-          <MButtonInner>Montar meu orçamento</MButtonInner>
+          <MButtonInner>Quero ver meu rascunho</MButtonInner>
         </a>
       </section>
     </main>

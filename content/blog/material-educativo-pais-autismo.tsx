@@ -533,7 +533,7 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, a identidade visual do consultório sai de uma
-          imersão de dois dias e fica pronta, com site e peças, em 45 dias. Os
+          imersão de dois encontros e fica pronta, com site e peças, em até 30 dias. Os
           modelos de material para famílias podem entrar nesse sistema, com
           paleta, fontes e rodapé prontos e revisados pelo art. 20. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
