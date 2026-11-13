@@ -39,12 +39,21 @@ export function BlogIndex({ posts, intro }: { posts: PostCardData[]; intro: stri
       const ctx = gsap.context(() => {
         const split = new SplitText(el.querySelector(".bwork__heading"), { type: "lines", mask: "lines" });
         const buttons = el.querySelectorAll(".bwork__btn, .bwork__search");
-        const cards = el.querySelectorAll(".bcard");
+        // Só os cards da primeira dobra entram animados: com ~55 cards em
+        // cascata, os de baixo ficavam ~4s semitransparentes fora da tela.
+        // E só a capa faz fade: o texto sobe já opaco, porque o resumo em
+        // --gray-500 a meio fade cai abaixo de 4.5:1 (axe pega o meio do caminho).
+        const cards = [...el.querySelectorAll<HTMLElement>(".bcard")].filter(
+          (card) => card.getBoundingClientRect().top < window.innerHeight
+        );
+        const covers = cards.map((card) => card.querySelector(".bcard__cover")).filter(Boolean);
+        const cascade = { each: 0.05, from: "start" } as const;
         const tl = gsap.timeline({ defaults: { ease: "ease-transition" } });
         tl.from(split.lines, { yPercent: 110, duration: T.slow, stagger: 0.05 }, 0)
           .from(el.querySelector(".bwork__index"), { yPercent: 40, autoAlpha: 0, duration: T.slow }, 0.1)
           .from(buttons, { y: 12, autoAlpha: 0, duration: T.slow, stagger: 0.04 }, 0.1)
-          .from(cards, { yPercent: 15, autoAlpha: 0, duration: T.slow, stagger: { each: 0.05, from: "start" }, clearProps: "transform,opacity,visibility" }, 0.1);
+          .from(cards, { yPercent: 15, duration: T.slow, stagger: cascade, clearProps: "transform" }, 0.1)
+          .from(covers, { autoAlpha: 0, duration: T.slow, stagger: cascade, clearProps: "opacity,visibility" }, 0.1);
       }, el);
       revert = () => ctx.revert();
     });
