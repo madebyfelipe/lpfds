@@ -44,6 +44,11 @@ import { post as consultorioSensorial } from "@/content/blog/consultorio-acessiv
 import { post as impulsionarPost } from "@/content/blog/impulsionar-post-psicologo";
 import { post as tituloEspecialista } from "@/content/blog/psicologo-titulo-de-especialista";
 import { post as psicologoOnline } from "@/content/blog/psicologo-online-divulgacao";
+import { post as newsletterPsicologo } from "@/content/blog/newsletter-para-psicologo";
+import { post as marcaNeuropsicologa } from "@/content/blog/marca-para-neuropsicologa";
+import { post as venderCurso } from "@/content/blog/psicologo-vender-curso-material";
+import { post as divulgarConvenio } from "@/content/blog/psicologo-divulgar-convenio";
+import { post as nomeSocial } from "@/content/blog/nome-social-psicologo-marca";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -160,7 +165,12 @@ export const posts: Post[] = [
   consultorioSensorial,
   impulsionarPost,
   tituloEspecialista,
-  psicologoOnline
+  psicologoOnline,
+  newsletterPsicologo,
+  marcaNeuropsicologa,
+  venderCurso,
+  divulgarConvenio,
+  nomeSocial
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
