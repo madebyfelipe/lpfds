@@ -44,7 +44,7 @@ const jornada = [
 const fotosEntregas: Record<string, { src: string; alt: string }> = {
   Posicionamento: { src: `${H}/servico-posicionamento-v2.jpg`, alt: "Parede de post-its com anotações de posicionamento" },
   "Identidade Visual": { src: `${H}/servico-identidade-visual.jpg`, alt: "Leque de amostras de cor em tons de vermelho" },
-  "Identidade Verbal": { src: `${H}/servico-identidade-verbal.jpg`, alt: "Tipos móveis de metal com letras e números" },
+  "Identidade Verbal": { src: `${H}/servico-identidade-verbal-v2.jpg`, alt: "Revista aberta numa página de tipografia editorial em caixas sobrepostas" },
   "Brand Guide": { src: `${H}/servico-brand-guide-v2.jpg`, alt: "Caderno com esboços de símbolos ao lado do teclado" },
   "Página Profissional": { src: `${H}/servico-pagina-v2.jpg`, alt: "Notebook com um logotipo aberto no editor e o esboço no caderno" },
   "Papelaria Clínica": { src: `${H}/servico-papelaria.jpg`, alt: "Cartões, envelopes e papéis timbrados em branco" },

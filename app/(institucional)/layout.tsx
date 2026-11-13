@@ -2,6 +2,7 @@ import { InstFooter } from "@/components/institucional/InstFooter";
 import { InstNav } from "@/components/institucional/InstNav";
 import { InstMobileCta } from "@/components/institucional/InstMobileCta";
 import { SmoothScroll } from "@/components/institucional/SmoothScroll";
+import { UiSound } from "@/components/institucional/UiSound";
 import "../institucional.css";
 import "../monolog.css";
 
@@ -18,6 +19,7 @@ export default function InstitucionalLayout({
       <InstFooter />
       <InstMobileCta />
       <SmoothScroll />
+      <UiSound />
       <div className="mgrain" aria-hidden="true" />
     </div>
   );

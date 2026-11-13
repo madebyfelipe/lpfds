@@ -6,7 +6,6 @@ import { FooterFx, FooterRelogio, FooterTopo } from "./FooterExtras";
 
 const nav = [
   { href: "/", label: "Início" },
-  { href: "/sobre", label: "Sobre" },
   { href: "/metodologia", label: "Método" },
   { href: "/blog", label: "Blog" },
   { href: "/imersao", label: "Imersão" },
