@@ -54,6 +54,11 @@ import { post as marcaNeuropsicologa } from "@/content/blog/marca-para-neuropsic
 import { post as venderCurso } from "@/content/blog/psicologo-vender-curso-material";
 import { post as divulgarConvenio } from "@/content/blog/psicologo-divulgar-convenio";
 import { post as nomeSocial } from "@/content/blog/nome-social-psicologo-marca";
+import { post as sloganPsicologo } from "@/content/blog/slogan-para-psicologo";
+import { post as psicologoPodcast } from "@/content/blog/psicologo-podcast";
+import { post as publiInfluenciador } from "@/content/blog/psicologo-publi-influenciador";
+import { post as materialEducativo } from "@/content/blog/material-educativo-pais-autismo";
+import { post as manualDeMarca } from "@/content/blog/manual-de-marca-psicologo";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -180,7 +185,12 @@ export const posts: Post[] = [
   papelariaConsultorio,
   placaConsultorio,
   psicologoTiktok,
-  paginaSobreMim
+  paginaSobreMim,
+  sloganPsicologo,
+  psicologoPodcast,
+  publiInfluenciador,
+  materialEducativo,
+  manualDeMarca
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
