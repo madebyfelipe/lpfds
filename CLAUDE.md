@@ -649,6 +649,55 @@ status. Hoje ele envia de verdade.
 
 ---
 
+## LPs de captação (`/lp/marca`, `/lp/site`) e banner do blog (nov/2026)
+
+Duas páginas de tráfego pago, fora do `(institucional)` route group (mesmo padrão do
+`/hub` e dos cases: importam `institucional.css`/`monolog.css` direto e montam o próprio
+cabeçalho/rodapé — `components/lp/LpHeader.tsx` e `LpFooter.tsx` — em vez do `InstNav`/
+`InstFooter` completos). É decisão de propósito: quem chega por anúncio não deve ter para
+onde sair além do form ou do WhatsApp. As duas são **`noindex`** (`robots: { index: false,
+follow: false }`, mesmo padrão de `/contato` e `/portfolio`) e ficam fora do `sitemap.ts` —
+são página de campanha, não conteúdo de busca orgânica.
+
+- **`/lp/marca`** — oferta qualificada (a imersão de 2 dias / 45 dias no ar, a mesma de
+  `/imersao`): dores de quem já atende mas cobra menos do que deveria e não se diferencia
+  da concorrência local, teaser do método (`MetodoFoco` + `positioning`, reaproveitados de
+  `/metodologia`) e `<Depoimentos />` (reaproveitado de `lib/institucional.ts`, já
+  anonimizado). **Sem preço** — segue a decisão do Felipe de não publicar o valor da
+  imersão em lugar nenhum do site.
+- **`/lp/site`** — produto novo, **separado** da imersão: site parcelado no cartão, preço
+  fixo e publicado (**exceção deliberada** à regra de não mostrar preço — vale só aqui).
+  Dois planos: **One Page a partir de R$ 440** e **Institucional a partir de R$ 1.550**.
+  O que não foi informado pelo Felipe (domínio, hospedagem, prazo exato, nº de parcelas)
+  **não é inventado** — fica para a conversa, por isso o FAQ da página é propositalmente
+  vago nesses pontos. Não acrescentar garantia ou prazo aqui sem confirmar com ele.
+- **Captação**: `components/lp/LpQuiz.tsx` — mini-quiz de botão (1–2 perguntas de
+  qualificação, sem digitar nada) terminando num passo final de **Nome + WhatsApp**
+  (sem CRP — mais curto que o form da imersão, pensado para tráfego pago). O painel final
+  é `.inst-dark`, por isso reaproveita `.inst-form`/`.inst-field`/`.inst-submit`/
+  `.inst-consent` sem overrides (ver a nota em `.inst-consent` no CSS: eles já são feitos
+  para essa superfície). **Sempre** tem, ao lado do botão de enviar, um link direto de
+  WhatsApp com mensagem pré-pronta — pedido do Felipe, para quem não quer esperar o
+  retorno do form. Consentimento obrigatório e validado no servidor, mesmo padrão dos
+  outros formulários.
+- **Backend**: `lib/lp-lead.ts` + `app/api/lp-lead/route.ts` — rota irmã de
+  `/api/imersao` (mesmo SMTP, mesmo destinatário `IMERSAO_TO`/`IMERSAO_BCC`, reexportados
+  de `lib/imersao.ts` em vez de duplicar a caixa de e-mail). Assunto do e-mail e corpo
+  trazem a origem (`marca`/`site`) e as respostas do quiz, para o Felipe já abrir sabendo
+  o contexto.
+- **Banner do blog (`AdBanner`)** — substitui a antiga linha "data · min de leitura · Por
+  Felipe" por `PostByline` (avatar + nome + data, estética de blog de empresa tipo RD
+  Station, mas com o Felipe no lugar da marca) seguida de um banner cheio da largura da
+  capa, fundo `.inst-red`, anunciando **uma oferta do próprio estúdio** — nunca um
+  anúncio de terceiro. `postAd()` (`lib/blog.ts`) decide entre `/lp/marca`, `/lp/site` e o
+  e-book pelo tema do post (`presenca-digital` → site; `identidade-visual`/
+  `posicionamento` → marca; o resto → e-book, oferta mais leve para tema mais frio); um
+  post pode forçar outra escolha com o campo opcional `ad`. O gatilho do e-book
+  (`openEbookModal()`) exige `<EbookModal />` montado na árvore — por isso ele passou a
+  viver no `(institucional)/layout.tsx` (antes só existia em `/hub`).
+
+---
+
 ## Conformidade legal, consentimento e acessibilidade
 
 Passagem feita sobre o site inteiro cobrindo privacidade, cookies, direitos do

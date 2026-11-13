@@ -5,9 +5,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { MButtonInner } from "@/components/institucional/home/MButton";
+import { AdBanner } from "@/components/institucional/AdBanner";
 import { ComentarioForm } from "@/components/institucional/ComentarioForm";
 import { AuthorBox } from "@/components/institucional/AuthorBox";
 import { BackToTop } from "@/components/institucional/BackToTop";
+import { PostByline } from "@/components/institucional/PostByline";
 import { PostCard } from "@/components/institucional/PostCard";
 import { PostNav } from "@/components/institucional/PostNav";
 import { PostToc } from "@/components/institucional/PostToc";
@@ -16,7 +18,7 @@ import { ReadingProgress } from "@/components/institucional/ReadingProgress";
 import { SectionLinkCopy } from "@/components/institucional/SectionLinkCopy";
 import { ShareBar } from "@/components/institucional/ShareBar";
 import { comentarios } from "@/content/blog/comentarios";
-import { formatDate, getPost, postImage, posts, relatedPosts } from "@/lib/blog";
+import { formatDate, getPost, postAd, postImage, posts, relatedPosts } from "@/lib/blog";
 import { readBody, toCard } from "@/lib/blog-body";
 import { temaLabel } from "@/lib/blog-temas";
 import { SITE_URL } from "@/lib/site";
@@ -138,10 +140,7 @@ export default async function PostPage({ params }: Props) {
             ))}
           </h1>
           <p className="inst-legal__lead">{post.description}</p>
-          <p className="inst-legal__updated">
-            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-            {" · "}{minutes} min de leitura{" · "}Por Felipe
-          </p>
+          <PostByline publishedAt={post.publishedAt} minutes={minutes} />
         </header>
         {post.cover && (
           <figure className="inst-blog__cover">
@@ -160,6 +159,9 @@ export default async function PostPage({ params }: Props) {
             )}
           </figure>
         )}
+        <div className="inst-blog__ad-wrap">
+          <AdBanner ad={postAd(post)} />
+        </div>
         <div className="inst-post" id="leitura">
           <div className="inst-post__main">
             {/* Resposta direta no topo: o trecho que buscadores e assistentes citam. */}
