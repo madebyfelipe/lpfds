@@ -1286,6 +1286,12 @@
   border-left-color: var(--red);
 }
 
+/* O rótulo mono (10.5px) em --gray-500 sobre o fundo --gray-100 da caixa dava
+   4.26:1 no claro. --gray-700 sobe para 8+:1 no claro e 9+:1 no escuro. */
+.inst .inst-blog__summary > .inst-kicker {
+  color: var(--gray-700);
+}
+
 .inst :is(.inst-toc__link, .inst-toc--inline summary) {
   font-size: var(--t-small);
   letter-spacing: -0.01em;
