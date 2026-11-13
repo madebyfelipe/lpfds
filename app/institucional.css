@@ -68,6 +68,13 @@
      da versão clareada #ef4358). Sobre o escuro ele rende ~2.8:1 — use em
      tipo grande/ênfase, não em texto corrido pequeno. */
   --red-ink: #bc0319;
+  /* Cor do TEXTO de link corrido (.inst-link). Sobre o claro é o vermelho real
+     (6.1:1). Sobre o escuro o vermelho real cai para 3.01:1 — passa como
+     filete (3:1), não como texto pequeno (4.5:1) —, então lá o texto do link
+     usa a tinta da própria superfície e o vermelho fica só no filete. As
+     superfícies escuras (tema escuro, .inst-dark no claro) estão logo abaixo
+     do bloco do tema escuro. */
+  --link-ink: var(--red-ink);
   /* Tinta sobre o vermelho. Fixa nos dois temas, porque o vermelho é a única
      cor da paleta que não inverte: usar --cream aqui fazia o texto virar
      preto sobre vermelho (2.75:1) quando o tema escuro trocava os papéis. */
@@ -117,13 +124,28 @@
   --black: #e8e8e3;
   --gray-100: #181715;
   --gray-200: #2a2925;
-  --gray-300: #696969;
+  /* Texto apagado sobre a superfície invertida (.inst-dark vira #e8e8e3 aqui).
+     Era #696969, que dava 5.3:1 sobre o cream antigo (#f6f6f6) e caiu para
+     4.46:1 sobre a pedra #e8e8e3. #5f5f5f volta a 5.2:1. */
+  --gray-300: #5f5f5f;
   --gray-500: #9a9a9a;
   --gray-700: #b8b8b8;
 
   --line-inverse: rgba(8, 8, 7, 0.18);
   --line-inverse-strong: rgba(8, 8, 7, 0.4);
   /* --nav-bg não se repete aqui: é var(--cream), que este bloco já inverteu. */
+}
+
+/* --link-ink sobre superfície escura. A superfície real é XOR(seção
+   .inst-dark, tema escuro). `currentColor` resolve no próprio link, então o
+   texto herda a tinta do parágrafo (5+:1 nos dois temas). */
+.inst-dark,
+:root[data-inst-theme="dark"] .inst {
+  --link-ink: currentColor;
+}
+
+:root[data-inst-theme="dark"] .inst-dark {
+  --link-ink: var(--red-ink);
 }
 
 .inst {
@@ -1086,13 +1108,26 @@
 }
 
 .inst-link {
-  color: var(--red-ink);
+  color: var(--link-ink);
   border-bottom: 1px solid var(--red-ink);
 }
 
 .inst-link:hover {
   color: var(--red-dark);
   border-bottom-color: var(--red-dark);
+}
+
+/* No escuro, --red-dark some no fundo (~1.9:1): o hover mantém a tinta e
+   engrossa o filete vermelho. */
+.inst-dark .inst-link:hover,
+:root[data-inst-theme="dark"] .inst .inst-link:hover {
+  color: var(--link-ink);
+  border-bottom: 2px solid var(--red-ink);
+}
+
+:root[data-inst-theme="dark"] .inst .inst-dark .inst-link:hover {
+  color: var(--red-dark);
+  border-bottom: 1px solid var(--red-dark);
 }
 
 /* --------------------------------------------------------------------------
