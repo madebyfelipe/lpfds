@@ -450,6 +450,12 @@ redireciona 301). Antes era `https://madebyfelipe.com`, que **não resolve** —
 `og:url`, sitemap e `@id` do JSON-LD apontavam para fora do site. Não escreva a URL
 absoluta à mão em outro arquivo.
 
+**Deploy (nov/2026)**: na Vercel, a branch de produção do projeto `lpfds` é a **`beta`**
+(trocada pelo Felipe em 13/11/2026). Merge na `beta` publica em
+`www.madebyfelipe.com.br`; as outras branches geram só Preview. Nunca promova para
+Produção um deploy de branch de feature: ela pode estar atrás da `beta` e derrubar
+páginas que já estão no ar.
+
 **og:image**: a padrão é `/og.png` (`app/og.png/route.tsx`, gerada no build por
 `renderOg` em `lib/og.tsx`, que espelha os tokens — o Satori não lê CSS vars). O Next
 **não mescla** `openGraph` entre layout e página: toda página que declara `openGraph`
