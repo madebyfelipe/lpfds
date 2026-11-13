@@ -455,6 +455,8 @@ absoluta à mão em outro arquivo.
 `www.madebyfelipe.com.br`; as outras branches geram só Preview. Nunca promova para
 Produção um deploy de branch de feature: ela pode estar atrás da `beta` e derrubar
 páginas que já estão no ar.
+Para conferir um merge: `gh api "repos/madebyfelipe/lpfds/deployments?sha=<sha>" --jq '.[].environment'`
+tem que mostrar `Production`; se mostrar só `Preview`, a branch de produção da Vercel não é a `beta`.
 
 **og:image**: a padrão é `/og.png` (`app/og.png/route.tsx`, gerada no build por
 `renderOg` em `lib/og.tsx`, que espelha os tokens — o Satori não lê CSS vars). O Next
