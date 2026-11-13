@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { temas, type TemaSlug } from "@/lib/blog-temas";
 import { PostCard, type PostCardData } from "@/components/institucional/PostCard";
+import { loadGsap, T } from "@/components/institucional/home/loadGsap";
 
 const fold = (s: string) =>
   s
@@ -24,6 +25,34 @@ export function BlogIndex({ posts, intro }: { posts: PostCardData[]; intro: stri
   const [q, setQ] = useState("");
   const [ready, setReady] = useState(false);
   const search = useRef<HTMLInputElement>(null);
+  const root = useRef<HTMLElement>(null);
+
+  // Entrada da página /work do Monolog: o título sobe linha a linha, os
+  // filtros aparecem em cascata e os cards sobem um a um.
+  useEffect(() => {
+    const el = root.current;
+    if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let revert = () => {};
+    let dead = false;
+    loadGsap().then(({ gsap, SplitText }) => {
+      if (dead) return;
+      const ctx = gsap.context(() => {
+        const split = new SplitText(el.querySelector(".bwork__heading"), { type: "lines", mask: "lines" });
+        const buttons = el.querySelectorAll(".bwork__btn, .bwork__search");
+        const cards = el.querySelectorAll(".bcard");
+        const tl = gsap.timeline({ defaults: { ease: "ease-transition" } });
+        tl.from(split.lines, { yPercent: 110, duration: T.slow, stagger: 0.05 }, 0)
+          .from(el.querySelector(".bwork__index"), { yPercent: 40, autoAlpha: 0, duration: T.slow }, 0.1)
+          .from(buttons, { y: 12, autoAlpha: 0, duration: T.slow, stagger: 0.04 }, 0.1)
+          .from(cards, { yPercent: 15, autoAlpha: 0, duration: T.slow, stagger: { each: 0.05, from: "start" }, clearProps: "transform,opacity,visibility" }, 0.1);
+      }, el);
+      revert = () => ctx.revert();
+    });
+    return () => {
+      dead = true;
+      revert();
+    };
+  }, []);
 
   useEffect(() => {
     const t = new URLSearchParams(window.location.search).get("tema");
@@ -71,7 +100,7 @@ export function BlogIndex({ posts, intro }: { posts: PostCardData[]; intro: stri
   const temaNome = temas.find((x) => x.slug === tema)?.label;
 
   return (
-    <section className="bwork" data-ready={ready ? "" : undefined}>
+    <section ref={root} className="bwork" data-ready={ready ? "" : undefined}>
       <header className="bwork__header">
         <h1 className="bwork__heading">Todos os artigos</h1>
         <p className="bwork__index" aria-hidden="true">
