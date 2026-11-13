@@ -93,16 +93,8 @@ export type Post = {
   faq?: { q: string; a: string }[];
   /** Banner do post (opcional). Sem ele, o og:image é o gerado com o título. */
   cover?: Cover;
-  /**
-   * Qual oferta o banner de anúncio do post (AdBanner) promove. Sem valor,
-   * `postAd()` decide pela heurística de tema — ver a função abaixo.
-   */
-  ad?: PostAd;
   body: ReactNode;
 };
-
-/** As três ofertas que o banner do blog pode anunciar. */
-export type PostAd = "marca" | "site" | "ebook";
 
 /**
  * Imagem de capa. Padrão em CLAUDE.md ("Blog → Imagens"): arquivo-fonte em
@@ -239,22 +231,6 @@ export function relatedPosts(post: Post, limit = 3) {
 
 export function getPost(slug: string) {
   return posts.find((post) => post.slug === slug);
-}
-
-/**
- * Qual oferta o banner de anúncio do post promove — cada artigo leva ao que
- * é mais adequado à busca que trouxe o leitor. Prioridade: "presença
- * digital" é quem está pesquisando site; "identidade visual"/"posicionamento"
- * é quem já pensa em marca; o resto (divulgação/ética, neurodivergência) é
- * tema mais frio — vai para o e-book, oferta mais leve, em vez de empurrar
- * uma LP de conversão direta. `post.ad` sobrepõe a heurística quando um post
- * específico pede outra coisa.
- */
-export function postAd(post: Post): PostAd {
-  if (post.ad) return post.ad;
-  if (post.tags.includes("presenca-digital")) return "site";
-  if (post.tags.includes("identidade-visual") || post.tags.includes("posicionamento")) return "marca";
-  return "ebook";
 }
 
 /** "7 de novembro de 2026" — sem depender do fuso do servidor. */

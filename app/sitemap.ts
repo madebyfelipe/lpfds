@@ -8,8 +8,6 @@ import { webinarNoAr } from "@/lib/webinar";
 // de propósito: são acessíveis só por link direto (noindex nas próprias
 // páginas), não devem ser públicos/indexados. /contato também: a página é
 // noindex, e sitemap com URL noindex é sinal contraditório para o Google.
-// Mesma regra para /lp/marca e /lp/site: são páginas de campanha para
-// tráfego pago, com `robots: { index: false }` próprio — não entram aqui.
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_URL;
 
