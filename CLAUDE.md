@@ -862,3 +862,41 @@ Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-r
   `Bearer PROSPECCAO_TOKEN`. `/r/` fica fora do robots.txt.
 - **Pausa de 13/11/2026**: o disparo do site está pausado pela nota "Prospecção · PAUSADA"
   (Felipe: "Pausar o do site", para ficar só o cold mail do Dylan). Não retome sem ele.
+
+---
+
+## Versão em inglês (`/en`) e seletor de idioma (nov/2026)
+
+Pedido do Felipe (via Tyler) para a campanha de cold email fora do Brasil (EUA primeiro).
+
+- **PT segue na raiz, sem mudar URL.** O inglês vive em `app/(en)/en/` (grupo de rota
+  próprio, layout com nav/rodapé em inglês). Páginas: `/en`, `/en/method`,
+  `/en/website-process` (= `/cases`) e `/en/contact` (= `/imersao`, sem o form, que
+  pede CRP/WhatsApp; oferece a chamada e o e-mail). O blog fica só em português.
+- **`lib/i18n.ts` é a fonte única**: pares PT ↔ EN (`ROTAS`), `alternatesDe()` (canonical
+  por idioma + hreflang pt-BR / en / x-default = PT), textos da interface compartilhada
+  (`UI`). Página nova com par em inglês = entrada em `ROTAS` + `alternates:
+  alternatesDe(...)` nas duas versões; o sitemap e o seletor leem daí.
+- **Copy EN** em `lib/institucional-en.ts` (espelha `lib/institucional.ts`). Regras: nada de
+  CFP/artigo 20 (vira "built with professional ethics guidelines in mind", sem prometer
+  conformidade com APA ou conselhos estaduais); nada de pacientes, agenda cheia ou
+  ranking; **sem preço** ("get a quote"); depoimentos são os mesmos, traduzidos e
+  rotulados "translated from Portuguese". PSIQUE mantém as letras: Practice, Subject,
+  Inner need, Quality, Universe, Ethos.
+- **Decisões do Felipe (14/11/2026)** para o EN: "free homepage preview" é oferta real para os EUA;
+  a imersão é **online** e a chamada é **em inglês com o próprio Felipe** (dizer isso onde a
+  imersão aparece); depoimentos traduzidos com o rótulo ficam; rodapé EN: "Remote, based in
+  São Paulo, Brazil."; entregas: Brand Voice, Practice Web Page, Practice Stationery.
+- **Componentes compartilhados** (nav, controles, banner de cookies, CTA mobile) escolhem o
+  idioma por `localeDoPath(usePathname())`; o rodapé (server) recebe `locale`. O padrão é
+  sempre português — sem prop/rota EN, nada muda no PT.
+- **`<html lang>`**: o layout raiz é um só (pt-BR). Dividir em dois layouts raiz obrigaria a
+  mover todas as pastas do app. O conteúdo EN sai com `lang="en"` no wrapper `.inst` e o
+  `HtmlLang` + script inline corrigem o `<html>` no navegador. O HTML estático de `/en`
+  ainda diz `lang="pt-BR"` no `<html>`.
+- **Seletor flutuante** (`LangFloater`): canto inferior esquerdo, PT | EN, leva à página
+  equivalente (sem par → home do outro idioma). Cookie `mbf-lang` (12 meses, listado em
+  `/cookies`). O idioma do navegador só sugere (aviso discreto, dispensável), **nunca
+  redireciona** — Googlebot e links compartilhados sempre recebem a página pedida.
+- Diagramas do método (`MetodologiaFlow`, `LinhaTempo`) têm texto em português nas imagens
+  e no SVG; `/en/method` usa só a lista dos oito passos.

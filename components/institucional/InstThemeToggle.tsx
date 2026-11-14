@@ -1,5 +1,8 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { UI, localeDoPath } from "@/lib/i18n";
+
 /**
  * Alterna o tema (claro/escuro) do site institucional. Mesmo botão do /hub,
  * mas a marca vai no <html> (`data-inst-theme`), porque a nav e o rodapé
@@ -8,6 +11,7 @@
  * alternamos, para não piscar o tema claro antes da hidratação.
  */
 export function InstThemeToggle() {
+  const pathname = usePathname();
   function toggle() {
     const root = document.documentElement;
     const next = root.dataset.instTheme === "dark" ? "light" : "dark";
@@ -25,7 +29,7 @@ export function InstThemeToggle() {
       type="button"
       className="inst-theme-toggle"
       onClick={toggle}
-      aria-label="Alternar entre modo claro e escuro"
+      aria-label={UI[localeDoPath(pathname)].tema}
     >
       <svg
         className="inst-theme-toggle__sun"

@@ -7,13 +7,7 @@ import { ScheduleLink } from "@/components/ScheduleLink";
 import { InstThemeToggle } from "@/components/institucional/InstThemeToggle";
 import { SoundToggle } from "@/components/institucional/UiSound";
 import { MButtonInner } from "@/components/institucional/home/MButton";
-
-const links = [
-  { href: "/", label: "Início" },
-  { href: "/metodologia", label: "Método" },
-  { href: "/blog", label: "Blog" },
-  { href: "/imersao", label: "Imersão" }
-];
+import { UI, localeDoPath } from "@/lib/i18n";
 
 /**
  * Nav no padrão do Monolog. Na home ela é fixa e transparente e troca de
@@ -24,12 +18,16 @@ const links = [
  */
 export function InstNav() {
   const pathname = usePathname();
-  const overlay = pathname === "/";
+  const locale = localeDoPath(pathname);
+  const t = UI[locale];
+  const links = t.links;
+  const home = links[0].href;
+  const overlay = pathname === home;
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const navRef = useRef<HTMLElement>(null);
 
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const isActive = (href: string) => (href === home ? pathname === home : pathname.startsWith(href));
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -71,15 +69,15 @@ export function InstNav() {
       data-open={open || undefined}
     >
       <a href="#conteudo" className="inst-skip">
-        Pular para o conteúdo
+        {t.pular}
       </a>
       <div className="mnav__contain mgrid">
         <div className="mnav__clip mnav__home-wrap">
-          <Link href="/" className="mnav__home" data-nav-intro>
+          <Link href={home} className="mnav__home" data-nav-intro>
             Made by Felipe®
           </Link>
         </div>
-        <nav className="mnav__links" aria-label="Principal">
+        <nav className="mnav__links" aria-label={t.navPrincipal}>
           <ul className="mnav__ul">
             {links.map((link) => (
               <li key={link.href} className="mnav__li mnav__clip">
@@ -104,7 +102,7 @@ export function InstNav() {
           </div>
           <div className="mnav__cta-btn" data-nav-intro>
             <ScheduleLink className="mbtn">
-              <MButtonInner>Conversar</MButtonInner>
+              <MButtonInner>{t.conversar}</MButtonInner>
             </ScheduleLink>
           </div>
           <button
@@ -115,11 +113,11 @@ export function InstNav() {
             onClick={() => setOpen((v) => !v)}
             data-nav-intro
           >
-            <span className="mnav__menu-span">Menu</span>
+            <span className="mnav__menu-span">{t.menu}</span>
             <span className="mnav__menu-span is-close" aria-hidden="true">
-              Fechar
+              {t.fechar}
             </span>
-            <span className="sr-only">{open ? "Fechar menu" : "Abrir menu"}</span>
+            <span className="sr-only">{open ? t.fecharMenu : t.abrirMenu}</span>
           </button>
         </div>
       </div>
@@ -136,7 +134,7 @@ export function InstNav() {
           ))}
           <li className="mnav__menu-li">
             <ScheduleLink className="mnav__menu-link">
-              <span>Conversar por 15 minutos</span>
+              <span>{t.conversar15}</span>
               <span aria-hidden="true">↗</span>
             </ScheduleLink>
           </li>

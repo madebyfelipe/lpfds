@@ -4027,3 +4027,110 @@
     transition: none;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Seletor de idioma flutuante (PT | EN) — components/institucional/LangFloater */
+/* Canto inferior esquerdo: o CTA e o "voltar ao topo" ficam à direita. Só      */
+/* tokens: tinta e fundo trocam de papel no tema escuro, então o contraste      */
+/* (preto × creme, > 15:1) vale nos dois temas. Raio 2px, rótulo em caixa alta. */
+/* -------------------------------------------------------------------------- */
+.langfloat {
+  position: fixed;
+  z-index: 90; /* abaixo do skip link e do CTA mobile (100) e do banner de cookies */
+  left: var(--inst-pad);
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.langfloat > * {
+  pointer-events: auto;
+}
+
+.langfloat__nav {
+  display: flex;
+  border: 1px solid var(--black);
+  border-radius: 2px;
+  background: var(--cream);
+  overflow: hidden;
+}
+
+.langfloat__opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.langfloat__opt + .langfloat__opt {
+  border-left: 1px solid var(--black);
+}
+
+.langfloat__opt[aria-current="true"] {
+  background: var(--black);
+  color: var(--cream);
+}
+
+.langfloat__opt:focus-visible,
+.langfloat__hint a:focus-visible,
+.langfloat__dismiss:focus-visible {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 2px;
+}
+
+.langfloat__hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 8px 8px 12px;
+  max-width: min(320px, calc(100vw - 2 * var(--inst-pad)));
+  border-radius: 2px;
+  background: var(--black);
+  color: var(--cream);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.langfloat__hint a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.langfloat__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+}
+
+@media (max-width: 720px) {
+  .inst:has(.inst-mobile-cta) .langfloat {
+    bottom: calc(12px + var(--inst-mobile-cta-height));
+  }
+}
+
+@media print {
+  .langfloat {
+    display: none;
+  }
+}

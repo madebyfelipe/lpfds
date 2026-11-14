@@ -3,14 +3,32 @@ import { EMAIL, social } from "@/lib/institucional";
 import { empresa, paginasLegais } from "@/lib/legal";
 import { ScheduleLink } from "@/components/ScheduleLink";
 import { FooterFx, FooterRelogio, FooterTopo } from "./FooterExtras";
+import { UI, type Locale } from "@/lib/i18n";
 
-const nav = [
-  { href: "/", label: "Início" },
-  { href: "/metodologia", label: "Método" },
-  { href: "/blog", label: "Blog" },
-  { href: "/imersao", label: "Imersão" },
-  { href: "/hub", label: "Hub" }
-];
+const TEXTO = {
+  pt: {
+    nav: [...UI.pt.links, { href: "/hub", label: "Hub" }],
+    navegacao: "Navegação",
+    estudio: "(Estúdio)",
+    endereco: "Sorocaba (SP), Brasil.",
+    redes: "(Redes)",
+    legal: "(Legal)",
+    imagens: "Imagens de banco:",
+    agitar: "Segure para agitar",
+    tese: "『Branding é tradução, não invenção.』"
+  },
+  en: {
+    nav: [...UI.en.links],
+    navegacao: "Navigation",
+    estudio: "(Studio)",
+    endereco: "Remote, based in São Paulo, Brazil.",
+    redes: "(Social)",
+    legal: "(Legal · in Portuguese)",
+    imagens: "Stock images:",
+    agitar: "Hold to shake",
+    tese: "『Branding is translation, not invention.』"
+  }
+} as const;
 
 /**
  * Rodapé no padrão do Monolog: navegação em tipo grande, dados do estúdio,
@@ -18,7 +36,8 @@ const nav = [
  * e copyright; e a faixa de meio-tom animada (canvas) que entra por baixo com
  * parallax. A linha legal (CNPJ + páginas legais) é obrigatória em toda página.
  */
-export function InstFooter() {
+export function InstFooter({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = TEXTO[locale];
   return (
     <footer className="inst-footer mfoot" data-footer-parallax>
       <div className="mfoot__wrap" data-footer-inner>
@@ -26,10 +45,10 @@ export function InstFooter() {
           <div className="mfoot__nav-col">
             <div className="meyebrow">
               <span className="meyebrow__marker" aria-hidden="true" />
-              <p className="meyebrow__text">Navegação</p>
+              <p className="meyebrow__text">{t.navegacao}</p>
             </div>
             <ul className="mfoot__nav">
-              {nav.map((item) => (
+              {t.nav.map((item) => (
                 <li key={item.href} className="mfoot__nav-li">
                   <Link href={item.href} className="mfoot__nav-link">
                     <span className="mfoot__nav-text">{item.label}</span>
@@ -41,7 +60,7 @@ export function InstFooter() {
               ))}
               <li className="mfoot__nav-li">
                 <ScheduleLink className="mfoot__nav-link">
-                  <span className="mfoot__nav-text">Conversar por 15 minutos</span>
+                  <span className="mfoot__nav-text">{UI[locale].conversar15}</span>
                   <span className="mfoot__nav-arrow" aria-hidden="true">
                     →
                   </span>
@@ -52,12 +71,12 @@ export function InstFooter() {
 
           <div className="mfoot__aside">
             <div className="mfoot__details">
-              <p className="mfoot__label mmono">(Estúdio)</p>
+              <p className="mfoot__label mmono">{t.estudio}</p>
               <a href={`mailto:${EMAIL}`} className="mfoot__email">
                 ⮡ {EMAIL}
               </a>
               <p className="mfoot__address">
-                Sorocaba (SP), Brasil.
+                {t.endereco}
                 {empresa.cnpj ? (
                   <>
                     <br />
@@ -67,7 +86,7 @@ export function InstFooter() {
               </p>
             </div>
             <div className="mfoot__details">
-              <p className="mfoot__label mmono">(Redes)</p>
+              <p className="mfoot__label mmono">{t.redes}</p>
               <ul className="mfoot__socials">
                 {social.map((item) => (
                   <li key={item.href}>
@@ -79,7 +98,7 @@ export function InstFooter() {
               </ul>
             </div>
             <div className="mfoot__details">
-              <p className="mfoot__label mmono">(Legal)</p>
+              <p className="mfoot__label mmono">{t.legal}</p>
               <ul className="mfoot__legal">
                 {paginasLegais.map((pagina) => (
                   <li key={pagina.href}>
@@ -90,7 +109,7 @@ export function InstFooter() {
                 ))}
               </ul>
               <p className="mfoot__credit mmono">
-                Imagens de banco:{" "}
+                {t.imagens}{" "}
                 <a href="https://www.freepik.com" target="_blank" rel="noopener noreferrer">
                   Freepik
                 </a>
@@ -121,7 +140,7 @@ export function InstFooter() {
         className="mfoot__canvas-wrap"
         data-footer-canvas
         data-cursor-hover
-        data-cursor-label="Segure para agitar"
+        data-cursor-label={t.agitar}
         aria-hidden="true"
       >
         <canvas className="mfoot__canvas" />
@@ -130,7 +149,7 @@ export function InstFooter() {
             Made by Felipe®
           </span>
           <span className="mfoot__canvas-text" data-canvas-content="right">
-            『Branding é tradução, não invenção.』
+            {t.tese}
           </span>
         </div>
       </div>

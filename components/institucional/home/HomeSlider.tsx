@@ -20,7 +20,18 @@ const DURATION = 16;
  * Troca sozinho a cada 16s enquanto está na tela. Sem JS, só a primeira fala
  * aparece — as outras ficam no HTML, escondidas.
  */
-export function HomeSlider({ items, label }: { items: SliderItem[]; label: string }) {
+/** Textos dos controles; padrão em português, a home /en passa os em inglês. */
+const CONTROLES_PT = { carrossel: "carrossel", anterior: "Anterior", proximo: "Próximo" };
+
+export function HomeSlider({
+  items,
+  label,
+  controles = CONTROLES_PT
+}: {
+  items: SliderItem[];
+  label: string;
+  controles?: { carrossel: string; anterior: string; proximo: string };
+}) {
   const [active, setActive] = useState(0);
   const root = useRef<HTMLDivElement>(null);
   const api = useRef<{ go: (dir: 1 | -1) => void } | null>(null);
@@ -128,7 +139,7 @@ export function HomeSlider({ items, label }: { items: SliderItem[]; label: strin
   }, [items.length]);
 
   return (
-    <div className="mslider" ref={root} role="region" aria-roledescription="carrossel" aria-label={label}>
+    <div className="mslider" ref={root} role="region" aria-roledescription={controles.carrossel} aria-label={label}>
       <div className="mslider__nav">
         <div className="mslider__line">
           <span className="mslider__bar" data-slider-bar />
@@ -136,12 +147,12 @@ export function HomeSlider({ items, label }: { items: SliderItem[]; label: strin
         </div>
         <div className="mslider__bottom">
           <div className="mslider__arrows">
-            <button type="button" className="mslider__btn" aria-label="Anterior" onClick={() => api.current?.go(-1)}>
+            <button type="button" className="mslider__btn" aria-label={controles.anterior} onClick={() => api.current?.go(-1)}>
               <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                 <path d="M14 8H2.5M7.5 3l-5 5 5 5" stroke="currentColor" strokeWidth="1.6" fill="none" />
               </svg>
             </button>
-            <button type="button" className="mslider__btn" aria-label="Próximo" onClick={() => api.current?.go(1)}>
+            <button type="button" className="mslider__btn" aria-label={controles.proximo} onClick={() => api.current?.go(1)}>
               <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                 <path d="M2 8h11.5M8.5 3l5 5-5 5" stroke="currentColor" strokeWidth="1.6" fill="none" />
               </svg>

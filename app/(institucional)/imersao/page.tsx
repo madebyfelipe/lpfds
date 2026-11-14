@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { alternatesDe } from "@/lib/i18n";
 import { OG_IMAGE } from "@/lib/site";
 import { ImersaoForm } from "@/components/institucional/ImersaoForm";
 import { InstContato } from "@/components/institucional/InstContato";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "Agende a imersão de branding | Made by Felipe",
   description:
     "Agende a imersão de dois dias: posicionamento, identidade visual e verbal no ar em 45 dias, para consultórios de psicologia, dentro do artigo 20 do Código de Ética.",
-  alternates: { canonical: "/imersao" },
+  alternates: alternatesDe("/imersao", "pt"),
   openGraph: {
     title: "Agende a imersão de branding | Made by Felipe",
     description:

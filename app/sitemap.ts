@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { posts } from "@/lib/blog";
+import { ROTAS } from "@/lib/i18n";
 import { paginasLegais } from "@/lib/legal";
 import { SITE_URL } from "@/lib/site";
 import { webinarNoAr } from "@/lib/webinar";
@@ -11,7 +12,7 @@ import { webinarNoAr } from "@/lib/webinar";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_URL;
 
-  return [
+  const lista: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -77,4 +78,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     })),
   ];
+
+  // Versão em inglês (/en): cada página com par entra nos dois idiomas, e as
+  // duas URLs declaram uma à outra (hreflang no sitemap, além do <head>).
+  const absoluta = (p: string) => (p === "/" ? baseUrl : `${baseUrl}${p}`);
+  const idiomas = (pt: string, en: string) => ({
+    languages: { "pt-BR": absoluta(pt), en: absoluta(en), "x-default": absoluta(pt) }
+  });
+  for (const [pt, en] of ROTAS) {
+    const entrada = lista.find((e) => e.url === absoluta(pt));
+    if (entrada) entrada.alternates = idiomas(pt, en);
+    lista.push({
+      url: absoluta(en),
+      lastModified: entrada?.lastModified ?? new Date(),
+      changeFrequency: entrada?.changeFrequency ?? "monthly",
+      priority: entrada?.priority ?? 0.7,
+      alternates: idiomas(pt, en)
+    });
+  }
+  return lista;
 }
