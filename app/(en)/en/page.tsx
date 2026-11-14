@@ -59,7 +59,7 @@ if (fotosEntregas.length !== deliverables.length || deliverablesEn.length !== de
   throw new Error("[en] deliverablesEn must match lib/institucional.ts deliverables");
 }
 
-const fotosTese = [1, 2, 3, 4, 5].map((n) => `${H}/gap-${n}.jpg`);
+const fotosTese = ["gap-1", "gap-2", "gap-3", "gap-4", "gap-5-v2"].map((n) => `${H}/${n}.jpg`);
 
 const depoSlides = depoimentosEn.map((d) => ({
   message: d.texto,

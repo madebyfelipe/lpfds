@@ -304,7 +304,7 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
   recorte no scroll → rodapé. **Sem grade de marcas e sem cases** ("Success Stories") — Felipe
   pediu para tirar; não recolocar.
 - **Fotos**: de banco (Freepik via MCP do Magnific) e enviadas pelo Felipe (passos do método e
-  posicionamento/brand guide/página/direção de arte — substituíram as geradas por IA, nenhuma
+  posicionamento/brand guide/página/direção de arte e a 5ª foto da tese, `gap-5-v2.jpg`, tela do Illustrator — substituíram as geradas por IA, nenhuma
   imagem de IA resta), em `public/institucional/home/`; crédito "Imagens de banco: Freepik" no
   rodapé. As do Felipe vieram em baixa (~736px de largura) — trocar por originais quando houver. **Foto do Felipe só
   onde o texto fala dele** (FAQ: `felipe-avatar.jpg`, recorte de `public/eu.jpg`, a mesma do /hub).

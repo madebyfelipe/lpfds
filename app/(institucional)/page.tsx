@@ -52,8 +52,9 @@ const fotosEntregas: Record<string, { src: string; alt: string }> = {
   "Direção de Arte": { src: `${H}/servico-direcao-v2.jpg`, alt: "Câmera, lentes e notebook sobre a mesa de um set de fotografia" }
 };
 
-// Fotos de banco (Freepik) que se revezam atrás da tese, a cada 800ms.
-const fotosTese = [1, 2, 3, 4, 5].map((n) => `${H}/gap-${n}.jpg`);
+// Fotos que se revezam atrás da tese, a cada 800ms: 1–4 de banco (Freepik),
+// a 5 enviada pelo Felipe (tela do Illustrator; trocou o tipo móvel).
+const fotosTese = ["gap-1", "gap-2", "gap-3", "gap-4", "gap-5-v2"].map((n) => `${H}/${n}.jpg`);
 
 const depoSlides = depoimentos.map((d) => ({
   message: d.texto,
