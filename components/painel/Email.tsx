@@ -160,7 +160,12 @@ export function Email() {
           </h2>
           <ul className="painel-mini-list">
             <li>
-              <strong>{m.fila.elegiveis}</strong> leads elegíveis para o 1º e-mail (lista fria ou pronto, com e-mail, sem SAIR).
+              <strong>{m.fila.elegiveis}</strong> leads elegíveis para o 1º e-mail (mesma fila do envio do Dylan: sem site,
+              responsável vendedor, nunca contatados, sem SAIR).
+            </li>
+            <li>
+              <strong>{m.fila.seguradasComSite}</strong> seguradas (com site): site fraco local e Google Maps, fora dos
+              elegíveis.
             </li>
             <li>
               <strong>{m.fila.followupsDevidos}</strong> follow-ups devidos ({m.fila.diasParaFollowup}+ dias sem resposta depois do

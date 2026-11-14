@@ -65,9 +65,19 @@ test("contagem segue as definições do benchmark", () => {
     p({ prospCaixa: "contato@madebyfelipe.agency", prospEnviadoEm: "2026-11-05T12:00:00Z", prospStatus: "GANHO", prospEtapa: 2 }),
     p({ prospCaixa: "alo@madebyfelipe.com.br", prospEnviadoEm: "2026-11-01T12:00:00Z", prospStatus: "ENVIADO", optOut: true }),
     p({ prospCaixa: "whatsapp business do felipe", prospEnviadoEm: "2026-11-13T12:00:00Z", prospStatus: "ENVIADO" }),
-    p({ prospStatus: "LISTA_FRIA" }),
-    p({ prospStatus: "PRONTO" }),
-    p({ prospStatus: "PRONTO", optOut: true }),
+    // fila do Dylan: elegível
+    p({ prospStatus: "LISTA_FRIA", responsavel: "VENDEDOR", optOut: false, siteUrl: "", prospCampanha: "site-gratis-whatsapp" }),
+    p({ prospStatus: "PRONTO", responsavel: "VENDEDOR", optOut: false, siteUrl: "", utmSource: "instagram_search_11-11-2026" }),
+    // fora: SAIR, outro responsável, já contatado, campanha errada
+    p({ prospStatus: "PRONTO", responsavel: "VENDEDOR", optOut: true, prospCampanha: "site-gratis-whatsapp" }),
+    p({ prospStatus: "LISTA_FRIA", responsavel: "FELIPE", optOut: false, prospCampanha: "site-gratis-whatsapp" }),
+    p({ prospStatus: "LISTA_FRIA", responsavel: "VENDEDOR", optOut: false, ultimoContatoEm: "2026-11-10T10:00:00Z", prospCampanha: "site-gratis-whatsapp" }),
+    p({ prospStatus: "LISTA_FRIA", responsavel: "VENDEDOR", optOut: false, prospCampanha: "psico-neurodivergencia" }),
+    // segurada (com site)
+    p({ prospStatus: "LISTA_FRIA", responsavel: "VENDEDOR", optOut: false, siteUrl: "https://clinica.example", prospCampanha: "site-fraco-local" }),
+    p({ prospStatus: "LISTA_FRIA", responsavel: "PROSPECT_RESEARCHER", optOut: false, siteUrl: { primaryLinkUrl: "https://x.example" }, utmSource: "google_maps_11-11-2026" }),
+    // com site na campanha do site grátis: nem elegível nem segurada
+    p({ prospStatus: "LISTA_FRIA", responsavel: "VENDEDOR", optOut: false, siteUrl: "https://y.example", prospCampanha: "site-gratis-whatsapp" }),
     p({ prospCaixa: "leonardo@madebyfelipe.com.br", prospEnviadoEm: "2026-11-06T12:00:00Z", prospStatus: "ENVIADO", prospEtapa: 0 })
   ];
   assert.equal(canal(pessoas[5]), "WhatsApp");
@@ -81,6 +91,7 @@ test("contagem segue as definições do benchmark", () => {
   assert.equal(m.cliques.disponivel, true);
   assert.equal(m.cliques.leadsComClique, 1);
   assert.equal(m.fila.elegiveis, 2);
+  assert.equal(m.fila.seguradasComSite, 2);
   // devidos: ENVIADO sem resposta, etapa < 2, último envio há 3+ dias, sem SAIR → o de 06/11 só
   assert.equal(m.fila.followupsDevidos, 1);
   assert.deepEqual(m.funil.map((f) => f.valor), [6, 2, 1, 2, 1, 1, 1]);

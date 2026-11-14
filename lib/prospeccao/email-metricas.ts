@@ -45,7 +45,7 @@ export type MetricasEmail = {
   porNicho: Linha[];
   porCampanha: Linha[];
   funil: Array<{ etapa: string; valor: number }>;
-  fila: { elegiveis: number; followupsDevidos: number; diasParaFollowup: number };
+  fila: { elegiveis: number; seguradasComSite: number; followupsDevidos: number; diasParaFollowup: number };
   cliques: { disponivel: boolean; total: number; leadsComClique: number; taxa: number };
   alertas: string[];
 };
@@ -55,6 +55,9 @@ export type MetricasEmail = {
 /* -------------------------------------------------------------------------- */
 
 const s = (v: unknown) => (typeof v === "string" ? v : "");
+/** Campo de link do Twenty pode vir como texto ou como { primaryLinkUrl }. */
+const link = (v: unknown) =>
+  typeof v === "string" ? v : v && typeof v === "object" ? s((v as { primaryLinkUrl?: unknown }).primaryLinkUrl) : "";
 const n = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : 0);
 const iniciativa = (p: PessoaCrm) => (Array.isArray(p.iniciativa) ? (p.iniciativa as unknown[]).map(String) : []);
 const temEmail = (p: PessoaCrm) => {
@@ -183,8 +186,26 @@ export function calcular(pessoas: PessoaCrm[], agora = new Date()): MetricasEmai
     { etapa: "Ganho", valor: enviados.filter((p) => status(p) === "GANHO").length }
   ];
 
+  // Fila do 1º e-mail = a mesma do Dylan (outreach/queue-email.sh), para o painel e
+  // o envio darem o mesmo número: LISTA_FRIA ou PRONTO, com e-mail, responsável
+  // VENDEDOR, sem SAIR, nunca contatado, SEM site, e campanha site-gratis-whatsapp ou
+  // origem instagram_search_11-11-2026. Quem já tem site (site-fraco-local,
+  // google_maps_11-11-2026) fica segurado à parte, fora dos elegíveis; essas estão
+  // com o responsável PROSPECT_RESEARCHER, por isso a contagem delas não exige VENDEDOR.
+  const baseFila = (p: PessoaCrm) =>
+    ["LISTA_FRIA", "PRONTO"].includes(status(p)) && temEmail(p) && p.optOut === false && !s(p.ultimoContatoEm);
   const elegiveis = pessoas.filter(
-    (p) => ["LISTA_FRIA", "PRONTO"].includes(status(p)) && !p.optOut && temEmail(p)
+    (p) =>
+      baseFila(p) &&
+      s(p.responsavel) === "VENDEDOR" &&
+      !link(p.siteUrl) &&
+      (s(p.prospCampanha) === "site-gratis-whatsapp" || s(p.utmSource) === "instagram_search_11-11-2026")
+  ).length;
+  const seguradasComSite = pessoas.filter(
+    (p) =>
+      baseFila(p) &&
+      Boolean(link(p.siteUrl)) &&
+      (s(p.prospCampanha) === "site-fraco-local" || s(p.utmSource) === "google_maps_11-11-2026")
   ).length;
   const limite = agora.getTime() - DIAS_PARA_FOLLOWUP * 86400_000;
   const followupsDevidos = enviados.filter((p) => {
@@ -214,7 +235,7 @@ export function calcular(pessoas: PessoaCrm[], agora = new Date()): MetricasEmai
     porNicho,
     porCampanha,
     funil,
-    fila: { elegiveis, followupsDevidos, diasParaFollowup: DIAS_PARA_FOLLOWUP },
+    fila: { elegiveis, seguradasComSite, followupsDevidos, diasParaFollowup: DIAS_PARA_FOLLOWUP },
     cliques: { disponivel, total: total.cliques, leadsComClique, taxa: taxa(leadsComClique, enviados.length) },
     alertas
   };
