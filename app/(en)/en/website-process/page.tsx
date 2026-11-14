@@ -33,7 +33,7 @@ const etapas = [
   {
     num: "01",
     title: "Discovery and research",
-    copy: "An interview and immersion to understand how your practice really works, followed by research into your niche, your clients, the other practices in your area and the words people use when they search for help."
+    copy: "An online interview and immersion, in English with Felipe, to understand how your practice really works, followed by research into your niche, your clients, the other practices in your area and the words people use when they search for help."
   },
   {
     num: "02",

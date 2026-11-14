@@ -21,7 +21,7 @@ const TEXTO = {
     nav: [...UI.en.links],
     navegacao: "Navigation",
     estudio: "(Studio)",
-    endereco: "Sorocaba, São Paulo, Brazil.",
+    endereco: "Remote, based in São Paulo, Brazil.",
     redes: "(Social)",
     legal: "(Legal · in Portuguese)",
     imagens: "Stock images:",

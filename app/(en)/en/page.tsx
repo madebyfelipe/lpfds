@@ -26,7 +26,7 @@ const jornada = [
   {
     titulo: "We study your practice",
     texto:
-      "A one-on-one interview and two days of guided immersion, where the method's six areas — Practice, Subject, Inner need, Quality, Universe and Ethos — become strategy, documented and approved with you before we move on.",
+      "A one-on-one interview and two days of guided online immersion, where the method's six areas — Practice, Subject, Inner need, Quality, Universe and Ethos — become strategy, documented and approved with you before we move on.",
     foto: `${H}/passo-1-v2.jpg`,
     alt: "Wall covered in colorful sticky notes from a strategy workshop"
   },
@@ -82,11 +82,11 @@ const sliderEn = { carrossel: "carousel", anterior: "Previous", proximo: "Next" 
 const faq = [
   {
     q: "How long does the project take?",
-    a: "Two days of immersion and 45 days until your brand is live. Your positioning is documented and approved with you before any visual work begins."
+    a: "Two days of online immersion and 45 days until your brand is live. Your positioning is documented and approved with you before any visual work begins."
   },
   {
     q: "What happens during the two-day immersion?",
-    a: "A guided workshop that follows a one-on-one interview with you — and with anyone else who works in your practice. Over the two days, the six areas of the PSIQUE method become strategy."
+    a: "It's online, in English, with Felipe. A guided workshop that follows a one-on-one interview with you — and with anyone else who works in your practice. Over the two days, the six areas of the PSIQUE method become strategy."
   },
   {
     q: "What do I get at the end?",
@@ -102,7 +102,7 @@ const faq = [
   },
   {
     q: "How much does it cost?",
-    a: "Pricing isn't listed on the site. Book a 15-minute call or write to us and we'll send you a quote."
+    a: "Pricing isn't listed on the site. Book a 15-minute call in English with Felipe, or write to us, and we'll send you a quote."
   }
 ];
 
@@ -120,7 +120,7 @@ const faqJsonLd = {
 
 const title = "Brand Studio for Therapists in Private Practice | Made by Felipe";
 const description =
-  "Build your therapy practice's brand in a two-day immersion. Positioning, visual identity and brand voice, live in 45 days. Book a 15-minute call to get a quote.";
+  "Build your therapy practice's brand in a two-day online immersion. Positioning, visual identity and brand voice, live in 45 days. Get a quote on a call with Felipe.";
 
 export const metadata: Metadata = {
   title,
@@ -186,8 +186,8 @@ export default function HomeEn() {
           </svg>
           <div className="mh-hero__left" data-animate>
             <p className="mh-hero__lead" data-hero-p data-delay="0.2">
-              Two days with you. Positioning, visual identity and brand voice, live in 45 days — built with professional
-              ethics guidelines in mind.
+              Two days with you, online and in English. Positioning, visual identity and brand voice, live in 45 days —
+              built with professional ethics guidelines in mind.
             </p>
             <div className="mh-hero__btn">
               <ScheduleLink className="mbtn mbtn--secondary">
@@ -233,11 +233,11 @@ export default function HomeEn() {
                   </svg>
                 </div>
                 <div className="mh-pop__content">
-                  <p className="mh-pop__p">Two days of guided immersion: the six areas of the PSIQUE method become strategy.</p>
+                  <p className="mh-pop__p">Two days of guided online immersion: the six areas of the PSIQUE method become strategy.</p>
                   <p className="mh-pop__meta mmono">PSIQUE method • 2 days</p>
                 </div>
                 <button type="button" className="mh-pop__trigger">
-                  <span className="sr-only">Show: two days of guided immersion</span>
+                  <span className="sr-only">Show: two days of guided online immersion</span>
                 </button>
                 <div className="mh-pop__shade" aria-hidden="true" />
               </div>

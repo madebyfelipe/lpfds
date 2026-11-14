@@ -56,7 +56,7 @@ export const processEn = [
     tag: "Gathering · Exploring",
     steps: [
       { num: "01", title: "Interview", copy: "A one-on-one conversation with you — and with anyone else who works in your practice." },
-      { num: "02", title: "Workshop", copy: "Two days of guided immersion, where the six areas become strategy." },
+      { num: "02", title: "Workshop", copy: "Two days of guided online immersion, in English with Felipe, where the six areas become strategy." },
       { num: "03", title: "Research", copy: "We validate what came up and look closely at the other practices in your area." },
       { num: "04", title: "Diagnosis", copy: "Everything we gathered, documented and approved with you before we move on." }
     ]

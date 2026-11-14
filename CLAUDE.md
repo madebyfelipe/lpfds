@@ -867,6 +867,10 @@ Pedido do Felipe (via Tyler) para a campanha de cold email fora do Brasil (EUA p
   ranking; **sem preço** ("get a quote"); depoimentos são os mesmos, traduzidos e
   rotulados "translated from Portuguese". PSIQUE mantém as letras: Practice, Subject,
   Inner need, Quality, Universe, Ethos.
+- **Decisões do Felipe (14/11/2026)** para o EN: "free homepage preview" é oferta real para os EUA;
+  a imersão é **online** e a chamada é **em inglês com o próprio Felipe** (dizer isso onde a
+  imersão aparece); depoimentos traduzidos com o rótulo ficam; rodapé EN: "Remote, based in
+  São Paulo, Brazil."; entregas: Brand Voice, Practice Web Page, Practice Stationery.
 - **Componentes compartilhados** (nav, controles, banner de cookies, CTA mobile) escolhem o
   idioma por `localeDoPath(usePathname())`; o rodapé (server) recebe `locale`. O padrão é
   sempre português — sem prop/rota EN, nada muda no PT.

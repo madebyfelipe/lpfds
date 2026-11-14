@@ -10,7 +10,7 @@ import { OG_IMAGE } from "@/lib/site";
 
 const title = "Get a Quote for Your Practice's Brand | Made by Felipe";
 const description =
-  "Tell us about your therapy practice and get a quote, or ask for a free homepage preview. Book a 15-minute call or email the studio.";
+  "Get a quote for your therapy practice, or ask for a free homepage preview. The immersion is online; book a 15-minute call in English with Felipe.";
 
 export const metadata: Metadata = {
   title,
@@ -49,11 +49,12 @@ export default function ContactEn() {
             </div>
             <div>
               <p className="inst-method__intro">
-                A 15-minute call is enough to understand your practice and tell you whether the immersion makes sense
-                for you. Prefer email? Tell us who you work with and where, and we&apos;ll reply with a quote.
+                The immersion is online, and the call is in English with Felipe himself. Fifteen minutes is enough to
+                understand your practice and tell you whether the immersion makes sense for you. Prefer email? Tell us
+                who you work with and where, and we&apos;ll reply with a quote.
               </p>
               <p>
-                <ScheduleLink className="inst-submit">Book a 15-minute call</ScheduleLink>
+                <ScheduleLink className="inst-submit">Book a 15-minute call with Felipe</ScheduleLink>
               </p>
               <p className="inst-contact__line">
                 Or email{" "}

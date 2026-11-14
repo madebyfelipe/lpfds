@@ -67,7 +67,7 @@ export default function MethodEn() {
         <p className="inst-kicker">The process</p>
         <p className="inst-diagram__caption">
           Two stages — strategy and identity — broken into four phases: gathering, exploring, creating and defining.
-          Live in 45 days.
+          The immersion is online, in English, with Felipe. Live in 45 days.
         </p>
         <div className="inst-proc">
           {processEn.map((etapa) => (
