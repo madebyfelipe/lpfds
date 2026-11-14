@@ -64,6 +64,11 @@ import { post as direitoAutoral } from "@/content/blog/psicologo-direito-autoral
 import { post as agendamentoOnline } from "@/content/blog/agendamento-online-psicologo";
 import { post as entrevistaImprensa } from "@/content/blog/psicologo-entrevista-imprensa";
 import { post as siteAcessivel } from "@/content/blog/site-acessivel-psicologo";
+import { post as paginaServicos } from "@/content/blog/pagina-de-servicos-psicologo";
+import { post as responderComentarios } from "@/content/blog/psicologo-responder-comentarios-direct";
+import { post as marcaAdolescentes } from "@/content/blog/marca-psicologo-adolescentes";
+import { post as palestraPais } from "@/content/blog/psicologo-palestra-para-pais";
+import { post as carrosselInstagram } from "@/content/blog/carrossel-instagram-psicologo";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -205,7 +210,12 @@ export const posts: Post[] = [
   direitoAutoral,
   agendamentoOnline,
   entrevistaImprensa,
-  siteAcessivel
+  siteAcessivel,
+  paginaServicos,
+  responderComentarios,
+  marcaAdolescentes,
+  palestraPais,
+  carrosselInstagram
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
