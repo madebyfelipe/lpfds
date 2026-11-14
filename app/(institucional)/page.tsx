@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { alternatesDe } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "next/link";
 import { ScheduleLink } from "@/components/ScheduleLink";
@@ -117,7 +118,7 @@ export const metadata: Metadata = {
   title: "Marca para consultório de psicologia em 45 dias | Made by Felipe",
   description:
     "Construa a marca do seu consultório em dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética. Estúdio de branding em Sorocaba (SP).",
-  alternates: { canonical: "/" },
+  alternates: alternatesDe("/", "pt"),
   keywords: [
     "marca para psicólogo",
     "branding para psicólogo",

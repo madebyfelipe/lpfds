@@ -846,3 +846,37 @@ Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-r
 - Leitura de IMAP é pelas últimas 500 mensagens por sequência (não `SEARCH SINCE`) e o
   parser recebe o Buffer cru — os dois foram bugs reais no teste.
 - `previews/campanhas/` é o protótipo estático do Codex, arquivado.
+
+---
+
+## Versão em inglês (`/en`) e seletor de idioma (nov/2026)
+
+Pedido do Felipe (via Tyler) para a campanha de cold email fora do Brasil (EUA primeiro).
+
+- **PT segue na raiz, sem mudar URL.** O inglês vive em `app/(en)/en/` (grupo de rota
+  próprio, layout com nav/rodapé em inglês). Páginas: `/en`, `/en/method`,
+  `/en/website-process` (= `/cases`) e `/en/contact` (= `/imersao`, sem o form, que
+  pede CRP/WhatsApp; oferece a chamada e o e-mail). O blog fica só em português.
+- **`lib/i18n.ts` é a fonte única**: pares PT ↔ EN (`ROTAS`), `alternatesDe()` (canonical
+  por idioma + hreflang pt-BR / en / x-default = PT), textos da interface compartilhada
+  (`UI`). Página nova com par em inglês = entrada em `ROTAS` + `alternates:
+  alternatesDe(...)` nas duas versões; o sitemap e o seletor leem daí.
+- **Copy EN** em `lib/institucional-en.ts` (espelha `lib/institucional.ts`). Regras: nada de
+  CFP/artigo 20 (vira "built with professional ethics guidelines in mind", sem prometer
+  conformidade com APA ou conselhos estaduais); nada de pacientes, agenda cheia ou
+  ranking; **sem preço** ("get a quote"); depoimentos são os mesmos, traduzidos e
+  rotulados "translated from Portuguese". PSIQUE mantém as letras: Practice, Subject,
+  Inner need, Quality, Universe, Ethos.
+- **Componentes compartilhados** (nav, controles, banner de cookies, CTA mobile) escolhem o
+  idioma por `localeDoPath(usePathname())`; o rodapé (server) recebe `locale`. O padrão é
+  sempre português — sem prop/rota EN, nada muda no PT.
+- **`<html lang>`**: o layout raiz é um só (pt-BR). Dividir em dois layouts raiz obrigaria a
+  mover todas as pastas do app. O conteúdo EN sai com `lang="en"` no wrapper `.inst` e o
+  `HtmlLang` + script inline corrigem o `<html>` no navegador. O HTML estático de `/en`
+  ainda diz `lang="pt-BR"` no `<html>`.
+- **Seletor flutuante** (`LangFloater`): canto inferior esquerdo, PT | EN, leva à página
+  equivalente (sem par → home do outro idioma). Cookie `mbf-lang` (12 meses, listado em
+  `/cookies`). O idioma do navegador só sugere (aviso discreto, dispensável), **nunca
+  redireciona** — Googlebot e links compartilhados sempre recebem a página pedida.
+- Diagramas do método (`MetodologiaFlow`, `LinhaTempo`) têm texto em português nas imagens
+  e no SVG; `/en/method` usa só a lista dos oito passos.

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { UI, localeDoPath } from "@/lib/i18n";
 
 /**
  * Sons de interface no padrão do Monolog: um "tap" curto (cinco variações,
@@ -145,6 +147,7 @@ export function UiSound() {
 
 /** Botão de som da nav: alto-falante com ondas (ligado) ou X (desligado). */
 export function SoundToggle() {
+  const pathname = usePathname();
   const [on, setOn] = useState(false);
   useEffect(() => {
     setOn(store.enabled);
@@ -160,7 +163,7 @@ export function SoundToggle() {
       className="msound"
       data-sound-toggle
       aria-pressed={on}
-      aria-label={on ? "Desligar sons" : "Ligar sons"}
+      aria-label={on ? UI[localeDoPath(pathname)].somDesligar : UI[localeDoPath(pathname)].somLigar}
       data-on={on || undefined}
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" focusable="false">
