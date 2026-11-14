@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       // Painel interno (atrás de senha) e APIs não têm o que indexar.
-      disallow: ["/painel", "/api/"],
+      disallow: ["/painel", "/api/", "/r/"],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
