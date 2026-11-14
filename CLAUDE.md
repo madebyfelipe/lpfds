@@ -56,6 +56,21 @@ do axe-core (WCAG 2.1 AA) — mantenha assim. Para conferir, veja
 alta com o tracking certo? funciona nos dois temas? passa contraste nos dois?
 foco visível? Se qualquer resposta for "não", ainda não está pronto.
 
+## Como trabalhar com o Felipe (nov/2026, pedido dele)
+
+- **Pedido explícito vai direto para o ar, sem PR.** Post de blog, alteração que ele pediu:
+  commit e push na branch de produção da Vercel (hoje `beta`, ver "Deploy") e na `main`,
+  mantendo as duas iguais. O site não tem dado sensível. Branch separada ou worktree só
+  quando ele pedir. Exceção: preço e oferta só vão ao ar com aval dele na conversa.
+- **Autonomia:** decida, faça e valide depois. Não interrompa com pergunta que dá para
+  resolver sozinho. Pergunte só se estiver bloqueado ou se a decisão for dele.
+- **Resposta curta.** Bem menos texto que o normal, em lista: o que fez · se está no ar ·
+  o que precisa dele. Nada de parágrafo grande.
+- **Escrita (copy, post, e-mail):** sem cara de IA, sem termo técnico, benefício antes do
+  entregável e **nenhuma estrutura de comparação** ("não é X, é Y", "mais do que X, Y").
+- Ele fala com a IA e recebe avisos pelo **WhatsApp (Evolution API)**; aviso por lá tem
+  1 a 3 linhas.
+
 ## Project
 
 Next.js 16 (App Router, Turbopack) + TypeScript landing page for **Made by Felipe**, a branding + social media service targeting Brazilian professionals (lawyers, nutritionists, psychologists, clinics).
