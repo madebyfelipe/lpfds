@@ -348,6 +348,16 @@
   pointer-events: auto;
 }
 
+/* O scrim do menu mobile é um <button> de tela cheia: a regra acima o liberava
+   mesmo com o menu fechado e ele engolia todos os toques da home no celular. */
+.mnav[data-overlay] .mnav__scrim {
+  pointer-events: none;
+}
+
+.mnav[data-overlay][data-open] .mnav__scrim {
+  pointer-events: auto;
+}
+
 .mnav__contain {
   align-items: center;
 }
