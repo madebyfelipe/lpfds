@@ -454,3 +454,32 @@ export function bloqueado(email: string, bloqueios: readonly string[]): boolean 
   const dom = e.split("@")[1] ?? "";
   return bloqueios.some((b) => (b.includes("@") ? b === e : dom === b || dom.endsWith(`.${b}`)));
 }
+
+/* -------------------------------------------------------------------------- */
+/* Aba "E-mail" do painel e cliques do link rastreado                         */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Todas as pessoas, cruas (depth=0), para as métricas agregadas da aba
+ * "E-mail" (lib/prospeccao/email-metricas.ts). Inclui o cold mail do Dylan,
+ * que grava os mesmos campos `prosp*`. Nunca vai para o navegador: a rota só
+ * devolve os números.
+ */
+export async function listarPessoasCrm(): Promise<Raw[]> {
+  return listar("people", "", 6000);
+}
+
+/**
+ * Soma 1 clique no lead (prospCliques) e grava a hora (prospUltimoCliqueEm).
+ * Ler e depois gravar não é atômico; dois cliques no mesmo segundo podem virar
+ * um. Para a métrica (pessoas que clicaram) isso não muda nada.
+ */
+export async function registrarClique(id: string, quando = new Date()): Promise<void> {
+  const json = await twenty<{ data?: { person?: Raw } }>("GET", `/people/${encodeURIComponent(id)}?depth=0`);
+  const p = json.data?.person;
+  if (!p) return;
+  await twenty("PATCH", `/people/${encodeURIComponent(id)}`, {
+    prospCliques: (num(p.prospCliques) ?? 0) + 1,
+    prospUltimoCliqueEm: quando.toISOString()
+  });
+}
