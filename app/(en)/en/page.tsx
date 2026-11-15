@@ -8,7 +8,7 @@ import { HomeSlider } from "@/components/institucional/home/HomeSlider";
 import { MButtonInner } from "@/components/institucional/home/MButton";
 import { alternatesDe } from "@/lib/i18n";
 import { deliverables } from "@/lib/institucional";
-import { deliverablesEn, depoimentosEn, positioningEn, processEn } from "@/lib/institucional-en";
+import { deliverablesEn, positioningEn, processEn } from "@/lib/institucional-en";
 import { OG_IMAGE, SITE_URL } from "@/lib/site";
 import "../../home.css";
 
@@ -60,14 +60,6 @@ if (fotosEntregas.length !== deliverables.length || deliverablesEn.length !== de
 }
 
 const fotosTese = ["gap-1", "gap-2", "gap-3", "gap-4", "gap-5-v2"].map((n) => `${H}/${n}.jpg`);
-
-const depoSlides = depoimentosEn.map((d) => ({
-  message: d.texto,
-  name: d.titulo,
-  role: d.cidade,
-  detail: "(Studio client testimonial, translated from Portuguese)",
-  mark: "Ps"
-}));
 
 const areaSlides = positioningEn.map((p, i) => ({
   message: p.copy,
@@ -260,12 +252,9 @@ export default function HomeEn() {
         </div>
       </section>
 
-      {/* ---- Manifesto + testimonials --------------------------------- */}
+      {/* ---- Manifesto ------------------------------------------------- */}
       <section className="mh-problems" data-theme-section="dark" data-stack>
         <div className="mh-problems__header">
-          <div className="mh-problems__stats">
-            <HomeSlider items={depoSlides} label="Client testimonials" controles={sliderEn} />
-          </div>
           <div className="mh-problems__top">
             <h2 className="mh-problems__heading" data-highlight-text>
               Made by Felipe builds brands from a close reading of the business. Revenue, caseload, session fee and how

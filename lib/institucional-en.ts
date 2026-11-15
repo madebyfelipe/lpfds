@@ -84,24 +84,3 @@ export const deliverablesEn = [
   "Art Direction"
 ];
 
-/** Same three client quotes as lib/institucional.ts, translated from Portuguese. */
-export const depoimentosEn = [
-  {
-    texto:
-      "I came in expecting to leave with a logo, and I left with a clear read of my own practice. Over the two-day immersion we talked about my caseload, my session fee and the kind of client I work with best. The materials came after that, and they were consistent with it. Today the people who reach out already know what I work with, and the first message starts much further along.",
-    titulo: "Psychologist",
-    cidade: "Sorocaba, Brazil"
-  },
-  {
-    texto:
-      "What changed wasn't the look, it was the first conversation. I used to have to explain my entire background; now the brand does part of that before I say a word. The project was run in a focused way, the deadline was met, and every piece was checked against our professional code of ethics before it went out. For someone whose schedule is taken up by sessions, that was worth more than any visual deliverable.",
-    titulo: "Psychologist",
-    cidade: "Itu, Brazil"
-  },
-  {
-    texto:
-      "I always treated branding as an afterthought, something for once my schedule was full. The immersion turned that around in two days, because it started from numbers that were already mine. The positioning was approved before any design, which avoided the back-and-forth over personal taste. Forty-five days later everything was live, from the practice web page to the office stationery.",
-    titulo: "Psychologist",
-    cidade: "Campinas, Brazil"
-  }
-];

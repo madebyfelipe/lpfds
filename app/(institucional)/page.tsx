@@ -7,7 +7,7 @@ import { HomeFaq } from "@/components/institucional/home/HomeFaq";
 import { HomeMotion } from "@/components/institucional/home/HomeMotion";
 import { HomeSlider } from "@/components/institucional/home/HomeSlider";
 import { MButtonInner } from "@/components/institucional/home/MButton";
-import { deliverables, depoimentos, positioning, process } from "@/lib/institucional";
+import { deliverables, positioning, process } from "@/lib/institucional";
 import { OG_IMAGE, SITE_URL } from "@/lib/site";
 import "../home.css";
 
@@ -55,14 +55,6 @@ const fotosEntregas: Record<string, { src: string; alt: string }> = {
 // Fotos que se revezam atrás da tese, a cada 800ms: 1–4 de banco (Freepik),
 // a 5 enviada pelo Felipe (tela do Illustrator; trocou o tipo móvel).
 const fotosTese = ["gap-1", "gap-2", "gap-3", "gap-4", "gap-5-v2"].map((n) => `${H}/${n}.jpg`);
-
-const depoSlides = depoimentos.map((d) => ({
-  message: d.texto,
-  name: d.titulo,
-  role: d.cidade,
-  detail: "(Depoimento de cliente do estúdio)",
-  mark: "Ps"
-}));
 
 const areaSlides = positioning.map((p, i) => ({
   message: p.copy,
@@ -257,12 +249,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---- Manifesto + depoimentos (card empilhado) ----------------- */}
+      {/* ---- Manifesto (card empilhado) --------------------------------- */}
       <section className="mh-problems" data-theme-section="dark" data-stack>
         <div className="mh-problems__header">
-          <div className="mh-problems__stats">
-            <HomeSlider items={depoSlides} label="Depoimentos de clientes" />
-          </div>
           <div className="mh-problems__top">
             <h2 className="mh-problems__heading" data-highlight-text>
               Made by Felipe constrói marca a partir da leitura do negócio. Receita, carteira, valor de sessão e

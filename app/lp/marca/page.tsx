@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MButtonInner } from "@/components/institucional/home/MButton";
 import { LpQuiz } from "@/components/lp/LpQuiz";
-import { depoimentos, deliverables, positioning } from "@/lib/institucional";
+import { deliverables, positioning } from "@/lib/institucional";
 import { WHATSAPP_URL } from "@/lib/legal";
 import { OG_IMAGE } from "@/lib/site";
 
@@ -243,25 +243,6 @@ export default function LpMarcaPage() {
         </div>
       </section>
 
-      {/* ---- Depoimentos (anonimizados, ver lib/institucional.ts) ---- */}
-      <section className="lp-sec lp-sec--tint" aria-labelledby="depo-titulo">
-        <div className="lp-sec__head">
-          <p className="lp-mono lp-mono--dot">Quem já passou pela imersão</p>
-          <h2 id="depo-titulo" className="lp-h2">
-            O que mudou não foi a aparência. Foi a conversa.
-          </h2>
-        </div>
-        <ul className="lp-quotes">
-          {depoimentos.map((d) => (
-            <li key={d.texto.slice(0, 24)} className="lp-quote">
-              <blockquote className="lp-quote__text">{d.texto}</blockquote>
-              <p className="lp-quote__who">
-                {d.titulo} · {d.cidade}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       {/* ---- Quem faz ---- */}
       <section className="lp-sec lp-who" aria-labelledby="quem-titulo">
