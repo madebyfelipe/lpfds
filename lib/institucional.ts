@@ -171,36 +171,6 @@ export const deliverables = [
   "Direção de Arte"
 ];
 
-// Depoimento aqui é de cliente do estúdio falando sobre serviço de design —
-// fora do alcance da vedação de depoimento de paciente. Nenhuma fala cita
-// atendimento, caso clínico ou resultado de terapia.
-//
-// IDENTIFICAÇÃO: por decisão do Felipe, as autoras não são nomeadas e o CRP
-// não é publicado. Motivo: o registro profissional é dado de identificação
-// direta e publicá-lo num anúncio expõe a cliente sem necessidade — o
-// depoimento se sustenta pelo que diz, não por quem assina. Se um dia entrar
-// nome ou CRP aqui, é preciso ter a autorização escrita da titular para essa
-// divulgação específica (LGPD art. 7º, I) — e conferir se ela ainda vale.
-export const depoimentos = [
-  {
-    texto:
-      "Cheguei achando que ia sair com um logotipo e saí com uma leitura do meu próprio consultório. Nos dois dias de imersão a conversa foi sobre carteira, valor da sessão e o tipo de pessoa que eu atendo melhor. O material veio depois, e veio coerente com isso. Hoje quem me procura já chega sabendo do que eu trato, e a primeira mensagem começa num ponto muito mais adiantado.",
-    titulo: "Psicóloga",
-    cidade: "Sorocaba"
-  },
-  {
-    texto:
-      "O que mudou não foi a aparência, foi a conversa inicial. Antes eu precisava explicar minha formação inteira; agora a marca faz parte disso antes de eu falar. A condução do projeto foi objetiva, com prazo cumprido e cada peça revisada quanto ao Código de Ética antes de ir para a rua. Para quem tem a agenda tomada por atendimento, isso valeu mais do que qualquer entrega visual.",
-    titulo: "Psicóloga",
-    cidade: "Itu"
-  },
-  {
-    texto:
-      "Sempre tratei marca como assunto secundário, coisa para depois que a agenda estivesse cheia. A imersão inverteu isso em dois dias, porque partiu de números que já eram meus. O posicionamento foi aprovado antes de qualquer arte, o que evitou o vaivém de gosto pessoal. Quarenta e cinco dias depois estava tudo no ar, da página profissional à papelaria do consultório.",
-    titulo: "Psicóloga",
-    cidade: "Campinas"
-  }
-];
 
 // Capacidade do estúdio; disponibilidade é confirmada no contato inicial.
 export const agenda = { numProjetos: 3 };

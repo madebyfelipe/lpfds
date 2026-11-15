@@ -4,7 +4,7 @@ import "./exemplo.css";
 
 /**
  * Exemplo de site de psicóloga — destino do link rastreado do cold mail
- * (/r/<token>, ver lib/prospeccao/clique.ts). Pessoa, CRP, cidade e telefone
+ * (link direto no cold mail). Pessoa, CRP, cidade e telefone
  * são FICTÍCIOS e a página diz isso no topo. Fora do Google (noindex) e fora
  * do sitemap. Texto dentro do artigo 20: sem preço, sem promessa, sem foto de
  * atendimento.

@@ -877,13 +877,10 @@ Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-r
   definições de enviado, bounce, resposta, positiva e SAIR são as do relatório diário
   `/data/OpenBot/Shared/campanha-email/benchmark.js`; mudar uma é mudar as duas. Vencedor
   de variante só com 60+ envios por braço. Nunca mande nome, e-mail ou id de lead para essa tela.
-- **Link rastreado** (`app/r/[token]/route.ts`, `lib/prospeccao/clique.ts`): o token é
-  AES-256-GCM do id do lead com `CLIQUE_SECRET` (sem ele, `PROSPECCAO_SECRET`). É opaco e
-  não dá para adulterar. Grava `prospCliques` (+1) e `prospUltimoCliqueEm` no Twenty depois
-  de responder (`after`) e redireciona para `/exemplo/site-psicologa` (dados fictícios,
-  noindex). HEAD, pré-busca, robôs de prévia e scanners de e-mail não contam (`ehRobo`).
-  Quem monta o e-mail pede o link em `GET /api/prospeccao/link-clique?id=<uuid>` com
-  `Bearer PROSPECCAO_TOKEN`. `/r/` fica fora do robots.txt.
+- **Link do cold mail (15/11/2026, decisão do Felipe)**: sem rastreio de clique. `/r/<token>`,
+  `/api/prospeccao/link-clique`, `lib/prospeccao/clique.ts` e o `CLIQUE_SECRET` foram removidos.
+  O e-mail usa o link direto `https://www.madebyfelipe.com.br/exemplo/site-psicologa`.
+  A aba E-mail continua lendo `prospCliques` (histórico), mas não entra clique novo.
 - **Pausa de 13/11/2026**: o disparo do site está pausado pela nota "Prospecção · PAUSADA"
   (Felipe: "Pausar o do site", para ficar só o cold mail do Dylan). Não retome sem ele.
 
