@@ -74,6 +74,11 @@ import { post as manualBoasVindas } from "@/content/blog/manual-boas-vindas-cons
 import { post as dominioSite } from "@/content/blog/dominio-site-psicologo";
 import { post as consultorioCompartilhado } from "@/content/blog/consultorio-compartilhado-divulgacao";
 import { post as gruposDeMaes } from "@/content/blog/psicologo-grupos-de-maes";
+import { post as marcaAba } from "@/content/blog/marca-psicologo-aba";
+import { post as avaliacaoAutismoAdulto } from "@/content/blog/divulgar-avaliacao-autismo-adulto";
+import { post as marketingInfantil } from "@/content/blog/marketing-psicologa-infantil";
+import { post as fotosConsultorio } from "@/content/blog/fotos-do-consultorio-psicologia";
+import { post as panfletoPsicologo } from "@/content/blog/panfleto-psicologo";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -225,7 +230,12 @@ export const posts: Post[] = [
   manualBoasVindas,
   dominioSite,
   consultorioCompartilhado,
-  gruposDeMaes
+  gruposDeMaes,
+  marcaAba,
+  avaliacaoAutismoAdulto,
+  marketingInfantil,
+  fotosConsultorio,
+  panfletoPsicologo
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
