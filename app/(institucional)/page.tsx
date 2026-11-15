@@ -193,8 +193,8 @@ export default function Home() {
             <div className="mh-hero__items">
               <div className="mh-hero__item">
                 <Image
-                  src={`${H}/hero-1.jpg`}
-                  alt="Mesa de estúdio de design com caderno aberto, amostras de cor e pincéis"
+                  src={`${H}/hero-figma.jpg`}
+                  alt="Tela do Figma com o sistema de uma marca: logotipo, tipografia, cores e peças aplicadas"
                   fill
                   priority
                   sizes="(max-width: 991px) 100vw, 64vw"
@@ -203,8 +203,8 @@ export default function Home() {
               </div>
               <div className="mh-hero__item">
                 <Image
-                  src={`${H}/hero-2.jpg`}
-                  alt="Leque de amostras de cor aberto sobre papel branco"
+                  src={`${H}/hero-illustrator.jpg`}
+                  alt="Tela do Illustrator com uma série de calendários tipográficos em produção"
                   fill
                   sizes="(max-width: 991px) 100vw, 64vw"
                   data-translate
