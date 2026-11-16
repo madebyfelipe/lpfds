@@ -132,8 +132,8 @@ export default function LpMarcaPage() {
           </div>
           <figure className="lp-hero__media">
             <Image
-              src="/institucional/home/hero-2.jpg"
-              alt="Leques de cores, régua e óculos sobre a mesa de trabalho do estúdio"
+              src="/institucional/home/lp-marca-hero.jpg"
+              alt="Envelopes branco e preto, caneta e pedras sobre fundo cinza: a papelaria de uma marca"
               width={1840}
               height={1227}
               sizes="(max-width: 900px) 100vw, 58vw"

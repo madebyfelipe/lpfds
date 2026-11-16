@@ -378,6 +378,9 @@
   color: inherit;
   text-decoration: none;
   transition: color 0.25s;
+  /* O nome da marca é uma linha só: sem isso ele quebra em "Made by" / "Felipe®"
+     no celular estreito (o wrap de 4 colunas fica menor que a palavra). */
+  white-space: nowrap;
 }
 
 .mnav__links {
@@ -532,10 +535,37 @@
   display: none;
 }
 
+/* Abaixo de 400px não cabe logo + som + tema + CTA + menu na mesma linha:
+   o logo cede um pouco e os vãos encolhem, em vez de cortar o "Menu". */
+@media (max-width: 400px) {
+  .mnav__home {
+    font-size: 13px;
+  }
+
+  .mnav__contain {
+    gap: 6px;
+  }
+}
+
 @media (max-width: 767px) {
   .mnav__contain {
     display: flex;
     justify-content: space-between;
+  }
+
+  /* O logo não encolhe nem quebra; o resto da barra cede espaço. */
+  .mnav__home-wrap {
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+
+  .mnav__home {
+    font-size: 15px;
+    letter-spacing: -0.02em;
+  }
+
+  .mnav__contain {
+    gap: 8px;
   }
 
   .mnav__links {
