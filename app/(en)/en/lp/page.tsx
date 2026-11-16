@@ -462,7 +462,9 @@ export default function LpEn() {
       <section className="lpc-sec lpc-night" aria-labelledby="t-clock">
         <div className="lpc-head">
           <h2 id="t-clock" className="lpc-h">
-            It&apos;s <LpClock className="mh-red" /> in São&nbsp;Paulo.
+            It&apos;s{" "}
+            <LpClock className="mh-red" />{" "}
+            in São&nbsp;Paulo.
           </h2>
           <p className="lpc-note" data-lpc-in="">
             send it whenever
