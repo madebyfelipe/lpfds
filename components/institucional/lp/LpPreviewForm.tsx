@@ -5,7 +5,7 @@ import { LP_ORIGEM_PREVIEW_EN, validateLpPreview } from "@/lib/lp";
 
 type Estado = "idle" | "enviando" | "enviado" | "erro";
 
-const rotulos = { nome: "your name", email: "your email", link: "a valid link (starting with https://)", consentimento: "" };
+const rotulos = { nome: "your name", email: "your email", link: "the link (it should start with https://)", consentimento: "" };
 
 /**
  * Formulário da prévia grátis (/en/lp) → /api/lp-lead, origem "preview-en".
@@ -70,8 +70,8 @@ export function LpPreviewForm() {
 
   if (estado === "enviado") {
     return (
-      <div className="lpx-thanks" role="status" tabIndex={-1}>
-        <h3 className="lpx-thanks__title">Thanks. Your request is in.</h3>
+      <div className="lpc-thanks" role="status" tabIndex={-1}>
+        <h3 className="lpc-thanks__title">Thanks. Your request is in.</h3>
         <p>We&apos;ll start on your homepage preview and reply by email.</p>
       </div>
     );
@@ -101,7 +101,7 @@ export function LpPreviewForm() {
           aria-describedby={statusId} value={form.link} onChange={set("link")}
           className="inst-field__input" placeholder="https://" />
       </label>
-      <div className="lpx-hp" aria-hidden="true">
+      <div className="lpc-hp" aria-hidden="true">
         <label>Leave this field empty <input type="text" name="site" tabIndex={-1} autoComplete="off" /></label>
       </div>
       <label className="inst-consent">
@@ -112,7 +112,8 @@ export function LpPreviewForm() {
             if (estado === "erro") { setEstado("idle"); setErro(""); setInvalido(null); }
           }} />
         <span>
-          I agree that Made by Felipe may use my details to prepare my free preview and contact me by email about it.
+          I agree that Made by Felipe may use my details to prepare my free preview and contact me by email about it. I can
+          ask to have them deleted at any time.
         </span>
       </label>
       <button type="submit" className="inst-submit" disabled={estado === "enviando"}>
@@ -121,7 +122,7 @@ export function LpPreviewForm() {
       <p id={statusId} className="inst-form__status" role={estado === "erro" ? "alert" : "status"}>
         {estado === "erro" ? erro : ""}
       </p>
-      <p className="lpx-fine">Nothing is published or charged without your written approval.</p>
+      <p className="lpc-fine">Nothing is published or charged without your written approval.</p>
     </form>
   );
 }
