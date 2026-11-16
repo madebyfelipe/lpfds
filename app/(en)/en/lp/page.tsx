@@ -332,8 +332,8 @@ export default function LpEn() {
 
           <figure className="lpc-card lpc-bento__desk" data-lpc-in="">
             <Image
-              src="/institucional/home/hero-2.jpg"
-              alt="Color swatches, a pair of glasses and a phone laid out on the studio desk"
+              src="/institucional/lp-en/desk-monitor.jpg"
+              alt="A monitor showing a website being built, with a keyboard and a mouse on the studio desk"
               fill
               sizes="(max-width: 767px) 100vw, 30vw"
             />
@@ -472,8 +472,8 @@ export default function LpEn() {
         </div>
         <figure className="lpc-night__photo lpc-sel" data-tag="studio-desk.jpg" data-lpc-in="">
           <Image
-            src="/institucional/home/cta.jpg"
-            alt="An open blank notebook on the studio desk, with color swatches and pens around it"
+            src="/institucional/lp-en/studio-desk.jpg"
+            alt="The studio desk at night with two monitors, a keyboard and two studio lights"
             fill
             sizes="(max-width: 767px) 92vw, 520px"
           />
