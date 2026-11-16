@@ -84,6 +84,11 @@ import { post as reciboPsicologo } from "@/content/blog/recibo-psicologo";
 import { post as faqSite } from "@/content/blog/perguntas-frequentes-site-psicologo";
 import { post as mascoteInfantil } from "@/content/blog/mascote-marca-psicologa-infantil";
 import { post as nomeClinicaAutismo } from "@/content/blog/nome-clinica-autismo";
+import { post as sitePsicologaInfantil } from "@/content/blog/site-psicologa-infantil";
+import { post as textosSite } from "@/content/blog/textos-site-psicologo";
+import { post as brasileirosExterior } from "@/content/blog/psicologo-brasileiros-no-exterior";
+import { post as reembolsoPlano } from "@/content/blog/reembolso-plano-psicologo";
+import { post as salaDeEspera } from "@/content/blog/sala-de-espera-consultorio-psicologia";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -245,7 +250,12 @@ export const posts: Post[] = [
   reciboPsicologo,
   faqSite,
   mascoteInfantil,
-  nomeClinicaAutismo
+  nomeClinicaAutismo,
+  sitePsicologaInfantil,
+  textosSite,
+  brasileirosExterior,
+  reembolsoPlano,
+  salaDeEspera
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
