@@ -924,3 +924,29 @@ Pedido do Felipe (via Tyler) para a campanha de cold email fora do Brasil (EUA p
   R$ 1.999 do `/lp/site` não aparecem em `/en`.
 - Diagramas do método (`MetodologiaFlow`, `LinhaTempo`) têm texto em português nas imagens
   e no SVG; `/en/method` usa só a lista dos oito passos.
+
+### `/en/lp` — LP da oferta em inglês (16/11/2026, pedido do Felipe)
+
+- **Rota nova, não substitui `/en`.** `app/(lp-en)/en/lp/route.ts` serve o HTML autônomo
+  `content/lp/sellbird.html` (CSS, JS e animações próprios). Vai por route handler, e não por
+  página, de propósito: o layout raiz injetaria o CSS escuro, o cursor e o banner de cookies
+  por cima do design da LP. `force-static`; `{{SITE_URL}}` do canonical/og vem de `lib/site.ts`.
+- **Exceção de preço (decisão do Felipe, 15/11/2026):** US$ 499 (página única) e US$ 1.499
+  (site institucional), pagamento único, sem mensalidade, aparecem **só em `/en/lp`**.
+  **`/en` e demais páginas EN seguem sem preço.** Mexer nos valores é com aval dele.
+- **Indexação:** `noindex, follow` (meta + `X-Robots-Tag`), fora do sitemap e sem hreflang
+  (não há par em PT) — mesmo tratamento de `/lp/marca` e `/lp/site`. Para indexar, trocar os
+  dois pontos em `route.ts`/`sellbird.html` e decidir o sitemap.
+- **Formulário real** → `/api/lp-lead` com `origem: "preview-en"` (nome, e-mail, link opcional,
+  `consentimento`, honeypot `site`). Ramo próprio na rota (`handlePreviewEn`, validação
+  `validateLpPreview` em `lib/lp.ts`); o caminho `marca`/`site` não mudou. Mesmo SMTP, mesmos
+  destinatários, mesmo freio por IP; e-mail "Novo lead — Prévia grátis (EN)" com `Reply-To` do
+  lead e a prova de aceite. "Thanks" só aparece depois de resposta `ok:true`; antes, o botão
+  vira "Sending…"; erro devolve o botão e mostra mensagem.
+- **Cookies:** a LP não grava cookie nem carrega medição (sem Pixel), então não monta o banner.
+  Se entrar qualquer medição, ela precisa passar por `lib/consent.ts`.
+- **Ajustes de contraste na LP (axe):** barra fixa opaca, rótulo do passo sem `opacity`, e o
+  carrossel de planos no celular ganhou `tabindex`/`aria-label`.
+- **Pendente:** o aceite do formulário não leva link para a política de privacidade (a
+  `/privacidade` é só em português e não descreve este formulário). A copy do aceite é a
+  aprovada; adicionar o link e a seção na política depende do Felipe.
