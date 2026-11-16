@@ -15,56 +15,52 @@ export type PostCardData = {
   cover?: { src: string; alt: string; width: number; height: number };
 };
 
+/**
+ * Card no padrão da página /work do Monolog: capa 4:5 que dá zoom-out no
+ * hover (com data e "Ler artigo →" por cima), título, resumo em cinza e os
+ * temas como etiquetas.
+ */
 export function PostCard({
   post,
-  featured = false,
   as: Heading = "h2",
-  index = 0,
   morph = false
 }: {
   post: PostCardData;
-  featured?: boolean;
   as?: "h2" | "h3";
-  /** Posição na grade: escalona a entrada dos cards (coluna a coluna). */
-  index?: number;
   /** Dá nome de transição ao card para o filtro animar a troca (View Transitions). */
   morph?: boolean;
 }) {
-  const style = {
-    "--i": featured ? 0 : index % 3,
-    ...(morph && { viewTransitionName: `card-${post.slug}` })
-  } as CSSProperties;
+  const style = (morph ? { viewTransitionName: `card-${post.slug}` } : undefined) as CSSProperties | undefined;
   return (
-    <article className={`inst-card${featured ? " inst-card--featured" : ""}`} style={style}>
-      <Link href={`/blog/${post.slug}`} className="inst-card__link">
-        {post.cover && (
-          <div className="inst-card__media">
+    <article className="bcard" style={style}>
+      <Link href={`/blog/${post.slug}`} className="bcard__link">
+        <div className="bcard__cover">
+          {post.cover && (
             <Image
               src={post.cover.src}
               alt={post.cover.alt}
-              width={post.cover.width}
-              height={post.cover.height}
-              sizes={featured ? "(max-width: 900px) 100vw, 720px" : "(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px"}
-              priority={featured}
-              className="inst-card__img"
+              fill
+              sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 25vw"
+              className="bcard__img"
             />
+          )}
+          <div className="bcard__overlay" aria-hidden="true" />
+          <div className="bcard__hover" aria-hidden="true">
+            <span className="bcard__block">{post.dateLabel}</span>
+            <span className="bcard__block">Ler artigo →</span>
           </div>
-        )}
-        <div className="inst-card__text">
-          <p className="inst-card__tema">
-            {featured ? "Mais recente · " : ""}
-            {post.tagLabels[0]}
-          </p>
-          <Heading className="inst-card__title">{post.title}</Heading>
-          <p className="inst-card__excerpt">{post.description}</p>
-          <p className="inst-card__meta">
-            <time dateTime={post.publishedAt}>{post.dateLabel}</time>
-            {" · "}
-            {post.minutes} min de leitura
-            <span className="inst-card__arrow" aria-hidden="true">
-              →
-            </span>
-          </p>
+        </div>
+        <div className="bcard__content">
+          <Heading className="bcard__title">{post.title}</Heading>
+          <p className="bcard__summary">{post.description}</p>
+          <ul className="bcard__tags">
+            {post.tagLabels.map((t) => (
+              <li key={t} className="bcard__tag">
+                {t}
+              </li>
+            ))}
+            <li className="bcard__tag bcard__tag--muted">{post.minutes} min</li>
+          </ul>
         </div>
       </Link>
     </article>

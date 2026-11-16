@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { temas, type TemaSlug } from "@/lib/blog-temas";
-import { CursorLabel } from "@/components/institucional/CursorLabel";
 import { PostCard, type PostCardData } from "@/components/institucional/PostCard";
+import { loadGsap, T } from "@/components/institucional/home/loadGsap";
 
 const fold = (s: string) =>
   s
@@ -12,18 +12,47 @@ const fold = (s: string) =>
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase();
 
+const pad = (n: number) => String(n).padStart(2, "0");
+
 /**
- * Listagem com filtro por tema (?tema=) e busca por título. O HTML estático
- * já traz todos os posts (sem JS a lista completa aparece e os links
- * continuam rastreáveis); a barra de filtros só aparece depois da hidratação,
- * para não mostrar botão que não faz nada.
+ * Listagem no padrão da página /work do Monolog: título com o total entre
+ * parênteses, filtros empilhados numa coluna fixa à esquerda e a grade de
+ * cards à direita. Filtra por tema (?tema=) e por título. O HTML estático já
+ * traz todos os posts; os filtros só aparecem depois da hidratação.
  */
-export function BlogIndex({ posts }: { posts: PostCardData[] }) {
+export function BlogIndex({ posts, intro }: { posts: PostCardData[]; intro: string }) {
   const [tema, setTema] = useState<TemaSlug | null>(null);
   const [q, setQ] = useState("");
   const [ready, setReady] = useState(false);
-  const root = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLInputElement>(null);
+  const root = useRef<HTMLElement>(null);
+
+  // Entrada da página /work do Monolog: o título sobe linha a linha, os
+  // filtros aparecem em cascata e os cards sobem um a um.
+  useEffect(() => {
+    const el = root.current;
+    if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let revert = () => {};
+    let dead = false;
+    loadGsap().then(({ gsap, SplitText }) => {
+      if (dead) return;
+      const ctx = gsap.context(() => {
+        const split = new SplitText(el.querySelector(".bwork__heading"), { type: "lines", mask: "lines" });
+        const buttons = el.querySelectorAll(".bwork__btn, .bwork__search");
+        const cards = el.querySelectorAll(".bcard");
+        const tl = gsap.timeline({ defaults: { ease: "ease-transition" } });
+        tl.from(split.lines, { yPercent: 110, duration: T.slow, stagger: 0.05 }, 0)
+          .from(el.querySelector(".bwork__index"), { yPercent: 40, autoAlpha: 0, duration: T.slow }, 0.1)
+          .from(buttons, { y: 12, autoAlpha: 0, duration: T.slow, stagger: 0.04 }, 0.1)
+          .from(cards, { yPercent: 15, autoAlpha: 0, duration: T.slow, stagger: { each: 0.05, from: "start" }, clearProps: "transform,opacity,visibility" }, 0.1);
+      }, el);
+      revert = () => ctx.revert();
+    });
+    return () => {
+      dead = true;
+      revert();
+    };
+  }, []);
 
   useEffect(() => {
     const t = new URLSearchParams(window.location.search).get("tema");
@@ -32,9 +61,8 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
     setReady(true);
   }, []);
 
-  // Troca de filtro com transição animada (View Transitions): cada card tem
-  // nome próprio, então os que ficam deslizam e os que saem/entram esmaecem.
-  // Sem suporte ou com movimento reduzido, troca na hora.
+  // Troca de filtro com View Transitions; sem suporte ou com movimento
+  // reduzido, troca na hora.
   const animate = (change: () => void) => {
     const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
     if (!doc.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return change();
@@ -49,7 +77,7 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
     window.history.replaceState(null, "", url);
   };
 
-  // Atalho "/" foca a busca; Esc limpa. Ignora quando já está digitando.
+  // Atalho "/" foca a busca; Esc limpa.
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const el = event.target as HTMLElement | null;
@@ -69,102 +97,85 @@ export function BlogIndex({ posts }: { posts: PostCardData[] }) {
   const shown = posts.filter(
     (p) => (!tema || p.tags.includes(tema)) && (!needle || fold(p.title).includes(needle))
   );
-  const filtering = Boolean(tema || needle);
-  const [first, ...rest] = shown;
-  const cards = filtering ? shown : rest;
   const temaNome = temas.find((x) => x.slug === tema)?.label;
 
-  // Entrada dos cards ao rolar: só depois da hidratação (sem JS a lista toda
-  // aparece). Cada card ganha data-in ao cruzar a borda inferior da tela.
-  useEffect(() => {
-    if (!ready || !root.current) return;
-    const cards = [...root.current.querySelectorAll<HTMLElement>(".inst-card:not([data-in])")];
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      cards.forEach((card) => card.setAttribute("data-in", ""));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.setAttribute("data-in", "");
-          io.unobserve(entry.target);
-        }
-      },
-      { rootMargin: "0px 0px -8% 0px" }
-    );
-    cards.forEach((card) => io.observe(card));
-    return () => io.disconnect();
-  }, [ready, tema, needle, shown.length]);
-
   return (
-    <div ref={root} className="inst-reveal" data-ready={ready ? "" : undefined}>
-      <CursorLabel />
-      <div className="inst-filters" data-ready={ready ? "" : undefined}>
-        <div role="group" aria-label="Filtrar por tema" className="inst-filters__chips">
-          <button type="button" className="inst-chip" aria-pressed={!tema} onClick={() => choose(null)}>
-            Todos
-            <span className="inst-chip__n">{posts.length}</span>
-          </button>
-          {temas.map((t) => (
-            <button
-              key={t.slug}
-              type="button"
-              className="inst-chip"
-              aria-pressed={tema === t.slug}
-              onClick={() => choose(t.slug)}
-            >
-              {t.label}
-              <span className="inst-chip__n">{posts.filter((p) => p.tags.includes(t.slug)).length}</span>
-            </button>
-          ))}
-        </div>
-        <div className="inst-filters__search">
-          <label htmlFor="blog-busca" className="inst-filters__label">
-            Buscar por título
-          </label>
-          <input
-            id="blog-busca"
-            ref={search}
-            type="search"
-            className="inst-filters__input"
-            placeholder="Buscar por título  ( / )"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-          />
+    <section ref={root} className="bwork" data-ready={ready ? "" : undefined}>
+      <header className="bwork__header">
+        <h1 className="bwork__heading">Todos os artigos</h1>
+        <p className="bwork__index" aria-hidden="true">
+          ({pad(shown.length)})
+        </p>
+      </header>
+
+      <div className="bwork__content">
+        <aside className="bwork__left">
+          <p className="bwork__intro">{intro}</p>
+          <div className="meyebrow">
+            <span className="meyebrow__marker" aria-hidden="true" />
+            <p className="meyebrow__text">Filtrar por tema</p>
+          </div>
+          <div className="bwork__filters" data-ready={ready ? "" : undefined}>
+            <div role="group" aria-label="Filtrar por tema" className="bwork__buttons">
+              <button type="button" className="bwork__btn" aria-pressed={!tema} onClick={() => choose(null)}>
+                Todos os temas
+              </button>
+              {temas.map((t) => (
+                <button
+                  key={t.slug}
+                  type="button"
+                  className="bwork__btn"
+                  aria-pressed={tema === t.slug}
+                  onClick={() => choose(t.slug)}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+            <label htmlFor="blog-busca" className="sr-only">
+              Buscar por título
+            </label>
+            <input
+              id="blog-busca"
+              ref={search}
+              type="search"
+              className="bwork__search"
+              placeholder="Buscar por título ( / )"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+            />
+          </div>
+          <p role="status" className="bwork__status">
+            {shown.length === 1 ? "1 artigo" : `${shown.length} artigos`}
+            {temaNome ? ` em ${temaNome}` : ""}
+            {needle ? ` para “${q.trim()}”` : ""}
+          </p>
+        </aside>
+
+        <div className="bwork__projects">
+          {shown.length === 0 ? (
+            <div className="bwork__empty">
+              <p>Nenhum artigo com esse filtro.</p>
+              <button
+                type="button"
+                className="bwork__btn"
+                onClick={() => {
+                  setQ("");
+                  choose(null);
+                }}
+              >
+                Limpar filtros
+              </button>
+            </div>
+          ) : (
+            <div className="bwork__grid">
+              {shown.map((p) => (
+                <PostCard key={p.slug} post={p} morph />
+              ))}
+            </div>
+          )}
         </div>
       </div>
-
-      <p role="status" className="inst-filters__status">
-        {shown.length === 1 ? "1 artigo" : `${shown.length} artigos`}
-        {temaNome ? ` em ${temaNome}` : ""}
-        {needle ? ` para “${q.trim()}”` : ""}
-      </p>
-
-      {shown.length === 0 ? (
-        <div className="inst-blog__empty">
-          <p>Nenhum artigo com esse filtro.</p>
-          <button
-            type="button"
-            className="inst-link"
-            onClick={() => {
-              setQ("");
-              choose(null);
-            }}
-          >
-            Limpar filtros
-          </button>
-        </div>
-      ) : (
-        <>
-          {!filtering && first && <PostCard post={first} featured morph />}
-          <div className="inst-blog__grid">
-            {cards.map((p, i) => (
-              <PostCard key={p.slug} post={p} index={i} morph />
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+    </section>
   );
 }

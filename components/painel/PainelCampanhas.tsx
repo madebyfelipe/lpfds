@@ -6,6 +6,7 @@ import { CLASSIFICACOES_POSITIVAS, STATUS_CONVERSA, metricasDe } from "@/lib/pro
 import { Campanhas } from "./Campanhas";
 import { api, erro, Metric, pct, type Contexto, type Estado } from "./comum";
 import { Conversas } from "./Conversas";
+import { Email } from "./Email";
 import { Dominio } from "./Dominio";
 import { Leads } from "./Leads";
 import { Meta } from "./Meta";
@@ -28,6 +29,7 @@ const ABAS = [
   ["campanhas", "Campanhas"],
   ["leads", "Leads"],
   ["resultados", "Resultados"],
+  ["email", "E-mail"],
   ["dominio", "Caixas"],
   ["rotina", "Rotina"],
   ["meta", "Meta"]
@@ -179,6 +181,7 @@ export function PainelCampanhas() {
             {aba === "campanhas" && <Campanhas ctx={ctx} />}
             {aba === "leads" && <Leads ctx={ctx} />}
             {aba === "resultados" && <Resultados ctx={ctx} />}
+            {aba === "email" && <Email />}
             {aba === "dominio" && <Dominio ctx={ctx} />}
             {aba === "rotina" && <Rotina ctx={ctx} />}
             {aba === "meta" && <Meta ctx={ctx} />}

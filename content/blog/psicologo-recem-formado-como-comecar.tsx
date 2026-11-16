@@ -224,9 +224,9 @@ export const post: Post = {
       <section>
         <h2>Como o estúdio trabalha</h2>
         <p>
-          A Made by Felipe constrói a marca de consultórios de psicologia em
-          dois dias de imersão (posicionamento, identidade visual e verbal), com
-          tudo no ar em 45 dias, dentro do artigo 20 do Código de Ética. Para
+          A Made by Felipe constrói a marca de consultórios de psicologia a
+          partir de dois encontros de imersão (posicionamento, identidade visual e
+          verbal), com tudo entregue em até 30 dias, dentro do artigo 20 do Código de Ética. Para
           quem está no começo, a conversa costuma ser sobre o momento certo de
           fazer isso. O processo está na{" "}
           <Link href="/metodologia" className="inst-link">

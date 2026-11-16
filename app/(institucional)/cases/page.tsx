@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { alternatesDe } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "next/link";
 import { ScheduleLink } from "@/components/ScheduleLink";
@@ -16,7 +17,7 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: "/cases" },
+  alternates: alternatesDe("/cases", "pt"),
   openGraph: {
     title,
     description,

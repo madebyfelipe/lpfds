@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { UI, localeDoPath } from "@/lib/i18n";
 
 const TZ = "America/Sao_Paulo";
 
@@ -51,6 +53,7 @@ export function FooterRelogio() {
 
 /** "Voltar ao topo" do rodapé; usa o Lenis quando ele está ligado. */
 export function FooterTopo() {
+  const pathname = usePathname();
   return (
     <button
       type="button"
@@ -65,7 +68,7 @@ export function FooterTopo() {
           });
       }}
     >
-      <span className="mfoot__top-text">Voltar ao topo</span> <span aria-hidden="true">↑</span>
+      <span className="mfoot__top-text">{UI[localeDoPath(pathname)].topo}</span> <span aria-hidden="true">↑</span>
     </button>
   );
 }

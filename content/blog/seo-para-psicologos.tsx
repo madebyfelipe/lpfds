@@ -224,8 +224,8 @@ export const post: Post = {
         <p>
           A Made by Felipe entrega o site do consultório com o SEO técnico pronto
           (títulos, descrições, dados estruturados, mapa do site, acessibilidade)
-          e com textos que seguem o posicionamento definido nos dois dias de
-          imersão. Tudo no ar em 45 dias, dentro do artigo 20 do Código de Ética,
+          e com textos que seguem o posicionamento definido nos dois encontros de
+          imersão. Tudo entregue em até 30 dias, dentro do artigo 20 do Código de Ética,
           sem promessa de posição no Google. O processo está na{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia

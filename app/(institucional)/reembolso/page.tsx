@@ -97,10 +97,10 @@ export default function ReembolsoPage() {
       <section>
         <h2>4. A imersão</h2>
         <p>
-          A imersão de dois dias é remarcável sem custo com aviso de até{" "}
-          <strong>5 dias úteis</strong> da data agendada. Depois disso, a
-          remarcação depende de disponibilidade de agenda. Se a imersão não
-          chegou a acontecer, ela não é cobrada.
+          Os dois encontros da imersão são remarcáveis sem custo com aviso de
+          até <strong>5 dias úteis</strong> da data agendada. Depois disso, a
+          remarcação depende de disponibilidade de agenda. Se os encontros não
+          chegaram a acontecer, a imersão não é cobrada.
         </p>
         <p>
           Se a imersão já foi realizada, o valor correspondente a ela é devido

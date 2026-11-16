@@ -191,8 +191,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           A Made by Felipe constrói a marca e o site de consultórios que atendem
-          presencialmente e online: posicionamento, identidade visual e verbal em
-          dois dias de imersão, no ar em 45 dias, dentro do artigo 20. Veja a{" "}
+          presencialmente e online: posicionamento, identidade visual e verbal a
+          partir de dois encontros de imersão, entregues em até 30 dias, dentro do artigo 20. Veja a{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia
           </Link>

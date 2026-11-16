@@ -155,8 +155,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, o tom de voz do consultório (inclusive o quanto de
-          humor cabe nele) é definido nos dois dias de imersão, junto com a
-          identidade visual, com tudo no ar em 45 dias e dentro do artigo 20. Se
+          humor cabe nele) é definido nos dois encontros de imersão, junto com a
+          identidade visual, com tudo entregue em até 30 dias e dentro do artigo 20. Se
           quiser conversar sobre o jeito de falar do seu perfil, o primeiro passo
           é uma conversa de 15 minutos.
         </p>

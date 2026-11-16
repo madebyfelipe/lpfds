@@ -17,7 +17,7 @@ const services: { name: string; description: string }[] = [
   {
     name: "Imersão de marca para consultório de psicologia",
     description:
-      "Dois dias de imersão: posicionamento, identidade visual e verbal do consultório, no ar em 45 dias, dentro do artigo 20 do Código de Ética Profissional do Psicólogo."
+      "Dois encontros de imersão, de cerca de 1h30 cada: diagnóstico, estudo de mercado, posicionamento, identidade visual e verbal do consultório, entregues em até 30 dias com o site incluso, dentro do artigo 20 do Código de Ética Profissional do Psicólogo."
   },
   {
     name: "Posicionamento de marca para psicólogos",
@@ -59,7 +59,7 @@ const graph = {
         url: `${SITE}/logo-black.png`
       },
       description:
-        "Estúdio de branding para psicólogos e consultórios de psicologia, em Sorocaba (SP): posicionamento, identidade visual e verbal em dois dias de imersão, no ar em 45 dias, dentro do artigo 20 do Código de Ética Profissional do Psicólogo.",
+        "Estúdio de branding para psicólogos e consultórios de psicologia, em Sorocaba (SP): posicionamento, identidade visual e verbal a partir de dois encontros de imersão, entregues em até 30 dias com o site incluso, dentro do artigo 20 do Código de Ética Profissional do Psicólogo.",
       slogan: "Branding é tradução, não invenção.",
       email: EMAIL,
       audience: {

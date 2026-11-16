@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { alternatesDe } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "next/link";
 import { ScheduleLink } from "@/components/ScheduleLink";
@@ -6,7 +7,7 @@ import { HomeFaq } from "@/components/institucional/home/HomeFaq";
 import { HomeMotion } from "@/components/institucional/home/HomeMotion";
 import { HomeSlider } from "@/components/institucional/home/HomeSlider";
 import { MButtonInner } from "@/components/institucional/home/MButton";
-import { deliverables, depoimentos, positioning, process } from "@/lib/institucional";
+import { deliverables, positioning, process } from "@/lib/institucional";
 import { OG_IMAGE, SITE_URL } from "@/lib/site";
 import "../home.css";
 
@@ -21,7 +22,7 @@ const jornada = [
   {
     titulo: "Investigamos o seu consultório",
     texto:
-      "Entrevista individual e dois dias de imersão guiada, em que as seis áreas do método — Prática, Sujeito, Inquietação, Qualidade, Universo e Estória — viram estratégia, documentada e aprovada com você antes de seguir.",
+      "Dois encontros de cerca de 1h30 para entender como você trabalha, para quem e aonde quer chegar. As seis áreas do método — Prática, Sujeito, Inquietação, Qualidade, Universo e Estória — viram diagnóstico e estudo de mercado, documentados e aprovados com você antes de seguir.",
     foto: `${H}/passo-1-v2.jpg`,
     alt: "Parede coberta de post-its coloridos com anotações de um workshop de estratégia"
   },
@@ -44,23 +45,16 @@ const jornada = [
 const fotosEntregas: Record<string, { src: string; alt: string }> = {
   Posicionamento: { src: `${H}/servico-posicionamento-v2.jpg`, alt: "Parede de post-its com anotações de posicionamento" },
   "Identidade Visual": { src: `${H}/servico-identidade-visual.jpg`, alt: "Leque de amostras de cor em tons de vermelho" },
-  "Identidade Verbal": { src: `${H}/servico-identidade-verbal.jpg`, alt: "Tipos móveis de metal com letras e números" },
+  "Identidade Verbal": { src: `${H}/servico-identidade-verbal-v2.jpg`, alt: "Revista aberta numa página de tipografia editorial em caixas sobrepostas" },
   "Brand Guide": { src: `${H}/servico-brand-guide-v2.jpg`, alt: "Caderno com esboços de símbolos ao lado do teclado" },
   "Página Profissional": { src: `${H}/servico-pagina-v2.jpg`, alt: "Notebook com um logotipo aberto no editor e o esboço no caderno" },
   "Papelaria Clínica": { src: `${H}/servico-papelaria.jpg`, alt: "Cartões, envelopes e papéis timbrados em branco" },
   "Direção de Arte": { src: `${H}/servico-direcao-v2.jpg`, alt: "Câmera, lentes e notebook sobre a mesa de um set de fotografia" }
 };
 
-// Fotos de banco (Freepik) que se revezam atrás da tese, a cada 800ms.
-const fotosTese = [1, 2, 3, 4, 5].map((n) => `${H}/gap-${n}.jpg`);
-
-const depoSlides = depoimentos.map((d) => ({
-  message: d.texto,
-  name: d.titulo,
-  role: d.cidade,
-  detail: "(Depoimento de cliente do estúdio)",
-  mark: "Ps"
-}));
+// Fotos que se revezam atrás da tese, a cada 800ms: 1–4 de banco (Freepik),
+// a 5 enviada pelo Felipe (tela do Illustrator; trocou o tipo móvel).
+const fotosTese = ["gap-1", "gap-2", "gap-3", "gap-4", "gap-5-v2"].map((n) => `${H}/${n}.jpg`);
 
 const areaSlides = positioning.map((p, i) => ({
   message: p.copy,
@@ -76,11 +70,11 @@ const areaSlides = positioning.map((p, i) => ({
 const faq = [
   {
     q: "Quanto tempo leva o projeto?",
-    a: "Dois dias de imersão e 45 dias até a marca estar no ar. O posicionamento é documentado e aprovado com você antes de qualquer peça visual."
+    a: "São dois encontros de cerca de 1h30 e, em até 30 dias, apresentamos tudo para você, com o site já incluso. O posicionamento é documentado e aprovado com você antes de qualquer peça visual."
   },
   {
-    q: "Como são os dois dias de imersão?",
-    a: "Um workshop guiado, que vem depois de uma entrevista individual com você — e com quem mais atua no consultório. Nos dois dias, as seis áreas do método PSIQUE viram estratégia."
+    q: "Como são os dois encontros da imersão?",
+    a: "Dois encontros de cerca de 1h30 com você — e com quem mais atua no consultório. Neles entendemos como você trabalha, para quem e aonde quer chegar. A partir disso fazemos o diagnóstico, o estudo de mercado e a construção da marca, pelas seis áreas do método PSIQUE."
   },
   {
     q: "O que eu recebo no fim?",
@@ -114,10 +108,10 @@ const faqJsonLd = {
 // Title/description da home vêm do copy aprovado e sobrescrevem os do
 // layout raiz, que seguem servindo /hub, /contato e /portfolio.
 export const metadata: Metadata = {
-  title: "Marca para consultório de psicologia em 45 dias | Made by Felipe",
+  title: "Marca para consultório de psicologia em até 30 dias | Made by Felipe",
   description:
-    "Construa a marca do seu consultório em dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética. Estúdio de branding em Sorocaba (SP).",
-  alternates: { canonical: "/" },
+    "Construa a marca do seu consultório em dois encontros de imersão. Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso, dentro do artigo 20 do Código de Ética. Estúdio de branding em Sorocaba (SP).",
+  alternates: alternatesDe("/", "pt"),
   keywords: [
     "marca para psicólogo",
     "branding para psicólogo",
@@ -128,9 +122,9 @@ export const metadata: Metadata = {
     "São Paulo"
   ],
   openGraph: {
-    title: "Marca para consultório de psicologia em 45 dias | Made by Felipe",
+    title: "Marca para consultório de psicologia em até 30 dias | Made by Felipe",
     description:
-      "Dois dias de imersão. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20 do Código de Ética.",
+      "Dois encontros de imersão. Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso, dentro do artigo 20 do Código de Ética.",
     url: "/",
     siteName: "Made by Felipe",
     images: [OG_IMAGE],
@@ -181,7 +175,7 @@ export default function Home() {
           </svg>
           <div className="mh-hero__left" data-animate>
             <p className="mh-hero__lead" data-hero-p data-delay="0.2">
-              Dois dias com você. Posicionamento, identidade visual e verbal no ar em 45 dias, dentro do artigo 20
+              Dois encontros com você. Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso, dentro do artigo 20
               do Código de Ética Profissional do Psicólogo.
             </p>
             <div className="mh-hero__btn">
@@ -192,15 +186,15 @@ export default function Home() {
           </div>
           <div className="mh-hero__aside" data-animate>
             <h1 className="mh-hero__title" data-hero-p data-delay="0">
-              Construa a marca do seu consultório em <span className="mh-red">dois dias de imersão</span>.
+              Construa a marca do seu consultório em <span className="mh-red">dois encontros de imersão</span>.
             </h1>
           </div>
           <div className="mh-hero__visuals" data-animate>
             <div className="mh-hero__items">
               <div className="mh-hero__item">
                 <Image
-                  src={`${H}/hero-1.jpg`}
-                  alt="Mesa de estúdio de design com caderno aberto, amostras de cor e pincéis"
+                  src={`${H}/hero-banco-1.jpg`}
+                  alt="Mesa de designer com notebook aberto num layout, luminária amarela e peças gráficas na parede"
                   fill
                   priority
                   sizes="(max-width: 991px) 100vw, 64vw"
@@ -209,8 +203,8 @@ export default function Home() {
               </div>
               <div className="mh-hero__item">
                 <Image
-                  src={`${H}/hero-2.jpg`}
-                  alt="Leque de amostras de cor aberto sobre papel branco"
+                  src={`${H}/hero-banco-2.jpg`}
+                  alt="Mãos desenhando num notebook com software de design aberto, ao lado de um leque de cores"
                   fill
                   sizes="(max-width: 991px) 100vw, 64vw"
                   data-translate
@@ -228,25 +222,25 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="mh-pop__content">
-                  <p className="mh-pop__p">Dois dias de imersão guiada: as seis áreas do método PSIQUE viram estratégia.</p>
-                  <p className="mh-pop__meta mmono">Método PSIQUE • 2 dias</p>
+                  <p className="mh-pop__p">Dois encontros de cerca de 1h30: as seis áreas do método PSIQUE viram estratégia.</p>
+                  <p className="mh-pop__meta mmono">Método PSIQUE • 2 encontros</p>
                 </div>
                 <button type="button" className="mh-pop__trigger">
-                  <span className="sr-only">Mostrar: dois dias de imersão guiada</span>
+                  <span className="sr-only">Mostrar: dois encontros de imersão</span>
                 </button>
                 <div className="mh-pop__shade" aria-hidden="true" />
               </div>
               <div className="mh-pop">
                 <div className="mh-pop__fill" aria-hidden="true" />
                 <div className="mh-pop__cover mh-pop__cover--red" aria-hidden="true">
-                  <span>45</span>
+                  <span>30</span>
                 </div>
                 <div className="mh-pop__content">
-                  <p className="mh-pop__p">Posicionamento, identidade visual e verbal no ar em 45 dias.</p>
-                  <p className="mh-pop__meta mmono">Entrega • 45 dias</p>
+                  <p className="mh-pop__p">Posicionamento, identidade visual e verbal em até 30 dias, com o site incluso.</p>
+                  <p className="mh-pop__meta mmono">Entrega • até 30 dias</p>
                 </div>
                 <button type="button" className="mh-pop__trigger">
-                  <span className="sr-only">Mostrar: a marca no ar em 45 dias</span>
+                  <span className="sr-only">Mostrar: a marca entregue em até 30 dias</span>
                 </button>
                 <div className="mh-pop__shade" aria-hidden="true" />
               </div>
@@ -255,12 +249,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---- Manifesto + depoimentos (card empilhado) ----------------- */}
+      {/* ---- Manifesto (card empilhado) --------------------------------- */}
       <section className="mh-problems" data-theme-section="dark" data-stack>
         <div className="mh-problems__header">
-          <div className="mh-problems__stats">
-            <HomeSlider items={depoSlides} label="Depoimentos de clientes" />
-          </div>
           <div className="mh-problems__top">
             <h2 className="mh-problems__heading" data-highlight-text>
               Made by Felipe constrói marca a partir da leitura do negócio. Receita, carteira, valor de sessão e

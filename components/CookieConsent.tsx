@@ -3,6 +3,25 @@
 import Link from "next/link";
 import Script from "next/script";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { localeDoPath } from "@/lib/i18n";
+
+const BANNER = {
+  pt: {
+    titulo: "Cookies de medição",
+    antes: "O site funciona sem rastreamento. Só usamos cookies de medição da Meta — e carregamos publicações do Instagram e do TikTok — se você autorizar. Você pode mudar de ideia quando quiser na",
+    link: "Política de Cookies",
+    recusar: "Recusar cookies de medição",
+    aceitar: "Aceitar cookies de medição"
+  },
+  en: {
+    titulo: "Analytics cookies",
+    antes: "This site works without tracking. We only use Meta analytics cookies — and load Instagram and TikTok posts — if you allow it. You can change your mind at any time in our",
+    link: "Cookie Policy (in Portuguese)",
+    recusar: "Decline analytics cookies",
+    aceitar: "Accept analytics cookies"
+  }
+} as const;
 import {
   CONSENT_EVENT,
   clearConsent,
@@ -76,6 +95,7 @@ fbq('track', 'PageView');`}
  */
 export function CookieConsent() {
   const consent = useConsent();
+  const t = BANNER[localeDoPath(usePathname() ?? "/")];
   const bannerRef = useRef<HTMLDivElement>(null);
   const jaFocou = useRef(false);
 
@@ -106,14 +126,12 @@ export function CookieConsent() {
     >
       <div className="mbf-consent__text">
         <h2 id="mbf-consent-title" className="mbf-consent__title">
-          Cookies de medição
+          {t.titulo}
         </h2>
         <p id="mbf-consent-desc" className="mbf-consent__copy">
-          O site funciona sem rastreamento. Só usamos cookies de medição da Meta
-          — e carregamos publicações do Instagram e do TikTok — se você
-          autorizar. Você pode mudar de ideia quando quiser na{" "}
+          {t.antes}{" "}
           <Link href="/cookies" className="mbf-consent__link">
-            Política de Cookies
+            {t.link}
           </Link>
           .
         </p>
@@ -124,14 +142,14 @@ export function CookieConsent() {
           className="mbf-consent__btn mbf-consent__btn--ghost"
           onClick={() => decidir("denied")}
         >
-          Recusar cookies de medição
+          {t.recusar}
         </button>
         <button
           type="button"
           className="mbf-consent__btn mbf-consent__btn--solid"
           onClick={() => decidir("granted")}
         >
-          Aceitar cookies de medição
+          {t.aceitar}
         </button>
       </div>
     </div>

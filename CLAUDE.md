@@ -22,6 +22,7 @@ rampa `--gray-100…--gray-700`. São quatro cores. Não invente uma quinta.
 |---|---|---|
 | `--red` | **preenchimento** (fundo de botão, faixa `.inst-red`, barra de progresso) | é o vermelho da marca |
 | `--red-ink` | **tinta** (texto, traço de SVG, sublinhado, anel de foco) | **sempre `#bc0319`, nos dois temas** (Felipe, nov/2026: "só o vermelho REAL"). A versão clareada `#ef4358` foi removida — sobre o escuro ele rende ~2.8:1, então use em tipo grande/ênfase, não em texto corrido pequeno |
+| `--link-ink` | **texto do `.inst-link`** (link em texto corrido) | vermelho real sobre o claro; sobre o escuro (tema escuro, `.inst-dark` no claro) vira `currentColor` e o vermelho fica só no filete — 3.01:1 passa como elemento gráfico, não como texto pequeno |
 | `--on-red` | **texto em cima do vermelho** | fixo `#f6f6f6` nos dois temas — o vermelho é a única cor que **não** inverte, então usar `--cream` aqui pinta texto preto sobre vermelho no tema escuro |
 
 O hub tem o mesmo par: `--accent` e `--accent-ink`, hoje ambos `#bc0319` (o
@@ -54,6 +55,21 @@ do axe-core (WCAG 2.1 AA) — mantenha assim. Para conferir, veja
 **Componente novo, checklist:** usa token de cor? raio 2px? rótulo em caixa
 alta com o tracking certo? funciona nos dois temas? passa contraste nos dois?
 foco visível? Se qualquer resposta for "não", ainda não está pronto.
+
+## Como trabalhar com o Felipe (nov/2026, pedido dele)
+
+- **Pedido explícito vai direto para o ar, sem PR.** Post de blog, alteração que ele pediu:
+  commit e push na branch de produção da Vercel (hoje `beta`, ver "Deploy") e na `main`,
+  mantendo as duas iguais. O site não tem dado sensível. Branch separada ou worktree só
+  quando ele pedir. Exceção: preço e oferta só vão ao ar com aval dele na conversa.
+- **Autonomia:** decida, faça e valide depois. Não interrompa com pergunta que dá para
+  resolver sozinho. Pergunte só se estiver bloqueado ou se a decisão for dele.
+- **Resposta curta.** Bem menos texto que o normal, em lista: o que fez · se está no ar ·
+  o que precisa dele. Nada de parágrafo grande.
+- **Escrita (copy, post, e-mail):** sem cara de IA, sem termo técnico, benefício antes do
+  entregável e **nenhuma estrutura de comparação** ("não é X, é Y", "mais do que X, Y").
+- Ele fala com a IA e recebe avisos pelo **WhatsApp (Evolution API)**; aviso por lá tem
+  1 a 3 linhas.
 
 ## Project
 
@@ -237,7 +253,7 @@ it** — it is approved copy. The portfolio is *not* duplicated there: `/projeto
 `lib/portfolio.ts`, the single source of truth shared with the `/portfolio` case pages.
 
 **ICP (agosto/2026)**: the site no longer speaks to law firms — it speaks to
-**consultórios de psicologia**. Headline is "dois dias de imersão", compliance line is
+**consultórios de psicologia**. Headline is "dois encontros de imersão", compliance line is
 the *artigo 20 do Código de Ética Profissional do Psicólogo* (it replaced "Provimento
 205 da OAB"), the studio block reads receita/carteira/valor de sessão/ocupação de
 agenda, and the `/imersao` form asks **Nome · CRP · WhatsApp** (CRP replaced
@@ -245,16 +261,22 @@ agenda, and the `/imersao` form asks **Nome · CRP · WhatsApp** (CRP replaced
 the divulgação to carry nome completo, título and CRP, and nome fantasia depends on a
 registered PJ — naming is an optional, case-by-case item, not a listed deliverable.
 O `/hub` fala a mesma oferta, nesta ordem: a primeira dobra é o `HubHero` (`/A IMERSÃO`,
-"Dois dias com você. Quarenta e cinco dias no ar.") e o bloco de
+"Dois encontros com você. Tudo em até 30 dias.") e o bloco de
 fechamento é o `HubBio` (`/QUEM FAZ`, bio em terceira pessoa: estrategista de marca,
 7 anos de mercado, 150+ projetos, hoje atende psicólogos e clínicas). Os dois já foram
 o inverso disso; não trocar de volta nem voltar para a copy genérica de branding.
 
-**Oferta e método (setembro/2026)**: a oferta passou de "meio dia / 30 dias" para
-**dois dias de imersão / 45 dias no ar** — Felipe adaptou os números ao escopo real do
-método PSIQUE. Trocar esses números em qualquer superfície é regressão; eles vivem no hero
-e na metadata da home, na metadata do `/imersao`, no `HubHero` e nas referências
-numéricas dos `depoimentos`. **Preço continua fora do site** (a decisão de segurar o
+**Oferta e método (nov/2026)**: a oferta passou de "meio dia / 30 dias" (até ago/2026)
+para "dois dias de imersão / 45 dias no ar" (set/2026) e, em nov/2026, para a versão da
+proposta comercial enviada aos leads: **dois encontros de cerca de 1h30** (entender como a
+pessoa trabalha, para quem e aonde quer chegar) → **diagnóstico, estudo de mercado e
+construção da marca** → **tudo apresentado em até 30 dias, com o site incluso**. Trocar
+esses números em qualquer superfície é regressão; eles vivem no hero, nos pops e na
+metadata da home, no FAQ da home, em `process` (`lib/institucional.ts`), na metadata do
+`/imersao`, no `HubHero`, nas LPs, no banner do blog (`lib/blog-ads.ts`), no JSON-LD, no
+`og.png`, no `/reembolso` e no parágrafo "Como o estúdio trabalha" de cada post. **Exceção
+pendente:** os `depoimentos` ainda citam "dois dias" e "quarenta e cinco dias" — são falas
+de clientes que fizeram o formato antigo, então só mudam com o aval do Felipe. **Preço continua fora do site** (a decisão de segurar o
 preço, abaixo, segue valendo). A antiga dobra "Como funciona" da home (3 passos: Imersão
 → Território → Sistema) foi **substituída** por um **teaser gráfico** do método PSIQUE
 (ainda em `id="processo"`, que o `/hub` linka) — hoje é o "Método PSIQUE" em três passos
@@ -277,7 +299,7 @@ posicionamento** numa seção `.inst-dark` — as seis áreas P-S-I-Q-U-E como c
 grande (`.inst-nave`); (3) **O processo** numa seção cream — o diagrama `LinhaTempo` + os
 **oito passos** como **lista numerada** (`.inst-proc`, nº · passo · descrição, agrupada
 nas duas etapas Estratégia/Identidade, export `process`), **não** outro grid de cards.
-Copy adaptada ao ICP de psicologia e ao escopo de 45 dias — **não** é a copy genérica B2B
+Copy adaptada ao ICP de psicologia e ao escopo atual (dois encontros, até 30 dias) — **não** é a copy genérica B2B
 do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
 
 **Home = clone do bymonolog.com (nov/2026, pedido do Felipe: "igualzinho, animações etc.")** —
@@ -297,10 +319,15 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
   recorte no scroll → rodapé. **Sem grade de marcas e sem cases** ("Success Stories") — Felipe
   pediu para tirar; não recolocar.
 - **Fotos**: de banco (Freepik via MCP do Magnific) e enviadas pelo Felipe (passos do método e
-  posicionamento/brand guide/página/direção de arte — substituíram as geradas por IA, nenhuma
+  posicionamento/brand guide/página/direção de arte e a 5ª foto da tese, `gap-5-v2.jpg`, tela do Illustrator — substituíram as geradas por IA, nenhuma
   imagem de IA resta), em `public/institucional/home/`; crédito "Imagens de banco: Freepik" no
   rodapé. As do Felipe vieram em baixa (~736px de largura) — trocar por originais quando houver. **Foto do Felipe só
   onde o texto fala dele** (FAQ: `felipe-avatar.jpg`, recorte de `public/eu.jpg`, a mesma do /hub).
+- **Hero**: as duas imagens que se revezam atrás dos cards são de banco do Magnific
+  (`hero-banco-1.jpg`, mesa de designer com notebook; `hero-banco-2.jpg`, tela de edição de
+  imagem no monitor do estúdio), 1600x1660 e 1400x1452 — o mesmo aspecto da janela do hero (~0.96), que é
+  3:2 de container com `inset: -150px 0` no desktop; foto 3:2 ali perde 36% da largura e
+  parece ampliada. Mesmas imagens e alts na home em inglês.
 - **Paleta própria** (pedra `#e8e8e3` / quase-preto `#080807`, tokens `--m-*` com tema escuro);
   o vermelho da marca aparece só no marcador dos rótulos e no card "45". É exceção declarada ao
   design system, como o `/hub`.
@@ -321,14 +348,25 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
 reveste as peças compartilhadas sem mexer no markup: `.inst-kicker` virou rótulo mono com ponto
 vermelho (o "— " saiu do texto de todos os rótulos), títulos em display pesado, CTA de seção
 com filete vermelho, `.inst-submit` no ritmo do botão Monolog, texto corrido maior. O **blog**
-lista os posts no padrão "Success Stories" (número grande · capa · texto) e o CTA do post usa
-`.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois dias de imersão", "tradução",
+segue a página `/work` do Monolog (`.bwork`/`.bcard` em `monolog.css`): título "Todos os
+artigos (NN)", filtros empilhados numa coluna fixa e grade de cards 4:5 com zoom-out e
+"Ler artigo →" no hover. Leitura dos posts mais calma (título menor, texto 17–19px, entrelinha
+1.65) — Felipe achou a versão de display "agressiva". CTA do post usa `.mbtn`. **Ênfase em vermelho voltou** (`.mh-red`): "dois encontros de imersão", "tradução",
 "PSIQUE", "→ marca", "começar.".
 
-**`/sobre`** (nav + rodapé + sitemap) — mesma linguagem da home (`.ms-*` em `home.css`,
-`HomeMotion` reaproveitado): "Eu sou o Felipe.", foto (`public/institucional/sobre/`, recortes
-de `public/eu.jpg`), a bio já publicada no `HubBio` com texto que acende no scroll, três
-princípios só com fatos aprovados e CTA. A nav fica transparente na home e no `/sobre`.
+**`/hub` refeito (nov/2026)** — na linguagem do site, dentro de `.inst.hub2`
+(`app/hub/hub-monolog.css`): perfil + a oferta da imersão (copy do antigo `HubHero`), links em
+tipo grande numerados (`HubLinks`, padrão do menu do rodapé do Monolog; o e-book abre o
+`EbookModal`), newsletter + mentoria (`HubMedia`, mesma lógica de consentimento), embeds
+(`HubSocial`, ainda dentro de `.hub` por causa do `hub.css`) e a bio (copy do antigo `HubBio`).
+Usa `InstFooter`. O baralho de cards, `HubHero`, `HubBio`, `HubProducts`, `HubFooter` e
+`useCardDeck` foram apagados. `/contato` segue intocado.
+
+**Sons e ruído (nov/2026)** — `UiSound` (layout institucional e `/hub`): "tap" ao passar em
+algo clicável e "select" ao clicar, sintetizados com Web Audio (sem arquivo), como no Monolog.
+Começa desligado; o primeiro clique liga, a não ser que a pessoa desligue no botão de som da
+nav (`SoundToggle`, `localStorage["mbf-sound-enabled"]`). O grão (`.mgrain`) caiu para 0.45 de
+opacidade a pedido do Felipe. O `/sobre` foi criado e removido a pedido dele — não recriar.
 
 **Método em foco (ref. Specia1ne)** — `components/institucional/MetodoFoco.tsx` (cliente), nas
 seis áreas P-S-I-Q-U-E em `/metodologia`.
@@ -450,6 +488,14 @@ redireciona 301). Antes era `https://madebyfelipe.com`, que **não resolve** —
 `og:url`, sitemap e `@id` do JSON-LD apontavam para fora do site. Não escreva a URL
 absoluta à mão em outro arquivo.
 
+**Deploy (nov/2026)**: na Vercel, a branch de produção do projeto `lpfds` é a **`beta`**
+(trocada pelo Felipe em 13/11/2026). Merge na `beta` publica em
+`www.madebyfelipe.com.br`; as outras branches geram só Preview. Nunca promova para
+Produção um deploy de branch de feature: ela pode estar atrás da `beta` e derrubar
+páginas que já estão no ar.
+Para conferir um merge: `gh api "repos/madebyfelipe/lpfds/deployments?sha=<sha>" --jq '.[].environment'`
+tem que mostrar `Production`; se mostrar só `Preview`, a branch de produção da Vercel não é a `beta`.
+
 **og:image**: a padrão é `/og.png` (`app/og.png/route.tsx`, gerada no build por
 `renderOg` em `lib/og.tsx`, que espelha os tokens — o Satori não lê CSS vars). O Next
 **não mescla** `openGraph` entre layout e página: toda página que declara `openGraph`
@@ -458,7 +504,7 @@ próprio precisa repetir `images: [OG_IMAGE]`. Posts têm imagem própria com o 
 
 **Metadata/JSON-LD alinhados ao ICP (nov/2026)**: o title padrão do layout raiz, a
 description e o `StructuredData` falam de branding para psicólogos e consultórios de
-psicologia (imersão de dois dias, 45 dias, artigo 20) — não mais "Branding e Social Media
+psicologia (dois encontros de imersão, até 30 dias com o site incluso, artigo 20) — não mais "Branding e Social Media
 em Sorocaba". O catálogo de serviços do JSON-LD é a oferta atual, sem preço.
 
 **E-mail público**: `EMAIL` (`lib/institucional.ts`) reexporta `CONTATO_EMAIL`
@@ -547,8 +593,18 @@ famílias de crianças autistas/neurodivergentes) que termine na conversa de 15 
   promessa de resultado terapêutico, de preço/gratuidade como chamariz, de imagem de
   sessão/paciente. **Não inventar números, depoimentos nem fontes**: toda afirmação
   normativa cita a fonte (CFP, CRP) com link no fim do post. Preço do estúdio fica
-  fora, como no resto do site. Oferta citada só com os números aprovados (dois dias de
-  imersão, 45 dias no ar).
+  fora, como no resto do site. Oferta citada só com os números aprovados (dois encontros
+  de imersão, tudo entregue em até 30 dias, com o site incluso).
+- **Autoria + banner de anúncio (nov/2026, ref. RD Station)** — sob o lead, `PostByline`
+  (avatar redondo, "Felipe Silva" em `--link-ink` levando a `#sobre-o-autor`, data e
+  tempo de leitura) e um filete sólido de 2px (`.inst-legal__head--post`). Logo abaixo,
+  `PostAd`: banner de display com visual · chamada · botão, o banner inteiro é o link,
+  rótulo "Publicidade · Made by Felipe" visível. **Só anuncia o próprio estúdio.** Três
+  peças em `lib/blog-ads.ts`: `/lp/marca`, `/lp/site` e o e-book (`/hub#ebook`, que abre
+  o modal sozinho — o `EbookModal` depende do `hub.css`, por isso não é montado no blog).
+  `adForPost()` escolhe pelo slug (site/seo/google/página… → site; marca/logo/identidade/
+  posicionamento… → marca), depois pelo tema; o resto vai para o e-book. Campo opcional
+  `ad` no `Post` força outra peça.
 
 ---
 
@@ -626,6 +682,49 @@ status. Hoje ele envia de verdade.
   exatamente o que não pode voltar.
 - O form **não pede e-mail**, então não há `replyTo`: o retorno é pelo WhatsApp. Se um dia
   entrar campo de e-mail, ligue-o ao `replyTo` da rota.
+
+---
+
+## LPs de captação (`/lp/marca`, `/lp/site`) — nov/2026
+
+Refeitas do zero depois que a primeira versão foi descartada pelo Felipe. Pedido original:
+LP de construção de marca (qualificada) + LP de construção de site (entrada), design com
+referências do One Page Love, form curto em etapas de botão terminando em Nome + WhatsApp,
+com botão de contato direto no fim.
+
+- **Casca própria**: `app/lp/layout.tsx` (fora do route group institucional; importa
+  `institucional.css` + `monolog.css` + `app/lp/lp.css` e envolve tudo em `.inst .lp`),
+  `LpHeader` (marca, WhatsApp, "Começar" → `#quiz`) e `LpFooter` (identificação de
+  `lib/legal.ts` + páginas legais). **Sem menu de propósito**: quem chega por anúncio só
+  tem o quiz e o WhatsApp. As duas são `noindex` e ficam fora do `sitemap.ts`.
+- **Referências One Page Love**: título gigante + foto + bloco vermelho (Tegra), lista
+  numerada de dores (Specia1ne), faixa vermelha de tese, planos numa caixa única com barra
+  de contato embaixo (Frontend Supply), form em painel escuro ao lado da chamada (Kelvin).
+- **`/lp/marca`** — a imersão (2 encontros de ~1h30 / tudo em até 30 dias, site incluso), **sem preço**. Dores → tese da
+  tribo (destacar da concorrência, sustentar o valor da sessão, ser indicada pelo motivo
+  certo) → etapas → letras PSIQUE (`positioning`) → `deliverables` → `depoimentos`
+  (anonimizados) → quem conduz → quiz → FAQ. Copy sem promessa de resultado.
+- **`/lp/site`** — produto de entrada, separado da imersão. **Condições da proposta
+  comercial (nov/2026): página única R$ 599 e site institucional R$ 1.999, os dois em até
+  12x sem juros, sem mensalidade (depois do primeiro ano, só a renovação do domínio)** —
+  única exceção do site à regra de não publicar preço. Página única: site no ar, perfil no
+  Google configurado, conteúdo revisado pelas normas do CFP. Institucional: até 8 páginas,
+  SEO, perfil no Google e revisão CFP — **não inclui blog**. Antes de fechar, a pessoa vê um
+  **rascunho sem compromisso** (CTA "Quero ver meu rascunho"). Prazo **não foi informado**:
+  fica para a conversa. Não inventar garantia ou prazo. A seção "Sites que já estão no
+  ar" usa as capturas reais de `lib/portfolio.ts` (rolam no hover; `--r` = largura/altura
+  da captura acerta o fim da rolagem) e leva aos cases.
+- **Quiz** (`components/lp/LpQuiz.tsx`, perguntas em `lib/lp.ts`): uma pergunta por tela,
+  4 opções na primeira (A–D, `role="radiogroup"` com roving tabindex, Enter confirma),
+  botão "OK" para seguir, "Voltar", e no fim Nome + WhatsApp + aceite. Ao lado do envio,
+  sempre o link "Prefiro falar direto com o Felipe no WhatsApp" com as respostas já
+  escritas na mensagem (`lpWhatsappUrl`). Erro de envio manda para o WhatsApp; confirmação
+  só depois do `ok` da rota.
+- **Rota** `app/api/lp-lead/route.ts`: valida as respostas contra o quiz da origem (texto
+  livre do cliente é recusado), exige aceite, honeypot `site`, até 3 envios por IP a cada
+  10 min, e manda e-mail "Novo lead — Construção de marca/site" para `IMERSAO_TO`/`BCC`.
+  O SMTP saiu para `lib/smtp.ts` (`getTransporter`, `escapeHtml`, `whatsappLink`), usado
+  também por `/api/imersao`.
 
 ---
 
@@ -757,8 +856,9 @@ Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-r
   ≤ 100 palavras, uma pergunta, sem pedido de reunião; assunto de e-mail interno; até 3
   follow-ups ≤ 70 palavras. Valem para a rotina e para a edição no painel. Afrouxar uma
   regra é decisão do Felipe, não ajuste de código.
-- **Sem rastreio:** só texto puro, sem pixel nem link rastreado. Rodapé (assinatura,
-  origem do dado, descadastro) é do servidor — a rotina não escreve.
+- **Sem pixel:** e-mail frio em texto puro, sem pixel de abertura. A única exceção é o
+  **link rastreado** `/r/<token>` (nov/2026, decisão do Felipe), e o texto que o usa passa
+  por ele. Rodapé (assinatura, origem do dado, descadastro) é do servidor; a rotina não escreve.
 - **Dedup contra o CRM inteiro:** quem já é contato por outra origem (webinar, newsletter,
   cliente) nunca vira prospecção fria. Rota de leads só cria, nunca sobrescreve.
 - **LinkedIn:** só rascunho de convite; o envio é manual (termos de uso).
@@ -776,3 +876,68 @@ Guia completo em `docs/prospeccao.md`; o roteiro da rotina é `docs/prospeccao-r
 - Leitura de IMAP é pelas últimas 500 mensagens por sequência (não `SEARCH SINCE`) e o
   parser recebe o Buffer cru — os dois foram bugs reais no teste.
 - `previews/campanhas/` é o protótipo estático do Codex, arquivado.
+- **Aba "E-mail" (nov/2026)**: `/painel/api/email` lê todas as pessoas do Twenty e devolve
+  **só números** (`lib/prospeccao/email-metricas.ts`, função pura e testada). Ela soma o
+  cold mail do painel e o do Dylan (OpenBot), que grava os mesmos campos `prosp*`. As
+  definições de enviado, bounce, resposta, positiva e SAIR são as do relatório diário
+  `/data/OpenBot/Shared/campanha-email/benchmark.js`; mudar uma é mudar as duas. Vencedor
+  de variante só com 60+ envios por braço. Nunca mande nome, e-mail ou id de lead para essa tela.
+- **Link do cold mail (15/11/2026, decisão do Felipe)**: sem rastreio de clique. `/r/<token>`,
+  `/api/prospeccao/link-clique`, `lib/prospeccao/clique.ts` e o `CLIQUE_SECRET` foram removidos.
+  O e-mail usa o link direto `https://www.madebyfelipe.com.br/exemplo/site-psicologa`.
+  A aba E-mail continua lendo `prospCliques` (histórico), mas não entra clique novo.
+- **Pausa de 13/11/2026**: o disparo do site está pausado pela nota "Prospecção · PAUSADA"
+  (Felipe: "Pausar o do site", para ficar só o cold mail do Dylan). Não retome sem ele.
+
+---
+
+## Versão em inglês (`/en`) e seletor de idioma (nov/2026)
+
+Pedido do Felipe (via Tyler) para a campanha de cold email fora do Brasil (EUA primeiro).
+
+- **PT segue na raiz, sem mudar URL.** O inglês vive em `app/(en)/en/` (grupo de rota
+  próprio, layout com nav/rodapé em inglês). Páginas: `/en`, `/en/method`,
+  `/en/website-process` (= `/cases`) e `/en/contact` (= `/imersao`, sem o form, que
+  pede CRP/WhatsApp; oferece a chamada e o e-mail). O blog fica só em português.
+- **`lib/i18n.ts` é a fonte única**: pares PT ↔ EN (`ROTAS`), `alternatesDe()` (canonical
+  por idioma + hreflang pt-BR / en / x-default = PT), textos da interface compartilhada
+  (`UI`). Página nova com par em inglês = entrada em `ROTAS` + `alternates:
+  alternatesDe(...)` nas duas versões; o sitemap e o seletor leem daí.
+- **Copy EN** em `lib/institucional-en.ts` (espelha `lib/institucional.ts`). Regras: nada de
+  CFP/artigo 20 (vira "built with professional ethics guidelines in mind", sem prometer
+  conformidade com APA ou conselhos estaduais); nada de pacientes, agenda cheia ou
+  ranking; **sem preço** ("get a quote"); depoimentos são os mesmos, traduzidos e
+  rotulados "translated from Portuguese". PSIQUE mantém as letras: Practice, Subject,
+  Inner need, Quality, Universe, Ethos.
+- **Decisões do Felipe (14/11/2026)** para o EN: "free homepage preview" é oferta real para os EUA;
+  a imersão é **online** e a chamada é **em inglês com o próprio Felipe** (dizer isso onde a
+  imersão aparece); depoimentos traduzidos com o rótulo ficam; rodapé EN: "Remote, based in
+  São Paulo, Brazil."; entregas: Brand Voice, Practice Web Page, Practice Stationery.
+- **Componentes compartilhados** (nav, controles, banner de cookies, CTA mobile) escolhem o
+  idioma por `localeDoPath(usePathname())`; o rodapé (server) recebe `locale`. O padrão é
+  sempre português — sem prop/rota EN, nada muda no PT.
+- **`<html lang>`**: o layout raiz é um só (pt-BR). Dividir em dois layouts raiz obrigaria a
+  mover todas as pastas do app. O conteúdo EN sai com `lang="en"` no wrapper `.inst` e o
+  `HtmlLang` + script inline corrigem o `<html>` no navegador. O HTML estático de `/en`
+  ainda diz `lang="pt-BR"` no `<html>`.
+- **Seletor flutuante** (`LangFloater`): canto inferior esquerdo, PT | EN, leva à página
+  equivalente (sem par → home do outro idioma). Cookie `mbf-lang` (12 meses, listado em
+  `/cookies`). O idioma do navegador só sugere (aviso discreto, dispensável), **nunca
+  redireciona** — Googlebot e links compartilhados sempre recebem a página pedida.
+- **Oferta no EN** segue a do PT (dois encontros online de ~90 min, em inglês com o Felipe;
+  tudo apresentado em até 30 dias, com o site incluso), mas **sem preço** — os R$ 599 /
+  R$ 1.999 do `/lp/site` não aparecem em `/en`.
+- Diagramas do método (`MetodologiaFlow`, `LinhaTempo`) têm texto em português nas imagens
+  e no SVG; `/en/method` usa só a lista dos oito passos.
+
+### `/en/lp` — LP da oferta em inglês (16/11/2026, pedido do Felipe)
+
+- **Página normal dentro do shell de `/en`** (`app/(en)/en/lp/page.tsx`): mesmo menu, cursor, rodapé, tokens, tipografia e movimento da home (`HomeMotion`, `HomeFaq`, `inst-*`). Felipe, 16/11/2026: "use o design system do site, cursor, etc., priorize o estilo que meu site já transmite, derrube a regra de contraste, use o vermelho true". A versão anterior (HTML autônomo, `content/lp/sellbird.html`, vermelho e cursor próprios) foi removida. Vermelho é só `--red`/`--red-ink` (#bc0319); CSS próprio só em `lp-en.css`, em tokens.
+- **Conceito (refeita em 16/11/2026, Felipe: "simples demais, longe da minha identidade e da referência"):** a página é um arquivo de design aberto, na linha da referência onepagelove.com/ohhmydesign: régua presa sob o menu (% de rolagem e hora de São Paulo), molduras de seleção com alças e etiqueta de arquivo, carrossel de três prévias de exemplo, conversa de exemplo em quatro passos, alavanca dos dois tamanhos, tabela de perguntas e FAQ. Peças vivas em `components/institucional/lp/LpCanvas.tsx`; CSS só em `lp-en.css` (classes `lpc-*`, tokens). Código escrito do zero a partir do comportamento da referência, sem copiar texto nem código.
+- **Imagens:** as três prévias usam foto de banco (Freepik, `public/institucional/lp-en/`) e são rotuladas "Sample"; a conversa leva o rótulo "Example conversation". Nada ali é cliente nem depoimento. As demais fotos são do próprio site (`hero/06.jpg`, `home/hero-2.jpg`, `home/cta.jpg`).
+- **Acessibilidade:** axe-core sem violações no tema claro (1440 e 390). No escuro sobra só o contraste do vermelho `#bc0319` em texto pequeno, que é a exceção pedida pelo Felipe acima. O `data-hero-p` vai no `h1` (o SplitText põe `aria-label`, proibido em `span`/`p`).
+- **Exceção de preço (Felipe, 15/11/2026):** US$ 499 (página única) e US$ 1.499 (site institucional), pagamento único, sem mensalidade, **só em `/en/lp`**. `/en` e demais páginas EN seguem sem preço. Mexer nos valores é com aval dele.
+- **Indexação:** `noindex, follow`, fora do sitemap, sem hreflang.
+- **Formulário** (`components/institucional/lp/LpPreviewForm.tsx`) → `/api/lp-lead`, `origem: "preview-en"` (nome, e-mail, link opcional, `consentimento`, honeypot `site`). "Thanks" só após `ok:true`.
+- **Cookies:** o banner do shell vale; a página não carrega medição.
+- **Pendente:** o aceite do formulário não leva link de privacidade (`/privacidade` é só em português). Depende do Felipe.

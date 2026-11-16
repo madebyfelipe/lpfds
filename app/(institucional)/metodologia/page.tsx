@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { alternatesDe } from "@/lib/i18n";
 import { OG_IMAGE } from "@/lib/site";
 import { InstContato } from "@/components/institucional/InstContato";
 import {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: "Método de construção de marca — PSIQUE | Made by Felipe",
   description:
     "Como construir uma marca do zero: o método PSIQUE traduz o negócio em posicionamento, identidade visual e verbal — da estratégia à comunicação, em oito passos e duas etapas. Branding em Sorocaba e São Paulo.",
-  alternates: { canonical: "/metodologia" },
+  alternates: alternatesDe("/metodologia", "pt"),
   keywords: [
     "construção de marca",
     "como construir uma marca",
@@ -86,7 +87,7 @@ export default function MetodologiaPage() {
         <LinhaTempo />
         <p className="inst-diagram__caption">
           Duas etapas — estratégia e identidade — quebradas em quatro fases:
-          coletar, explorar, criar e definir. No ar em 45 dias.
+          coletar, explorar, criar e definir. Tudo apresentado em até 30 dias, com o site incluso.
         </p>
 
         <div className="inst-proc">

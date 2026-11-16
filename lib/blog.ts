@@ -44,6 +44,56 @@ import { post as consultorioSensorial } from "@/content/blog/consultorio-acessiv
 import { post as impulsionarPost } from "@/content/blog/impulsionar-post-psicologo";
 import { post as tituloEspecialista } from "@/content/blog/psicologo-titulo-de-especialista";
 import { post as psicologoOnline } from "@/content/blog/psicologo-online-divulgacao";
+import { post as sorteioInstagram } from "@/content/blog/psicologo-sorteio-instagram";
+import { post as papelariaConsultorio } from "@/content/blog/papelaria-consultorio-psicologia";
+import { post as placaConsultorio } from "@/content/blog/placa-consultorio-psicologia";
+import { post as psicologoTiktok } from "@/content/blog/psicologo-tiktok";
+import { post as paginaSobreMim } from "@/content/blog/pagina-sobre-mim-psicologo";
+import { post as newsletterPsicologo } from "@/content/blog/newsletter-para-psicologo";
+import { post as marcaNeuropsicologa } from "@/content/blog/marca-para-neuropsicologa";
+import { post as venderCurso } from "@/content/blog/psicologo-vender-curso-material";
+import { post as divulgarConvenio } from "@/content/blog/psicologo-divulgar-convenio";
+import { post as nomeSocial } from "@/content/blog/nome-social-psicologo-marca";
+import { post as sloganPsicologo } from "@/content/blog/slogan-para-psicologo";
+import { post as psicologoPodcast } from "@/content/blog/psicologo-podcast";
+import { post as publiInfluenciador } from "@/content/blog/psicologo-publi-influenciador";
+import { post as materialEducativo } from "@/content/blog/material-educativo-pais-autismo";
+import { post as manualDeMarca } from "@/content/blog/manual-de-marca-psicologo";
+import { post as logoPsicologo } from "@/content/blog/logo-para-psicologo";
+import { post as direitoAutoral } from "@/content/blog/psicologo-direito-autoral-redes";
+import { post as agendamentoOnline } from "@/content/blog/agendamento-online-psicologo";
+import { post as entrevistaImprensa } from "@/content/blog/psicologo-entrevista-imprensa";
+import { post as siteAcessivel } from "@/content/blog/site-acessivel-psicologo";
+import { post as paginaServicos } from "@/content/blog/pagina-de-servicos-psicologo";
+import { post as responderComentarios } from "@/content/blog/psicologo-responder-comentarios-direct";
+import { post as marcaAdolescentes } from "@/content/blog/marca-psicologo-adolescentes";
+import { post as palestraPais } from "@/content/blog/psicologo-palestra-para-pais";
+import { post as carrosselInstagram } from "@/content/blog/carrossel-instagram-psicologo";
+import { post as parceriaPediatra } from "@/content/blog/parceria-psicologo-pediatra";
+import { post as manualBoasVindas } from "@/content/blog/manual-boas-vindas-consultorio";
+import { post as dominioSite } from "@/content/blog/dominio-site-psicologo";
+import { post as consultorioCompartilhado } from "@/content/blog/consultorio-compartilhado-divulgacao";
+import { post as gruposDeMaes } from "@/content/blog/psicologo-grupos-de-maes";
+import { post as marcaAba } from "@/content/blog/marca-psicologo-aba";
+import { post as avaliacaoAutismoAdulto } from "@/content/blog/divulgar-avaliacao-autismo-adulto";
+import { post as marketingInfantil } from "@/content/blog/marketing-psicologa-infantil";
+import { post as fotosConsultorio } from "@/content/blog/fotos-do-consultorio-psicologia";
+import { post as panfletoPsicologo } from "@/content/blog/panfleto-psicologo";
+import { post as landingPage } from "@/content/blog/landing-page-psicologo";
+import { post as reciboPsicologo } from "@/content/blog/recibo-psicologo";
+import { post as faqSite } from "@/content/blog/perguntas-frequentes-site-psicologo";
+import { post as mascoteInfantil } from "@/content/blog/mascote-marca-psicologa-infantil";
+import { post as nomeClinicaAutismo } from "@/content/blog/nome-clinica-autismo";
+import { post as sitePsicologaInfantil } from "@/content/blog/site-psicologa-infantil";
+import { post as textosSite } from "@/content/blog/textos-site-psicologo";
+import { post as brasileirosExterior } from "@/content/blog/psicologo-brasileiros-no-exterior";
+import { post as reembolsoPlano } from "@/content/blog/reembolso-plano-psicologo";
+import { post as salaDeEspera } from "@/content/blog/sala-de-espera-consultorio-psicologia";
+import { post as grupoHabilidadesSociais } from "@/content/blog/grupo-habilidades-sociais-divulgar";
+import { post as marcaPerinatal } from "@/content/blog/marca-psicologa-perinatal";
+import { post as blogParaPsicologo } from "@/content/blog/blog-para-psicologo";
+import { post as videoApresentacao } from "@/content/blog/video-apresentacao-psicologo";
+import { post as politicaPrivacidade } from "@/content/blog/politica-de-privacidade-psicologo";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -73,6 +123,11 @@ export type Post = {
   faq?: { q: string; a: string }[];
   /** Banner do post (opcional). Sem ele, o og:image é o gerado com o título. */
   cover?: Cover;
+  /**
+   * Força a peça do banner de anúncio (ver `lib/blog-ads.ts`). Sem ele, a
+   * peça sai do slug e do tema do post.
+   */
+  ad?: "marca" | "site" | "ebook";
   body: ReactNode;
 };
 
@@ -160,7 +215,57 @@ export const posts: Post[] = [
   consultorioSensorial,
   impulsionarPost,
   tituloEspecialista,
-  psicologoOnline
+  psicologoOnline,
+  newsletterPsicologo,
+  marcaNeuropsicologa,
+  venderCurso,
+  divulgarConvenio,
+  nomeSocial,
+  sorteioInstagram,
+  papelariaConsultorio,
+  placaConsultorio,
+  psicologoTiktok,
+  paginaSobreMim,
+  sloganPsicologo,
+  psicologoPodcast,
+  publiInfluenciador,
+  materialEducativo,
+  manualDeMarca,
+  logoPsicologo,
+  direitoAutoral,
+  agendamentoOnline,
+  entrevistaImprensa,
+  siteAcessivel,
+  paginaServicos,
+  responderComentarios,
+  marcaAdolescentes,
+  palestraPais,
+  carrosselInstagram,
+  parceriaPediatra,
+  manualBoasVindas,
+  dominioSite,
+  consultorioCompartilhado,
+  gruposDeMaes,
+  marcaAba,
+  avaliacaoAutismoAdulto,
+  marketingInfantil,
+  fotosConsultorio,
+  panfletoPsicologo,
+  landingPage,
+  reciboPsicologo,
+  faqSite,
+  mascoteInfantil,
+  nomeClinicaAutismo,
+  sitePsicologaInfantil,
+  textosSite,
+  brasileirosExterior,
+  reembolsoPlano,
+  salaDeEspera,
+  grupoHabilidadesSociais,
+  marcaPerinatal,
+  blogParaPsicologo,
+  videoApresentacao,
+  politicaPrivacidade
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );

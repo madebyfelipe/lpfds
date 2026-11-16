@@ -8,7 +8,7 @@ import Link from "next/link";
  */
 export function AuthorBox() {
   return (
-    <aside className="inst-author" aria-label="Sobre o autor">
+    <aside className="inst-author" id="sobre-o-autor" aria-label="Sobre o autor">
       <Image
         src="/eu.jpg"
         alt=""

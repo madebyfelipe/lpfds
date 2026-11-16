@@ -55,6 +55,17 @@ export default function CookiesPage() {
             e-book, para reabrir o link sem cadastrar de novo.
           </li>
         </ul>
+        <p>
+          Um item é cookie, e não <code>localStorage</code>: o navegador o envia
+          junto com os pedidos a este site, mas ele também não identifica você.
+        </p>
+        <ul>
+          <li>
+            <code>mbf-lang</code> — o idioma que você escolheu no seletor
+            (português ou inglês), para lembrar da escolha. Vale por 12 meses.
+            Também usamos esse registro para não repetir a sugestão de idioma.
+          </li>
+        </ul>
 
         <h3>2.2 Medição (só com o seu aceite)</h3>
         <ul>

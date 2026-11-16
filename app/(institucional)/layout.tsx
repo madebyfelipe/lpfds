@@ -1,7 +1,10 @@
+import { HtmlLang } from "@/components/institucional/HtmlLang";
 import { InstFooter } from "@/components/institucional/InstFooter";
+import { LangFloater } from "@/components/institucional/LangFloater";
 import { InstNav } from "@/components/institucional/InstNav";
 import { InstMobileCta } from "@/components/institucional/InstMobileCta";
 import { SmoothScroll } from "@/components/institucional/SmoothScroll";
+import { UiSound } from "@/components/institucional/UiSound";
 import "../institucional.css";
 import "../monolog.css";
 
@@ -13,11 +16,14 @@ export default function InstitucionalLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="inst">
+      <HtmlLang lang="pt-BR" />
       <InstNav />
       {children}
       <InstFooter />
       <InstMobileCta />
+      <LangFloater />
       <SmoothScroll />
+      <UiSound />
       <div className="mgrain" aria-hidden="true" />
     </div>
   );

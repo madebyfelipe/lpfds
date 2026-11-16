@@ -1,0 +1,86 @@
+/**
+ * English copy for /en (nov/2026). Mirrors lib/institucional.ts — same facts,
+ * written for US therapists in private practice, not a literal translation.
+ *
+ * Rules (Felipe via Tyler):
+ * - No Brazilian council (CFP) or "Article 20" claims; where PT cites them, EN
+ *   says "built with professional ethics guidelines in mind" and never claims
+ *   compliance with APA or state licensing boards.
+ * - No promised clients, full calendars or Google rankings.
+ * - No prices (USD not defined): "Get a quote" instead.
+ * - Testimonials are the same real PT quotes, translated and labeled as such.
+ *
+ * PSIQUE keeps its six letters: Practice, Subject, Inner need, Quality,
+ * Universe, Ethos (PT: Prática, Sujeito, Inquietação, Qualidade, Universo, Estória).
+ */
+
+export const methodIntroEn =
+  "Branding is translation, not invention. Your practice's brand isn't made up — it's translated from six areas we explore until we find what only exists in you.";
+
+export const positioningEn = [
+  {
+    letter: "P",
+    title: "Practice",
+    copy: "How your practice actually runs: revenue, caseload, session fee and how full your schedule is. There's no brand before the business."
+  },
+  {
+    letter: "S",
+    title: "Subject",
+    copy: "Who you work with best, and who actually reaches out to you. Your real clients, not an idealized profile."
+  },
+  {
+    letter: "I",
+    title: "Inner need",
+    copy: "What moves people to look for you: the need behind the search, which your brand has to recognize."
+  },
+  {
+    letter: "Q",
+    title: "Quality",
+    copy: "What you offer compared with what other local practices already do — to find where you're genuinely different."
+  },
+  {
+    letter: "U",
+    title: "Universe",
+    copy: "The context you work in: your city, its culture and the channels where your brand will live."
+  },
+  {
+    letter: "E",
+    title: "Ethos",
+    copy: "Where you come from, what you believe and the personality your brand will carry. The origin no one can copy."
+  }
+];
+
+export const processEn = [
+  {
+    etapa: "Brand strategy",
+    tag: "Gathering · Exploring",
+    steps: [
+      { num: "01", title: "Interview", copy: "First online session, about 90 minutes, with you — and with anyone else who works in your practice: how you work, who you work with and where you want to go." },
+      { num: "02", title: "Workshop", copy: "Second online session, also about 90 minutes, in English with Felipe, where the six areas become strategy." },
+      { num: "03", title: "Research", copy: "Market study: we validate what came up and look closely at the other practices in your area." },
+      { num: "04", title: "Diagnosis", copy: "Everything we gathered, documented and approved with you before we move on." }
+    ]
+  },
+  {
+    etapa: "Brand identity",
+    tag: "Creating · Defining",
+    steps: [
+      { num: "05", title: "Platform", copy: "The strategy distilled — the document that guides your whole brand identity." },
+      { num: "06", title: "Keyword", copy: "A proposal for positioning and brand voice: how your practice speaks." },
+      { num: "07", title: "Keyvisual", copy: "A proposal for visual identity: colors, graphic elements and typography." },
+      { num: "08", title: "Brand guide", copy: "Strategy, positioning and identity brought together, applied and presented within 30 days, website included." }
+    ]
+  }
+];
+
+/** Same order as `deliverables` in lib/institucional.ts (photos are matched by index). */
+export const deliverablesEn = [
+  "Positioning",
+  "Visual Identity",
+  "Brand Voice",
+  "Brand Guide",
+  "Practice Web Page",
+  "Practice Stationery",
+  "Art Direction"
+];
+

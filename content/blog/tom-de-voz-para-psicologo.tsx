@@ -247,8 +247,8 @@ export const post: Post = {
         <h2>Como o estúdio trabalha</h2>
         <p>
           Na Made by Felipe, a identidade verbal (voz, tom, mensagens-chave e
-          textos de base) sai junto com a identidade visual, nos dois dias de
-          imersão, com tudo no ar em 45 dias e dentro do artigo 20 do Código de
+          textos de base) sai junto com a identidade visual, nos dois encontros de
+          imersão, com tudo entregue em até 30 dias e dentro do artigo 20 do Código de
           Ética. O passo a passo está na{" "}
           <Link href="/metodologia" className="inst-link">
             metodologia
