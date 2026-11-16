@@ -194,7 +194,7 @@ export default function Home() {
               <div className="mh-hero__item">
                 <Image
                   src={`${H}/hero-banco-1.jpg`}
-                  alt="Notebook preto, lápis, clipes e estojo sobre mesa escura, a papelaria de uma marca"
+                  alt="Mesa de designer com notebook aberto num layout, luminária amarela e peças gráficas na parede"
                   fill
                   priority
                   sizes="(max-width: 991px) 100vw, 64vw"
@@ -204,7 +204,7 @@ export default function Home() {
               <div className="mh-hero__item">
                 <Image
                   src={`${H}/hero-banco-2.jpg`}
-                  alt="Tipos móveis de metal empilhados, usados para imprimir letras em relevo"
+                  alt="Mãos desenhando num notebook com software de design aberto, ao lado de um leque de cores"
                   fill
                   sizes="(max-width: 991px) 100vw, 64vw"
                   data-translate

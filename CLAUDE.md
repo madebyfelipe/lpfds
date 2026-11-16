@@ -324,10 +324,10 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
   rodapé. As do Felipe vieram em baixa (~736px de largura) — trocar por originais quando houver. **Foto do Felipe só
   onde o texto fala dele** (FAQ: `felipe-avatar.jpg`, recorte de `public/eu.jpg`, a mesma do /hub).
 - **Hero**: as duas imagens que se revezam atrás dos cards são de banco do Magnific
-  (`hero-banco-1.jpg`, papelaria em branco; `hero-banco-2.jpg`, tipos móveis de metal), 1840x1227,
-  3:2 como o container. Substituíram as telas do Figma e do Illustrator (`hero-figma.jpg`,
-  `hero-illustrator.jpg`, que seguem no repo sem uso) — as telas mostravam o projeto de um
-  cliente real e não diziam nada para quem chega. Mesmas imagens em `/(en)/en/page.tsx`.
+  (`hero-banco-1.jpg`, mesa de designer com notebook; `hero-banco-2.jpg`, tela de edição de
+  imagem no monitor do estúdio), 1600x1660 e 1400x1452 — o mesmo aspecto da janela do hero (~0.96), que é
+  3:2 de container com `inset: -150px 0` no desktop; foto 3:2 ali perde 36% da largura e
+  parece ampliada. Mesmas imagens e alts na home em inglês.
 - **Paleta própria** (pedra `#e8e8e3` / quase-preto `#080807`, tokens `--m-*` com tema escuro);
   o vermelho da marca aparece só no marcador dos rótulos e no card "45". É exceção declarada ao
   design system, como o `/hub`.
