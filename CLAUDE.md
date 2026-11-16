@@ -323,6 +323,11 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
   imagem de IA resta), em `public/institucional/home/`; crédito "Imagens de banco: Freepik" no
   rodapé. As do Felipe vieram em baixa (~736px de largura) — trocar por originais quando houver. **Foto do Felipe só
   onde o texto fala dele** (FAQ: `felipe-avatar.jpg`, recorte de `public/eu.jpg`, a mesma do /hub).
+- **Hero**: as duas imagens que se revezam atrás dos cards são de banco do Magnific
+  (`hero-banco-1.jpg`, papelaria em branco; `hero-banco-2.jpg`, tipos móveis de metal), 1840x1227,
+  3:2 como o container. Substituíram as telas do Figma e do Illustrator (`hero-figma.jpg`,
+  `hero-illustrator.jpg`, que seguem no repo sem uso) — as telas mostravam o projeto de um
+  cliente real e não diziam nada para quem chega. Mesmas imagens em `/(en)/en/page.tsx`.
 - **Paleta própria** (pedra `#e8e8e3` / quase-preto `#080807`, tokens `--m-*` com tema escuro);
   o vermelho da marca aparece só no marcador dos rótulos e no card "45". É exceção declarada ao
   design system, como o `/hub`.
