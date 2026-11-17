@@ -1,17 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { UI, localeDoPath } from "@/lib/i18n";
 
 const TZ = "America/Sao_Paulo";
 
 /**
- * Hora e data de Sorocaba no rodapé, com os dois-pontos piscando como no
- * Monolog. Só aparece depois da hidratação (a hora do servidor divergiria do
- * cliente). Sem JS simplesmente não há relógio.
+ * Relógio da sede no rodapé (ref. shortscut.com/about): mostrador analógico
+ * com ponteiro de segundos vermelho, cidade em destaque e a linha de hora e
+ * data de São Paulo, com os dois-pontos piscando. Só aparece depois da
+ * hidratação (a hora do servidor divergiria do cliente); antes disso fica
+ * só a cidade, que não depende de hora.
  */
-export function FooterRelogio() {
+export function FooterRelogio({ cidade, rotulo }: { cidade: string; rotulo: string }) {
+  const pathname = usePathname();
+  const locale = localeDoPath(pathname);
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -20,34 +24,87 @@ export function FooterRelogio() {
     return () => clearInterval(id);
   }, []);
 
-  if (!now) return null;
-  const [h, m, s] = new Intl.DateTimeFormat("pt-BR", {
-    timeZone: TZ,
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
-  })
-    .format(now)
-    .split(":");
-  const date = new Intl.DateTimeFormat("pt-BR", {
-    timeZone: TZ,
-    weekday: "long",
-    day: "numeric",
-    month: "short",
-    year: "numeric"
-  }).format(now);
+  let horas = 0;
+  let minutos = 0;
+  let segundos = 0;
+  let linha: ReactNode = null;
+  if (now) {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: TZ,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hourCycle: "h23"
+    }).formatToParts(now);
+    const get = (type: string) => Number(parts.find((p) => p.type === type)?.value ?? 0);
+    horas = get("hour");
+    minutos = get("minute");
+    segundos = get("second");
+    const lang = locale === "en" ? "en-US" : "pt-BR";
+    const hora = new Intl.DateTimeFormat(lang, {
+      timeZone: TZ,
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: locale === "en"
+    }).format(now);
+    const [hh, rest] = hora.split(":");
+    const data = new Intl.DateTimeFormat(lang, {
+      timeZone: TZ,
+      weekday: "long",
+      day: "numeric",
+      month: "short"
+    }).format(now);
+    linha = (
+      <>
+        {hh}
+        <span className="mfoot__colon">:</span>
+        {rest} <span className="mfoot__date">{data}</span> (GMT −03)
+      </>
+    );
+  }
+
+  // Ângulos dos ponteiros (12h = 0°)
+  const aHora = ((horas % 12) + minutos / 60) * 30;
+  const aMin = (minutos + segundos / 60) * 6;
+  const aSeg = segundos * 6;
 
   return (
-    <span className="mfoot__clock" aria-hidden="true">
-      <span>
-        Sorocaba {h}
-        <span className="mfoot__colon">:</span>
-        {m}
-        <span className="mfoot__colon">:</span>
-        {s}
-      </span>
-      <span className="mfoot__date">{date} (GMT −03)</span>
-    </span>
+    <div className="mfoot__hq">
+      <p className="mfoot__hq-label mmono">{rotulo}</p>
+      <svg className="mfoot__dial" viewBox="0 0 100 100" aria-hidden="true">
+        <circle className="mfoot__dial-face" cx="50" cy="50" r="50" />
+        {Array.from({ length: 12 }, (_, i) => (
+          <circle
+            key={i}
+            className="mfoot__dial-tick"
+            cx={50 + 38 * Math.sin((i * Math.PI) / 6)}
+            cy={50 - 38 * Math.cos((i * Math.PI) / 6)}
+            r="1.2"
+          />
+        ))}
+        {now ? (
+          <>
+            <line className="mfoot__dial-hand" x1="50" y1="50" x2="50" y2="30" transform={`rotate(${aHora} 50 50)`} />
+            <line className="mfoot__dial-hand" x1="50" y1="50" x2="50" y2="20" transform={`rotate(${aMin} 50 50)`} />
+            <line
+              className="mfoot__dial-sec"
+              x1="50"
+              y1="58"
+              x2="50"
+              y2="14"
+              transform={`rotate(${aSeg} 50 50)`}
+            />
+          </>
+        ) : null}
+        <circle className="mfoot__dial-pin" cx="50" cy="50" r="4.5" />
+      </svg>
+      <p className="mfoot__hq-city">{cidade}</p>
+      {/* A hora muda a cada segundo: fora da árvore de acessibilidade para o
+          leitor de tela não anunciar o rodapé sem parar. */}
+      <p className="mfoot__hq-time" aria-hidden="true">
+        {linha}
+      </p>
+    </div>
   );
 }
 

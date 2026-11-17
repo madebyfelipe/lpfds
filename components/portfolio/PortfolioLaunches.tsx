@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Project, ProjectCategory } from "@/lib/portfolio";
+import type { ProjectCategory } from "@/lib/portfolio";
+import { ProjectDrawer, type DrawerProject } from "./ProjectDrawer";
 
 type Filter = "Todos" | ProjectCategory;
-type Item = Pick<Project, "slug" | "client" | "category"> & { cover: string };
+type Item = DrawerProject & { category: ProjectCategory; cover: string };
 
 const CATEGORIES: ProjectCategory[] = ["Marca", "Conteúdo", "Landing Page", "Produto digital"];
 
@@ -39,6 +40,27 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
   const wheelAcc = useRef(0);
   const dragState = useRef<{ x: number; id: number; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
+
+  // Gaveta do projeto, com ?project=<slug> na URL (link direto abre ela).
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+  useEffect(() => {
+    const read = () => {
+      const slug = new URLSearchParams(location.search).get("project");
+      setOpenSlug(slug && items.some((i) => i.slug === slug) ? slug : null);
+    };
+    read();
+    addEventListener("popstate", read);
+    return () => removeEventListener("popstate", read);
+  }, [items]);
+  const openProject = useCallback((slug: string) => {
+    history.pushState(null, "", `?project=${slug}`);
+    setOpenSlug(slug);
+  }, []);
+  const closeProject = useCallback(() => {
+    history.pushState(null, "", location.pathname);
+    setOpenSlug(null);
+  }, []);
+  const drawerProject = openSlug ? items.find((i) => i.slug === openSlug) ?? null : null;
 
   const categories = CATEGORIES.filter((c) => items.some((item) => item.category === c));
 
@@ -111,6 +133,7 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
     const root = rootRef.current;
     if (!root) return;
     const onWheel = (event: WheelEvent) => {
+      if ((event.target as HTMLElement | null)?.closest(".pfd")) return;
       // Tela baixa demais para caber tudo: enquanto houver página para rolar
       // naquele sentido, a rolagem vertical continua sendo da página.
       if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
@@ -137,7 +160,7 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
-      if (target?.closest("input, textarea, select, [contenteditable], .mnav__menu")) return;
+      if (target?.closest("input, textarea, select, [contenteditable], .mnav__menu, .pfd")) return;
       if (event.key === "ArrowRight") go(1);
       else if (event.key === "ArrowLeft") go(-1);
       else return;
@@ -194,7 +217,14 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
       event.preventDefault();
       setAnimate(true);
       setPos(index);
+      return;
     }
+    // Card do centro abre a gaveta; Ctrl/Cmd/Shift + clique segue o link
+    // para o case completo (nova aba etc.).
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+    event.preventDefault();
+    showCursor(false);
+    openProject(list[active].slug);
   };
 
   // Etiqueta "Ver projeto" presa ao cursor sobre o card do centro.
@@ -333,6 +363,8 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
           ))}
         </div>
       </div>
+
+      <ProjectDrawer project={drawerProject} onClose={closeProject} />
 
       <span ref={cursorRef} className="pfl__cursor" aria-hidden="true">
         Ver projeto

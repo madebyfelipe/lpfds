@@ -11,6 +11,8 @@ const TEXTO = {
     navegacao: "Navegação",
     estudio: "(Estúdio)",
     endereco: "Sorocaba (SP), Brasil.",
+    cidade: "Sorocaba (SP), Brasil",
+    sede: "Estúdio",
     redes: "(Redes)",
     legal: "(Legal)",
     imagens: "Imagens de banco:",
@@ -22,6 +24,8 @@ const TEXTO = {
     navegacao: "Navigation",
     estudio: "(Studio)",
     endereco: "Remote, based in São Paulo, Brazil.",
+    cidade: "São Paulo, Brazil",
+    sede: "Studio",
     redes: "(Social)",
     legal: "(Legal · in Portuguese)",
     imagens: "Stock images:",
@@ -70,6 +74,7 @@ export function InstFooter({ locale = "pt" }: { locale?: Locale } = {}) {
           </div>
 
           <div className="mfoot__aside">
+            <FooterRelogio cidade={t.cidade} rotulo={t.sede} />
             <div className="mfoot__details">
               <p className="mfoot__label mmono">{t.estudio}</p>
               <a href={`mailto:${EMAIL}`} className="mfoot__email">
@@ -119,12 +124,10 @@ export function InstFooter({ locale = "pt" }: { locale?: Locale } = {}) {
         </div>
 
         <div className="mfoot__bottom mgrid">
-          <p className="mfoot__time">
-            <FooterRelogio />
-          </p>
-          <div className="mfoot__totop">
+          <div className="mfoot__time">
             <FooterTopo />
           </div>
+          <div className="mfoot__totop" />
           <p className="mfoot__brand">
             © {new Date().getFullYear()} {empresa.nomeFantasia}
           </p>

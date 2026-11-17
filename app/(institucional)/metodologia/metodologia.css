@@ -1,0 +1,431 @@
+/* --------------------------------------------------------------------------
+   /metodologia — formato da página About do shortscut.com (nov/2026).
+   Seções na ordem da referência: abertura com ícones de pontos → dois
+   textos → janela 16:9 → "fatos" (aqui, as seis áreas em rolo de letras) →
+   lista em tipo grande numa faixa cinza (os oito passos) → régua + chamada.
+   Animação: components/institucional/MetodoMotion.tsx. Só tokens do site.
+   -------------------------------------------------------------------------- */
+
+.mtd {
+  --mtd-offset: 17.6%; /* recuo das colunas e da janela, como na referência */
+  font-family: var(--m-font);
+  overflow-x: clip;
+}
+
+.mtd-red {
+  color: var(--red-ink);
+}
+
+.mtd-pill {
+  display: inline-block;
+  margin: 0;
+  padding: 3px 9px;
+  border: 1px solid currentColor;
+  border-radius: var(--m-radius);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Ícone de pontos ------------------------------------------------------- */
+.mtd-px {
+  display: inline-block;
+  width: 0.78em;
+  height: 0.78em;
+  margin: 0 0.06em;
+  vertical-align: -0.04em;
+}
+
+.mtd-px__dot {
+  fill: var(--gray-200);
+}
+
+.mtd-px__dot.is-on {
+  fill: var(--red);
+  animation: mtd-px 2.2s var(--d, 0s) steps(1, end) infinite;
+}
+
+@keyframes mtd-px {
+  0%,
+  70% {
+    fill: var(--red);
+  }
+  71%,
+  85% {
+    fill: var(--gray-200);
+  }
+}
+
+/* 1 — Abertura ---------------------------------------------------------- */
+.mtd-hero {
+  padding: clamp(56px, 12vh, 120px) var(--m-margin) 0;
+}
+
+.mtd-hero__title {
+  max-width: 15.5em;
+  margin: 0;
+  font-size: clamp(40px, 5.75vw, 96px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.mtd-hero__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 360px));
+  gap: clamp(32px, 4.6vw, 64px);
+  margin: clamp(80px, 18vh, 150px) 0 0 var(--mtd-offset);
+}
+
+.mtd-hero__col {
+  margin: 0;
+  font-size: clamp(19px, 1.75vw, 24px);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+/* 2 — Janela 16:9 --------------------------------------------------------- */
+.mtd-media {
+  max-width: 820px;
+  margin: clamp(80px, 14vh, 120px) 0 0 var(--mtd-offset);
+  transform-origin: center top;
+}
+
+.mtd-media__bar {
+  padding: 12px 12px 10px;
+  border-radius: var(--m-radius) var(--m-radius) 0 0;
+  background: var(--gray-100);
+  font-size: var(--t-main);
+  font-weight: 500;
+}
+
+.mtd-media__screen {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  padding: clamp(16px, 3vw, 40px);
+  border: 12px solid var(--gray-100);
+  border-top: 0;
+  border-radius: 0 0 var(--m-radius) var(--m-radius);
+  background: var(--cream);
+  overflow: hidden;
+}
+
+.mtd-media__screen > * {
+  width: 100%;
+  max-height: 100%;
+}
+
+.mtd-media__foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.mtd-media__foot .mtd-px {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+}
+
+.mtd-media__label {
+  margin: 0;
+  font-size: var(--t-small);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.mtd-media__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 0 auto;
+  font-size: var(--t-small);
+}
+
+.mtd-media__pill {
+  padding: 2px 8px;
+  border-radius: var(--m-radius);
+  background: var(--gray-100);
+  text-transform: uppercase;
+}
+
+/* 3 — Seis áreas ---------------------------------------------------------- */
+.mtd-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: clamp(96px, 18vh, 180px) var(--m-margin);
+}
+
+.mtd-facts__label {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  margin: 0;
+  font-size: var(--t-main);
+  font-weight: 700;
+}
+
+.mtd-facts__list {
+  display: grid;
+  gap: clamp(20px, 3vh, 36px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mtd-fact {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.mtd-reel {
+  --reel-h: 1.08em; /* folga para a perna do Q */
+  display: block;
+  height: var(--reel-h);
+  overflow: hidden;
+  color: var(--red-ink);
+  font-size: clamp(72px, 9.5vw, 136px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  width: 0.8em;
+  text-align: center;
+}
+
+.mtd-reel__strip {
+  display: flex;
+  flex-direction: column;
+  /* sem JS, o rolo já mostra a letra final */
+  transform: translateY(calc(var(--n) * -1 * var(--reel-h)));
+}
+
+.mtd-reel__strip > span {
+  display: block;
+  height: var(--reel-h);
+}
+
+.mtd-fact__title {
+  margin: 0;
+  font-size: clamp(20px, 1.7vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.mtd-fact__copy {
+  max-width: 36ch;
+  margin: 6px 0 0;
+  color: var(--gray-700);
+  font-size: var(--t-small);
+  line-height: 1.4;
+}
+
+/* 4 — Oito passos --------------------------------------------------------- */
+.mtd-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(80px, 12vh, 120px) var(--m-margin) clamp(80px, 12vh, 120px);
+  background: var(--gray-100);
+  text-align: center;
+}
+
+.mtd-steps__list {
+  display: grid;
+  gap: clamp(18px, 3vh, 34px);
+  margin: clamp(56px, 10vh, 100px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mtd-step__name {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  font-size: clamp(48px, 6.3vw, 108px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.mtd-step__num {
+  position: absolute;
+  top: 0.2em;
+  right: 100%;
+  margin-right: 0.5em;
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--red-ink);
+}
+
+.mtd-step__text {
+  display: inline-block;
+}
+
+/* Vermelho em texto pequeno não passa sobre o escuro (~2.6:1): lá o número
+   fica na tinta apagada da superfície. */
+:root[data-inst-theme="dark"] .mtd-step__num,
+:root[data-inst-theme="dark"] .mtd-ruler__label {
+  color: var(--gray-700);
+}
+
+.mtd-step__copy {
+  max-width: 46ch;
+  margin: 10px auto 0;
+  color: var(--gray-700);
+  font-size: var(--t-small);
+  line-height: 1.4;
+}
+
+.mtd-steps__note {
+  max-width: 30ch;
+  margin: clamp(56px, 10vh, 100px) 0 0;
+  font-size: var(--t-main);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+/* 5 — Régua + chamada ----------------------------------------------------- */
+.mtd-cta {
+  position: relative;
+  padding-bottom: clamp(120px, 20vh, 200px);
+  overflow: hidden;
+  text-align: center;
+}
+
+.mtd-ruler {
+  height: 140px;
+  overflow: hidden;
+}
+
+.mtd-ruler__track {
+  display: flex;
+  width: 112%;
+  height: 100%;
+}
+
+.mtd-ruler__mark {
+  position: relative;
+  flex: 1 1 0;
+}
+
+/* um traço grande no começo de cada marca + nove pequenos até a próxima */
+.mtd-ruler__ticks {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 75px;
+  background:
+    linear-gradient(var(--black), var(--black)) left top / 1px 75px no-repeat,
+    repeating-linear-gradient(to right, var(--gray-300) 0 1px, transparent 1px 10%) left top / 100% 16px no-repeat;
+}
+
+.mtd-ruler__label {
+  position: absolute;
+  top: 96px;
+  left: 0;
+  translate: -50% 0;
+  color: var(--red-ink);
+  font-size: var(--t-micro);
+  font-weight: 700;
+}
+
+.mtd-cta__grid {
+  position: absolute;
+  inset: 140px 0 0;
+  background: linear-gradient(to right, var(--gray-100) 1px, transparent 1px) 0 0 / 12.5% 100%;
+  pointer-events: none;
+}
+
+.mtd-cta__title {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: clamp(48px, 8vh, 80px) auto 0;
+  padding: 0 var(--m-margin);
+  font-size: clamp(52px, 8.2vw, 132px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+}
+
+.mtd-cta__line {
+  display: block;
+}
+
+.mtd-cta__photo {
+  position: relative;
+  display: block;
+  width: min(35vw, 520px);
+  aspect-ratio: 445 / 187;
+  margin: 0.12em 0;
+  overflow: hidden;
+  border-radius: var(--m-radius);
+  background: var(--red);
+}
+
+/* Duotone vermelho + retícula, como a foto da referência */
+.mtd-cta__photo img {
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.25);
+  mix-blend-mode: multiply;
+}
+
+.mtd-cta__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, var(--black) 0.9px, transparent 1.2px) 0 0 / 4px 4px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.mtd-cta__action {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+/* Mobile ------------------------------------------------------------------ */
+@media (max-width: 767px) {
+  .mtd {
+    --mtd-offset: 0;
+  }
+
+  .mtd-hero__cols {
+    grid-template-columns: 1fr;
+    margin-top: 56px;
+  }
+
+  .mtd-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .mtd-step__num {
+    position: static;
+    display: block;
+    margin: 0 0 6px;
+  }
+
+  .mtd-cta__photo {
+    width: 78vw;
+  }
+
+  .mtd-cta__grid {
+    background-size: 25% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mtd-px__dot.is-on {
+    animation: none;
+  }
+}
