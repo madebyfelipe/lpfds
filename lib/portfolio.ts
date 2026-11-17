@@ -91,6 +91,8 @@ export const projects: Project[] = [
       "Desenvolvimento do site institucional e criação de anúncios para apresentar Home Equity, conta digital e soluções de capital com clareza e consistência visual.",
     images: {
       cover: "/portfolio/estruturart/posts/post-01.jpg",
+      // Peças 4:5 inteiras numa tela 16:9: o cover vertical ampliado cortava o texto do anúncio.
+      hero: "/portfolio/estruturart/hero.jpg",
     },
     gallery: posts("estruturart", 3),
     aboutImageFit: "contain",
@@ -167,6 +169,8 @@ export const projects: Project[] = [
       "Desenvolvimento da página de apresentação e conversão, com simulador de economia e demonstrações de produto, além de uma série de seis anúncios para as campanhas digitais.",
     images: {
       cover: "/portfolio/prismapay/posts/post-01.jpg",
+      // Peças 4:5 inteiras numa tela 16:9: o cover vertical ampliado cortava o texto do anúncio.
+      hero: "/portfolio/prismapay/hero.jpg",
     },
     gallery: posts("prismapay", 6),
     aboutImageFit: "contain",
@@ -222,33 +226,34 @@ export const projects: Project[] = [
       text: "As sete aplicações entregues, da embalagem do produto à fachada da loja.",
     },
   },
-  {
-    slug: "oliveira-health-score",
-    client: "Oliveira & Co",
-    displayName: "OLIVEIRA & CO\nHEALTH SCORE",
-    category: "Produto digital",
-    tagline:
-      "Dashboard de saúde do cliente com dados automáticos de campanhas e rotina comercial em uma única interface.",
-    statement: "Performance e relacionamento no mesmo painel.",
-    scope: [
-      "Dashboard de performance",
-      "Integração com Google Ads e Meta Ads",
-      "Health score",
-      "CRM kanban",
-    ],
-    execution:
-      "Desenvolvimento da V4 do dashboard, com sincronização de campanhas, consolidação de indicadores, acompanhamento da carteira e recursos de check-in, churn e gestão comercial em fluxo kanban.",
-    images: {
-      cover: "/portfolio/oliveira-health-score/dashboard.jpg",
-    },
-    gallery: ["/portfolio/oliveira-health-score/dashboard.jpg"],
-    about:
-      "Criei um dashboard de saúde do cliente para centralizar a leitura da operação da Oliveira & Co. A plataforma puxa automaticamente os dados das campanhas conectadas às APIs de Google e Meta e transforma investimento, leads, CPL, CTR e taxa de conversão em uma visão comparável por período, canal e campanha. Em vez de montar relatórios manualmente, a equipe acompanha a performance em uma interface atualizada e pronta para a reunião.\n\nO produto vai além do relatório de mídia. A carteira ganha sinais de saúde, histórico e registro de atividades, enquanto check-ins e churn ajudam a acompanhar o relacionamento ao longo do tempo. A lógica de CRM em formato kanban organiza os próximos passos comerciais, unindo dados de aquisição e gestão de clientes no mesmo ambiente. A V4 consolida essa operação com visão geral, performance detalhada, gráficos diários e leitura campanha a campanha.",
-    presentation: {
-      layout: "grid-1",
-      text: "A tela de performance do dashboard, com indicadores consolidados, evolução diária e detalhamento das campanhas sincronizadas.",
-    },
-  },
+  // Fora do ar a pedido do Felipe (17/11/2026). Para voltar, descomente o bloco.
+  // {
+  //   slug: "oliveira-health-score",
+  //   client: "Oliveira & Co",
+  //   displayName: "OLIVEIRA & CO\nHEALTH SCORE",
+  //   category: "Produto digital",
+  //   tagline:
+  //     "Dashboard de saúde do cliente com dados automáticos de campanhas e rotina comercial em uma única interface.",
+  //   statement: "Performance e relacionamento no mesmo painel.",
+  //   scope: [
+  //     "Dashboard de performance",
+  //     "Integração com Google Ads e Meta Ads",
+  //     "Health score",
+  //     "CRM kanban",
+  //   ],
+  //   execution:
+  //     "Desenvolvimento da V4 do dashboard, com sincronização de campanhas, consolidação de indicadores, acompanhamento da carteira e recursos de check-in, churn e gestão comercial em fluxo kanban.",
+  //   images: {
+  //     cover: "/portfolio/oliveira-health-score/dashboard.jpg",
+  //   },
+  //   gallery: ["/portfolio/oliveira-health-score/dashboard.jpg"],
+  //   about:
+  //     "Criei um dashboard de saúde do cliente para centralizar a leitura da operação da Oliveira & Co. A plataforma puxa automaticamente os dados das campanhas conectadas às APIs de Google e Meta e transforma investimento, leads, CPL, CTR e taxa de conversão em uma visão comparável por período, canal e campanha. Em vez de montar relatórios manualmente, a equipe acompanha a performance em uma interface atualizada e pronta para a reunião.\n\nO produto vai além do relatório de mídia. A carteira ganha sinais de saúde, histórico e registro de atividades, enquanto check-ins e churn ajudam a acompanhar o relacionamento ao longo do tempo. A lógica de CRM em formato kanban organiza os próximos passos comerciais, unindo dados de aquisição e gestão de clientes no mesmo ambiente. A V4 consolida essa operação com visão geral, performance detalhada, gráficos diários e leitura campanha a campanha.",
+  //   presentation: {
+  //     layout: "grid-1",
+  //     text: "A tela de performance do dashboard, com indicadores consolidados, evolução diária e detalhamento das campanhas sincronizadas.",
+  //   },
+  // },
   {
     slug: "alves-nabuco",
     client: "Alves & Nabuco",
