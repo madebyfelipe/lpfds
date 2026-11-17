@@ -199,7 +199,12 @@ Key exports: `metrics`, `services`, `problemItems`, `solutionItems`, `processSte
 - **Display type**: big case titles (`case-hero__title`, `case-statement__text`, `case-next__client`, etc.) use `var(--font-outfit), system-ui, sans-serif` — same family as the home `hero__title`. Never let them fall back to the body stack.
 - **Case kickers**: all kicker/label classes in cases use `0.72rem / letter-spacing 0.24em / weight 700 / uppercase / var(--accent)`, without the `::before` red dash (that dash belongs to `.section-kicker` on the home only).
 - **Card radius**: always via tokens (`--radius-lg` desktop / `--radius-md` mobile) — no hardcoded px.
-- **Índice `/portfolio` (nov/2026, pedido do Felipe: "assim", ref. shortscut.com/launches)**: `PortfolioLaunches` (cliente) + CSS `.pfl*` no fim de `app/monolog.css`. Tela cheia sem rodapé: título "Portfólio(N)", carrossel em loop (lista renderizada 3×, só a cópia do meio é focável; ao sair dela a posição volta N casas sem transição), roda do mouse/setas/arrasto avançam um card, clique no card lateral centraliza e no do centro abre o case, legenda "categoria · cliente" só no card ativo, filtros por categoria embaixo à esquerda e minimapa duotone à direita (some ≤767px, `aria-hidden`, só mouse). Capa = `projectCover()`, recortada em 16:9. A grade masonry antiga (`PortfolioGrid`/`ProjectCard`) foi apagada.
+- **Índice `/portfolio` (nov/2026, pedido do Felipe: "assim", ref. shortscut.com/launches)**: `PortfolioLaunches` (cliente) + CSS `.pfl*` no fim de `app/monolog.css`. Tela cheia sem rodapé: título "Portfólio(N)", carrossel em loop (lista renderizada 3×, só a cópia do meio é focável; ao sair dela a posição volta N casas sem transição), roda do mouse/setas/arrasto avançam um card, clique no card lateral centraliza e no do centro abre o case, legenda "categoria · cliente" só no card ativo, filtros por categoria embaixo à esquerda e minimapa duotone à direita (some ≤767px, `aria-hidden`, só mouse). Capa = `projectCover()`, recortada em 16:9. **Gaveta do projeto** (nov/2026, ref.
+  shortscut.com/social-content?project=): o clique no card do centro abre `ProjectDrawer` com
+  `?project=<slug>` (link direto abre também; Esc/véu/Fechar fecham; Ctrl/Cmd + clique ainda abre o
+  case): etiquetas (categoria + escopo), título, tagline, carrossel das peças (galeria, até 12)
+  com setas e barra de progresso, e "Sobre o projeto" (statement + about + "Ver o case completo
+  →"). Sem números nem depoimentos no lugar dos da referência. A grade masonry antiga (`PortfolioGrid`/`ProjectCard`) foi apagada.
 - **Gallery vs Apresentação**: when a case's `presentation` is grid mode without explicit `images` (it reuses `gallery`), the Galeria strip renders only the first 10 pieces as a sample — the Apresentação grid is the complete listing. Cases with a single-board presentation keep the full strip.
 - **One client = one case, folded structure**: `[slug]/page.tsx` is a single case layout with mandatory folds (hero, tagline, gallery, statement, scope) and optional ones that render only when their field is set — `about`/`aboutImage` (Sobre), `website` (O site, ao vivo — `SiteFrame`), `presentation` (Apresentação). Don't create a second slug when scope grows; add the fold to the existing case and redirect the dead slug in `next.config.ts`. The old standalone `WebsiteCase.tsx` was removed — the browser-window fold now lives inline in the standard case.
 - **Nav**: o índice e os cases usam `InstNav` (o `<Nav collapsible />` antigo saiu; `components/Nav.tsx` e `components/Footer.tsx` ficaram sem uso).
@@ -292,15 +297,19 @@ necessidade por trás da busca), **Q**ualidade (proposta de valor vs concorrênc
 **U**niverso (contexto/canais), **E**stória (origem/crenças/personalidade). No diagrama
 `MetodologiaFlow` elas viram um **hexágono** (não mais o quadrado de 4).
 
-**`/metodologia`** (página dedicada, na `InstNav`) — três blocos com tratamentos visuais
-**distintos de propósito** (uma versão empilhava dois grids de cards e confundia):
-(1) `MetodologiaFlow` — o fluxo Estratégia → Identidade → Comunicação; (2) **O
-posicionamento** numa seção `.inst-dark` — as seis áreas P-S-I-Q-U-E como cards de letra
-grande (`.inst-nave`); (3) **O processo** numa seção cream — o diagrama `LinhaTempo` + os
-**oito passos** como **lista numerada** (`.inst-proc`, nº · passo · descrição, agrupada
-nas duas etapas Estratégia/Identidade, export `process`), **não** outro grid de cards.
-Copy adaptada ao ICP de psicologia e ao escopo atual (dois encontros, até 30 dias) — **não** é a copy genérica B2B
-do deck-fonte (`Modelo_Proposta_Comercial.pdf`).
+**`/metodologia`** (página dedicada, na `InstNav`) — **nov/2026, pedido do Felipe: "método
+assim, animado inteirinho" (ref. shortscut.com/about)**. Seções na ordem da referência:
+(1) frase de abertura gigante ("Método PSIQUE" em vermelho) com ícones de pontos piscando
+(`PixelIcon`); (2) dois textos em colunas recuadas; (3) janela 16:9 com o `MetodologiaFlow`
+(barra com nome de arquivo, legenda e "Prazo até 30 dias"); (4) "O posicionamento:" com as
+seis áreas P-S-I-Q-U-E em **rolo de letras** — no lugar dos números da referência (Felipe não
+quer faixa de números); (5) faixa cinza com os **oito passos** (`process`) em tipo gigante que
+acendem na rolagem; (6) régua 01–08 + chamada "Vamos traduzir o seu consultório em uma marca"
+com foto duotone e `.mbtn`. Arquivos: `page.tsx`, `metodologia.css` (na pasta da rota),
+`components/institucional/MetodoMotion.tsx` (GSAP; estados iniciais só via JS, nada some sem
+JS ou com movimento reduzido). Os passos começam a 50% de opacidade e os números/régua ficam
+cinza no tema escuro para manter o axe em zero. `MetodoFoco`, `LinhaTempo` e `InstContato`
+saíram desta página (seguem no código para outras).
 
 **Home = clone do bymonolog.com (nov/2026, pedido do Felipe: "igualzinho, animações etc.")** —
 substituiu o redesign anterior (hero escuro `.inst-mono`, `.inst-thesis`, `.inst-help`…, removidos).
@@ -333,9 +342,13 @@ Estrutura e movimento portados do JS/CSS do Monolog, com medidas tiradas dos est
   design system, como o `/hub`.
 - **Nav** (`InstNav`, todas as páginas): grade de 12 colunas do Monolog; na home é fixa e
   transparente e troca de tinta pela seção sob ela (`data-theme-section` → `data-theme-nav`) e
-  some quando o rodapé entra; nas outras páginas é sticky e sólida. Mobile: botão "Menu" abre
+  some quando o rodapé entra; nas outras páginas é sticky e sólida e **também some quando o
+  rodapé entra** (`data-footer-in`, IntersectionObserver no `InstNav`) — antes ela cobria o
+  topo do rodapé ("Navegação", "(Estúdio)" e o e-mail sumiam). Mobile: botão "Menu" abre
   painel escuro de cima. `InstMobileCta` não aparece mais na home.
-- **Rodapé** (`InstFooter`): navegação em tipo grande, estúdio/redes/legal, hora de Sorocaba,
+- **Rodapé** (`InstFooter`): navegação em tipo grande, relógio da sede (nov/2026, ref.
+  shortscut.com: rótulo, mostrador analógico com segundos em vermelho, "Sorocaba (SP), Brasil" e a
+  linha de hora/data de SP — `FooterRelogio`), estúdio/redes/legal,
   voltar ao topo, **"Made by Felipe" gigante na largura inteira** (`.mfoot__mark`, Felipe pediu
   para manter) e a faixa de meio-tom em canvas ("Segure para agitar").
 - O estado inicial das animações só vale com `data-mh-motion` no `<html>` (script inline na

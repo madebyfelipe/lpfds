@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { InstNav } from "@/components/institucional/InstNav";
 import { PortfolioLaunches } from "@/components/portfolio/PortfolioLaunches";
+import { getImageSize } from "@/lib/image-size";
 import { projectCover } from "@/lib/institucional";
-import { projects } from "@/lib/portfolio";
+import { projects, type Project } from "@/lib/portfolio";
 import "../institucional.css";
 import "../monolog.css";
 
@@ -21,12 +22,31 @@ export const metadata: Metadata = {
 
 // Layout da referência shortscut.com/launches (tela cheia, sem rodapé):
 // a página inteira é o carrossel. Os cases continuam em /portfolio/[slug].
+// Peças da gaveta do projeto: a galeria do case (até 12, como amostra), ou
+// detalhe + série, ou as capturas do site; sem nada disso, a capa.
+const MAX_PIECES = 12;
+function drawerPieces(project: Project): string[] {
+  const list =
+    project.gallery ??
+    (project.images.detail && project.images.series
+      ? [project.images.detail, ...project.images.series]
+      : project.website?.pages.map((page) => page.src) ?? []);
+  return (list.length ? list : [projectCover(project)]).slice(0, MAX_PIECES);
+}
+
 export default function PortfolioPage() {
+  // Dimensões reais lidas em build time: o carrossel da gaveta reserva a
+  // proporção de cada peça antes do download.
   const items = projects.map((project) => ({
     slug: project.slug,
     client: project.client,
     category: project.category,
-    cover: projectCover(project)
+    cover: projectCover(project),
+    scope: project.scope,
+    tagline: project.tagline,
+    statement: project.statement,
+    about: project.about,
+    pieces: drawerPieces(project).map((src) => ({ src, ...getImageSize(src) }))
   }));
 
   return (
