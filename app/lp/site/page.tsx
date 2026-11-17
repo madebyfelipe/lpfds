@@ -96,16 +96,16 @@ const sites = [
     client: "Estruturart Capital",
     tipo: "Site institucional",
     src: "/portfolio/estruturart/pagina-inicio.jpg",
-    w: 960,
-    h: 6400
+    w: 1440,
+    h: 5952
   },
   {
     slug: "prismapay",
     client: "PrismaPay",
     tipo: "Landing page",
     src: "/portfolio/prismapay/pagina-inicio.jpg",
-    w: 960,
-    h: 6000
+    w: 1440,
+    h: 5359
   }
 ];
 
