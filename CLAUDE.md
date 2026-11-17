@@ -199,10 +199,10 @@ Key exports: `metrics`, `services`, `problemItems`, `solutionItems`, `processSte
 - **Display type**: big case titles (`case-hero__title`, `case-statement__text`, `case-next__client`, etc.) use `var(--font-outfit), system-ui, sans-serif` — same family as the home `hero__title`. Never let them fall back to the body stack.
 - **Case kickers**: all kicker/label classes in cases use `0.72rem / letter-spacing 0.24em / weight 700 / uppercase / var(--accent)`, without the `::before` red dash (that dash belongs to `.section-kicker` on the home only).
 - **Card radius**: always via tokens (`--radius-lg` desktop / `--radius-md` mobile) — no hardcoded px.
-- **Mobile card caption**: `project-card__caption` (client + category) renders only at ≤768px; on desktop the cursor floater shows the name. Keep both in sync when adding fields.
+- **Índice `/portfolio` (nov/2026, pedido do Felipe: "assim", ref. shortscut.com/launches)**: `PortfolioLaunches` (cliente) + CSS `.pfl*` no fim de `app/monolog.css`. Tela cheia sem rodapé: título "Portfólio(N)", carrossel em loop (lista renderizada 3×, só a cópia do meio é focável; ao sair dela a posição volta N casas sem transição), roda do mouse/setas/arrasto avançam um card, clique no card lateral centraliza e no do centro abre o case, legenda "categoria · cliente" só no card ativo, filtros por categoria embaixo à esquerda e minimapa duotone à direita (some ≤767px, `aria-hidden`, só mouse). Capa = `projectCover()`, recortada em 16:9. A grade masonry antiga (`PortfolioGrid`/`ProjectCard`) foi apagada.
 - **Gallery vs Apresentação**: when a case's `presentation` is grid mode without explicit `images` (it reuses `gallery`), the Galeria strip renders only the first 10 pieces as a sample — the Apresentação grid is the complete listing. Cases with a single-board presentation keep the full strip.
 - **One client = one case, folded structure**: `[slug]/page.tsx` is a single case layout with mandatory folds (hero, tagline, gallery, statement, scope) and optional ones that render only when their field is set — `about`/`aboutImage` (Sobre), `website` (O site, ao vivo — `SiteFrame`), `presentation` (Apresentação). Don't create a second slug when scope grows; add the fold to the existing case and redirect the dead slug in `next.config.ts`. The old standalone `WebsiteCase.tsx` was removed — the browser-window fold now lives inline in the standard case.
-- **Nav**: portfolio pages (grid and cases) always use `<Nav collapsible />`.
+- **Nav**: o índice e os cases usam `InstNav` (o `<Nav collapsible />` antigo saiu; `components/Nav.tsx` e `components/Footer.tsx` ficaram sem uso).
 - On touch (`hover: none`) and reduced motion, the Galeria marquee becomes a manual horizontal scroll and the duplicated loop copy (`case-gallery__item--dup`) is hidden.
 
 ---
@@ -470,9 +470,8 @@ ids live on the institutional home — removing them breaks those links. `lib/da
 `navigationLinks` was likewise repointed at the new routes, since the old home's section
 anchors no longer exist.
 
-**Untouched by this port**: `/contato` and `/portfolio` (the old dark grid, still linked
-from `/hub`'s "Trabalhos" card — `components/Nav.tsx` and `components/Footer.tsx` now
-exist only for it). `/hub` keeps its content and its own body/footer; only its desktop
+**Untouched by this port**: `/contato`. (`/portfolio` era a grade escura antiga; em
+nov/2026 virou o carrossel no estilo do site — ver "Portfolio conventions".) `/hub` keeps its content and its own body/footer; only its desktop
 footer/deck full-bleed padding was fixed (the content used to stretch to 100vw instead of
 the hub column) and its header was swapped for `InstNav` (see "Nav" above).
 The institutional footer carries a backlink to `/hub`.
