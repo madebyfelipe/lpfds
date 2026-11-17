@@ -94,6 +94,11 @@ import { post as marcaPerinatal } from "@/content/blog/marca-psicologa-perinatal
 import { post as blogParaPsicologo } from "@/content/blog/blog-para-psicologo";
 import { post as videoApresentacao } from "@/content/blog/video-apresentacao-psicologo";
 import { post as politicaPrivacidade } from "@/content/blog/politica-de-privacidade-psicologo";
+import { post as acompanhanteTerapeutico } from "@/content/blog/acompanhante-terapeutico-divulgar";
+import { post as marcaCasalFamilia } from "@/content/blog/marca-psicologo-casal-familia";
+import { post as seletividadeAlimentar } from "@/content/blog/seletividade-alimentar-psicologa-divulgar";
+import { post as contratoTerapeutico } from "@/content/blog/contrato-terapeutico-psicologo";
+import { post as identidadeVisualClinica } from "@/content/blog/identidade-visual-clinica-psicologia";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -265,7 +270,12 @@ export const posts: Post[] = [
   marcaPerinatal,
   blogParaPsicologo,
   videoApresentacao,
-  politicaPrivacidade
+  politicaPrivacidade,
+  acompanhanteTerapeutico,
+  marcaCasalFamilia,
+  seletividadeAlimentar,
+  contratoTerapeutico,
+  identidadeVisualClinica
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
