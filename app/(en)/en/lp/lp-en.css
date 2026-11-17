@@ -54,6 +54,15 @@
   color: var(--red-ink);
 }
 
+/* A hora vem do relógio do estúdio. O entreletra negativo do display (0.03em a
+   108px) encosta os dígitos uns nos outros, e o espaço antes do "in" colapsa
+   ao lado de um elemento inline. Aqui o relógio abre o próprio respiro. */
+.lpc-h .mh-red {
+  letter-spacing: 0.015em;
+  font-variant-numeric: tabular-nums;
+  margin-inline: 0.05em;
+}
+
 .lpc-dot {
   display: inline-block;
   width: 0.6em;
