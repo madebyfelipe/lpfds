@@ -409,6 +409,23 @@
     grid-template-columns: 1fr;
   }
 
+  /* Numa coluna só, o rótulo fixo passaria por cima das letras. */
+  .mtd-facts__label {
+    position: static;
+  }
+
+  /* Legenda da janela: "Prazo até 30 dias" desce para uma linha própria,
+     sem quebrar palavra por palavra. */
+  .mtd-media__foot {
+    flex-wrap: wrap;
+  }
+
+  .mtd-media__meta {
+    flex-basis: 100%;
+    margin-left: 42px;
+    white-space: nowrap;
+  }
+
   .mtd-step__num {
     position: static;
     display: block;
@@ -421,6 +438,28 @@
 
   .mtd-cta__grid {
     background-size: 25% 100%;
+  }
+}
+
+/* Abaixo de 720px o MetodologiaFlow vira coluna (três peças empilhadas):
+   a janela deixa de ser 16:9 e cresce com o diagrama, que antes aparecia
+   cortado e ampliado. */
+@media (max-width: 720px) {
+  .mtd-media__screen {
+    aspect-ratio: auto;
+    padding: 8px 16px 24px;
+  }
+
+  .mtd-media__screen > * {
+    max-height: none;
+  }
+
+  .mtd-media__screen .inst-flow {
+    margin-top: 16px;
+  }
+
+  .mtd-media__screen .inst-flow__fig {
+    width: min(100%, 260px);
   }
 }
 
