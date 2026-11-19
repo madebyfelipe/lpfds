@@ -2216,6 +2216,24 @@
   text-decoration: none;
 }
 
+/* Case + site no ar lado a lado, abaixo do texto do projeto */
+.pfd__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+  margin-top: 8px;
+}
+
+.pfd__actions .pfd__cta {
+  margin-top: 0;
+}
+
+.pfd__actions :is(.pfd__cta, .pfd__live):focus-visible {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 3px;
+}
+
 @media (max-width: 767px) {
   .pfd__panel {
     top: 8px;
