@@ -133,7 +133,7 @@ export default function LpMarcaPage() {
           <figure className="lp-hero__media">
             <Image
               src="/institucional/home/lp-marca-hero.jpg"
-              alt="Envelopes branco e preto, caneta e pedras sobre fundo cinza: a papelaria de uma marca"
+              alt="Caderno de marca aberto, impresso com tipografia preta, cartão e selo vermelho sobre a mesa do estúdio"
               width={1840}
               height={1227}
               sizes="(max-width: 900px) 100vw, 58vw"
