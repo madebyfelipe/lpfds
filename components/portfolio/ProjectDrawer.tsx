@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { MButtonInner } from "@/components/institucional/home/MButton";
 
 export type DrawerPiece = { src: string; width: number; height: number };
 
@@ -14,6 +15,9 @@ export type DrawerProject = {
   tagline: string;
   statement: string;
   about?: string;
+  // Site entregue, com protocolo — vira o botão "Acessar o site", ao lado do
+  // link do case. Cases sem site (marca, conteúdo) não mostram o botão.
+  site?: string;
   pieces: DrawerPiece[];
 };
 
@@ -188,9 +192,25 @@ export function ProjectDrawer({ project, onClose }: { project: DrawerProject | n
                 {text}
               </p>
             ))}
-            <Link href={`/portfolio/${shown.slug}`} className="pfd__cta">
-              Ver o case completo <span aria-hidden="true">→</span>
-            </Link>
+            <div className="pfd__actions">
+              <Link href={`/portfolio/${shown.slug}`} className="pfd__cta">
+                Ver o case completo <span aria-hidden="true">→</span>
+              </Link>
+              {shown.site && (
+                <a
+                  className="mbtn mbtn--secondary pfd__live"
+                  href={shown.site}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Acessar o site de ${shown.client} (abre em nova aba)`}
+                >
+                  <MButtonInner>
+                    Acessar o site
+                    <span className="sr-only"> (abre em nova aba)</span>
+                  </MButtonInner>
+                </a>
+              )}
+            </div>
           </div>
         </section>
       </div>

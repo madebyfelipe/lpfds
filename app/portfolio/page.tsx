@@ -46,6 +46,8 @@ export default function PortfolioPage() {
     tagline: project.tagline,
     statement: project.statement,
     about: project.about,
+    // Só cases com site entregue ganham o botão "Acessar o site" na gaveta.
+    site: project.website ? `https://${project.website.url}` : undefined,
     pieces: drawerPieces(project).map((src) => ({ src, ...getImageSize(src) }))
   }));
 
