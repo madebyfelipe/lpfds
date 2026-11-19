@@ -31,6 +31,18 @@ export function InstNav() {
 
   useEffect(() => setOpen(false), [pathname]);
 
+  // A nav é sticky e opaca: sem isto ela cobre o topo do rodapé. Some quando
+  // o rodapé entra na tela (a home faz o mesmo pelo HomeMotion, com GSAP).
+  const [footerIn, setFooterIn] = useState(false);
+  useEffect(() => {
+    if (overlay) return;
+    const foot = document.querySelector<HTMLElement>("[data-footer-parallax]");
+    if (!foot) return;
+    const io = new IntersectionObserver(([entry]) => setFooterIn(entry.isIntersecting));
+    io.observe(foot);
+    return () => io.disconnect();
+  }, [overlay, pathname]);
+
   useEffect(() => {
     if (!overlay) return;
     const update = () => {
@@ -67,6 +79,7 @@ export function InstNav() {
       data-overlay={overlay || undefined}
       data-theme-nav={overlay ? theme : undefined}
       data-open={open || undefined}
+      data-footer-in={(footerIn && !open) || undefined}
     >
       <a href="#conteudo" className="inst-skip">
         {t.pular}

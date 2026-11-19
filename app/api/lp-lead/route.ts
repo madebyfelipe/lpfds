@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { IMERSAO_BCC, IMERSAO_TO } from "@/lib/imersao";
 import {
   LP_MAX_FIELD,
+  LP_ORIGEM_PREVIEW_EN,
   lpQuiz,
   lpTitulo,
   validateLpLead,
+  validateLpPreview,
   type LpLeadInput,
   type LpOrigem
 } from "@/lib/lp";
@@ -38,6 +40,89 @@ function isOrigem(value: unknown): value is LpOrigem {
   return value === "marca" || value === "site";
 }
 
+/** Linha de e-mail sem quebra de linha: o valor vem do visitante. */
+const umaLinha = (valor: string) => valor.replace(/[\r\n\u2028\u2029]+/g, " ").trim();
+
+/**
+ * /en/lp — pedido de prévia grátis da home (nome, e-mail, link opcional). Mesmo
+ * freio, SMTP e destinatários do restante; o e-mail sai com Reply-To do lead.
+ */
+async function handlePreviewEn(body: Record<string, unknown>, request: Request) {
+  const clean = {
+    nome: umaLinha(String(body.nome ?? "")).slice(0, LP_MAX_FIELD),
+    email: umaLinha(String(body.email ?? "")).slice(0, 254),
+    link: umaLinha(String(body.link ?? "")).slice(0, 300),
+    consentimento: body.consentimento === true
+  };
+  const invalid = validateLpPreview(clean);
+  if (invalid) {
+    return NextResponse.json({ ok: false, error: "invalid_field", field: invalid }, { status: 400 });
+  }
+
+  const ip = (request.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "anon";
+  if (limitado(ip)) {
+    return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
+  }
+
+  const mailer = getTransporter();
+  if (!mailer) {
+    console.error("[lp-lead] SMTP não configurado — faltam variáveis de ambiente.");
+    return NextResponse.json({ ok: false, error: "smtp_unconfigured" }, { status: 500 });
+  }
+
+  const recebidoEm = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+  const linhas: Array<[string, string]> = [
+    ["Nome", clean.nome],
+    ["E-mail", clean.email],
+    ["Site ou perfil atual", clean.link || "(não informado)"],
+    ["Idioma", "inglês (EUA)"],
+    ["Página", "/en/lp"],
+    ["Recebido em", `${recebidoEm} (horário de Brasília)`],
+    // Prova de consentimento (LGPD art. 8º, § 2º) no próprio e-mail.
+    ["Aceite do formulário", `sim — ${recebidoEm}`]
+  ];
+
+  try {
+    await mailer.sendMail({
+      from: `"Made by Felipe — site" <${process.env.SMTP_USER}>`,
+      to: IMERSAO_TO,
+      bcc: IMERSAO_BCC,
+      replyTo: clean.email,
+      subject: `Novo lead — Prévia grátis (EN) — ${clean.nome}`,
+      text: [
+        "Lead da LP em inglês (prévia grátis da home)",
+        "",
+        ...linhas.map(([rotulo, valor]) => `${rotulo}: ${valor}`),
+        "",
+        `Responder por e-mail: ${clean.email}`
+      ].join("\n"),
+      html: `
+        <div style="font-family:Helvetica,Arial,sans-serif;color:#151515;max-width:560px">
+          <p style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#bc0319;margin:0 0 16px">
+            Novo lead · Prévia grátis (EN)
+          </p>
+          <table style="border-collapse:collapse;width:100%;font-size:15px">
+            ${linhas
+              .map(
+                ([rotulo, valor]) => `
+              <tr>
+                <td style="padding:10px 12px 10px 0;border-bottom:1px solid #ececec;color:#767676;width:44%;vertical-align:top">${escapeHtml(rotulo)}</td>
+                <td style="padding:10px 0;border-bottom:1px solid #ececec;font-weight:600;vertical-align:top">${escapeHtml(valor)}</td>
+              </tr>`
+              )
+              .join("")}
+          </table>
+          <p style="margin:24px 0 0;font-size:13px;color:#767676">Responda a este e-mail: o Reply-To é o do lead.</p>
+        </div>`
+    });
+  } catch (error) {
+    console.error("[lp-lead] Envio falhou:", error);
+    return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
+  }
+
+  return NextResponse.json({ ok: true });
+}
+
 export async function POST(request: Request) {
   let body: Partial<LpLeadInput> & { site?: string };
   try {
@@ -48,6 +133,10 @@ export async function POST(request: Request) {
 
   // Campo invisível preenchido = robô. Responde ok para não ensinar o filtro.
   if (body.site) return NextResponse.json({ ok: true });
+
+  if ((body.origem as unknown) === LP_ORIGEM_PREVIEW_EN) {
+    return handlePreviewEn(body as Record<string, unknown>, request);
+  }
 
   if (!isOrigem(body.origem)) {
     return NextResponse.json({ ok: false, error: "invalid_field", field: "respostas" }, { status: 400 });

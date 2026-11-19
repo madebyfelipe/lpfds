@@ -84,6 +84,26 @@ import { post as reciboPsicologo } from "@/content/blog/recibo-psicologo";
 import { post as faqSite } from "@/content/blog/perguntas-frequentes-site-psicologo";
 import { post as mascoteInfantil } from "@/content/blog/mascote-marca-psicologa-infantil";
 import { post as nomeClinicaAutismo } from "@/content/blog/nome-clinica-autismo";
+import { post as sitePsicologaInfantil } from "@/content/blog/site-psicologa-infantil";
+import { post as textosSite } from "@/content/blog/textos-site-psicologo";
+import { post as brasileirosExterior } from "@/content/blog/psicologo-brasileiros-no-exterior";
+import { post as reembolsoPlano } from "@/content/blog/reembolso-plano-psicologo";
+import { post as salaDeEspera } from "@/content/blog/sala-de-espera-consultorio-psicologia";
+import { post as grupoHabilidadesSociais } from "@/content/blog/grupo-habilidades-sociais-divulgar";
+import { post as marcaPerinatal } from "@/content/blog/marca-psicologa-perinatal";
+import { post as blogParaPsicologo } from "@/content/blog/blog-para-psicologo";
+import { post as videoApresentacao } from "@/content/blog/video-apresentacao-psicologo";
+import { post as politicaPrivacidade } from "@/content/blog/politica-de-privacidade-psicologo";
+import { post as acompanhanteTerapeutico } from "@/content/blog/acompanhante-terapeutico-divulgar";
+import { post as marcaCasalFamilia } from "@/content/blog/marca-psicologo-casal-familia";
+import { post as seletividadeAlimentar } from "@/content/blog/seletividade-alimentar-psicologa-divulgar";
+import { post as contratoTerapeutico } from "@/content/blog/contrato-terapeutico-psicologo";
+import { post as identidadeVisualClinica } from "@/content/blog/identidade-visual-clinica-psicologia";
+import { post as linkNaBio } from "@/content/blog/link-na-bio-psicologo";
+import { post as mudancaEndereco } from "@/content/blog/mudanca-endereco-consultorio";
+import { post as abordagemNaMarca } from "@/content/blog/abordagem-terapeutica-na-marca";
+import { post as marcaOnline } from "@/content/blog/marca-psicologo-online";
+import { post as relatorioEscola } from "@/content/blog/relatorio-psicologico-escola";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -245,7 +265,27 @@ export const posts: Post[] = [
   reciboPsicologo,
   faqSite,
   mascoteInfantil,
-  nomeClinicaAutismo
+  nomeClinicaAutismo,
+  sitePsicologaInfantil,
+  textosSite,
+  brasileirosExterior,
+  reembolsoPlano,
+  salaDeEspera,
+  grupoHabilidadesSociais,
+  marcaPerinatal,
+  blogParaPsicologo,
+  videoApresentacao,
+  politicaPrivacidade,
+  acompanhanteTerapeutico,
+  marcaCasalFamilia,
+  seletividadeAlimentar,
+  contratoTerapeutico,
+  identidadeVisualClinica,
+  linkNaBio,
+  mudancaEndereco,
+  abordagemNaMarca,
+  marcaOnline,
+  relatorioEscola
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );

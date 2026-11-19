@@ -378,6 +378,9 @@
   color: inherit;
   text-decoration: none;
   transition: color 0.25s;
+  /* O nome da marca é uma linha só: sem isso ele quebra em "Made by" / "Felipe®"
+     no celular estreito (o wrap de 4 colunas fica menor que a palavra). */
+  white-space: nowrap;
 }
 
 .mnav__links {
@@ -533,10 +536,37 @@
   display: none;
 }
 
+/* Abaixo de 400px não cabe logo + som + tema + CTA + menu na mesma linha:
+   o logo cede um pouco e os vãos encolhem, em vez de cortar o "Menu". */
+@media (max-width: 400px) {
+  .mnav__home {
+    font-size: 13px;
+  }
+
+  .mnav__contain {
+    gap: 6px;
+  }
+}
+
 @media (max-width: 767px) {
   .mnav__contain {
     display: flex;
     justify-content: space-between;
+  }
+
+  /* O logo não encolhe nem quebra; o resto da barra cede espaço. */
+  .mnav__home-wrap {
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+
+  .mnav__home {
+    font-size: 15px;
+    letter-spacing: -0.02em;
+  }
+
+  .mnav__contain {
+    gap: 8px;
   }
 
   .mnav__links {
@@ -740,6 +770,73 @@
   margin: 0;
   max-width: 24ch;
   color: var(--m-muted-on-dark);
+}
+
+/* Relógio da sede (ref. shortscut.com/about): rótulo em caixa, mostrador
+   analógico com segundos em vermelho, cidade e linha de hora de SP. Ocupa a
+   largura da coluna da direita, acima de estúdio/redes/legal. */
+.mfoot__hq {
+  flex: 1 0 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mfoot__hq-label {
+  margin: 0 0 28px;
+  padding: 3px 8px;
+  border: 1px solid currentColor;
+  border-radius: var(--m-radius);
+  font-size: var(--t-micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mfoot__dial {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 26px;
+}
+
+.mfoot__dial-face {
+  fill: var(--m-card);
+}
+
+.mfoot__dial-tick {
+  fill: var(--m-muted-on-dark);
+}
+
+.mfoot__dial-hand {
+  stroke: var(--m-light);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.mfoot__dial-sec {
+  stroke: var(--red);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.mfoot__dial-pin {
+  fill: var(--red);
+}
+
+.mfoot__hq-city {
+  margin: 0;
+  font-size: var(--t-large);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.mfoot__hq-time {
+  min-height: 1.25em;
+  margin: 6px 0 0;
+  font-weight: 500;
+}
+
+.mfoot__hq-time .mfoot__date {
+  display: inline-block;
 }
 
 .mfoot__socials,
@@ -1517,4 +1614,640 @@
 .msound[data-on] .msound__cross {
   stroke-dashoffset: 12;
   opacity: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Portfólio (/portfolio) — formato da referência shortscut.com/launches:
+   tela cheia, título gigante com contador, carrossel horizontal com o card
+   ativo no centro, legenda "categoria · cliente" sob ele, filtros embaixo
+   à esquerda e minimapa das capas embaixo à direita. Componente:
+   components/portfolio/PortfolioLaunches.tsx.
+   -------------------------------------------------------------------------- */
+
+.pfl-page {
+  min-height: 0;
+}
+
+/* A página não rola: sem a reserva de barra do site (scrollbar-gutter:
+   stable), que aqui viraria uma faixa escura vazia na borda direita. */
+:root:has(.pfl-page) {
+  scrollbar-gutter: auto;
+}
+
+.pfl {
+  /* largura do card e vão do trilho: a conta do translate usa os dois */
+  --pfl-w: clamp(240px, 27.6vw, 560px);
+  --pfl-gap: 12px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: calc(100svh - var(--pfl-nav, 72px));
+  padding: 0 var(--m-margin) var(--m-margin);
+  overflow: hidden;
+  font-family: var(--m-font);
+}
+
+.pfl__title {
+  margin: clamp(16px, 4vw, 64px) 0 0;
+  font-size: var(--t-display);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+}
+
+.pfl__count {
+  position: relative;
+  top: -0.05em;
+  margin-left: 0.02em;
+  font-size: 0.26em;
+  letter-spacing: -0.02em;
+  vertical-align: top;
+}
+
+.pfl__stage {
+  align-self: center;
+  margin: clamp(32px, 5vh, 72px) calc(-1 * var(--m-margin));
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.pfl__track {
+  display: flex;
+  column-gap: var(--pfl-gap);
+  width: 100%;
+  /* 50% = meio do palco (o trilho tem a largura dele) */
+  transform: translateX(
+    calc(50% - var(--pfl-w) / 2 - var(--pfl-pos) * (var(--pfl-w) + var(--pfl-gap)) + var(--pfl-drag))
+  );
+}
+
+.pfl__track[data-animate] {
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pfl__card {
+  flex: 0 0 var(--pfl-w);
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.pfl__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--gray-100);
+}
+
+.pfl__img {
+  object-fit: cover;
+  transition: scale 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pfl__card:focus-visible .pfl__media {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 3px;
+}
+
+.pfl__caption {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 8px;
+  font-size: var(--t-main);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  translate: 0 4px;
+  transition:
+    opacity 0.3s,
+    translate 0.3s;
+}
+
+.pfl__card[data-active] .pfl__caption {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: 0.25s;
+}
+
+.pfl__caption-cat {
+  color: var(--gray-500);
+}
+
+.pfl__caption-client {
+  color: var(--black);
+}
+
+.pfl__foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.pfl__filters {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+}
+
+.pfl__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 400px;
+}
+
+.pfl__chip {
+  min-height: 32px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: var(--m-radius);
+  background: var(--gray-100);
+  color: var(--black);
+  font-family: var(--m-font);
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.pfl__chip:hover {
+  background: var(--gray-200);
+}
+
+.pfl__chip[aria-pressed="true"] {
+  background: var(--red);
+  color: var(--on-red);
+}
+
+.pfl__chip:focus-visible {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 2px;
+}
+
+/* Minimapa: a capa ativa aberta em 16:9, as outras em filetes duotone
+   (preto + vermelho da marca). Só mouse: os cards já têm o teclado. */
+.pfl__minimap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 55px;
+}
+
+.pfl__thumb {
+  position: relative;
+  flex: 0 0 auto;
+  width: 7px;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: var(--gray-100);
+  cursor: pointer;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pfl__thumb[data-active] {
+  width: 97px;
+}
+
+.pfl__thumb-img {
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.4);
+  transition: filter 0.4s;
+}
+
+.pfl__thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--red);
+  mix-blend-mode: multiply;
+  transition: opacity 0.4s;
+}
+
+.pfl__thumb[data-active] .pfl__thumb-img,
+.pfl__thumb:hover .pfl__thumb-img {
+  filter: none;
+}
+
+.pfl__thumb[data-active]::after,
+.pfl__thumb:hover::after {
+  opacity: 0;
+}
+
+/* Etiqueta presa ao cursor sobre o card do centro (só mouse). */
+.pfl__cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  padding: 6px 10px;
+  border-radius: var(--m-radius);
+  background: var(--red);
+  color: var(--on-red);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(14px, -50%) scale(0.6);
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pfl__cursor {
+    display: block;
+  }
+
+  .pfl__cursor[data-visible] {
+    opacity: 1;
+    transform: translate(14px, -50%) scale(1);
+  }
+
+  .pfl__card[data-active] {
+    cursor: none;
+  }
+
+  .pfl__card[data-active]:hover .pfl__img {
+    scale: 1.03;
+  }
+
+  .pfl__card:not([data-active]) {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 767px) {
+  .pfl {
+    --pfl-w: 86vw;
+    --pfl-gap: 10px;
+  }
+
+  .pfl__title {
+    font-size: 19vw;
+  }
+
+  .pfl__minimap {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pfl__track[data-animate],
+  .pfl__img,
+  .pfl__thumb,
+  .pfl__caption {
+    transition: none;
+  }
+}
+
+
+/* A nav é sticky e opaca: fora da home ela cobria o topo do rodapé (rótulos
+   "Navegação"/"(Estúdio)" e o e-mail sumiam sob ela). Some quando o rodapé
+   entra na tela, como a home já fazia por GSAP. InstNav marca o atributo. */
+.mnav {
+  transition:
+    opacity 0.4s,
+    visibility 0s linear 0s;
+}
+
+.mnav[data-footer-in] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.4s,
+    visibility 0s linear 0.4s;
+}
+
+/* --------------------------------------------------------------------------
+   Gaveta do projeto (/portfolio?project=…) — formato da referência
+   shortscut.com/social-content: painel à direita sobre o portfólio
+   desfocado. Componente: components/portfolio/ProjectDrawer.tsx.
+   -------------------------------------------------------------------------- */
+
+.pfd {
+  /* Véu sobre a página: escuro nos dois temas (um véu claro no tema escuro
+     apagaria o painel em vez de destacá-lo), por isso não usa --black. */
+  --pfd-scrim: rgba(8, 8, 7, 0.65);
+  --pfd-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+.pfd[data-open] {
+  pointer-events: auto;
+}
+
+.pfd__scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: var(--pfd-scrim);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.5s var(--pfd-ease);
+}
+
+.pfd[data-open] .pfd__scrim {
+  opacity: 1;
+}
+
+.pfd__panel {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  bottom: 15px;
+  width: min(58.7vw, 900px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 36px 30px 48px;
+  border-radius: var(--m-radius);
+  background: var(--cream);
+  color: var(--black);
+  font-family: var(--m-font);
+  transform: translateX(calc(100% + 30px));
+  transition: transform 0.6s var(--pfd-ease);
+}
+
+.pfd[data-open] .pfd__panel {
+  transform: translateX(0);
+}
+
+/* Conteúdo sobe em cascata depois que o painel chega */
+.pfd__head > *,
+.pfd__rail,
+.pfd__controls,
+.pfd__about {
+  opacity: 0;
+  translate: 0 18px;
+  transition:
+    opacity 0.5s var(--pfd-ease),
+    translate 0.6s var(--pfd-ease);
+}
+
+.pfd[data-open] .pfd__head > *,
+.pfd[data-open] .pfd__rail,
+.pfd[data-open] .pfd__controls,
+.pfd[data-open] .pfd__about {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.pfd[data-open] .pfd__tags { transition-delay: 0.2s; }
+.pfd[data-open] .pfd__title { transition-delay: 0.26s; }
+.pfd[data-open] .pfd__tagline { transition-delay: 0.32s; }
+.pfd[data-open] .pfd__rail { transition-delay: 0.38s; }
+.pfd[data-open] .pfd__controls { transition-delay: 0.44s; }
+.pfd[data-open] .pfd__about { transition-delay: 0.5s; }
+
+.pfd__close {
+  position: sticky;
+  top: 0;
+  float: right;
+  z-index: 2;
+  min-height: 40px;
+  margin: -14px -8px 0 0;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: var(--m-radius);
+  background: var(--gray-100);
+  color: var(--black);
+  font: 500 var(--t-small) / 1 var(--m-font);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pfd__close:hover {
+  background: var(--gray-200);
+}
+
+.pfd__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pfd__tag {
+  margin: 0;
+  padding: 3px 7px;
+  border: 1px solid currentColor;
+  border-radius: var(--m-radius);
+  font-family: var(--m-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pfd__title {
+  margin: 10px 0 0;
+  font-size: clamp(40px, 4.4vw, 64px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.pfd__tagline {
+  max-width: 34ch;
+  margin: clamp(40px, 9vh, 96px) 0 0;
+  font-size: var(--t-large);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.pfd__rail {
+  display: flex;
+  gap: 16px;
+  margin: 28px -30px 0 0;
+  padding-right: 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.pfd__rail::-webkit-scrollbar {
+  display: none;
+}
+
+.pfd__rail:focus-visible,
+.pfd__close:focus-visible,
+.pfd__arrow:focus-visible,
+.pfd__cta:focus-visible {
+  outline: 2px solid var(--red-ink);
+  outline-offset: 3px;
+}
+
+.pfd__piece {
+  --pfd-h: clamp(300px, 56vh, 500px);
+  position: relative;
+  flex: 0 0 auto;
+  width: calc(var(--pfd-h) * var(--pfd-r, 0.8));
+  max-width: 80vw;
+  height: var(--pfd-h);
+  overflow: hidden;
+  border-radius: var(--m-radius);
+  background: var(--gray-100);
+  scroll-snap-align: start;
+}
+
+.pfd__piece-img {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.pfd__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 36px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.pfd__arrows {
+  display: flex;
+  gap: 6px;
+}
+
+.pfd__arrow {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: var(--m-radius);
+  background: var(--gray-100);
+  color: var(--black);
+  font-size: 20px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    opacity 0.2s;
+}
+
+.pfd__arrow:hover:not(:disabled) {
+  background: var(--gray-200);
+}
+
+.pfd__arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pfd__progress {
+  position: relative;
+  width: 176px;
+  height: 1px;
+  background: var(--gray-200);
+  overflow: hidden;
+}
+
+.pfd__progress-bar {
+  position: absolute;
+  inset: 0;
+  background: var(--black);
+  transform-origin: left center;
+  transition: transform 0.3s var(--pfd-ease);
+}
+
+.pfd__about {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  padding-top: 32px;
+}
+
+.pfd__tag--label {
+  justify-self: start;
+  align-self: start;
+}
+
+.pfd__about-body {
+  display: grid;
+  gap: 18px;
+  max-width: 60ch;
+}
+
+.pfd__statement {
+  margin: 0;
+  font-size: clamp(24px, 2.3vw, 30px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.pfd__text {
+  margin: 0;
+  font-size: var(--t-main);
+  line-height: 1.5;
+  color: var(--gray-700);
+}
+
+.pfd__cta {
+  justify-self: start;
+  margin-top: 8px;
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--red-ink);
+  color: var(--black);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .pfd__panel {
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    width: auto;
+    padding: 28px 18px 40px;
+  }
+
+  .pfd__rail {
+    margin-right: -18px;
+    padding-right: 18px;
+  }
+
+  .pfd__piece {
+    --pfd-h: 58vh;
+  }
+
+  .pfd__about {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pfd__scrim,
+  .pfd__panel,
+  .pfd__head > *,
+  .pfd__rail,
+  .pfd__controls,
+  .pfd__about,
+  .pfd__progress-bar {
+    transition: none;
+  }
 }

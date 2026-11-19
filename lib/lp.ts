@@ -137,3 +137,35 @@ export async function requestLpLead(input: LpLeadInput & { site?: string }): Pro
   if (!res.ok) throw new Error(`lp-lead respondeu ${res.status}`);
   return (await res.json()) as { ok: boolean };
 }
+
+/**
+ * LP em inglês (/en/lp): "prévia grátis da home". Sem quiz nem WhatsApp — pede
+ * nome, e-mail e (opcional) o link do site atual. Origem própria no mesmo
+ * endpoint, para o caminho das LPs em português ficar intocado.
+ */
+export const LP_ORIGEM_PREVIEW_EN = "preview-en";
+
+export type LpPreviewInput = {
+  nome: string;
+  email: string;
+  link: string;
+  consentimento: boolean;
+};
+
+const EMAIL_RE = /^[^\s@<>"',;]+@[^\s@<>"',;]+\.[^\s@<>"',;]+$/;
+
+/** Devolve o campo inválido ou null. O link só aceita http(s). */
+export function validateLpPreview(input: Partial<LpPreviewInput>): "nome" | "email" | "link" | "consentimento" | null {
+  if (!input.nome?.trim()) return "nome";
+  if (!input.email || input.email.length > 254 || !EMAIL_RE.test(input.email)) return "email";
+  if (input.link) {
+    try {
+      const url = new URL(input.link);
+      if (url.protocol !== "http:" && url.protocol !== "https:") return "link";
+    } catch {
+      return "link";
+    }
+  }
+  if (input.consentimento !== true) return "consentimento";
+  return null;
+}

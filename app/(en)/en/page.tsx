@@ -196,8 +196,8 @@ export default function HomeEn() {
             <div className="mh-hero__items">
               <div className="mh-hero__item">
                 <Image
-                  src={`${H}/hero-figma.jpg`}
-                  alt="Figma screen showing a brand system: logo, typography, colors and applied pieces"
+                  src={`${H}/hero-banco-1.jpg`}
+                  alt="A designer's desk with a laptop showing a layout, a yellow lamp and graphic shapes on the wall"
                   fill
                   priority
                   sizes="(max-width: 991px) 100vw, 64vw"
@@ -206,8 +206,8 @@ export default function HomeEn() {
               </div>
               <div className="mh-hero__item">
                 <Image
-                  src={`${H}/hero-illustrator.jpg`}
-                  alt="Illustrator screen with a series of typographic calendars in progress"
+                  src={`${H}/hero-banco-2.jpg`}
+                  alt="Hands drawing on a laptop with design software open, next to a colour chart"
                   fill
                   sizes="(max-width: 991px) 100vw, 64vw"
                   data-translate
