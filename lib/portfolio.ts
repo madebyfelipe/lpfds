@@ -79,6 +79,139 @@ const posts = (slug: string, count: number): string[] =>
 // A ordem do array define a ordem do grid (1º = destaque) e o "próximo projeto".
 export const projects: Project[] = [
   {
+    slug: "v4-oliveira",
+    client: "V4 Oliveira & Co",
+    displayName: "V4 DE\nSOROCABA",
+    category: "Landing Page",
+    tagline:
+      "Site institucional da unidade da V4 Company em Sorocaba, com o Método V4 explicado em painéis navegáveis.",
+    statement: "Marketing que termina no caixa.",
+    scope: [
+      "Site institucional",
+      "Direção de arte",
+      "Redação",
+      "Painel interativo do método",
+      "Blog e perguntas frequentes",
+    ],
+    execution:
+      "Desenvolvimento do site da unidade: abertura de impacto, quem somos com os números da rede, Método V4 em painel navegável, soluções detalhadas, blog, perguntas frequentes e contato direto com o time de Sorocaba.",
+    images: {
+      cover: "/portfolio/v4-oliveira/cover.jpg",
+    },
+    gallery: [
+      "/portfolio/v4-oliveira/galeria-01.jpg",
+      "/portfolio/v4-oliveira/galeria-02.jpg",
+      "/portfolio/v4-oliveira/galeria-03.jpg",
+      "/portfolio/v4-oliveira/galeria-04.jpg",
+    ],
+    aboutImageFit: "contain",
+    about:
+      "A V4 de Sorocaba é a unidade da V4 Company na cidade: mesma estrutura, método e ferramentas da rede, com time e escritório próprios. O site precisava resolver essa dupla leitura — a solidez de uma operação com mais de 260 franquias e a proximidade de quem atende empresas da região — sem virar um catálogo institucional genérico.\n\nA estrutura começa pela promessa e desce para a prova: abertura escura com a marca em primeiro plano, os números da rede logo abaixo e, na sequência, o Método V4 em um painel interativo em que o visitante escolhe o pilar e vê o que entra nele. As soluções seguem a mesma lógica de leitura, com o painel do funil de aquisição, e o restante da página alterna conteúdo, artigos do blog, dúvidas frequentes e o caminho de contato com o time.",
+    aboutImage: "/portfolio/v4-oliveira/sobre.jpg",
+    website: {
+      url: "v4oliveira.com.br",
+      intro:
+        "O site da unidade na íntegra: posicionamento, números da rede, Método V4 em painel interativo, soluções, blog e perguntas frequentes. Role dentro da janela para percorrer a página.",
+      pages: [
+        {
+          label: "Início",
+          path: "/",
+          description:
+            "Abertura, quem somos, números da rede, Método V4 em painel interativo, soluções, blog, perguntas frequentes e contato.",
+          src: "/portfolio/v4-oliveira/pagina-inicio.jpg",
+        },
+      ],
+    },
+  },
+  {
+    slug: "grupo-carnevali",
+    client: "Grupo Carnevali",
+    displayName: "GRUPO\nCARNEVALI",
+    category: "Landing Page",
+    tagline:
+      "Site institucional para uma empresa de engenharia, estruturas metálicas, serralheria e vidro em Santos.",
+    statement: "Obra é confiança em cada etapa.",
+    scope: [
+      "Site institucional",
+      "Direção de arte",
+      "Redação",
+      "Galeria de obras",
+      "Formulário de proposta",
+    ],
+    execution:
+      "Estruturação do site com as áreas de atuação, portfólio de obras com antes, durante e depois, serviços de caldeiraria e uma jornada de proposta em etapas, adaptada a cada tipo de serviço.",
+    images: {
+      cover: "/portfolio/grupo-carnevali/cover.jpg",
+    },
+    gallery: [
+      "/portfolio/grupo-carnevali/galeria-01.jpg",
+      "/portfolio/grupo-carnevali/galeria-02.jpg",
+      "/portfolio/grupo-carnevali/galeria-03.jpg",
+    ],
+    aboutImageFit: "contain",
+    about:
+      "O Grupo Carnevali atua em obras de engenharia, estruturas metálicas, reformas, serralheria, esquadrias e soluções em vidro. São serviços técnicos que o visitante costuma comparar com dificuldade, porque a maior parte das empresas do setor não mostra o que já executou. O site entra para resolver essa assimetria: em vez de prometer, apresenta obra por obra.\n\nA página abre com a proposta e leva direto para as seis áreas de atuação, cada uma com um caminho de proposta próprio. O portfólio tem antes, durante e depois nos projetos que passaram por revitalização, e cada cartão abre uma galeria de fotos. Na sequência vêm os diferenciais, os setores atendidos, o passo a passo do primeiro contato, as dúvidas frequentes e um formulário que pede tipo de serviço, local e etapa da obra antes de encaminhar a solicitação.",
+    aboutImage: "/portfolio/grupo-carnevali/sobre.jpg",
+    website: {
+      url: "carnevali.vercel.app",
+      intro:
+        "O site do grupo na íntegra: áreas de atuação, obras com galeria de fotos, serviços de caldeiraria, diferenciais, setores e formulário de proposta. Role dentro da janela para percorrer a página.",
+      pages: [
+        {
+          label: "Início",
+          path: "/",
+          description:
+            "Abertura, soluções por área, portfólio de obras, caldeiraria, diferenciais, setores, como funciona, dúvidas e proposta.",
+          src: "/portfolio/grupo-carnevali/pagina-inicio.jpg",
+        },
+      ],
+    },
+  },
+  {
+    slug: "sdr-de-ia",
+    client: "Oliveira & Co",
+    displayName: "SDR\nDE IA",
+    category: "Landing Page",
+    tagline:
+      "Landing page de lançamento do SDR de IA da Oliveira & Co, da oferta ao comparativo com o atendimento humano.",
+    statement: "Nenhum lead espera cinco minutos.",
+    scope: [
+      "Landing page",
+      "Direção de arte",
+      "Copy de oferta",
+      "Planos e preços",
+      "Demonstração",
+    ],
+    execution:
+      "Página de lançamento do produto, com abertura de impacto, números de operação, os componentes do SDR, implantação em sete dias, comparativo com o atendimento humano, planos por estágio comercial e captação para demonstração.",
+    images: {
+      cover: "/portfolio/sdr-de-ia/cover.jpg",
+    },
+    gallery: [
+      "/portfolio/sdr-de-ia/galeria-01.jpg",
+      "/portfolio/sdr-de-ia/galeria-02.jpg",
+      "/portfolio/sdr-de-ia/galeria-03.jpg",
+    ],
+    aboutImageFit: "contain",
+    about:
+      "O SDR de IA é o produto da Oliveira & Co que responde todo lead em segundos, qualifica a conversa e entrega o contato pronto para o CRM. A landing page precisava vender um software que o visitante ainda não conhece, para donos de empresa que já foram decepcionados por automação genérica. A resposta foi mostrar o produto funcionando antes de falar de plano.\n\nA página abre com a promessa e um recorte da interface, seguida dos números que sustentam a operação. Depois vêm os quatro blocos que formam a solução, o plano de implantação em sete dias, o depoimento de quem já opera e uma tabela que coloca SDR humano e SDR de IA lado a lado, sem esconder o que cada um faz melhor. Os planos fecham a leitura por estágio comercial, e a demonstração é o único caminho de conversão da página.",
+    aboutImage: "/portfolio/sdr-de-ia/sobre.jpg",
+    website: {
+      url: "ai.v4oliveira.com.br",
+      intro:
+        "A landing do produto na íntegra: promessa, números, componentes do SDR, implantação, comparativo, planos e demonstração. Role dentro da janela para percorrer a página.",
+      pages: [
+        {
+          label: "Início",
+          path: "/",
+          description:
+            "Abertura com o produto em tela, números de operação, componentes do SDR, implantação, depoimento, comparativo, planos, dúvidas e demonstração.",
+          src: "/portfolio/sdr-de-ia/pagina-inicio.jpg",
+        },
+      ],
+    },
+  },
+  {
     slug: "estruturart",
     client: "Estruturart Capital",
     displayName: "ESTRUTURART\nCAPITAL",
