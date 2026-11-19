@@ -178,5 +178,5 @@ export const agenda = { numProjetos: 3 };
 // Imagem de capa do projeto no hub — mesma regra do grid atual do portfólio.
 // O card abre o case completo já existente em /portfolio/[slug].
 export function projectCover(project: Project): string {
-  return project.images.hero ?? project.images.cover;
+  return project.images.thumb ?? project.images.hero ?? project.images.cover;
 }

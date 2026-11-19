@@ -25,6 +25,9 @@ export type Project = {
   execution: string; // texto da coluna "Execução" (seção 5)
   images: {
     cover: string; // /portfolio/<slug>/cover.jpg
+    // Capa própria do card do grid quando ela precisa diferir do hero do case
+    // (ex.: banner do site com texto impresso — não serve de fundo do hero).
+    thumb?: string;
     // Imagem de fundo do hero do case. Se ausente, o hero usa `cover` — o
     // mesmo thumbnail do grid. Defina quando o hero deve diferir do card.
     hero?: string;
@@ -223,8 +226,10 @@ export const projects: Project[] = [
     execution:
       "Desenvolvimento do site institucional e criação de anúncios para apresentar Home Equity, conta digital e soluções de capital com clareza e consistência visual.",
     images: {
-      cover: "/portfolio/estruturart/posts/post-01.jpg",
-      // Peças 4:5 inteiras numa tela 16:9: o cover vertical ampliado cortava o texto do anúncio.
+      // Capa do grid: banner do primeiro hero do site (16:9). O hero do case
+      // continua com as três peças, porque a capa traz título e CTA impressos.
+      cover: "/portfolio/estruturart/cover.jpg",
+      thumb: "/portfolio/estruturart/cover.jpg",
       hero: "/portfolio/estruturart/hero.jpg",
     },
     gallery: posts("estruturart", 3),
@@ -233,7 +238,7 @@ export const projects: Project[] = [
       "A Estruturart reúne diferentes frentes financeiras para empresas, da antecipação de recebíveis ao Home Equity. O site institucional organiza esse portfólio em uma navegação clara, apresentando cada solução, os diferenciais do grupo e os caminhos de contato sem perder a percepção de solidez que o setor exige.\n\nA comunicação ganhou continuidade nos criativos de performance. As peças transformam temas complexos em mensagens diretas, combinando copy de dor e solução, imagens de alto impacto e a identidade em laranja, preto e branco. O resultado é um sistema consistente entre o destino da campanha e os anúncios que levam o público até ele.",
     aboutImage: "/portfolio/estruturart/posts/post-02.jpg",
     website: {
-      url: "estruturart-institucional.vercel.app",
+      url: "estruturart.com.br",
       intro:
         "A página institucional apresenta as soluções do grupo, sua história e os canais de contato em uma experiência completa. Role dentro da janela para percorrer o site do início ao fim.",
       pages: [
