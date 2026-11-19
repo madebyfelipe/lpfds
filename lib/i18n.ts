@@ -60,6 +60,7 @@ export const UI = {
     links: [
       { href: "/", label: "Início" },
       { href: "/metodologia", label: "Método" },
+      { href: "/portfolio", label: "Portfólio" },
       { href: "/blog", label: "Blog" },
       { href: "/imersao", label: "Imersão" }
     ],

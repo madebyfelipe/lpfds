@@ -384,7 +384,8 @@
 }
 
 .mnav__links {
-  grid-column: span 3;
+  /* 4 colunas: com 5 links (Portfólio voltou) 3 colunas cortavam o texto abaixo de ~1200px. */
+  grid-column: span 4;
   font-size: var(--t-small);
 }
 
@@ -436,7 +437,7 @@
 }
 
 .mnav__cta {
-  grid-column: span 5;
+  grid-column: span 4;
   justify-self: end;
   display: flex;
   align-items: center;
