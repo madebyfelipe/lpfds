@@ -157,6 +157,15 @@
     color 300ms ease;
 }
 
+/* Só os tokens, sem caixa: usado onde o conteúdo é de outro tema (o corpo
+   escuro do case) e um controle do design system precisa deles — hoje o
+   seletor de idioma. Não ocupa altura nem pinta fundo. */
+.inst--bare {
+  min-height: 0;
+  background: none;
+  color: inherit;
+}
+
 .inst ::selection {
   background: var(--red);
   color: var(--on-red);

@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { HtmlLang } from "@/components/institucional/HtmlLang";
+import { InstFooter } from "@/components/institucional/InstFooter";
+import { InstNav } from "@/components/institucional/InstNav";
+import { LangFloater } from "@/components/institucional/LangFloater";
 import { CaseBody } from "@/components/portfolio/CaseBody";
 import { CASO } from "@/lib/i18n";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
 import { localizarProjeto } from "@/lib/portfolio-texto";
+import "../../../institucional.css";
+import "../../../monolog.css";
 
+/**
+ * Case em inglês (/en/portfolio/<slug>). Shell igual à do case em português
+ * (app/portfolio/[slug]/page.tsx): nav, corpo do case e rodapé — sem o Lenis
+ * das páginas de leitura, que brigava com o scroll próprio da janela do site
+ * e com a gaveta do portfólio.
+ *
+ * Fica fora do grupo (en) de propósito, pela mesma razão do índice.
+ */
 type Params = { slug: string };
+
+const htmlLang = `document.documentElement.lang="en"`;
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -52,12 +68,23 @@ export default async function CaseEnPage({
     notFound();
   }
 
-  // Nav, rodapé e seletor de idioma vêm do layout de /en.
   return (
-    <CaseBody
-      project={localizarProjeto(project, "en")}
-      next={localizarProjeto(getNextProject(slug), "en")}
-      locale="en"
-    />
+    <>
+      <script dangerouslySetInnerHTML={{ __html: htmlLang }} />
+      <HtmlLang lang="en" />
+      <InstNav />
+      <CaseBody
+        project={localizarProjeto(project, "en")}
+        next={localizarProjeto(getNextProject(slug), "en")}
+        locale="en"
+      />
+      <InstFooter locale="en" />
+      {/* O seletor de idioma precisa dos tokens do design system (.inst), que
+          esta página não usa no corpo escuro do case: o wrapper só empresta os
+          tokens, sem caixa nem altura. */}
+      <div className="inst inst--bare">
+        <LangFloater />
+      </div>
+    </>
   );
 }

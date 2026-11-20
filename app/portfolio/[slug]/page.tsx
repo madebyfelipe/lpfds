@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { InstFooter } from "@/components/institucional/InstFooter";
 import { InstNav } from "@/components/institucional/InstNav";
+import { LangFloater } from "@/components/institucional/LangFloater";
 import { CaseBody } from "@/components/portfolio/CaseBody";
 import { getNextProject, getProject, projects } from "@/lib/portfolio";
 import { localizarProjeto } from "@/lib/portfolio-texto";
@@ -63,6 +64,11 @@ export default async function CasePage({
         locale="pt"
       />
       <InstFooter />
+      {/* O corpo do case é escuro e fora do .inst: o wrapper só empresta os
+          tokens do seletor de idioma, sem caixa nem altura. */}
+      <div className="inst inst--bare">
+        <LangFloater />
+      </div>
     </>
   );
 }
