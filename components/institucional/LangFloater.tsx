@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { LOCALE_COOKIE, UI, localeDoPath, rotaEquivalente, type Locale } from "@/lib/i18n";
+import { IDIOMAS, UI, gravarIdioma, lerIdioma, localeDoPath, rotaEquivalente, type Locale } from "@/lib/i18n";
 
 /**
  * Seletor de idioma flutuante (PT | EN), canto inferior esquerdo — o CTA de
@@ -15,22 +15,6 @@ import { LOCALE_COOKIE, UI, localeDoPath, rotaEquivalente, type Locale } from "@
  * do navegador só gera uma sugestão discreta, nunca redirecionamento: o
  * Googlebot e quem compartilha um link sempre recebem a página pedida.
  */
-const UM_ANO = 60 * 60 * 24 * 365;
-
-function gravar(locale: Locale) {
-  document.cookie = `${LOCALE_COOKIE}=${locale}; Max-Age=${UM_ANO}; Path=/; SameSite=Lax`;
-}
-
-function lerCookie(): string | null {
-  const m = document.cookie.match(new RegExp(`(?:^|; )${LOCALE_COOKIE}=([^;]*)`));
-  return m ? decodeURIComponent(m[1]) : null;
-}
-
-const OPCOES: Array<{ locale: Locale; sigla: string; nome: string; lang: string }> = [
-  { locale: "pt", sigla: "PT", nome: "Português", lang: "pt-BR" },
-  { locale: "en", sigla: "EN", nome: "English", lang: "en" }
-];
-
 export function LangFloater() {
   const pathname = usePathname() ?? "/";
   const atual = localeDoPath(pathname);
@@ -38,7 +22,7 @@ export function LangFloater() {
   const [sugerir, setSugerir] = useState(false);
 
   useEffect(() => {
-    if (lerCookie()) return setSugerir(false);
+    if (lerIdioma()) return setSugerir(false);
     const primeiro = (navigator.languages?.[0] ?? navigator.language ?? "").toLowerCase();
     const prefere: Locale | null = primeiro.startsWith("pt") ? "pt" : primeiro.startsWith("en") ? "en" : null;
     setSugerir(prefere !== null && prefere !== atual);
@@ -53,7 +37,7 @@ export function LangFloater() {
     <div className="langfloat">
       {sugerir && (
         <p className="langfloat__hint" lang={outro === "en" ? "en" : "pt-BR"}>
-          <Link href={rotaEquivalente(pathname, outro)} hrefLang={outro === "en" ? "en" : "pt-BR"} onClick={() => gravar(outro)}>
+          <Link href={rotaEquivalente(pathname, outro)} hrefLang={outro === "en" ? "en" : "pt-BR"} onClick={() => gravarIdioma(outro)}>
             {textoSugestao} →
           </Link>
           <button
@@ -61,7 +45,7 @@ export function LangFloater() {
             className="langfloat__dismiss"
             aria-label={fecharSugestao}
             onClick={() => {
-              gravar(atual);
+              gravarIdioma(atual);
               setSugerir(false);
             }}
           >
@@ -70,7 +54,7 @@ export function LangFloater() {
         </p>
       )}
       <nav className="langfloat__nav" aria-label={t.idioma}>
-        {OPCOES.map((o) => {
+        {IDIOMAS.map((o) => {
           const ativo = o.locale === atual;
           return (
             <Link
@@ -81,7 +65,7 @@ export function LangFloater() {
               className="langfloat__opt"
               aria-current={ativo ? "true" : undefined}
               aria-label={`${o.sigla}, ${o.nome}`}
-              onClick={() => gravar(o.locale)}
+              onClick={() => gravarIdioma(o.locale)}
             >
               {o.sigla}
             </Link>

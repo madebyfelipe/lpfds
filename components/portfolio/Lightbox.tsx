@@ -2,17 +2,20 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { CASO, fmt, type Locale } from "@/lib/i18n";
 
 type Props = {
   src: string;
   alt: string;
   className?: string;
   children: React.ReactNode;
+  locale?: Locale;
 };
 
 // Envolve uma mídia do case num gatilho que abre a imagem em escala
 // real sobre um overlay escuro. Fecha com Esc, clique ou botão ×.
-export function Lightbox({ src, alt, className, children }: Props) {
+export function Lightbox({ src, alt, className, children, locale = "pt" }: Props) {
+  const t = CASO[locale];
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -52,7 +55,7 @@ export function Lightbox({ src, alt, className, children }: Props) {
         ref={triggerRef}
         type="button"
         className={`lightbox-trigger${className ? ` ${className}` : ""}`}
-        aria-label={`Ampliar imagem: ${alt}`}
+        aria-label={fmt(t.ampliar, { alt })}
         onClick={() => setOpen(true)}
       >
         {children}
@@ -71,7 +74,7 @@ export function Lightbox({ src, alt, className, children }: Props) {
               ref={closeRef}
               type="button"
               className="lightbox__close"
-              aria-label="Fechar visualizador"
+              aria-label={t.fecharVisualizador}
               onClick={close}
             >
               ×

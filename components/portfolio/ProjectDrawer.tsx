@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MButtonInner } from "@/components/institucional/home/MButton";
+import { PFL, fmt, type Locale } from "@/lib/i18n";
 
 export type DrawerPiece = { src: string; width: number; height: number };
 
@@ -27,7 +28,17 @@ export type DrawerProject = {
 // progresso e, embaixo, o bloco "Sobre o projeto" com o link para o case
 // completo. Sem números nem depoimentos: o lugar deles na referência fica
 // com a frase-resumo e a frase de efeito que o case já tem.
-export function ProjectDrawer({ project, onClose }: { project: DrawerProject | null; onClose: () => void }) {
+export function ProjectDrawer({
+  project,
+  onClose,
+  locale = "pt"
+}: {
+  project: DrawerProject | null;
+  onClose: () => void;
+  locale?: Locale;
+}) {
+  const t = PFL[locale];
+  const hrefDoCase = locale === "en" ? "/en/portfolio" : "/portfolio";
   const [shown, setShown] = useState<DrawerProject | null>(project);
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -126,11 +137,11 @@ export function ProjectDrawer({ project, onClose }: { project: DrawerProject | n
         aria-labelledby="pfd-title"
       >
         <button ref={closeRef} type="button" className="pfd__close" onClick={onClose}>
-          Fechar
+          {t.fechar}
         </button>
 
         <header className="pfd__head">
-          <ul className="pfd__tags" aria-label="Escopo">
+          <ul className="pfd__tags" aria-label={t.escopo}>
             {tags.map((tag) => (
               <li key={tag} className="pfd__tag">
                 {tag}
@@ -148,7 +159,7 @@ export function ProjectDrawer({ project, onClose }: { project: DrawerProject | n
           className="pfd__rail"
           onScroll={onRailScroll}
           role="region"
-          aria-label={`Peças do projeto ${shown.client}`}
+          aria-label={fmt(t.pecas, { cliente: shown.client })}
           tabIndex={0}
         >
           {shown.pieces.map((piece, i) => {
@@ -157,7 +168,7 @@ export function ProjectDrawer({ project, onClose }: { project: DrawerProject | n
               <div key={piece.src} className="pfd__piece" style={{ "--pfd-r": ratio } as React.CSSProperties}>
                 <Image
                   src={piece.src}
-                  alt={`Peça ${i + 1} do projeto ${shown.client}`}
+                  alt={fmt(t.pecaAlt, { n: i + 1, cliente: shown.client })}
                   fill
                   sizes="(max-width: 767px) 80vw, 420px"
                   className="pfd__piece-img"
@@ -169,10 +180,10 @@ export function ProjectDrawer({ project, onClose }: { project: DrawerProject | n
 
         <div className="pfd__controls">
           <div className="pfd__arrows">
-            <button type="button" className="pfd__arrow" onClick={() => step(-1)} disabled={edges.start} aria-label="Peça anterior">
+            <button type="button" className="pfd__arrow" onClick={() => step(-1)} disabled={edges.start} aria-label={t.anterior}>
               <span aria-hidden="true">←</span>
             </button>
-            <button type="button" className="pfd__arrow" onClick={() => step(1)} disabled={edges.end} aria-label="Próxima peça">
+            <button type="button" className="pfd__arrow" onClick={() => step(1)} disabled={edges.end} aria-label={t.proxima}>
               <span aria-hidden="true">→</span>
             </button>
           </div>
@@ -183,7 +194,7 @@ export function ProjectDrawer({ project, onClose }: { project: DrawerProject | n
 
         <section className="pfd__about" aria-labelledby="pfd-about">
           <p id="pfd-about" className="pfd__tag pfd__tag--label">
-            Sobre o projeto
+            {t.sobre}
           </p>
           <div className="pfd__about-body">
             <p className="pfd__statement">{shown.statement}</p>
@@ -193,8 +204,8 @@ export function ProjectDrawer({ project, onClose }: { project: DrawerProject | n
               </p>
             ))}
             <div className="pfd__actions">
-              <Link href={`/portfolio/${shown.slug}`} className="pfd__cta">
-                Ver o case completo <span aria-hidden="true">→</span>
+              <Link href={`${hrefDoCase}/${shown.slug}`} className="pfd__cta">
+                {t.verCase} <span aria-hidden="true">→</span>
               </Link>
               {shown.site && (
                 <a
@@ -202,11 +213,11 @@ export function ProjectDrawer({ project, onClose }: { project: DrawerProject | n
                   href={shown.site}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Acessar o site de ${shown.client} (abre em nova aba)`}
+                  aria-label={fmt(t.acessarSiteAria, { cliente: shown.client })}
                 >
                   <MButtonInner>
-                    Acessar o site
-                    <span className="sr-only"> (abre em nova aba)</span>
+                    {t.acessarSite}
+                    <span className="sr-only">{t.novaAba}</span>
                   </MButtonInner>
                 </a>
               )}

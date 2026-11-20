@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { CASO, fmt, type Locale } from "@/lib/i18n";
 
 // Página com as dimensões reais do screenshot (lidas em build time pelo
 // servidor) — o viewport reserva a proporção antes do download.
@@ -18,12 +19,14 @@ type Props = {
   url: string;
   client: string;
   pages: SiteFramePage[];
+  locale?: Locale;
 };
 
 // Janela de navegador navegável: a captura full-page rola dentro do
 // viewport como se o site estivesse embedado. As abas do chrome e os
 // cards-índice abaixo trocam a página ativa.
-export function SiteFrame({ url, client, pages }: Props) {
+export function SiteFrame({ url, client, pages, locale = "pt" }: Props) {
+  const t = CASO[locale];
   const [active, setActive] = useState(0);
   const [hintVisible, setHintVisible] = useState(true);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -48,7 +51,7 @@ export function SiteFrame({ url, client, pages }: Props) {
           <div
             className="site-frame__tabs"
             role="tablist"
-            aria-label={`Páginas do site ${client}`}
+            aria-label={fmt(t.paginasDoSite, { cliente: client })}
           >
             {pages.map((item, index) => (
               <button
@@ -98,14 +101,14 @@ export function SiteFrame({ url, client, pages }: Props) {
             className="site-frame__viewport"
             ref={viewportRef}
             tabIndex={0}
-            aria-label={`${client} — página ${page.label}. Role para percorrer a tela inteira.`}
+            aria-label={fmt(t.rolarPagina, { cliente: client, pagina: page.label })}
             onScroll={() => hintVisible && setHintVisible(false)}
           >
             {/* key troca o nó a cada aba: reinicia o fade de carregamento */}
             <Image
               key={page.src}
               src={page.src}
-              alt={`Captura completa da página ${page.label} do site da ${client}`}
+              alt={fmt(t.captura, { pagina: page.label, cliente: client })}
               width={page.width}
               height={page.height}
               sizes="(max-width: 1200px) 100vw, 1120px"
@@ -118,7 +121,7 @@ export function SiteFrame({ url, client, pages }: Props) {
             }`}
             aria-hidden="true"
           >
-            Role para navegar pelo site ↓
+            {t.rolar}
           </span>
         </div>
       </figure>
@@ -132,7 +135,7 @@ export function SiteFrame({ url, client, pages }: Props) {
               index === active ? " site-frame__index-item--active" : ""
             }`}
             onClick={() => openPage(index)}
-            aria-label={`Abrir a página ${item.label} na janela acima`}
+            aria-label={fmt(t.abrirPagina, { pagina: item.label })}
           >
             <span className="site-frame__index-number">
               {String(index + 1).padStart(2, "0")}

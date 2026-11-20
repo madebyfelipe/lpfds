@@ -55,7 +55,10 @@ export default function PortfolioPage() {
     <>
       <InstNav />
       <main id="conteudo" className="inst pfl-page">
-        <PortfolioLaunches items={items} />
+        <PortfolioLaunches
+          items={items}
+          categories={["Marca", "Conteúdo", "Landing Page", "Produto digital"]}
+        />
       </main>
     </>
   );

@@ -1646,6 +1646,27 @@
   font-family: var(--m-font);
 }
 
+.pfl__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* Seletor PT | EN na faixa do título: no carrossel o pill flutuante cobria os
+   filtros, então ele vive aqui e mantém a mesma linguagem visual
+   (.langfloat__nav/.langfloat__opt). */
+.pfl__lang {
+  flex: 0 0 auto;
+  margin-top: clamp(16px, 4vw, 64px);
+}
+
+/* O pill flutuante sai de cena nesta página: o seletor está no título. */
+:root:has(.pfl) .langfloat {
+  display: none;
+}
+
 .pfl__title {
   margin: clamp(16px, 4vw, 64px) 0 0;
   font-size: var(--t-display);
@@ -1893,6 +1914,18 @@
   .pfl {
     --pfl-w: 86vw;
     --pfl-gap: 10px;
+  }
+
+  /* No celular o título ocupa a largura toda: o seletor desce para baixo dele. */
+  .pfl__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .pfl__lang {
+    margin-top: 0;
+    order: 1;
   }
 
   .pfl__title {

@@ -12,7 +12,30 @@
 
 export type Locale = "pt" | "en";
 
+/** Sigla, nome e hreflang de cada idioma, na ordem do seletor. */
+export const IDIOMAS: ReadonlyArray<{
+  locale: Locale;
+  sigla: string;
+  nome: string;
+  lang: string;
+}> = [
+  { locale: "pt", sigla: "PT", nome: "Português", lang: "pt-BR" },
+  { locale: "en", sigla: "EN", nome: "English", lang: "en" }
+];
+
 export const LOCALE_COOKIE = "mbf-lang";
+
+/** Guarda a escolha de idioma por 12 meses (listada em /cookies). */
+export function gravarIdioma(locale: Locale): void {
+  const ano = 60 * 60 * 24 * 365;
+  document.cookie = `${LOCALE_COOKIE}=${locale}; Max-Age=${ano}; Path=/; SameSite=Lax`;
+}
+
+/** Idioma já escolhido nesta máquina, ou null (aí vale a sugestão do navegador). */
+export function lerIdioma(): string | null {
+  const m = document.cookie.match(new RegExp(`(?:^|; )${LOCALE_COOKIE}=([^;]*)`));
+  return m ? decodeURIComponent(m[1]) : null;
+}
 
 /** Pares de páginas equivalentes: [português, inglês]. */
 export const ROTAS: ReadonlyArray<readonly [pt: string, en: string]> = [
@@ -21,6 +44,17 @@ export const ROTAS: ReadonlyArray<readonly [pt: string, en: string]> = [
   ["/cases", "/en/website-process"],
   ["/imersao", "/en/contact"]
 ];
+
+/**
+ * Pares que existem nos dois idiomas mas ficam fora do sitemap e do índice
+ * (`noindex`, só por link direto): o portfólio e os cases. O seletor de idioma
+ * e o hreflang continuam funcionando; o sitemap lê só `ROTAS`.
+ */
+export const ROTAS_OCULTAS: ReadonlyArray<readonly [pt: string, en: string]> = [
+  ["/portfolio", "/en/portfolio"]
+];
+
+const TODOS_OS_PARES = [...ROTAS, ...ROTAS_OCULTAS];
 
 export function localeDoPath(path: string): Locale {
   return path === "/en" || path.startsWith("/en/") ? "en" : "pt";
@@ -33,8 +67,13 @@ export function rotaEquivalente(path: string, alvo: Locale): string {
   const p = semBarraFinal(path.split(/[?#]/)[0] || "/");
   const atual = localeDoPath(p);
   if (atual === alvo) return p;
-  const par = ROTAS.find(([pt, en]) => (atual === "pt" ? pt === p : en === p));
+  const par = TODOS_OS_PARES.find(([pt, en]) => (atual === "pt" ? pt === p : en === p));
   if (par) return alvo === "en" ? par[1] : par[0];
+
+  // Cases: /portfolio/<slug> ↔ /en/portfolio/<slug>.
+  const caso = p.match(/^\/(?:en\/)?portfolio\/(.+)$/);
+  if (caso) return `${alvo === "en" ? "/en/portfolio" : "/portfolio"}/${caso[1]}`;
+
   return alvo === "en" ? "/en" : "/";
 }
 
@@ -85,6 +124,7 @@ export const UI = {
     links: [
       { href: "/en", label: "Home" },
       { href: "/en/method", label: "Method" },
+      { href: "/en/portfolio", label: "Work" },
       { href: "/en/website-process", label: "Websites" },
       { href: "/en/contact", label: "Contact" }
     ],
@@ -102,5 +142,115 @@ export const UI = {
     idioma: "Site language",
     sugestao: "English version available",
     sugestaoFechar: "Dismiss language suggestion"
+  }
+} as const;
+
+/** Troca `{chave}` pelo valor — rótulos com o nome do cliente no meio. */
+export function fmt(template: string, values: Record<string, string | number>): string {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
+}
+
+/**
+ * Portfólio (carrossel e gaveta). O texto dos cases em si fica em
+ * lib/portfolio-texto.ts — aqui só a interface em volta.
+ */
+export const PFL = {
+  pt: {
+    titulo: "Portfólio",
+    contador: "({n})",
+    contadorSr: ", {n} projetos",
+    regiao: "Projetos",
+    filtro: "Filtrar projetos por categoria",
+    todos: "Todos os projetos",
+    cursor: "Ver projeto",
+    cartao: "{cliente}, {categoria}: ver projeto",
+    aoVivo: "Projeto {n} de {total}: {cliente}",
+    fechar: "Fechar",
+    escopo: "Escopo",
+    pecas: "Peças do projeto {cliente}",
+    pecaAlt: "Peça {n} do projeto {cliente}",
+    anterior: "Peça anterior",
+    proxima: "Próxima peça",
+    sobre: "Sobre o projeto",
+    verCase: "Ver o case completo",
+    acessarSite: "Acessar o site",
+    acessarSiteAria: "Acessar o site de {cliente} (abre em nova aba)",
+    novaAba: " (abre em nova aba)"
+  },
+  en: {
+    titulo: "Work",
+    contador: "({n})",
+    contadorSr: ", {n} projects",
+    regiao: "Projects",
+    filtro: "Filter projects by category",
+    todos: "All projects",
+    cursor: "View project",
+    cartao: "{cliente}, {categoria}: view project",
+    aoVivo: "Project {n} of {total}: {cliente}",
+    fechar: "Close",
+    escopo: "Scope",
+    pecas: "Pieces from {cliente}",
+    pecaAlt: "Piece {n} from {cliente}",
+    anterior: "Previous piece",
+    proxima: "Next piece",
+    sobre: "About the project",
+    verCase: "View the full case",
+    acessarSite: "Visit the site",
+    acessarSiteAria: "Visit {cliente}'s site (opens in a new tab)",
+    novaAba: " (opens in a new tab)"
+  }
+} as const;
+
+/** Rótulos das páginas de case (/portfolio/<slug>). */
+export const CASO = {
+  pt: {
+    naoEncontrado: "Projeto não encontrado | Portfólio — Made by Felipe",
+    galeria: "Galeria",
+    pecaGaleria: "{cliente} — peça {n}",
+    ampliar: "Ampliar imagem: {alt}",
+    fecharVisualizador: "Fechar visualizador",
+    escopo: "Escopo",
+    execucao: "Execução",
+    sobre: "Sobre o projeto",
+    bastidores: "Bastidores do projeto {cliente}",
+    oSite: "O site, ao vivo",
+    apresentacao: "Apresentação",
+    apresentacaoPadrao: "O projeto completo, como foi entregue ao cliente.",
+    proximo: "Próximo projeto",
+    proximoAlt: "Próximo projeto: {cliente}",
+    capa: "Capa do projeto {cliente}",
+    apresentacaoCompleta: "Apresentação completa da marca {cliente}",
+    expandir: "Ver apresentação completa",
+    recolher: "Recolher apresentação",
+    paginasDoSite: "Páginas do site {cliente}",
+    rolarPagina: "{cliente} — página {pagina}. Role para percorrer a tela inteira.",
+    captura: "Captura completa da página {pagina} do site da {cliente}",
+    rolar: "Role para navegar pelo site ↓",
+    abrirPagina: "Abrir a página {pagina} na janela acima"
+  },
+  en: {
+    naoEncontrado: "Project not found | Work — Made by Felipe",
+    galeria: "Gallery",
+    pecaGaleria: "{cliente} — piece {n}",
+    ampliar: "Enlarge image: {alt}",
+    fecharVisualizador: "Close viewer",
+    escopo: "Scope",
+    execucao: "Execution",
+    sobre: "About the project",
+    bastidores: "Behind the scenes of {cliente}",
+    oSite: "The live site",
+    apresentacao: "Presentation",
+    apresentacaoPadrao: "The full project, as delivered to the client.",
+    proximo: "Next project",
+    proximoAlt: "Next project: {cliente}",
+    capa: "{cliente} project cover",
+    apresentacaoCompleta: "{cliente} full brand presentation",
+    expandir: "View the full presentation",
+    recolher: "Collapse the presentation",
+    paginasDoSite: "{cliente} site pages",
+    rolarPagina: "{cliente} — {pagina} page. Scroll to go through the whole screen.",
+    captura: "Full screenshot of the {pagina} page of {cliente}'s site",
+    rolar: "Scroll to browse the site ↓",
+    abrirPagina: "Open the {pagina} page in the window above"
   }
 } as const;

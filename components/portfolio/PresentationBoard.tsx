@@ -3,17 +3,20 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { Lightbox } from "@/components/portfolio/Lightbox";
+import { CASO, fmt, type Locale } from "@/lib/i18n";
 
 type GridItem = { src: string; width: number; height: number };
 
-type Props =
+type Props = (
   | { mode: "board"; src: string; width: number; height: number; client: string }
-  | { mode: "grid"; layout: "grid-4" | "grid-1"; images: GridItem[]; client: string };
+  | { mode: "grid"; layout: "grid-4" | "grid-1"; images: GridItem[]; client: string }
+) & { locale?: Locale };
 
 // Seção "Apresentação": ou uma prancha única (imagem já montada, estilo
 // Behance) ou um grid das peças individuais. Nasce recolhida com um fade
 // no rodapé; o botão expande para a altura natural em ambos os modos.
 export function PresentationBoard(props: Props) {
+  const t = CASO[props.locale ?? "pt"];
   const [expanded, setExpanded] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +50,7 @@ export function PresentationBoard(props: Props) {
         {props.mode === "board" ? (
           <Image
             src={props.src}
-            alt={`Apresentação completa da marca ${props.client}`}
+            alt={fmt(t.apresentacaoCompleta, { cliente: props.client })}
             width={props.width}
             height={props.height}
             sizes="(max-width: 1200px) 100vw, 1160px"
@@ -61,12 +64,13 @@ export function PresentationBoard(props: Props) {
               <Lightbox
                 key={item.src}
                 src={item.src}
-                alt={`${props.client} — peça ${i + 1}`}
+                alt={fmt(t.pecaGaleria, { cliente: props.client, n: i + 1 })}
+                locale={props.locale}
                 className="presentation-board__grid-item"
               >
                 <Image
                   src={item.src}
-                  alt={`${props.client} — peça ${i + 1}`}
+                  alt={fmt(t.pecaGaleria, { cliente: props.client, n: i + 1 })}
                   width={item.width}
                   height={item.height}
                   sizes={
@@ -91,7 +95,7 @@ export function PresentationBoard(props: Props) {
           aria-expanded={expanded}
           onClick={toggle}
         >
-          {expanded ? "Recolher apresentação" : "Ver apresentação completa"}
+          {expanded ? t.recolher : t.expandir}
         </button>
       </div>
     </div>

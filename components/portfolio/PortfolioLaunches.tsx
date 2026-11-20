@@ -3,13 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { ProjectCategory } from "@/lib/portfolio";
+import { PFL, fmt, type Locale } from "@/lib/i18n";
+import { PflLangSwitch } from "./PflLangSwitch";
 import { ProjectDrawer, type DrawerProject } from "./ProjectDrawer";
 
-type Filter = "Todos" | ProjectCategory;
-type Item = DrawerProject & { category: ProjectCategory; cover: string };
-
-const CATEGORIES: ProjectCategory[] = ["Marca", "Conteúdo", "Landing Page", "Produto digital"];
+type Filter = string;
+type Item = DrawerProject & { category: string; cover: string };
 
 // Três cópias da lista (anterior · principal · seguinte): o card ativo vive
 // sempre na cópia do meio, então há vizinhos dos dois lados mesmo no
@@ -21,11 +20,23 @@ const COPIES = 3;
 // gigante com contador, carrossel horizontal que avança pela rolagem,
 // legenda "categoria · cliente" sob o card do centro, filtros embaixo à
 // esquerda e minimapa das capas embaixo à direita.
-export function PortfolioLaunches({ items }: { items: Item[] }) {
-  const [filter, setFilter] = useState<Filter>("Todos");
+export function PortfolioLaunches({
+  items,
+  locale = "pt",
+  categories: ordem
+}: {
+  items: Item[];
+  locale?: Locale;
+  /** Ordem dos filtros; sem ela, a ordem em que as categorias aparecem. */
+  categories?: readonly string[];
+}) {
+  const t = PFL[locale];
+  const hrefDoCase = locale === "en" ? "/en/portfolio" : "/portfolio";
+  const TODOS = t.todos;
+  const [filter, setFilter] = useState<Filter>(TODOS);
   const list = useMemo(
-    () => (filter === "Todos" ? items : items.filter((item) => item.category === filter)),
-    [filter, items]
+    () => (filter === TODOS ? items : items.filter((item) => item.category === filter)),
+    [filter, items, TODOS]
   );
   const n = list.length;
   const [pos, setPos] = useState(n); // posição no trilho de 3·N cards
@@ -62,7 +73,9 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
   }, []);
   const drawerProject = openSlug ? items.find((i) => i.slug === openSlug) ?? null : null;
 
-  const categories = CATEGORIES.filter((c) => items.some((item) => item.category === c));
+  const categories = (ordem ?? [...new Set(items.map((item) => item.category))]).filter((c) =>
+    items.some((item) => item.category === c)
+  );
 
   const go = useCallback(
     (delta: number) => {
@@ -238,7 +251,7 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
 
   const changeFilter = (next: Filter) => {
     setFilter(next);
-    const size = next === "Todos" ? items.length : items.filter((i) => i.category === next).length;
+    const size = next === TODOS ? items.length : items.filter((i) => i.category === next).length;
     setAnimate(false);
     setPos(size);
   };
@@ -250,20 +263,23 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
 
   return (
     <section ref={rootRef} className="pfl" aria-labelledby="pfl-title">
-      <h1 id="pfl-title" className="pfl__title">
-        Portfólio
-        <span className="pfl__count">
-          <span aria-hidden="true">({n})</span>
-          <span className="sr-only">, {n} projetos</span>
-        </span>
-      </h1>
+      <div className="pfl__head">
+        <h1 id="pfl-title" className="pfl__title">
+          {t.titulo}
+          <span className="pfl__count">
+            <span aria-hidden="true">{fmt(t.contador, { n })}</span>
+            <span className="sr-only">{fmt(t.contadorSr, { n })}</span>
+          </span>
+        </h1>
+        <PflLangSwitch />
+      </div>
 
       <div
         ref={stageRef}
         className="pfl__stage"
         role="region"
-        aria-roledescription="carrossel"
-        aria-label="Projetos"
+        aria-roledescription={locale === "en" ? "carousel" : "carrossel"}
+        aria-label={t.regiao}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
@@ -281,12 +297,12 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
             return (
               <Link
                 key={`${copy}-${item.slug}`}
-                href={`/portfolio/${item.slug}`}
+                href={`${hrefDoCase}/${item.slug}`}
                 className="pfl__card"
                 data-active={isActive || undefined}
                 aria-hidden={isMain ? undefined : true}
                 tabIndex={isMain ? undefined : -1}
-                aria-label={isMain ? `${item.client}, ${item.category}: ver projeto` : undefined}
+                aria-label={isMain ? fmt(t.cartao, { cliente: item.client, categoria: item.category }) : undefined}
                 draggable={false}
                 onClick={(event) => onCardClick(event, index)}
                 onFocus={(event) => {
@@ -318,19 +334,19 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
           })}
         </div>
         <p className="sr-only" aria-live="polite">
-          {n ? `Projeto ${active + 1} de ${n}: ${list[active].client}` : ""}
+          {n ? fmt(t.aoVivo, { n: active + 1, total: n, cliente: list[active].client }) : ""}
         </p>
       </div>
 
       <div className="pfl__foot">
-        <div className="pfl__filters" role="group" aria-label="Filtrar projetos por categoria">
+        <div className="pfl__filters" role="group" aria-label={t.filtro}>
           <button
             type="button"
             className="pfl__chip pfl__chip--all"
-            aria-pressed={filter === "Todos"}
-            onClick={() => changeFilter("Todos")}
+            aria-pressed={filter === TODOS}
+            onClick={() => changeFilter(TODOS)}
           >
-            Todos os projetos
+            {t.todos}
           </button>
           <div className="pfl__chips">
             {categories.map((c) => (
@@ -364,10 +380,10 @@ export function PortfolioLaunches({ items }: { items: Item[] }) {
         </div>
       </div>
 
-      <ProjectDrawer project={drawerProject} onClose={closeProject} />
+      <ProjectDrawer project={drawerProject} onClose={closeProject} locale={locale} />
 
       <span ref={cursorRef} className="pfl__cursor" aria-hidden="true">
-        Ver projeto
+        {t.cursor}
       </span>
     </section>
   );
