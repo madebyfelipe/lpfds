@@ -109,6 +109,11 @@ import { post as atenderFamiliarAmigo } from "@/content/blog/psicologo-atender-f
 import { post as devolutivaPais } from "@/content/blog/devolutiva-avaliacao-pais";
 import { post as feriasPsicologo } from "@/content/blog/ferias-psicologo-avisar-pacientes";
 import { post as datasComemorativas } from "@/content/blog/datas-comemorativas-psicologo";
+import { post as metricasSite } from "@/content/blog/metricas-site-psicologo";
+import { post as atendimentoDomiciliar } from "@/content/blog/atendimento-domiciliar-psicologo";
+import { post as divulgarSupervisao } from "@/content/blog/divulgar-supervisao-clinica";
+import { post as indicacaoPsicologos } from "@/content/blog/indicacao-entre-psicologos";
+import { post as gravarSessao } from "@/content/blog/psicologo-gravar-sessao";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -295,7 +300,12 @@ export const posts: Post[] = [
   atenderFamiliarAmigo,
   devolutivaPais,
   feriasPsicologo,
-  datasComemorativas
+  datasComemorativas,
+  metricasSite,
+  atendimentoDomiciliar,
+  divulgarSupervisao,
+  indicacaoPsicologos,
+  gravarSessao
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
