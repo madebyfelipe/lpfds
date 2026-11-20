@@ -104,6 +104,11 @@ import { post as mudancaEndereco } from "@/content/blog/mudanca-endereco-consult
 import { post as abordagemNaMarca } from "@/content/blog/abordagem-terapeutica-na-marca";
 import { post as marcaOnline } from "@/content/blog/marca-psicologo-online";
 import { post as relatorioEscola } from "@/content/blog/relatorio-psicologico-escola";
+import { post as listaDeEspera } from "@/content/blog/lista-de-espera-consultorio";
+import { post as atenderFamiliarAmigo } from "@/content/blog/psicologo-atender-familiar-amigo";
+import { post as devolutivaPais } from "@/content/blog/devolutiva-avaliacao-pais";
+import { post as feriasPsicologo } from "@/content/blog/ferias-psicologo-avisar-pacientes";
+import { post as datasComemorativas } from "@/content/blog/datas-comemorativas-psicologo";
 
 /**
  * Blog — conteúdo em arquivo, sem CMS. Cada post é um módulo em
@@ -285,7 +290,12 @@ export const posts: Post[] = [
   mudancaEndereco,
   abordagemNaMarca,
   marcaOnline,
-  relatorioEscola
+  relatorioEscola,
+  listaDeEspera,
+  atenderFamiliarAmigo,
+  devolutivaPais,
+  feriasPsicologo,
+  datasComemorativas
 ].sort((a, b) =>
   b.publishedAt.localeCompare(a.publishedAt)
 );
