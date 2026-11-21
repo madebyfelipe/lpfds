@@ -16,6 +16,7 @@ export const post: Post = {
   keyword: "psicólogo pode usar inteligência artificial",
   tags: ["divulgacao-etica", "presenca-digital"],
   publishedAt: "2026-11-12",
+  updatedAt: "2026-11-21",
   summary:
     "O Código de Ética do Psicólogo não trata de inteligência artificial, mas a responsabilidade pelo que o consultório publica continua sendo do psicólogo. Valem o artigo 20, o sigilo profissional e a LGPD: nunca coloque dados de pacientes em ferramentas de IA e revise tudo antes de publicar.",
   faq: [
@@ -34,6 +35,14 @@ export const post: Post = {
     {
       q: "Posso usar imagens geradas por IA no perfil?",
       a: "Com cuidado. A imagem não deve sugerir sessão, paciente ou resultado, nem representar uma pessoa real sem autorização. Para foto de perfil, use uma foto real sua."
+    },
+    {
+      q: "Posso usar IA para responder mensagens de pacientes no WhatsApp?",
+      a: "Não é recomendado. A mensagem de quem procura atendimento pode trazer dado de saúde, que a LGPD trata como sensível, e a resposta deve vir de você. Mensagens prontas escritas por você, como a saudação automática, são outra coisa."
+    },
+    {
+      q: "A IA pode sugerir pautas para o blog do consultório?",
+      a: "Pode ajudar a listar temas. Escolha os que respondem a dúvidas reais do seu público, confira as informações e escreva com a sua voz, citando as fontes que usou."
     }
   ],
   cover: {
@@ -131,6 +140,130 @@ export const post: Post = {
           </Link>
           .
         </p>
+      </section>
+
+      <section>
+        <h2>Erros comuns ao usar IA na divulgação</h2>
+        <ul>
+          <li>
+            <strong>Publicar o primeiro rascunho.</strong> O texto sai fluente,
+            mas genérico, e costuma soar igual ao de muitos outros perfis. Quem
+            procura um psicólogo quer reconhecer a sua forma de falar.
+          </li>
+          <li>
+            <strong>Aceitar estatísticas e estudos sem conferir.</strong>{" "}
+            Ferramentas de IA podem citar pesquisa que não existe ou atribuir
+            um dado à fonte errada. Se não encontrou a fonte original, tire o
+            número.
+          </li>
+          <li>
+            <strong>Pedir “um caso para ilustrar”.</strong> A ferramenta cria
+            uma história verossímil, e o leitor pode achar que é um paciente
+            seu. Se usar exemplo, deixe claro que é fictício e genérico.
+          </li>
+          <li>
+            <strong>Copiar o texto de um colega para a IA “reescrever”.</strong>{" "}
+            Continua sendo o trabalho de outra pessoa. Veja{" "}
+            <Link href="/blog/psicologo-direito-autoral-redes" className="inst-link">
+              direito autoral nas redes
+            </Link>
+            .
+          </li>
+          <li>
+            <strong>Deixar escapar superlativos.</strong> “A melhor abordagem”,
+            “resultados comprovados” e “transforme sua vida” aparecem com
+            frequência em textos gerados e esbarram no artigo 20.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Frases para revisar: o que pode e o que evitar</h2>
+        <div className="inst-blog__table" role="region" aria-label="Revisão de texto feito com IA: o que pode e o que evitar" tabIndex={0}>
+          <table>
+            <caption>Revisão de texto feito com IA: o que pode e o que evitar</caption>
+            <thead><tr><th scope="col">Frase típica</th><th scope="col">Situação</th></tr></thead>
+            <tbody>
+              <tr><td>“Atendo adultos com ansiedade, presencial e online”</td><td>Pode</td></tr>
+              <tr><td>“Explico como funciona a primeira conversa”</td><td>Pode</td></tr>
+              <tr><td>“Supere a ansiedade em poucas sessões”</td><td>Evitar (promessa)</td></tr>
+              <tr><td>“A abordagem mais eficaz que existe”</td><td>Evitar (superlativo)</td></tr>
+              <tr><td>“Estudos mostram que…” sem fonte</td><td>Evitar até conferir</td></tr>
+              <tr><td>“Primeira sessão com desconto”</td><td>Evitar (preço como propaganda)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Para que o texto final soe como você, vale ter o seu{" "}
+          <Link href="/blog/tom-de-voz-para-psicologo" className="inst-link">
+            tom de voz
+          </Link>{" "}
+          escrito e entregar esse guia à ferramenta junto com o pedido.
+        </p>
+      </section>
+
+      <section>
+        <h2>Exemplo ilustrativo de pedido seguro</h2>
+        <p>
+          <em>Exemplo fictício, só para mostrar o formato.</em> Uma psicóloga
+          quer ideias para a página de perguntas frequentes do site. Ela
+          escreve na ferramenta:
+        </p>
+        <blockquote>
+          <p>
+            “Sou psicóloga e atendo adolescentes, presencial e online. Liste dez
+            dúvidas comuns de pais antes de marcar a primeira conversa, em
+            linguagem simples. Não invente dados, estudos nem casos.”
+          </p>
+        </blockquote>
+        <p>
+          O pedido não traz nome de paciente, história de atendimento nem dado
+          pessoal de ninguém. Com a lista em mãos, ela escolhe as perguntas que
+          ouve de verdade e escreve as respostas com as próprias palavras. Para
+          montar essa página, veja{" "}
+          <Link href="/blog/perguntas-frequentes-site-psicologo" className="inst-link">
+            perguntas frequentes no site do psicólogo
+          </Link>
+          ; para os demais textos,{" "}
+          <Link href="/blog/textos-site-psicologo" className="inst-link">
+            textos do site do psicólogo
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section>
+        <h2>Para quem atende famílias de crianças autistas e neurodivergentes</h2>
+        <p>
+          Textos gerados por IA sobre autismo e TDAH tendem a repetir termos
+          antigos ou carregados, como “portador”, “sofre de autismo” ou listas
+          de “sintomas” para os pais conferirem. Antes de publicar:
+        </p>
+        <ul>
+          <li>
+            revise o vocabulário com o guia de{" "}
+            <Link href="/blog/linguagem-neuroafirmativa-psicologo" className="inst-link">
+              linguagem neuroafirmativa
+            </Link>
+            ;
+          </li>
+          <li>
+            tire listas de sinais que funcionem como triagem caseira, porque
+            elas beiram o diagnóstico à distância;
+          </li>
+          <li>
+            nunca descreva na ferramenta a criança, a escola ou a família que
+            você atende, nem para pedir um material “personalizado”;
+          </li>
+          <li>
+            confira se o material para pais segue o que você faz no consultório.
+            Ideias em{" "}
+            <Link href="/blog/material-educativo-pais-autismo" className="inst-link">
+              material educativo para pais
+            </Link>
+            .
+          </li>
+        </ul>
       </section>
 
       <section>
