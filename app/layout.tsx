@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, Poppins } from "next/font/google";
 import { CookieConsent, MetaPixel } from "@/components/CookieConsent";
 import { CustomCursor } from "@/components/CustomCursor";
 import { StructuredData } from "@/components/StructuredData";
+import { WebMcp } from "@/components/WebMcp";
 import { OG_IMAGE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -94,6 +95,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className={`${poppins.variable} ${plexMono.variable} site-body`}>
         <StructuredData />
+        {/* Ferramentas para navegador-agente (WebMCP): sem suporte, não faz nada. */}
+        <WebMcp />
         {children}
         <CustomCursor />
         {/* Medição só entra depois do aceite — o banner é quem decide.
