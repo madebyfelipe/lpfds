@@ -16,6 +16,7 @@ export const post: Post = {
   keyword: "psicólogo pode fazer live no youtube",
   tags: ["presenca-digital", "divulgacao-etica"],
   publishedAt: "2026-11-12",
+  updatedAt: "2026-11-21",
   summary:
     "Psicólogo pode fazer vídeos no YouTube e lives, como forma de divulgar o trabalho e de levar informação ao público. Valem as regras do artigo 20 do Código de Ética e da Nota Técnica nº 01/2022 do CFP: nome completo e CRP visíveis, nada de caso clínico, de diagnóstico ao vivo ou de promessa de resultado, e atenção ao sigilo nos comentários e nas perguntas do público.",
   faq: [
@@ -34,6 +35,14 @@ export const post: Post = {
     {
       q: "Posso monetizar o canal ou receber patrocínio?",
       a: "Monetização de plataforma é um tema que vale conferir com o seu CRP. Em qualquer caso, a vedação de preço e promessa como chamariz continua, e patrocínio de produto deve ser claramente identificado."
+    },
+    {
+      q: "Preciso de equipamento caro para começar um canal?",
+      a: "Não necessariamente. Um celular, luz de janela de frente e um microfone de lapela simples já deixam o vídeo claro. Som limpo pesa mais que imagem perfeita."
+    },
+    {
+      q: "Posso fazer live com outro psicólogo ou com outro profissional?",
+      a: "Pode, e costuma enriquecer o tema. Os dois aparecem com nome e registro profissional, e as mesmas regras valem para os dois: nada de caso clínico, diagnóstico ao vivo ou promessa."
     }
   ],
   cover: {
@@ -132,6 +141,151 @@ export const post: Post = {
           , e o básico das redes em{" "}
           <Link href="/blog/instagram-para-psicologos" className="inst-link">
             Instagram para psicólogos
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section>
+        <h2>Erros comuns em vídeos e lives de psicólogos</h2>
+        <ul>
+          <li>
+            <strong>Começar sem dizer quem fala.</strong> Quem chega pelo
+            YouTube muitas vezes não conhece você. Diga nome, profissão e CRP
+            no começo e deixe escrito na descrição, como pede o artigo 20.
+          </li>
+          <li>
+            <strong>Usar uma história de consultório para “ilustrar”.</strong>{" "}
+            Mesmo com nome trocado, detalhes como idade, escola ou bairro podem
+            identificar a pessoa. Prefira explicar o tema em termos gerais.
+          </li>
+          <li>
+            <strong>Responder a pergunta individual como se fosse sessão.</strong>{" "}
+            Na live, a vontade de ajudar quem escreveu é grande. A resposta
+            geral protege quem perguntou e quem assiste.
+          </li>
+          <li>
+            <strong>Título e miniatura em tom de alarme.</strong> Frases como
+            “os sinais que ninguém te conta” chamam clique pelo medo, o que o
+            Código chama de divulgação sensacionalista.
+          </li>
+          <li>
+            <strong>Deixar a gravação no ar sem rever.</strong> Ao vivo escapa
+            uma frase mal colocada ou um comentário que expõe alguém. Reveja
+            antes de manter o vídeo público.
+          </li>
+          <li>
+            <strong>Usar música ou trecho de vídeo de terceiros sem licença.</strong>{" "}
+            Isso pode derrubar o vídeo. Veja{" "}
+            <Link href="/blog/psicologo-direito-autoral-redes" className="inst-link">
+              direito autoral nas redes
+            </Link>
+            .
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Exemplo ilustrativo: roteiro de uma live informativa</h2>
+        <p>
+          <em>Exemplo fictício, só para mostrar a estrutura.</em> Uma psicóloga
+          que atende crianças marca uma live sobre “rotina de sono nas férias”:
+        </p>
+        <ol>
+          <li>
+            <strong>Abertura:</strong> nome, “psicóloga”, CRP e o aviso de que a
+            live é informativa e não substitui atendimento.
+          </li>
+          <li>
+            <strong>Tema em três partes:</strong> por que a rotina muda nas
+            férias, o que costuma ajudar em casa e quando vale procurar um
+            profissional.
+          </li>
+          <li>
+            <strong>Perguntas:</strong> ela lê as perguntas em voz alta sem
+            nomes e responde de forma geral. A quem descreve um caso, sugere
+            buscar atendimento.
+          </li>
+          <li>
+            <strong>Fechamento:</strong> onde encontrar o site e como funciona o
+            primeiro contato, sem preço, sem desconto e sem “vagas limitadas”.
+          </li>
+        </ol>
+        <p>
+          Depois, ela corta um trecho curto com uma das explicações e publica
+          com legenda. Para vídeos curtos, veja{" "}
+          <Link href="/blog/psicologo-tiktok" className="inst-link">
+            psicólogo no TikTok
+          </Link>
+          ; para o vídeo que apresenta você no site,{" "}
+          <Link href="/blog/video-apresentacao-psicologo" className="inst-link">
+            vídeo de apresentação
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section>
+        <h2>Para quem atende famílias de crianças autistas e neurodivergentes</h2>
+        <p>
+          Pais de crianças autistas, com TDAH ou outras condições costumam
+          buscar vídeos quando ainda estão com dúvida, muitas vezes antes de
+          qualquer avaliação. Isso pede alguns cuidados a mais:
+        </p>
+        <ul>
+          <li>
+            <strong>Nada de “teste” ou lista de sinais para conferir em casa.</strong>{" "}
+            Em vídeo, isso vira diagnóstico à distância. Explique o que é uma
+            avaliação e quem faz.
+          </li>
+          <li>
+            <strong>Linguagem respeitosa.</strong> Evite falar da criança como
+            problema a corrigir. O guia de{" "}
+            <Link href="/blog/linguagem-neuroafirmativa-psicologo" className="inst-link">
+              linguagem neuroafirmativa
+            </Link>{" "}
+            ajuda a revisar o roteiro.
+          </li>
+          <li>
+            <strong>Nenhuma criança atendida no vídeo,</strong> nem de costas,
+            nem com o rosto borrado, nem desenho dela.
+          </li>
+          <li>
+            <strong>Acessibilidade.</strong> Legenda, fala sem pressa, pouco
+            efeito sonoro e sem luz piscando. Muitos pais também são
+            neurodivergentes e agradecem.
+          </li>
+        </ul>
+        <p>
+          Se você prefere falar com grupos de pais ao vivo e presencial, veja{" "}
+          <Link href="/blog/psicologo-palestra-para-pais" className="inst-link">
+            palestra para pais
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section>
+        <h2>Checklist antes de publicar ou entrar ao vivo</h2>
+        <ol>
+          <li>Nome completo, “psicóloga(o)” e CRP aparecem no vídeo e na descrição?</li>
+          <li>O título responde a uma pergunta, sem medo nem promessa?</li>
+          <li>Nenhum caso, paciente ou criança atendida aparece ou é descrito?</li>
+          <li>Há aviso de que o conteúdo é informativo?</li>
+          <li>Os comentários vão ser moderados durante e depois?</li>
+          <li>Música, imagens e trechos usados têm licença?</li>
+          <li>O vídeo tem legenda?</li>
+          <li>A descrição leva para o site ou para uma página com informação completa?</li>
+        </ol>
+        <p>
+          Para quem prefere só áudio, o{" "}
+          <Link href="/blog/psicologo-podcast" className="inst-link">
+            guia de podcast para psicólogos
+          </Link>{" "}
+          segue a mesma lógica. E para lidar com mensagens que chegam depois do
+          vídeo, veja{" "}
+          <Link href="/blog/psicologo-responder-comentarios-direct" className="inst-link">
+            como responder comentários e direct
           </Link>
           .
         </p>

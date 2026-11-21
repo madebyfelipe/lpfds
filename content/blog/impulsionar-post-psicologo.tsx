@@ -6,6 +6,7 @@ const CODIGO = "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo-de-eti
 const NOTA = "https://site.cfp.org.br/wp-content/uploads/2022/06/SEI_CFP-0612475-Nota-Tecnica.pdf";
 const CARTILHA =
   "https://acervodigital.crp04.org.br/wp-content/uploads/tainacan-items/9483/81624/CRP-MG_Cartilha-Publicidade-profissional-abril-2026.pdf";
+const RES11 = "https://site.cfp.org.br/wp-content/uploads/2018/05/RESOLU%C3%87%C3%83O-N%C2%BA-11-DE-11-DE-MAIO-DE-2018.pdf";
 const META_ADS = "https://transparency.meta.com/pt-br/policies/ad-standards/";
 
 export const post: Post = {
@@ -16,6 +17,7 @@ export const post: Post = {
   keyword: "psicólogo pode impulsionar post",
   tags: ["divulgacao-etica", "presenca-digital"],
   publishedAt: "2026-11-12",
+  updatedAt: "2026-11-21",
   summary:
     "Pode. O Conselho de Psicologia não restringe os meios de divulgação, então anúncio pago e post impulsionado são permitidos. O que muda é a responsabilidade: o conteúdo impulsionado segue as mesmas regras do artigo 20 (nada de preço como chamariz, promessa, sensacionalismo ou depoimento) e precisa trazer nome completo, titulação e CRP. Também valem as políticas de anúncios da Meta.",
   faq: [
@@ -30,6 +32,14 @@ export const post: Post = {
     {
       q: "Que tipo de post vale impulsionar?",
       a: "Posts que explicam como você trabalha, para quem é o atendimento e como é o primeiro contato, ou conteúdos educativos que respondem a dúvidas reais do seu público, com base na ciência psicológica."
+    },
+    {
+      q: "Posso pedir para uma agência impulsionar por mim?",
+      a: "Pode. A Nota Técnica do CFP lembra que a responsabilidade pelo conteúdo continua sendo do psicólogo, então revise cada anúncio antes de ir ao ar."
+    },
+    {
+      q: "Posso anunciar atendimento online para outras cidades?",
+      a: "Pode, desde que o atendimento online siga a Resolução CFP nº 11/2018 e o anúncio respeite o artigo 20. Deixe claro que o atendimento é online e mantenha o CRP visível."
     }
   ],
   cover: {
@@ -147,6 +157,115 @@ export const post: Post = {
           </Link>
           .
         </p>
+        <p>
+          Outro cuidado: o público de pais de crianças neurodivergentes troca
+          muita informação em grupos e indicações. Um post pago que leva a uma
+          página clara, com quem você atende, como é a primeira conversa e o seu
+          CRP, também serve para quem recebeu o seu nome de outra mãe e foi
+          conferir. Material educativo que você já tem, como os do guia de{" "}
+          <Link href="/blog/material-educativo-pais-autismo" className="inst-link">
+            material educativo para pais
+          </Link>
+          , costuma render bons posts para impulsionar.
+        </p>
+      </section>
+
+      <section>
+        <h2>Erros comuns ao impulsionar post</h2>
+        <ul>
+          <li>
+            <strong>Impulsionar o post que “bombou” sem reler.</strong> Um post
+            orgânico pode ter um tom que passa no perfil e soa como promessa
+            quando aparece para desconhecidos. Releia como se fosse anúncio,
+            porque ele é.
+          </li>
+          <li>
+            <strong>Colocar valor, desconto ou sessão gratuita.</strong> É o
+            caso mais claro de preço como propaganda. Veja{" "}
+            <Link href="/blog/psicologo-pode-divulgar-preco" className="inst-link">
+              psicólogo pode divulgar preço?
+            </Link>
+          </li>
+          <li>
+            <strong>Usar print de mensagem de paciente.</strong> Mesmo com o
+            nome escondido, é depoimento. O assunto está em{" "}
+            <Link href="/blog/psicologo-pode-postar-depoimento-de-paciente" className="inst-link">
+              depoimento de paciente
+            </Link>
+            .
+          </li>
+          <li>
+            <strong>Escolher o objetivo “mensagens” sem estar pronta para
+            responder.</strong>{" "}
+            Se o post leva ao WhatsApp, combine antes como e quando você
+            responde, e o que diz no primeiro contato.
+          </li>
+          <li>
+            <strong>Segmentar por condição de saúde.</strong> Além do risco
+            com as regras da Meta, o texto acaba falando diretamente com a dor
+            de quem vê, o que beira o sensacionalismo.
+          </li>
+          <li>
+            <strong>Mandar o clique para um perfil desorganizado.</strong> Bio
+            sem CRP, sem explicação de quem você atende e sem link útil faz a
+            pessoa sair. Revise o{" "}
+            <Link href="/blog/link-na-bio-psicologo" className="inst-link">
+              link na bio
+            </Link>{" "}
+            antes de pagar.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Exemplo ilustrativo de post para impulsionar</h2>
+        <p>
+          <em>Exemplo fictício, com nome e registro inventados, só para mostrar
+          o formato.</em>
+        </p>
+        <blockquote>
+          <p>
+            “Como funciona a primeira conversa com os pais. Antes de começar o
+            atendimento de uma criança, eu converso com a família para entender
+            a rotina, as dúvidas e o que levou vocês a procurar ajuda. Nesse
+            encontro explico como trabalho e respondemos juntos se faz sentido
+            seguir. Ana Exemplo, psicóloga, CRP 00/00000.”
+          </p>
+        </blockquote>
+        <p>
+          O que esse texto faz: explica um passo concreto, diz para quem é,
+          traz nome, profissão e registro, e não tem preço, prazo, promessa ou
+          urgência. Em formato de carrossel, cada etapa pode virar um slide; veja{" "}
+          <Link href="/blog/carrossel-instagram-psicologo" className="inst-link">
+            carrossel no Instagram para psicólogos
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section>
+        <h2>Checklist antes de impulsionar</h2>
+        <ol>
+          <li>O post traz nome completo, “psicóloga(o)” e CRP, na arte ou na legenda?</li>
+          <li>Não há valor, desconto, gratuidade, promessa de resultado nem urgência?</li>
+          <li>Não há depoimento, print ou imagem de paciente?</li>
+          <li>A segmentação é por região e interesse amplo, sem condição de saúde?</li>
+          <li>O destino (perfil, site ou WhatsApp) tem informação completa?</li>
+          <li>Você sabe quem vai moderar os comentários e em quanto tempo?</li>
+          <li>Se outra pessoa cria o anúncio, você revisou a versão final?</li>
+          <li>Você definiu um orçamento e uma data de fim antes de começar?</li>
+        </ol>
+        <p>
+          Para saber se o anúncio trouxe visitas ao site, veja{" "}
+          <Link href="/blog/metricas-site-psicologo" className="inst-link">
+            métricas do site do psicólogo
+          </Link>
+          . E se a ideia é ter uma página só para receber quem vem do anúncio,{" "}
+          <Link href="/blog/landing-page-psicologo" className="inst-link">
+            landing page para psicólogo
+          </Link>{" "}
+          mostra o que colocar nela.
+        </p>
       </section>
 
       <section>
@@ -183,6 +302,13 @@ export const post: Post = {
               Orientações sobre publicidade profissional
             </a>
             , edição de 2026 (“Formas e locais de divulgação”).
+          </li>
+          <li>
+            Conselho Federal de Psicologia.{" "}
+            <a href={RES11} {...ext}>
+              Resolução CFP nº 11/2018
+            </a>{" "}
+            (serviços psicológicos por tecnologias da informação e comunicação).
           </li>
           <li>
             Meta.{" "}
